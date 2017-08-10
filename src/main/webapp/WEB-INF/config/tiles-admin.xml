@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC 
+    "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+    "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	<!-- admin -->
+	<definition name="templateAdmin" template="/WEB-INF/views/admin/templateAdmin.jsp" />
+	<definition name="templateAdminWork"
+		template="/WEB-INF/views/admin/templateAdminDateMonth.jsp" />
+	<definition name="templateAdminDates"
+		template="/WEB-INF/views/admin/templateAdminDates.jsp" />
+	<definition name="templateLogin" template="/WEB-INF/views/admin/templateLogin.jsp" />
+	<definition name="admin" extends="templateAdmin">
+		<put-attribute name="body" value="/WEB-INF/views/admin/admin.jsp" />
+	</definition>
+	<definition name="login" extends="templateLogin">
+		<put-attribute name="body" value="/WEB-INF/views/admin/login.jsp" />
+	</definition>
+	<definition name="newJewel" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/jewels/newjewel/newJewel.jsp" />
+	</definition>
+	<definition name="newjewel" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/jewels/updatejewel/newJewel.jsp" />
+	</definition>
+	<definition name="jewelsToUpdate" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/jewels/updatejewel/updateJewelEntity.jsp" />
+	</definition>
+	<definition name="searchtoupdatejewel" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/jewels/updatejewel/searchtoupdatejewel.jsp" />
+	</definition>
+	<definition name="resultsearchupdatejewels" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/jewels/updatejewel/jewelsToUpdate.jsp" />
+	</definition>
+	<definition name="success" extends="templateAdmin">
+		<put-attribute name="body" value="/WEB-INF/views/admin/success.jsp" />
+	</definition>
+	<definition name="successjewel" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/jewels/newjewel/successjewel.jsp" />
+	</definition>
+	<definition name="resultJewels" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/resultJewels.jsp" />
+	</definition>
+	<definition name="newCategory" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/newCategory.jsp" />
+	</definition>
+	<definition name="newPayment" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/payments/newPayment.jsp" />
+	</definition>
+	<definition name="resultClients" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/resultClients.jsp" />
+	</definition>
+	<definition name="searchbyreference" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/jewels/searchjewels/searchByReference.jsp" />
+	</definition>
+	<definition name="resultsearchbyreference" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/jewels/searchjewels/resultsearchbyreference.jsp" />
+	</definition>
+	<definition name="newset" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/jewels/sets/newset.jsp" />
+	</definition>
+	<definition name="allsets" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/jewels/sets/allsets.jsp" />
+	</definition>
+	<definition name="newcoin" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/coins/newcoin.jsp" />
+	</definition>
+	<definition name="allcoins" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/coins/allcoins.jsp" />
+	</definition>
+	<definition name="searchshoppings" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/shoppings/searchshoppings/searchshoppings.jsp" />
+	</definition>
+	<definition name="resultshoppings" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/shoppings/searchshoppings/resultshoppings.jsp" />
+	</definition>
+	<definition name="searchgramsnull" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/shoppings/searchshoppings/searchgramsnull.jsp" />
+	</definition>
+	<definition name="updateshopping" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/shoppings/searchshoppings/updateshopping.jsp" />
+	</definition>
+	<definition name="allpayments" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/payments/allpayments.jsp" />
+	</definition>
+	<definition name="errorupdatejewel" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/jewels/updatejewel/errorupdatejewel.jsp" />
+	</definition>
+	<definition name="searchpawn" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/pawns/searchpawns/searchpawn.jsp" />
+	</definition>
+	<definition name="errorupdatepawn" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/pawns/searchpawns/errorupdatepawn.jsp" />
+	</definition>
+	<definition name="updatepawn" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/pawns/searchpawns/updatepawn.jsp" />
+	</definition>
+	<definition name="resultpawns" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/pawns/searchpawns/resultpawn.jsp" />
+	</definition>
+	<definition name="newholiday" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/holidays/newholiday.jsp" />
+	</definition>
+	<definition name="allholidays" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/holidays/allholidays.jsp" />
+	</definition>
+	<definition name="searchdaily" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/dailies/searchdaily.jsp" />
+	</definition>
+	<definition name="searchcalculatedailies" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/dailies/searchcalculatedailies.jsp" />
+	</definition>
+	<definition name="dailyadmin" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/dailies/daily.jsp" />
+	</definition>
+	<definition name="quarter" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/shoppings/quarters/quarter.jsp" />
+	</definition>
+	<definition name="searchquarter" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/shoppings/quarters/searchquarter.jsp" />
+	</definition>
+	<definition name="quartermetal" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/shoppings/quartersmetal/quarter.jsp" />
+	</definition>
+	<definition name="newshop" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/shoppings/newshop/newshop.jsp" />
+	</definition>
+	<definition name="searchclientadmin" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/shoppings/newshop/searchclient.jsp" />
+	</definition>
+	<definition name="searchquartermetal" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/shoppings/quartersmetal/searchquarter.jsp" />
+	</definition>
+	<definition name="quarterpawns" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/pawns/quarters/quarter.jsp" />
+	</definition>
+	<definition name="searchquarterpawns" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/pawns/quarters/searchquarter.jsp" />
+	</definition>
+	<definition name="billingadmin" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/workshop/billing.jsp" />
+	</definition>
+	<definition name="searchbill" extends="templateAdminWork">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/workshop/searchbill.jsp" />
+	</definition>
+	<definition name="403admin" extends="templateLogin">
+		<put-attribute name="body" value="/WEB-INF/views/admin/403.jsp" />
+	</definition>
+	<definition name="resultsalescard" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/sales/salescard/resultsalescard.jsp" />
+	</definition>
+	<definition name="searchsalescard" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/sales/salescard/searchsalescard.jsp" />
+	</definition>
+	<definition name="resultsales" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/sales/searchsales/resultsales.jsp" />
+	</definition>
+	<definition name="searchsales" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/sales/searchsales/searchsales.jsp" />
+	</definition>
+	<definition name="resultnummissing" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/sales/salesmissing/resultnummissing.jsp" />
+	</definition>
+	<definition name="searchnummissing" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/sales/salesmissing/searchnummissing.jsp" />
+	</definition>
+	<definition name="searchsalepostponed" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/sales/salesmissing/searchsalepostponed.jsp" />
+	</definition>
+	<definition name="salepostponed" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/sales/salesmissing/salepostponed.jsp" />
+	</definition>
+	<definition name="notdailyadmin" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/dailies/notdailyadmin.jsp" />
+	</definition>
+	<definition name="searchholidays" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/holidays/searchholidays.jsp" />
+	</definition>
+	<definition name="searchposiblerepeated" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/pawns/searchpawnsinshoppings/searchposiblerepeated.jsp" />
+	</definition>
+	<definition name="resultposiblerepeated" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/pawns/searchpawnsinshoppings/resultposiblerepeated.jsp" />
+	</definition>
+	<definition name="searchrenovations" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/pawns/searchrenovations/searchpawn.jsp" />
+	</definition>
+	<definition name="resultpawnsrenovations" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/pawns/searchrenovations/resultpawn.jsp" />
+	</definition>
+	<definition name="resultpawns" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/pawns/searchpawns/resultpawn.jsp" />
+	</definition>
+	<definition name="resultrenovations" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/pawns/searchrenovations/renovations.jsp" />
+	</definition>
+	<definition name="enabledisableuser" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/users/enabledisable/enabledisableuser.jsp" />
+	</definition>
+	<definition name="resultenabledisableuser" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/users/enabledisable/resultenabledisableuser.jsp" />
+	</definition>
+	<definition name="newuser" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/users/saveuser/newuser.jsp" />
+	</definition>
+	<definition name="resultuser" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/users/saveuser/resultuser.jsp" />
+	</definition>
+	<definition name="searchjewelsactive" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/jewels/searchjewelsactive.jsp" />
+	</definition>
+	<definition name="allincidents" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/incidents/allincidents.jsp" />
+	</definition>
+	<definition name="updateincident" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/incidents/updateincident.jsp" />
+	</definition>
+	<definition name="searchmissingshoppings" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/searchmissingshoppings/searchmissingshoppings.jsp" />
+	</definition>
+	<definition name="resultmissingshoppings" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/searchmissingshoppings/resultmissingshoppings.jsp" />
+	</definition>
+	<definition name="searchcommissions" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/pawns/commissions/searchcommissions.jsp" />
+	</definition>
+	<definition name="commissions" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/pawns/commissions/commissions.jsp" />
+	</definition>
+	<definition name="showsale" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/sales/finishsale.jsp" />
+	</definition>
+	<definition name="newsaleadmin" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/sales/newsale.jsp" />
+	</definition>
+	<definition name="searchpawnsoutofdate" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/pawns/outofdate/search.jsp" />
+	</definition>
+	<definition name="resultpawnsoutofdate" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/pawns/outofdate/resultpawn.jsp" />
+	</definition>
+	<definition name="uploadimg" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/jewels/uploadfile.jsp" />
+	</definition>
+	<definition name="searchentries" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/entriesmoney/searchentries.jsp" />
+	</definition>
+	<definition name="resultentriesmoney" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/entriesmoney/resultentriesmoney.jsp" />
+	</definition>
+	<definition name="searchinvestedmoney" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/pawns/investedmoney/searchinvestedmoney.jsp" />
+	</definition>
+	<definition name="investedmoney" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/pawns/investedmoney/investedmoney.jsp" />
+	</definition>
+	<definition name="searchinventory" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/jewels/revise/search.jsp" />
+	</definition>
+	<definition name="resultsearchrevise" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/jewels/revise/resultsearch.jsp" />
+	</definition>
+	<definition name="searchsumadjustments" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/adjustments/searchsumadjustments.jsp" />
+	</definition>
+	<definition name="sumadjustments" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/adjustments/sumadjustments.jsp" />
+	</definition>
+	<definition name="exceltomelloso" extends="templateAdminDates">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/exceltomelloso.jsp" />
+	</definition>
+</tiles-definitions>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+	<import resource="classpath*:spring-db-context.xml" />
+	<bean id="mapper" class="org.dozer.DozerBeanMapper">
+		<property name="mappingFiles">
+			<list>
+				<value>mapping-dozer.xml</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="searchCategoriesService" class="com.je.services.categories.CategoriesServiceImpl" />
+	<bean id="jewelService" class="com.je.services.jewels.JewelServiceImpl" />
+	<bean id="searchService" class="com.je.services.search.SearchServiceImpl" />
+	<bean id="searchClientsService" class="com.je.services.users.SearchClientsServiceImpl" />
+	<bean id="registrationService" class="com.je.services.users.RegistrationServiceImpl" />
+	<bean id="paymentService" class="com.je.services.payment.PaymentServiceImpl" />
+	<bean id="saleService" class="com.je.services.sales.SaleServiceImpl" />
+	<bean id="pawnService" class="com.je.services.pawns.PawnServiceImpl" />
+	<bean id="placeService" class="com.je.services.places.PlaceServiceImpl" />
+	<bean id="metalService" class="com.je.services.metal.MetalServiceImpl" />
+	<bean id="setService" class="com.je.services.sets.SetServiceImpl" />
+	<bean id="coinService" class="com.je.services.coins.CoinServiceImpl" />
+	<bean id="adjustmentService" class="com.je.services.adjustments.AdjustmentServiceImpl" />
+	<bean id="othersConceptsService" class="com.je.services.otherconcepts.OthersConceptsServiceImpl" />
+	<bean id="shoppingService" class="com.je.services.shoppings.ShoppingServiceImpl" />
+	<bean id="dailyService" class="com.je.services.dailies.DailyServiceImpl" />
+	<bean id="workshopService" class="com.je.services.workshop.WorkshopServiceImpl" />
+	<bean id="holidayService" class="com.je.services.holidays.HolidayServiceImpl" />
+	<bean id="billingService" class="com.je.services.workshop.BillingServiceImpl" />
+	<bean id="mailService" class="com.je.services.mails.MailServiceImpl" />
+	<bean id="payrollService" class="com.je.services.payroll.PayrollServiceImpl" />
+	<bean id="entryMoneyService" class="com.je.services.entrymoney.EntryMoneyServiceImpl" />
+	<bean id="batteriesService" class="com.je.services.batteries.BatteriesServiceImpl" />
+	<bean id="strapsService" class="com.je.services.straps.StrapsServiceImpl" />
+	<bean id="rentalService" class="com.je.services.rentals.RentalServiceImpl" />
+	<bean id="userService" class="com.je.services.users.UserServiceImpl" />
+	<bean id="incidentService" class="com.je.services.incidents.IncidentServiceImpl" />
+	<bean id="searchMissingNumbers"
+		class="com.je.services.searchmissingnumbers.SearchMissingNumberServiceImpl" />
+	<bean id="recordingService" class="com.je.services.recordings.RecordingServiceImpl" />
+	<bean id="discountService" class="com.je.services.discounts.DiscountServiceImpl" />
+	<bean id="salesCardService" class="com.je.services.sales.SalesCardServiceImpl" />
+	<bean id="selectCategoryValidator" class="com.je.admin.validators.SelectCategoryValidator" />
+	<bean id="dataClientFormValidator" class="com.je.web.validators.DataClientFormValidator" />
+	<bean id="newPawnFormValidator" class="com.je.employee.validators.NewPawnFormValidator" />
+	<bean id="updatePawnFormValidator" class="com.je.admin.validators.UpdatePawnFormValidator" />
+	<bean id="pawnFormValidator" class="com.je.employee.validators.PawnFormValidator" />
+	<bean id="setValidator" class="com.je.admin.validators.NewSetFormValidator" />
+	<bean id="coinValidator" class="com.je.admin.validators.CoinFormValidator" />
+	<bean id="saleFormValidator" class="com.je.validators.SaleFormValidator" />
+	<bean id="adjustmentFormValidator" class="com.je.employee.validators.AdjustmentValidator" />
+	<bean id="otherConceptValidator" class="com.je.employee.validators.OtherConceptValidator" />
+	<bean id="removeSaleValidator" class="com.je.employee.validators.RemoveSaleFormValidator" />
+	<bean id="shoppingsValidator" class="com.je.employee.validators.ShoppingsValidator" />
+	<bean id="searchSalesValidator" class="com.je.admin.validators.SearchSalesValidator" />
+	<bean id="searchFormValidator" class="com.je.validators.SearchFormValidator" />
+	<bean id="shoppingFormValidator" class="com.je.admin.validators.ShoppingFormValidator" />
+	<bean id="newshoppingFormValidator" class="com.je.admin.validators.NewShoppingFormValidator" />
+	<bean id="adjustmentValidator" class="com.je.workshop.validators.AdjustmentValidator" />
+	<bean id="workShopValidator" class="com.je.workshop.validators.WorkshopValidator" />
+	<bean id="billingFormValidator" class="com.je.admin.validators.BillingFormValidator" />
+	<bean id="holidayValidator" class="com.je.admin.validators.HolidayValidator" />
+	<bean id="userValidator" class="com.je.admin.validators.UserValidator" />
+	<bean id="payrollFormValidator" class="com.je.employee.validators.PayrollFormValidator" />
+	<bean id="entrymoneyFormValidator" class="com.je.employee.validators.EntryMoneyValidator" />
+	<bean id="batteryFormValidator" class="com.je.employee.validators.BatteryFormValidator" />
+	<bean id="strapFormValidator" class="com.je.employee.validators.StrapFormValidator" />
+	<bean id="rentalValidator" class="com.je.employee.validators.RentalValidator" />
+	<bean id="incidentValidator" class="com.je.employee.validators.IncidentValidator" />
+	<bean id="searchMissingNumbersValidator" class="com.je.admin.validators.SearchMissingNumbersValidator" />
+	<bean id="discountsValidator" class="com.je.employee.validators.DiscountsValidator" />
+	<bean id="jewelFormValidator" class="com.je.admin.validators.JewelFormValidator" />
+	<bean id="buyFormValidator" class="com.je.web.validators.BuyFormValidator" />
+	<bean id="recordingValidator" class="com.je.employee.validators.RecordingValidator" />
+	<bean id="searchDailyFormValidator" class="com.je.admin.validators.SearchDailyFormValidator" />
+	<bean id="partialCancelSaleValidator" class="com.je.employee.validators.PartialCancelSaleValidator" />
+</beans>

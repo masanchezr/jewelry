@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC 
+    "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+    "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<!-- web -->
+	<definition name="template" template="/WEB-INF/views/web/template.jsp" />
+	<definition name="welcome" extends="template">
+		<put-attribute name="body" value="/WEB-INF/views/web/welcome.jsp" />
+	</definition>
+	<definition name="resultSearch" extends="template">
+		<put-attribute name="body"
+			value="/WEB-INF/views/web/resultSearch.jsp" />
+	</definition>
+	<definition name="home" extends="template">
+		<put-attribute name="body" value="/WEB-INF/views/web/home.jsp" />
+	</definition>
+	<definition name="contact" extends="template">
+		<put-attribute name="body" value="/WEB-INF/views/web/contact.jsp" />
+	</definition>
+	<definition name="faqs" extends="template">
+		<put-attribute name="body" value="/WEB-INF/views/web/faqs.jsp" />
+	</definition>
+	<definition name="generic_error" extends="template">
+		<put-attribute name="body"
+			value="/WEB-INF/views/web/generic_error.jsp" />
+	</definition>
+	<definition name="home_error" extends="template">
+		<put-attribute name="body" value="/WEB-INF/views/web/home_error.jsp" />
+	</definition>
+	<definition name="termsconditions" extends="template">
+		<put-attribute name="body"
+			value="/WEB-INF/views/web/termsconditions.jsp" />
+	</definition>
+	<definition name="chooseAddress" extends="template">
+		<put-attribute name="body"
+			value="/WEB-INF/views/web/chooseaddress.jsp" />
+	</definition>
+	<definition name="sale" extends="template">
+		<put-attribute name="body" value="/WEB-INF/views/web/sale.jsp" />
+	</definition>
+	<definition name="reviewOrder" extends="template">
+		<put-attribute name="body" value="/WEB-INF/views/web/reviewOrder.jsp" />
+	</definition>
+	<definition name="finishbuy" extends="template">
+		<put-attribute name="body" value="/WEB-INF/views/web/finishbuy.jsp" />
+	</definition>
+	<definition name="shoppingcart" extends="template">
+		<put-attribute name="body"
+			value="/WEB-INF/views/web/shoppingcart.jsp" />
+	</definition>
+</tiles-definitions>
