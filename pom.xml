@@ -58,9 +58,9 @@
 				</property>
 			</activation>
 			<properties>
-				<database.url>jdbc:mysql://127.12.198.130:3306/dailies</database.url>
-				<database.user>adminXwhqquQ</database.user>
-				<database.password>5b2UpLj9wddn</database.password>
+				<database.url>jdbc:mysql://10.129.89.178:3306/jewelrydb</database.url>
+				<database.user>userSUL</database.user>
+				<database.password>Al8iocLoNAvrqa6B</database.password>
 				<anyvalue.name>Satan</anyvalue.name>
 			</properties>
 			<build>
