@@ -71,7 +71,8 @@
 							</c:forEach>
 							<c:forEach items="${daily.shoppings}" var="shopping">
 								<tr>
-									<td><spring:message code="shopping" /></td>
+									<td><spring:message code="shopping" /> <c:out
+											value="${shopping.description}" /></td>
 									<td><c:out value="${shopping.numshop}" /></td>
 									<td><c:out value="${shopping.totalamount}" /><i
 										class="fa fa-euro"></i></td>

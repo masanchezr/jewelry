@@ -42,6 +42,7 @@ public class AdjustmentServiceImpl implements AdjustmentService {
 	@Autowired
 	private Mapper mapper;
 
+	@Override
 	public Daily save(Adjustment adjustment) {
 		// primeramente miramos si existe el arreglo
 		Long idadjustment = adjustment.getIdadjustment();
@@ -80,16 +81,32 @@ public class AdjustmentServiceImpl implements AdjustmentService {
 		return dailyService.getDaily(new Date(), place, null);
 	}
 
+	@Override
 	public void saveWorkshop(Adjustment adjustment) {
 		AdjustmentEntity adjustmentEntity = mapper.map(adjustment, AdjustmentEntity.class);
+		// miramos si ya existía
+		AdjustmentEntity adjustmentlast = adjustmentRepository.findOne(adjustment.getIdadjustment());
 		PaymentEntity pay = new PaymentEntity();
 		pay.setIdpayment(Constants.EFECTIVO);
-		adjustmentEntity.setCreationdate(new Date());
-		adjustmentEntity.setWork(Boolean.TRUE);
-		adjustmentEntity.setPayment(pay);
-		adjustmentRepository.save(adjustmentEntity);
+		if (adjustmentlast != null) {
+			adjustmentlast.setCreationdate(new Date());
+			adjustmentlast.setWork(Boolean.TRUE);
+			adjustmentlast.setPaymentwork(pay);
+			adjustmentlast.setAmountwork(adjustmentEntity.getAmountwork());
+			adjustmentlast.setRecommendedprice(adjustmentEntity.getRecommendedprice());
+			adjustmentlast
+					.setDescription(adjustmentlast.getDescription().concat(" ").concat(adjustment.getDescription()));
+			adjustmentlast.setGrams(adjustmentEntity.getGrams());
+			adjustmentRepository.save(adjustmentlast);
+		} else {
+			adjustmentEntity.setCreationdate(new Date());
+			adjustmentEntity.setWork(Boolean.TRUE);
+			adjustmentEntity.setPaymentwork(pay);
+			adjustmentRepository.save(adjustmentEntity);
+		}
 	}
 
+	@Override
 	public Map<String, BigDecimal> sumAdjustmentByDates(Date from, Date until, PlaceEntity place) {
 		Map<String, BigDecimal> sums = new HashMap<String, BigDecimal>();
 		sums.put("amount", adjustmentRepository.sumAmountByCreationdateAndPlace(from, until,

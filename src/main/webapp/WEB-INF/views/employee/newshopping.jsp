@@ -22,6 +22,9 @@
 										class="control-label" for="inputSuccess"><form:errors
 												path="numshop" /></label></td>
 									<td></td>
+									<td><spring:message code="description" var="description" />
+										<form:input class="form-control" path="description"
+											placeholder="${description}" /></td>
 								</tr>
 								<c:forEach items="${shoppingForm.objects}" var="os"
 									varStatus="status">
@@ -40,6 +43,10 @@
 										<td><spring:message code="amount" var="amount" /> <form:input
 												class="form-control" path="objects[${status.index}].amount"
 												placeholder="${amount}" /></td>
+										<td><spring:message code="description" var="description" />
+											<form:input class="form-control"
+												path="objects[${status.index}].description"
+												placeholder="${description}" /></td>
 									</tr>
 								</c:forEach>
 								<tr>

@@ -74,6 +74,9 @@ public class ShoppingEntity implements Serializable {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<PaymentShopEntity> spayments;
 
+	@Column(name = "DESCRIPTION")
+	private String description;
+
 	/**
 	 * Gets the idshop.
 	 *
@@ -210,6 +213,14 @@ public class ShoppingEntity implements Serializable {
 
 	public void setClient(ClientPawnEntity client) {
 		this.client = client;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

@@ -83,7 +83,8 @@
 							</c:forEach>
 							<c:forEach items="${daily.shoppings}" var="shopping">
 								<tr>
-									<td><spring:message code="shopping" /></td>
+									<td><spring:message code="shopping" /> <c:out
+											value="${shopping.description}" /></td>
 									<td><spring:url value="/updateShopping"
 											var="updateShopping" /><a
 										href="${updateShopping}<c:out value="${shopping.idshop}" />"><c:out
