@@ -59,7 +59,7 @@
 				</property>
 			</activation>
 			<properties>
-				<database.url>jdbc:mysql://10.131.26.140:3306/jewelrydb</database.url>
+				<database.url>jdbc:mysql://172.30.26.136:3306/jewelrydb</database.url>
 				<database.user>userSUL</database.user>
 				<database.password>Al8iocLoNAvrqa6B</database.password>
 				<anyvalue.name>Satan</anyvalue.name>
