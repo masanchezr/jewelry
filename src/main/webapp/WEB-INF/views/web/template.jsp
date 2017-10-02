@@ -146,7 +146,7 @@
 					</ul>
 					<form:form action='busqueda' commandName="search"
 						class="navbar-form pull-right" role="search">
-						<div class="form-group">
+						<div class="form-group col-3">
 							<spring:message code="find" var="find" />
 							<form:input path="searchname" class="form-control"
 								placeholder="${find}" />

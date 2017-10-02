@@ -1,21 +1,15 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <div class="row">
-	<div class="col-lg-3 col-md-6">
-		<div class="panel panel-green">
-			<div class="panel-heading">
-				<div class="row">
-					<div class="col-xs-3">
-						<i class="fa fa-euro fa-5x"></i>
-					</div>
-					<div class="col-xs-9 text-right">
-						<div class="huge">
-							<c:out value="${commissions}" />
-						</div>
-						<div>
-							<spring:message code="totalamount" />
-						</div>
-					</div>
+	<div class="col-xl-3 col-sm-6 mb-3">
+		<div class="card text-white bg-primary o-hidden h-100">
+			<div class="card-body">
+				<div class="card-body-icon">
+					<i class="fa fa-fw fa-comments"></i>
+				</div>
+				<div class="mr-5">
+					<spring:message code="totalamount" />
+					<c:out value="${commissions}" />
 				</div>
 			</div>
 		</div>

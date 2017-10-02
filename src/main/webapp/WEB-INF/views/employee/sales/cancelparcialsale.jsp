@@ -4,53 +4,50 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <form:form action="savecancelparcial" commandName="saleForm" role="form">
 	<form:hidden path="idsale" />
-	<div class="row">
-		<div class="col-lg-12">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<spring:message code="removeparcialsale" />
-				</div>
-				<div class="panel-body">
-					<div class="table-responsive">
-						<table class="table">
-							<tbody>
-								<tr>
-									<td></td>
-									<td></td>
-									<td><spring:message code="selectjeweltocancel" /></td>
-									<td class="form-group has-error"><label
-										class="control-label" for="inputSuccess"> <form:errors
-												path="idsale" /></label></td>
-									<td></td>
-									<td><spring:message code="idsale" /> <form:input
-											class="form-control" path="numsale" disabled="true" /></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<c:forEach items="${saleForm.jewels}" var="jewel"
-									varStatus="status">
-									<tr class="success">
-										<td><form:checkbox
-												path="jewelstocancel[${status.index}].idjewel"
-												value="${jewel.idjewel}" /></td>
-										<td><c:out value="${jewel.reference}" /></td>
-										<td><c:out value="${jewel.name}" /></td>
-										<td><c:out value="${jewel.description}" /></td>
-										<td><c:out value="${jewel.price}" /></td>
-										<td><c:out value="${jewel.category.namecategory}" /></td>
-										<td><c:out value="${jewel.metal.description}" /></td>
-										<td><c:out value="${jewel.place.description}" /></td>
-										<td><c:out value="${jewel.active}" /></td>
-										<td><c:out value="${jewel.saledate}" /></td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
+	<!-- Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#"><spring:message
+					code="sales" /></a></li>
+		<li class="breadcrumb-item active"><spring:message
+				code="removeparcialsale" /></li>
+	</ol>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table">
+				<tbody>
+					<tr>
+						<td></td>
+						<td></td>
+						<td><spring:message code="selectjeweltocancel" /></td>
+						<td class="form-group has-error"><label class="control-label"
+							for="inputSuccess"> <form:errors path="idsale" /></label></td>
+						<td></td>
+						<td><spring:message code="idsale" /> <form:input
+								class="form-control" path="numsale" disabled="true" /></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<c:forEach items="${saleForm.jewels}" var="jewel"
+						varStatus="status">
+						<tr class="success">
+							<td><form:checkbox
+									path="jewelstocancel[${status.index}].idjewel"
+									value="${jewel.idjewel}" /></td>
+							<td><c:out value="${jewel.reference}" /></td>
+							<td><c:out value="${jewel.name}" /></td>
+							<td><c:out value="${jewel.description}" /></td>
+							<td><c:out value="${jewel.price}" /></td>
+							<td><c:out value="${jewel.category.namecategory}" /></td>
+							<td><c:out value="${jewel.metal.description}" /></td>
+							<td><c:out value="${jewel.place.description}" /></td>
+							<td><c:out value="${jewel.active}" /></td>
+							<td><c:out value="${jewel.saledate}" /></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 		</div>
 	</div>
 	<div class="row">
@@ -73,8 +70,8 @@
 					<form:input class="form-control" path="numsalechange" />
 				</div>
 			</div>
-			<div class="form-group">
-				<form:button class="btn btn-success" value="submit">
+			<div class="form-group col-3">
+				<form:button class="btn btn-primary" value="submit">
 					<spring:message code="cancelsale" />
 				</form:button>
 			</div>

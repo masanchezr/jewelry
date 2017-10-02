@@ -1,14 +1,18 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
-<div class="container">
-	<form:form action="savePayment" commandName="payment">
+<form:form action="savePayment" commandName="payment">
+	<div class="form-group">
 		<spring:message code="name" />
 		<form:input class="form-control" path="name" />
+	</div>
+	<div class="form-group">
 		<spring:message code="active" />
 		<form:checkbox path="active" />
-		<form:button class="btn btn-success" value="submit">
+	</div>
+	<div class="form-group">
+		<form:button class="btn btn-primary" value="submit">
 			<spring:message code="save" />
 		</form:button>
-	</form:form>
-</div>
+	</div>
+</form:form>

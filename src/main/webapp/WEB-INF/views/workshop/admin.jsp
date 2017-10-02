@@ -1,4 +1,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<div class="container">
-	<h1 class="page-header"><spring:message code="welcomeworkshop"/></h1>
+<div class="row">
+	<div class="col-12">
+		<h1>
+			<spring:message code="welcomeworkshop" />
+		</h1>
+	</div>
 </div>

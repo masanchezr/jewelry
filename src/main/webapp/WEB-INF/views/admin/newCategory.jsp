@@ -1,19 +1,25 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
-<div class="container">
-	<div>
-		<h3>
-			<spring:message code="newcategory" />
-		</h3>
-	</div>
-	<form:form action="saveCategory" commandName="category">
+<!-- Breadcrumbs-->
+<ol class="breadcrumb">
+	<li class="breadcrumb-item"><a href="#"><spring:message
+				code="categories" /></a></li>
+	<li class="breadcrumb-item active"><spring:message
+			code="newcategory" /></li>
+</ol>
+<form:form action="saveCategory" commandName="category">
+	<div class="form-group">
 		<spring:message code="namecategory" />
 		<form:input class="form-control" path="namecategory" />
+	</div>
+	<div class="form-group">
 		<spring:message code="active" />
 		<form:checkbox path="active" />
-		<form:button class="btn btn-success" value="submit">
+	</div>
+	<div class="form-group">
+		<form:button class="btn btn-primary" value="submit">
 			<spring:message code="save" />
 		</form:button>
-	</form:form>
-</div>
+	</div>
+</form:form>

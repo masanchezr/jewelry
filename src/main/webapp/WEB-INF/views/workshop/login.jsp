@@ -4,43 +4,49 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page session="false"%>
 <div class="container">
-	<div class="row">
-		<div class="col-md-4 col-md-offset-4">
-			<div class="login-panel panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">
-						<spring:message code="login" />
-					</h3>
+	<div class="card card-login mx-auto mt-5">
+		<div class="card-header">
+			<spring:message code="login" />
+		</div>
+		<div class="card-body">
+			<form role="form" name='f'
+				action='<c:url value='jspringsecuritycheckws' />' method='POST'>
+				<c:if test="${param.error != null}">
+					<p>
+						<spring:message code="invaliduser" />
+					</p>
+				</c:if>
+				<c:if test="${param.logout != null}">
+					<p>
+						<spring:message code="sessionout" />
+					</p>
+				</c:if>
+				<div class="form-group">
+					<label for="exampleInputEmail1"><spring:message code="user" /></label>
+					<spring:message code="enteruser" var="enteruser" />
+					<input id="exampleInputEmail1" placeholder="${enteruser}"
+						class="form-control" type='text' name='username' value=''
+						autofocus>
 				</div>
-				<div class="panel-body">
-					<form role="form" name='f'
-						action='<c:url value='jspringsecuritycheckws' />' method='POST'>
-						<c:if test="${param.error != null}">
-							<p>
-								<spring:message code="invaliduser" />
-							</p>
-						</c:if>
-						<c:if test="${param.logout != null}">
-							<p>
-								<spring:message code="sessionout" />
-							</p>
-						</c:if>
-						<fieldset>
-							<div class="form-group">
-								<input class="form-control" type='text' name='username' value=''
-									autofocus>
-							</div>
-							<div class="form-group">
-								<input class="form-control" type='password' name='password' />
-							</div>
-							<input type="hidden" name="${_csrf.parameterName}"
-								value="${_csrf.token}" /> <input
-								class="btn btn-lg btn-success btn-block" name="submit"
-								type="submit" />
-						</fieldset>
-					</form>
+				<div class="form-group">
+					<label for="exampleInputPassword1"><spring:message
+							code="password" /></label>
+					<spring:message code="enterpassword" var="enterpass" />
+					<input class="form-control" id="exampleInputPassword1"
+						type="password" placeholder="${enterpass}" name='password' />
 				</div>
-			</div>
+				<input type="hidden" name="${_csrf.parameterName}"
+					value="${_csrf.token}" /> <input class="btn btn-primary btn-block"
+					name="submit" type="submit" />
+			</form>
 		</div>
 	</div>
 </div>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="<spring:url value="/resources/js/admin/popper.min.js"/>" /></script>
+<script src="<spring:url value="/resources/js/admin/bootstrap.min.js"/>" /></script>
+<!-- Core plugin JavaScript-->
+<script
+	src="<spring:url value="/resources/js/admin/jquery.easing.min.js"/>" /></script>

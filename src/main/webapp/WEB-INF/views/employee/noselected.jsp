@@ -1,6 +1,8 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<div class="container">
-	<h1 class="page-header">
-		<spring:message code="noselected" />
-	</h1>
+<div class="row">
+	<div class="col-12">
+		<h1>
+			<spring:message code="noselected" />
+		</h1>
+	</div>
 </div>

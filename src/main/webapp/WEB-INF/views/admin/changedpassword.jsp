@@ -1,5 +1,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<div id="content">
-	<spring:message code="passwordsuccessfull"/>
-	<spring:url value="/login"/>
+<div class="row">
+	<div class="col-12">
+		<spring:message code="passwordsuccessfull" />
+		<spring:url value="/login" />
+	</div>
 </div>

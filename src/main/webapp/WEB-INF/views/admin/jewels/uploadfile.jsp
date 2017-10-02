@@ -3,9 +3,9 @@
 <form method="POST" enctype="multipart/form-data"
 	action="upload?${_csrf.parameterName}=${_csrf.token}">
 	<spring:message code="fileupload" />
-	<input class="btn btn-success" type="file" name="file"><br />
+	<input class="btn btn-primary" type="file" name="file"><br />
 	<spring:message code="namefile" />
 	<input type="text" name="name"><br /> <br /> <input
-		class="btn btn-success" type="submit" value="UPLOAD"> <label><c:out
+		class="btn btn-primary" type="submit" value="UPLOAD"> <label><c:out
 			value="${message}" /></label>
 </form>
