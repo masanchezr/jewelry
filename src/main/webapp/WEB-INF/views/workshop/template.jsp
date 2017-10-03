@@ -115,28 +115,26 @@
 			</div>
 		</div>
 	</div>
+	<!-- jQuery -->
 	<script type="text/javascript"
-		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<!-- Bootstrap Core JavaScript -->
+		src="<spring:url value="/resources/js/admin/jquery.min.js"/>"></script>
 	<script src="<spring:url value="/resources/js/admin/popper.min.js"/>"></script>
 	<script
 		src="<spring:url value="/resources/js/admin/bootstrap.min.js"/>"></script>
 	<!-- Custom Theme JavaScript -->
 	<script
 		src="<spring:url value="/resources/js/admin/jquery.easing.min.js"/>"></script>
-	<script src="<spring:url value="/resources/js/admin/Chart.min.js"/>"></script>
 	<script
 		src="<spring:url value="/resources/js/admin/jquery.dataTables.js"/>"></script>
 	<script
 		src="<spring:url value="/resources/js/admin/dataTables.bootstrap4.js"/>"></script>
 	<script src="<spring:url value="/resources/js/admin/sb-admin.min.js"/>"></script>
 	<script
-		src="<spring:url value="/resources/js/admin/sb-admin-charts.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/js/admin/jquery.dataTables.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/js/admin/dataTables.bootstrap4.js"/>"></script>
-	<script
 		src="<spring:url value="/resources/js/admin/sb-admin-datatables.min.js"/>"></script>
+	<script src="<spring:url value="/resources/js/employee/discounts.js"/>"></script>
+	<script
+		src="<spring:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
+	<script
+		src="<spring:url value="/resources/js/bootstrap-datepicker.es.min.js"/>"></script>
 </body>
 </html>

@@ -65,27 +65,15 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="form-group has-error">
-			<label class="control-label" for="inputSuccess"> <form:errors
-					path="numsale" /></label>
-		</div>
-		<div class="card-group" id="accordion">
-			<div class="panel card-default">
-				<div id="collapseOne" class="card-collapse collapse in">
-					<div class="card-body">
-						<spring:message code="clientdiscount" />
-						<form:input class="form-control" path="iddiscount" />
-					</div>
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group">
+					<spring:message code="clientdiscount" />
+					<form:input class="form-control" path="iddiscount" />
 				</div>
-			</div>
-		</div>
-		<div class="card-group" id="accordion">
-			<div class="panel card-default">
-				<div id="collapseOne" class="card-collapse collapse in">
-					<div class="card-body">
-						<spring:message code="severalpayments" />
-						<form:input class="form-control" path="optionalpayment" />
-					</div>
+				<div class="form-group">
+					<spring:message code="severalpayments" />
+					<form:input class="form-control" path="optionalpayment" />
 				</div>
 			</div>
 		</div>

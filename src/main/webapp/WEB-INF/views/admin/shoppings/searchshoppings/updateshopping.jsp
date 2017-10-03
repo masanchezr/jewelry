@@ -20,7 +20,7 @@
 							<tr>
 								<td><spring:message code="numshop" /> <form:input
 										class="form-control" path="numshop" disabled="true" /></td>
-								<td class="form-group col-3 has-error"><label
+								<td class="form-group has-error"><label
 									class="control-label" for="inputSuccess"><form:errors
 											path="numshop" /></label></td>
 								<td></td>
@@ -30,15 +30,15 @@
 							<c:forEach items="${shoppingForm.objects}" var="os"
 								varStatus="status">
 								<tr class="${status.count % 2 == 0 ? 'success' : 'danger'}">
-									<td><strong><form:hidden
-												path="objects[${status.index}].idobjectshop" /> <form:select
-												class="form-control"
-												path="objects[${status.index}].metal.idmetal">
-												<form:option value="${os.metal.idmetal}"
-													label="${os.metal.description}" />
-												<form:options items="${metals}" itemValue="idmetal"
-													itemLabel="description" />
-											</form:select></strong></td>
+									<td><strong><spring:message code="metal" /></strong>
+									<form:hidden path="objects[${status.index}].idobjectshop" /> <form:select
+											class="form-control"
+											path="objects[${status.index}].metal.idmetal">
+											<form:option value="${os.metal.idmetal}"
+												label="${os.metal.description}" />
+											<form:options items="${metals}" itemValue="idmetal"
+												itemLabel="description" />
+										</form:select></td>
 									<td><spring:message code="grossgrams" /> <form:input
 											class="form-control"
 											path="objects[${status.index}].grossgrams" /></td>
@@ -56,7 +56,7 @@
 								<td></td>
 								<td><spring:message code="amount" /> <form:input
 										class="form-control" disabled="true" path="totalamount" /></td>
-								<td class="form-group col-3 has-error"><label
+								<td class="form-group has-error"><label
 									class="control-label" for="inputSuccess"><form:errors
 											path="totalamount" /></label></td>
 								<td><form:button class="btn btn-primary" value="submit">
