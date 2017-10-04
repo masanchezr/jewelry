@@ -8,9 +8,8 @@
 	<li class="breadcrumb-item active"><fmt:formatDate
 			value="${datedaily}" type="date" /></li>
 	<li class="breadcrumb-item active"><c:out
-			value="${daily.numoperations}" /></li>
-	<li class="breadcrumb-item active"><spring:message
-			code="operations" /></li>
+			value="${daily.numoperations}" />
+		<spring:message code="operations" /></li>
 	<li class="breadcrumb-item active"><c:out value="${place}" /></li>
 </ol>
 <div class="row">
