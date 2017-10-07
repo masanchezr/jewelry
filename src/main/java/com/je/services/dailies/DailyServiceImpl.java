@@ -124,6 +124,7 @@ public class DailyServiceImpl implements DailyService {
 	@Autowired
 	private Mapper mapper;
 
+	@Override
 	public Daily getDaily(Date date, PlaceEntity place, String ipaddress) {
 		Daily daily = new Daily();
 		// lo primero que voy hacer es mirar si el día es festivo, con lo cual
@@ -213,12 +214,13 @@ public class DailyServiceImpl implements DailyService {
 					amount = pawnEntity.getAmount();
 					BigDecimal percent = pawnEntity.getPercent();
 					Integer months = pawnEntity.getMonths();
-					if (months != null && months.intValue() > 0
-							&& pawnEntity.getPlace().getIdplace().equals(Constants.STODOMINGO)) {
+					if (months != null && pawnEntity.getPlace().getIdplace().equals(Constants.STODOMINGO)) {
 						percent = percent.multiply(new BigDecimal(months));
 					}
-					BigDecimal percentamount = amount.multiply(percent).divide(new BigDecimal(100));
-					amount = amount.add(percentamount);
+					if (percent.compareTo(BigDecimal.ZERO) > 0) {
+						BigDecimal percentamount = amount.multiply(percent).divide(new BigDecimal(100));
+						amount = amount.add(percentamount);
+					}
 					retiredpawnsamount = retiredpawnsamount.add(amount);
 					pawn.setAmount(amount);
 					lpawns.add(pawn);
@@ -310,8 +312,8 @@ public class DailyServiceImpl implements DailyService {
 					renovationamount = pawn.getAmount().multiply(pawn.getPercent());
 					renovationamount = renovationamount.divide(new BigDecimal(100));
 					/**
-					 * if ((renovationamount - ((int) renovationamount) != 0)) {
-					 * renovationamount += 1; }
+					 * if ((renovationamount - ((int) renovationamount) != 0)) { renovationamount +=
+					 * 1; }
 					 **/
 					re.setRenovationamount(renovationamount);
 					lrenovations.add(re);
@@ -462,6 +464,7 @@ public class DailyServiceImpl implements DailyService {
 		return daily;
 	}
 
+	@Override
 	public void calculateDailies(Date date, PlaceEntity place) {
 		Calendar calendar = Calendar.getInstance();
 		while (date.compareTo(new Date()) < 0) {
