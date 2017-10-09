@@ -18,26 +18,23 @@
 						<div class="form-group">
 							<spring:message code="numfrom" />
 							<form:input class="form-control" path="numfrom" />
-							<div class="form-group has-error">
-								<label class="control-label" for="inputSuccess"><form:errors
-										path="numfrom" /></label>
-							</div>
+							<p class="text-danger">
+								<form:errors path="numfrom" />
+							</p>
 						</div>
 						<div class="form-group">
 							<spring:message code="numuntil" />
 							<form:input class="form-control" path="numuntil" />
-							<div class="form-group col-3 has-error">
-								<label class="control-label" for="inputSuccess"><form:errors
-										path="numuntil" /></label>
-							</div>
+							<p class="text-danger">
+								<form:errors path="numuntil" />
+							</p>
 						</div>
 						<div class="form-group">
 							<spring:message code="year" />
 							<form:input class="form-control" path="year" />
-							<div class="form-group has-error">
-								<label class="control-label" for="inputSuccess"><form:errors
-										path="year" /></label>
-							</div>
+							<p class="text-danger">
+								<form:errors path="year" />
+							</p>
 						</div>
 						<div class="form-group">
 							<spring:message code="place" />

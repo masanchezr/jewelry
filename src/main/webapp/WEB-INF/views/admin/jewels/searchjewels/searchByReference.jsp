@@ -24,10 +24,8 @@
 						<div class="form-group">
 							<spring:message code="reference" />
 							<form:input class="form-control" path="reference" />
-							<div class="form-group has-error">
-								<label class="control-label" for="inputSuccess"> <form:errors
-										path="reference" /></label>
-							</div>
+							<p class="text-danger"><form:errors
+										path="reference" /></p>
 						</div>
 					</div>
 					<div class="col-lg-6">

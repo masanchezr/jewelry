@@ -47,19 +47,17 @@
 							<spring:message code="reference" var="reference" />
 							<form:input class="form-control" path="reference"
 								placeholder="${reference}" />
-							<div class="form-group has-error">
-								<label class="control-label" for="inputSuccess"> <form:errors
-										path="reference" /></label>
-							</div>
+							<p class="text-danger">
+								<form:errors path="reference" />
+							</p>
 						</div>
 						<div class="form-group">
 							<spring:message code="price" var="price" />
 							<form:input class="form-control" path="price"
 								placeholder="${price}" />
-							<div class="form-group has-error">
-								<label class="control-label" for="inputSuccess"> <form:errors
-										path="price" /></label>
-							</div>
+							<p class="text-danger">
+								<form:errors path="price" />
+							</p>
 						</div>
 						<div class="form-group">
 							<spring:message code="jewelname" var="name" />

@@ -16,34 +16,30 @@
 						<div class="form-group">
 							<spring:message code="referencering" />
 							<form:input class="form-control" path="referencering" />
-							<div class="form-group has-error">
-								<label class="control-label" for="inputSuccess"><form:errors
-										path="referencering" /></label>
-							</div>
+							<p class="text-danger">
+								<form:errors path="referencering" />
+							</p>
 						</div>
 						<div class="form-group">
 							<spring:message code="referenceearrings" />
 							<form:input class="form-control" path="referenceearrings" />
-							<div class="form-group has-error">
-								<label class="control-label" for="inputSuccess"><form:errors
-										path="referenceearrings" /></label>
-							</div>
+							<p class="text-danger">
+								<form:errors path="referenceearrings" />
+							</p>
 						</div>
 						<div class="form-group">
 							<spring:message code="referencependant" />
 							<form:input class="form-control" path="referencependant" />
-							<div class="form-group has-error">
-								<label class="control-label" for="inputSuccess"><form:errors
-										path="referencependant" /></label>
-							</div>
+							<p class="text-danger">
+								<form:errors path="referencependant" />
+							</p>
 						</div>
 						<div class="form-group">
 							<spring:message code="referencebrazalet" />
 							<form:input class="form-control" path="referencebrazalet" />
-							<div class="form-group has-error">
-								<label class="control-label" for="inputSuccess"><form:errors
-										path="referencebrazalet" /></label>
-							</div>
+							<p class="text-danger">
+								<form:errors path="referencebrazalet" />
+							</p>
 						</div>
 						<div class="form-group">
 							<spring:message code="metal" />
@@ -64,31 +60,30 @@
 						<div class="form-group">
 							<spring:message code="referencechoker" />
 							<form:input class="form-control" path="referencechoker" />
-							<div class="form-group has-error">
-								<label class="control-label" for="inputSuccess"><form:errors
-										path="referencechoker" /></label>
-							</div>
+							<p class="text-danger">
+								<form:errors path="referencechoker" />
+							</p>
 						</div>
 						<div class="form-group">
 							<spring:message code="referencetiepin" />
 							<form:input class="form-control" path="referencetiepin" />
-							<form:errors path="referencetiepin" />
+							<p class="text-danger">
+								<form:errors path="referencetiepin" />
+							</p>
 						</div>
 						<div class="form-group">
 							<spring:message code="referencecufflinks" />
 							<form:input class="form-control" path="referencecufflinks" />
-							<div class="form-group has-error">
-								<label class="control-label" for="inputSuccess"> <form:errors
-										path="referencecufflinks" /></label>
-							</div>
+							<p class="text-danger">
+								<form:errors path="referencecufflinks" />
+							</p>
 						</div>
 						<div class="form-group">
 							<spring:message code="referencediamondring" />
 							<form:input class="form-control" path="referencediamondring" />
-							<div class="form-group has-error">
-								<label class="control-label" for="inputSuccess"> <form:errors
-										path="referencediamondring" /></label>
-							</div>
+							<p class="text-danger">
+								<form:errors path="referencediamondring" />
+							</p>
 						</div>
 						<div class="form-group">
 							<form:button class="btn btn-primary" value="submit">

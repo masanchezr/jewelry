@@ -20,10 +20,9 @@
 								<form:input class="form-control" type="text" path="datefrom"
 									placeholder="${datem}" />
 							</div>
-							<div class="form-group has-error">
-								<label class="control-label" for="inputSuccess"><form:errors
-										path="datefrom" /></label>
-							</div>
+							<p class="text-danger">
+								<form:errors path="datefrom" />
+							</p>
 						</div>
 						<div class="form-group">
 							<form:button class="btn btn-primary" value="submit">

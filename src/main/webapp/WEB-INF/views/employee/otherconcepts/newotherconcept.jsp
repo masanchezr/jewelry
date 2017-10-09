@@ -13,18 +13,16 @@
 		<div class="form-group">
 			<spring:message code="description" />
 			<form:input class="form-control" path="description" />
-			<div class="form-group has-error">
-				<label class="control-label" for="inputSuccess"><form:errors
-						path="description" /></label>
-			</div>
+			<p class="text-danger">
+				<form:errors path="description" />
+			</p>
 		</div>
 		<div class="form-group">
 			<spring:message code="amountotherconcept" />
 			<form:input class="form-control" path="amount" />
-			<div class="form-group has-error">
-				<label class="control-label" for="inputSuccess"><form:errors
-						path="amount" /></label>
-			</div>
+			<p class="text-danger">
+				<form:errors path="amount" />
+			</p>
 		</div>
 		<div class="form-group">
 			<form:button class="btn btn-primary" value="submit">

@@ -20,10 +20,9 @@
 								<form:input class="form-control" type="text" path="datefrom"
 									placeholder="${messagedatefrom}" />
 							</div>
-							<div class="form-group has-error">
-								<label class="control-label" for="inputSuccess"><form:errors
-										path="datefrom" /></label>
-							</div>
+							<p class="text-danger">
+								<form:errors path="datefrom" />
+							</p>
 						</div>
 						<div class="form-group">
 							<spring:message code="dateuntil" var="messagedateuntil" />
@@ -31,10 +30,9 @@
 								<form:input class="form-control" type="text" path="dateuntil"
 									placeholder="${messagedateuntil}" />
 							</div>
-							<div class="form-group has-error">
-								<label class="control-label" for="inputSuccess"><form:errors
-										path="dateuntil" /></label>
-							</div>
+							<p class="text-danger">
+								<form:errors path="dateuntil" />
+							</p>
 						</div>
 						<div class="form-group">
 							<spring:message code="place" />

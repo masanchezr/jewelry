@@ -18,19 +18,17 @@
 							<spring:message code="numfrom" var="numfrom" />
 							<form:input class="form-control" placeholder="${numfrom}"
 								type="text" path="numfrom" />
-							<div class="form-group has-error">
-								<label class="control-label" for="inputSuccess"><form:errors
-										path="numfrom" /></label>
-							</div>
+							<p class="text-danger">
+								<form:errors path="numfrom" />
+							</p>
 						</div>
 						<div class="form-group">
 							<spring:message code="numuntil" var="numuntilmessage" />
 							<form:input class="form-control" type="text" path="numuntil"
 								placeholder="${numuntilmessage}" />
-							<div class="form-group has-error">
-								<label class="control-label" for="inputSuccess"><form:errors
-										path="numuntil" /></label>
-							</div>
+							<p class="text-danger">
+								<form:errors path="numuntil" />
+							</p>
 						</div>
 						<div class="form-group">
 							<spring:message code="place" />

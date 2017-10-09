@@ -20,10 +20,9 @@
 								<form:input class="form-control" path="sfrom"
 									placeholder="${from}" />
 							</div>
-							<div class="form-group has-error">
-								<label class="control-label" for="inputSuccess"><form:errors
-										path="sfrom" /></label>
-							</div>
+							<p class="text-danger">
+								<form:errors path="sfrom" />
+							</p>
 						</div>
 						<div class="form-group">
 							<spring:message code="dateuntil" var="until" />

@@ -17,19 +17,17 @@
 							<spring:message code="username" var="usermessage" />
 							<form:input class="form-control" path="username"
 								placeholder="${usermessage}" />
-							<div class="form-group has-error">
-								<label class="control-label" for="inputSuccess"> <form:errors
-										path="username" /></label>
-							</div>
+							<p class="text-danger">
+								<form:errors path="username" />
+							</p>
 						</div>
 						<div class="form-group">
 							<spring:message code="password" var="passmessage" />
 							<form:input class="form-control" path="password"
 								placeholder="${passmessage}" />
-							<div class="form-group has-error">
-								<label class="control-label" for="inputSuccess"> <form:errors
-										path="password" /></label>
-							</div>
+							<p class="text-danger">
+								<form:errors path="password" />
+							</p>
 						</div>
 						<div class="form-group">
 							<spring:message code="place" />

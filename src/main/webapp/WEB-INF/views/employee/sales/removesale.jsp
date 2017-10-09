@@ -15,10 +15,9 @@
 				<div class="form-group">
 					<spring:message code="idsale" />
 					<form:input class="form-control" path="numsale" />
-					<div class="form-group has-error">
-						<label class="control-label" for="inputSuccess"> <form:errors
-								path="numsale" /></label>
-					</div>
+					<p class="text-danger">
+						<form:errors path="numsale" />
+					</p>
 				</div>
 				<div class="form-group" id="payments">
 					<spring:message code="repayment" />

@@ -21,10 +21,9 @@
 							<div class="form-group">
 								<spring:message code="datefrom" />
 								<form:input class="form-control" path="datefrom" />
-								<div class="form-group has-error">
-									<label class="control-label" for="inputSuccess"><form:errors
-											path="datefrom" /></label>
-								</div>
+								<p class="text-danger">
+									<form:errors path="datefrom" />
+								</p>
 							</div>
 							<div class="form-group">
 								<spring:message code="dateuntil" />
