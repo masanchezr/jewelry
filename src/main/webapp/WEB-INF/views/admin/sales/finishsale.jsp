@@ -9,7 +9,7 @@
 </ol>
 <div class="row">
 	<div class="col-xl-3 col-sm-6 mb-3">
-		<div class="card text-white bg-primary o-hidden h-100">
+		<div class="card text-white bg-primary o-hidden">
 			<div class="card-body">
 				<div class="card-body-icon">
 					<i class="fa fa-fw fa-comments"></i>
@@ -22,7 +22,7 @@
 		</div>
 	</div>
 	<div class="col-xl-3 col-sm-6 mb-3">
-		<div class="card text-white bg-success o-hidden h-100">
+		<div class="card text-white bg-success o-hidden">
 			<div class="card-body">
 				<div class="card-body-icon">
 					<i class="fa fa-fw fa-shopping-cart"></i>
@@ -35,7 +35,7 @@
 		</div>
 	</div>
 	<div class="col-xl-3 col-sm-6 mb-3">
-		<div class="card text-white bg-warning o-hidden h-100">
+		<div class="card text-white bg-warning o-hidden">
 			<div class="card-body">
 				<div class="card-body-icon">
 					<i class="fa fa-fw fa-gift"></i>
@@ -49,44 +49,42 @@
 	</div>
 </div>
 <!-- /.row -->
-<div class="row">
-	<div class="col-lg-12">
-		<div class="card-heading">
-			<spring:message code="jewelrysold" />
-		</div>
-		<!-- /.card-heading -->
-		<div class="card-body">
-			<div class="table-responsive">
-				<table class="table table-striped table-bordered table-hover"
-					id="dataTables-example">
-					<thead>
+<div class="card mb-3">
+	<div class="card-header">
+		<spring:message code="jewelrysold" />
+	</div>
+	<!-- /.card-heading -->
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-striped table-bordered table-hover"
+				id="dataTables-example">
+				<thead>
+					<tr>
+						<th><spring:message code="reference" /></th>
+						<th><spring:message code="nameclient" /></th>
+						<th><spring:message code="description" /></th>
+						<th><spring:message code="price" /></th>
+						<th><spring:message code="category" /></th>
+						<th><spring:message code="metal" /></th>
+						<th><spring:message code="place" /></th>
+						<th><spring:message code="cost" /></th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${sale.jewels}" var="jewel">
 						<tr>
-							<th><spring:message code="reference" /></th>
-							<th><spring:message code="nameclient" /></th>
-							<th><spring:message code="description" /></th>
-							<th><spring:message code="price" /></th>
-							<th><spring:message code="category" /></th>
-							<th><spring:message code="metal" /></th>
-							<th><spring:message code="place" /></th>
-							<th><spring:message code="cost" /></th>
+							<td><c:out value="${jewel.reference}" /></td>
+							<td><c:out value="${jewel.name}" /></td>
+							<td><c:out value="${jewel.description}" /></td>
+							<td><c:out value="${jewel.price}" /></td>
+							<td><c:out value="${jewel.category.namecategory}" /></td>
+							<td><c:out value="${jewel.metal.description}" /></td>
+							<td><c:out value="${jewel.place.description}" /></td>
+							<td><c:out value="${jewel.cost}" /></td>
 						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${sale.jewels}" var="jewel">
-							<tr>
-								<td><c:out value="${jewel.reference}" /></td>
-								<td><c:out value="${jewel.name}" /></td>
-								<td><c:out value="${jewel.description}" /></td>
-								<td><c:out value="${jewel.price}" /></td>
-								<td><c:out value="${jewel.category.namecategory}" /></td>
-								<td><c:out value="${jewel.metal.description}" /></td>
-								<td><c:out value="${jewel.place.description}" /></td>
-								<td><c:out value="${jewel.cost}" /></td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-			</div>
+					</c:forEach>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>

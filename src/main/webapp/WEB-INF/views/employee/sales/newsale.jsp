@@ -45,8 +45,9 @@
 						<td><spring:message code="discount" var="discountmessage" />
 							<form:input class="form-control" path="discount"
 								placeholder="${discountmessage}" /></td>
-						<td class="form-group has-error"><label class="control-label"
-							for="inputSuccess"> <form:errors path="numsale" /></label></td>
+						<td><p class="text-danger">
+								<form:errors path="numsale" />
+							</p></td>
 						<td><form:button class="btn btn-primary" value="submit">
 								<spring:message code="save" />
 							</form:button></td>

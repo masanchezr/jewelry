@@ -11,47 +11,47 @@
 </ol>
 <div class="row">
 	<div class="col-xl-3 col-sm-6 mb-3">
-		<div class="card text-white bg-primary o-hidden h-100">
+		<div class="card text-white bg-primary o-hidden">
 			<div class="card-body">
 				<div class="card-body-icon">
-					<i class="fa fa-shopping-cart fa-5x"></i>
+					<i class="fa fa-shopping-cart fa-fw"></i>
 				</div>
 				<div class="mr-5">
 					<c:out value="${sale.numsale}" />
 					<spring:message code="idsale" />
 				</div>
 			</div>
+			<spring:url value="/employee/newsale" var="newsale"></spring:url>
+			<a class="card-footer text-white clearfix small z-1"
+				href="${newsale}"> <span class="float-left"><spring:message
+						code="newsale" /></span> <span class="float-right"><i
+					class="fa fa-angle-right"></i></span>
+			</a>
 		</div>
-		<spring:url value="/employee/newsale" var="newsale"></spring:url>
-		<a class="card-footer text-white clearfix small z-1" href="${newsale}">
-			<span class="float-left"><spring:message code="newsale" /></span> <span
-			class="float-right"><i class="fa fa-arrow-circle-right"></i></span>
-		</a>
 	</div>
-
 	<div class="col-xl-3 col-sm-6 mb-3">
-		<div class="card text-white bg-success o-hidden h-100">
+		<div class="card text-white bg-success o-hidden">
 			<div class="card-body">
 				<div class="card-body-icon">
-					<i class="fa fa-euro fa-5x"></i>
+					<i class="fa fa-euro fa-fw"></i>
 				</div>
 				<div class="mr-5">
 					<c:out value="${sale.total}" />
 					<spring:message code="totalamount" />
 				</div>
 			</div>
+			<spring:url value="/employee/daily" var="daily"></spring:url>
+			<a class="card-footer text-white clearfix small z-1" href="${daily}">
+				<span class="float-left"><spring:message code="daily" /></span> <span
+				class="float-right"><i class="fa fa-angle-right"></i></span>
+			</a>
 		</div>
-		<spring:url value="/employee/daily" var="daily"></spring:url>
-		<a class="card-footer text-white clearfix small z-1" href="${daily}">
-			<span class="float-left"><spring:message code="daily" /></span> <span
-			class="float-right"><i class="fa fa-arrow-circle-right"></i></span>
-		</a>
 	</div>
 	<div class="col-xl-3 col-sm-6 mb-3">
-		<div class="card text-white bg-warning o-hidden h-100">
+		<div class="card text-white bg-warning o-hidden">
 			<div class="card-body">
 				<div class="card-body-icon">
-					<i class="fa fa-gift fa-5x"></i>
+					<i class="fa fa-gift fa-fw"></i>
 				</div>
 				<div class="mr-5">
 					<c:out value="${sale.discount}" />
@@ -63,8 +63,8 @@
 </div>
 <!-- /.row -->
 <div class="row">
-	<div class="col-lg-12">
-		<div class="card-heading">
+	<div class="card mb3">
+		<div class="card-header">
 			<spring:message code="jewelrysold" />
 		</div>
 		<!-- /.card-heading -->
