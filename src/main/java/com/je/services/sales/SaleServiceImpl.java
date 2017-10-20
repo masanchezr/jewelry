@@ -36,9 +36,6 @@ import com.je.utils.string.Util;
 public class SaleServiceImpl implements SaleService {
 
 	@Autowired
-	private MailService mailService;
-
-	@Autowired
 	private DiscountsRepository discountsRepository;
 
 	/** The sale manager. */
@@ -53,9 +50,11 @@ public class SaleServiceImpl implements SaleService {
 	@Autowired
 	private Mapper mapper;
 
+	@Override
 	public Long buy(Sale sale) {
 		// Tengo que crear un saleentity y varios salesjewels
 		SaleEntity saleEntity = new SaleEntity();
+		MailService mailService;
 		saleEntity.setNumsale(sale.getNumsale());
 		List<SalesJewels> salesJewels = new ArrayList<SalesJewels>();
 		List<SalesPayments> payments = new ArrayList<SalesPayments>();
@@ -139,12 +138,14 @@ public class SaleServiceImpl implements SaleService {
 			SaleEntity s = saleManager.searchByNumsaleAndPlace(sale.getNumsale() - 1,
 					saleEntity.getPlace().getIdplace());
 			if (s == null) {
-				mailService.sendMail("Numero de venta " + sale.getNumsale(), null, "REVISAR NUMERO VENTA.");
+				mailService = new MailService("Numero de venta " + sale.getNumsale(), null, "REVISAR NUMERO VENTA.");
+				mailService.start();
 			}
 		}
 		return saleManager.buy(saleEntity);
 	}
 
+	@Override
 	public List<Sale> searchAllSales() {
 		Iterable<SaleEntity> sales = saleManager.searchAllSales();
 		if (sales != null) {
@@ -188,6 +189,7 @@ public class SaleServiceImpl implements SaleService {
 		return jewels;
 	}
 
+	@Override
 	public List<Sale> searchByDate(Date date) {
 		Iterable<SaleEntity> sales = saleManager.searchByDate(date);
 		if (sales != null) {
@@ -197,6 +199,7 @@ public class SaleServiceImpl implements SaleService {
 		}
 	}
 
+	@Override
 	public Addresses searchAddressByClient(String nif) {
 		ClientEntity client = usersManager.findOne(nif);
 		Addresses addresses = null;
@@ -211,6 +214,7 @@ public class SaleServiceImpl implements SaleService {
 		return addresses;
 	}
 
+	@Override
 	public void removeSale(Sale removeSaleForm) {
 		Long iddiscount = removeSaleForm.getIddiscount();
 		List<CancelSalePaymentEntity> payments = new ArrayList<CancelSalePaymentEntity>();
@@ -256,6 +260,7 @@ public class SaleServiceImpl implements SaleService {
 		saleManager.cancelSale(cancel, sale.getSjewels(), discount);
 	}
 
+	@Override
 	public boolean removeSaleParcial(Sale removeSaleForm) {
 		SaleEntity sale = saleManager.searchByPK(removeSaleForm.getIdsale());
 		List<CancelSalePaymentEntity> payments = new ArrayList<CancelSalePaymentEntity>();
@@ -284,6 +289,7 @@ public class SaleServiceImpl implements SaleService {
 		return saleManager.cancelParcialSale(cancel, removeSaleForm.getJewelstocancel(), discount);
 	}
 
+	@Override
 	public Sale searchByNumsaleAndPlace(Long numsale, Long idplace) {
 		SaleEntity saleEntity = saleManager.searchByNumsaleAndPlace(numsale, idplace);
 		Sale sale = null;
@@ -294,6 +300,7 @@ public class SaleServiceImpl implements SaleService {
 		return sale;
 	}
 
+	@Override
 	public Map<String, Object> searchByDatesAndPlace(String sDateFrom, String sDateUntil, PlaceEntity place) {
 		Date until = new Date();
 		if (!Util.isEmpty(sDateUntil)) {
@@ -306,6 +313,7 @@ public class SaleServiceImpl implements SaleService {
 		return map;
 	}
 
+	@Override
 	public Sale searchByPK(Long idsale) {
 		SaleEntity entity = saleManager.searchByPK(idsale);
 		Sale sale = mapper.map(entity, Sale.class);

@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.je.dbaccess.entities.JewelEntity;
 import com.je.dbaccess.entities.PaymentEntity;
 import com.je.dbaccess.entities.PlaceEntity;
+import com.je.dbaccess.entities.SalePostponedEntity;
 import com.je.employee.validators.PartialCancelSaleValidator;
 import com.je.employee.validators.RemoveSaleFormValidator;
 import com.je.services.categories.CategoriesService;
@@ -28,6 +29,7 @@ import com.je.services.payment.PaymentService;
 import com.je.services.places.PlaceService;
 import com.je.services.sales.Sale;
 import com.je.services.sales.SaleService;
+import com.je.services.sales.SalesPostPonedService;
 import com.je.utils.constants.Constants;
 import com.je.utils.string.Util;
 import com.je.validators.SaleFormValidator;
@@ -41,6 +43,9 @@ public class SalesController {
 	/** The sale service. */
 	@Autowired
 	private SaleService saleService;
+
+	@Autowired
+	private SalesPostPonedService saleservicepostponed;
 
 	/** The jewel service. */
 	@Autowired
@@ -293,6 +298,82 @@ public class SalesController {
 		model.addObject("categories", categoriesService.getAllCategoriesOrderByName());
 		model.addObject("payments", paymentService.findAllActive());
 		model.addObject("saleForm", sale);
+		return model;
+	}
+
+	@RequestMapping(value = "/employee/newsalepostponed")
+	public ModelAndView newSalepostponed() {
+		ModelAndView model = new ModelAndView("newsalepostponed");
+		Sale sale = new Sale();
+		List<JewelEntity> jewels = new ArrayList<JewelEntity>();
+		for (int i = 0; i < Constants.MAXJEWELS; i++) {
+			jewels.add(new JewelEntity());
+		}
+		sale.setJewels(jewels);
+		model.addObject("metals", metalService.getAllMetals());
+		model.addObject("categories", categoriesService.getAllCategoriesOrderByName());
+		model.addObject("payments", paymentService.findAllActive());
+		model.addObject("saleForm", sale);
+		return model;
+	}
+
+	@RequestMapping(value = "/employee/savesalepostponed")
+	public ModelAndView savesalepostponed(@ModelAttribute("saleForm") Sale saleForm, BindingResult result) {
+		ModelAndView model = new ModelAndView();
+		saleFormValidator.validate(saleForm, result);
+		if (!result.hasErrors()) {
+			String user = SecurityContextHolder.getContext().getAuthentication().getName();
+			List<JewelEntity> jewels = saleForm.getJewels();
+			List<JewelEntity> newjewels = new ArrayList<JewelEntity>();
+			JewelEntity jewel;
+			boolean exists = true;
+			PlaceEntity place = placeService.getPlaceUser(user);
+			Iterator<JewelEntity> ijewels = jewels.iterator();
+			while (ijewels.hasNext() && exists) {
+				jewel = ijewels.next();
+				if (!Util.isEmpty(jewel.getReference())) {
+					jewel.setPlace(place);
+					jewel.setActive(true);
+					jewel = jewelService.searchByReferenceCategoryMetalPlaceActive(jewel);
+					if (jewel != null && jewel.getIdjewel() != null) {
+						newjewels.add(jewel);
+					} else {
+						exists = false;
+					}
+				}
+			}
+			if (!jewels.isEmpty() && exists) {
+				saleForm.setJewels(newjewels);
+				saleForm.setPlace(place);
+				// comprobamos si ya existe la venta
+				SalePostponedEntity sale = saleservicepostponed.searchByNumsale(saleForm.getNumsale());
+				if (sale == null) {
+					saleservicepostponed.buy(saleForm);
+					model.setViewName("finishsalepostponed");
+					model.addObject("sale", saleForm);
+				} else {
+					model.addObject("metals", metalService.getAllMetals());
+					model.addObject("categories", categoriesService.getAllCategoriesOrderByName());
+					model.addObject("payments", paymentService.findAllActive());
+					result.rejectValue("idsale", "numsalerepeated");
+					model.addObject("saleForm", saleForm);
+					model.setViewName("newsale");
+				}
+			} else {
+				model.addObject("metals", metalService.getAllMetals());
+				model.addObject("categories", categoriesService.getAllCategoriesOrderByName());
+				model.addObject("payments", paymentService.findAllActive());
+				result.rejectValue("numsale", "jewelnoexist");
+				model.addObject("saleForm", saleForm);
+				model.setViewName("newsale");
+			}
+		} else {
+			model.addObject("metals", metalService.getAllMetals());
+			model.addObject("categories", categoriesService.getAllCategoriesOrderByName());
+			model.addObject("payments", paymentService.findAllActive());
+			model.addObject("saleForm", saleForm);
+			model.setViewName("newsale");
+		}
 		return model;
 	}
 }

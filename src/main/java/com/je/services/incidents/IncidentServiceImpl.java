@@ -19,23 +19,25 @@ import com.je.utils.string.Util;
 public class IncidentServiceImpl implements IncidentService {
 
 	@Autowired
-	private MailService mailIncidentService;
-
-	@Autowired
 	private IncidentRepository incidentRepository;
 
 	@Autowired
 	private Mapper mapper;
 
+	@Override
 	public void save(Incident incident) {
+		MailService mailIncidentService;
 		IncidentEntity entity = mapper.map(incident, IncidentEntity.class);
 		entity.setCreationdate(new Date());
 		entity = incidentRepository.save(entity);
 		incident.setIdincident(entity.getIdincident());
-		mailIncidentService.sendMail("Numero de incidencia: " + entity.getIdincident() + " usuario: "
+		mailIncidentService = new MailService("Numero de incidencia: " + entity.getIdincident() + " usuario: "
 				+ incident.getUser() + " descripcion: " + incident.getDescription(), null, "NUEVA INCIDENCIA");
+
+		mailIncidentService.start();
 	}
 
+	@Override
 	public void resolve(Incident incident) {
 		IncidentEntity entity = incidentRepository.findOne(incident.getIdincident());
 		entity.setDescription(incident.getDescription());
@@ -43,15 +45,18 @@ public class IncidentServiceImpl implements IncidentService {
 		incidentRepository.save(entity);
 	}
 
+	@Override
 	public List<Incident> searchAllIncidents() {
 		List<Incident> incidents = mapper(incidentRepository.findAll());
 		return incidents;
 	}
 
+	@Override
 	public List<Incident> searchPending() {
 		return mapper(incidentRepository.findByState(Boolean.FALSE));
 	}
 
+	@Override
 	public List<Incident> searchByUser(String user) {
 		UserEntity entity = new UserEntity();
 		entity.setUsername(user);
@@ -74,6 +79,7 @@ public class IncidentServiceImpl implements IncidentService {
 		return incidents;
 	}
 
+	@Override
 	public Incident searchIncident(Incident incident) {
 		return mapper.map(incidentRepository.findOne(incident.getIdincident()), Incident.class);
 	}

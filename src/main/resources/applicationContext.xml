@@ -32,7 +32,6 @@
 	<bean id="workshopService" class="com.je.services.workshop.WorkshopServiceImpl" />
 	<bean id="holidayService" class="com.je.services.holidays.HolidayServiceImpl" />
 	<bean id="billingService" class="com.je.services.workshop.BillingServiceImpl" />
-	<bean id="mailService" class="com.je.services.mails.MailServiceImpl" />
 	<bean id="payrollService" class="com.je.services.payroll.PayrollServiceImpl" />
 	<bean id="entryMoneyService" class="com.je.services.entrymoney.EntryMoneyServiceImpl" />
 	<bean id="batteriesService" class="com.je.services.batteries.BatteriesServiceImpl" />

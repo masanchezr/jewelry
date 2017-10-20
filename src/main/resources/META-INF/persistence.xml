@@ -48,5 +48,7 @@
 		<class>com.je.dbaccess.entities.RecordingEntity</class>
 		<class>com.je.dbaccess.entities.PaymentShopEntity</class>
 		<class>com.je.dbaccess.entities.CancelSalePaymentEntity</class>
+		<class>com.je.dbaccess.entities.SalePostPonedJewel</class>
+		<class>com.je.dbaccess.entities.InstallmentEntity</class>
 	</persistence-unit>
 </persistence>

@@ -33,9 +33,6 @@ public class AdjustmentServiceImpl implements AdjustmentService {
 	private PlaceUserRepository placeUserRepository;
 
 	@Autowired
-	private MailService mailAdjustmentService;
-
-	@Autowired
 	private DailyService dailyService;
 
 	/** The mapper. */
@@ -44,6 +41,7 @@ public class AdjustmentServiceImpl implements AdjustmentService {
 
 	@Override
 	public Daily save(Adjustment adjustment) {
+		MailService mailAdjustmentService;
 		// primeramente miramos si existe el arreglo
 		Long idadjustment = adjustment.getIdadjustment();
 		AdjustmentEntity adjustmentEntity = adjustmentRepository.findOne(adjustment.getIdadjustment());
@@ -54,10 +52,11 @@ public class AdjustmentServiceImpl implements AdjustmentService {
 			if (recommendedprice != null && recommendedprice.compareTo(BigDecimal.ZERO) > 0
 					&& recommendedprice.compareTo(amount) != 0) {
 				// envio un mail u otro tipo de alerta
-				mailAdjustmentService.sendMail(
+				mailAdjustmentService = new MailService(
 						"Numero de arreglo: " + idadjustment + ", importe recomendado:" + recommendedprice
 								+ " euros, importe cobrado al cliente:" + amount + " euros.",
 						null, "Arreglo no coincide con precio recomendado.");
+				mailAdjustmentService.start();
 			}
 		} else {
 			adjustmentEntity = new AdjustmentEntity();

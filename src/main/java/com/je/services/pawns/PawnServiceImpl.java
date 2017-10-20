@@ -34,9 +34,6 @@ import com.je.utils.string.Util;
  */
 public class PawnServiceImpl implements PawnService {
 
-	@Autowired
-	private MailService mailService;
-
 	/** The daily service. */
 	@Autowired
 	private DailyService dailyService;
@@ -63,6 +60,7 @@ public class PawnServiceImpl implements PawnService {
 	@Autowired
 	private Mapper mapper;
 
+	@Override
 	public Daily save(NewPawn pawn) {
 		// cuidado con el mapeo del creationdate
 		PawnEntity pawnEntity = mapper.map(pawn, PawnEntity.class);
@@ -99,6 +97,7 @@ public class PawnServiceImpl implements PawnService {
 		return dailyService.getDaily(pawnEntity.getCreationdate(), place, null);
 	}
 
+	@Override
 	public void update(NewPawn pawn) {
 		PawnEntity pawnEntity = pawnsRepository.findOne(pawn.getIdpawn());
 		List<ObjectPawnEntity> objects = pawnEntity.getObjects();
@@ -137,10 +136,12 @@ public class PawnServiceImpl implements PawnService {
 		pawnsRepository.save(pawnEntity);
 	}
 
+	@Override
 	public Pawn searchByIdpawn(Long idpawn) {
 		return mapper.map(pawnsRepository.findOne(idpawn), Pawn.class);
 	}
 
+	@Override
 	public NewPawn findByIdpawn(Long idpawn) {
 		PawnEntity pawnEntity = pawnsRepository.findOne(idpawn);
 		NewPawn pawn = mapper.map(pawnEntity, NewPawn.class);
@@ -148,11 +149,13 @@ public class PawnServiceImpl implements PawnService {
 		return pawn;
 	}
 
+	@Override
 	public List<Pawn> searchRenewByNumpawn(Pawn pawn) {
 		PlaceEntity place = placeUserRepository.findByUsername(pawn.getUser()).get(0).getPlace();
 		return mapper(pawnsRepository.findByNumpawnAndPlaceAndRetired(pawn.getNumpawn(), place));
 	}
 
+	@Override
 	public List<Pawn> searchByNumpawn(Pawn pawn) {
 		return mapper(pawnsRepository.findByNumpawnAndPlace(pawn.getNumpawn(),
 				mapper.map(pawn.getPlace(), PlaceEntity.class)));
@@ -177,6 +180,7 @@ public class PawnServiceImpl implements PawnService {
 		return pawns;
 	}
 
+	@Override
 	public Daily renew(Pawn pawn) {
 		PawnEntity pawnEntity = pawnsRepository.findOne(pawn.getIdpawn());
 		if (pawnEntity != null) {
@@ -208,7 +212,9 @@ public class PawnServiceImpl implements PawnService {
 		return dailyService.getDaily(new Date(), pawnEntity.getPlace(), null);
 	}
 
+	@Override
 	public Daily remove(Pawn pawn) {
+		MailService mailService;
 		Long idpawn = pawn.getIdpawn();
 		PawnEntity pawnEntity = pawnsRepository.findOne(idpawn);
 		PlaceEntity place = pawnEntity.getPlace();
@@ -227,12 +233,15 @@ public class PawnServiceImpl implements PawnService {
 			pawns = pawnsRepository.searchMissingRenovations(idpawn);
 		}
 		if (pawns != null && !pawns.isEmpty()) {
-			mailService.sendMail("N&uacute;mero empe&ntilde;o: " + pawnEntity.getNumpawn() + ", fecha creaci&oacute;n: "
-					+ pawnEntity.getCreationdate() + ", lugar:" + idplace, null, "REVISAR EMPE&Ntilde;O.");
+			mailService = new MailService("N&uacute;mero empe&ntilde;o: " + pawnEntity.getNumpawn()
+					+ ", fecha creaci&oacute;n: " + pawnEntity.getCreationdate() + ", lugar:" + idplace, null,
+					"REVISAR EMPE&Ntilde;O.");
+			mailService.start();
 		}
 		return dailyService.getDaily(new Date(), place, null);
 	}
 
+	@Override
 	public List<RenovationDates> searchRenovations(Long idpawn) {
 		PawnEntity pawnEntity = pawnsRepository.findOne(idpawn);
 		List<RenovationDates> renovationdates = new ArrayList<RenovationDates>();
@@ -248,6 +257,7 @@ public class PawnServiceImpl implements PawnService {
 		return renovationdates;
 	}
 
+	@Override
 	public Quarter searchGramsByDates(String sDateFrom, String sDateUntil, PlaceEntity place) {
 		PawnEntity pawnEntity = null;
 		Date datefrom = DateUtil.getDate(sDateFrom), dateuntil = DateUtil.getDate(sDateUntil);
@@ -289,6 +299,7 @@ public class PawnServiceImpl implements PawnService {
 		return quarter;
 	}
 
+	@Override
 	public BigDecimal getCommissions(String sDateFrom, String sDateUntil, PlaceEntity place) {
 		BigDecimal commissions = BigDecimal.ZERO;
 		Date dfrom = DateUtil.getDate(sDateFrom);
@@ -312,8 +323,7 @@ public class PawnServiceImpl implements PawnService {
 				}
 				BigDecimal percentamount = amount.multiply(percent).divide(new BigDecimal(100));
 				/**
-				 * if (percentamount - ((int) percentamount) != 0) {
-				 * percentamount += 1; }
+				 * if (percentamount - ((int) percentamount) != 0) { percentamount += 1; }
 				 **/
 				commissions = commissions.add(percentamount);
 			}
@@ -332,8 +342,8 @@ public class PawnServiceImpl implements PawnService {
 				renovationamount = pawn.getAmount().multiply(pawn.getPercent());
 				renovationamount = renovationamount.divide(new BigDecimal(100));
 				/**
-				 * if ((renovationamount - ((int) renovationamount) != 0)) {
-				 * renovationamount += 1; }
+				 * if ((renovationamount - ((int) renovationamount) != 0)) { renovationamount +=
+				 * 1; }
 				 **/
 				re.setRenovationamount(renovationamount);
 				commissions = commissions.add(re.getRenovationamount());
@@ -342,6 +352,7 @@ public class PawnServiceImpl implements PawnService {
 		return commissions;
 	}
 
+	@Override
 	public NewPawn searchClient(String nif) {
 		ClientPawnEntity client = clientPawnsRepository.findOne(nif);
 		NewPawn pawn = new NewPawn();
@@ -353,6 +364,7 @@ public class PawnServiceImpl implements PawnService {
 		return pawn;
 	}
 
+	@Override
 	public List<Pawn> pawnsOutofdate(PlaceEntity place) {
 		List<Pawn> pawns = null;
 		Calendar calendar;
@@ -383,10 +395,12 @@ public class PawnServiceImpl implements PawnService {
 		return pawns;
 	}
 
+	@Override
 	public Double sumPawnsActiveByPlace(PlaceEntity place) {
 		return pawnsRepository.sumPawnsActive(mapper.map(place, PlaceEntity.class));
 	}
 
+	@Override
 	public boolean isRepeatNumber(String num, String user, int year) {
 		boolean repeat = true;
 		PlaceEntity placeEntity = placeUserRepository.findByUsername(user).get(0).getPlace();
@@ -404,9 +418,9 @@ public class PawnServiceImpl implements PawnService {
 
 	@Override
 	/**
-	 * elimino temporalmente este método ya que si ordenamos los empeños por
-	 * fecha puede que no nos los de bien y si los ordenamos por id y hemos
-	 * metido un empeño de otra fecha ya tenemos el lío otra vez
+	 * elimino temporalmente este método ya que si ordenamos los empeños por fecha
+	 * puede que no nos los de bien y si los ordenamos por id y hemos metido un
+	 * empeño de otra fecha ya tenemos el lío otra vez
 	 **/
 	public boolean isCorrectNumber(String num, String user, int i) {
 		boolean isCorrectNumber = false;

@@ -18,13 +18,16 @@ import com.je.utils.string.Util;
  */
 public class SaleFormValidator implements Validator {
 
+	@Override
 	public boolean supports(Class<?> arg0) {
 		return Sale.class.isAssignableFrom(arg0);
 	}
 
+	@Override
 	public void validate(Object arg0, Errors arg1) {
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "numsale", "selectidsale");
 		Sale sale = (Sale) arg0;
+		Long numsale = sale.getNumsale();
 		List<JewelEntity> jewels = sale.getJewels();
 		if (jewels != null) {
 			Iterator<JewelEntity> ijewels = jewels.iterator();
@@ -44,6 +47,9 @@ public class SaleFormValidator implements Validator {
 			}
 		} else {
 			arg1.rejectValue("numsale", "selectreference");
+		}
+		if (numsale.compareTo(0L) <= 0) {
+			arg1.rejectValue("numsale", "numsaleminuszero");
 		}
 	}
 }

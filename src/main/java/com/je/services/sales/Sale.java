@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import com.je.dbaccess.entities.AddressEntity;
+import com.je.dbaccess.entities.InstallmentEntity;
 import com.je.dbaccess.entities.JewelEntity;
 import com.je.dbaccess.entities.PaymentEntity;
 import com.je.dbaccess.entities.PlaceEntity;
@@ -55,6 +56,8 @@ public class Sale {
 	private Long iddiscount;
 
 	private Long numsalechange;
+
+	private List<InstallmentEntity> spayments;
 
 	/**
 	 * Gets the client.
@@ -281,5 +284,13 @@ public class Sale {
 
 	public void setJewelstocancel(List<JewelEntity> jewelstocancel) {
 		this.jewelstocancel = jewelstocancel;
+	}
+
+	public List<InstallmentEntity> getSpayments() {
+		return spayments;
+	}
+
+	public void setSpayments(List<InstallmentEntity> spayments) {
+		this.spayments = spayments;
 	}
 }
