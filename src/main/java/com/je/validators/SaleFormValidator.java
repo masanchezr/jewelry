@@ -47,6 +47,9 @@ public class SaleFormValidator implements Validator {
 			}
 		} else {
 			arg1.rejectValue("numsale", "selectreference");
-		}
+		} /**
+			 * if (numsale.compareTo(0L) <= 0) { arg1.rejectValue("numsale",
+			 * "numsaleminuszero"); }
+			 */
 	}
 }
