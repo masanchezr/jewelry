@@ -156,13 +156,10 @@ public class ShoppingsAdminController {
 	 */
 	@RequestMapping(value = "/saveShopping")
 	public ModelAndView saveShopping(@ModelAttribute("shoppingForm") Shopping shoppingForm) {
-		ModelAndView model = new ModelAndView();
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		shoppingForm.setUser(user);
 		shoppingService.update(shoppingForm);
-		model.addObject("adminForm", new AdminForm());
-		model.setViewName("success");
-		return model;
+		return searchShoppings();
 	}
 
 	/**

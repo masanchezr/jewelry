@@ -11,7 +11,7 @@ import com.je.dbaccess.entities.SalePostponedEntity;
 
 public interface InstallmentsRepository extends CrudRepository<InstallmentEntity, Long> {
 
-	@Query("select sum(i.amount) from InstallmentEntity i where s.salepostponed=:sppentity")
+	@Query("select sum(i.amount) from InstallmentEntity i where i.salepostponed=:sppentity")
 	public BigDecimal sumBySalepostponed(@Param("sppentity") SalePostponedEntity sppentity);
 
 }

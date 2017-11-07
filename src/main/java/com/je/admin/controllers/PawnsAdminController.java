@@ -163,14 +163,15 @@ public class PawnsAdminController {
 	 */
 	@RequestMapping(value = "/savePawn")
 	public ModelAndView savePawn(@ModelAttribute("pawnForm") NewPawn pawn, BindingResult result) {
-		ModelAndView model = new ModelAndView();
-		model.addObject("adminForm", new AdminForm());
+		ModelAndView model;
 		updatePawnFormValidator.validate(pawn, result);
 		if (result.hasErrors()) {
+			model = new ModelAndView();
+			model.addObject("adminForm", new AdminForm());
 			model.setViewName("updatepawn");
 			model.addObject("pawn", pawn);
 		} else {
-			model.setViewName("success");
+			model = searchPawns();
 			pawn.setNif(Util.refactorNIF(pawn.getNif()));
 			pawnService.update(pawn);
 		}

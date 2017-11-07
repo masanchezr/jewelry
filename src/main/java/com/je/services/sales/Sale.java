@@ -4,32 +4,18 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import com.je.dbaccess.entities.AddressEntity;
-import com.je.dbaccess.entities.InstallmentEntity;
 import com.je.dbaccess.entities.JewelEntity;
-import com.je.dbaccess.entities.PaymentEntity;
-import com.je.dbaccess.entities.PlaceEntity;
 import com.je.services.users.Client;
 
 /**
  * The Class Sale.
  */
-public class Sale {
-
-	private Long idsale;
+public class Sale extends SaleParent {
 
 	/** The client. */
 	private Client client;
 
-	/** The jewels. */
-	private List<JewelEntity> jewels;
-
 	private List<JewelEntity> jewelstocancel;
-
-	/** The payment. */
-	private PaymentEntity payment;
-
-	/** The total. */
-	private BigDecimal total;
 
 	/** The invoice. */
 	private AddressEntity invoice;
@@ -46,18 +32,9 @@ public class Sale {
 	/** The discount. */
 	private BigDecimal discount;
 
-	/** The place. */
-	private PlaceEntity place;
-
-	private BigDecimal optionalpayment;
-
-	private String payments;
-
 	private Long iddiscount;
 
 	private Long numsalechange;
-
-	private List<InstallmentEntity> spayments;
 
 	/**
 	 * Gets the client.
@@ -76,63 +53,6 @@ public class Sale {
 	 */
 	public void setClient(Client client) {
 		this.client = client;
-	}
-
-	/**
-	 * Gets the jewels.
-	 *
-	 * @return the jewels
-	 */
-	public List<JewelEntity> getJewels() {
-		return jewels;
-	}
-
-	/**
-	 * Gets the idsale.
-	 *
-	 * @return the idsale
-	 */
-	public Long getIdsale() {
-		return idsale;
-	}
-
-	/**
-	 * Sets the jewels.
-	 *
-	 * @param jewels
-	 *            the new jewels
-	 */
-	public void setJewels(List<JewelEntity> jewels) {
-		this.jewels = jewels;
-	}
-
-	/**
-	 * Sets the idsale.
-	 *
-	 * @param id
-	 *            the new idsale
-	 */
-	public void setIdsale(Long id) {
-		this.idsale = id;
-	}
-
-	/**
-	 * Gets the total.
-	 *
-	 * @return the total
-	 */
-	public BigDecimal getTotal() {
-		return total;
-	}
-
-	/**
-	 * Sets the total.
-	 *
-	 * @param total
-	 *            the total to set
-	 */
-	public void setTotal(BigDecimal total) {
-		this.total = total;
 	}
 
 	/**
@@ -211,55 +131,12 @@ public class Sale {
 		this.discount = discount;
 	}
 
-	/**
-	 * Gets the place.
-	 *
-	 * @return the place
-	 */
-	public PlaceEntity getPlace() {
-		return place;
-	}
-
-	/**
-	 * Sets the place.
-	 *
-	 * @param place
-	 *            the new place
-	 */
-	public void setPlace(PlaceEntity place) {
-		this.place = place;
-	}
-
 	public Long getNumsale() {
 		return numsale;
 	}
 
 	public void setNumsale(Long numsale) {
 		this.numsale = numsale;
-	}
-
-	public BigDecimal getOptionalpayment() {
-		return optionalpayment;
-	}
-
-	public void setOptionalpayment(BigDecimal optionalpayment) {
-		this.optionalpayment = optionalpayment;
-	}
-
-	public PaymentEntity getPayment() {
-		return payment;
-	}
-
-	public void setPayment(PaymentEntity payment) {
-		this.payment = payment;
-	}
-
-	public String getPayments() {
-		return payments;
-	}
-
-	public void setPayments(String payments) {
-		this.payments = payments;
 	}
 
 	public Long getIddiscount() {
@@ -284,13 +161,5 @@ public class Sale {
 
 	public void setJewelstocancel(List<JewelEntity> jewelstocancel) {
 		this.jewelstocancel = jewelstocancel;
-	}
-
-	public List<InstallmentEntity> getSpayments() {
-		return spayments;
-	}
-
-	public void setSpayments(List<InstallmentEntity> spayments) {
-		this.spayments = spayments;
 	}
 }

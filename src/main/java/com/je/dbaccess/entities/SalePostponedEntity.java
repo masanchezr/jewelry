@@ -24,7 +24,7 @@ public class SalePostponedEntity {
 	@Column(name = "idsalepostponed")
 	private Long idsalepostponed;
 
-	@Column(name = "amount")
+	@Column(name = "totalamount")
 	private BigDecimal totalamount;
 
 	@Column(name = "dateretired")

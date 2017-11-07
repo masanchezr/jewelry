@@ -52,12 +52,8 @@
 		</field>
 	</mapping>
 	<mapping>
-		<class-a>com.je.services.sales.Sale</class-a>
+		<class-a>com.je.services.sales.SalePostPoned</class-a>
 		<class-b>com.je.dbaccess.entities.SalePostponedEntity</class-b>
-		<field custom-converter="com.je.services.converters.StringToDateConverter">
-			<a>saledate</a>
-			<b>creationdate</b>
-		</field>
 		<field>
 			<a>idsale</a>
 			<b>idsalepostponed</b>

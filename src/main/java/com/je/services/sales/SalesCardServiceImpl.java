@@ -17,12 +17,14 @@ import com.je.dbaccess.entities.JewelEntity;
 import com.je.dbaccess.entities.PaymentEntity;
 import com.je.dbaccess.entities.RecordingEntity;
 import com.je.dbaccess.entities.SaleEntity;
+import com.je.dbaccess.entities.SalePostponedEntity;
 import com.je.dbaccess.entities.SalesJewels;
 import com.je.dbaccess.entities.StrapEntity;
 import com.je.dbaccess.managers.SaleManager;
 import com.je.dbaccess.repositories.AdjustmentRepository;
 import com.je.dbaccess.repositories.BatteriesRepository;
 import com.je.dbaccess.repositories.RecordingRepository;
+import com.je.dbaccess.repositories.SalesPostponedRepository;
 import com.je.dbaccess.repositories.StrapsRepository;
 import com.je.services.adjustments.Adjustment;
 import com.je.utils.date.DateUtil;
@@ -49,6 +51,9 @@ public class SalesCardServiceImpl implements SalesCardService {
 
 	@Autowired
 	private StrapsRepository strapsRepository;
+
+	@Autowired
+	private SalesPostponedRepository salespostponedrepository;
 
 	@Override
 	public Map<String, Object> searchByDates(SearchSale searchSale) {
@@ -112,12 +117,22 @@ public class SalesCardServiceImpl implements SalesCardService {
 			}
 			size += straps.size();
 		}
+		List<SalePostponedEntity> salespost = salespostponedrepository.findByCreationdateBetweenPay(from, until,
+				payment);
+		if (salespost != null && !salespost.isEmpty()) {
+			Iterator<SalePostponedEntity> isalespost = salespost.iterator();
+			while (isalespost.hasNext()) {
+				total = total.add(isalespost.next().getTotalamount());
+			}
+			size += straps.size();
+		}
 		map.put("straps", straps);
 		map.put("batteries", batteries);
 		map.put("recordings", recordings);
 		map.put("adjustments", ladjustments);
 		map.put("numsales", size);
 		map.put("sales", sales);
+		map.put("salespost", salespost);
 		map.put("total", total);
 		return map;
 	}

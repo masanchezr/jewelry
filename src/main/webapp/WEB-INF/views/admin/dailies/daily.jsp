@@ -8,8 +8,7 @@
 	<li class="breadcrumb-item active"><fmt:formatDate
 			value="${datedaily}" type="date" /></li>
 	<li class="breadcrumb-item active"><c:out
-			value="${daily.numoperations}" />
-		<spring:message code="operations" /></li>
+			value="${daily.numoperations}" /> <spring:message code="operations" /></li>
 	<li class="breadcrumb-item active"><c:out value="${place}" /></li>
 </ol>
 <div class="row">
@@ -35,6 +34,15 @@
 											value="${sale.numsale}" /></a></td>
 								<td><c:out value="${sale.total}" /><i class="fa fa-euro"></i></td>
 								<td><c:out value="${sale.payments}" /></td>
+							</tr>
+						</c:forEach>
+						<c:forEach items="${daily.lsalespost}" var="salepost">
+							<tr>
+								<td><spring:message code="salepostponed" /></td>
+								<td><c:out value="${salepost.idsale}" /></td>
+								<td><c:out value="${salepost.total}" /><i
+									class="fa fa-euro"></i></td>
+								<td><c:out value="${salepost.payments}" /></td>
 							</tr>
 						</c:forEach>
 						<c:forEach items="${daily.retiredpawns}" var="pawn">

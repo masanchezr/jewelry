@@ -2,6 +2,7 @@ package com.je.services.sales;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -31,19 +32,24 @@ public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 	private Mapper mapper;
 
 	@Override
-	public void buy(Sale sale) {
+	public void buy(SalePostPoned sale) {
 		// Tengo que crear un saleentity y varios salesjewels
 		SalePostponedEntity saleEntity = new SalePostponedEntity();
-		saleEntity.setIdsalepostponed(sale.getNumsale());
+		saleEntity.setIdsalepostponed(sale.getIdsale());
 		List<SalePostPonedJewel> salesJewels = new ArrayList<SalePostPonedJewel>();
 		List<InstallmentEntity> payments = new ArrayList<InstallmentEntity>();
 		saleEntity.setCreationdate(new Date());
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+		calendar.add(Calendar.MONTH, 6);
+		saleEntity.setDeadline(calendar.getTime());
 		Iterator<JewelEntity> ijewels = sale.getJewels().iterator();
 		BigDecimal importeTotal = BigDecimal.ZERO;
 		while (ijewels.hasNext()) {
 			// Deshabilito el objeto comprado
 			JewelEntity jewel = ijewels.next();
 			jewel.setActive(false);
+			jewel.setSaledate(new Date());
 			importeTotal = importeTotal.add(jewel.getPrice());
 			SalePostPonedJewel e = new SalePostPonedJewel();
 			e.setSalepostponed(saleEntity);
@@ -66,16 +72,24 @@ public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 		mapper.map(saleEntity, sale);
 	}
 
-	public SalePostponedEntity addInstallment(Installment installment) {
-		InstallmentEntity entity = mapper.map(installment, InstallmentEntity.class);
+	@Override
+	public SalePostPoned addInstallment(Installment installment) {
 		SalePostponedEntity sppentity = salespostponedrepository.findOne(installment.getIdsalepostponed());
-		entity.setSalepostponed(sppentity);
-		installmentsrepository.save(entity);
-		BigDecimal amount = installmentsrepository.sumBySalepostponed(sppentity);
-		if (amount.equals(sppentity.getTotalamount())) {
-			sppentity.setDateretired(new Date());
+		SalePostPoned sale = null;
+		if (sppentity != null) {
+			InstallmentEntity entity = mapper.map(installment, InstallmentEntity.class);
+			entity.setSalepostponed(sppentity);
+			entity.setCreationdate(new Date());
+			installmentsrepository.save(entity);
+			BigDecimal amount = installmentsrepository.sumBySalepostponed(sppentity);
+			if (amount.equals(sppentity.getTotalamount())) {
+				sppentity.setDateretired(new Date());
+				salespostponedrepository.save(sppentity);
+			}
+			sppentity = salespostponedrepository.findOne(installment.getIdsalepostponed());
+			sale = mapper.map(sppentity, SalePostPoned.class);
 		}
-		return sppentity;
+		return sale;
 	}
 
 	@Override

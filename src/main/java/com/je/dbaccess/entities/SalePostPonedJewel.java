@@ -1,5 +1,6 @@
 package com.je.dbaccess.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +25,7 @@ public class SalePostPonedJewel {
 	private SalePostponedEntity salepostponed;
 
 	/** The jewel. */
-	@OneToOne
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "IDJEWEL")
 	private JewelEntity jewel;
 

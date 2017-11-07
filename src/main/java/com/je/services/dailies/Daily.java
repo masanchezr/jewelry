@@ -16,6 +16,7 @@ import com.je.services.payroll.Payroll;
 import com.je.services.rentals.Rental;
 import com.je.services.sales.CancelSale;
 import com.je.services.sales.Sale;
+import com.je.services.sales.SalePostPoned;
 import com.je.services.shoppings.Shopping;
 
 /**
@@ -65,6 +66,8 @@ public class Daily {
 	private Payroll payroll;
 
 	private int numoperations;
+
+	private List<SalePostPoned> lsalespost;
 
 	/**
 	 * Gets the sales.
@@ -296,5 +299,13 @@ public class Daily {
 
 	public void setNewpawns(List<Pawn> newpawns) {
 		this.newpawns = newpawns;
+	}
+
+	public List<SalePostPoned> getLsalespost() {
+		return lsalespost;
+	}
+
+	public void setLsalespost(List<SalePostPoned> lsalespost) {
+		this.lsalespost = lsalespost;
 	}
 }

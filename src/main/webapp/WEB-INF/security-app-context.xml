@@ -65,6 +65,10 @@
 			access="hasAnyRole('ROLE_USER','ROLE_NRA','ROLE_NPCA','ROLE_NA')" />
 		<intercept-url pattern="/employee/newrecording"
 			access="hasAnyRole('ROLE_USER','ROLE_NRA','ROLE_NA')" />
+		<intercept-url pattern="/employee/newsalepostponed"
+			access="hasAnyRole('ROLE_USER','ROLE_NRA','ROLE_NPCA','ROLE_NA')" />
+		<intercept-url pattern="/employee/addinstallment"
+			access="hasAnyRole('ROLE_USER','ROLE_NRA','ROLE_NPCA','ROLE_NA')" />
 		<form-login login-page="/employee/login"
 			default-target-url="/employee/admin" authentication-failure-url="/employee/login"
 			always-use-default-target="true" login-processing-url="/employee/jspringsecuritycheck" />

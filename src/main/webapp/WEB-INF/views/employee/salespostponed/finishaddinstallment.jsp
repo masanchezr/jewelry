@@ -5,9 +5,10 @@
 <ol class="breadcrumb">
 	<li class="breadcrumb-item"><a href="#"><spring:message
 				code="salespostponed" /></a></li>
-	<li class="breadcrumb-item active"><spring:message code="newsale" /></li>
 	<li class="breadcrumb-item active"><spring:message
-			code="savedsale" /></li>
+			code="addinstallment" /></li>
+	<li class="breadcrumb-item active"><spring:message
+			code="amountadded" /></li>
 </ol>
 <div class="row">
 	<div class="col-xl-3 col-sm-6 mb-3">
@@ -48,45 +49,6 @@
 		</div>
 	</div>
 </div>
-<!-- /.row -->
-<div class="row">
-	<div class="card mb3">
-		<div class="card-header">
-			<spring:message code="jewelrysold" />
-		</div>
-		<!-- /.card-heading -->
-		<div class="card-body">
-			<div class="table-responsive">
-				<table class="table table-striped table-bordered table-hover"
-					id="dataTables-example">
-					<thead>
-						<tr>
-							<th><spring:message code="reference" /></th>
-							<th><spring:message code="nameclient" /></th>
-							<th><spring:message code="description" /></th>
-							<th><spring:message code="price" /></th>
-							<th><spring:message code="category" /></th>
-							<th><spring:message code="metal" /></th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${sale.jewels}" var="jewel">
-							<tr>
-								<td><c:out value="${jewel.reference}" /></td>
-								<td><c:out value="${jewel.name}" /></td>
-								<td><c:out value="${jewel.description}" /></td>
-								<td><c:out value="${jewel.price}" /><i class="fa fa-euro"></i></td>
-								<td><c:out value="${jewel.category.namecategory}" /></td>
-								<td><c:out value="${jewel.metal.description}" /></td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- /.row -->
 <div class="row">
 	<div class="card mb3">
 		<div class="card-header">

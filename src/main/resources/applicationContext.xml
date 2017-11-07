@@ -79,4 +79,6 @@
 	<bean id="recordingValidator" class="com.je.employee.validators.RecordingValidator" />
 	<bean id="searchDailyFormValidator" class="com.je.admin.validators.SearchDailyFormValidator" />
 	<bean id="partialCancelSaleValidator" class="com.je.employee.validators.PartialCancelSaleValidator" />
+	<bean id="salepostponedvalidator" class="com.je.employee.validators.SalePostPonedValidator" />	
+	<bean id="installmentvalidator" class="com.je.employee.validators.InstallmentValidator" />
 </beans>

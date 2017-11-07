@@ -2,10 +2,11 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<form:form action="resultsale" commandName="saleForm" role="form">
+<form:form action="savesalepostponed" commandName="saleForm" role="form">
 	<!-- Breadcrumbs-->
 	<ol class="breadcrumb">
-		<li class="breadcrumb-item active"><spring:message code="newsale" /></li>
+		<li class="breadcrumb-item active"><spring:message
+				code="newsalepostponed" /></li>
 	</ol>
 	<div class="card-body">
 		<div class="table-responsive">
@@ -13,10 +14,10 @@
 				<tbody>
 					<tr>
 						<td><spring:message code="idsale" var="numsalemessage" /> <form:input
-								class="form-control" path="numsale"
+								class="form-control" path="idsale"
 								placeholder="${numsalemessage}" /></td>
 						<td><p class="text-danger">
-								<form:errors path="numsale" />
+								<form:errors path="idsale" />
 							</p></td>
 						<td></td>
 					</tr>
@@ -53,14 +54,6 @@
 					</tr>
 				</tbody>
 			</table>
-		</div>
-		<div class="row">
-			<div class="col-sm-6">
-				<div class="form-group">
-					<spring:message code="clientdiscount" />
-					<form:input class="form-control" path="iddiscount" />
-				</div>
-			</div>
 		</div>
 	</div>
 </form:form>

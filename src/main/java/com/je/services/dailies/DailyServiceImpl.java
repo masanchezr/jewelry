@@ -17,6 +17,7 @@ import com.je.dbaccess.entities.CancelSalePaymentEntity;
 import com.je.dbaccess.entities.DailyEntity;
 import com.je.dbaccess.entities.DiscountEntity;
 import com.je.dbaccess.entities.EntryMoneyEntity;
+import com.je.dbaccess.entities.InstallmentEntity;
 import com.je.dbaccess.entities.OtherConceptEntity;
 import com.je.dbaccess.entities.PawnEntity;
 import com.je.dbaccess.entities.PaymentEntity;
@@ -27,6 +28,7 @@ import com.je.dbaccess.entities.RecordingEntity;
 import com.je.dbaccess.entities.RenovationEntity;
 import com.je.dbaccess.entities.RentalEntity;
 import com.je.dbaccess.entities.SaleEntity;
+import com.je.dbaccess.entities.SalePostponedEntity;
 import com.je.dbaccess.entities.SalesPayments;
 import com.je.dbaccess.entities.ShoppingEntity;
 import com.je.dbaccess.entities.StrapEntity;
@@ -44,6 +46,7 @@ import com.je.dbaccess.repositories.PayrollRepository;
 import com.je.dbaccess.repositories.RecordingRepository;
 import com.je.dbaccess.repositories.RenovationsRepository;
 import com.je.dbaccess.repositories.RentalsRepository;
+import com.je.dbaccess.repositories.SalesPostponedRepository;
 import com.je.dbaccess.repositories.ShoppingsRepository;
 import com.je.dbaccess.repositories.StrapsRepository;
 import com.je.services.adjustments.Adjustment;
@@ -55,6 +58,7 @@ import com.je.services.payroll.Payroll;
 import com.je.services.rentals.Rental;
 import com.je.services.sales.CancelSale;
 import com.je.services.sales.Sale;
+import com.je.services.sales.SalePostPoned;
 import com.je.services.shoppings.Shopping;
 import com.je.utils.constants.Constants;
 
@@ -120,6 +124,8 @@ public class DailyServiceImpl implements DailyService {
 	@Autowired
 	private RecordingRepository recordingRepository;
 
+	@Autowired
+	private SalesPostponedRepository salespostponedrepository;
 	/** The mapper. */
 	@Autowired
 	private Mapper mapper;
@@ -149,6 +155,7 @@ public class DailyServiceImpl implements DailyService {
 			List<RentalEntity> rentalsEntity = rentalsRepository.findByCreationdateAndPlace(date, place);
 			List<DiscountEntity> discounts = discountsRepository.findByCreationdateAndPlace(date, place);
 			List<RecordingEntity> recordings = recordingRepository.findByCreationdateAndPlace(date, place);
+			List<SalePostponedEntity> salespost = salespostponedrepository.findByDateretiredAndPlace(date, place);
 			int numoperations = 0;
 			BigDecimal discountsamount = BigDecimal.ZERO, finalamount = BigDecimal.ZERO,
 					adjustmentsworkamount = BigDecimal.ZERO, renovationsamount = BigDecimal.ZERO,
@@ -157,7 +164,7 @@ public class DailyServiceImpl implements DailyService {
 					recordingsAmount = BigDecimal.ZERO, adjusmentsamount = BigDecimal.ZERO,
 					rentalsamount = BigDecimal.ZERO, cancelsamount = BigDecimal.ZERO, batteriesamount = BigDecimal.ZERO,
 					strapsamount = BigDecimal.ZERO, entriesmoneyamount = BigDecimal.ZERO;
-			double salesamount = 0, payrollamount = 0;
+			double salesamount = 0, payrollamount = 0, salespostamount = 0;
 			if (adjustments != null && !adjustments.isEmpty()) {
 				List<Adjustment> ladjustments = new ArrayList<Adjustment>();
 				Iterator<AdjustmentEntity> iadjustments = adjustments.iterator();
@@ -257,6 +264,36 @@ public class DailyServiceImpl implements DailyService {
 					numoperations = numoperations + 1;
 				}
 				daily.setSales(lsales);
+			}
+			if (salespost != null && !salespost.isEmpty()) {
+				Iterator<SalePostponedEntity> isalespost = salespost.iterator();
+				List<SalePostPoned> lsalespost = new ArrayList<SalePostPoned>();
+				SalePostponedEntity sale;
+				List<InstallmentEntity> spayments = new ArrayList<InstallmentEntity>();
+				Iterator<InstallmentEntity> ipayments;
+				PaymentEntity payment;
+				InstallmentEntity sp;
+				SalePostPoned saleView;
+				String payments;
+				while (isalespost.hasNext()) {
+					sale = isalespost.next();
+					spayments = sale.getSpayments();
+					ipayments = spayments.iterator();
+					payments = "";
+					while (ipayments.hasNext()) {
+						sp = ipayments.next();
+						payment = sp.getPay();
+						if (payment.getIdpayment().equals(Constants.EFECTIVO)) {
+							salespostamount += sp.getAmount().doubleValue();
+						}
+						payments = payments.concat(payment.getName()).concat(" ");
+					}
+					saleView = mapper.map(sale, SalePostPoned.class);
+					saleView.setPayments(payments);
+					lsalespost.add(saleView);
+					numoperations = numoperations + 1;
+				}
+				daily.setLsalespost(lsalespost);
 			}
 			if (otherconcepts != null && !otherconcepts.isEmpty()) {
 				Iterator<OtherConceptEntity> iotherconcepts = otherconcepts.iterator();
@@ -454,7 +491,7 @@ public class DailyServiceImpl implements DailyService {
 					.add(new BigDecimal(salesamount)).add(shoppingsamount).add(retiredpawnsamount)
 					.add(otherconceptsamount).add(newpawnsamount).add(cancelsamount).add(new BigDecimal(payrollamount))
 					.add(entriesmoneyamount).add(batteriesamount).add(strapsamount).add(rentalsamount)
-					.add(discountsamount).add(recordingsAmount);
+					.add(discountsamount).add(recordingsAmount).add(new BigDecimal(salespostamount));
 			dEntity.setFinalamount(finalamount);
 			dEntity.setIpaddress(ipaddress);
 			daily.setFinalamount(finalamount);

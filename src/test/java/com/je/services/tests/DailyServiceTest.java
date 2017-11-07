@@ -45,7 +45,7 @@ public class DailyServiceTest {
 	public void calculateDailiesTest() {
 		PlaceEntity place = new PlaceEntity();
 		Calendar c = Calendar.getInstance();
-		c.set(2017, 7, 28);
+		c.set(2017, 8, 28);
 		place.setIdplace(28017L);
 		dailyService.calculateDailies(c.getTime(), place);
 	}

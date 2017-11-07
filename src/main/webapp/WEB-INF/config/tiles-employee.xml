@@ -25,7 +25,11 @@
 	</definition>
 	<definition name="finishsalepostponed" extends="templateEmployee">
 		<put-attribute name="body"
-			value="/WEB-INF/views/employee/salespostponed/finishsalepostponed.jsp" />
+			value="/WEB-INF/views/employee/salespostponed/finishsale.jsp" />
+	</definition>
+	<definition name="finishaddinstallment" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/salespostponed/finishaddinstallment.jsp" />
 	</definition>
 	<definition name="finishsale" extends="templateEmployee">
 		<put-attribute name="body"
@@ -149,5 +153,9 @@
 	<definition name="searchincidents" extends="templateEmployee">
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/incidents/searchincidents.jsp" />
+	</definition>
+	<definition name="addinstallment" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/salespostponed/addinstallment.jsp" />
 	</definition>
 </tiles-definitions>

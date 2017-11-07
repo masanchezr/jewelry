@@ -32,12 +32,21 @@
 									<td><c:out value="${sale.discount}" /></td>
 								</tr>
 							</c:forEach>
+							<c:forEach items="${salespost}" var="sale">
+								<tr>
+									<td><c:out value="${sale.idsalepostponed}" /></td>
+									<td><c:out value="${sale.totalamount}" /></td>
+									<td><c:out value="${sale.place.description}" /></td>
+									<td><c:out value="${sale.dateretired}" /></td>
+									<td><spring:message code="salepostponed" /></td>
+								</tr>
+							</c:forEach>
 							<c:forEach items="${adjustments}" var="adjustment">
 								<tr>
 									<td><c:out value="${adjustment.idadjustment}" /></td>
 									<td><c:out value="${adjustment.amount}" /></td>
 									<td><c:out value="${adjustment.user}" /></td>
-									<td></td>
+									<td><spring:message code="adjustmen" /></td>
 									<td></td>
 								</tr>
 							</c:forEach>
@@ -46,7 +55,7 @@
 									<td><c:out value="${recording.numsale}" /></td>
 									<td><c:out value="${recording.amount}" /></td>
 									<td><c:out value="${recording.place.description}" /></td>
-									<td></td>
+									<td><spring:message code="recording" /></td>
 									<td></td>
 								</tr>
 							</c:forEach>
@@ -55,7 +64,7 @@
 									<td><c:out value="${strap.numsale}" /></td>
 									<td><c:out value="${strap.amount}" /></td>
 									<td><c:out value="${strap.place.description}" /></td>
-									<td></td>
+									<td><spring:message code="strap" /></td>
 									<td></td>
 								</tr>
 							</c:forEach>
@@ -64,7 +73,7 @@
 									<td><c:out value="${battery.numsale}" /></td>
 									<td><c:out value="${battery.amount}" /></td>
 									<td><c:out value="${battery.place.description}" /></td>
-									<td></td>
+									<td><spring:message code="battery" /></td>
 									<td></td>
 								</tr>
 							</c:forEach>

@@ -1,4 +1,4 @@
-package com.je.validators;
+package com.je.employee.validators;
 
 import java.math.BigDecimal;
 import java.util.Iterator;
@@ -9,25 +9,21 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.je.dbaccess.entities.JewelEntity;
-import com.je.services.sales.Sale;
-import com.je.utils.constants.Constants;
+import com.je.services.sales.SalePostPoned;
 import com.je.utils.string.Util;
 
-/**
- * The Class SaleFormValidator.
- */
-public class SaleFormValidator implements Validator {
+public class SalePostPonedValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> arg0) {
-		return Sale.class.isAssignableFrom(arg0);
+		return SalePostPoned.class.isAssignableFrom(arg0);
 	}
 
 	@Override
 	public void validate(Object arg0, Errors arg1) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "numsale", "selectidsale");
-		Sale sale = (Sale) arg0;
-		Long numsale = sale.getNumsale();
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "idsale", "selectidsale");
+		SalePostPoned sale = (SalePostPoned) arg0;
+		Long numsale = sale.getIdsale();
 		List<JewelEntity> jewels = sale.getJewels();
 		if (jewels != null) {
 			Iterator<JewelEntity> ijewels = jewels.iterator();
@@ -38,18 +34,18 @@ public class SaleFormValidator implements Validator {
 				}
 			}
 			if (noreference) {
-				arg1.rejectValue("numsale", "selectreference");
+				arg1.rejectValue("idsale", "selectreference");
 			}
 			BigDecimal optionalpay = sale.getOptionalpayment();
-			if (optionalpay != null && BigDecimal.ZERO.compareTo(optionalpay) == 0
-					&& sale.getPayment().getIdpayment().equals(Constants.CARD)) {
-				arg1.rejectValue("numsale", "twopaycard");
+			if (optionalpay != null && BigDecimal.ZERO.compareTo(optionalpay) == 0) {
+				arg1.rejectValue("idsale", "twopaycard");
 			}
 		} else {
-			arg1.rejectValue("numsale", "selectreference");
+			arg1.rejectValue("idsale", "selectreference");
 		}
 		if (numsale.compareTo(0L) <= 0) {
-			arg1.rejectValue("numsale", "numsaleminuszero");
+			arg1.rejectValue("idsale", "numsaleminuszero");
 		}
 	}
+
 }
