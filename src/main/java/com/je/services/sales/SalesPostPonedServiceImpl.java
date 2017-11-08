@@ -68,6 +68,9 @@ public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 		saleEntity.setPlace(mapper.map(sale.getPlace(), PlaceEntity.class));
 		saleEntity.setSjewels(salesJewels);
 		saleEntity.setSpayments(payments);
+		if (importeTotal.compareTo(firstpayment) == 0) {
+			saleEntity.setDateretired(new Date());
+		}
 		salespostponedrepository.save(saleEntity);
 		mapper.map(saleEntity, sale);
 	}
