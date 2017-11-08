@@ -23,7 +23,7 @@ public class SalePostPonedValidator implements Validator {
 	public void validate(Object arg0, Errors arg1) {
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "idsale", "selectidsale");
 		SalePostPoned sale = (SalePostPoned) arg0;
-		Long numsale = sale.getIdsale();
+		// Long numsale = sale.getIdsale();
 		List<JewelEntity> jewels = sale.getJewels();
 		if (jewels != null) {
 			Iterator<JewelEntity> ijewels = jewels.iterator();
@@ -43,9 +43,5 @@ public class SalePostPonedValidator implements Validator {
 		} else {
 			arg1.rejectValue("idsale", "selectreference");
 		}
-		if (numsale.compareTo(0L) <= 0) {
-			arg1.rejectValue("idsale", "numsaleminuszero");
-		}
 	}
-
 }
