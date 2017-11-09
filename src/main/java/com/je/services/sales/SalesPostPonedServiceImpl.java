@@ -85,7 +85,7 @@ public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 			entity.setCreationdate(new Date());
 			installmentsrepository.save(entity);
 			BigDecimal amount = installmentsrepository.sumBySalepostponed(sppentity);
-			if (amount.equals(sppentity.getTotalamount())) {
+			if (amount.compareTo(sppentity.getTotalamount()) == 0) {
 				sppentity.setDateretired(new Date());
 				salespostponedrepository.save(sppentity);
 			}

@@ -128,7 +128,7 @@ public class SalePostPonedController {
 				model.addObject("metals", metalService.getAllMetals());
 				model.addObject("categories", categoriesService.getAllCategoriesOrderByName());
 				model.addObject("payments", paymentService.findAllActive());
-				result.rejectValue("numsale", "jewelnoexist");
+				result.rejectValue("idsale", "jewelnoexist");
 				model.addObject("saleForm", saleForm);
 				model.setViewName("newsalepostponed");
 			}
