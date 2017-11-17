@@ -98,9 +98,9 @@
 										value="${shopping.description}" /></td>
 								<td><spring:url value="/updateShopping"
 										var="updateShopping" /><a
-									href="${updateShopping}<c:out value="${shopping.idshop}" />"><c:out
+									href="${updateShopping}<c:out value="${shopping.id}" />"><c:out
 											value="${shopping.numshop}" /></a></td>
-								<td><c:out value="${shopping.totalamount}" /><i
+								<td><c:out value="${shopping.amount}" /><i
 									class="fa fa-euro"></i></td>
 								<td><c:out value="${shopping.payments}" /></td>
 							</tr>

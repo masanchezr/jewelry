@@ -82,7 +82,7 @@
 								<td><spring:message code="shopping" /> <c:out
 										value="${shopping.description}" /></td>
 								<td><c:out value="${shopping.numshop}" /></td>
-								<td><c:out value="${shopping.totalamount}" /><i
+								<td><c:out value="${shopping.amount}" /><i
 									class="fa fa-euro"></i></td>
 								<td><c:out value="${shopping.payments}" /></td>
 							</tr>
