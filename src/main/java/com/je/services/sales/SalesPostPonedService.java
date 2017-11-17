@@ -1,5 +1,7 @@
 package com.je.services.sales;
 
+import java.math.BigDecimal;
+
 import com.je.dbaccess.entities.SalePostponedEntity;
 
 public interface SalesPostPonedService {
@@ -9,5 +11,7 @@ public interface SalesPostPonedService {
 	public SalePostponedEntity searchByNumsale(Long numsale);
 
 	public SalePostPoned addInstallment(Installment installment);
+
+	public BigDecimal howmanyamount(SalePostponedEntity sale);
 
 }

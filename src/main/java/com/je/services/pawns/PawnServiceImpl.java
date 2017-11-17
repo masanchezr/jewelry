@@ -76,10 +76,9 @@ public class PawnServiceImpl implements PawnService {
 		List<ObjectPawnEntity> object = pawnEntity.getObjects();
 		Iterator<ObjectPawnEntity> iobjects = object.iterator();
 		if (cpe == null) {
-			// TODO creo que esto así no actualiza el cliente en el caso de que
-			// se lo muestre
 			cpe = mapper.map(pawn, ClientPawnEntity.class);
 			cpe.setCreationclient(new Date());
+			clientPawnsRepository.save(cpe);
 		}
 		pawnEntity.setPlace(place);
 		pawnEntity.setClient(cpe);
@@ -99,7 +98,7 @@ public class PawnServiceImpl implements PawnService {
 
 	@Override
 	public void update(NewPawn pawn) {
-		PawnEntity pawnEntity = pawnsRepository.findOne(pawn.getIdpawn());
+		PawnEntity pawnEntity = pawnsRepository.findOne(pawn.getId());
 		List<ObjectPawnEntity> objects = pawnEntity.getObjects();
 		List<ObjectPawnEntity> newobjects = new ArrayList<ObjectPawnEntity>();
 		Iterator<ObjectPawnEntity> iobjects;
@@ -182,7 +181,7 @@ public class PawnServiceImpl implements PawnService {
 
 	@Override
 	public Daily renew(Pawn pawn) {
-		PawnEntity pawnEntity = pawnsRepository.findOne(pawn.getIdpawn());
+		PawnEntity pawnEntity = pawnsRepository.findOne(pawn.getId());
 		if (pawnEntity != null) {
 			Date date;
 			List<RenovationEntity> renovations = pawnEntity.getRenovations();
@@ -215,7 +214,7 @@ public class PawnServiceImpl implements PawnService {
 	@Override
 	public Daily remove(Pawn pawn) {
 		MailService mailService;
-		Long idpawn = pawn.getIdpawn();
+		Long idpawn = pawn.getId();
 		PawnEntity pawnEntity = pawnsRepository.findOne(idpawn);
 		PlaceEntity place = pawnEntity.getPlace();
 		Long idplace = place.getIdplace();

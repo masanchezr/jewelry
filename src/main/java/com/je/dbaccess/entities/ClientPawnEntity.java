@@ -6,6 +6,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -50,9 +52,13 @@ public class ClientPawnEntity implements Serializable {
 	@Column(name = "TOWN")
 	private String town;
 
-	/** The nationality. */
-	@Column(name = "NATIONALITY")
-	private String nationality;
+	@ManyToOne
+	@JoinColumn(name = "IDNATION")
+	private NationEntity nation;
+
+	@ManyToOne
+	@JoinColumn(name = "IDTRACK")
+	private TrackEntity track;
 
 	/**
 	 * Gets the nif.
@@ -168,31 +174,28 @@ public class ClientPawnEntity implements Serializable {
 		this.datebirth = datebirth;
 	}
 
-	/**
-	 * Gets the nationality.
-	 *
-	 * @return the nationality
-	 */
-	public String getNationality() {
-		return nationality;
-	}
-
-	/**
-	 * Sets the nationality.
-	 *
-	 * @param nationality
-	 *            the new nationality
-	 */
-	public void setNationality(String nationality) {
-		this.nationality = nationality;
-	}
-
 	public String getTown() {
 		return town;
 	}
 
 	public void setTown(String town) {
 		this.town = town;
+	}
+
+	public NationEntity getNation() {
+		return nation;
+	}
+
+	public void setNation(NationEntity nation) {
+		this.nation = nation;
+	}
+
+	public TrackEntity getTrack() {
+		return track;
+	}
+
+	public void setTrack(TrackEntity track) {
+		this.track = track;
 	}
 
 }

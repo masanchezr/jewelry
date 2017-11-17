@@ -49,13 +49,13 @@
 							<tr>
 								<td><spring:message code="pawn" /></td>
 								<td><spring:url value="/searchpawn" var="searchpawn" /> <a
-									href="${searchpawn}<c:out value="${pawn.idpawn}" />"> <c:out
+									href="${searchpawn}<c:out value="${pawn.id}" />"> <c:out
 											value="${pawn.numpawn}" />
 								</a></td>
 								<td><c:out value="${pawn.amount}" /><i class="fa fa-euro"></i></td>
 								<td><spring:message code="retired" /> <spring:url
 										value="/renovations" var="renovations" /> <a
-									href="${renovations}<c:out value="${pawn.idpawn}" />"><spring:message
+									href="${renovations}<c:out value="${pawn.id}" />"><spring:message
 											code="renovations" /></a></td>
 							</tr>
 						</c:forEach>
@@ -63,7 +63,7 @@
 							<tr>
 								<td><spring:message code="pawn" /></td>
 								<td><spring:url value="/searchpawn" var="searchpawn" /> <a
-									href="${searchpawn}<c:out value="${pawn.idpawn}" />"> <c:out
+									href="${searchpawn}<c:out value="${pawn.id}" />"> <c:out
 											value="${pawn.numpawn}" />
 								</a></td>
 								<td><c:out value="${pawn.amount}" /><i class="fa fa-euro"></i></td>

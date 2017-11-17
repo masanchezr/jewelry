@@ -103,7 +103,7 @@ public class JewelsController {
 	@RequestMapping(value = "/searchByReference")
 	public ModelAndView searchByReference() {
 		ModelAndView model = new ModelAndView("searchbyreference");
-		model.addObject("categories", categoriesService.getAllCategories());
+		model.addObject("categories", categoriesService.getAllCategoriesOrderByName());
 		model.addObject("places", placeService.getAllPlaces());
 		model.addObject("metals", metalService.getAllMetals());
 		model.addObject("jewelForm", new JewelEntity());

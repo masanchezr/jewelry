@@ -35,6 +35,20 @@
 						<form:errors path="surname" />
 					</p>
 				</div>
+				<div id="sandbox-container" class="form-group">
+					<spring:message code="datebirth" var="datebirth" />
+					<form:input class="form-control" path="datebirth"
+						placeholder="${datebirth}" />
+					<p class="text-danger">
+						<form:errors path="datebirth" />
+					</p>
+				</div>
+				<div class="form-group">
+					<form:select class="form-control" path="track.idtrack">
+						<form:options items="${tracks}" itemValue="idtrack"
+							itemLabel="track" />
+					</form:select>
+				</div>
 				<div class="form-group">
 					<spring:message code="addressnif" var="addressdni" />
 					<form:input class="form-control" path="address"
@@ -51,17 +65,10 @@
 					</p>
 				</div>
 				<div class="form-group">
-					<spring:message code="nationality" var="nationality" />
-					<form:input class="form-control" path="nationality"
-						placeholder="${nationality}" />
-					<p class="text-danger">
-						<form:errors path="nationality" />
-					</p>
-				</div>
-				<div>
-					<form:button class="btn btn-primary" value="submit">
-						<spring:message code="save" />
-					</form:button>
+					<form:select class="form-control" path="nation.idnation">
+						<form:options items="${nations}" itemValue="idnation"
+							itemLabel="nation" />
+					</form:select>
 				</div>
 			</div>
 			<div class="col-lg-6">
@@ -93,18 +100,15 @@
 						<form:errors path="creationdate" />
 					</p>
 				</div>
-				<div id="sandbox-container" class="form-group">
-					<spring:message code="datebirth" var="datebirth" />
-					<form:input class="form-control" path="datebirth"
-						placeholder="${datebirth}" />
-					<p class="text-danger">
-						<form:errors path="datebirth" />
-					</p>
+				<div>
+					<form:button class="btn btn-primary" value="submit">
+						<spring:message code="save" />
+					</form:button>
 				</div>
 			</div>
 		</div>
+		<!-- fin div row -->
 	</div>
-	<!-- fin div row -->
 	<div class="table-responsive">
 		<table class="table">
 			<tbody>

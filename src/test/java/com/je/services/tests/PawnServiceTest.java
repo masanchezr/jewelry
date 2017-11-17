@@ -41,15 +41,14 @@ public class PawnServiceTest {
 		metal.setIdmetal(1L);
 		object.setGrossgrams(new BigDecimal(6));
 		object.setMetal(metal);
-		pawn.setNumpawn("177");
-		pawn.setNif("YB569035");
+		pawn.setNumpawn("908");
+		pawn.setNif("06285380D");
 		pawn.setUser("13700");
 		pawn.setAddress("Leon");
 		pawn.setName("Ainhoa");
 		pawn.setSurname("Gonzalez Gonzalez");
 		pawn.setDatebirth("21-01-1973");
-		pawn.setAmount(130);
-		pawn.setNationality("Española");
+		pawn.setAmount(new BigDecimal(130));
 		pawn.setCreationdate("14-01-2017");
 		pawn.setPercent(20);
 		pawn.setObjects(objects);

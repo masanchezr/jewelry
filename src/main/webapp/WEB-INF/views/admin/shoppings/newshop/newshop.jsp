@@ -45,6 +45,12 @@
 					</p>
 				</div>
 				<div class="form-group">
+					<form:select class="form-control" path="track.idtrack">
+						<form:options items="${tracks}" itemValue="idtrack"
+							itemLabel="track" />
+					</form:select>
+				</div>
+				<div class="form-group">
 					<spring:message code="addressnif" var="addressnif" />
 					<form:input class="form-control" path="address"
 						placeholder="${addressnif}" />
@@ -63,12 +69,10 @@
 					</p>
 				</div>
 				<div class="form-group">
-					<spring:message code="nationality" var="nationalityvar" />
-					<form:input class="form-control" path="nationality"
-						placeholder="${nationalityvar}" />
-					<p class="text-danger">
-						<form:errors path="nationality" />
-					</p>
+					<form:select class="form-control" path="nation.idnation">
+						<form:options items="${nations}" itemValue="idnation"
+							itemLabel="nation" />
+					</form:select>
 				</div>
 				<div class="form-group">
 					<spring:message code="cashamount" var="amount" />

@@ -248,19 +248,12 @@
 						</a></li>
 					</ul></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
-					title="<spring:message code="incidents"/>"><a
-					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
-					href="#collapseIncidents" data-parent="#exampleAccordion"><i
-						class="fa fa-exclamation-triangle fa-fw"></i> <span
-						class="nav-link-text"><spring:message code="incidents" /></span>
-				</a>
-					<ul class="sidenav-second-level collapse" id="collapseIncidents">
-						<li><spring:url value="/allincidents" var="allincidents" />
-							<a href="${allincidents}"><spring:message code="allincidents" /></a></li>
-						<li><spring:url value="/pendingissues" var="pendingissues" />
-							<a href="${pendingissues}"><spring:message
-									code="pendingissues" /></a></li>
-					</ul></li>
+					title="<spring:message
+									code="pendingissues" />"><spring:url
+						value="/pendingissues" var="pendingissues" /> <a
+					href="${pendingissues}" class="nav-link"><i
+						class="fa fa-exclamation-triangle fa-fw"></i> <span class="nav-link-text"><spring:message
+								code="pendingissues" /></span></a></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message code="newcategory"/>"><spring:url
 						value="/newCategory" var="newcategory"></spring:url> <a

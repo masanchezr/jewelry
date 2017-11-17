@@ -61,6 +61,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 	@Autowired
 	private Mapper mapper;
 
+	@Override
 	public Daily save(Shopping shopping) {
 		ShoppingEntity shoppingEntity = mapper.map(shopping, ShoppingEntity.class);
 		String nif = shopping.getNif();
@@ -149,6 +150,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 		return shoppings;
 	}
 
+	@Override
 	public List<Shopping> searchShoppings(String sDateFrom, String sDateUntil, PlaceEntity place, Long numshop) {
 		List<Shopping> shoppings = null;
 		if (numshop != null && sDateFrom != null && !Util.isEmpty(sDateUntil)) {
@@ -171,6 +173,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 		return shoppings;
 	}
 
+	@Override
 	public Quarter searchGramsByDates(String sDateFrom, String sDateUntil, PlaceEntity place) {
 		ShoppingEntity shoppingEntity = null;
 		Date datefrom = DateUtil.getDate(sDateFrom), dateuntil = DateUtil.getDate(sDateUntil);
@@ -214,13 +217,15 @@ public class ShoppingServiceImpl implements ShoppingService {
 		return quarter;
 	}
 
+	@Override
 	public Shopping findShopByPK(Long idshop) {
 		ShoppingEntity shopping = shoppingsRepository.findOne(idshop);
 		return mapper.map(shopping, Shopping.class);
 	}
 
+	@Override
 	public void update(Shopping shopping) {
-		ShoppingEntity shoppingEntity = shoppingsRepository.findOne(shopping.getIdshop());
+		ShoppingEntity shoppingEntity = shoppingsRepository.findOne(shopping.getId());
 		List<ObjectShopEntity> objects = shoppingEntity.getObjects();
 		Iterator<ObjectShopEntity> iobjects;
 		List<ObjectShopEntity> newobjects = new ArrayList<ObjectShopEntity>();
@@ -245,6 +250,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 		shoppingsRepository.save(shoppingEntity);
 	}
 
+	@Override
 	public List<QuarterMetal> searchGramsByMetal(String sDateFrom, String sDateUntil, PlaceEntity place) {
 		Date datefrom = DateUtil.getDate(sDateFrom), dateuntil = DateUtil.getDate(sDateUntil);
 		List<QuarterMetal> lquartermetal = new ArrayList<QuarterMetal>();
@@ -307,6 +313,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 		return lqm;
 	}
 
+	@Override
 	public List<Long> searchGramsNull(String sDateFrom, String sDateUntil, PlaceEntity place) {
 		Date datefrom = DateUtil.getDate(sDateFrom), dateuntil = DateUtil.getDate(sDateUntil);
 		return shoppingsRepository.findGramsNull(place, datefrom, dateuntil);
@@ -388,7 +395,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 			nif.setCellValue(shop.getNif());
 			address.setCellValue(shop.getAddress());
 			town.setCellValue(shop.getTown());
-			country.setCellValue(shop.getNationality());
+			country.setCellValue(shop.getNation().getNation());
 			lobjects = shop.getObjects();
 			ilobjects = lobjects.iterator();
 			while (ilobjects.hasNext()) {

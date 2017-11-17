@@ -4,29 +4,20 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import com.je.dbaccess.entities.ObjectShopEntity;
+import com.je.forms.OperationForm;
 
 /**
  * The Class Shopping.
  */
-public class Shopping {
-
-	/** The idshop. */
-	private Long idshop;
+public class Shopping extends OperationForm {
 
 	/** The numshop. */
 	private Long numshop;
 
 	private BigDecimal cashamount;
 
-	/** The creationdate. */
-	private String creationdate;
-
 	/** The wiretransfer. */
 	private BigDecimal wiretransfer;
-
-	private String user;
-
-	private BigDecimal totalamount;
 
 	private List<ObjectShopEntity> objects;
 
@@ -43,9 +34,6 @@ public class Shopping {
 
 	/** The surname. */
 	private String surname;
-
-	/** The nationality. */
-	private String nationality;
 
 	private String town;
 
@@ -71,44 +59,6 @@ public class Shopping {
 	}
 
 	/**
-	 * Gets the creationdate.
-	 *
-	 * @return the creationdate
-	 */
-	public String getCreationdate() {
-		return creationdate;
-	}
-
-	/**
-	 * Sets the creationdate.
-	 *
-	 * @param creationdate
-	 *            the new creationdate
-	 */
-	public void setCreationdate(String creationdate) {
-		this.creationdate = creationdate;
-	}
-
-	/**
-	 * Gets the idshop.
-	 *
-	 * @return the idshop
-	 */
-	public Long getIdshop() {
-		return idshop;
-	}
-
-	/**
-	 * Sets the idshop.
-	 *
-	 * @param idshop
-	 *            the new idshop
-	 */
-	public void setIdshop(Long idshop) {
-		this.idshop = idshop;
-	}
-
-	/**
 	 * Checks if is wiretransfer.
 	 *
 	 * @return true, if is wiretransfer
@@ -127,14 +77,6 @@ public class Shopping {
 		this.wiretransfer = wiretransfer;
 	}
 
-	public String getUser() {
-		return user;
-	}
-
-	public void setUser(String user) {
-		this.user = user;
-	}
-
 	public List<ObjectShopEntity> getObjects() {
 		return objects;
 	}
@@ -149,14 +91,6 @@ public class Shopping {
 
 	public void setCashamount(BigDecimal cashamount) {
 		this.cashamount = cashamount;
-	}
-
-	public BigDecimal getTotalamount() {
-		return totalamount;
-	}
-
-	public void setTotalamount(BigDecimal totalamount) {
-		this.totalamount = totalamount;
 	}
 
 	public String getPayments() {
@@ -197,14 +131,6 @@ public class Shopping {
 
 	public void setSurname(String surname) {
 		this.surname = surname;
-	}
-
-	public String getNationality() {
-		return nationality;
-	}
-
-	public void setNationality(String nationality) {
-		this.nationality = nationality;
 	}
 
 	public String getTown() {

@@ -68,6 +68,7 @@ public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 		saleEntity.setPlace(mapper.map(sale.getPlace(), PlaceEntity.class));
 		saleEntity.setSjewels(salesJewels);
 		saleEntity.setSpayments(payments);
+		saleEntity.setTimeout(Boolean.FALSE);
 		if (importeTotal.compareTo(firstpayment) == 0) {
 			saleEntity.setDateretired(new Date());
 		}
@@ -93,6 +94,11 @@ public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 			sale = mapper.map(sppentity, SalePostPoned.class);
 		}
 		return sale;
+	}
+
+	public BigDecimal howmanyamount(SalePostponedEntity sppentity) {
+		BigDecimal amount = installmentsrepository.sumBySalepostponed(sppentity);
+		return sppentity.getTotalamount().subtract(amount);
 	}
 
 	@Override

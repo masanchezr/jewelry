@@ -31,8 +31,8 @@
 							<tbody>
 								<c:forEach items="${pawns}" var="pawn">
 									<tr>
-										<td><form:radiobutton path="idpawn"
-												value="${pawn.idpawn}" /></td>
+										<td><form:radiobutton path="id"
+												value="${pawn.id}" /></td>
 										<td><c:out value="${pawn.numpawn}" /></td>
 										<td><c:out value="${pawn.percent}" /></td>
 										<td><c:out value="${pawn.amount}" /></td>

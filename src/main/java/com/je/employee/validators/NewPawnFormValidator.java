@@ -1,5 +1,6 @@
 package com.je.employee.validators;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
@@ -21,10 +22,12 @@ import com.je.utils.string.Util;
  * The Class NewPawnFormValidator.
  */
 public class NewPawnFormValidator implements Validator {
+	@Override
 	public boolean supports(Class<?> clazz) {
 		return NewPawn.class.isAssignableFrom(clazz);
 	}
 
+	@Override
 	public void validate(Object target, Errors errors) {
 		NewPawn pawn = (NewPawn) target;
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "numpawn", "idpawn");
@@ -38,8 +41,8 @@ public class NewPawnFormValidator implements Validator {
 		String dni = pawn.getNif();
 		String numpawn = pawn.getNumpawn();
 		double percent = pawn.getPercent();
-		double amount = pawn.getAmount();
-		if (amount <= 0) {
+		BigDecimal amount = pawn.getAmount();
+		if (amount.compareTo(BigDecimal.ZERO) <= 0) {
 			errors.rejectValue("amount", "selectamount");
 		}
 		if (!Util.isEmpty(sdate) && !DateUtil.isDate(sdate)) {

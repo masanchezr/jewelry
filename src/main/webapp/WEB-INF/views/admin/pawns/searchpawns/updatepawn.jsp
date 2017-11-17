@@ -11,7 +11,7 @@
 	<li class="breadcrumb-item active"><spring:message code="newpawn" /></li>
 </ol>
 <form:form action="savePawn" commandName="pawnForm">
-	<form:hidden path="idpawn" />
+	<form:hidden path="id" />
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card-body">
@@ -40,6 +40,20 @@
 								<form:errors path="surname" />
 							</p>
 						</div>
+						<div id="sandbox-container" class="form-group">
+							<spring:message code="datebirth" var="datebirth" />
+							<form:input class="form-control" path="datebirth"
+								placeholder="${datebirth}" />
+							<p class="text-danger">
+								<form:errors path="datebirth" />
+							</p>
+						</div>
+						<div class="form-group">
+							<form:select class="form-control" path="track.idtrack">
+								<form:options items="${tracks}" itemValue="idtrack"
+									itemLabel="track" />
+							</form:select>
+						</div>
 						<div class="form-group">
 							<spring:message code="addressnif" var="addressdni" />
 							<form:input class="form-control" path="address"
@@ -48,7 +62,7 @@
 								<form:errors path="address" />
 							</p>
 						</div>
-						<div class="form-group">
+						<div class="form-group ">
 							<spring:message code="town" var="town" />
 							<form:input class="form-control" path="town"
 								placeholder="${town}" />
@@ -57,52 +71,39 @@
 							</p>
 						</div>
 						<div class="form-group">
-							<spring:message code="nationality" />
-							<form:input class="form-control" path="nationality" />
-							<p class="text-danger">
-								<form:errors path="nationality" />
-							</p>
+							<form:select class="form-control" path="nation.idnation">
+								<form:options items="${nations}" itemValue="idnation"
+									itemLabel="nation" />
+							</form:select>
 						</div>
 					</div>
 					<div class="col-lg-6">
 						<div class="form-group">
-							<spring:message code="idpawn" var="numpawnmessage" />
-							<form:input class="form-control" path="numpawn"
-								placeholder="${numpawnmessage}" />
+							<spring:message code="idpawn" />
+							<form:input class="form-control" path="numpawn" />
 							<p class="text-danger">
 								<form:errors path="numpawn" />
 							</p>
 						</div>
 						<div class="form-group">
-							<spring:message code="amountpawn" var="amountpawn" />
-							<form:input class="form-control" path="amount"
-								placeholder="${amountpawn}" />
+							<spring:message code="amountpawn" />
+							<form:input class="form-control" path="amount" />
 							<p class="text-danger">
 								<form:errors path="amount" />
 							</p>
 						</div>
 						<div class="form-group">
-							<spring:message code="percent" var="per" />
-							<form:input class="form-control" path="percent"
-								placeholder="${per}" />
+							<spring:message code="percent" />
+							<form:input class="form-control" path="percent" />
 							<p class="text-danger">
 								<form:errors path="percent" />
 							</p>
 						</div>
 						<div id="sandbox-container" class="form-group">
-							<spring:message code="pawndate" var="pawndate" />
-							<form:input class="form-control" path="creationdate"
-								placeholder="${pawndate}" />
+							<spring:message code="pawndate" />
+							<form:input class="form-control" path="creationdate" />
 							<p class="text-danger">
 								<form:errors path="creationdate" />
-							</p>
-						</div>
-						<div id="sandbox-container" class="form-group">
-							<spring:message code="datebirth" var="datebirth" />
-							<form:input class="form-control" path="datebirth"
-								placeholder="${datebirth}" />
-							<p class="text-danger">
-								<form:errors path="datebirth" />
 							</p>
 						</div>
 						<div>

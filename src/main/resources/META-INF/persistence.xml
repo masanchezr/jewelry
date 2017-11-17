@@ -50,5 +50,7 @@
 		<class>com.je.dbaccess.entities.CancelSalePaymentEntity</class>
 		<class>com.je.dbaccess.entities.SalePostPonedJewel</class>
 		<class>com.je.dbaccess.entities.InstallmentEntity</class>
+		<class>com.je.dbaccess.entities.NationEntity</class>
+		<class>com.je.dbaccess.entities.TrackEntity</class>
 	</persistence-unit>
 </persistence>

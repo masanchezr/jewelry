@@ -25,9 +25,11 @@ import com.je.dbaccess.entities.ObjectPawnEntity;
 import com.je.employee.validators.NewPawnFormValidator;
 import com.je.employee.validators.PawnFormValidator;
 import com.je.services.metal.MetalService;
+import com.je.services.nations.NationService;
 import com.je.services.pawns.NewPawn;
 import com.je.services.pawns.Pawn;
 import com.je.services.pawns.PawnService;
+import com.je.services.tracks.TrackService;
 import com.je.utils.constants.Constants;
 import com.je.utils.date.DateUtil;
 import com.je.utils.string.Util;
@@ -41,6 +43,12 @@ public class PawnsController {
 	/** The pawn service. */
 	@Autowired
 	private PawnService pawnService;
+
+	@Autowired
+	private NationService nationservice;
+
+	@Autowired
+	private TrackService trackservice;
 
 	/** The new pawn form validator. */
 	@Autowired
@@ -80,6 +88,8 @@ public class PawnsController {
 			}
 			pawn.setObjects(lop);
 			model.addObject("pawnForm", pawn);
+			model.addObject("tracks", trackservice.getTracks());
+			model.addObject("nations", nationservice.getNations());
 			model.setViewName("newPawn");
 		} else {
 			Calendar c = Calendar.getInstance();
@@ -100,6 +110,8 @@ public class PawnsController {
 				}
 				pawn.setObjects(lop);
 				model.addObject("pawnForm", pawn);
+				model.addObject("tracks", trackservice.getTracks());
+				model.addObject("nations", nationservice.getNations());
 				model.setViewName("newPawn");
 				result.rejectValue("numpawn", "numrepited");
 			} else {
@@ -170,6 +182,8 @@ public class PawnsController {
 				lop.add(op);
 			}
 			pawn.setObjects(lop);
+			model.addObject("tracks", trackservice.getTracks());
+			model.addObject("nations", nationservice.getNations());
 			model.setViewName("newPawn");
 		}
 		model.addObject("pawnForm", pawn);
@@ -268,7 +282,7 @@ public class PawnsController {
 		while (itcollection.hasNext()) {
 			role = itcollection.next().getAuthority();
 		}
-		if ((Constants.ROLE_NRA.equals(role) && pawn.getMonths() <= 0) || pawn.getIdpawn() == null) {
+		if ((Constants.ROLE_NRA.equals(role) && pawn.getMonths() <= 0) || pawn.getId() == null) {
 			model.setViewName("noselected");
 		} else {
 			model.addObject("daily", pawnService.remove(pawn));

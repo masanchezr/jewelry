@@ -36,6 +36,9 @@ public class SalePostponedEntity {
 	@Column(name = "deadline")
 	private Date deadline;
 
+	@Column(name = "timeout")
+	private Boolean timeout;
+
 	/** The place. */
 	@ManyToOne
 	@JoinColumn(name = "IDPLACE", referencedColumnName = "IDPLACE")
@@ -113,5 +116,13 @@ public class SalePostponedEntity {
 
 	public void setSpayments(List<InstallmentEntity> spayments) {
 		this.spayments = spayments;
+	}
+
+	public Boolean getTimeout() {
+		return timeout;
+	}
+
+	public void setTimeout(Boolean timeout) {
+		this.timeout = timeout;
 	}
 }

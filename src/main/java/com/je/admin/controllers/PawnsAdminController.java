@@ -104,7 +104,7 @@ public class PawnsAdminController {
 	@RequestMapping(value = "/updatepawn")
 	public ModelAndView updatePawn(@ModelAttribute("pawnForm") Pawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
-		Long idpawn = pawn.getIdpawn();
+		Long idpawn = pawn.getId();
 		model.addObject("adminForm", new AdminForm());
 		if (idpawn == null) {
 			model.setViewName("errorupdatepawn");
@@ -130,7 +130,7 @@ public class PawnsAdminController {
 	@RequestMapping(value = "/resultrenovations")
 	public ModelAndView resultrenovations(@ModelAttribute("pawnForm") Pawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
-		Long idpawn = pawn.getIdpawn();
+		Long idpawn = pawn.getId();
 		model.addObject("adminForm", new AdminForm());
 		if (idpawn == null) {
 			model.setViewName("errorupdatepawn");

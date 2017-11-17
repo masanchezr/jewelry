@@ -1,5 +1,6 @@
 package com.je.employee.controllers;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -186,6 +188,22 @@ public class SalePostPonedController {
 				model.addObject("payments", paymentService.findAllActive());
 				result.rejectValue("idsalepostponed", "salenotexit");
 			}
+		}
+		return model;
+	}
+
+	@RequestMapping(value = "/employee/howmanyamount")
+	public ModelAndView howmanyamount(@ModelAttribute("saleForm") SalePostPoned saleForm, BindingResult arg1) {
+		ModelAndView model = new ModelAndView("addinstallment");
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "idsale", "selectidsale");
+		// comprobamos si existe la venta
+		SalePostponedEntity sale = saleservicepostponed.searchByNumsale(saleForm.getIdsale());
+		if (sale != null) {
+			BigDecimal howmany = saleservicepostponed.howmanyamount(sale);
+			model.addObject("howmany", howmany);
+			model.addObject("installments", sale.getSpayments());
+		} else {
+			arg1.rejectValue("idsale", "salenotexit");
 		}
 		return model;
 	}

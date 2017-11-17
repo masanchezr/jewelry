@@ -43,6 +43,8 @@
 		class="com.je.services.searchmissingnumbers.SearchMissingNumberServiceImpl" />
 	<bean id="recordingService" class="com.je.services.recordings.RecordingServiceImpl" />
 	<bean id="discountService" class="com.je.services.discounts.DiscountServiceImpl" />
+	<bean id="nationservice" class="com.je.services.nations.NationServiceImpl" />
+	<bean id="trackservice" class="com.je.services.tracks.TrackServiceImpl" />
 	<bean id="salesCardService" class="com.je.services.sales.SalesCardServiceImpl" />
 	<bean id="saleservicepostponed" class="com.je.services.sales.SalesPostPonedServiceImpl" />
 	<bean id="selectCategoryValidator" class="com.je.admin.validators.SelectCategoryValidator" />

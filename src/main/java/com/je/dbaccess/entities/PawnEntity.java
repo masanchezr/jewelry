@@ -43,7 +43,7 @@ public class PawnEntity implements Serializable {
 	private Date creationdate;
 
 	/** The client. */
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "NIF", referencedColumnName = "NIF")
 	private ClientPawnEntity client;
 
@@ -152,8 +152,7 @@ public class PawnEntity implements Serializable {
 	 */
 	public List<RenovationEntity> getRenovations() {
 		/*
-		 * if (renovations == null) { renovations = new
-		 * ArrayList<RenovationEntity>(); }
+		 * if (renovations == null) { renovations = new ArrayList<RenovationEntity>(); }
 		 */
 		return renovations;
 	}

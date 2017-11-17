@@ -3,11 +3,12 @@ package com.je.services.pawns;
 import java.util.List;
 
 import com.je.dbaccess.entities.ObjectPawnEntity;
+import com.je.forms.OperationForm;
 
 /**
  * The Class NewPawn.
  */
-public class NewPawn {
+public class NewPawn extends OperationForm {
 
 	private List<ObjectPawnEntity> objects;
 
@@ -28,28 +29,14 @@ public class NewPawn {
 	/** The surname. */
 	private String surname;
 
-	private String user;
-
-	/** The creationdate. */
-	private String creationdate;
-
 	/** The datebirth. */
 	private String datebirth;
-
-	/** The nationality. */
-	private String nationality;
-
-	/** The amount. */
-	private double amount;
 
 	/** The retired. */
 	private boolean retired;
 
 	/** The percent. */
 	private double percent;
-
-	/** The idpawn. */
-	private long idpawn;
 
 	private int months;
 
@@ -132,25 +119,6 @@ public class NewPawn {
 	}
 
 	/**
-	 * Gets the creationdate.
-	 *
-	 * @return the creationdate
-	 */
-	public String getCreationdate() {
-		return creationdate;
-	}
-
-	/**
-	 * Sets the creationdate.
-	 *
-	 * @param creationdate
-	 *            the new creationdate
-	 */
-	public void setCreationdate(String creationdate) {
-		this.creationdate = creationdate;
-	}
-
-	/**
 	 * Gets the datebirth.
 	 *
 	 * @return the datebirth
@@ -167,44 +135,6 @@ public class NewPawn {
 	 */
 	public void setDatebirth(String datebirth) {
 		this.datebirth = datebirth;
-	}
-
-	/**
-	 * Gets the nationality.
-	 *
-	 * @return the nationality
-	 */
-	public String getNationality() {
-		return nationality;
-	}
-
-	/**
-	 * Sets the nationality.
-	 *
-	 * @param nationality
-	 *            the new nationality
-	 */
-	public void setNationality(String nationality) {
-		this.nationality = nationality;
-	}
-
-	/**
-	 * Gets the amount.
-	 *
-	 * @return the amount
-	 */
-	public double getAmount() {
-		return amount;
-	}
-
-	/**
-	 * Sets the amount.
-	 *
-	 * @param amount
-	 *            the new amount
-	 */
-	public void setAmount(double amount) {
-		this.amount = amount;
 	}
 
 	/**
@@ -262,33 +192,6 @@ public class NewPawn {
 	 */
 	public void setPercent(double percent) {
 		this.percent = percent;
-	}
-
-	/**
-	 * Gets the idpawn.
-	 *
-	 * @return the idpawn
-	 */
-	public long getIdpawn() {
-		return idpawn;
-	}
-
-	/**
-	 * Sets the idpawn.
-	 *
-	 * @param idpawn
-	 *            the new idpawn
-	 */
-	public void setIdpawn(long idpawn) {
-		this.idpawn = idpawn;
-	}
-
-	public String getUser() {
-		return user;
-	}
-
-	public void setUser(String user) {
-		this.user = user;
 	}
 
 	public List<ObjectPawnEntity> getObjects() {

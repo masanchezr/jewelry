@@ -59,14 +59,14 @@ public class ShoppingServiceTest {
 	public void saveShoppingTest() {
 		Shopping shopping = new Shopping();
 		shopping.setCreationdate("02-03-2017");
-		shopping.setTotalamount(new BigDecimal(85));
+		shopping.setAmount(new BigDecimal(85));
 		shopping.setNumshop(9L);
 		shopping.setUser("13700");
-		/*
-		 * shopping.setNif("06227087K"); shopping.setAddress("Leon");
-		 * shopping.setName("Ainhoa"); shopping.setSurname("Gonzalez Gonzalez");
-		 * shopping.setNationality("Española");
-		 */
+		shopping.setNif("04189105T");
+		shopping.setAddress("Leon");
+		shopping.setName("Ainhoa");
+		shopping.setSurname("Gonzalez Gonzalez");
+		shopping.setNumshop(907L);
 		List<ObjectShopEntity> los = new ArrayList<ObjectShopEntity>();
 		ObjectShopEntity os = new ObjectShopEntity();
 		MetalEntity metal = new MetalEntity();

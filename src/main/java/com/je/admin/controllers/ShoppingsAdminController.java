@@ -31,11 +31,13 @@ import com.je.dbaccess.entities.ObjectShopEntity;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.forms.SearchForm;
 import com.je.services.metal.MetalService;
+import com.je.services.nations.NationService;
 import com.je.services.places.PlaceService;
 import com.je.services.shoppings.Quarter;
 import com.je.services.shoppings.QuarterMetal;
 import com.je.services.shoppings.Shopping;
 import com.je.services.shoppings.ShoppingService;
+import com.je.services.tracks.TrackService;
 import com.je.utils.constants.Constants;
 import com.je.utils.string.Util;
 import com.je.validators.SearchFormValidator;
@@ -57,6 +59,12 @@ public class ShoppingsAdminController {
 	/** The place service. */
 	@Autowired
 	private MetalService metalService;
+
+	@Autowired
+	private NationService nationservice;
+
+	@Autowired
+	private TrackService trackservice;
 
 	/** The shopping form validator. */
 	@Autowired
@@ -120,7 +128,7 @@ public class ShoppingsAdminController {
 	@RequestMapping(value = "/updateShoppings")
 	public ModelAndView updateShoppings(@ModelAttribute("shoppingForm") Shopping shopping) {
 		ModelAndView model = new ModelAndView();
-		Long idshop = shopping.getIdshop();
+		Long idshop = shopping.getId();
 		if (idshop == null) {
 			model.addObject("shoppingForm", new ShoppingSearch());
 			model.addObject("places", placeService.getAllPlaces());
@@ -320,13 +328,16 @@ public class ShoppingsAdminController {
 				lop.add(op);
 			}
 			pawn.setAddress(client.getAddress());
-			pawn.setNationality(client.getNationality());
 			pawn.setNif(client.getNif());
 			pawn.setSurname(client.getSurname());
 			pawn.setTown(client.getTown());
 			pawn.setName(client.getName());
+			pawn.setNation(client.getNation());
+			pawn.setTrack(client.getTrack());
 			pawn.setObjects(lop);
 			model.setViewName("newshop");
+			model.addObject("tracks", trackservice.getTracks());
+			model.addObject("nations", nationservice.getNations());
 		}
 		model.addObject("shopform", pawn);
 		model.addObject("adminForm", new AdminForm());
