@@ -22,6 +22,10 @@
 			<a>id</a>
 			<b>idshop</b>
 		</field>
+		<field>
+			<a>amount</a>
+			<b>totalamount</b>
+		</field>
 	</mapping>
 	<mapping>
 		<class-a>com.je.services.pawns.NewPawn</class-a>
