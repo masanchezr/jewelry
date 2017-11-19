@@ -30,7 +30,7 @@
 									<tr>
 										<td><form:radiobutton path="id" value="${shopping.id}" /></td>
 										<td><c:out value="${shopping.numshop}" /></td>
-										<td><c:out value="${shopping.totalamount}" /></td>
+										<td><c:out value="${shopping.amount}" /></td>
 										<td><c:out value="${shopping.creationdate}" /></td>
 									</tr>
 								</c:forEach>

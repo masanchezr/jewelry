@@ -55,10 +55,10 @@
 							<tr>
 								<td></td>
 								<td><spring:message code="amount" /> <form:input
-										class="form-control" disabled="true" path="totalamount" /></td>
+										class="form-control" disabled="true" path="amount" /></td>
 								<td class="form-group has-error"><label
 									class="control-label" for="inputSuccess"><form:errors
-											path="totalamount" /></label></td>
+											path="amount" /></label></td>
 								<td><form:button class="btn btn-primary" value="submit">
 										<spring:message code="save" />
 									</form:button></td>
