@@ -10,7 +10,7 @@
 			code="updateshopping" /></li>
 </ol>
 <form:form action="saveShopping" commandName="shoppingForm" role="form">
-	<form:hidden path="idshop" />
+	<form:hidden path="id" />
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card-body">
@@ -30,8 +30,8 @@
 							<c:forEach items="${shoppingForm.objects}" var="os"
 								varStatus="status">
 								<tr class="${status.count % 2 == 0 ? 'success' : 'danger'}">
-									<td><strong><spring:message code="metal" /></strong>
-									<form:hidden path="objects[${status.index}].idobjectshop" /> <form:select
+									<td><strong><spring:message code="metal" /></strong> <form:hidden
+											path="objects[${status.index}].idobjectshop" /> <form:select
 											class="form-control"
 											path="objects[${status.index}].metal.idmetal">
 											<form:option value="${os.metal.idmetal}"

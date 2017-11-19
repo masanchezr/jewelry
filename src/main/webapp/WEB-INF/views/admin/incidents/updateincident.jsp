@@ -20,7 +20,7 @@
 						<div class="form-group">
 							<spring:message code="description" />
 							<form:textarea path="description" />
-							<div class="form-group col-3 has-error">
+							<div class="form-group has-error">
 								<label class="control-label" for="inputSuccess"> <form:errors
 										path="description" /></label>
 							</div>
