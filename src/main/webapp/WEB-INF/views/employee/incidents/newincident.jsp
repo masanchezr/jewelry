@@ -18,7 +18,7 @@
 						</div>
 						<div class="form-group">
 							<spring:message code="description" />
-							<form:textarea class="form-control" path="description" />
+							<form:textarea class="form-control" class="form-control" path="description" />
 							<div class="form-group col-3 has-error">
 								<label class="control-label" for="inputSuccess"> <form:errors
 										path="description" /></label>

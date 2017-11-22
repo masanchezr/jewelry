@@ -8,7 +8,8 @@
 <ol class="breadcrumb">
 	<li class="breadcrumb-item"><a href="#"><spring:message
 				code="pawns" /></a></li>
-	<li class="breadcrumb-item active"><spring:message code="newpawn" /></li>
+	<li class="breadcrumb-item active"><spring:message
+			code="updatepawn" /></li>
 </ol>
 <form:form action="savePawn" commandName="pawnForm">
 	<form:hidden path="id" />
