@@ -44,7 +44,7 @@ public class AdjustmentServiceImpl implements AdjustmentService {
 		MailService mailAdjustmentService;
 		// primeramente miramos si existe el arreglo
 		Long idadjustment = adjustment.getIdadjustment();
-		AdjustmentEntity adjustmentEntity = adjustmentRepository.findOne(adjustment.getIdadjustment());
+		AdjustmentEntity adjustmentEntity = adjustmentRepository.findById(adjustment.getIdadjustment()).get();
 		BigDecimal amount = adjustment.getAmount();
 		if (adjustmentEntity != null) {
 			// miro si se ha cobrado el precio recomendado
@@ -84,7 +84,7 @@ public class AdjustmentServiceImpl implements AdjustmentService {
 	public void saveWorkshop(Adjustment adjustment) {
 		AdjustmentEntity adjustmentEntity = mapper.map(adjustment, AdjustmentEntity.class);
 		// miramos si ya existía
-		AdjustmentEntity adjustmentlast = adjustmentRepository.findOne(adjustment.getIdadjustment());
+		AdjustmentEntity adjustmentlast = adjustmentRepository.findById(adjustment.getIdadjustment()).get();
 		PaymentEntity pay = new PaymentEntity();
 		pay.setIdpayment(Constants.EFECTIVO);
 		if (adjustmentlast != null) {

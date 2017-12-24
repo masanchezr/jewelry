@@ -66,14 +66,4 @@ public class PaymentRepositoryTest {
 			}
 		}
 	}
-
-	/**
-	 * Update test.
-	 */
-	@Test
-	public void updateTest() {
-		PaymentEntity payment = paymentRepository.findOne(1L);
-		payment.setActive(true);
-		// paymentRepository.save(payment);
-	}
 }

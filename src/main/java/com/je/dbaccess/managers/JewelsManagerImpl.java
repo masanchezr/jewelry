@@ -33,6 +33,7 @@ public class JewelsManagerImpl implements JewelsManager {
 	@Autowired
 	private CategoriesRepository categoryRepository;
 
+	@Override
 	public JewelEntity save(JewelEntity object) {
 		object.setCreationdate(new Date());
 		if (Util.isEmpty(object.getImg())) {
@@ -41,6 +42,7 @@ public class JewelsManagerImpl implements JewelsManager {
 		return jewelRepository.save(object);
 	}
 
+	@Override
 	public List<JewelEntity> searchAll() {
 		List<JewelEntity> target = new ArrayList<JewelEntity>();
 		Iterable<JewelEntity> jewels = jewelRepository.findAll();
@@ -52,9 +54,9 @@ public class JewelsManagerImpl implements JewelsManager {
 	}
 
 	/**
-	 * Busca por nombre y descripcion de joya y categoria que estan activas. Si
-	 * el nombre y la categoria son nulas, buscara todas las joyas activas. Si
-	 * la categoria es nula buscará solo por nombres.
+	 * Busca por nombre y descripcion de joya y categoria que estan activas. Si el
+	 * nombre y la categoria son nulas, buscara todas las joyas activas. Si la
+	 * categoria es nula buscará solo por nombres.
 	 *
 	 * @param searchName
 	 *            the search name
@@ -62,6 +64,7 @@ public class JewelsManagerImpl implements JewelsManager {
 	 *            the category
 	 * @return the list
 	 */
+	@Override
 	public Page<JewelEntity> searchByNameDescCategoryActives(String searchName, CategoryEntity category,
 			Pageable pageable) {
 		Page<JewelEntity> jewels = null;
@@ -79,14 +82,17 @@ public class JewelsManagerImpl implements JewelsManager {
 		return jewels;
 	}
 
+	@Override
 	public JewelEntity searchById(Long idjewel) {
-		return jewelRepository.findOne(idjewel);
+		return jewelRepository.findById(idjewel).get();
 	}
 
+	@Override
 	public List<JewelEntity> searchAllActive() {
 		return iterableToList(jewelRepository.searchAllActive());
 	}
 
+	@Override
 	public List<JewelEntity> searchByNameDescCategory(String searchName) {
 		List<JewelEntity> jewels = null;
 		if (Util.isEmpty(searchName)) {
@@ -105,6 +111,7 @@ public class JewelsManagerImpl implements JewelsManager {
 		return jewels;
 	}
 
+	@Override
 	public List<JewelEntity> searchByCategoryActive(String keywordcategory) {
 		List<JewelEntity> jewels = null;
 		CategoryEntity category = categoryRepository.findByKeyword(keywordcategory);
@@ -135,6 +142,7 @@ public class JewelsManagerImpl implements JewelsManager {
 		return jewels;
 	}
 
+	@Override
 	public List<JewelEntity> searchByReferenceAndCategory(JewelEntity jewel) {
 		List<JewelEntity> jewels;
 		if (Util.isEmpty(jewel.getReference())) {
@@ -146,6 +154,7 @@ public class JewelsManagerImpl implements JewelsManager {
 		return jewels;
 	}
 
+	@Override
 	public JewelEntity searchByReferenceCategoryMetalPlaceActive(JewelEntity jewel) {
 		List<JewelEntity> jewels = jewelRepository.findByReferenceAndCategoryAndMetalAndPlaceAndActive(
 				jewel.getReference(), jewel.getCategory(), jewel.getMetal(), jewel.getPlace(), jewel.getActive());
@@ -156,6 +165,7 @@ public class JewelsManagerImpl implements JewelsManager {
 		return jewelEntity;
 	}
 
+	@Override
 	public JewelEntity searchByReferenceCategoryMetalPlace(JewelEntity jewel) {
 		List<JewelEntity> jewels = jewelRepository.findByReferenceAndCategoryAndMetalAndPlace(jewel.getReference(),
 				jewel.getCategory(), jewel.getMetal(), jewel.getPlace());
@@ -166,42 +176,52 @@ public class JewelsManagerImpl implements JewelsManager {
 		return jewelEntity;
 	}
 
+	@Override
 	public Page<JewelEntity> searchAllActivePageable(Pageable p) {
 		return jewelRepository.searchAllActivePageable(p);
 	}
 
+	@Override
 	public Page<JewelEntity> findByPlaceAndActiveTrue(PlaceEntity place, Pageable pageable) {
 		return jewelRepository.findByPlaceAndActiveTrue(place, pageable);
 	}
 
+	@Override
 	public List<JewelEntity> searchByReference(String reference) {
 		return jewelRepository.findByReference(reference);
 	}
 
+	@Override
 	public List<JewelEntity> searchByReferenceAndPlaceAndMetal(String reference, PlaceEntity place, MetalEntity metal) {
 		return jewelRepository.findByReferenceAndPlaceAndMetal(reference, place, metal);
 	}
 
+	@Override
 	public List<JewelEntity> searchByPlaceAndMetal(PlaceEntity map, MetalEntity map2) {
 		return jewelRepository.findByPlaceAndMetal(map, map2);
 	}
 
+	@Override
 	public List<JewelEntity> searchByPlaceAndMetalAndCategory(PlaceEntity map, MetalEntity map2, CategoryEntity map3) {
 		return jewelRepository.findByCategoryAndPlaceAndMetal(map3, map, map2);
 	}
 
+	@Override
 	public List<JewelEntity> searchAllActiveByPlace(JewelEntity map) {
 		return jewelRepository.findByPlaceAndActiveTrueOrderByReference(map.getPlace());
 	}
 
-	public JewelEntity findOne(Long idjewel) {
-		return jewelRepository.findOne(idjewel);
+	@Override
+	public JewelEntity findById(Long idjewel) {
+		return jewelRepository.findById(idjewel).get();
 	}
 
+	@Override
 	public Page<JewelEntity> searchWithImg(Pageable pageable) {
 		return jewelRepository.findByImgIsNotNullAndActiveTrue(pageable);
 	}
 
+	@Override
 	public void setGrams() {
 		MetalEntity metal = new MetalEntity();
 		metal.setIdmetal(Constants.ORO18K);

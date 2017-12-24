@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 
+import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,19 +27,21 @@ public class DailiesRepositoryTest {
 	@Autowired
 	private DailyRepository dailyRepository;
 
+	private static final Logger logger = Logger.getLogger(DailiesRepositoryTest.class);
+
 	/**
 	 * Save test.
 	 */
 	@Test
 	public void saveTest() {
-		DailyEntity daily = new DailyEntity();
-		Calendar calendar = new GregorianCalendar(2015, 2, 14);
 		PlaceEntity place = new PlaceEntity();
 		place.setIdplace(13700L);
+		Calendar calendar = new GregorianCalendar(2017, 2, 14);
+		DailyEntity daily = dailyRepository.findByPlaceAndDailydate(place, calendar.getTime());
 		daily.setDailydate(calendar.getTime());
 		daily.setPlace(place);
 		daily.setFinalamount(new BigDecimal(8950));
-		// dailyRepository.save(daily);
+		dailyRepository.save(daily);
 	}
 
 	/**
@@ -46,15 +49,13 @@ public class DailiesRepositoryTest {
 	 */
 	@Test
 	public void findByDailydateAndPlaceTest() {
-		Calendar calendar = new GregorianCalendar(2016, 6, 21);
+		Calendar calendar = new GregorianCalendar(2017, 6, 21);
 		PlaceEntity place = new PlaceEntity();
 		place.setIdplace(28017L);
-		// Calendar calendar = Calendar.getInstance();
-		// calendar.setTime(new Date());
 		calendar.add(Calendar.DAY_OF_MONTH, -1);
 		DailyEntity daily = dailyRepository.findByPlaceAndDailydate(place, calendar.getTime());
-		System.out.println(daily.getFinalamount());
-		System.out.println(daily.getDailydate());
+		logger.debug(daily.getFinalamount());
+		logger.debug(daily.getDailydate());
 	}
 
 	/**

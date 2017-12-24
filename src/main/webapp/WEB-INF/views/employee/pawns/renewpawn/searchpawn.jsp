@@ -1,7 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
-<form:form action="searchRenewPawn" commandName="searchPawnForm"
+<form:form action="searchRenewPawn" modelAttribute="searchPawnForm"
 	role="form">
 	<!-- Breadcrumbs-->
 	<ol class="breadcrumb">

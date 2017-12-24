@@ -26,6 +26,7 @@ public class PayrollServiceImpl implements PayrollService {
 	@Autowired
 	private PlaceUserRepository placeUserRepository;
 
+	@Override
 	public Daily addPayroll(Payroll payroll) {
 		PayrollEntity payrollentity = new PayrollEntity();
 		PlaceEntity place = placeUserRepository.findByUsername(payroll.getUser()).get(0).getPlace();
@@ -42,6 +43,7 @@ public class PayrollServiceImpl implements PayrollService {
 		return dailyService.getDaily(new Date(), place, null);
 	}
 
+	@Override
 	public boolean existsPayroll(Payroll payroll) {
 		boolean exists = false;
 		Date date = DateUtil.getDate(payroll.getPayrolldate());
@@ -50,7 +52,7 @@ public class PayrollServiceImpl implements PayrollService {
 		String id = String.valueOf(calendar.get(Calendar.YEAR)).concat(String.valueOf(calendar.get(Calendar.MONTH) + 1))
 				.concat(String
 						.valueOf(placeUserRepository.findByUsername(payroll.getUser()).get(0).getPlace().getIdplace()));
-		PayrollEntity payrollentity = payrollrepository.findOne(Long.valueOf(id));
+		PayrollEntity payrollentity = payrollrepository.findById(Long.valueOf(id)).get();
 		if (payrollentity != null) {
 			exists = true;
 		}

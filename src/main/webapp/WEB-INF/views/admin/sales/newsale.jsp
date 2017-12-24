@@ -8,7 +8,7 @@
 				code="sales" /></a></li>
 	<li class="breadcrumb-item active"><spring:message code="newsale" /></li>
 </ol>
-<form:form action="resultsale" commandName="saleForm" role="form">
+<form:form action="resultsale" modelAttribute="saleForm" role="form">
 	<div class="card-body">
 		<div class="table-responsive">
 			<table class="table">

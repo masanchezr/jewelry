@@ -7,7 +7,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="addinstallment" /></li>
 </ol>
-<form:form action="saveinstallment" commandName="installment"
+<form:form action="saveinstallment" modelAttribute="installment"
 	role="form">
 	<div class="row">
 		<div class="col-lg-12">

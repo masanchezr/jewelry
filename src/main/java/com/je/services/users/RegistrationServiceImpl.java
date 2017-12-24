@@ -30,7 +30,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 	 */
 	public boolean registerUser(Client user) {
 		// comprobamos primero si ya existe un usuario con el mismo nif
-		ClientEntity userEntity = usersManager.findOne(user.getNifclient());
+		ClientEntity userEntity = usersManager.findById(user.getNifclient());
 		boolean successfull = false;
 		if (userEntity == null) {
 			userEntity = new ClientEntity();

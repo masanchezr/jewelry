@@ -37,4 +37,9 @@ public class HolidaysRepositoryTest {
 		holiday.setHoliday(calendar.getTime());
 		// holidayRepository.save(holiday);
 	}
+
+	@Test
+	public void allHolidaysTest() {
+		holidayRepository.findAll();
+	}
 }

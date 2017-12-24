@@ -16,15 +16,18 @@ public class MetalServiceImpl implements MetalService {
 	@Autowired
 	private MetalRepository metalRepository;
 
+	@Override
 	public Iterable<MetalEntity> getAllMetals() {
 		return metalRepository.findAll();
 	}
 
+	@Override
 	public List<MetalEntity> getAllMetalsActive() {
 		return metalRepository.findByActiveTrue();
 	}
 
-	public MetalEntity findOne(long l) {
-		return metalRepository.findOne(l);
+	@Override
+	public MetalEntity findById(long l) {
+		return metalRepository.findById(l).get();
 	}
 }

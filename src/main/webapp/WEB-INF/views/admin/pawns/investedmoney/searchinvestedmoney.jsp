@@ -8,7 +8,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="investedmoneypawns" /></li>
 </ol>
-<form:form action="resultinvestedmoney" commandName="pawnForm">
+<form:form action="resultinvestedmoney" modelAttribute="pawnForm">
 	<div class="row">
 		<div class="col-lg-6">
 			<div class="card-body">

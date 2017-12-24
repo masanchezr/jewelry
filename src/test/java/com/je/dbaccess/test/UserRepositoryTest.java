@@ -41,8 +41,8 @@ public class UserRepositoryTest {
 	 * Find one test.
 	 */
 	@Test
-	public void findOneTest() {
-		userRepository.findOne("70000000K");
+	public void findByIdTest() {
+		userRepository.findById("70000000K");
 	}
 
 	/**

@@ -9,7 +9,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="updateshopping" /></li>
 </ol>
-<form:form action="saveShopping" commandName="shoppingForm" role="form">
+<form:form action="saveShopping" modelAttribute="shoppingForm" role="form">
 	<form:hidden path="id" />
 	<div class="row">
 		<div class="col-lg-12">

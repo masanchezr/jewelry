@@ -25,7 +25,7 @@ public interface UsersManager {
 	 *            the nifclient
 	 * @return the client entity
 	 */
-	public ClientEntity findOne(String nifclient);
+	public ClientEntity findById(String nifclient);
 
 	/**
 	 * Save.

@@ -1,5 +1,7 @@
 package com.je.dbaccess.test;
 
+import java.util.Optional;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +19,9 @@ public class PayrollRepositoryTest {
 	private PayrollRepository payrollRepository;
 
 	@Test
-	public void findOneTest() {
-		PayrollEntity payroll = payrollRepository.findOne(2015513700L);
-		if (payroll != null) {
+	public void findByIdTest() {
+		Optional<PayrollEntity> payroll = payrollRepository.findById(2015513700L);
+		if (payroll.isPresent()) {
 			System.out.println("no es nulo");
 		}
 	}

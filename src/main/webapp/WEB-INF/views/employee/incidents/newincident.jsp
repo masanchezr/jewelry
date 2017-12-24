@@ -5,7 +5,7 @@
 				code="incidents" /></a></li>
 	<li class="breadcrumb-item active"><spring:message code="incident" /></li>
 </ol>
-<form:form action="saveincident" commandName="incident">
+<form:form action="saveincident" modelAttribute="incident">
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card-body">
@@ -18,8 +18,9 @@
 						</div>
 						<div class="form-group">
 							<spring:message code="description" />
-							<form:textarea class="form-control" class="form-control" path="description" />
-							<div class="form-group col-3 has-error">
+							<form:textarea class="form-control" class="form-control"
+								path="description" />
+							<div class="form-group has-error">
 								<label class="control-label" for="inputSuccess"> <form:errors
 										path="description" /></label>
 							</div>

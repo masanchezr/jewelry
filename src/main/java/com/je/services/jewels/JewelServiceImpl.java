@@ -42,12 +42,13 @@ public class JewelServiceImpl implements JewelService {
 	 *            the thing
 	 */
 
+	@Override
 	public JewelEntity addObject(JewelEntity thing) {
 		if (Util.isEmpty(thing.getImg())) {
 			thing.setImg(null);
 		}
 		// getBarCode(jewel);
-		return jewelsManager.findOne(jewelsManager.save(thing).getIdjewel());
+		return jewelsManager.findById(jewelsManager.save(thing).getIdjewel());
 	}
 
 	private void getBarCode(JewelEntity jewel) {
@@ -82,31 +83,35 @@ public class JewelServiceImpl implements JewelService {
 
 	}
 
+	@Override
 	public Collection<JewelEntity> searchAll() {
 		return jewelsManager.searchAll();
 	}
 
+	@Override
 	public JewelEntity selectProduct(Long idjewel) {
 		return jewelsManager.searchById(idjewel);
 	}
 
+	@Override
 	public Page<JewelEntity> searchAllActive(int pageNumber) {
-		PageRequest request = new PageRequest(pageNumber - 1, Constants.PAGE_SIZE);
-		return jewelsManager.searchAllActivePageable(request);
+		return jewelsManager.searchAllActivePageable(PageRequest.of(pageNumber - 1, Constants.PAGE_SIZE));
 	}
 
+	@Override
 	public Page<JewelEntity> searchPageableByPlace(int pageNumber, PlaceEntity place) {
-		PageRequest request = new PageRequest(pageNumber - 1, Constants.PAGE_SIZE);
-		return jewelsManager.findByPlaceAndActiveTrue(place, request);
+		return jewelsManager.findByPlaceAndActiveTrue(place, PageRequest.of(pageNumber - 1, Constants.PAGE_SIZE));
 	}
 
 	/**
 	 * Búsqueda por categoría activa, joya activa y con imagen
 	 */
+	@Override
 	public List<JewelEntity> searchJewelsByKeyWordCategory(String keywordcategory) {
 		return jewelsManager.searchByCategoryActive(keywordcategory);
 	}
 
+	@Override
 	public List<JewelEntity> search(JewelEntity jewelForm) {
 		List<JewelEntity> jewels = null;
 		String reference = jewelForm.getReference();
@@ -132,30 +137,37 @@ public class JewelServiceImpl implements JewelService {
 		return jewels;
 	}
 
+	@Override
 	public void updateJewelEntity(JewelEntity jewelForm) {
 		jewelsManager.save(jewelForm);
 	}
 
+	@Override
 	public JewelEntity searchByReferenceCategoryMetalPlaceActive(JewelEntity jewel) {
 		return jewelsManager.searchByReferenceCategoryMetalPlaceActive(jewel);
 	}
 
+	@Override
 	public JewelEntity searchByReferenceCategoryMetalPlace(JewelEntity jewel) {
 		return jewelsManager.searchByReferenceCategoryMetalPlace(jewel);
 	}
 
+	@Override
 	public List<JewelEntity> searchByReferenceAndCategory(JewelEntity jewelForm) {
 		return jewelsManager.searchByReferenceAndCategory(jewelForm);
 	}
 
+	@Override
 	public List<JewelEntity> searchAllActiveByPlace(JewelEntity jewel) {
 		return jewelsManager.searchAllActiveByPlace(jewel);
 	}
 
+	@Override
 	public List<JewelEntity> searchByReference(JewelEntity jewel) {
 		return jewelsManager.searchByReference(jewel.getReference());
 	}
 
+	@Override
 	public void revise(JewelEntity jewel) {
 		JewelEntity jewelEntity = jewelsManager.searchById(jewel.getIdjewel());
 		jewelEntity.setRevised(Boolean.TRUE);
@@ -165,10 +177,10 @@ public class JewelServiceImpl implements JewelService {
 
 	@Override
 	public Page<JewelEntity> searchWithImg(int i) {
-		PageRequest request = new PageRequest(i - 1, Constants.PAGE_SIZE);
-		return jewelsManager.searchWithImg(request);
+		return jewelsManager.searchWithImg(PageRequest.of(i - 1, Constants.PAGE_SIZE));
 	}
 
+	@Override
 	public void setGramsGold() {
 		jewelsManager.setGrams();
 	}

@@ -8,7 +8,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="searchpawns" /></li>
 </ol>
-<form:form action="resultPawns" commandName="pawnForm">
+<form:form action="resultPawns" modelAttribute="pawnForm">
 	<div class="row">
 		<div class="col-lg-6">
 			<div class="card-body">

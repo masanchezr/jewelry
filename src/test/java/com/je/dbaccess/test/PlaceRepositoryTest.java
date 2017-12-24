@@ -55,8 +55,8 @@ public class PlaceRepositoryTest {
 	 * Find one.
 	 */
 	@Test
-	public void findOne() {
-		PlaceEntity place = placeRepository.findOne(24002L);
+	public void findById() {
+		PlaceEntity place = placeRepository.findById(24002L).get();
 		if (place != null) {
 			System.out.println("Lugar:" + place.getDescription());
 		}

@@ -53,7 +53,7 @@ public class BillingServiceImpl implements BillingService {
 		MetalEntity metalEntity;
 		Worngrams worngrams;
 		BigDecimal amount, grams = BigDecimal.ZERO, totalamount = BigDecimal.ZERO;
-		MetalEntity metal = metalService.findOne(Constants.ORO18K);
+		MetalEntity metal = metalService.findById(Constants.ORO18K);
 		while (iadjustments.hasNext()) {
 			bill = new Billing();
 			adjustment = iadjustments.next();

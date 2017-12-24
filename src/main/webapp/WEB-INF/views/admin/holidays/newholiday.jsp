@@ -8,7 +8,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="newholiday" /></li>
 </ol>
-<form:form action="addHoliday" commandName="holiday">
+<form:form action="addHoliday" modelAttribute="holiday">
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card-body">

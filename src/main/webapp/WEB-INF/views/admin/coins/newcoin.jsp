@@ -1,7 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
-<form:form action="addcoin" commandName="coinForm">
+<form:form action="addcoin" modelAttribute="coinForm">
 	<div class="row">
 		<div class="col-lg-8">
 			<div class="panel card-default">

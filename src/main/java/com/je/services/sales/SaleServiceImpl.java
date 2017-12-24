@@ -97,7 +97,7 @@ public class SaleServiceImpl implements SaleService {
 		BigDecimal discount = sale.getDiscount();
 		Long iddiscount = sale.getIddiscount();
 		if (iddiscount != null) {
-			DiscountEntity discountEntity = discountsRepository.findOne(iddiscount);
+			DiscountEntity discountEntity = discountsRepository.findById(iddiscount).get();
 			if (discount == null) {
 				discount = BigDecimal.ZERO;
 			}
@@ -201,7 +201,7 @@ public class SaleServiceImpl implements SaleService {
 
 	@Override
 	public Addresses searchAddressByClient(String nif) {
-		ClientEntity client = usersManager.findOne(nif);
+		ClientEntity client = usersManager.findById(nif);
 		Addresses addresses = null;
 		if (client != null) {
 			com.je.dbaccess.entities.Addresses addressesEntity = saleManager.searchAddressByClient(client);

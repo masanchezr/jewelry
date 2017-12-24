@@ -8,7 +8,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="searchbill" /></li>
 </ol>
-<form:form action="bill" commandName="billingForm">
+<form:form action="bill" modelAttribute="billingForm">
 	<div class="row">
 		<div class="col-lg-6">
 			<div class="card-body">

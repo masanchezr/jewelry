@@ -6,9 +6,9 @@
 	<version>0.0.8-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<properties>
-		<org.springframework-version>4.3.12.RELEASE</org.springframework-version>
-		<spring-security-version>4.2.1.RELEASE</spring-security-version>
-		<tiles-version>3.0.7</tiles-version>
+		<org.springframework-version>5.0.2.RELEASE</org.springframework-version>
+		<spring-security-version>5.0.0.RELEASE</spring-security-version>
+		<tiles-version>3.0.8</tiles-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<profiles>
@@ -90,25 +90,8 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>${org.springframework-version}</version>
-			<exclusions>
-				<!-- Exclude Commons Logging in favor of SLF4j -->
-				<exclusion>
-					<groupId>commons-logging</groupId>
-					<artifactId>commons-logging</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-core</artifactId>
-			<version>${spring-security-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -183,7 +166,7 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
-			<version>1.11.0.RELEASE</version>
+			<version>2.0.2.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -198,7 +181,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.2.21.Final</version>
+			<version>5.2.12.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.poi</groupId>
@@ -209,6 +192,16 @@
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
 			<version>3.15</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.2</version>
 		</dependency>
 	</dependencies>
 </project>

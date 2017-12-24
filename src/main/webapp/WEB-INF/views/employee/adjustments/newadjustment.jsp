@@ -5,7 +5,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="newadjustment" /></li>
 </ol>
-<form:form action="saveAdjustment" commandName="adjustment">
+<form:form action="saveAdjustment" modelAttribute="adjustment">
 	<div class="card-body">
 		<div class="form-group col-3">
 			<spring:message code="idadjustment" var="idadjustmentmessage" />

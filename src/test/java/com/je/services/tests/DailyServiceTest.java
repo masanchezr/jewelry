@@ -1,6 +1,7 @@
 package com.je.services.tests;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,8 +32,7 @@ public class DailyServiceTest {
 	@Test
 	public void getDailyTest() {
 		PlaceEntity place = new PlaceEntity();
-		Calendar c = Calendar.getInstance();
-		c.set(2016, 12, 6);
+		Calendar c = new GregorianCalendar(2017, 10, 21);
 		place.setIdplace(28017L);
 		Daily daily = dailyService.getDaily(c.getTime(), place, "prueba");
 		if (daily != null) {
@@ -44,8 +44,7 @@ public class DailyServiceTest {
 	@Test
 	public void calculateDailiesTest() {
 		PlaceEntity place = new PlaceEntity();
-		Calendar c = Calendar.getInstance();
-		c.set(2017, 9, 28);
+		Calendar c = new GregorianCalendar(2017, 10, 21);
 		place.setIdplace(28017L);
 		dailyService.calculateDailies(c.getTime(), place);
 	}

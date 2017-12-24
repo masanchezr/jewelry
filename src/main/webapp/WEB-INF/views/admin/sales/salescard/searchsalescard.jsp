@@ -8,7 +8,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="searchsalescard" /></li>
 </ol>
-<form:form action="resultSalesCard" commandName="searchSaleForm">
+<form:form action="resultSalesCard" modelAttribute="searchSaleForm">
 	<div class="row">
 		<div class="col-lg-6">
 			<div class="card-body">

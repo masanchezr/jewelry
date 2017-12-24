@@ -1,7 +1,7 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<form:form action="deletesale" commandName="removeSaleForm" role="form">
+<form:form action="deletesale" modelAttribute="removeSaleForm" role="form">
 	<!-- Breadcrumbs-->
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item"><a href="#"><spring:message

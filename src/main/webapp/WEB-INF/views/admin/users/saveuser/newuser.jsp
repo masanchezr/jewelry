@@ -7,7 +7,7 @@
 				code="users" /></a></li>
 	<li class="breadcrumb-item active"><spring:message code="newuser" /></li>
 </ol>
-<form:form action="saveuser" commandName="user">
+<form:form action="saveuser" modelAttribute="user">
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card-body">

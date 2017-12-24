@@ -6,7 +6,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="adjustments" /></li>
 </ol>
-<form:form action="sumadjustments" commandName="searchForm">
+<form:form action="sumadjustments" modelAttribute="searchForm">
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card-body">

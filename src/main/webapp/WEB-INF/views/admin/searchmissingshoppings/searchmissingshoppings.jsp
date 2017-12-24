@@ -9,7 +9,7 @@
 			code="searchmissingshoppings" /></li>
 </ol>
 <form:form action="resultmissingshoppings"
-	commandName="searchmissingshoppings">
+	modelAttribute="searchmissingshoppings">
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card-body">

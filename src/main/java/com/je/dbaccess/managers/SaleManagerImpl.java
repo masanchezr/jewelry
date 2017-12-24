@@ -67,6 +67,7 @@ public class SaleManagerImpl implements SaleManager {
 	@Autowired
 	private SalesPostponedRepository salespostponedrepository;
 
+	@Override
 	@Transactional
 	public Long buy(SaleEntity sale) {
 		List<SalesJewels> lsj = new ArrayList<SalesJewels>();
@@ -74,7 +75,7 @@ public class SaleManagerImpl implements SaleManager {
 		Long orderNumber = null;
 		while (isj.hasNext()) {
 			SalesJewels sj = isj.next();
-			JewelEntity je = jewelRepository.findOne(sj.getJewelEntity().getIdjewel());
+			JewelEntity je = jewelRepository.findById(sj.getJewelEntity().getIdjewel()).get();
 			if (je != null) {
 				System.out.println("jewel no es nulo");
 				je.setActive(false);
@@ -96,14 +97,17 @@ public class SaleManagerImpl implements SaleManager {
 		return orderNumber;
 	}
 
+	@Override
 	public Iterable<SaleEntity> searchAllSales() {
 		return saleRepository.findAll();
 	}
 
+	@Override
 	public Iterable<SaleEntity> searchByDate(Date date) {
 		return saleRepository.findByDate(date);
 	}
 
+	@Override
 	public Addresses searchAddressByClient(ClientEntity client) {
 		Addresses addresses = null;
 		Iterable<SaleEntity> sales = saleRepository.findByClient(client);
@@ -128,10 +132,12 @@ public class SaleManagerImpl implements SaleManager {
 		return addresses;
 	}
 
+	@Override
 	public List<SaleEntity> searchByCreationDateAndPlace(Date date, PlaceEntity place) {
 		return saleRepository.findByCreationdateAndPlace(date, place);
 	}
 
+	@Override
 	public boolean cancelSale(CancelSaleEntity cancel, List<SalesJewels> salesjewels, DiscountEntity discount) {
 		Iterator<SalesJewels> isalesjewels = salesjewels.iterator();
 		JewelEntity jewel;
@@ -166,6 +172,7 @@ public class SaleManagerImpl implements SaleManager {
 	 *            the idjewels
 	 * @return true, if successful
 	 */
+	@Override
 	public boolean cancelParcialSale(CancelSaleEntity cancel, List<JewelEntity> jewelsToCancel,
 			DiscountEntity discount) {
 		Iterator<JewelEntity> isalesjewels = jewelsToCancel.iterator();
@@ -177,7 +184,7 @@ public class SaleManagerImpl implements SaleManager {
 			jewel = isalesjewels.next();
 			idjewel = jewel.getIdjewel();
 			if (idjewel != null) {
-				jewel = jewelRepository.findOne(idjewel);
+				jewel = jewelRepository.findById(idjewel).get();
 				if (!jewel.getActive()) {
 					amount = amount.add(jewel.getPrice());
 					jewel.setActive(true);
@@ -200,16 +207,19 @@ public class SaleManagerImpl implements SaleManager {
 		return exit;
 	}
 
+	@Override
 	public SaleEntity searchByNumsaleAndPlace(Long numsale, Long idplace) {
 		PlaceEntity place = new PlaceEntity();
 		place.setIdplace(idplace);
 		return saleRepository.findByNumsaleAndPlace(numsale, place);
 	}
 
+	@Override
 	public Iterable<SaleEntity> searchByDatesAndPayment(Date from, Date until, PaymentEntity pay) {
 		return saleRepository.findByCreationdateBetweenPay(from, until, pay);
 	}
 
+	@Override
 	public Map<String, Object> searchByDatesAndPlace(Date from, Date until, PlaceEntity place) {
 		List<SaleEntity> sales = new ArrayList<SaleEntity>();
 		List<CancelSaleEntity> cancels;
@@ -256,6 +266,7 @@ public class SaleManagerImpl implements SaleManager {
 		return map;
 	}
 
+	@Override
 	public List<Long> calculateNumberMissing(Long numFrom, Long numUntil, PlaceEntity place) {
 		List<Long> numbers = new ArrayList<Long>();
 		SaleEntity sale;
@@ -268,7 +279,7 @@ public class SaleManagerImpl implements SaleManager {
 					if (straps == null || straps.isEmpty()) {
 						List<RecordingEntity> recordings = recordingRepository.findByNumsaleAndPlace(i, place);
 						if (recordings == null || recordings.isEmpty()) {
-							DiscountEntity discount = discountsRepository.findOne(new Long(i));
+							DiscountEntity discount = discountsRepository.findById(new Long(i)).get();
 							if (discount == null) {
 								numbers.add(i);
 							}
@@ -280,10 +291,12 @@ public class SaleManagerImpl implements SaleManager {
 		return numbers;
 	}
 
+	@Override
 	public SaleEntity searchByPK(Long idsale) {
-		return saleRepository.findOne(idsale);
+		return saleRepository.findById(idsale).get();
 	}
 
+	@Override
 	public Long numsalepostponed(PlaceEntity place) {
 		Calendar c = Calendar.getInstance();
 		Long num = null;
@@ -298,7 +311,7 @@ public class SaleManagerImpl implements SaleManager {
 			num = sale.getNumsale() + 1;
 			sale = saleRepository.findByNumsaleAndPlace(num, place);
 			if (sale == null) {
-				sp = salespostponedrepository.findOne(Math.abs(num));
+				sp = salespostponedrepository.findById(Math.abs(num)).get();
 				if (sp != null) {
 					num = null;
 				}

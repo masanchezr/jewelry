@@ -66,7 +66,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 		ShoppingEntity shoppingEntity = mapper.map(shopping, ShoppingEntity.class);
 		String nif = shopping.getNif();
 		if (nif != null) {
-			ClientPawnEntity cpe = clientPawnsRepository.findOne(nif);
+			ClientPawnEntity cpe = clientPawnsRepository.findById(nif).get();
 			if (cpe == null) {
 				cpe = mapper.map(shopping, ClientPawnEntity.class);
 				cpe.setCreationclient(new Date());
@@ -219,13 +219,13 @@ public class ShoppingServiceImpl implements ShoppingService {
 
 	@Override
 	public Shopping findShopByPK(Long idshop) {
-		ShoppingEntity shopping = shoppingsRepository.findOne(idshop);
+		ShoppingEntity shopping = shoppingsRepository.findById(idshop).get();
 		return mapper.map(shopping, Shopping.class);
 	}
 
 	@Override
 	public void update(Shopping shopping) {
-		ShoppingEntity shoppingEntity = shoppingsRepository.findOne(shopping.getId());
+		ShoppingEntity shoppingEntity = shoppingsRepository.findById(shopping.getId()).get();
 		List<ObjectShopEntity> objects = shoppingEntity.getObjects();
 		Iterator<ObjectShopEntity> iobjects;
 		List<ObjectShopEntity> newobjects = new ArrayList<ObjectShopEntity>();
@@ -321,7 +321,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 
 	@Override
 	public Shopping searchClient(String nif) {
-		ClientPawnEntity client = clientPawnsRepository.findOne(nif);
+		ClientPawnEntity client = clientPawnsRepository.findById(nif).get();
 		Shopping pawn = new Shopping();
 		if (client != null) {
 			mapper.map(client, pawn);

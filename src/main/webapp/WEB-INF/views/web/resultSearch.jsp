@@ -28,7 +28,7 @@
 								});
 					});
 </script>
-<form:form commandName="jewel" action="addProduct" method="post">
+<form:form modelAttribute="jewel" action="addProduct" method="post">
 	<form:hidden path="idjewel" />
 	<div class="single">
 		<div class="container">

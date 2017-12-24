@@ -8,7 +8,7 @@
 				code="pawns" /></a></li>
 	<li class="breadcrumb-item active"><spring:message code="newpawn" /></li>
 </ol>
-<form:form action="savePawn" commandName="pawnForm">
+<form:form action="savePawn" modelAttribute="pawnForm">
 	<div class="card-body">
 		<div class="row">
 			<div class="col-lg-6">

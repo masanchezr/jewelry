@@ -119,7 +119,7 @@ public interface JewelsManager {
 
 	public Page<JewelEntity> findByPlaceAndActiveTrue(PlaceEntity place, Pageable pageable);
 
-	public JewelEntity findOne(Long idjewel);
+	public JewelEntity findById(Long idjewel);
 
 	public Page<JewelEntity> searchWithImg(Pageable pageable);
 

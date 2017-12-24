@@ -9,7 +9,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="selectforedit" /></li>
 </ol>
-<form:form action="updateJewels" commandName="toUpdate">
+<form:form action="updateJewels" modelAttribute="toUpdate">
 	<c:if test="${not empty results}">
 		<div class="row">
 			<div class="col-lg-12">

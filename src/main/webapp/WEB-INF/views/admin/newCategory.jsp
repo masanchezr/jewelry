@@ -8,7 +8,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="newcategory" /></li>
 </ol>
-<form:form action="saveCategory" commandName="category">
+<form:form action="saveCategory" modelAttribute="category">
 	<div class="form-group">
 		<spring:message code="namecategory" />
 		<form:input class="form-control" path="namecategory" />

@@ -5,7 +5,7 @@
 <section id="checkout">
 	<div class="container">
 		<div class="row">
-			<form:form action="aceptarcompra" commandName="buyForm">
+			<form:form action="aceptarcompra" modelAttribute="buyForm">
 				<form:hidden path="nif" />
 				<div class="row">
 					<div class="col-lg-6">

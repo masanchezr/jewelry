@@ -144,7 +144,7 @@
 						<li><a href="<spring:url value="/contacto" />"><spring:message
 									code="contact" /></a></li>
 					</ul>
-					<form:form action='busqueda' commandName="search"
+					<form:form action='busqueda' modelAttribute="search"
 						class="navbar-form pull-right" role="search">
 						<div class="form-group col-3">
 							<spring:message code="find" var="find" />

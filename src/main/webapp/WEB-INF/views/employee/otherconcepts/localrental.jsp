@@ -1,7 +1,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<form:form action="savelocalrental" commandName="rentalForm" role="form">
+<form:form action="savelocalrental" modelAttribute="rentalForm" role="form">
 	<!-- Breadcrumbs-->
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item"><a href="#"><spring:message

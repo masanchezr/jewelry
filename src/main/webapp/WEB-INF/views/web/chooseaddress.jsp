@@ -4,7 +4,7 @@
 <section id="checkout">
 	<div class="container">
 		<div class="row">
-			<form:form action="aceptarcompra" commandName="buyForm">
+			<form:form action="aceptarcompra" modelAttribute="buyForm">
 				<form:hidden path="nif" />
 				<c:forEach items="${addressesmailing}" var="address">
 					<address>

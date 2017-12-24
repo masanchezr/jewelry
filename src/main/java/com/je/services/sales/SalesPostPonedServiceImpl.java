@@ -78,7 +78,7 @@ public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 
 	@Override
 	public SalePostPoned addInstallment(Installment installment) {
-		SalePostponedEntity sppentity = salespostponedrepository.findOne(installment.getIdsalepostponed());
+		SalePostponedEntity sppentity = salespostponedrepository.findById(installment.getIdsalepostponed()).get();
 		SalePostPoned sale = null;
 		if (sppentity != null) {
 			InstallmentEntity entity = mapper.map(installment, InstallmentEntity.class);
@@ -90,12 +90,13 @@ public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 				sppentity.setDateretired(new Date());
 				salespostponedrepository.save(sppentity);
 			}
-			sppentity = salespostponedrepository.findOne(installment.getIdsalepostponed());
+			sppentity = salespostponedrepository.findById(installment.getIdsalepostponed()).get();
 			sale = mapper.map(sppentity, SalePostPoned.class);
 		}
 		return sale;
 	}
 
+	@Override
 	public BigDecimal howmanyamount(SalePostponedEntity sppentity) {
 		BigDecimal amount = installmentsrepository.sumBySalepostponed(sppentity);
 		return sppentity.getTotalamount().subtract(amount);
@@ -103,6 +104,6 @@ public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 
 	@Override
 	public SalePostponedEntity searchByNumsale(Long numsale) {
-		return salespostponedrepository.findOne(numsale);
+		return salespostponedrepository.findById(numsale).get();
 	}
 }

@@ -8,7 +8,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="searchpawnsoutofdate" /></li>
 </ol>
-<form:form action="searchpawnsoutofdate" commandName="searchForm">
+<form:form action="searchpawnsoutofdate" modelAttribute="searchForm">
 	<div class="row">
 		<div class="col-lg-6">
 			<div class="card-body">

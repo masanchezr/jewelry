@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public class OtherConceptsRepositoryTest {
 	@Autowired
 	private OtherConceptsRepository otherConceptsRepository;
 
+	private static final Logger logger = Logger.getLogger(OtherConceptsRepositoryTest.class);
+
 	/**
 	 * Find by creationdate and place test.
 	 */
@@ -35,6 +38,9 @@ public class OtherConceptsRepositoryTest {
 		List<OtherConceptEntity> concepts = otherConceptsRepository.findByCreationdateAndPlace(new Date(), place);
 		if (concepts != null) {
 			Iterator<OtherConceptEntity> iconcepts = concepts.iterator();
+			while (iconcepts.hasNext()) {
+				logger.debug(iconcepts.next().getDescription());
+			}
 		}
 	}
 

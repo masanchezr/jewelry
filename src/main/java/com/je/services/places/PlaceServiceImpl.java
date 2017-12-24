@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Order;
+import org.springframework.data.domain.Sort.Direction;
 
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.dbaccess.entities.PlaceUserEntity;
@@ -23,14 +23,17 @@ public class PlaceServiceImpl implements PlaceService {
 	@Autowired
 	private PlaceUserRepository placeUserRepository;
 
+	@Override
 	public Iterable<PlaceEntity> getAllPlaces() {
-		return placeRepository.findAll(new Sort(new Order("description")));
+		return placeRepository.findAll(new Sort(Direction.ASC, "description"));
 	}
 
+	@Override
 	public PlaceEntity getPlace(Long idplace) {
-		return placeRepository.findOne(idplace);
+		return placeRepository.findById(idplace).get();
 	}
 
+	@Override
 	public PlaceEntity getPlaceUser(String user) {
 		List<PlaceUserEntity> placeuser = placeUserRepository.findByUsername(user);
 		PlaceEntity place = null;

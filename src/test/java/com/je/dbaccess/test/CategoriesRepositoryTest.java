@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Order;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -47,7 +47,7 @@ public class CategoriesRepositoryTest {
 	@Test
 	public void findByActiveTest() {
 		Iterable<CategoryEntity> categories = categoriesRepository
-				.findByActiveTrue(new Sort(new Order("namecategory")));
+				.findByActiveTrue(new Sort(Direction.ASC, "namecategory"));
 		if (categories != null) {
 			Iterator<CategoryEntity> icategories = categories.iterator();
 			while (icategories.hasNext()) {
@@ -63,7 +63,7 @@ public class CategoriesRepositoryTest {
 	 */
 	@Test
 	public void findAllOrderByNamecategoryTest() {
-		Iterable<CategoryEntity> categories = categoriesRepository.findAll(new Sort(new Order("namecategory")));
+		Iterable<CategoryEntity> categories = categoriesRepository.findAll(new Sort(Direction.ASC, "namecategory"));
 		if (categories != null) {
 			Iterator<CategoryEntity> icategories = categories.iterator();
 			while (icategories.hasNext()) {

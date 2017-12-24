@@ -30,4 +30,9 @@ public class IncidentRepositoryTest {
 		arg0.setState(Boolean.FALSE);
 		// incidentsRepository.save(arg0);
 	}
+
+	@Autowired
+	public void allincidentsTest() {
+		incidentsRepository.findAll();
+	}
 }

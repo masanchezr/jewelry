@@ -11,7 +11,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="updatepawn" /></li>
 </ol>
-<form:form action="savePawn" commandName="pawnForm">
+<form:form action="savePawn" modelAttribute="pawnForm">
 	<form:hidden path="id" />
 	<div class="row">
 		<div class="col-lg-12">

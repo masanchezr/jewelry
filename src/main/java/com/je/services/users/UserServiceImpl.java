@@ -20,9 +20,10 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private Mapper mapper;
 
+	@Override
 	public User disableEnableUser(String username) {
 		User user = null;
-		UserEntity entity = usersRepository.findOne(username);
+		UserEntity entity = usersRepository.findById(username).get();
 		if (entity != null) {
 			Boolean state = entity.getEnabled();
 			if (state.equals(Boolean.TRUE)) {
@@ -36,9 +37,10 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
+	@Override
 	public void newUser(User user) {
 		String username = user.getUsername();
-		UserEntity entity = usersRepository.findOne(username);
+		UserEntity entity = usersRepository.findById(username).get();
 		if (entity == null) {
 			PlaceUserEntity pue = new PlaceUserEntity();
 			pue.setPlace(mapper.map(user.getPlace(), PlaceEntity.class));

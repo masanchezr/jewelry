@@ -8,7 +8,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="gramsformetal" /></li>
 </ol>
-<form:form action="quartermetal" commandName="shoppingForm">
+<form:form action="quartermetal" modelAttribute="shoppingForm">
 	<div class="row">
 		<div class="col-lg-6">
 			<div class="card-body">

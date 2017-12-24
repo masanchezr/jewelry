@@ -41,7 +41,7 @@ public class SearchClientsServiceImpl implements SearchClientsService {
 	 */
 	public Client getClient(String nif) {
 		Client client = new Client();
-		mapper.map(usersManager.findOne(nif), client);
+		mapper.map(usersManager.findById(nif), client);
 		return client;
 	}
 

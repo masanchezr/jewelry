@@ -8,7 +8,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="searchjewels" /></li>
 </ol>
-<form:form action="resultSearchRevise" commandName="jewelForm">
+<form:form action="resultSearchRevise" modelAttribute="jewelForm">
 	<div class="row">
 		<div class="col-lg-6">
 			<div class="card-body">

@@ -7,7 +7,7 @@
 				code="jewels" /></a></li>
 	<li class="breadcrumb-item active"><spring:message code="newset" /></li>
 </ol>
-<form:form action="addset" commandName="setForm">
+<form:form action="addset" modelAttribute="setForm">
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card-body">

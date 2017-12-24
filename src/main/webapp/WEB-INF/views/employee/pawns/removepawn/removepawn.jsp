@@ -13,7 +13,7 @@
 		<div class="card-body">
 			<c:if test="${not empty pawns}">
 				<div class="table-responsive">
-					<form:form action="removepawn" commandName="pawnForm">
+					<form:form action="removepawn" modelAttribute="pawnForm">
 						<table class="table table-striped table-bordered table-hover"
 							id="dataTables-example">
 							<thead>

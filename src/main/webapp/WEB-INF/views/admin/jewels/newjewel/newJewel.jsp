@@ -8,7 +8,7 @@
 				code="jewels" /></a></li>
 	<li class="breadcrumb-item active"><spring:message code="newjewel" /></li>
 </ol>
-<form:form action="saveJewel" commandName="jewelForm">
+<form:form action="saveJewel" modelAttribute="jewelForm">
 	<form:hidden path="idjewel" />
 	<div class="row">
 		<div class="col-lg-8">

@@ -18,30 +18,17 @@ public class UsersManagerImpl implements UsersManager {
 	@Autowired
 	UserRepository userRepository;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.je.dbaccess.managers.UsersManager#findByEmail(java.lang.String)
-	 */
+	@Override
 	public List<ClientEntity> findByEmail(String email) {
 		return iterableToList(userRepository.findByEmail(email));
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.je.dbaccess.managers.UsersManager#findOne(java.lang.String)
-	 */
-	public ClientEntity findOne(String nifclient) {
-		return userRepository.findOne(nifclient);
+	@Override
+	public ClientEntity findById(String nifclient) {
+		return userRepository.findById(nifclient).get();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.je.dbaccess.managers.UsersManager#save(com.je.dbaccess.entities.
-	 * ClientEntity)
-	 */
+	@Override
 	public void save(ClientEntity userEntity) {
 		userRepository.save(userEntity);
 	}
@@ -51,6 +38,7 @@ public class UsersManagerImpl implements UsersManager {
 	 * 
 	 * @see com.je.dbaccess.managers.UsersManager#findAll()
 	 */
+	@Override
 	public List<ClientEntity> findAll() {
 		return iterableToList(userRepository.findAll());
 	}

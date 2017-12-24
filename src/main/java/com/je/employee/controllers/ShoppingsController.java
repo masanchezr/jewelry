@@ -84,7 +84,7 @@ public class ShoppingsController {
 			Iterator<ObjectShopEntity> ilos = los.iterator();
 			while (ilos.hasNext()) {
 				ObjectShopEntity os = ilos.next();
-				os.setMetal(metalService.findOne(os.getMetal().getIdmetal()));
+				os.setMetal(metalService.findById(os.getMetal().getIdmetal()));
 				nlos.add(os);
 			}
 			shoppingForm.setObjects(nlos);

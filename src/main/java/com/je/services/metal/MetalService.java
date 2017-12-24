@@ -18,6 +18,6 @@ public interface MetalService {
 
 	public List<MetalEntity> getAllMetalsActive();
 
-	public MetalEntity findOne(long l);
+	public MetalEntity findById(long l);
 
 }

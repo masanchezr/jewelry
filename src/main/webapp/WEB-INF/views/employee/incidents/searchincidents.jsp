@@ -7,7 +7,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="searchincidents" /></li>
 </ol>
-<form:form action="resultIncidents" commandName="searchForm">
+<form:form action="resultIncidents" modelAttribute="searchForm">
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card-body">
@@ -17,7 +17,7 @@
 							<div id="sandbox-container">
 								<spring:message code="datefrom" />
 								<form:input class="form-control" path="datefrom" type="text" />
-								<div class="form-group col-3 has-error">
+								<div class="form-group has-error">
 									<label class="control-label" for="inputSuccess"> <form:errors
 											path="datefrom" /></label>
 								</div>

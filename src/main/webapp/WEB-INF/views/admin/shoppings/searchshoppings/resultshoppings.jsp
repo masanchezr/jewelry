@@ -14,7 +14,7 @@
 		<div class="card-body">
 			<c:if test="${not empty shoppings}">
 				<div class="table-responsive">
-					<form:form action="updateShoppings" commandName="shoppingForm">
+					<form:form action="updateShoppings" modelAttribute="shoppingForm">
 						<table class="table table-striped table-bordered table-hover"
 							id="dataTables-example">
 							<thead>

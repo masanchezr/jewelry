@@ -8,7 +8,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="enabledisableuser" /></li>
 </ol>
-<form:form action="resultenabledisableuser" commandName="user">
+<form:form action="resultenabledisableuser" modelAttribute="user">
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card-body">

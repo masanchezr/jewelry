@@ -8,7 +8,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="searchcommissions" /></li>
 </ol>
-<form:form action="commissions" commandName="searchForm">
+<form:form action="commissions" modelAttribute="searchForm">
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card-body">

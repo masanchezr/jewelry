@@ -2,7 +2,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <div class="container">
-	<form:form commandName="dataForm" action="comprar">
+	<form:form modelAttribute="dataForm" action="comprar">
 		<c:if test="${not empty cart}">
 			<div class="row">
 				<div class="col-lg-12">

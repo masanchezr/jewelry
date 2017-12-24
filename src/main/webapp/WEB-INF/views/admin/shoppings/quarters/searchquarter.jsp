@@ -8,7 +8,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="searchshoppings" /></li>
 </ol>
-<form:form action="quarter" commandName="shoppingForm">
+<form:form action="quarter" modelAttribute="shoppingForm">
 	<div class="row">
 		<div class="col-lg-6">
 			<div class="card-body">

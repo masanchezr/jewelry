@@ -39,7 +39,7 @@ public class IncidentServiceImpl implements IncidentService {
 
 	@Override
 	public void resolve(Incident incident) {
-		IncidentEntity entity = incidentRepository.findOne(incident.getIdincident());
+		IncidentEntity entity = incidentRepository.findById(incident.getIdincident()).get();
 		entity.setDescription(incident.getDescription());
 		entity.setState(Boolean.TRUE);
 		incidentRepository.save(entity);
@@ -81,7 +81,7 @@ public class IncidentServiceImpl implements IncidentService {
 
 	@Override
 	public Incident searchIncident(Incident incident) {
-		return mapper.map(incidentRepository.findOne(incident.getIdincident()), Incident.class);
+		return mapper.map(incidentRepository.findById(incident.getIdincident()), Incident.class);
 	}
 
 	@Override

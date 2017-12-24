@@ -29,6 +29,7 @@ public class RentalServiceImpl implements RentalService {
 	@Autowired
 	private Mapper mapper;
 
+	@Override
 	public Daily saveRental(Rental rental) {
 		Date date = DateUtil.getDate(rental.getRentaldate());
 		PlaceEntity place = placeUserRepository.findByUsername(rental.getUser()).get(0).getPlace();
@@ -45,6 +46,7 @@ public class RentalServiceImpl implements RentalService {
 		return dailyService.getDaily(new Date(), place, null);
 	}
 
+	@Override
 	public boolean existsLocalRental(Rental rental) {
 		boolean exists = false;
 		Date date = DateUtil.getDate(rental.getRentaldate());
@@ -53,7 +55,7 @@ public class RentalServiceImpl implements RentalService {
 		String id = String.valueOf(calendar.get(Calendar.YEAR)).concat(String.valueOf(calendar.get(Calendar.MONTH) + 1))
 				.concat(String
 						.valueOf(placeUserRepository.findByUsername(rental.getUser()).get(0).getPlace().getIdplace()));
-		RentalEntity rentalEntity = rentalsRepository.findOne(Long.valueOf(id));
+		RentalEntity rentalEntity = rentalsRepository.findById(Long.valueOf(id)).get();
 		if (rentalEntity != null) {
 			exists = true;
 		}

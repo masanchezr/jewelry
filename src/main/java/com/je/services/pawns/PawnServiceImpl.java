@@ -64,7 +64,7 @@ public class PawnServiceImpl implements PawnService {
 	public Daily save(NewPawn pawn) {
 		// cuidado con el mapeo del creationdate
 		PawnEntity pawnEntity = mapper.map(pawn, PawnEntity.class);
-		ClientPawnEntity cpe = clientPawnsRepository.findOne(pawn.getNif());
+		ClientPawnEntity cpe = clientPawnsRepository.findById(pawn.getNif()).get();
 		PlaceEntity place = placeUserRepository.findByUsername(pawn.getUser()).get(0).getPlace();
 		if (Util.isEmpty(pawn.getCreationdate())) {
 			pawnEntity.setCreationdate(new Date());
@@ -98,7 +98,7 @@ public class PawnServiceImpl implements PawnService {
 
 	@Override
 	public void update(NewPawn pawn) {
-		PawnEntity pawnEntity = pawnsRepository.findOne(pawn.getId());
+		PawnEntity pawnEntity = pawnsRepository.findById(pawn.getId()).get();
 		List<ObjectPawnEntity> objects = pawnEntity.getObjects();
 		List<ObjectPawnEntity> newobjects = new ArrayList<ObjectPawnEntity>();
 		Iterator<ObjectPawnEntity> iobjects;
@@ -123,7 +123,7 @@ public class PawnServiceImpl implements PawnService {
 				newobjects.add(op);
 			}
 		}
-		ClientPawnEntity cpe = clientPawnsRepository.findOne(pawn.getNif());
+		ClientPawnEntity cpe = clientPawnsRepository.findById(pawn.getNif()).get();
 		if (cpe == null) {
 			cpe = mapper.map(pawn, ClientPawnEntity.class);
 		} else {
@@ -137,12 +137,12 @@ public class PawnServiceImpl implements PawnService {
 
 	@Override
 	public Pawn searchByIdpawn(Long idpawn) {
-		return mapper.map(pawnsRepository.findOne(idpawn), Pawn.class);
+		return mapper.map(pawnsRepository.findById(idpawn), Pawn.class);
 	}
 
 	@Override
 	public NewPawn findByIdpawn(Long idpawn) {
-		PawnEntity pawnEntity = pawnsRepository.findOne(idpawn);
+		PawnEntity pawnEntity = pawnsRepository.findById(idpawn).get();
 		NewPawn pawn = mapper.map(pawnEntity, NewPawn.class);
 		mapper.map(pawnEntity.getClient(), pawn);
 		return pawn;
@@ -181,7 +181,7 @@ public class PawnServiceImpl implements PawnService {
 
 	@Override
 	public Daily renew(Pawn pawn) {
-		PawnEntity pawnEntity = pawnsRepository.findOne(pawn.getId());
+		PawnEntity pawnEntity = pawnsRepository.findById(pawn.getId()).get();
 		if (pawnEntity != null) {
 			Date date;
 			List<RenovationEntity> renovations = pawnEntity.getRenovations();
@@ -215,7 +215,7 @@ public class PawnServiceImpl implements PawnService {
 	public Daily remove(Pawn pawn) {
 		MailService mailService;
 		Long idpawn = pawn.getId();
-		PawnEntity pawnEntity = pawnsRepository.findOne(idpawn);
+		PawnEntity pawnEntity = pawnsRepository.findById(idpawn).get();
 		PlaceEntity place = pawnEntity.getPlace();
 		Long idplace = place.getIdplace();
 		int months = pawn.getMonths();
@@ -242,7 +242,7 @@ public class PawnServiceImpl implements PawnService {
 
 	@Override
 	public List<RenovationDates> searchRenovations(Long idpawn) {
-		PawnEntity pawnEntity = pawnsRepository.findOne(idpawn);
+		PawnEntity pawnEntity = pawnsRepository.findById(idpawn).get();
 		List<RenovationDates> renovationdates = new ArrayList<RenovationDates>();
 		if (pawnEntity != null) {
 			List<RenovationEntity> renovations = pawnEntity.getRenovations();
@@ -353,7 +353,7 @@ public class PawnServiceImpl implements PawnService {
 
 	@Override
 	public NewPawn searchClient(String nif) {
-		ClientPawnEntity client = clientPawnsRepository.findOne(nif);
+		ClientPawnEntity client = clientPawnsRepository.findById(nif).get();
 		NewPawn pawn = new NewPawn();
 		if (client != null) {
 			mapper.map(client, pawn);

@@ -9,7 +9,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="newshopping" /></li>
 </ol>
-<form:form action="saveshop" commandName="shopform">
+<form:form action="saveshop" modelAttribute="shopform">
 	<div class="card-body">
 		<div class="row">
 			<div class="col-lg-6">

@@ -20,12 +20,14 @@ public class SearchServiceImpl implements SearchService {
 	@Autowired
 	private JewelsManager jewelsManager;
 
+	@Override
 	public Page<JewelEntity> searchActivesWithImg(String searchName, CategoryEntity category, int pageNumber) {
-		PageRequest request = new PageRequest(pageNumber - 1, Constants.PAGE_SIZE);
-		Page<JewelEntity> jewels = jewelsManager.searchByNameDescCategoryActives(searchName, category, request);
+		Page<JewelEntity> jewels = jewelsManager.searchByNameDescCategoryActives(searchName, category,
+				PageRequest.of(pageNumber - 1, Constants.PAGE_SIZE));
 		return jewels;
 	}
 
+	@Override
 	public List<JewelEntity> search(String searchName) {
 		return jewelsManager.searchByNameDescCategory(searchName);
 	}

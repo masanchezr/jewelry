@@ -57,7 +57,7 @@
 					<form class="form-inline my-2 my-lg-0 mr-lg-2">
 						<div class="input-group">
 							<spring:message code="find" var="find" />
-							<form:form action="searchJewels" commandName="adminForm">
+							<form:form action="searchJewels" modelAttribute="adminForm">
 								<form:input class="form-control" path="search"
 									placeholder="${find}" />
 								<span class="input-group-btn">

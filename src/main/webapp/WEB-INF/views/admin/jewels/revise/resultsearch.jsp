@@ -13,7 +13,7 @@
 		<div class="card-body">
 			<c:if test="${not empty jewels}">
 				<div class="table-responsive">
-					<form:form action="revised" commandName="toUpdateForm">
+					<form:form action="revised" modelAttribute="toUpdateForm">
 						<table class="table table-striped table-bordered table-hover"
 							id="dataTables-example">
 							<thead>

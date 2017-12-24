@@ -1,7 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
-<form:form action="saveworkshop" commandName="workshop">
+<form:form action="saveworkshop" modelAttribute="workshop">
 	<div class="panel card-default">
 		<div class="card-heading">
 			<spring:message code="newworkshop" />
