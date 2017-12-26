@@ -104,6 +104,6 @@ public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 
 	@Override
 	public SalePostponedEntity searchByNumsale(Long numsale) {
-		return salespostponedrepository.findById(numsale).get();
+		return salespostponedrepository.findById(numsale).orElse(null);
 	}
 }
