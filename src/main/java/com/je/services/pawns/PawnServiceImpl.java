@@ -353,7 +353,7 @@ public class PawnServiceImpl implements PawnService {
 
 	@Override
 	public NewPawn searchClient(String nif) {
-		ClientPawnEntity client = clientPawnsRepository.findById(nif).get();
+		ClientPawnEntity client = clientPawnsRepository.findById(nif).orElse(null);
 		NewPawn pawn = new NewPawn();
 		if (client != null) {
 			mapper.map(client, pawn);

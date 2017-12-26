@@ -44,7 +44,7 @@ public class AdjustmentServiceImpl implements AdjustmentService {
 		MailService mailAdjustmentService;
 		// primeramente miramos si existe el arreglo
 		Long idadjustment = adjustment.getIdadjustment();
-		AdjustmentEntity adjustmentEntity = adjustmentRepository.findById(adjustment.getIdadjustment()).get();
+		AdjustmentEntity adjustmentEntity = adjustmentRepository.findById(adjustment.getIdadjustment()).orElse(null);
 		BigDecimal amount = adjustment.getAmount();
 		if (adjustmentEntity != null) {
 			// miro si se ha cobrado el precio recomendado
