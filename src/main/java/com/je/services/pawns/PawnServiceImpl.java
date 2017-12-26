@@ -64,7 +64,7 @@ public class PawnServiceImpl implements PawnService {
 	public Daily save(NewPawn pawn) {
 		// cuidado con el mapeo del creationdate
 		PawnEntity pawnEntity = mapper.map(pawn, PawnEntity.class);
-		ClientPawnEntity cpe = clientPawnsRepository.findById(pawn.getNif()).get();
+		ClientPawnEntity cpe = clientPawnsRepository.findById(pawn.getNif()).orElse(null);
 		PlaceEntity place = placeUserRepository.findByUsername(pawn.getUser()).get(0).getPlace();
 		if (Util.isEmpty(pawn.getCreationdate())) {
 			pawnEntity.setCreationdate(new Date());
