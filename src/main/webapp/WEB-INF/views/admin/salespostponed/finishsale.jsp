@@ -17,7 +17,7 @@
 					<i class="fa fa-shopping-cart fa-fw"></i>
 				</div>
 				<div class="mr-5">
-					<c:out value="${sale.idsalepostponed}" />
+					<c:out value="${sale.idsale}" />
 					<spring:message code="idsale" />
 				</div>
 			</div>
@@ -30,7 +30,7 @@
 					<i class="fa fa-euro fa-fw"></i>
 				</div>
 				<div class="mr-5">
-					<c:out value="${sale.totalamount}" />
+					<c:out value="${sale.total}" />
 					<spring:message code="totalamount" />
 				</div>
 			</div>

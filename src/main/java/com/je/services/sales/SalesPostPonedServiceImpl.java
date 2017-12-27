@@ -108,7 +108,7 @@ public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 	}
 
 	@Override
-	public SalePostponedEntity searchByPK(long id) {
-		return salespostponedrepository.findById(id).get();
+	public SalePostPoned searchByPK(long id) {
+		return mapper.map(salespostponedrepository.findById(id).get(), SalePostPoned.class);
 	}
 }
