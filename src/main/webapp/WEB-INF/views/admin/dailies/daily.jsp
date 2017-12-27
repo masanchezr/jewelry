@@ -39,7 +39,9 @@
 						<c:forEach items="${daily.lsalespost}" var="salepost">
 							<tr>
 								<td><spring:message code="salepostponed" /></td>
-								<td><c:out value="${salepost.idsale}" /></td>
+								<td><spring:url value="/showsalepost" var="showsalepost" /><a
+									href="${showsalepost}<c:out value="${salepost.idsale}" />"><c:out
+											value="${salepost.idsale}" /></a></td>
 								<td><c:out value="${salepost.total}" /><i
 									class="fa fa-euro"></i></td>
 								<td><c:out value="${salepost.payments}" /></td>

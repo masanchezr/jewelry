@@ -84,7 +84,7 @@ public class AdjustmentServiceImpl implements AdjustmentService {
 	public void saveWorkshop(Adjustment adjustment) {
 		AdjustmentEntity adjustmentEntity = mapper.map(adjustment, AdjustmentEntity.class);
 		// miramos si ya existía
-		AdjustmentEntity adjustmentlast = adjustmentRepository.findById(adjustment.getIdadjustment()).get();
+		AdjustmentEntity adjustmentlast = adjustmentRepository.findById(adjustment.getIdadjustment()).orElse(null);
 		PaymentEntity pay = new PaymentEntity();
 		pay.setIdpayment(Constants.EFECTIVO);
 		if (adjustmentlast != null) {

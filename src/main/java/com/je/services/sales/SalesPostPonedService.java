@@ -14,4 +14,6 @@ public interface SalesPostPonedService {
 
 	public BigDecimal howmanyamount(SalePostponedEntity sale);
 
+	public SalePostponedEntity searchByPK(long id);
+
 }
