@@ -17,16 +17,10 @@
 					<i class="fa fa-shopping-cart fa-fw"></i>
 				</div>
 				<div class="mr-5">
-					<c:out value="${sale.idsale}" />
+					<c:out value="${sale.idsalepostponed}" />
 					<spring:message code="idsale" />
 				</div>
 			</div>
-			<spring:url value="/employee/newsalepostponed" var="newsale"></spring:url>
-			<a class="card-footer text-white clearfix small z-1"
-				href="${newsale}"> <span class="float-left"><spring:message
-						code="newsalepostponed" /></span> <span class="float-right"><i
-					class="fa fa-angle-right"></i></span>
-			</a>
 		</div>
 	</div>
 	<div class="col-xl-3 col-sm-6 mb-3">
@@ -36,11 +30,11 @@
 					<i class="fa fa-euro fa-fw"></i>
 				</div>
 				<div class="mr-5">
-					<c:out value="${sale.total}" />
+					<c:out value="${sale.totalamount}" />
 					<spring:message code="totalamount" />
 				</div>
 			</div>
-			<spring:url value="/employee/daily" var="daily"></spring:url>
+			<spring:url value="/dailyplace" var="daily"></spring:url>
 			<a class="card-footer text-white clearfix small z-1" href="${daily}">
 				<span class="float-left"><spring:message code="daily" /></span> <span
 				class="float-right"><i class="fa fa-angle-right"></i></span>

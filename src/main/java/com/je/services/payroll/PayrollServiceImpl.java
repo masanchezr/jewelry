@@ -45,17 +45,12 @@ public class PayrollServiceImpl implements PayrollService {
 
 	@Override
 	public boolean existsPayroll(Payroll payroll) {
-		boolean exists = false;
 		Date date = DateUtil.getDate(payroll.getPayrolldate());
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
 		String id = String.valueOf(calendar.get(Calendar.YEAR)).concat(String.valueOf(calendar.get(Calendar.MONTH) + 1))
 				.concat(String
 						.valueOf(placeUserRepository.findByUsername(payroll.getUser()).get(0).getPlace().getIdplace()));
-		PayrollEntity payrollentity = payrollrepository.findById(Long.valueOf(id)).get();
-		if (payrollentity != null) {
-			exists = true;
-		}
-		return exists;
+		return payrollrepository.findById(Long.valueOf(id)).isPresent();
 	}
 }

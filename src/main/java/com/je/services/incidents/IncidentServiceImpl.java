@@ -33,7 +33,6 @@ public class IncidentServiceImpl implements IncidentService {
 		incident.setIdincident(entity.getIdincident());
 		mailIncidentService = new MailService("Numero de incidencia: " + entity.getIdincident() + " usuario: "
 				+ incident.getUser() + " descripcion: " + incident.getDescription(), null, "NUEVA INCIDENCIA");
-
 		mailIncidentService.start();
 	}
 
@@ -81,7 +80,7 @@ public class IncidentServiceImpl implements IncidentService {
 
 	@Override
 	public Incident searchIncident(Incident incident) {
-		return mapper.map(incidentRepository.findById(incident.getIdincident()), Incident.class);
+		return mapper.map(incidentRepository.findById(incident.getIdincident()).get(), Incident.class);
 	}
 
 	@Override
