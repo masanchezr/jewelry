@@ -5,9 +5,10 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 
-import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -27,7 +28,7 @@ public class DailiesRepositoryTest {
 	@Autowired
 	private DailyRepository dailyRepository;
 
-	private static final Logger logger = Logger.getLogger(DailiesRepositoryTest.class);
+	private static final Logger logger = LoggerFactory.getLogger(DailiesRepositoryTest.class);
 
 	/**
 	 * Save test.
@@ -54,8 +55,8 @@ public class DailiesRepositoryTest {
 		place.setIdplace(28017L);
 		calendar.add(Calendar.DAY_OF_MONTH, -1);
 		DailyEntity daily = dailyRepository.findByPlaceAndDailydate(place, calendar.getTime());
-		logger.debug(daily.getFinalamount());
-		logger.debug(daily.getDailydate());
+		logger.debug(daily.getFinalamount().toString());
+		logger.debug(daily.getDailydate().toString());
 	}
 
 	/**

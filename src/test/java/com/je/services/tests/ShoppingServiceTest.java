@@ -85,7 +85,7 @@ public class ShoppingServiceTest {
 		place.setIdplace(13700L);
 		try {
 			XSSFWorkbook myWorkBook = shoppingService.generateExcel("20-03-2017", "20-03-2017", place);
-			File file = new File("D://workbook.xlsx");
+			File file = new File("F://workbook.xlsx");
 			FileOutputStream out = new FileOutputStream(file);
 			// write operation workbook using file out object
 			myWorkBook.write(out);
