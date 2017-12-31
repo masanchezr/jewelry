@@ -109,6 +109,14 @@ public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 
 	@Override
 	public SalePostPoned searchByPK(long id) {
-		return mapper.map(salespostponedrepository.findById(id).get(), SalePostPoned.class);
+		SalePostponedEntity saleEntity = salespostponedrepository.findById(id).get();
+		SalePostPoned sale = mapper.map(saleEntity, SalePostPoned.class);
+		List<SalePostPonedJewel> sjewels = saleEntity.getSjewels();
+		Iterator<SalePostPonedJewel> isjewels = sjewels.iterator();
+		sale.setJewels(new ArrayList<JewelEntity>());
+		while (isjewels.hasNext()) {
+			sale.getJewels().add(isjewels.next().getJewel());
+		}
+		return sale;
 	}
 }

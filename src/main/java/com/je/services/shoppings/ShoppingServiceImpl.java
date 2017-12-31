@@ -321,7 +321,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 
 	@Override
 	public Shopping searchClient(String nif) {
-		ClientPawnEntity client = clientPawnsRepository.findById(nif).get();
+		ClientPawnEntity client = clientPawnsRepository.findById(nif).orElse(null);
 		Shopping pawn = new Shopping();
 		if (client != null) {
 			mapper.map(client, pawn);
