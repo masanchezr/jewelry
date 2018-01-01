@@ -66,7 +66,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 		ShoppingEntity shoppingEntity = mapper.map(shopping, ShoppingEntity.class);
 		String nif = shopping.getNif();
 		if (nif != null) {
-			ClientPawnEntity cpe = clientPawnsRepository.findById(nif).get();
+			ClientPawnEntity cpe = clientPawnsRepository.findById(nif).orElse(null);
 			if (cpe == null) {
 				cpe = mapper.map(shopping, ClientPawnEntity.class);
 				cpe.setCreationclient(new Date());
