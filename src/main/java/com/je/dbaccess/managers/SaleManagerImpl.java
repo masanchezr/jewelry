@@ -279,7 +279,7 @@ public class SaleManagerImpl implements SaleManager {
 					if (straps == null || straps.isEmpty()) {
 						List<RecordingEntity> recordings = recordingRepository.findByNumsaleAndPlace(i, place);
 						if (recordings == null || recordings.isEmpty()) {
-							DiscountEntity discount = discountsRepository.findById(new Long(i)).get();
+							DiscountEntity discount = discountsRepository.findById(new Long(i)).orElse(null);
 							if (discount == null) {
 								numbers.add(i);
 							}
