@@ -196,6 +196,8 @@ public class ShoppingsAdminController {
 			model = new ModelAndView();
 			model.addObject("shopform", shoppingForm);
 			model.addObject("adminForm", new AdminForm());
+			model.addObject("tracks", trackservice.getTracks());
+			model.addObject("nations", nationservice.getNations());
 			model.setViewName("newshop");
 		} else {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();

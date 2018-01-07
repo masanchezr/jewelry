@@ -134,6 +134,8 @@ public class PawnsAdminController {
 		NewPawn p = pawnService.findByIdpawn(id);
 		model.setViewName("updatepawn");
 		model.addObject("pawnForm", p);
+		model.addObject("nations", nationservice.getNations());
+		model.addObject("tracks", trackservice.getTracks());
 		return model;
 	}
 
