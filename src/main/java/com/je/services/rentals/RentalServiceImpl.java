@@ -48,18 +48,13 @@ public class RentalServiceImpl implements RentalService {
 
 	@Override
 	public boolean existsLocalRental(Rental rental) {
-		boolean exists = false;
 		Date date = DateUtil.getDate(rental.getRentaldate());
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
 		String id = String.valueOf(calendar.get(Calendar.YEAR)).concat(String.valueOf(calendar.get(Calendar.MONTH) + 1))
 				.concat(String
 						.valueOf(placeUserRepository.findByUsername(rental.getUser()).get(0).getPlace().getIdplace()));
-		RentalEntity rentalEntity = rentalsRepository.findById(Long.valueOf(id)).get();
-		if (rentalEntity != null) {
-			exists = true;
-		}
-		return exists;
+		return rentalsRepository.existsById(Long.valueOf(id));
 	}
 
 }
