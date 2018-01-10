@@ -168,7 +168,7 @@
 						<c:forEach items="${daily.rentals}" var="rental">
 							<tr>
 								<td><spring:message code="localrental" /></td>
-								<td></td>
+								<td><c:out value="${rental.rentaldate}" /></td>
 								<td><c:out value="${rental.amount}" /><i
 									class="fa fa-euro"></i></td>
 								<td></td>

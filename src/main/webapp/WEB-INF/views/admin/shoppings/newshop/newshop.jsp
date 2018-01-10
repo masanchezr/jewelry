@@ -103,7 +103,7 @@
 		<table class="table">
 			<tbody>
 				<c:forEach items="${shopform.objects}" varStatus="status" var="os">
-					<tr class="${status.count % 2 == 0 ? 'success' : 'danger'}">
+					<tr>
 						<td><strong><form:hidden
 									path="objects[${status.index}].metal.idmetal" /> <c:out
 									value="${os.metal.description}" /></strong></td>

@@ -9,7 +9,8 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="updateshopping" /></li>
 </ol>
-<form:form action="saveShopping" modelAttribute="shoppingForm" role="form">
+<form:form action="saveShopping" modelAttribute="shoppingForm"
+	role="form">
 	<form:hidden path="id" />
 	<div class="row">
 		<div class="col-lg-12">
@@ -29,7 +30,7 @@
 							</tr>
 							<c:forEach items="${shoppingForm.objects}" var="os"
 								varStatus="status">
-								<tr class="${status.count % 2 == 0 ? 'success' : 'danger'}">
+								<tr>
 									<td><strong><spring:message code="metal" /></strong> <form:hidden
 											path="objects[${status.index}].idobjectshop" /> <form:select
 											class="form-control"

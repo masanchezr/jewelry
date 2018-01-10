@@ -60,6 +60,7 @@ public class ShoppingsController {
 			los.add(os);
 		}
 		shopping.setObjects(los);
+		model.addObject("metals", metals);
 		model.addObject("shoppingForm", shopping);
 		return model;
 	}
@@ -114,15 +115,14 @@ public class ShoppingsController {
 				 * boolean iscorrectnumber =
 				 * pawnService.isCorrectNumber(String.valueOf(numshop), user,
 				 * c.get(Calendar.YEAR)); if (!iscorrectnumber) {
-				 * model.setViewName("newshopping"); List<ObjectShopEntity> los
-				 * = shoppingForm.getObjects(); List<ObjectShopEntity> newlos =
-				 * new ArrayList<ObjectShopEntity>(); List<MetalEntity> metals =
-				 * metalService.getAllMetalsActive(); ObjectShopEntity os; for
-				 * (int i = 0; i < metals.size(); i++) { os = los.get(i);
-				 * os.setMetal(metals.get(i)); newlos.add(os); }
-				 * shoppingForm.setObjects(newlos);
-				 * model.addObject("shoppingForm", shoppingForm);
-				 * result.rejectValue("numshop", "wrongnumber"); } else {
+				 * model.setViewName("newshopping"); List<ObjectShopEntity> los =
+				 * shoppingForm.getObjects(); List<ObjectShopEntity> newlos = new
+				 * ArrayList<ObjectShopEntity>(); List<MetalEntity> metals =
+				 * metalService.getAllMetalsActive(); ObjectShopEntity os; for (int i = 0; i <
+				 * metals.size(); i++) { os = los.get(i); os.setMetal(metals.get(i));
+				 * newlos.add(os); } shoppingForm.setObjects(newlos);
+				 * model.addObject("shoppingForm", shoppingForm); result.rejectValue("numshop",
+				 * "wrongnumber"); } else {
 				 */
 				model.addObject("daily", shoppingService.save(shoppingForm));
 				model.setViewName("daily");

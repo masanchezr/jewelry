@@ -2,7 +2,8 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<form:form action="saveShopping" modelAttribute="shoppingForm" role="form">
+<form:form action="saveShopping" modelAttribute="shoppingForm"
+	role="form">
 	<!-- Breadcrumbs-->
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item active"><spring:message
@@ -19,17 +20,25 @@
 								placeholder="${numshopmessage}" /></td>
 						<td class="form-group has-error"><label class="control-label"
 							for="inputSuccess"><form:errors path="numshop" /></label></td>
-						<td></td>
+						<td><spring:message code="cashamount" var="cashamount" /> <form:input
+								class="form-control" path="cashamount"
+								placeholder="${cashamount}" /></td>
 						<td><spring:message code="description" var="description" />
 							<form:input class="form-control" path="description"
 								placeholder="${description}" /></td>
 					</tr>
 					<c:forEach items="${shoppingForm.objects}" var="os"
-						varStatus="status">
-						<tr class="${status.count % 2 == 0 ? 'success' : 'danger'}">
-							<td><strong><form:hidden
-										path="objects[${status.index}].metal.idmetal" /> <c:out
-										value="${os.metal.description}" /></strong></td>
+						varStatus="status" end="4">
+						<tr>
+							<td><form:hidden
+									path="objects[${status.index}].idobjectshop" /> <form:select
+									class="form-control"
+									path="objects[${status.index}].metal.idmetal">
+									<form:option value="${os.metal.idmetal}"
+										label="${os.metal.description}" />
+									<form:options items="${metals}" itemValue="idmetal"
+										itemLabel="description" />
+								</form:select></td>
 							<td><spring:message code="grossgrams" var="grossgrams" /> <form:input
 									class="form-control" path="objects[${status.index}].grossgrams"
 									placeholder="${grossgrams}" /></td>
@@ -51,8 +60,7 @@
 							</form:button></td>
 						<td><spring:message code="wiretransfer" /> <form:input
 								class="form-control" path="wiretransfer" /></td>
-						<td><spring:message code="cashamount" /> <form:input
-								class="form-control" path="cashamount" /></td>
+						<td></td>
 						<td class="form-group has-error"><label class="control-label"
 							for="inputSuccess"><form:errors path="cashamount" /></label></td>
 					</tr>
