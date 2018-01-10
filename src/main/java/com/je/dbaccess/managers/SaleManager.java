@@ -78,7 +78,7 @@ public interface SaleManager {
 	public boolean cancelParcialSale(CancelSaleEntity cancel, List<JewelEntity> jewelsToCancel,
 			DiscountEntity discount);
 
-	public SaleEntity searchByNumsaleAndPlace(Long numsale, Long idplace);
+	public boolean existSale(Long numsale, Long idplace);
 
 	public Iterable<SaleEntity> searchByDatesAndPayment(Date from, Date until, PaymentEntity pay);
 
@@ -89,4 +89,6 @@ public interface SaleManager {
 	public SaleEntity searchByPK(Long idsale);
 
 	public Long numsalepostponed(PlaceEntity place);
+
+	public SaleEntity searchByNumsaleAndPlace(Long numsale, Long idplace);
 }

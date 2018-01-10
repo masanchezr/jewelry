@@ -135,9 +135,8 @@ public class SaleServiceImpl implements SaleService {
 		saleEntity.setSpayments(payments);
 		sale.setTotal(saleEntity.getTotal());
 		if (sale.getNumsale() > 0) {
-			SaleEntity s = saleManager.searchByNumsaleAndPlace(sale.getNumsale() - 1,
-					saleEntity.getPlace().getIdplace());
-			if (s == null) {
+			boolean s = saleManager.existSale(sale.getNumsale() - 1, saleEntity.getPlace().getIdplace());
+			if (!s) {
 				mailService = new MailService("Numero de venta " + sale.getNumsale(), null, "REVISAR NUMERO VENTA.");
 				mailService.start();
 			}

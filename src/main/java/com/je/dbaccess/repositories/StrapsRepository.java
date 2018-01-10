@@ -19,7 +19,7 @@ public interface StrapsRepository extends CrudRepository<StrapEntity, Long> {
 	public List<StrapEntity> findByCreationdateBetweenAndPlaceAndNumsaleNotNullOrderByNumsaleAsc(
 			@Temporal(TemporalType.DATE) Date from, @Temporal(TemporalType.DATE) Date until, PlaceEntity place);
 
-	public List<StrapEntity> findByNumsaleAndPlace(Long numsale, PlaceEntity place);
+	public StrapEntity findByNumsaleAndPlace(Long numsale, PlaceEntity place);
 
 	public List<StrapEntity> findByCreationdateBetweenAndPayment(@Temporal(TemporalType.DATE) Date from,
 			@Temporal(TemporalType.DATE) Date until, PaymentEntity payment);

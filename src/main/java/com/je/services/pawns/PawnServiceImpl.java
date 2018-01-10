@@ -123,13 +123,11 @@ public class PawnServiceImpl implements PawnService {
 				newobjects.add(op);
 			}
 		}
-		ClientPawnEntity cpe = clientPawnsRepository.findById(pawn.getNif()).get();
-		if (cpe == null) {
-			cpe = mapper.map(pawn, ClientPawnEntity.class);
-		} else {
-			mapper.map(pawn, cpe);
-		}
+		ClientPawnEntity cpe = clientPawnsRepository.findById(pawn.getNif()).orElse(new ClientPawnEntity());
+		mapper.map(pawn, cpe);
 		cpe.setCreationclient(new Date());
+		clientPawnsRepository.save(cpe);
+		pawnEntity.setMeltdate(new Date());
 		pawnEntity.setObjects(newobjects);
 		pawnEntity.setClient(cpe);
 		pawnsRepository.save(pawnEntity);

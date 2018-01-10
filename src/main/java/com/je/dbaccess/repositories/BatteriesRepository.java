@@ -20,7 +20,7 @@ public interface BatteriesRepository extends CrudRepository<BatteryEntity, Long>
 	public List<BatteryEntity> findByCreationdateBetweenAndPlaceAndNumsaleNotNullOrderByNumsaleAsc(
 			@Temporal(TemporalType.DATE) Date from, @Temporal(TemporalType.DATE) Date until, PlaceEntity place);
 
-	public List<BatteryEntity> findByNumsaleAndPlace(Long numsale, PlaceEntity place);
+	public BatteryEntity findByNumsaleAndPlace(Long numsale, PlaceEntity place);
 
 	public List<BatteryEntity> findByCreationdateBetweenAndPayment(@Temporal(TemporalType.DATE) Date from,
 			@Temporal(TemporalType.DATE) Date until, PaymentEntity payment);

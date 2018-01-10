@@ -247,6 +247,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 			}
 		}
 		shoppingEntity.setObjects(newobjects);
+		shoppingEntity.setMeltdate(new Date());
 		shoppingsRepository.save(shoppingEntity);
 	}
 

@@ -208,10 +208,17 @@ public class SaleManagerImpl implements SaleManager {
 	}
 
 	@Override
-	public SaleEntity searchByNumsaleAndPlace(Long numsale, Long idplace) {
+	public boolean existSale(Long numsale, Long idplace) {
 		PlaceEntity place = new PlaceEntity();
+		SaleEntity sale = saleRepository.findByNumsaleAndPlace(numsale, place);
+		boolean exists = true;
 		place.setIdplace(idplace);
-		return saleRepository.findByNumsaleAndPlace(numsale, place);
+		if (sale == null) {
+			if (checkAllSales(numsale, place) != 0) {
+				exists = false;
+			}
+		}
+		return exists;
 	}
 
 	@Override
@@ -273,22 +280,30 @@ public class SaleManagerImpl implements SaleManager {
 		for (long i = numFrom; i <= numUntil; i++) {
 			sale = saleRepository.findByNumsaleAndPlace(i, place);
 			if (sale == null) {
-				List<BatteryEntity> batteries = batteriesRepository.findByNumsaleAndPlace(i, place);
-				if (batteries == null || batteries.isEmpty()) {
-					List<StrapEntity> straps = strapsRepository.findByNumsaleAndPlace(i, place);
-					if (straps == null || straps.isEmpty()) {
-						List<RecordingEntity> recordings = recordingRepository.findByNumsaleAndPlace(i, place);
-						if (recordings == null || recordings.isEmpty()) {
-							DiscountEntity discount = discountsRepository.findById(new Long(i)).orElse(null);
-							if (discount == null) {
-								numbers.add(i);
-							}
-						}
-					}
+				if (checkAllSales(i, place) != 0) {
+					numbers.add(i);
 				}
 			}
 		}
 		return numbers;
+	}
+
+	private long checkAllSales(long i, PlaceEntity place) {
+		long num = 0;
+		BatteryEntity batteries = batteriesRepository.findByNumsaleAndPlace(i, place);
+		if (batteries == null) {
+			StrapEntity straps = strapsRepository.findByNumsaleAndPlace(i, place);
+			if (straps == null) {
+				List<RecordingEntity> recordings = recordingRepository.findByNumsaleAndPlace(i, place);
+				if (recordings == null || recordings.isEmpty()) {
+					DiscountEntity discount = discountsRepository.findById(new Long(i)).orElse(null);
+					if (discount == null) {
+						num = i;
+					}
+				}
+			}
+		}
+		return num;
 	}
 
 	@Override
@@ -320,5 +335,12 @@ public class SaleManagerImpl implements SaleManager {
 			}
 		}
 		return num;
+	}
+
+	@Override
+	public SaleEntity searchByNumsaleAndPlace(Long numsale, Long idplace) {
+		PlaceEntity place = new PlaceEntity();
+		place.setIdplace(idplace);
+		return saleRepository.findByNumsaleAndPlace(numsale, place);
 	}
 }

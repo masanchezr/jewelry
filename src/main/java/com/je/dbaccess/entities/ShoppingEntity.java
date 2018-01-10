@@ -51,6 +51,11 @@ public class ShoppingEntity implements Serializable {
 	@Column(name = "CREATIONDATE")
 	private Date creationdate;
 
+	/** The creationdate. */
+	@Temporal(TemporalType.DATE)
+	@Column(name = "MELTDATE")
+	private Date meltdate;
+
 	/** The client. */
 	@ManyToOne
 	@JoinColumn(name = "NIF", referencedColumnName = "NIF")
@@ -221,6 +226,14 @@ public class ShoppingEntity implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Date getMeltdate() {
+		return meltdate;
+	}
+
+	public void setMeltdate(Date meltdate) {
+		this.meltdate = meltdate;
 	}
 
 }

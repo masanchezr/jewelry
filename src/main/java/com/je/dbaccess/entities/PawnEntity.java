@@ -88,6 +88,11 @@ public class PawnEntity implements Serializable {
 	@Column(name = "YEAR")
 	private Integer year;
 
+	/** The creationdate. */
+	@Temporal(TemporalType.DATE)
+	@Column(name = "MELTDATE")
+	private Date meltdate;
+
 	/**
 	 * Gets the idpawn.
 	 *
@@ -306,6 +311,14 @@ public class PawnEntity implements Serializable {
 
 	public void setYear(Integer year) {
 		this.year = year;
+	}
+
+	public Date getMeltdate() {
+		return meltdate;
+	}
+
+	public void setMeltdate(Date meltdate) {
+		this.meltdate = meltdate;
 	}
 
 }
