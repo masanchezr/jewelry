@@ -54,18 +54,27 @@
 									placeholder="${description}" /></td>
 						</tr>
 					</c:forEach>
-					<tr>
-						<td><form:button class="btn btn-primary" value="submit">
-								<spring:message code="save" />
-							</form:button></td>
-						<td><spring:message code="wiretransfer" /> <form:input
-								class="form-control" path="wiretransfer" /></td>
-						<td></td>
-						<td class="form-group has-error"><label class="control-label"
-							for="inputSuccess"><form:errors path="cashamount" /></label></td>
-					</tr>
 				</tbody>
 			</table>
+		</div>
+		<div class="row">
+			<div class="col-lg-4">
+				<div class="form-group">
+					<spring:message code="wiretransfer" var="amount" />
+					<form:input class="form-control" path="wiretransfer"
+						placeholder="${amount}" />
+					<p class="text-danger">
+						<form:errors path="wiretransfer" />
+					</p>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="form-group">
+					<form:button class="btn btn-primary" value="submit">
+						<spring:message code="save" />
+					</form:button>
+				</div>
+			</div>
 		</div>
 	</div>
 </form:form>
