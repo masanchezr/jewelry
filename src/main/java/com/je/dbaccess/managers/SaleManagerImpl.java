@@ -210,9 +210,9 @@ public class SaleManagerImpl implements SaleManager {
 	@Override
 	public boolean existSale(Long numsale, Long idplace) {
 		PlaceEntity place = new PlaceEntity();
+		place.setIdplace(idplace);
 		SaleEntity sale = saleRepository.findByNumsaleAndPlace(numsale, place);
 		boolean exists = true;
-		place.setIdplace(idplace);
 		if (sale == null) {
 			if (checkAllSales(numsale, place) != 0) {
 				exists = false;
