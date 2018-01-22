@@ -153,24 +153,26 @@ public class DailyController {
 		log.info("ip remote address:", ipAddress);
 		String sdate = searchForm.getDatefrom();
 		Date date;
+		String view;
+		Calendar c = Calendar.getInstance();
 		if (Util.isEmpty(sdate)) {
 			date = new Date();
+			view = "dailyarrow";
 		} else {
-			Calendar c = Calendar.getInstance();
-			c.set(2015, 4, 17);
+			view = "dailyarrows";
 			date = DateUtil.getDate(sdate);
-			if (date.after(c.getTime())) {
-				Daily daily = dailyService.getDaily(date, placeService.getPlaceUser(user), ipAddress);
-				if (daily.getFinalamount() == null) {
-					model.setViewName("notdaily");
-				} else {
-					model.addObject("daily", daily);
-					model.setViewName("dailyarrows");
-					model.addObject("datedaily", date);
-				}
-			} else {
+		}
+		if (date.before(c.getTime())) {
+			Daily daily = dailyService.getDaily(date, placeService.getPlaceUser(user), ipAddress);
+			if (daily.getFinalamount() == null) {
 				model.setViewName("notdaily");
+			} else {
+				model.addObject("daily", daily);
+				model.setViewName(view);
+				model.addObject("datedaily", date);
 			}
+		} else {
+			model.setViewName("notdaily");
 		}
 		return model;
 	}
