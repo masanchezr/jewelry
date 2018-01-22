@@ -114,6 +114,9 @@
 						<td><spring:message code="grossgrams" var="grossgrams" /> <form:input
 								class="form-control" path="objects[${status.index}].grossgrams"
 								placeholder="${grossgrams}" /></td>
+						<td><spring:message code="netgrams" var="netgrams" /> <form:input
+								class="form-control" path="objects[${status.index}].netgrams"
+								placeholder="${netgrams}" /></td>
 						<td><spring:message code="amount" var="amountmessage" /> <form:input
 								class="form-control" path="objects[${status.index}].amount"
 								placeholder="${amountmessage}" /></td>

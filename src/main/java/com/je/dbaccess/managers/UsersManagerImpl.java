@@ -33,11 +33,6 @@ public class UsersManagerImpl implements UsersManager {
 		userRepository.save(userEntity);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.je.dbaccess.managers.UsersManager#findAll()
-	 */
 	@Override
 	public List<ClientEntity> findAll() {
 		return iterableToList(userRepository.findAll());

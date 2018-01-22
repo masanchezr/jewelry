@@ -22,6 +22,7 @@ import com.je.utils.string.Util;
  * The Class NewPawnFormValidator.
  */
 public class NewPawnFormValidator implements Validator {
+
 	@Override
 	public boolean supports(Class<?> clazz) {
 		return NewPawn.class.isAssignableFrom(clazz);

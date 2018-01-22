@@ -64,6 +64,7 @@ public class JewelsManagerImpl implements JewelsManager {
 	 *            the category
 	 * @return the list
 	 */
+
 	@Override
 	public Page<JewelEntity> searchByNameDescCategoryActives(String searchName, CategoryEntity category,
 			Pageable pageable) {

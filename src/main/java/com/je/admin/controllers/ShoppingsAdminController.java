@@ -33,7 +33,6 @@ import com.je.forms.SearchForm;
 import com.je.services.metal.MetalService;
 import com.je.services.nations.NationService;
 import com.je.services.places.PlaceService;
-import com.je.services.shoppings.Quarter;
 import com.je.services.shoppings.QuarterMetal;
 import com.je.services.shoppings.Shopping;
 import com.je.services.shoppings.ShoppingService;
@@ -214,26 +213,6 @@ public class ShoppingsAdminController {
 		model.addObject("adminForm", new AdminForm());
 		model.addObject("shoppingForm", new SearchForm());
 		model.addObject("places", placeService.getAllPlaces());
-		return model;
-	}
-
-	@RequestMapping(value = "/quarter")
-	public ModelAndView quarter(@ModelAttribute("shoppingForm") SearchForm shopping, BindingResult result) {
-		ModelAndView model = new ModelAndView();
-		adminSearchValidator.validate(shopping, result);
-		if (result.hasErrors()) {
-			model.setViewName("searchquarter");
-			model.addObject("shoppingForm", shopping);
-			model.addObject("places", placeService.getAllPlaces());
-		} else {
-			Quarter quarter = shoppingService.searchGramsByDates(shopping.getDatefrom(), shopping.getDateuntil(),
-					shopping.getPlace());
-			model.addObject("quarter", quarter);
-			model.setViewName("quarter");
-			shopping.setPlace(placeService.getPlace(shopping.getPlace().getIdplace()));
-		}
-		model.addObject("shoppingForm", shopping);
-		model.addObject("adminForm", new AdminForm());
 		return model;
 	}
 

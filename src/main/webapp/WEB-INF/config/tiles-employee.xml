@@ -79,9 +79,13 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/pawns/renewpawn/searchpawn.jsp" />
 	</definition>
-	<definition name="daily" extends="templateEmployee">
+	<definition name="dailyarrows" extends="templateEmployee">
 		<put-attribute name="body"
-			value="/WEB-INF/views/employee/daily/daily.jsp" />
+			value="/WEB-INF/views/employee/daily/dailyarrows.jsp" />
+	</definition>
+	<definition name="dailyarrow" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/daily/dailyarrow.jsp" />
 	</definition>
 	<definition name="searchdailyem" extends="templateEmployee">
 		<put-attribute name="body"

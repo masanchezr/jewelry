@@ -57,7 +57,7 @@ public class DailyController {
 			model.setViewName("notdaily");
 		} else {
 			model.addObject("daily", daily);
-			model.setViewName("daily");
+			model.setViewName("dailyarrow");
 			model.addObject("datedaily", new Date());
 		}
 		return model;
@@ -91,7 +91,7 @@ public class DailyController {
 					model.setViewName("notdaily");
 				} else {
 					model.addObject("daily", daily);
-					model.setViewName("daily");
+					model.setViewName("dailyarrows");
 					model.addObject("datedaily", date);
 					existdaily = true;
 				}
@@ -121,8 +121,16 @@ public class DailyController {
 				if (daily.getFinalamount() == null) {
 					model.setViewName("notdaily");
 				} else {
+					String view;
+					String stoday = DateUtil.getStringDateFormatdd_MM_yyyy(new Date());
+					sdate = DateUtil.getStringDateFormatdd_MM_yyyy(date);
+					if (stoday.compareTo(sdate) == 0) {
+						view = "dailyarrow";
+					} else {
+						view = "dailyarrows";
+					}
 					model.addObject("daily", daily);
-					model.setViewName("daily");
+					model.setViewName(view);
 					model.addObject("datedaily", date);
 					existdaily = true;
 				}
@@ -135,8 +143,7 @@ public class DailyController {
 	}
 
 	@RequestMapping(value = "/employee/resultdaily")
-	public ModelAndView resultdaily(@ModelAttribute("searchForm") SearchForm searchForm,
-			HttpServletRequest request) {
+	public ModelAndView resultdaily(@ModelAttribute("searchForm") SearchForm searchForm, HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		String ipAddress = request.getHeader("X-FORWARDED-FOR");
@@ -158,7 +165,7 @@ public class DailyController {
 					model.setViewName("notdaily");
 				} else {
 					model.addObject("daily", daily);
-					model.setViewName("daily");
+					model.setViewName("dailyarrows");
 					model.addObject("datedaily", date);
 				}
 			} else {

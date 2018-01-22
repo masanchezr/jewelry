@@ -86,7 +86,7 @@ public class DailiesController {
 		}
 		if (date == null) {
 			date = new Date();
-			return getDailyModel(ipAddress, date, place);
+			return getDailyModel(ipAddress, date, place, "dailyadminarrow");
 		} else {
 			searchDailyFormValidator.validate(sdf, arg1);
 			if (arg1.hasErrors()) {
@@ -97,19 +97,19 @@ public class DailiesController {
 				model.addObject("adminForm", new AdminForm());
 				return model;
 			} else {
-				return getDailyModel(ipAddress, date, place);
+				return getDailyModel(ipAddress, date, place, "dailyadminarrows");
 			}
 		}
 	}
 
-	private ModelAndView getDailyModel(String ipAddress, Date date, PlaceEntity place) {
+	private ModelAndView getDailyModel(String ipAddress, Date date, PlaceEntity place, String view) {
 		ModelAndView model = new ModelAndView();
 		Daily daily = dailyService.getDaily(date, place, ipAddress);
 		if (daily.getFinalamount() == null) {
 			model.setViewName("notdailyadmin");
 		} else {
 			model.addObject("daily", daily);
-			model.setViewName("dailyadmin");
+			model.setViewName(view);
 			model.addObject("datedaily", date);
 			model.addObject("place", place.getIdplace());
 		}
@@ -168,7 +168,7 @@ public class DailiesController {
 					model.setViewName("notdailyadmin");
 				} else {
 					model.addObject("daily", daily);
-					model.setViewName("dailyadmin");
+					model.setViewName("dailyadminarrows");
 					model.addObject("datedaily", date);
 					model.addObject("place", idplace);
 					existdaily = true;
@@ -202,8 +202,16 @@ public class DailiesController {
 				if (daily.getFinalamount() == null) {
 					model.setViewName("notdailyadmin");
 				} else {
+					String view;
+					String stoday = DateUtil.getStringDateFormatdd_MM_yyyy(new Date());
+					sdate = DateUtil.getStringDateFormatdd_MM_yyyy(date);
+					if (stoday.compareTo(sdate) == 0) {
+						view = "dailyadminarrow";
+					} else {
+						view = "dailyadminarrows";
+					}
 					model.addObject("daily", daily);
-					model.setViewName("dailyadmin");
+					model.setViewName(view);
 					model.addObject("datedaily", date);
 					model.addObject("place", idplace);
 					existdaily = true;

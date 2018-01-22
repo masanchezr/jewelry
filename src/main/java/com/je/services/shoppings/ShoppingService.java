@@ -49,8 +49,6 @@ public interface ShoppingService {
 
 	public List<Long> searchGramsNull(String sDateFrom, String sDateUntil, PlaceEntity place);
 
-	public Quarter searchGramsByDates(String sDateFrom, String sDateUntil, PlaceEntity place);
-
 	public List<QuarterMetal> searchGramsByMetal(String sDateFrom, String sDateUntil, PlaceEntity place);
 
 	public Shopping searchClient(String refactorNIF);

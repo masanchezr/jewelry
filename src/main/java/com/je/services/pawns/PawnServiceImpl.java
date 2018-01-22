@@ -413,12 +413,12 @@ public class PawnServiceImpl implements PawnService {
 		return repeat;
 	}
 
-	@Override
 	/**
 	 * elimino temporalmente este método ya que si ordenamos los empeños por fecha
 	 * puede que no nos los de bien y si los ordenamos por id y hemos metido un
 	 * empeño de otra fecha ya tenemos el lío otra vez
 	 **/
+	@Override
 	public boolean isCorrectNumber(String num, String user, int i) {
 		boolean isCorrectNumber = false;
 		if (Util.isNumeric(num)) {

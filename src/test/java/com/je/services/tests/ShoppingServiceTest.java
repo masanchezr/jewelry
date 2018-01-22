@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -18,7 +17,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.je.dbaccess.entities.MetalEntity;
 import com.je.dbaccess.entities.ObjectShopEntity;
 import com.je.dbaccess.entities.PlaceEntity;
-import com.je.services.shoppings.QuarterMetal;
 import com.je.services.shoppings.Shopping;
 import com.je.services.shoppings.ShoppingService;
 
@@ -39,20 +37,6 @@ public class ShoppingServiceTest {
 	@Test
 	public void findShopByPKTest() {
 		shoppingService.findShopByPK(4L);
-	}
-
-	@Test
-	public void searchGramsByMetalTest() {
-		PlaceEntity place = new PlaceEntity();
-		place.setIdplace(13700L);
-		List<QuarterMetal> lqm = shoppingService.searchGramsByMetal("01-01-2015", "25-07-2015", place);
-		Iterator<QuarterMetal> ilqm = lqm.iterator();
-		QuarterMetal qm;
-		while (ilqm.hasNext()) {
-			qm = ilqm.next();
-			System.out.println("grossgrams:" + qm.getGrossgrams() + " netgrams" + qm.getNetgrams() + " realgrams:"
-					+ qm.getRealgrams() + " metal:" + qm.getMetal().getDescription());
-		}
 	}
 
 	@Test

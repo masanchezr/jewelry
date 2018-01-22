@@ -85,12 +85,19 @@
 						class="fa fa-eur fa-fw"></i> <span class="nav-link-text"><spring:message
 								code="searchentries" /></span></a></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
-					title="<spring:message code="adjustments"/>"><spring:url
-						value="/searchsumadjustments" var="searchsumadjustments" /> <a
-					href="${searchsumadjustments}" class="nav-link"><i
+					title="<spring:message code="adjustments"/>"><a
+					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
+					href="#collapseAdjustments" data-parent="#exampleAccordion"><i
 						class="fa fa-wrench fa-fw"></i> <span class="nav-link-text"><spring:message
-								code="adjustments" /></span></a></li>
-
+								code="jewels" /></span></a>
+					<ul class="sidenav-second-level collapse" id="#collapseAdjustments">
+						<li><spring:url value="/searchadjustment"
+								var="searchadjustment" /> <a href="${searchadjustment}"
+							class="nav-link"><spring:message code="adjustments" /></a></li>
+						<li><spring:url value="/searchsumadjustments"
+								var="searchsumadjustments" /> <a href="${searchsumadjustments}"
+							class="nav-link"><spring:message code="adjustments" /></a></li>
+					</ul></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message code="jewels"/>"><a
 					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
@@ -131,8 +138,6 @@
 						<li><spring:url value="/searchShoppings"
 								var="searchshoppings" /> <a href="${searchshoppings}"> <spring:message
 									code="searchshoppings" /></a></li>
-						<li><spring:url value="/searchquarter" var="searchquarter" />
-							<a href="${searchquarter}"> <spring:message code="quarters" /></a></li>
 						<li><spring:url value="/searchquartermetal"
 								var="searchquartermetal" /> <a href="${searchquartermetal}">
 								<spring:message code="gramsformetal" />

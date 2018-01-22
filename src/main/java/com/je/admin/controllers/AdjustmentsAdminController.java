@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.je.admin.forms.AdminForm;
 import com.je.forms.SearchForm;
+import com.je.services.adjustments.Adjustment;
 import com.je.services.adjustments.AdjustmentService;
 import com.je.services.places.PlaceService;
 import com.je.utils.date.DateUtil;
@@ -56,4 +57,28 @@ public class AdjustmentsAdminController {
 		}
 		return model;
 	}
+
+	@RequestMapping(value = "/searchadjustment")
+	public ModelAndView searchAdjustment() {
+		ModelAndView model = new ModelAndView("searchadjustment");
+		model.addObject("adjustment", new Adjustment());
+		model.addObject("adminForm", new AdminForm());
+		return model;
+	}
+
+	@RequestMapping(value = "/resultadjustment")
+	public ModelAndView resultadjustment(@ModelAttribute("adjustment") Adjustment adjustment) {
+		ModelAndView model = new ModelAndView();
+		Long idadjustment = adjustment.getIdadjustment();
+		model.addObject("adminForm", new AdminForm());
+		if (idadjustment == null || idadjustment.compareTo(1L) < 0) {
+			model.setViewName("searchadjustment");
+		} else {
+			adjustment = adjustmentService.findById(idadjustment);
+			model.setViewName("resultadjustment");
+		}
+		model.addObject("adjustment", adjustment);
+		return model;
+	}
+
 }

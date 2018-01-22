@@ -114,4 +114,9 @@ public class AdjustmentServiceImpl implements AdjustmentService {
 				mapper.map(place, PlaceEntity.class)));
 		return sums;
 	}
+
+	@Override
+	public Adjustment findById(Long idadjustment) {
+		return mapper.map(adjustmentRepository.findById(idadjustment), Adjustment.class);
+	}
 }

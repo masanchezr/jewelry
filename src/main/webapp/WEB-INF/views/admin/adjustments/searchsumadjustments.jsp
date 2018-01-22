@@ -3,8 +3,10 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <!-- Breadcrumbs-->
 <ol class="breadcrumb">
+	<li class="breadcrumb-item"><a href="#"><spring:message
+				code="adjustments" /></a></li>
 	<li class="breadcrumb-item active"><spring:message
-			code="adjustments" /></li>
+			code="searchsumadjustments" /></li>
 </ol>
 <form:form action="sumadjustments" modelAttribute="searchForm">
 	<div class="row">

@@ -1,7 +1,6 @@
 package com.je.services.shoppings;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -174,50 +173,6 @@ public class ShoppingServiceImpl implements ShoppingService {
 	}
 
 	@Override
-	public Quarter searchGramsByDates(String sDateFrom, String sDateUntil, PlaceEntity place) {
-		ShoppingEntity shoppingEntity = null;
-		Date datefrom = DateUtil.getDate(sDateFrom), dateuntil = DateUtil.getDate(sDateUntil);
-		List<ShoppingEntity> shoppings = shoppingsRepository.findByCreationdateBetweenAndPlace(datefrom, dateuntil,
-				place);
-		Quarter quarter = new Quarter();
-		List<ObjectShopEntity> lose;
-		Iterator<ObjectShopEntity> ilose;
-		Iterator<ShoppingEntity> ishoppings = shoppings.iterator();
-		ObjectShopEntity ose;
-		BigDecimal amount = BigDecimal.ZERO, gramsreal = BigDecimal.ZERO, grossgrams = BigDecimal.ZERO,
-				netgrams = BigDecimal.ZERO, gramsAg = BigDecimal.ZERO, amountag = BigDecimal.ZERO;
-		while (ishoppings.hasNext()) {
-			shoppingEntity = ishoppings.next();
-			lose = shoppingEntity.getObjects();
-			ilose = lose.iterator();
-			while (ilose.hasNext()) {
-				ose = ilose.next();
-				if (ose.getMetal().getIdmetal().equals(Constants.PLATA)) {
-					if (ose.getRealgrams() != null) {
-						gramsAg = gramsAg.add(ose.getRealgrams());
-					}
-					amountag = amountag.add(ose.getAmount());
-				} else {
-					if (ose.getRealgrams() != null) {
-						gramsreal = gramsreal.add(ose.getRealgrams());
-					}
-					grossgrams = grossgrams.add(ose.getGrossgrams());
-					netgrams = netgrams.add(ose.getNetgrams());
-					amount = amount.add(ose.getAmount());
-				}
-			}
-		}
-		quarter.setAmount(amount);
-		quarter.setGramsreal(gramsreal);
-		quarter.setGrossgrams(grossgrams);
-		quarter.setNetgrams(netgrams);
-		quarter.setGramsAg(gramsAg);
-		quarter.setAmountag(amountag);
-		quarter.setAveragegold(amount.divide(gramsreal, 2, RoundingMode.HALF_UP));
-		return quarter;
-	}
-
-	@Override
 	public Shopping findShopByPK(Long idshop) {
 		ShoppingEntity shopping = shoppingsRepository.findById(idshop).get();
 		return mapper.map(shopping, Shopping.class);
@@ -269,7 +224,9 @@ public class ShoppingServiceImpl implements ShoppingService {
 				QuarterMetal qm = new QuarterMetal();
 				qm.setGrossgrams(ose.getGrossgrams());
 				qm.setNetgrams(ose.getNetgrams());
-				qm.setRealgrams(ose.getRealgrams());
+				if (ose.getRealgrams() != null) {
+					qm.setRealgrams(ose.getRealgrams());
+				}
 				qm.setAmount(ose.getAmount());
 				qm.setMetal(ose.getMetal());
 				lquartermetal.add(qm);
@@ -291,7 +248,9 @@ public class ShoppingServiceImpl implements ShoppingService {
 			amount = BigDecimal.ZERO;
 			for (QuarterMetal quarterMetal : lquartermetal) {
 				if (quarterMetal.getMetal().getIdmetal().equals(metal.getIdmetal())) {
-					realgrams = realgrams.add(quarterMetal.getRealgrams());
+					if (quarterMetal.getRealgrams() != null) {
+						realgrams = realgrams.add(quarterMetal.getRealgrams());
+					}
 					netgrams = netgrams.add(quarterMetal.getNetgrams());
 					grossgrams = grossgrams.add(quarterMetal.getGrossgrams());
 					amountmetal = quarterMetal.getAmount();

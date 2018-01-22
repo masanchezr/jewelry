@@ -31,4 +31,6 @@ public interface AdjustmentService {
 
 	public Map<String, BigDecimal> sumAdjustmentByDates(Date from, Date until, PlaceEntity place);
 
+	public Adjustment findById(Long idadjustment);
+
 }

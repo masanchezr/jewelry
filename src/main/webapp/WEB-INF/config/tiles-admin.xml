@@ -140,9 +140,13 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/dailies/searchcalculatedailies.jsp" />
 	</definition>
-	<definition name="dailyadmin" extends="templateAdmin">
+	<definition name="dailyadminarrows" extends="templateAdmin">
 		<put-attribute name="body"
-			value="/WEB-INF/views/admin/dailies/daily.jsp" />
+			value="/WEB-INF/views/admin/dailies/dailyarrows.jsp" />
+	</definition>
+	<definition name="dailyadminarrow" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/dailies/dailyarrow.jsp" />
 	</definition>
 	<definition name="quarter" extends="templateAdmin">
 		<put-attribute name="body"
@@ -346,6 +350,10 @@
 	<definition name="searchsumadjustments" extends="templateAdmin">
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/adjustments/searchsumadjustments.jsp" />
+	</definition>
+	<definition name="searchadjustment" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/adjustments/searchadjustment.jsp" />
 	</definition>
 	<definition name="sumadjustments" extends="templateAdmin">
 		<put-attribute name="body"
