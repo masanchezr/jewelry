@@ -263,7 +263,7 @@ public class SalesController {
 				if (ipAddress == null) {
 					ipAddress = request.getRemoteAddr();
 				}
-				model.setViewName("daily");
+				model.setViewName("dailyarrow");
 				searchSale.setPlace(place);
 				searchSale.setIddiscount(removeSaleForm.getIddiscount());
 				searchSale.setPayment(removeSaleForm.getPayment());

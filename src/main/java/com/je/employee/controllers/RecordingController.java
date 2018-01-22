@@ -65,7 +65,7 @@ public class RecordingController {
 			PlaceEntity place = placeService.getPlaceUser(user);
 			recording.setPlace(place);
 			recordingService.save(recording);
-			model.setViewName("daily");
+			model.setViewName("dailyarrow");
 			model.addObject("daily", dailyService.getDaily(today, place, ipAddress));
 			model.addObject("datedaily", today);
 		}

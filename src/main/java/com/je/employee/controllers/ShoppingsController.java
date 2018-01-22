@@ -125,7 +125,7 @@ public class ShoppingsController {
 				 * "wrongnumber"); } else {
 				 */
 				model.addObject("daily", shoppingService.save(shoppingForm));
-				model.setViewName("daily");
+				model.setViewName("dailyarrow");
 				model.addObject("datedaily", new Date());
 				// }
 			}

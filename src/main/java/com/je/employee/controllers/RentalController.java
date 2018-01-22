@@ -43,7 +43,7 @@ public class RentalController {
 			rental.setUser(user);
 			if (!rentalService.existsLocalRental(rental)) {
 				model.addObject("daily", rentalService.saveRental(rental));
-				model.setViewName("daily");
+				model.setViewName("dailyarrow");
 				model.addObject("datedaily", new Date());
 			} else {
 				model.setViewName("localrental");

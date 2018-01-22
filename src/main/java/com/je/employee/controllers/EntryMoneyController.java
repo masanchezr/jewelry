@@ -41,7 +41,7 @@ public class EntryMoneyController {
 		} else {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			model.addObject("daily", entryMoneyService.saveEntryMoney(user, entryMoney.getAmount()));
-			model.setViewName("daily");
+			model.setViewName("dailyarrow");
 			model.addObject("datedaily", new Date());
 		}
 		return model;

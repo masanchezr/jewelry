@@ -60,7 +60,7 @@ public class OthersConceptsController {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			otherconcept.setUser(user);
 			model.addObject("daily", othersConceptsService.save(otherconcept));
-			model.setViewName("daily");
+			model.setViewName("dailyarrow");
 			model.addObject("datedaily", new Date());
 		}
 		return model;

@@ -74,7 +74,7 @@ public class BatteriesController {
 				model.addObject("batteryForm", battery);
 			} else {
 				Date today = new Date();
-				model.setViewName("daily");
+				model.setViewName("dailyarrow");
 				battery.setPlace(place);
 				batteriesService.saveSaleBattery(battery);
 				model.addObject("daily", dailyService.getDaily(today, place, ipAddress));

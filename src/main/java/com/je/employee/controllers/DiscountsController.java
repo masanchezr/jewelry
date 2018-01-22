@@ -61,7 +61,7 @@ public class DiscountsController {
 			discountService.save(discount);
 			model.addObject("daily", dailyService.getDaily(today, place, ipAddress));
 			model.addObject("datedaily", today);
-			model.setViewName("daily");
+			model.setViewName("dailyarrow");
 		}
 		return model;
 	}

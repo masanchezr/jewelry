@@ -175,7 +175,7 @@ public class SalePostPonedController {
 						model.setViewName("notdaily");
 					} else {
 						model.addObject("daily", daily);
-						model.setViewName("daily");
+						model.setViewName("dailyarrow");
 						model.addObject("datedaily", new Date());
 					}
 				} else {

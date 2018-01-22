@@ -66,7 +66,7 @@ public class AdjustmentsController {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			adjustment.setUser(user);
 			model.addObject("daily", adjustmentService.save(adjustment));
-			model.setViewName("daily");
+			model.setViewName("dailyarrow");
 			model.addObject("datedaily", new Date());
 		}
 		return model;

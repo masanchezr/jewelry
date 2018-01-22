@@ -43,7 +43,7 @@ public class PayrollController {
 			payroll.setUser(user);
 			if (!payrollservice.existsPayroll(payroll)) {
 				model.addObject("daily", payrollservice.addPayroll(payroll));
-				model.setViewName("daily");
+				model.setViewName("dailyarrow");
 				model.addObject("datedaily", new Date());
 			} else {
 				model.setViewName("newpayroll");

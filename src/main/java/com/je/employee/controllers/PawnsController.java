@@ -131,7 +131,7 @@ public class PawnsController {
 					date = new Date();
 				}
 				model.addObject("daily", pawnService.save(pawn));
-				model.setViewName("daily");
+				model.setViewName("dailyarrow");
 				model.addObject("datedaily", date);
 				// }
 			}
@@ -260,7 +260,7 @@ public class PawnsController {
 	public ModelAndView renew(@ModelAttribute("pawnForm") Pawn pawn) {
 		ModelAndView model = new ModelAndView();
 		model.addObject("daily", pawnService.renew(pawn));
-		model.setViewName("daily");
+		model.setViewName("dailyarrow");
 		model.addObject("datedaily", new Date());
 		return model;
 	}
@@ -286,7 +286,7 @@ public class PawnsController {
 			model.setViewName("noselected");
 		} else {
 			model.addObject("daily", pawnService.remove(pawn));
-			model.setViewName("daily");
+			model.setViewName("dailyarrow");
 			model.addObject("datedaily", new Date());
 		}
 		return model;

@@ -74,7 +74,7 @@ public class StrapsController {
 					ipAddress = request.getRemoteAddr();
 				}
 				Date today = new Date();
-				model.setViewName("daily");
+				model.setViewName("dailyarrow");
 				strap.setPlace(place);
 				strapsService.saveSaleStrap(strap);
 				model.addObject("daily", dailyService.getDaily(today, place, ipAddress));
