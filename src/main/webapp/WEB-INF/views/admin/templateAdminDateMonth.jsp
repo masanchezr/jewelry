@@ -87,8 +87,8 @@
 					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
 					href="#collapseAdjustments" data-parent="#exampleAccordion"><i
 						class="fa fa-wrench fa-fw"></i> <span class="nav-link-text"><spring:message
-								code="jewels" /></span></a>
-					<ul class="sidenav-second-level collapse" id="#collapseAdjustments">
+								code="adjustments" /></span></a>
+					<ul class="sidenav-second-level collapse" id="collapseAdjustments">
 						<li><spring:url value="/searchadjustment"
 								var="searchadjustment" /> <a href="${searchadjustment}"
 							class="nav-link"><spring:message code="adjustments" /></a></li>
