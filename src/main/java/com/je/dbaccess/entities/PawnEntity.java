@@ -33,7 +33,7 @@ public class PawnEntity implements Serializable {
 
 	/** The idpawn. */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "IDPAWN")
 	private Long idpawn;
 

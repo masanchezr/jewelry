@@ -41,7 +41,7 @@ public class NewPawnFormValidator implements Validator {
 		String birthday = pawn.getDatebirth();
 		String dni = pawn.getNif();
 		String numpawn = pawn.getNumpawn();
-		double percent = pawn.getPercent();
+		BigDecimal percent = pawn.getPercent();
 		BigDecimal amount = pawn.getAmount();
 		if (amount.compareTo(BigDecimal.ZERO) <= 0) {
 			errors.rejectValue("amount", "selectamount");
@@ -70,7 +70,7 @@ public class NewPawnFormValidator implements Validator {
 				}
 			}
 		}
-		if (percent <= 0) {
+		if (percent.compareTo(BigDecimal.ZERO) <= 0) {
 			errors.rejectValue("percent", "selectpercent");
 		}
 		List<ObjectPawnEntity> lop = pawn.getObjects();

@@ -129,7 +129,8 @@ public class PawnServiceImpl implements PawnService {
 		clientPawnsRepository.save(cpe);
 		pawnEntity.setMeltdate(new Date());
 		pawnEntity.setObjects(newobjects);
-		pawnEntity.setClient(cpe);
+		pawnEntity.setPercent(pawn.getPercent());
+		pawnEntity.setAmount(pawn.getAmount());
 		pawnsRepository.save(pawnEntity);
 	}
 

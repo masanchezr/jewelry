@@ -1,5 +1,6 @@
 package com.je.services.pawns;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.je.dbaccess.entities.ObjectPawnEntity;
@@ -36,7 +37,7 @@ public class NewPawn extends OperationForm {
 	private boolean retired;
 
 	/** The percent. */
-	private double percent;
+	private BigDecimal percent;
 
 	private int months;
 
@@ -180,7 +181,7 @@ public class NewPawn extends OperationForm {
 	 *
 	 * @return the percent
 	 */
-	public double getPercent() {
+	public BigDecimal getPercent() {
 		return percent;
 	}
 
@@ -190,7 +191,7 @@ public class NewPawn extends OperationForm {
 	 * @param percent
 	 *            the new percent
 	 */
-	public void setPercent(double percent) {
+	public void setPercent(BigDecimal percent) {
 		this.percent = percent;
 	}
 
