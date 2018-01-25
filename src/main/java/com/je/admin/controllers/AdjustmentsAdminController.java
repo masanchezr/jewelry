@@ -75,6 +75,7 @@ public class AdjustmentsAdminController {
 			model.setViewName("searchadjustment");
 		} else {
 			adjustment = adjustmentService.findById(idadjustment);
+			model.addObject("adjustment", adjustment);
 			model.setViewName("resultadjustment");
 		}
 		model.addObject("adjustment", adjustment);
