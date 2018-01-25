@@ -363,4 +363,8 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/exceltomelloso.jsp" />
 	</definition>
+	<definition name="resultadjustment" extends="templateAdminDates">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/adjustments/resultadjustment.jsp" />
+	</definition>
 </tiles-definitions>
