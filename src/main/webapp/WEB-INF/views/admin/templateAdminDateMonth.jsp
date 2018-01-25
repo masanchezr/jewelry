@@ -91,10 +91,10 @@
 					<ul class="sidenav-second-level collapse" id="collapseAdjustments">
 						<li><spring:url value="/searchadjustment"
 								var="searchadjustment" /> <a href="${searchadjustment}"
-							class="nav-link"><spring:message code="adjustments" /></a></li>
+							class="nav-link"><spring:message code="searchadjustment" /></a></li>
 						<li><spring:url value="/searchsumadjustments"
 								var="searchsumadjustments" /> <a href="${searchsumadjustments}"
-							class="nav-link"><spring:message code="adjustments" /></a></li>
+							class="nav-link"><spring:message code="searchsumadjustments" /></a></li>
 					</ul></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message code="jewels"/>"><a
