@@ -17,13 +17,12 @@
 						<td><spring:message code="idsale" var="numsalemessage" /> <form:input
 								class="form-control" path="numsale"
 								placeholder="${numsalemessage}" /></td>
-						<td><spring:message code="payment" /> <form:select
-								class="form-control" path="payment.idpayment">
+						<td><form:select class="form-control"
+								path="payment.idpayment">
 								<form:options items="${payments}" itemValue="idpayment"
 									itemLabel="name" />
 							</form:select></td>
-						<td><spring:message code="place" /> <form:select
-								class="form-control" path="place.idplace">
+						<td><form:select class="form-control" path="place.idplace">
 								<form:options items="${places}" itemValue="idplace"
 									itemLabel="description" />
 							</form:select></td>
@@ -35,14 +34,12 @@
 								<form:input class="form-control"
 									path="jewels[${status.index}].reference"
 									placeholder="${referencej} ${status.index}" /></td>
-							<td><spring:message code="category" /> <form:select
-									class="form-control"
+							<td><form:select class="form-control"
 									path="jewels[${status.index}].category.idcategory">
 									<form:options items="${categories}" itemValue="idcategory"
 										itemLabel="namecategory" />
 								</form:select></td>
-							<td><spring:message code="metal" /> <form:select
-									class="form-control"
+							<td><form:select class="form-control"
 									path="jewels[${status.index}].metal.idmetal">
 									<form:options items="${metals}" itemValue="idmetal"
 										itemLabel="description" />

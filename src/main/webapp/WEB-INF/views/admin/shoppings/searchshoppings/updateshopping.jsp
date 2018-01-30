@@ -31,7 +31,7 @@
 							<c:forEach items="${shoppingForm.objects}" var="os"
 								varStatus="status">
 								<tr>
-									<td><strong><spring:message code="metal" /></strong> <form:hidden
+									<td><form:hidden
 											path="objects[${status.index}].idobjectshop" /> <form:select
 											class="form-control"
 											path="objects[${status.index}].metal.idmetal">
