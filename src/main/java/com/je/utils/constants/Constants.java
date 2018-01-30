@@ -26,8 +26,8 @@ public class Constants {
 	/** The Constant PLASTICO. 6L */
 	public static final Long PLASTICO = 6L;
 
-	/** The Constant MARIANA. ROLE_NRA */
-	public static final String ROLE_NRA = "ROLE_NRA";
+	/** The Constant Santo Domingo. ROLE_NRA */
+	public static final String ROLE_AR = "ROLE_AR";
 
 	/** 3 **/
 	public static final Long CARD = 3L;

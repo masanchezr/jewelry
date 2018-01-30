@@ -282,7 +282,7 @@ public class PawnsController {
 		while (itcollection.hasNext()) {
 			role = itcollection.next().getAuthority();
 		}
-		if ((Constants.ROLE_NRA.equals(role) && pawn.getMonths() <= 0) || pawn.getId() == null) {
+		if ((Constants.ROLE_AR.equals(role) && pawn.getMonths() <= 0) || pawn.getId() == null) {
 			model.setViewName("noselected");
 		} else {
 			model.addObject("daily", pawnService.remove(pawn));
@@ -320,7 +320,7 @@ public class PawnsController {
 			pawn.setUser(user);
 			List<Pawn> pawns = pawnService.searchRenewByNumpawn(pawn);
 			model.addObject("pawns", pawns);
-			if (Constants.ROLE_NRA.equals(role)) {
+			if (Constants.ROLE_AR.equals(role)) {
 				model.setViewName("removepawnfive");
 			} else {
 				model.setViewName("removepawn");
