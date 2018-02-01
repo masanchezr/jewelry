@@ -18,7 +18,7 @@
 								<th><spring:message code="number" /></th>
 								<th><spring:message code="concept" /></th>
 								<th><spring:message code="amount" /></th>
-								<th><spring:message code="metal" /></th>
+								<th><spring:message code="material" /></th>
 								<th><spring:message code="grams" /></th>
 							</tr>
 						</thead>
@@ -28,7 +28,7 @@
 									<td><c:out value="${bill.idadjustment}" /></td>
 									<td><c:out value="${bill.description}" /></td>
 									<td><c:out value="${bill.amount}" /></td>
-									<td><c:out value="${bill.metal.description}" /></td>
+									<td><c:out value="${bill.material.description}" /></td>
 									<td><c:out value="${bill.grams}" /></td>
 								</tr>
 							</c:forEach>
@@ -55,14 +55,14 @@
 						<thead>
 							<tr>
 								<th><spring:message code="grams" /></th>
-								<th><spring:message code="metal" /></th>
+								<th><spring:message code="material" /></th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach items="${grams}" var="item">
 								<tr>
 									<td><c:out value="${item.grams}" /></td>
-									<td><c:out value="${item.metal.description}" /></td>
+									<td><c:out value="${item.material.description}" /></td>
 								</tr>
 							</c:forEach>
 						</tbody>

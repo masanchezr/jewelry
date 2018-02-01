@@ -55,7 +55,7 @@
 					id="dataTables-example">
 					<thead>
 						<tr>
-							<th><spring:message code="metalag" /></th>
+							<th><spring:message code="materialag" /></th>
 							<th></th>
 						</tr>
 					</thead>

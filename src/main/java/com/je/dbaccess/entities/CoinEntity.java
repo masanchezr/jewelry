@@ -32,7 +32,7 @@ public class CoinEntity implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "IDPLACE", referencedColumnName = "IDPLACE")
 	private PlaceEntity place;
-	/** The metal. */
+	/** The material. */
 	@ManyToOne
 	@JoinColumn(name = "IDMETAL", referencedColumnName = "IDMETAL")
 	private MetalEntity metal;
@@ -88,22 +88,22 @@ public class CoinEntity implements Serializable {
 	}
 
 	/**
-	 * Gets the metal.
+	 * Gets the material.
 	 *
-	 * @return the metal
+	 * @return the material
 	 */
 	public MetalEntity getMetal() {
 		return metal;
 	}
 
 	/**
-	 * Sets the metal.
+	 * Sets the material.
 	 *
-	 * @param metal
-	 *            the new metal
+	 * @param material
+	 *            the new material
 	 */
-	public void setMetal(MetalEntity metal) {
-		this.metal = metal;
+	public void setMetal(MetalEntity material) {
+		this.metal = material;
 	}
 
 	/**

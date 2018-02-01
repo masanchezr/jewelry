@@ -38,11 +38,11 @@ public class SetServiceImpl implements SetService {
 	private Mapper mapper;
 
 	public void saveSet(NewSet set) {
-		MetalEntity metal = mapper.map(set.getMetal(), MetalEntity.class);
+		MetalEntity material = mapper.map(set.getMetal(), MetalEntity.class);
 		PlaceEntity place = mapper.map(set.getPlace(), PlaceEntity.class);
 		CategoryEntity categoryRing = categoryRepository.findByKeyword("anillo");
 		JewelEntity jewel = new JewelEntity();
-		jewel.setMetal(metal);
+		jewel.setMetal(material);
 		jewel.setPlace(place);
 		jewel.setCategory(categoryRing);
 		jewel.setReference(set.getReferencering());

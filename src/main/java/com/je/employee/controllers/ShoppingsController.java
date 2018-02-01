@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.je.dbaccess.entities.MetalEntity;
 import com.je.dbaccess.entities.ObjectShopEntity;
 import com.je.employee.validators.ShoppingsValidator;
-import com.je.services.metal.MetalService;
+import com.je.services.material.MetalService;
 import com.je.services.pawns.PawnService;
 import com.je.services.shoppings.Shopping;
 import com.je.services.shoppings.ShoppingService;
@@ -36,7 +36,7 @@ public class ShoppingsController {
 	private PawnService pawnService;
 
 	@Autowired
-	private MetalService metalService;
+	private MetalService materialService;
 
 	/** The shoppings validator. */
 	@Autowired
@@ -52,15 +52,15 @@ public class ShoppingsController {
 		ModelAndView model = new ModelAndView("newshopping");
 		Shopping shopping = new Shopping();
 		List<ObjectShopEntity> los = new ArrayList<ObjectShopEntity>();
-		List<MetalEntity> metals = metalService.getAllMetalsActive();
-		Iterator<MetalEntity> imetals = metals.iterator();
-		while (imetals.hasNext()) {
+		List<MetalEntity> materials = materialService.getAllMetalsActive();
+		Iterator<MetalEntity> imaterials = materials.iterator();
+		while (imaterials.hasNext()) {
 			ObjectShopEntity os = new ObjectShopEntity();
-			os.setMetal(imetals.next());
+			os.setMetal(imaterials.next());
 			los.add(os);
 		}
 		shopping.setObjects(los);
-		model.addObject("metals", metals);
+		model.addObject("materials", materials);
 		model.addObject("shoppingForm", shopping);
 		return model;
 	}
@@ -85,7 +85,7 @@ public class ShoppingsController {
 			Iterator<ObjectShopEntity> ilos = los.iterator();
 			while (ilos.hasNext()) {
 				ObjectShopEntity os = ilos.next();
-				os.setMetal(metalService.findById(os.getMetal().getIdmetal()));
+				os.setMetal(materialService.findById(os.getMetal().getIdmetal()));
 				nlos.add(os);
 			}
 			shoppingForm.setObjects(nlos);
@@ -100,11 +100,11 @@ public class ShoppingsController {
 				model.setViewName("newshopping");
 				List<ObjectShopEntity> los = shoppingForm.getObjects();
 				List<ObjectShopEntity> newlos = new ArrayList<ObjectShopEntity>();
-				List<MetalEntity> metals = metalService.getAllMetalsActive();
+				List<MetalEntity> materials = materialService.getAllMetalsActive();
 				ObjectShopEntity os;
-				for (int i = 0; i < metals.size(); i++) {
+				for (int i = 0; i < materials.size(); i++) {
 					os = los.get(i);
-					os.setMetal(metals.get(i));
+					os.setMetal(materials.get(i));
 					newlos.add(os);
 				}
 				shoppingForm.setObjects(newlos);
@@ -117,9 +117,9 @@ public class ShoppingsController {
 				 * c.get(Calendar.YEAR)); if (!iscorrectnumber) {
 				 * model.setViewName("newshopping"); List<ObjectShopEntity> los =
 				 * shoppingForm.getObjects(); List<ObjectShopEntity> newlos = new
-				 * ArrayList<ObjectShopEntity>(); List<MetalEntity> metals =
-				 * metalService.getAllMetalsActive(); ObjectShopEntity os; for (int i = 0; i <
-				 * metals.size(); i++) { os = los.get(i); os.setMetal(metals.get(i));
+				 * ArrayList<ObjectShopEntity>(); List<MetalEntity> materials =
+				 * materialService.getAllMetalsActive(); ObjectShopEntity os; for (int i = 0; i <
+				 * materials.size(); i++) { os = los.get(i); os.setMetal(materials.get(i));
 				 * newlos.add(os); } shoppingForm.setObjects(newlos);
 				 * model.addObject("shoppingForm", shoppingForm); result.rejectValue("numshop",
 				 * "wrongnumber"); } else {

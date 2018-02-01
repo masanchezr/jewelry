@@ -136,9 +136,9 @@
 						<li><spring:url value="/searchShoppings"
 								var="searchshoppings" /> <a href="${searchshoppings}"> <spring:message
 									code="searchshoppings" /></a></li>
-						<li><spring:url value="/searchquartermetal"
-								var="searchquartermetal" /> <a href="${searchquartermetal}">
-								<spring:message code="gramsformetal" />
+						<li><spring:url value="/searchquartermaterial"
+								var="searchquartermaterial" /> <a href="${searchquartermaterial}">
+								<spring:message code="gramsformaterial" />
 						</a></li>
 						<li><spring:url value="/searchgramsnull"
 								var="searchgramsnull" /> <a href="${searchgramsnull}"> <spring:message

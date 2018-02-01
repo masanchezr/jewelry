@@ -138,7 +138,7 @@
 		<intercept-url pattern="/newuser" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/allincidents" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/pendingissues" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/searchquartermetal" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/searchquartermaterial" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/searchincident" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/searchcalculatedailies" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/outofdate" access="hasRole('ROLE_ADMIN')" />

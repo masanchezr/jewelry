@@ -47,7 +47,6 @@ public class JewelServiceImpl implements JewelService {
 		if (Util.isEmpty(thing.getImg())) {
 			thing.setImg(null);
 		}
-		// getBarCode(jewel);
 		return jewelsManager.findById(jewelsManager.save(thing).getIdjewel());
 	}
 
@@ -55,19 +54,14 @@ public class JewelServiceImpl implements JewelService {
 		// intento crear código de barras
 		try {
 			String barCodePath = System.getenv(Constants.OPENSHIFT_DATA_DIR);
-			// String barCodePath = "D:/";
 			// puede ser con 128 o 39 no se cual es la diferencia
 			Code39Bean bean = new Code39Bean();
 			final int dpi = 160;
 			// Configure the barcode generator
 			bean.setModuleWidth(1.0);
-			// altura de la barra
-			// bean.setBarHeight(25.0);
 			bean.setFontSize(5.0);
 			bean.setQuietZone(2.0);
 			bean.doQuietZone(true);
-			// altura de la imagen bean.setHeight(30);
-			// bean.setVerticalQuietZone(-6);
 			// Open output file
 			File outputFile = new File(barCodePath.concat(jewel.getReference()).concat(Constants.PNG));
 			FileOutputStream out = new FileOutputStream(outputFile);
@@ -78,7 +72,7 @@ public class JewelServiceImpl implements JewelService {
 			// Signal end of generation
 			canvas.finish();
 		} catch (IOException ex) {
-			ex.printStackTrace();
+
 		}
 
 	}
@@ -121,7 +115,7 @@ public class JewelServiceImpl implements JewelService {
 						mapper.map(jewelForm.getPlace(), PlaceEntity.class),
 						mapper.map(jewelForm.getMetal(), MetalEntity.class));
 			} else {
-				jewels = new ArrayList<JewelEntity>();
+				jewels = new ArrayList<>();
 				JewelEntity jewel = jewelsManager
 						.searchByReferenceCategoryMetalPlace(mapper.map(jewelForm, JewelEntity.class));
 				if (jewel != null) {
@@ -178,10 +172,5 @@ public class JewelServiceImpl implements JewelService {
 	@Override
 	public Page<JewelEntity> searchWithImg(int i) {
 		return jewelsManager.searchWithImg(PageRequest.of(i - 1, Constants.PAGE_SIZE));
-	}
-
-	@Override
-	public void setGramsGold() {
-		jewelsManager.setGrams();
 	}
 }

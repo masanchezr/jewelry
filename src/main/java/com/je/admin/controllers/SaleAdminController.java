@@ -21,7 +21,7 @@ import com.je.dbaccess.entities.PlaceEntity;
 import com.je.forms.SearchForm;
 import com.je.services.categories.CategoriesService;
 import com.je.services.jewels.JewelService;
-import com.je.services.metal.MetalService;
+import com.je.services.material.MetalService;
 import com.je.services.payment.PaymentService;
 import com.je.services.places.PlaceService;
 import com.je.services.sales.Sale;
@@ -56,9 +56,9 @@ public class SaleAdminController {
 	@Autowired
 	private JewelService jewelService;
 
-	/** The metal service. */
+	/** The material service. */
 	@Autowired
-	private MetalService metalService;
+	private MetalService materialService;
 
 	/** The categories service. */
 	@Autowired
@@ -213,7 +213,7 @@ public class SaleAdminController {
 					model.setViewName("showsale");
 					model.addObject("sale", saleForm);
 				} else {
-					model.addObject("metals", metalService.getAllMetals());
+					model.addObject("materials", materialService.getAllMetals());
 					model.addObject("categories", categoriesService.getAllCategoriesOrderByName());
 					model.addObject("payments", paymentService.findAllActive());
 					model.addObject("places", placeService.getAllPlaces());
@@ -222,7 +222,7 @@ public class SaleAdminController {
 					model.setViewName("newsaleadmin");
 				}
 			} else {
-				model.addObject("metals", metalService.getAllMetals());
+				model.addObject("materials", materialService.getAllMetals());
 				model.addObject("categories", categoriesService.getAllCategoriesOrderByName());
 				model.addObject("payments", paymentService.findAllActive());
 				model.addObject("places", placeService.getAllPlaces());
@@ -231,7 +231,7 @@ public class SaleAdminController {
 				model.setViewName("newsaleadmin");
 			}
 		} else {
-			model.addObject("metals", metalService.getAllMetals());
+			model.addObject("materials", materialService.getAllMetals());
 			model.addObject("categories", categoriesService.getAllCategoriesOrderByName());
 			model.addObject("payments", paymentService.findAllActive());
 			model.addObject("places", placeService.getAllPlaces());
@@ -255,7 +255,7 @@ public class SaleAdminController {
 			jewels.add(new JewelEntity());
 		}
 		sale.setJewels(jewels);
-		model.addObject("metals", metalService.getAllMetals());
+		model.addObject("materials", materialService.getAllMetals());
 		model.addObject("categories", categoriesService.getAllCategoriesOrderByName());
 		model.addObject("payments", paymentService.findAllActive());
 		model.addObject("places", placeService.getAllPlaces());

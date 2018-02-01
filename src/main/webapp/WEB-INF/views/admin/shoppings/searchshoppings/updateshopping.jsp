@@ -31,13 +31,13 @@
 							<c:forEach items="${shoppingForm.objects}" var="os"
 								varStatus="status">
 								<tr>
-									<td><form:hidden
+									<td><spring:message code="metal" /> <form:hidden
 											path="objects[${status.index}].idobjectshop" /> <form:select
 											class="form-control"
-											path="objects[${status.index}].metal.idmetal">
-											<form:option value="${os.metal.idmetal}"
-												label="${os.metal.description}" />
-											<form:options items="${metals}" itemValue="idmetal"
+											path="objects[${status.index}].material.idmaterial">
+											<form:option value="${os.material.idmaterial}"
+												label="${os.material.description}" />
+											<form:options items="${materials}" itemValue="idmaterial"
 												itemLabel="description" />
 										</form:select></td>
 									<td><spring:message code="grossgrams" /> <form:input

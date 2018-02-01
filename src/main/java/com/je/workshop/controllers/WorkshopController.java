@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.je.services.metal.MetalService;
+import com.je.services.material.MetalService;
 import com.je.services.workshop.Workshop;
 import com.je.services.workshop.WorkshopService;
 import com.je.workshop.validators.WorkshopValidator;
@@ -23,7 +23,7 @@ public class WorkshopController {
 	private WorkshopService workshopService;
 
 	@Autowired
-	private MetalService metalService;
+	private MetalService materialService;
 
 	/** The work shop validator. */
 	@Autowired
@@ -58,7 +58,7 @@ public class WorkshopController {
 	public ModelAndView newWorkshop() {
 		ModelAndView model = new ModelAndView("newWorkshop");
 		model.addObject("workshop", new Workshop());
-		model.addObject("metals", metalService.getAllMetals());
+		model.addObject("materials", materialService.getAllMetals());
 		return model;
 	}
 

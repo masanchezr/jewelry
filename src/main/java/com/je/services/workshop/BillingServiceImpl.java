@@ -16,7 +16,7 @@ import com.je.dbaccess.entities.MetalEntity;
 import com.je.dbaccess.entities.WorkshopEntity;
 import com.je.dbaccess.repositories.AdjustmentRepository;
 import com.je.dbaccess.repositories.WorkshopRepository;
-import com.je.services.metal.MetalService;
+import com.je.services.material.MetalService;
 import com.je.utils.constants.Constants;
 
 /**
@@ -33,7 +33,7 @@ public class BillingServiceImpl implements BillingService {
 	private WorkshopRepository workshopRepository;
 
 	@Autowired
-	private MetalService metalService;
+	private MetalService materialService;
 
 	public Map<String, Object> getBill(Calendar current) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -50,10 +50,10 @@ public class BillingServiceImpl implements BillingService {
 		Billing bill;
 		AdjustmentEntity adjustment;
 		WorkshopEntity work;
-		MetalEntity metalEntity;
+		MetalEntity materialEntity;
 		Worngrams worngrams;
 		BigDecimal amount, grams = BigDecimal.ZERO, totalamount = BigDecimal.ZERO;
-		MetalEntity metal = metalService.findById(Constants.ORO18K);
+		MetalEntity material = materialService.findById(Constants.ORO18K);
 		while (iadjustments.hasNext()) {
 			bill = new Billing();
 			adjustment = iadjustments.next();
@@ -63,7 +63,7 @@ public class BillingServiceImpl implements BillingService {
 			bill.setIdadjustment(adjustment.getIdadjustment());
 			bill.setCreationdate(adjustment.getCreationdate());
 			bill.setGrams(adjustment.getGrams());
-			bill.setMetal(metal);
+			bill.setMetal(material);
 			billing.add(bill);
 			totalamount = totalamount.add(amount);
 		}
@@ -78,8 +78,8 @@ public class BillingServiceImpl implements BillingService {
 			bill.setDescription(work.getDescription());
 			bill.setIdadjustment(work.getIdworkshop());
 			bill.setCreationdate(work.getCreationdate());
-			metalEntity = work.getMetal();
-			if (metalEntity != null) {
+			materialEntity = work.getMetal();
+			if (materialEntity != null) {
 				worngrams = new Worngrams();
 				worngrams.setGrams(grams);
 				worngrams.setMetal(work.getMetal());
@@ -90,22 +90,22 @@ public class BillingServiceImpl implements BillingService {
 			billing.add(bill);
 			totalamount = totalamount.add(amount);
 		}
-		Iterable<MetalEntity> metals = metalService.getAllMetals();
-		Iterator<MetalEntity> imetals = metals.iterator();
-		while (imetals.hasNext()) {
-			metal = imetals.next();
+		Iterable<MetalEntity> materials = materialService.getAllMetals();
+		Iterator<MetalEntity> imaterials = materials.iterator();
+		while (imaterials.hasNext()) {
+			material = imaterials.next();
 			grams = BigDecimal.ZERO;
 			Iterator<Worngrams> iwg = lworngrams.iterator();
 			while (iwg.hasNext()) {
 				worngrams = iwg.next();
-				if (worngrams.getMetal().equals(metal)) {
+				if (worngrams.getMetal().equals(material)) {
 					grams = grams.add(worngrams.getGrams());
 				}
 			}
 			if (grams.compareTo(BigDecimal.ZERO) > 0) {
 				worngrams = new Worngrams();
 				worngrams.setGrams(grams);
-				worngrams.setMetal(metal);
+				worngrams.setMetal(material);
 				lwg.add(worngrams);
 			}
 		}

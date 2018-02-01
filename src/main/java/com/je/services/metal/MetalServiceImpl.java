@@ -1,4 +1,4 @@
-package com.je.services.metal;
+package com.je.services.material;
 
 import java.util.List;
 
@@ -12,22 +12,22 @@ import com.je.dbaccess.repositories.MetalRepository;
  */
 public class MetalServiceImpl implements MetalService {
 
-	/** The metal repository. */
+	/** The material repository. */
 	@Autowired
-	private MetalRepository metalRepository;
+	private MetalRepository materialRepository;
 
 	@Override
 	public Iterable<MetalEntity> getAllMetals() {
-		return metalRepository.findAll();
+		return materialRepository.findAll();
 	}
 
 	@Override
 	public List<MetalEntity> getAllMetalsActive() {
-		return metalRepository.findByActiveTrue();
+		return materialRepository.findByActiveTrue();
 	}
 
 	@Override
 	public MetalEntity findById(long l) {
-		return metalRepository.findById(l).get();
+		return materialRepository.findById(l).get();
 	}
 }

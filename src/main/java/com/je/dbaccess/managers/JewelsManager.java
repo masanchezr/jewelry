@@ -88,7 +88,7 @@ public interface JewelsManager {
 	public List<JewelEntity> searchByReferenceAndCategory(JewelEntity jewel);
 
 	/**
-	 * Search by reference category metal place active.
+	 * Search by reference category material place active.
 	 *
 	 * @param jewel
 	 *            the jewel
@@ -97,7 +97,7 @@ public interface JewelsManager {
 	public JewelEntity searchByReferenceCategoryMetalPlaceActive(JewelEntity jewel);
 
 	/**
-	 * Search by reference category metal place.
+	 * Search by reference category material place.
 	 *
 	 * @param jewelEntity
 	 *            the jewel entity

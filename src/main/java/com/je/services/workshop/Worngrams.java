@@ -7,7 +7,7 @@ import com.je.dbaccess.entities.MetalEntity;
 public class Worngrams {
 
 	private BigDecimal grams;
-	private MetalEntity metal;
+	private MetalEntity material;
 
 	public BigDecimal getGrams() {
 		return grams;
@@ -18,11 +18,11 @@ public class Worngrams {
 	}
 
 	public MetalEntity getMetal() {
-		return metal;
+		return material;
 	}
 
-	public void setMetal(MetalEntity metal) {
-		this.metal = metal;
+	public void setMetal(MetalEntity material) {
+		this.material = material;
 	}
 
 }

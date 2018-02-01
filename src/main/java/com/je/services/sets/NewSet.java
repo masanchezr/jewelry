@@ -31,8 +31,8 @@ public class NewSet {
 
 	private String referencediamondring;
 
-	/** The metal. */
-	private MetalEntity metal;
+	/** The material. */
+	private MetalEntity material;
 
 	/** The place. */
 	private PlaceEntity place;
@@ -171,22 +171,22 @@ public class NewSet {
 	}
 
 	/**
-	 * Gets the metal.
+	 * Gets the material.
 	 *
-	 * @return the metal
+	 * @return the material
 	 */
 	public MetalEntity getMetal() {
-		return metal;
+		return material;
 	}
 
 	/**
-	 * Sets the metal.
+	 * Sets the material.
 	 *
-	 * @param metal
-	 *            the new metal
+	 * @param material
+	 *            the new material
 	 */
-	public void setMetal(MetalEntity metal) {
-		this.metal = metal;
+	public void setMetal(MetalEntity material) {
+		this.material = material;
 	}
 
 	/**

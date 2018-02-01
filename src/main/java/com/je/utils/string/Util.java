@@ -8,6 +8,10 @@ import java.util.regex.Pattern;
  */
 public class Util {
 
+	private Util() {
+
+	}
+
 	/**
 	 * Checks if is empty.
 	 * 
@@ -35,7 +39,7 @@ public class Util {
 	}
 
 	public static boolean isNumeric(String str) {
-		return (str.matches("[+-]?\\d*(\\.\\d+)?") && str.equals("") == false);
+		return (str.matches("[+-]?\\d*(\\.\\d+)?") && str.equals(""));
 	}
 
 	public static String refactorNIF(String nif) {
@@ -69,20 +73,14 @@ public class Util {
 				int dni = Integer.parseInt(m.group(1));
 				dni = dni % 23;
 				String reference = letras.substring(dni, dni + 1);
-				if (reference.equalsIgnoreCase(letra)) {
-					return true;
-				} else {
-					return false;
-				}
+				return reference.equalsIgnoreCase(letra);
 			} else {
 				return false;
 			}
 		} else if (Character.isLetter(nif.charAt(0))) {
 			return true;
-		} else if (nif.length() > 8) {
-			return true;
 		} else {
-			return false;
+			return nif.length() > 9;
 		}
 	}
 }

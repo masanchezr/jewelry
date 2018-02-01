@@ -30,7 +30,7 @@ import com.je.dbaccess.entities.MetalEntity;
 import com.je.dbaccess.entities.ObjectShopEntity;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.forms.SearchForm;
-import com.je.services.metal.MetalService;
+import com.je.services.material.MetalService;
 import com.je.services.nations.NationService;
 import com.je.services.places.PlaceService;
 import com.je.services.shoppings.QuarterMetal;
@@ -57,7 +57,7 @@ public class ShoppingsAdminController {
 
 	/** The place service. */
 	@Autowired
-	private MetalService metalService;
+	private MetalService materialService;
 
 	@Autowired
 	private NationService nationservice;
@@ -136,7 +136,7 @@ public class ShoppingsAdminController {
 			shopping = shoppingService.findShopByPK(idshop);
 			model.addObject("shoppingForm", shopping);
 			model.setViewName("updateshopping");
-			model.addObject("metals", metalService.getAllMetals());
+			model.addObject("materials", materialService.getAllMetals());
 		}
 		model.addObject("adminForm", new AdminForm());
 		return model;
@@ -148,7 +148,7 @@ public class ShoppingsAdminController {
 		Shopping shopping = shoppingService.findShopByPK(id);
 		model.addObject("shoppingForm", shopping);
 		model.addObject("adminForm", new AdminForm());
-		model.addObject("metals", metalService.getAllMetals());
+		model.addObject("materials", materialService.getAllMetals());
 		return model;
 	}
 
@@ -183,12 +183,12 @@ public class ShoppingsAdminController {
 		ModelAndView model = new ModelAndView();
 		newshoppingFormValidator.validate(shoppingForm, result);
 		if (result.hasErrors()) {
-			List<MetalEntity> metals = metalService.getAllMetalsActive();
-			Iterator<MetalEntity> imetals = metals.iterator();
+			List<MetalEntity> materials = materialService.getAllMetalsActive();
+			Iterator<MetalEntity> imaterials = materials.iterator();
 			List<ObjectShopEntity> lop = new ArrayList<ObjectShopEntity>();
-			while (imetals.hasNext()) {
+			while (imaterials.hasNext()) {
 				ObjectShopEntity op = new ObjectShopEntity();
-				op.setMetal(imetals.next());
+				op.setMetal(imaterials.next());
 				lop.add(op);
 			}
 			shoppingForm.setObjects(lop);
@@ -216,27 +216,27 @@ public class ShoppingsAdminController {
 		return model;
 	}
 
-	@RequestMapping(value = "/searchquartermetal")
+	@RequestMapping(value = "/searchquartermaterial")
 	public ModelAndView searchQuarterMetal() {
-		ModelAndView model = new ModelAndView("searchquartermetal");
+		ModelAndView model = new ModelAndView("searchquartermaterial");
 		model.addObject("adminForm", new AdminForm());
 		model.addObject("shoppingForm", new SearchForm());
 		model.addObject("places", placeService.getAllPlaces());
 		return model;
 	}
 
-	@RequestMapping(value = "/quartermetal")
+	@RequestMapping(value = "/quartermaterial")
 	public ModelAndView quarterMetal(@ModelAttribute("shoppingForm") SearchForm shopping, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		adminSearchValidator.validate(shopping, result);
 		if (result.hasErrors()) {
-			model.setViewName("searchquartermetal");
+			model.setViewName("searchquartermaterial");
 			model.addObject("places", placeService.getAllPlaces());
 		} else {
 			List<QuarterMetal> quarters = shoppingService.searchGramsByMetal(shopping.getDatefrom(),
 					shopping.getDateuntil(), shopping.getPlace());
 			model.addObject("quarters", quarters);
-			model.setViewName("quartermetal");
+			model.setViewName("quartermaterial");
 			shopping.setPlace(placeService.getPlace(shopping.getPlace().getIdplace()));
 		}
 		model.addObject("shoppingForm", shopping);
@@ -300,12 +300,12 @@ public class ShoppingsAdminController {
 			model.setViewName("searchclientadmin");
 		} else {
 			Shopping client = shoppingService.searchClient(Util.refactorNIF(pawn.getNif()));
-			List<MetalEntity> metals = metalService.getAllMetalsActive();
-			Iterator<MetalEntity> imetals = metals.iterator();
+			List<MetalEntity> materials = materialService.getAllMetalsActive();
+			Iterator<MetalEntity> imaterials = materials.iterator();
 			List<ObjectShopEntity> lop = new ArrayList<ObjectShopEntity>();
-			while (imetals.hasNext()) {
+			while (imaterials.hasNext()) {
 				ObjectShopEntity op = new ObjectShopEntity();
-				op.setMetal(imetals.next());
+				op.setMetal(imaterials.next());
 				lop.add(op);
 			}
 			pawn.setAddress(client.getAddress());

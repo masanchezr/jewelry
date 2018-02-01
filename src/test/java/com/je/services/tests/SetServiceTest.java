@@ -27,11 +27,11 @@ public class SetServiceTest {
 	@Test
 	public void saveTest() {
 		NewSet set = new NewSet();
-		MetalEntity metal = new MetalEntity();
+		MetalEntity material = new MetalEntity();
 		set.setReferenceearrings("p148");
 		set.setReferencering("084");
-		metal.setIdmetal(1L);
-		set.setMetal(metal);
+		material.setIdmetal(1L);
+		set.setMetal(material);
 		// setService.saveSet(set);
 	}
 }

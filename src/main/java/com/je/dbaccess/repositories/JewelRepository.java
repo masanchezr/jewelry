@@ -84,14 +84,14 @@ public interface JewelRepository extends PagingAndSortingRepository<JewelEntity,
 	public List<JewelEntity> findByReferenceAndCategory(String reference, CategoryEntity category);
 
 	/**
-	 * Find by reference and category and metal and place and active.
+	 * Find by reference and category and material and place and active.
 	 *
 	 * @param reference
 	 *            the reference
 	 * @param category
 	 *            the category
-	 * @param metal
-	 *            the metal
+	 * @param material
+	 *            the material
 	 * @param place
 	 *            the place
 	 * @param active
@@ -99,7 +99,7 @@ public interface JewelRepository extends PagingAndSortingRepository<JewelEntity,
 	 * @return the list
 	 */
 	public List<JewelEntity> findByReferenceAndCategoryAndMetalAndPlaceAndActive(String reference,
-			CategoryEntity category, MetalEntity metal, PlaceEntity place, Boolean active);
+			CategoryEntity category, MetalEntity material, PlaceEntity place, Boolean active);
 
 	/**
 	 * Find by constraint unique.
@@ -108,14 +108,14 @@ public interface JewelRepository extends PagingAndSortingRepository<JewelEntity,
 	 *            the reference
 	 * @param category
 	 *            the category
-	 * @param metal
-	 *            the metal
+	 * @param material
+	 *            the material
 	 * @param place
 	 *            the place
 	 * @return JewelEntity
 	 */
 	public List<JewelEntity> findByReferenceAndCategoryAndMetalAndPlace(String reference, CategoryEntity category,
-			MetalEntity metal, PlaceEntity place);
+			MetalEntity material, PlaceEntity place);
 
 	public List<JewelEntity> findByPlace(PlaceEntity place);
 
@@ -125,12 +125,12 @@ public interface JewelRepository extends PagingAndSortingRepository<JewelEntity,
 
 	public List<JewelEntity> findByCategory(CategoryEntity category);
 
-	public List<JewelEntity> findByPlaceAndMetal(PlaceEntity place, MetalEntity metal);
+	public List<JewelEntity> findByPlaceAndMetal(PlaceEntity place, MetalEntity material);
 
-	public List<JewelEntity> findByReferenceAndPlaceAndMetal(String reference, PlaceEntity place, MetalEntity metal);
+	public List<JewelEntity> findByReferenceAndPlaceAndMetal(String reference, PlaceEntity place, MetalEntity material);
 
 	public List<JewelEntity> findByCategoryAndPlaceAndMetal(CategoryEntity category, PlaceEntity place,
-			MetalEntity metal);
+			MetalEntity material);
 
 	public List<JewelEntity> findByPlaceAndActiveTrueOrderByReference(PlaceEntity place);
 
@@ -142,6 +142,6 @@ public interface JewelRepository extends PagingAndSortingRepository<JewelEntity,
 
 	public Iterable<JewelEntity> findByCategoryAndActiveTrueAndImgNotNull(CategoryEntity category);
 
-	public List<JewelEntity> findByMetalAndGramsIsNull(MetalEntity metal);
+	public List<JewelEntity> findByMetalAndGramsIsNull(MetalEntity material);
 
 }

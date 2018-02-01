@@ -23,7 +23,7 @@ import com.je.employee.validators.RemoveSaleFormValidator;
 import com.je.services.categories.CategoriesService;
 import com.je.services.dailies.DailyService;
 import com.je.services.jewels.JewelService;
-import com.je.services.metal.MetalService;
+import com.je.services.material.MetalService;
 import com.je.services.payment.PaymentService;
 import com.je.services.places.PlaceService;
 import com.je.services.sales.Sale;
@@ -46,9 +46,9 @@ public class SalesController {
 	@Autowired
 	private JewelService jewelService;
 
-	/** The metal service. */
+	/** The material service. */
 	@Autowired
-	private MetalService metalService;
+	private MetalService materialService;
 
 	/** The categories service. */
 	@Autowired
@@ -118,7 +118,7 @@ public class SalesController {
 					model.setViewName("finishsale");
 					model.addObject("sale", saleForm);
 				} else {
-					model.addObject("metals", metalService.getAllMetals());
+					model.addObject("materials", materialService.getAllMetals());
 					model.addObject("categories", categoriesService.getAllCategoriesOrderByName());
 					model.addObject("payments", paymentService.findAllActive());
 					result.rejectValue("idsale", "numsalerepeated");
@@ -126,7 +126,7 @@ public class SalesController {
 					model.setViewName("newsale");
 				}
 			} else {
-				model.addObject("metals", metalService.getAllMetals());
+				model.addObject("materials", materialService.getAllMetals());
 				model.addObject("categories", categoriesService.getAllCategoriesOrderByName());
 				model.addObject("payments", paymentService.findAllActive());
 				result.rejectValue("numsale", "jewelnoexist");
@@ -134,7 +134,7 @@ public class SalesController {
 				model.setViewName("newsale");
 			}
 		} else {
-			model.addObject("metals", metalService.getAllMetals());
+			model.addObject("materials", materialService.getAllMetals());
 			model.addObject("categories", categoriesService.getAllCategoriesOrderByName());
 			model.addObject("payments", paymentService.findAllActive());
 			model.addObject("saleForm", saleForm);
@@ -289,7 +289,7 @@ public class SalesController {
 			jewels.add(new JewelEntity());
 		}
 		sale.setJewels(jewels);
-		model.addObject("metals", metalService.getAllMetals());
+		model.addObject("materials", materialService.getAllMetals());
 		model.addObject("categories", categoriesService.getAllCategoriesOrderByName());
 		model.addObject("payments", paymentService.findAllActive());
 		model.addObject("saleForm", sale);

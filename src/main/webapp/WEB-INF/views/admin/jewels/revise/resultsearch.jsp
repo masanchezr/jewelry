@@ -24,7 +24,7 @@
 									<th><spring:message code="description" /></th>
 									<th><spring:message code="price" /></th>
 									<th><spring:message code="category" /></th>
-									<th><spring:message code="metal" /></th>
+									<th><spring:message code="material" /></th>
 									<th><spring:message code="place" /></th>
 									<th><spring:message code="active" /></th>
 									<th><spring:message code="saledate" /></th>
@@ -42,7 +42,7 @@
 										<td><c:out value="${jewel.description}" /></td>
 										<td><c:out value="${jewel.price}" /></td>
 										<td><c:out value="${jewel.category.namecategory}" /></td>
-										<td><c:out value="${jewel.metal.description}" /></td>
+										<td><c:out value="${jewel.material.description}" /></td>
 										<td><c:out value="${jewel.place.description}" /></td>
 										<td><c:out value="${jewel.active}" /></td>
 										<td><c:out value="${jewel.saledate}" /></td>

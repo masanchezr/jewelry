@@ -63,7 +63,7 @@ public interface JewelService {
 	public void updateJewelEntity(JewelEntity jewel);
 
 	/**
-	 * Search by reference category metal place active.
+	 * Search by reference category material place active.
 	 *
 	 * @param jewel
 	 *            the jewel
@@ -71,7 +71,7 @@ public interface JewelService {
 	public JewelEntity searchByReferenceCategoryMetalPlaceActive(JewelEntity jewel);
 
 	/**
-	 * Search by reference category metal place.
+	 * Search by reference category material place.
 	 *
 	 * @param jewelForm
 	 *            the jewel form
@@ -92,7 +92,5 @@ public interface JewelService {
 	public Page<JewelEntity> searchWithImg(int i);
 
 	public List<JewelEntity> searchJewelsByKeyWordCategory(String keyword);
-
-	public void setGramsGold();
 
 }

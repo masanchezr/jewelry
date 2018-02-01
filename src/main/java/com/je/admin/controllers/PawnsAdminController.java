@@ -14,7 +14,7 @@ import com.je.admin.forms.AdminForm;
 import com.je.admin.validators.UpdatePawnFormValidator;
 import com.je.employee.validators.PawnFormValidator;
 import com.je.forms.SearchForm;
-import com.je.services.metal.MetalService;
+import com.je.services.material.MetalService;
 import com.je.services.nations.NationService;
 import com.je.services.pawns.NewPawn;
 import com.je.services.pawns.Pawn;
@@ -42,7 +42,7 @@ public class PawnsAdminController {
 
 	/** The place service. */
 	@Autowired
-	private MetalService metalService;
+	private MetalService materialService;
 
 	@Autowired
 	private NationService nationservice;
@@ -120,7 +120,7 @@ public class PawnsAdminController {
 			NewPawn p = pawnService.findByIdpawn(idpawn);
 			model.setViewName("updatepawn");
 			model.addObject("pawnForm", p);
-			model.addObject("metals", metalService.getAllMetals());
+			model.addObject("materials", materialService.getAllMetals());
 			model.addObject("nations", nationservice.getNations());
 			model.addObject("tracks", trackservice.getTracks());
 		}

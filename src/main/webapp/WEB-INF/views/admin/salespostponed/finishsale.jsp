@@ -60,7 +60,7 @@
 							<th><spring:message code="description" /></th>
 							<th><spring:message code="price" /></th>
 							<th><spring:message code="category" /></th>
-							<th><spring:message code="metal" /></th>
+							<th><spring:message code="material" /></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -71,7 +71,7 @@
 								<td><c:out value="${jewel.description}" /></td>
 								<td><c:out value="${jewel.price}" /><i class="fa fa-euro"></i></td>
 								<td><c:out value="${jewel.category.namecategory}" /></td>
-								<td><c:out value="${jewel.metal.description}" /></td>
+								<td><c:out value="${jewel.material.description}" /></td>
 							</tr>
 						</c:forEach>
 					</tbody>

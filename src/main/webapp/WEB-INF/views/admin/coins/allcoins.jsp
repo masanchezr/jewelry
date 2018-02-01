@@ -20,7 +20,7 @@
 							<tr>
 								<th><spring:message code="description" /></th>
 								<th><spring:message code="price" /></th>
-								<th><spring:message code="metal" /></th>
+								<th><spring:message code="material" /></th>
 								<th><spring:message code="place" /></th>
 							</tr>
 						</thead>
@@ -29,7 +29,7 @@
 								<tr>
 									<td><c:out value="${jewel.description}" /></td>
 									<td><c:out value="${jewel.price}" /></td>
-									<td><c:out value="${jewel.metal.description}" /></td>
+									<td><c:out value="${jewel.material.description}" /></td>
 									<td><c:out value="${jewel.place.description}" /></td>
 								</tr>
 							</c:forEach>

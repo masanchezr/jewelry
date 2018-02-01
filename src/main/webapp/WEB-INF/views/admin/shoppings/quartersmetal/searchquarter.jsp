@@ -6,9 +6,9 @@
 	<li class="breadcrumb-item"><a href="#"><spring:message
 				code="shoppings" /></a></li>
 	<li class="breadcrumb-item active"><spring:message
-			code="gramsformetal" /></li>
+			code="gramsformaterial" /></li>
 </ol>
-<form:form action="quartermetal" modelAttribute="shoppingForm">
+<form:form action="quartermaterial" modelAttribute="shoppingForm">
 	<div class="row">
 		<div class="col-lg-6">
 			<div class="card-body">

@@ -6,7 +6,7 @@ import com.je.dbaccess.entities.MetalEntity;
 
 public class QuarterMetal {
 
-	private MetalEntity metal;
+	private MetalEntity material;
 
 	private BigDecimal grossgrams;
 
@@ -17,11 +17,11 @@ public class QuarterMetal {
 	private BigDecimal amount;
 
 	public MetalEntity getMetal() {
-		return metal;
+		return material;
 	}
 
-	public void setMetal(MetalEntity metal) {
-		this.metal = metal;
+	public void setMetal(MetalEntity material) {
+		this.material = material;
 	}
 
 	public BigDecimal getGrossgrams() {

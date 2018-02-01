@@ -48,7 +48,7 @@ public class WorkshopEntity implements Serializable {
 	@Column(name = "grams")
 	private BigDecimal grams;
 
-	/** The metal. */
+	/** The material. */
 	@ManyToOne
 	@JoinColumn(name = "IDMETAL", referencedColumnName = "IDMETAL")
 	private MetalEntity metal;
@@ -141,8 +141,8 @@ public class WorkshopEntity implements Serializable {
 		return metal;
 	}
 
-	public void setMetal(MetalEntity metal) {
-		this.metal = metal;
+	public void setMetal(MetalEntity material) {
+		this.metal = material;
 	}
 
 }

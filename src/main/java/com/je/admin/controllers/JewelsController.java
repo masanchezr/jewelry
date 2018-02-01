@@ -31,7 +31,7 @@ import com.je.dbaccess.entities.JewelEntity;
 import com.je.services.categories.CategoriesService;
 import com.je.services.coins.CoinService;
 import com.je.services.jewels.JewelService;
-import com.je.services.metal.MetalService;
+import com.je.services.material.MetalService;
 import com.je.services.places.PlaceService;
 import com.je.services.sets.NewSet;
 import com.je.services.sets.SetService;
@@ -66,9 +66,9 @@ public class JewelsController {
 	@Autowired
 	private PlaceService placeService;
 
-	/** The metal service. */
+	/** The material service. */
 	@Autowired
-	private MetalService metalService;
+	private MetalService materialService;
 
 	/** The categories service. */
 	@Autowired
@@ -105,7 +105,7 @@ public class JewelsController {
 		ModelAndView model = new ModelAndView("searchbyreference");
 		model.addObject("categories", categoriesService.getAllCategoriesOrderByName());
 		model.addObject("places", placeService.getAllPlaces());
-		model.addObject("metals", metalService.getAllMetals());
+		model.addObject("materials", materialService.getAllMetals());
 		model.addObject("jewelForm", new JewelEntity());
 		model.addObject("adminForm", new AdminForm());
 		return model;
@@ -175,7 +175,7 @@ public class JewelsController {
 			Iterable<CategoryEntity> categories = categoriesService.getAllCategoriesOrderByName();
 			model.addObject("categories", categories);
 			model.addObject("places", placeService.getAllPlaces());
-			model.addObject("metals", metalService.getAllMetals());
+			model.addObject("materials", materialService.getAllMetals());
 			model.addObject("jewelForm", jewel);
 		} else {
 			model.setViewName("errorupdatejewel");
@@ -196,7 +196,7 @@ public class JewelsController {
 		model.addObject("jewelForm", jewel);
 		model.addObject("categories", categoriesService.getAllCategoriesOrderByName());
 		model.addObject("places", placeService.getAllPlaces());
-		model.addObject("metals", metalService.getAllMetals());
+		model.addObject("materials", materialService.getAllMetals());
 		model.addObject("adminForm", new AdminForm());
 		return model;
 	}
@@ -221,14 +221,14 @@ public class JewelsController {
 			log.info("en el if de hay errores");
 			model.addObject("categories", categoriesService.getAllCategoriesOrderByName());
 			model.addObject("places", placeService.getAllPlaces());
-			model.addObject("metals", metalService.getAllMetals());
+			model.addObject("materials", materialService.getAllMetals());
 			model.setViewName("newJewel");
 		} else {
 			// primero miro a ver si existe ya esa joya
 			JewelEntity jewel = jewelService.searchByReferenceCategoryMetalPlace(jewelForm);
 			if (jewel != null && !jewel.getIdjewel().equals(jewelForm.getIdjewel())) {
 				model.addObject("places", placeService.getAllPlaces());
-				model.addObject("metals", metalService.getAllMetals());
+				model.addObject("materials", materialService.getAllMetals());
 				model.addObject("categories", categoriesService.getAllCategoriesOrderByName());
 				model.setViewName("newJewel");
 				result.rejectValue("reference", "selectotherreference");
@@ -252,7 +252,7 @@ public class JewelsController {
 	public ModelAndView newSet() {
 		ModelAndView model = new ModelAndView();
 		model.setViewName("newset");
-		model.addObject("metals", metalService.getAllMetals());
+		model.addObject("materials", materialService.getAllMetals());
 		model.addObject("places", placeService.getAllPlaces());
 		model.addObject("setForm", new NewSet());
 		model.addObject("adminForm", new AdminForm());
@@ -297,7 +297,7 @@ public class JewelsController {
 		ModelAndView model = new ModelAndView("newcoin");
 		model.addObject("coinForm", new CoinEntity());
 		model.addObject("places", placeService.getAllPlaces());
-		model.addObject("metals", metalService.getAllMetals());
+		model.addObject("materials", materialService.getAllMetals());
 		model.addObject("adminForm", new AdminForm());
 		return model;
 	}
@@ -317,7 +317,7 @@ public class JewelsController {
 		coinValidator.validate(coin, result);
 		if (result.hasErrors()) {
 			model.addObject("places", placeService.getAllPlaces());
-			model.addObject("metals", metalService.getAllMetals());
+			model.addObject("materials", materialService.getAllMetals());
 			model.addObject("adminForm", new AdminForm());
 			model.setViewName("newcoin");
 		} else {

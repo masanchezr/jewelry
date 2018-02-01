@@ -37,9 +37,9 @@
 							</form:select>
 						</div>
 						<div class="form-group">
-							<spring:message code="metal" />
-							<form:select class="form-control" path="metal.idmetal">
-								<form:options items="${metals}" itemValue="idmetal"
+							<spring:message code="material" />
+							<form:select class="form-control" path="material.idmaterial">
+								<form:options items="${materials}" itemValue="idmaterial"
 									itemLabel="description" />
 							</form:select>
 						</div>

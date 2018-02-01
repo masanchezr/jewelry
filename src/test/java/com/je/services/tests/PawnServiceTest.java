@@ -37,10 +37,10 @@ public class PawnServiceTest {
 		NewPawn pawn = new NewPawn();
 		List<ObjectPawnEntity> objects = new ArrayList<ObjectPawnEntity>();
 		ObjectPawnEntity object = new ObjectPawnEntity();
-		MetalEntity metal = new MetalEntity();
-		metal.setIdmetal(1L);
+		MetalEntity material = new MetalEntity();
+		material.setIdmetal(1L);
 		object.setGrossgrams(new BigDecimal(6));
-		object.setMetal(metal);
+		object.setMetal(material);
 		pawn.setNumpawn("908");
 		pawn.setNif("06285380D");
 		pawn.setUser("13700");

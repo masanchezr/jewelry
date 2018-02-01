@@ -44,7 +44,7 @@ public class JewelsManagerImpl implements JewelsManager {
 
 	@Override
 	public List<JewelEntity> searchAll() {
-		List<JewelEntity> target = new ArrayList<JewelEntity>();
+		List<JewelEntity> target = new ArrayList<>();
 		Iterable<JewelEntity> jewels = jewelRepository.findAll();
 		Iterator<JewelEntity> ijewels = jewels.iterator();
 		while (ijewels.hasNext()) {
@@ -74,10 +74,10 @@ public class JewelsManagerImpl implements JewelsManager {
 		} else if (searchName != null && category == null) {
 			jewels = jewelRepository.findByNameActivesWithImg(searchName, pageable);
 
-		} else if (searchName == null && category != null) {
+		} else if (searchName == null) {
 			jewels = jewelRepository.findByCategoryActivesWithImg(category, pageable);
 
-		} else if (searchName != null && category != null) {
+		} else {
 			jewels = jewelRepository.findByNameAndCategoryActivesWithImg(searchName, category, pageable);
 		}
 		return jewels;
@@ -85,7 +85,7 @@ public class JewelsManagerImpl implements JewelsManager {
 
 	@Override
 	public JewelEntity searchById(Long idjewel) {
-		return jewelRepository.findById(idjewel).get();
+		return jewelRepository.findById(idjewel).orElse(null);
 	}
 
 	@Override
@@ -99,7 +99,7 @@ public class JewelsManagerImpl implements JewelsManager {
 		if (Util.isEmpty(searchName)) {
 			Iterable<JewelEntity> iJewels = searchAll();
 			if (iJewels != null) {
-				jewels = new ArrayList<JewelEntity>();
+				jewels = new ArrayList<>();
 				Iterator<JewelEntity> itJewels = iJewels.iterator();
 				while (itJewels.hasNext()) {
 					JewelEntity jewel = itJewels.next();
@@ -117,7 +117,7 @@ public class JewelsManagerImpl implements JewelsManager {
 		List<JewelEntity> jewels = null;
 		CategoryEntity category = categoryRepository.findByKeyword(keywordcategory);
 		if (category != null) {
-			jewels = new ArrayList<JewelEntity>();
+			jewels = new ArrayList<>();
 			jewels.addAll(iterableToList(jewelRepository.findByCategoryAndActiveTrueAndImgNotNull(category)));
 		}
 		return jewels;
@@ -133,7 +133,7 @@ public class JewelsManagerImpl implements JewelsManager {
 	private List<JewelEntity> iterableToList(Iterable<JewelEntity> ijewels) {
 		List<JewelEntity> jewels = null;
 		if (ijewels != null) {
-			jewels = new ArrayList<JewelEntity>();
+			jewels = new ArrayList<>();
 			Iterator<JewelEntity> itJewels = ijewels.iterator();
 			while (itJewels.hasNext()) {
 				JewelEntity jewel = itJewels.next();
@@ -193,8 +193,9 @@ public class JewelsManagerImpl implements JewelsManager {
 	}
 
 	@Override
-	public List<JewelEntity> searchByReferenceAndPlaceAndMetal(String reference, PlaceEntity place, MetalEntity metal) {
-		return jewelRepository.findByReferenceAndPlaceAndMetal(reference, place, metal);
+	public List<JewelEntity> searchByReferenceAndPlaceAndMetal(String reference, PlaceEntity place,
+			MetalEntity material) {
+		return jewelRepository.findByReferenceAndPlaceAndMetal(reference, place, material);
 	}
 
 	@Override
@@ -214,7 +215,7 @@ public class JewelsManagerImpl implements JewelsManager {
 
 	@Override
 	public JewelEntity findById(Long idjewel) {
-		return jewelRepository.findById(idjewel).get();
+		return jewelRepository.findById(idjewel).orElse(null);
 	}
 
 	@Override
@@ -224,13 +225,16 @@ public class JewelsManagerImpl implements JewelsManager {
 
 	@Override
 	public void setGrams() {
-		MetalEntity metal = new MetalEntity();
-		metal.setIdmetal(Constants.ORO18K);
-		List<JewelEntity> jewels = jewelRepository.findByMetalAndGramsIsNull(metal);
+		MetalEntity material = new MetalEntity();
+		material.setIdmetal(Constants.ORO18K);
+		List<JewelEntity> jewels = jewelRepository.findByMetalAndGramsIsNull(material);
 		Iterator<JewelEntity> ijewels = jewels.iterator();
 		JewelEntity jewel;
 		String reference;
-		BigDecimal pricegram, referencegrams, grams, hundred = new BigDecimal(100);
+		BigDecimal pricegram;
+		BigDecimal referencegrams;
+		BigDecimal grams;
+		BigDecimal hundred = new BigDecimal(100);
 		while (ijewels.hasNext()) {
 			jewel = ijewels.next();
 			reference = jewel.getReference();

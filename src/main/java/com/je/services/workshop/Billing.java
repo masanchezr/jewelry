@@ -22,7 +22,7 @@ public class Billing {
 	private Date creationdate;
 
 	private BigDecimal grams;
-	private MetalEntity metal;
+	private MetalEntity material;
 
 	/**
 	 * Gets the amount.
@@ -98,10 +98,10 @@ public class Billing {
 	}
 
 	public MetalEntity getMetal() {
-		return metal;
+		return material;
 	}
 
-	public void setMetal(MetalEntity metal) {
-		this.metal = metal;
+	public void setMetal(MetalEntity material) {
+		this.material = material;
 	}
 }

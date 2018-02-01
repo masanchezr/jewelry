@@ -19,20 +19,20 @@ import com.je.dbaccess.repositories.MetalRepository;
 @ContextConfiguration(locations = { "classpath*:spring-db-context-test.xml" })
 public class MetalRepositoryTest {
 
-	/** The metal repository. */
+	/** The material repository. */
 	@Autowired
-	private MetalRepository metalRepository;
+	private MetalRepository materialRepository;
 
 	/**
 	 * Save test.
 	 */
 	@Test
 	public void saveTest() {
-		MetalEntity metal = new MetalEntity();
-		metal.setIdmetal(4L);
-		metal.setCreationdate(new Date());
-		metal.setDescription("ORO 20K");
-		// metalRepository.save(metal);
+		MetalEntity material = new MetalEntity();
+		material.setIdmetal(4L);
+		material.setCreationdate(new Date());
+		material.setDescription("ORO 20K");
+		// materialRepository.save(material);
 	}
 
 	/**
@@ -40,14 +40,14 @@ public class MetalRepositoryTest {
 	 */
 	@Test
 	public void findAllTest() {
-		Iterable<MetalEntity> metals = metalRepository.findAll();
-		if (metals != null) {
-			Iterator<MetalEntity> imetals = metals.iterator();
-			MetalEntity metal;
-			while (imetals.hasNext()) {
-				metal = imetals.next();
-				System.out.println("idmetal:" + metal.getIdmetal()
-						+ " description:" + metal.getDescription());
+		Iterable<MetalEntity> materials = materialRepository.findAll();
+		if (materials != null) {
+			Iterator<MetalEntity> imaterials = materials.iterator();
+			MetalEntity material;
+			while (imaterials.hasNext()) {
+				material = imaterials.next();
+				System.out.println("idmaterial:" + material.getIdmetal()
+						+ " description:" + material.getDescription());
 			}
 		}
 	}

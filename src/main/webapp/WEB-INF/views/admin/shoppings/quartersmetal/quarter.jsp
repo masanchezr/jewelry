@@ -24,7 +24,7 @@
 							<th><spring:message code="grossgrams" /></th>
 							<th><spring:message code="netgrams" /></th>
 							<th><spring:message code="amount" /></th>
-							<th><spring:message code="metal" /></th>
+							<th><spring:message code="material" /></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -35,7 +35,7 @@
 								<td><c:out value="${quarter.netgrams}" /></td>
 								<td><c:out value="${quarter.amount}" /><i
 									class="fa fa-euro"></i></td>
-								<td><c:out value="${quarter.metal.description}" /></td>
+								<td><c:out value="${quarter.material.description}" /></td>
 							</tr>
 						</c:forEach>
 					</tbody>

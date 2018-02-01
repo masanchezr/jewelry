@@ -24,7 +24,7 @@ import com.je.dbaccess.entities.MetalEntity;
 import com.je.dbaccess.entities.ObjectPawnEntity;
 import com.je.employee.validators.NewPawnFormValidator;
 import com.je.employee.validators.PawnFormValidator;
-import com.je.services.metal.MetalService;
+import com.je.services.material.MetalService;
 import com.je.services.nations.NationService;
 import com.je.services.pawns.NewPawn;
 import com.je.services.pawns.Pawn;
@@ -59,7 +59,7 @@ public class PawnsController {
 	private PawnFormValidator pawnFormValidator;
 
 	@Autowired
-	private MetalService metalService;
+	private MetalService materialService;
 
 	/** The log. */
 	private static Logger log = LoggerFactory.getLogger(PawnsController.class);
@@ -78,12 +78,12 @@ public class PawnsController {
 		ModelAndView model = new ModelAndView();
 		newPawnFormValidator.validate(pawn, result);
 		if (result.hasErrors()) {
-			List<MetalEntity> metals = metalService.getAllMetalsActive();
-			Iterator<MetalEntity> imetals = metals.iterator();
+			List<MetalEntity> materials = materialService.getAllMetalsActive();
+			Iterator<MetalEntity> imaterials = materials.iterator();
 			List<ObjectPawnEntity> lop = new ArrayList<ObjectPawnEntity>();
-			while (imetals.hasNext()) {
+			while (imaterials.hasNext()) {
 				ObjectPawnEntity op = new ObjectPawnEntity();
-				op.setMetal(imetals.next());
+				op.setMetal(imaterials.next());
 				lop.add(op);
 			}
 			pawn.setObjects(lop);
@@ -100,12 +100,12 @@ public class PawnsController {
 			pawn.setRetired(false);
 			boolean repeat = pawnService.isRepeatNumber(numpawn, user, c.get(Calendar.YEAR));
 			if (repeat) {
-				List<MetalEntity> metals = metalService.getAllMetalsActive();
-				Iterator<MetalEntity> imetals = metals.iterator();
+				List<MetalEntity> materials = materialService.getAllMetalsActive();
+				Iterator<MetalEntity> imaterials = materials.iterator();
 				List<ObjectPawnEntity> lop = new ArrayList<ObjectPawnEntity>();
-				while (imetals.hasNext()) {
+				while (imaterials.hasNext()) {
 					ObjectPawnEntity op = new ObjectPawnEntity();
-					op.setMetal(imetals.next());
+					op.setMetal(imaterials.next());
 					lop.add(op);
 				}
 				pawn.setObjects(lop);
@@ -117,11 +117,11 @@ public class PawnsController {
 			} else {
 				/*
 				 * boolean isCorrectNumber = pawnService.isCorrectNumber(numpawn, user,
-				 * c.get(Calendar.YEAR)); if (!isCorrectNumber) { List<MetalEntity> metals =
-				 * metalService.getAllMetalsActive(); Iterator<MetalEntity> imetals =
-				 * metals.iterator(); List<ObjectPawnEntity> lop = new
-				 * ArrayList<ObjectPawnEntity>(); while (imetals.hasNext()) { ObjectPawnEntity
-				 * op = new ObjectPawnEntity(); op.setMetal(imetals.next()); lop.add(op); }
+				 * c.get(Calendar.YEAR)); if (!isCorrectNumber) { List<MetalEntity> materials =
+				 * materialService.getAllMetalsActive(); Iterator<MetalEntity> imaterials =
+				 * materials.iterator(); List<ObjectPawnEntity> lop = new
+				 * ArrayList<ObjectPawnEntity>(); while (imaterials.hasNext()) { ObjectPawnEntity
+				 * op = new ObjectPawnEntity(); op.setMetal(imaterials.next()); lop.add(op); }
 				 * pawn.setObjects(lop); model.addObject("pawnForm", pawn);
 				 * model.setViewName("newPawn"); result.rejectValue("numpawn", "wrongnumber"); }
 				 * else {
@@ -173,12 +173,12 @@ public class PawnsController {
 		} else {
 			pawn = pawnService.searchClient(dni);
 			pawn.setUser(user);
-			List<MetalEntity> metals = metalService.getAllMetalsActive();
-			Iterator<MetalEntity> imetals = metals.iterator();
+			List<MetalEntity> materials = materialService.getAllMetalsActive();
+			Iterator<MetalEntity> imaterials = materials.iterator();
 			List<ObjectPawnEntity> lop = new ArrayList<ObjectPawnEntity>();
-			while (imetals.hasNext()) {
+			while (imaterials.hasNext()) {
 				ObjectPawnEntity op = new ObjectPawnEntity();
-				op.setMetal(imetals.next());
+				op.setMetal(imaterials.next());
 				lop.add(op);
 			}
 			pawn.setObjects(lop);

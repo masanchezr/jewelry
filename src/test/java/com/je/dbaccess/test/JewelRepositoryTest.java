@@ -35,13 +35,13 @@ public class JewelRepositoryTest {
 		JewelEntity jewel = new JewelEntity();
 		PlaceEntity place = new PlaceEntity();
 		CategoryEntity category = new CategoryEntity();
-		MetalEntity metal = new MetalEntity();
-		metal.setIdmetal(2L);
+		MetalEntity material = new MetalEntity();
+		material.setIdmetal(2L);
 		category.setIdcategory(38L);
 		place.setIdplace(28017L);
 		// jewel.setIdjewel(978L);
 		jewel.setActive(true);
-		jewel.setMetal(metal);
+		jewel.setMetal(material);
 		jewel.setPrice(new BigDecimal(195));
 		jewel.setReference("PORTAFOTOSG120");
 		jewel.setCategory(category);
@@ -130,18 +130,18 @@ public class JewelRepositoryTest {
 	}
 
 	/**
-	 * Find by reference and category and metal and place and active test.
+	 * Find by reference and category and material and place and active test.
 	 */
 	@Test
 	public void findByReferenceAndCategoryAndMetalAndPlaceAndActiveTest() {
 		PlaceEntity place = new PlaceEntity();
 		CategoryEntity category = new CategoryEntity();
-		MetalEntity metal = new MetalEntity();
-		metal.setIdmetal(1L);
+		MetalEntity material = new MetalEntity();
+		material.setIdmetal(1L);
 		category.setIdcategory(1L);
 		place.setIdplace(24003L);
 		List<JewelEntity> jewels = jewelRepository.findByReferenceAndCategoryAndMetalAndPlaceAndActive("b186", category,
-				metal, place, Boolean.TRUE);
+				material, place, Boolean.TRUE);
 		if (jewels != null) {
 
 		}

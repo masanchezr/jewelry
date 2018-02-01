@@ -50,7 +50,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 	private PlaceUserRepository placeUserRepository;
 
 	@Autowired
-	private MetalRepository metalRepository;
+	private MetalRepository materialRepository;
 
 	/** The client pawns repository. */
 	@Autowired
@@ -209,7 +209,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 	@Override
 	public List<QuarterMetal> searchGramsByMetal(String sDateFrom, String sDateUntil, PlaceEntity place) {
 		Date datefrom = DateUtil.getDate(sDateFrom), dateuntil = DateUtil.getDate(sDateUntil);
-		List<QuarterMetal> lquartermetal = new ArrayList<QuarterMetal>();
+		List<QuarterMetal> lquartermaterial = new ArrayList<QuarterMetal>();
 		List<ShoppingEntity> shoppings = shoppingsRepository.findByCreationdateBetweenAndPlace(datefrom, dateuntil,
 				place);
 		List<ObjectShopEntity> lose;
@@ -229,44 +229,44 @@ public class ShoppingServiceImpl implements ShoppingService {
 				}
 				qm.setAmount(ose.getAmount());
 				qm.setMetal(ose.getMetal());
-				lquartermetal.add(qm);
+				lquartermaterial.add(qm);
 			}
 		}
-		Iterable<MetalEntity> metals = metalRepository.findAll();
-		Iterator<MetalEntity> imetals = metals.iterator();
+		Iterable<MetalEntity> materials = materialRepository.findAll();
+		Iterator<MetalEntity> imaterials = materials.iterator();
 		List<QuarterMetal> lqm = new ArrayList<QuarterMetal>();
-		MetalEntity metal;
+		MetalEntity material;
 		QuarterMetal qm;
-		BigDecimal realgrams, grossgrams, netgrams, amount, amountmetal;
-		boolean ismetal;
-		while (imetals.hasNext()) {
-			metal = imetals.next();
-			ismetal = false;
+		BigDecimal realgrams, grossgrams, netgrams, amount, amountmaterial;
+		boolean ismaterial;
+		while (imaterials.hasNext()) {
+			material = imaterials.next();
+			ismaterial = false;
 			realgrams = BigDecimal.ZERO;
 			grossgrams = BigDecimal.ZERO;
 			netgrams = BigDecimal.ZERO;
 			amount = BigDecimal.ZERO;
-			for (QuarterMetal quarterMetal : lquartermetal) {
-				if (quarterMetal.getMetal().getIdmetal().equals(metal.getIdmetal())) {
+			for (QuarterMetal quarterMetal : lquartermaterial) {
+				if (quarterMetal.getMetal().getIdmetal().equals(material.getIdmetal())) {
 					if (quarterMetal.getRealgrams() != null) {
 						realgrams = realgrams.add(quarterMetal.getRealgrams());
 					}
 					netgrams = netgrams.add(quarterMetal.getNetgrams());
 					grossgrams = grossgrams.add(quarterMetal.getGrossgrams());
-					amountmetal = quarterMetal.getAmount();
-					if (amountmetal != null) {
-						amount = amount.add(amountmetal);
+					amountmaterial = quarterMetal.getAmount();
+					if (amountmaterial != null) {
+						amount = amount.add(amountmaterial);
 					}
-					ismetal = true;
+					ismaterial = true;
 				}
 			}
-			if (ismetal) {
+			if (ismaterial) {
 				qm = new QuarterMetal();
 				qm.setGrossgrams(grossgrams);
 				qm.setNetgrams(netgrams);
 				qm.setRealgrams(realgrams);
 				qm.setAmount(amount);
-				qm.setMetal(metal);
+				qm.setMetal(material);
 				lqm.add(qm);
 			}
 		}
@@ -301,7 +301,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 		XSSFRow row = spreadsheet.createRow(0);
 		Cell numshop = row.createCell(0), date = row.createCell(1), name = row.createCell(2), nif = row.createCell(3),
 				address = row.createCell(4), town = row.createCell(5), country = row.createCell(6),
-				objects = row.createCell(7), metal = row.createCell(8), record = row.createCell(9),
+				objects = row.createCell(7), material = row.createCell(8), record = row.createCell(9),
 				rock = row.createCell(10);
 		List<Shopping> shoppings = searchShoppings(datefrom, dateuntil, place, null);
 		List<ObjectShopEntity> lobjects;
@@ -329,8 +329,8 @@ public class ShoppingServiceImpl implements ShoppingService {
 		country.setCellStyle(style);
 		objects.setCellValue("OBJETOS");
 		objects.setCellStyle(style);
-		metal.setCellValue("METAL");
-		metal.setCellStyle(style);
+		material.setCellValue("METAL");
+		material.setCellStyle(style);
 		record.setCellValue("GRABACIONES");
 		record.setCellStyle(style);
 		rock.setCellValue("PIEDRAS");
@@ -345,7 +345,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 			town = row.createCell(5);
 			country = row.createCell(6);
 			objects = row.createCell(7);
-			metal = row.createCell(8);
+			material = row.createCell(8);
 			record = row.createCell(9);
 			rock = row.createCell(10);
 			shop = ishoppings.next();
@@ -361,7 +361,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 			while (ilobjects.hasNext()) {
 				os = ilobjects.next();
 				System.out.println(os.getIdobjectshop());
-				metal.setCellValue(os.getMetal().getDescription());
+				material.setCellValue(os.getMetal().getDescription());
 				description = os.getDescription();
 				descriptions = description.split(";");
 				for (int d = 0; d < descriptions.length; d++) {
@@ -390,7 +390,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 				if (ilobjects.hasNext()) {
 					row = spreadsheet.createRow(i);
 					objects = row.createCell(7);
-					metal = row.createCell(8);
+					material = row.createCell(8);
 					record = row.createCell(9);
 					rock = row.createCell(10);
 				}

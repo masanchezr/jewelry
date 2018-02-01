@@ -1,4 +1,4 @@
-package com.je.services.metal;
+package com.je.services.material;
 
 import java.util.List;
 
@@ -10,9 +10,9 @@ import com.je.dbaccess.entities.MetalEntity;
 public interface MetalService {
 
 	/**
-	 * Gets the all metals.
+	 * Gets the all materials.
 	 *
-	 * @return the all metals
+	 * @return the all materials
 	 */
 	public Iterable<MetalEntity> getAllMetals();
 

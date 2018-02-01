@@ -156,9 +156,9 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/shoppings/quarters/searchquarter.jsp" />
 	</definition>
-	<definition name="quartermetal" extends="templateAdmin">
+	<definition name="quartermaterial" extends="templateAdmin">
 		<put-attribute name="body"
-			value="/WEB-INF/views/admin/shoppings/quartersmetal/quarter.jsp" />
+			value="/WEB-INF/views/admin/shoppings/quartersmaterial/quarter.jsp" />
 	</definition>
 	<definition name="newshop" extends="templateAdmin">
 		<put-attribute name="body"
@@ -168,9 +168,9 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/shoppings/newshop/searchclient.jsp" />
 	</definition>
-	<definition name="searchquartermetal" extends="templateAdmin">
+	<definition name="searchquartermaterial" extends="templateAdmin">
 		<put-attribute name="body"
-			value="/WEB-INF/views/admin/shoppings/quartersmetal/searchquarter.jsp" />
+			value="/WEB-INF/views/admin/shoppings/quartersmaterial/searchquarter.jsp" />
 	</definition>
 	<definition name="quarterpawns" extends="templateAdmin">
 		<put-attribute name="body"

@@ -34,8 +34,8 @@ public class JewelServiceTest {
 		JewelEntity thing = new JewelEntity();
 		PlaceEntity place = new PlaceEntity();
 		CategoryEntity category = new CategoryEntity();
-		MetalEntity metal = new MetalEntity();
-		metal.setIdmetal(1L);
+		MetalEntity material = new MetalEntity();
+		material.setIdmetal(1L);
 		category.setIdcategory(4L);
 		place.setIdplace(13700L);
 		thing.setPlace(place);
@@ -45,27 +45,27 @@ public class JewelServiceTest {
 		thing.setActive(true);
 		thing.setReference("9332p");
 		thing.setCategory(category);
-		thing.setMetal(metal);
+		thing.setMetal(material);
 		thing.setRevised(Boolean.FALSE);
 		// objectService.addObject(thing);
 	}
 
 	/**
-	 * Search by reference category metal place active test.
+	 * Search by reference category material place active test.
 	 */
 	@Test
 	public void searchByReferenceCategoryMetalPlaceActiveTest() {
 		JewelEntity jewel = new JewelEntity();
 		PlaceEntity place = new PlaceEntity();
 		CategoryEntity category = new CategoryEntity();
-		MetalEntity metal = new MetalEntity();
-		metal.setIdmetal(1L);
+		MetalEntity material = new MetalEntity();
+		material.setIdmetal(1L);
 		category.setIdcategory(1L);
 		place.setIdplace(24003L);
 		jewel.setPlace(place);
 		jewel.setCategory(category);
 		jewel.setReference("b186");
-		jewel.setMetal(metal);
+		jewel.setMetal(material);
 		objectService.searchByReferenceCategoryMetalPlaceActive(jewel);
 	}
 

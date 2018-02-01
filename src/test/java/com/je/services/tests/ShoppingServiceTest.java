@@ -53,11 +53,11 @@ public class ShoppingServiceTest {
 		shopping.setNumshop(907L);
 		List<ObjectShopEntity> los = new ArrayList<ObjectShopEntity>();
 		ObjectShopEntity os = new ObjectShopEntity();
-		MetalEntity metal = new MetalEntity();
-		metal.setIdmetal(1L);
+		MetalEntity material = new MetalEntity();
+		material.setIdmetal(1L);
 		os.setAmount(new BigDecimal(85));
 		os.setGrossgrams(new BigDecimal(5));
-		os.setMetal(metal);
+		os.setMetal(material);
 		los.add(os);
 		shopping.setObjects(los);
 		// shoppingService.save(shopping);
