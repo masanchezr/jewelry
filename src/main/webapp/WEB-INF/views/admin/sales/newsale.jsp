@@ -41,7 +41,7 @@
 								</form:select></td>
 							<td><form:select class="form-control"
 									path="jewels[${status.index}].metal.idmetal">
-									<form:options items="${materials}" itemValue="metal"
+									<form:options items="${materials}" itemValue="idmetal"
 										itemLabel="description" />
 								</form:select></td>
 						</tr>

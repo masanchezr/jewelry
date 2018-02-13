@@ -36,7 +36,7 @@
 									path="objects[${status.index}].metal.idmetal">
 									<form:option value="${os.metal.idmetal}"
 										label="${os.metal.description}" />
-									<form:options items="${materials}" itemValue="metal"
+									<form:options items="${materials}" itemValue="idmetal"
 										itemLabel="description" />
 								</form:select></td>
 							<td><spring:message code="grossgrams" var="grossgrams" /> <form:input
