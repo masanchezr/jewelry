@@ -254,8 +254,8 @@ public class JewelEntity implements Serializable {
 	 * @param material
 	 *            the new material
 	 */
-	public void setMetal(MetalEntity material) {
-		this.metal = material;
+	public void setMetal(MetalEntity metal) {
+		this.metal = metal;
 	}
 
 	/**

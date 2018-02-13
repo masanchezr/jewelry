@@ -29,7 +29,7 @@
 								<tr>
 									<td><c:out value="${jewel.description}" /></td>
 									<td><c:out value="${jewel.price}" /></td>
-									<td><c:out value="${jewel.material.description}" /></td>
+									<td><c:out value="${jewel.metal.description}" /></td>
 									<td><c:out value="${jewel.place.description}" /></td>
 								</tr>
 							</c:forEach>

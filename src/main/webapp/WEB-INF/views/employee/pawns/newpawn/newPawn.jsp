@@ -115,8 +115,8 @@
 				<c:forEach items="${pawnForm.objects}" varStatus="status" var="os">
 					<tr class="${status.count % 2 == 0 ? 'success' : 'danger'}">
 						<td><strong><form:hidden
-									path="objects[${status.index}].material.idmaterial" /> <c:out
-									value="${os.material.description}" /></strong></td>
+									path="objects[${status.index}].metal.idmaterial" /> <c:out
+									value="${os.metal.description}" /></strong></td>
 						<td><spring:message code="grossgrams" var="grossgrams" /> <form:input
 								class="form-control" path="objects[${status.index}].grossgrams"
 								placeholder="${grossgrams}" /></td>

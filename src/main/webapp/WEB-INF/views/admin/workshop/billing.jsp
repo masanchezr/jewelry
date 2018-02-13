@@ -30,7 +30,7 @@
 									<td><c:out value="${bill.description}" /></td>
 									<td><c:out value="${bill.amount}" /></td>
 									<td><c:out value="${bill.creationdate}" /></td>
-									<td><c:out value="${bill.material.description}" /></td>
+									<td><c:out value="${bill.metal.description}" /></td>
 									<td><c:out value="${bill.grams}" /></td>
 								</tr>
 							</c:forEach>
@@ -61,7 +61,7 @@
 							<c:forEach items="${grams}" var="item">
 								<tr>
 									<td><c:out value="${item.grams}" /></td>
-									<td><c:out value="${item.material.description}" /></td>
+									<td><c:out value="${item.metal.description}" /></td>
 								</tr>
 							</c:forEach>
 						</tbody>

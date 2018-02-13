@@ -35,7 +35,7 @@
 								<td><c:out value="${quarter.netgrams}" /></td>
 								<td><c:out value="${quarter.amount}" /><i
 									class="fa fa-euro"></i></td>
-								<td><c:out value="${quarter.material.description}" /></td>
+								<td><c:out value="${quarter.metal.description}" /></td>
 							</tr>
 						</c:forEach>
 					</tbody>
