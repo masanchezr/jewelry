@@ -7,6 +7,8 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.je.services.pawns.NewPawn;
+import com.je.utils.constants.Constants;
+import com.je.utils.constants.ConstantsJsp;
 import com.je.utils.date.DateUtil;
 import com.je.utils.string.Util;
 
@@ -24,19 +26,19 @@ public class UpdatePawnFormValidator implements Validator {
 	public void validate(Object arg0, Errors arg1) {
 
 		NewPawn pawn = (NewPawn) arg0;
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "numpawn", "idpawn");
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "name", "selectname");
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "surname", "selectsurname");
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "nif", "selectnif");
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "address", "selectaddress");
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "percent", "selectpercent");
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.NUMPAWN, Constants.IDPAWN);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.NAME, ConstantsJsp.ERRORSELECTNAME);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsJsp.SURNAME, ConstantsJsp.ERRORSURNAME);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsJsp.NIF, ConstantsJsp.ERRORSELECTNIF);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsJsp.ADDRESS, ConstantsJsp.ERRORSELECTADDRESS);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsJsp.ERRORSELECTADDRESS, ConstantsJsp.ERRORSELECTPERCENT);
 		String sdate = pawn.getCreationdate();
 		BigDecimal percent = pawn.getPercent();
 		if (!Util.isEmpty(sdate) && !DateUtil.isDate(sdate)) {
-			arg1.rejectValue("creationdate", "selectdate");
+			arg1.rejectValue(Constants.CREATIONDATE, ConstantsJsp.SELECTDATE);
 		}
 		if (percent.compareTo(BigDecimal.ZERO) <= 0) {
-			arg1.rejectValue("percent", "selectpercent");
+			arg1.rejectValue(ConstantsJsp.ERRORSELECTADDRESS, ConstantsJsp.ERRORSELECTPERCENT);
 		}
 	}
 }

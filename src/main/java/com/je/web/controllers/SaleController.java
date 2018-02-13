@@ -20,6 +20,7 @@ import com.je.services.sales.Addresses;
 import com.je.services.sales.SaleService;
 import com.je.services.users.Client;
 import com.je.services.users.RegistrationService;
+import com.je.utils.constants.ConstantsJsp;
 import com.je.utils.string.Util;
 import com.je.web.forms.BuyForm;
 import com.je.web.forms.DataClientForm;
@@ -53,6 +54,8 @@ public class SaleController {
 	@Autowired
 	private DataClientFormValidator dataClientFormValidator;
 
+	private static final String VIEWSHOPPINGCART = "shoppingcart";
+
 	/**
 	 * Buy.
 	 * 
@@ -73,7 +76,8 @@ public class SaleController {
 			// guardamos o actualizamos información del cliente
 			Client client = new Client();
 			client.setNifclient(dataForm.getNif());
-			String mail = dataForm.getEmail(), name = dataForm.getName();
+			String mail = dataForm.getEmail();
+			String name = dataForm.getName();
 			Long telephone = dataForm.getTelephone();
 			if (!Util.isEmpty(name)) {
 				client.setName(name);
@@ -97,30 +101,30 @@ public class SaleController {
 			buyForm.setJewels(dataForm.getJewels());
 			buyForm.setNif(dataForm.getNif());
 			model.addObject("buyForm", buyForm);
-			model.addObject("payments", paymentService.findAllActiveFalse());
+			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActiveFalse());
 			model.setViewName(jsp);
-			model.addObject("breadcrumbs", "Home >> Producto seleccionado >> Comprar");
+			model.addObject(ConstantsJsp.BREADCRUMBS, "Home >> Producto seleccionado >> Comprar");
 		} else {
-			model.setViewName("shoppingcart");
+			model.setViewName(VIEWSHOPPINGCART);
 		}
-		model.addObject("search", new SearchJewelForm());
-		model.addObject("categories", categories);
+		model.addObject(ConstantsJsp.FORMSEARCH, new SearchJewelForm());
+		model.addObject(ConstantsJsp.CATEGORIES, categories);
 		return model;
 	}
 
 	@RequestMapping(value = "/checkout")
 	public ModelAndView checkout() {
-		ModelAndView model = new ModelAndView("shoppingcart");
+		ModelAndView model = new ModelAndView(VIEWSHOPPINGCART);
 		model.addObject("dataForm", new DataClientForm());
-		model.addObject("search", new SearchJewelForm());
-		model.addObject("categories", searchCategoriesService.getAllCategoriesOrderByName());
+		model.addObject(ConstantsJsp.FORMSEARCH, new SearchJewelForm());
+		model.addObject(ConstantsJsp.CATEGORIES, searchCategoriesService.getAllCategoriesOrderByName());
 		return model;
 	}
 
 	@RequestMapping(value = "/eliminar{idjewel}")
 	public ModelAndView deleteJewelEntity(@PathVariable("idjewel") long idjewel,
 			@ModelAttribute("cart") List<JewelEntity> cart) {
-		ModelAndView model = new ModelAndView("shoppingcart");
+		ModelAndView model = new ModelAndView(VIEWSHOPPINGCART);
 		model.addObject("dataForm", new DataClientForm());
 		Iterator<JewelEntity> icart = cart.iterator();
 		JewelEntity jewel;

@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.je.admin.forms.AdminForm;
 import com.je.forms.SearchForm;
 import com.je.services.entrymoney.EntryMoneyService;
+import com.je.utils.constants.ConstantsJsp;
 import com.je.utils.date.DateUtil;
 import com.je.utils.string.Util;
 import com.je.validators.SearchFormValidator;
@@ -28,19 +29,19 @@ public class EntryMoneyAdminController {
 	@RequestMapping(value = "/searchEntries")
 	public ModelAndView searchEntries() {
 		ModelAndView model = new ModelAndView("searchentries");
-		model.addObject("adminForm", new AdminForm());
-		model.addObject("adminSearchForm", new SearchForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsJsp.FORMSEARCH, new SearchForm());
 		return model;
 	}
 
 	@RequestMapping(value = "/resultentries")
-	public ModelAndView resultEntries(@ModelAttribute("adminSearchForm") SearchForm asf, BindingResult arg1) {
+	public ModelAndView resultEntries(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm asf, BindingResult arg1) {
 		ModelAndView model = new ModelAndView();
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		adminSearchValidator.validate(asf, arg1);
 		if (arg1.hasErrors()) {
 			model.setViewName("searchentries");
-			model.addObject("adminSearchForm", asf);
+			model.addObject(ConstantsJsp.FORMSEARCH, asf);
 		} else {
 			model.setViewName("resultentriesmoney");
 			Date dfrom = DateUtil.getDate(asf.getDatefrom());

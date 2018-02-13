@@ -19,11 +19,13 @@ import javax.persistence.Table;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import com.je.utils.constants.Constants;
+
 /**
  * The Class SaleEntity.
  */
 @Entity
-@Table(name = "sales")
+@Table(name = Constants.SALES)
 public class SaleEntity implements Serializable {
 
 	/** The Constant serialVersionUID. */
@@ -43,9 +45,9 @@ public class SaleEntity implements Serializable {
 	private Date creationdate;
 
 	/**
-	 * The client_nif. Quito el manytoOne porque voy a guardar antes al cliente,
-	 * si quisieramos guardar el cliente a la vez que la compra el cascadetype
-	 * sería MERGE
+	 * The client_nif. Quito el manytoOne porque voy a guardar antes al cliente, si
+	 * quisieramos guardar el cliente a la vez que la compra el cascadetype sería
+	 * MERGE
 	 */
 
 	// @ManyToOne(cascade = CascadeType.MERGE)

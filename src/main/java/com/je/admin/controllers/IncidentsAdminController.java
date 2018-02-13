@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.je.admin.forms.AdminForm;
 import com.je.services.incidents.Incident;
 import com.je.services.incidents.IncidentService;
+import com.je.utils.constants.ConstantsJsp;
 
 @Controller
 public class IncidentsAdminController {
@@ -19,33 +20,34 @@ public class IncidentsAdminController {
 	@RequestMapping(value = "/allincidents")
 	public ModelAndView allincidents() {
 		ModelAndView model = new ModelAndView("allincidents");
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject("incidents", incidentService.searchAllIncidents());
-		model.addObject("incident", new Incident());
+		model.addObject(ConstantsJsp.FORMINCIDENT, new Incident());
 		return model;
 	}
 
 	@RequestMapping(value = "/pendingissues")
 	public ModelAndView pendingissues() {
 		ModelAndView model = new ModelAndView("allincidents");
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject("incidents", incidentService.searchPending());
-		model.addObject("incident", new Incident());
+		model.addObject(ConstantsJsp.FORMINCIDENT, new Incident());
 		return model;
 	}
 
 	@RequestMapping(value = "/searchincident")
-	public ModelAndView searchIncident(@ModelAttribute("incident") Incident incident) {
+	public ModelAndView searchIncident(@ModelAttribute(ConstantsJsp.FORMINCIDENT) Incident incident) {
 		ModelAndView model = new ModelAndView("updateincident");
-		model.addObject("incident", incidentService.searchIncident(incident));
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.FORMINCIDENT, incidentService.searchIncident(incident));
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		return model;
 	}
 
 	@RequestMapping(value = "/resolvedincident")
-	public ModelAndView resolvedIncident(@ModelAttribute("incident") Incident incident) {
+	public ModelAndView resolvedIncident(@ModelAttribute(ConstantsJsp.FORMINCIDENT) Incident incident) {
 		if (incident != null && incident.getIdincident() != null) {
 			incidentService.resolve(incident);
-		} return pendingissues();
+		}
+		return pendingissues();
 	}
 }

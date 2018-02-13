@@ -12,6 +12,8 @@ import com.je.admin.validators.UserValidator;
 import com.je.services.places.PlaceService;
 import com.je.services.users.User;
 import com.je.services.users.UserService;
+import com.je.utils.constants.Constants;
+import com.je.utils.constants.ConstantsJsp;
 
 @Controller
 public class UsersController {
@@ -26,30 +28,32 @@ public class UsersController {
 	@Autowired
 	private UserValidator userValidator;
 
+	private static final String VIEWENABLEDISABLEUSER = "enabledisableuser";
+
 	@RequestMapping(value = "/enabledisableuser")
 	public ModelAndView enabledisableuser() {
-		ModelAndView model = new ModelAndView("enabledisableuser");
-		model.addObject("adminForm", new AdminForm());
-		model.addObject("user", new User());
+		ModelAndView model = new ModelAndView(VIEWENABLEDISABLEUSER);
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsJsp.USER, new User());
 		return model;
 	}
 
 	@RequestMapping(value = "/resultenabledisableuser")
-	public ModelAndView resultenabledisableuser(@ModelAttribute("user") User user, BindingResult result) {
+	public ModelAndView resultenabledisableuser(@ModelAttribute(ConstantsJsp.USER) User user, BindingResult result) {
 		ModelAndView model = new ModelAndView("resultenabledisableuser");
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		userValidator.validate(user, result);
 		if (result.hasErrors()) {
-			model.setViewName("enabledisableuser");
-			model.addObject("user", new User());
+			model.setViewName(VIEWENABLEDISABLEUSER);
+			model.addObject(ConstantsJsp.USER, new User());
 		} else {
 			user = userService.disableEnableUser(user.getUsername());
 			if (user == null) {
-				model.setViewName("enabledisableuser");
-				model.addObject("user", new User());
-				result.rejectValue("username", "usernoexist");
+				model.setViewName(VIEWENABLEDISABLEUSER);
+				model.addObject(ConstantsJsp.USER, new User());
+				result.rejectValue(Constants.USERNAME, "usernoexist");
 			} else {
-				model.addObject("user", user);
+				model.addObject(ConstantsJsp.USER, user);
 				model.setViewName("resultenabledisableuser");
 			}
 		}
@@ -59,24 +63,24 @@ public class UsersController {
 	@RequestMapping(value = "/newuser")
 	public ModelAndView newUser() {
 		ModelAndView model = new ModelAndView("newuser");
-		model.addObject("adminForm", new AdminForm());
-		model.addObject("user", new User());
-		model.addObject("places", placeService.getAllPlaces());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsJsp.USER, new User());
+		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
 		return model;
 	}
 
 	@RequestMapping(value = "/saveuser")
-	public ModelAndView saveUser(@ModelAttribute("user") User user, BindingResult result) {
+	public ModelAndView saveUser(@ModelAttribute(ConstantsJsp.USER) User user, BindingResult result) {
 		ModelAndView model = new ModelAndView();
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		userValidator.validate(user, result);
 		if (result.hasErrors()) {
 			model.setViewName("newuser");
-			model.addObject("user", new User());
-			model.addObject("places", placeService.getAllPlaces());
+			model.addObject(ConstantsJsp.USER, new User());
+			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
 		} else {
 			model.setViewName("resultuser");
-			model.addObject("user", user);
+			model.addObject(ConstantsJsp.USER, user);
 			userService.newUser(user);
 		}
 		return model;

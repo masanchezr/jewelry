@@ -14,6 +14,7 @@ import com.je.employee.validators.IncidentValidator;
 import com.je.forms.SearchForm;
 import com.je.services.incidents.Incident;
 import com.je.services.incidents.IncidentService;
+import com.je.utils.constants.ConstantsJsp;
 import com.je.validators.SearchFormValidator;
 
 @Controller
@@ -31,40 +32,41 @@ public class IncidentsController {
 	@RequestMapping(value = "/employee/newincident")
 	public ModelAndView newIncident() {
 		ModelAndView model = new ModelAndView("newincident");
-		model.addObject("incident", new Incident());
+		model.addObject(ConstantsJsp.FORMINCIDENT, new Incident());
 		return model;
 	}
 
 	@RequestMapping(value = "/employee/saveincident")
-	public ModelAndView saveIncident(@ModelAttribute("incident") Incident incident, BindingResult result) {
+	public ModelAndView saveIncident(@ModelAttribute(ConstantsJsp.FORMINCIDENT) Incident incident,
+			BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		incidentValidator.validate(incident, result);
 		if (result.hasErrors()) {
 			model.setViewName("newincident");
 		} else {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
-			// String description = incident.getDescription();
 			model.setViewName("saveincident");
 			incident.setUser(user);
 			incidentService.save(incident);
 		}
-		model.addObject("incident", incident);
+		model.addObject(ConstantsJsp.FORMINCIDENT, incident);
 		return model;
 	}
 
 	@RequestMapping(value = "/employee/myincidents")
 	public ModelAndView myincidents() {
 		ModelAndView model = new ModelAndView("searchincidents");
-		model.addObject("searchForm", new SearchForm());
+		model.addObject(ConstantsJsp.FORMSEARCH, new SearchForm());
 		return model;
 	}
 
 	@RequestMapping(value = "/employee/resultIncidents")
-	public ModelAndView resultSearchIncidents(@ModelAttribute("searchForm") SearchForm form, BindingResult result) {
+	public ModelAndView resultSearchIncidents(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm form,
+			BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		searchFormValidator.validate(form, result);
 		if (result.hasErrors()) {
-			model.addObject("searchForm", form);
+			model.addObject(ConstantsJsp.FORMSEARCH, form);
 			model.setViewName("searchincidents");
 		} else {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();

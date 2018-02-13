@@ -34,6 +34,8 @@ import com.je.dbaccess.repositories.RecordingRepository;
 import com.je.dbaccess.repositories.SaleRepository;
 import com.je.dbaccess.repositories.SalesPostponedRepository;
 import com.je.dbaccess.repositories.StrapsRepository;
+import com.je.utils.constants.Constants;
+import com.je.utils.constants.ConstantsJsp;
 
 /**
  * The Class SaleManagerImpl.
@@ -70,21 +72,17 @@ public class SaleManagerImpl implements SaleManager {
 	@Override
 	@Transactional
 	public Long buy(SaleEntity sale) {
-		List<SalesJewels> lsj = new ArrayList<SalesJewels>();
+		List<SalesJewels> lsj = new ArrayList<>();
 		Iterator<SalesJewels> isj = sale.getSjewels().iterator();
 		Long orderNumber = null;
 		while (isj.hasNext()) {
 			SalesJewels sj = isj.next();
-			JewelEntity je = jewelRepository.findById(sj.getJewelEntity().getIdjewel()).get();
+			JewelEntity je = jewelRepository.findById(sj.getJewelEntity().getIdjewel()).orElse(null);
 			if (je != null) {
-				System.out.println("jewel no es nulo");
 				je.setActive(false);
 				je.setSaledate(sale.getCreationdate());
 				sj.setJewelEntity(je);
-			} else {
-				System.out.println("jewel es nulo");
 			}
-			System.out.println("antes de guardar sj");
 			lsj.add(sj);
 		}
 		sale.setSjewels(lsj);
@@ -112,8 +110,8 @@ public class SaleManagerImpl implements SaleManager {
 		Addresses addresses = null;
 		Iterable<SaleEntity> sales = saleRepository.findByClient(client);
 		if (sales != null && sales.iterator().hasNext()) {
-			List<AddressEntity> addressesMailing = new ArrayList<AddressEntity>();
-			List<AddressEntity> addressesBilling = new ArrayList<AddressEntity>();
+			List<AddressEntity> addressesMailing = new ArrayList<>();
+			List<AddressEntity> addressesBilling = new ArrayList<>();
 			addresses = new Addresses();
 			Iterator<SaleEntity> isales = sales.iterator();
 			SaleEntity sale;
@@ -179,20 +177,16 @@ public class SaleManagerImpl implements SaleManager {
 		JewelEntity jewel;
 		boolean exit = true;
 		BigDecimal amount = BigDecimal.ZERO;
-		Long idjewel;
 		while (isalesjewels.hasNext() && exit) {
 			jewel = isalesjewels.next();
-			idjewel = jewel.getIdjewel();
-			if (idjewel != null) {
-				jewel = jewelRepository.findById(idjewel).get();
-				if (!jewel.getActive()) {
-					amount = amount.add(jewel.getPrice());
-					jewel.setActive(true);
-					jewelRepository.save(jewel);
-					exit = true;
-				} else {
-					exit = false;
-				}
+			jewel = jewelRepository.findById(jewel.getIdjewel()).orElse(null);
+			if (jewel != null && !jewel.getActive()) {
+				amount = amount.add(jewel.getPrice());
+				jewel.setActive(true);
+				jewelRepository.save(jewel);
+				exit = true;
+			} else {
+				exit = false;
 			}
 		}
 		if (exit) {
@@ -213,10 +207,8 @@ public class SaleManagerImpl implements SaleManager {
 		place.setIdplace(idplace);
 		SaleEntity sale = saleRepository.findByNumsaleAndPlace(numsale, place);
 		boolean exists = true;
-		if (sale == null) {
-			if (checkAllSales(numsale, place) != 0) {
-				exists = false;
-			}
+		if (sale == null && checkAllSales(numsale, place) != 0) {
+			exists = false;
 		}
 		return exists;
 	}
@@ -228,17 +220,19 @@ public class SaleManagerImpl implements SaleManager {
 
 	@Override
 	public Map<String, Object> searchByDatesAndPlace(Date from, Date until, PlaceEntity place) {
-		List<SaleEntity> sales = new ArrayList<SaleEntity>();
+		List<SaleEntity> sales = new ArrayList<>();
 		List<CancelSaleEntity> cancels;
 		Iterable<SaleEntity> isales = saleRepository.findByCreationdateBetweenAndPlaceOrderByIdsaleAsc(from, until,
 				place);
 		Iterator<SaleEntity> itsales = isales.iterator();
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<>();
 		SaleEntity sale;
 		CancelSaleEntity cancelSale;
 		Long idsale;
 		boolean iscancel = false;
-		BigDecimal costjewel, cost = BigDecimal.ZERO, total = BigDecimal.ZERO;
+		BigDecimal costjewel;
+		BigDecimal cost = BigDecimal.ZERO;
+		BigDecimal total = BigDecimal.ZERO;
 		while (itsales.hasNext()) {
 			sale = itsales.next();
 			idsale = sale.getIdsale();
@@ -267,22 +261,20 @@ public class SaleManagerImpl implements SaleManager {
 				}
 			}
 		}
-		map.put("sales", sales);
-		map.put("total", total);
+		map.put(Constants.SALES, sales);
+		map.put(ConstantsJsp.TOTAL, total);
 		map.put("cost", cost);
 		return map;
 	}
 
 	@Override
 	public List<Long> calculateNumberMissing(Long numFrom, Long numUntil, PlaceEntity place) {
-		List<Long> numbers = new ArrayList<Long>();
+		List<Long> numbers = new ArrayList<>();
 		SaleEntity sale;
 		for (long i = numFrom; i <= numUntil; i++) {
 			sale = saleRepository.findByNumsaleAndPlace(i, place);
-			if (sale == null) {
-				if (checkAllSales(i, place) != 0) {
-					numbers.add(i);
-				}
+			if (sale == null && checkAllSales(i, place) != 0) {
+				numbers.add(i);
 			}
 		}
 		return numbers;
@@ -296,7 +288,7 @@ public class SaleManagerImpl implements SaleManager {
 			if (straps == null) {
 				List<RecordingEntity> recordings = recordingRepository.findByNumsaleAndPlace(i, place);
 				if (recordings == null || recordings.isEmpty()) {
-					DiscountEntity discount = discountsRepository.findById(new Long(i)).orElse(null);
+					DiscountEntity discount = discountsRepository.findById(i).orElse(null);
 					if (discount == null) {
 						num = i;
 					}
@@ -308,7 +300,7 @@ public class SaleManagerImpl implements SaleManager {
 
 	@Override
 	public SaleEntity searchByPK(Long idsale) {
-		return saleRepository.findById(idsale).get();
+		return saleRepository.findById(idsale).orElse(null);
 	}
 
 	@Override
@@ -326,7 +318,7 @@ public class SaleManagerImpl implements SaleManager {
 			num = sale.getNumsale() + 1;
 			sale = saleRepository.findByNumsaleAndPlace(num, place);
 			if (sale == null) {
-				sp = salespostponedrepository.findById(Math.abs(num)).get();
+				sp = salespostponedrepository.findById(Math.abs(num)).orElse(null);
 				if (sp != null) {
 					num = null;
 				}

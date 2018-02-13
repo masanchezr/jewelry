@@ -22,6 +22,8 @@ import com.je.dbaccess.entities.PlaceEntity;
 import com.je.services.dailies.Daily;
 import com.je.services.dailies.DailyService;
 import com.je.services.places.PlaceService;
+import com.je.utils.constants.Constants;
+import com.je.utils.constants.ConstantsJsp;
 import com.je.utils.date.DateUtil;
 
 /**
@@ -44,6 +46,8 @@ public class DailiesController {
 	/** The log. */
 	private static Logger log = LoggerFactory.getLogger(DailiesController.class);
 
+	private static final String VIEWSEARCHCALCULATEDAILIES = "searchcalculatedailies";
+
 	/**
 	 * Daily place.
 	 *
@@ -52,18 +56,18 @@ public class DailiesController {
 	@RequestMapping(value = "/dailyplace")
 	public ModelAndView dailyPlace() {
 		ModelAndView model = new ModelAndView("searchdaily");
-		model.addObject("adminForm", new AdminForm());
-		model.addObject("places", placeService.getAllPlaces());
-		model.addObject("searchDailyForm", new SearchDailyForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+		model.addObject(ConstantsJsp.FORMSEARCHDAILY, new SearchDailyForm());
 		return model;
 	}
 
 	@RequestMapping(value = "/searchcalculatedailies")
 	public ModelAndView searchCalculateDailies() {
-		ModelAndView model = new ModelAndView("searchcalculatedailies");
-		model.addObject("adminForm", new AdminForm());
-		model.addObject("places", placeService.getAllPlaces());
-		model.addObject("searchDailyForm", new SearchDailyForm());
+		ModelAndView model = new ModelAndView(VIEWSEARCHCALCULATEDAILIES);
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+		model.addObject(ConstantsJsp.FORMSEARCHDAILY, new SearchDailyForm());
 		return model;
 	}
 
@@ -75,12 +79,12 @@ public class DailiesController {
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/searchDaily")
-	public ModelAndView searchDaily(@ModelAttribute("searchDailyForm") SearchDailyForm sdf, HttpServletRequest request,
-			BindingResult arg1) {
+	public ModelAndView searchDaily(@ModelAttribute(ConstantsJsp.FORMSEARCHDAILY) SearchDailyForm sdf,
+			HttpServletRequest request, BindingResult arg1) {
 		ModelAndView model;
 		Date date = DateUtil.getDate(sdf.getDate());
 		PlaceEntity place = sdf.getPlace();
-		String ipAddress = request.getHeader("X-FORWARDED-FOR");
+		String ipAddress = request.getHeader(ConstantsJsp.XFORWARDEDFOR);
 		if (ipAddress == null) {
 			ipAddress = request.getRemoteAddr();
 		}
@@ -91,13 +95,13 @@ public class DailiesController {
 			searchDailyFormValidator.validate(sdf, arg1);
 			if (arg1.hasErrors()) {
 				model = new ModelAndView();
-				model.addObject("places", placeService.getAllPlaces());
-				model.addObject("searchDailyForm", sdf);
+				model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+				model.addObject(ConstantsJsp.FORMSEARCHDAILY, sdf);
 				model.setViewName("searchdaily");
-				model.addObject("adminForm", new AdminForm());
+				model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 				return model;
 			} else {
-				return getDailyModel(ipAddress, date, place, "dailyadminarrows");
+				return getDailyModel(ipAddress, date, place, ConstantsJsp.VIEWDAILYADMINARROWS);
 			}
 		}
 	}
@@ -106,26 +110,26 @@ public class DailiesController {
 		ModelAndView model = new ModelAndView();
 		Daily daily = dailyService.getDaily(date, place, ipAddress);
 		if (daily.getFinalamount() == null) {
-			model.setViewName("notdailyadmin");
+			model.setViewName(ConstantsJsp.VIEWNOTDAILYADMIN);
 		} else {
-			model.addObject("daily", daily);
+			model.addObject(ConstantsJsp.DAILY, daily);
 			model.setViewName(view);
-			model.addObject("datedaily", date);
-			model.addObject("place", place.getIdplace());
+			model.addObject(ConstantsJsp.DATEDAILY, date);
+			model.addObject(Constants.PLACE, place.getIdplace());
 		}
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		return model;
 	}
 
 	@RequestMapping(value = "/calculatedailies")
-	public ModelAndView calculateDailies(@ModelAttribute("searchDailyForm") SearchDailyForm sdf,
+	public ModelAndView calculateDailies(@ModelAttribute(ConstantsJsp.FORMSEARCHDAILY) SearchDailyForm sdf,
 			HttpServletRequest request, BindingResult arg1) {
 		ModelAndView model = new ModelAndView();
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		searchDailyFormValidator.validate(sdf, arg1);
 		if (arg1.hasErrors()) {
-			model.setViewName("searchcalculatedailies");
-			model.addObject("places", placeService.getAllPlaces());
+			model.setViewName(VIEWSEARCHCALCULATEDAILIES);
+			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
 		} else {
 			String sdate = sdf.getDate();
 			Date date = DateUtil.getDate(sdf.getDate());
@@ -135,10 +139,10 @@ public class DailiesController {
 				date = DateUtil.getDate(sdate);
 				if (date.after(c.getTime())) {
 					dailyService.calculateDailies(date, sdf.getPlace());
-					model.setViewName("success");
+					model.setViewName(ConstantsJsp.SUCCESS);
 				} else {
-					model.setViewName("searchcalculatedailies");
-					model.addObject("places", placeService.getAllPlaces());
+					model.setViewName(VIEWSEARCHCALCULATEDAILIES);
+					model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
 				}
 			}
 		}
@@ -146,10 +150,10 @@ public class DailiesController {
 	}
 
 	@RequestMapping(value = "/beforeday{date}/{place}")
-	public ModelAndView beforeday(@PathVariable("date") String sdate, @PathVariable("place") long idplace,
-			HttpServletRequest request) {
+	public ModelAndView beforeday(@PathVariable(ConstantsJsp.DATE) String sdate,
+			@PathVariable(Constants.PLACE) long idplace, HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
-		String ipAddress = request.getHeader("X-FORWARDED-FOR");
+		String ipAddress = request.getHeader(ConstantsJsp.XFORWARDEDFOR);
 		PlaceEntity place = new PlaceEntity();
 		place.setIdplace(idplace);
 		if (ipAddress == null) {
@@ -165,30 +169,30 @@ public class DailiesController {
 				date = DateUtil.addDays(date, -1);
 				Daily daily = dailyService.getDaily(date, place, ipAddress);
 				if (daily.getFinalamount() == null) {
-					model.setViewName("notdailyadmin");
+					model.setViewName(ConstantsJsp.VIEWNOTDAILYADMIN);
 				} else {
-					model.addObject("daily", daily);
+					model.addObject(ConstantsJsp.DAILY, daily);
 					model.setViewName("dailyadminarrows");
-					model.addObject("datedaily", date);
-					model.addObject("place", idplace);
+					model.addObject(ConstantsJsp.DATEDAILY, date);
+					model.addObject(Constants.PLACE, idplace);
 					existdaily = true;
 				}
 			} else {
-				model.setViewName("notdailyadmin");
+				model.setViewName(ConstantsJsp.VIEWNOTDAILYADMIN);
 				existdaily = true;
 			}
 		}
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		return model;
 	}
 
 	@RequestMapping(value = "/againday{date}/{place}")
-	public ModelAndView againday(@PathVariable("date") String sdate, @PathVariable("place") long idplace,
-			HttpServletRequest request) {
+	public ModelAndView againday(@PathVariable(ConstantsJsp.DATE) String sdate,
+			@PathVariable(Constants.PLACE) long idplace, HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
 		PlaceEntity place = new PlaceEntity();
 		place.setIdplace(idplace);
-		String ipAddress = request.getHeader("X-FORWARDED-FOR");
+		String ipAddress = request.getHeader(ConstantsJsp.XFORWARDEDFOR);
 		if (ipAddress == null) {
 			ipAddress = request.getRemoteAddr();
 		}
@@ -200,28 +204,28 @@ public class DailiesController {
 			if (date.compareTo(new Date()) < 0) {
 				Daily daily = dailyService.getDaily(date, place, ipAddress);
 				if (daily.getFinalamount() == null) {
-					model.setViewName("notdailyadmin");
+					model.setViewName(ConstantsJsp.VIEWNOTDAILYADMIN);
 				} else {
 					String view;
 					String stoday = DateUtil.getStringDateFormatdd_MM_yyyy(new Date());
 					sdate = DateUtil.getStringDateFormatdd_MM_yyyy(date);
 					if (stoday.compareTo(sdate) == 0) {
-						view = "dailyadminarrow";
+						view = ConstantsJsp.VIEWDAILYADMINARROW;
 					} else {
-						view = "dailyadminarrows";
+						view = ConstantsJsp.VIEWDAILYADMINARROWS;
 					}
-					model.addObject("daily", daily);
+					model.addObject(ConstantsJsp.DAILY, daily);
 					model.setViewName(view);
-					model.addObject("datedaily", date);
-					model.addObject("place", idplace);
+					model.addObject(ConstantsJsp.DATEDAILY, date);
+					model.addObject(Constants.PLACE, idplace);
 					existdaily = true;
 				}
 			} else {
-				model.setViewName("notdailyadmin");
+				model.setViewName(ConstantsJsp.VIEWNOTDAILYADMIN);
 				existdaily = true;
 			}
 		}
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		return model;
 	}
 }

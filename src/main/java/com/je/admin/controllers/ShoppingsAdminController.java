@@ -30,7 +30,7 @@ import com.je.dbaccess.entities.MetalEntity;
 import com.je.dbaccess.entities.ObjectShopEntity;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.forms.SearchForm;
-import com.je.services.material.MetalService;
+import com.je.services.metal.MetalService;
 import com.je.services.nations.NationService;
 import com.je.services.places.PlaceService;
 import com.je.services.shoppings.QuarterMetal;
@@ -38,6 +38,7 @@ import com.je.services.shoppings.Shopping;
 import com.je.services.shoppings.ShoppingService;
 import com.je.services.tracks.TrackService;
 import com.je.utils.constants.Constants;
+import com.je.utils.constants.ConstantsJsp;
 import com.je.utils.string.Util;
 import com.je.validators.SearchFormValidator;
 
@@ -75,6 +76,10 @@ public class ShoppingsAdminController {
 	@Autowired
 	private SearchFormValidator adminSearchValidator;
 
+	private static final String VIEWSEARCHSHOPPINGS = "searchshoppings";
+	private static final String VIEWSEARCHCLIENTADMIN = "searchclientadmin";
+	private static final String FORMSHOP = "shopform";
+
 	/**
 	 * Search shoppings.
 	 *
@@ -82,10 +87,10 @@ public class ShoppingsAdminController {
 	 */
 	@RequestMapping(value = "/searchShoppings")
 	public ModelAndView searchShoppings() {
-		ModelAndView model = new ModelAndView("searchshoppings");
-		model.addObject("shoppingForm", new ShoppingSearch());
-		model.addObject("adminForm", new AdminForm());
-		model.addObject("places", placeService.getAllPlaces());
+		ModelAndView model = new ModelAndView(VIEWSEARCHSHOPPINGS);
+		model.addObject(ConstantsJsp.SHOPPINGFORM, new ShoppingSearch());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
 		return model;
 	}
 
@@ -99,21 +104,22 @@ public class ShoppingsAdminController {
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/resultShoppings")
-	public ModelAndView resultShoppings(@ModelAttribute("shoppingForm") ShoppingSearch shopping, BindingResult result) {
+	public ModelAndView resultShoppings(@ModelAttribute(ConstantsJsp.SHOPPINGFORM) ShoppingSearch shopping,
+			BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		shoppingFormValidator.validate(shopping, result);
 		if (result.hasErrors()) {
 			model.addObject("shopping", shopping);
-			model.addObject("places", placeService.getAllPlaces());
-			model.setViewName("searchshoppings");
+			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+			model.setViewName(VIEWSEARCHSHOPPINGS);
 		} else {
 			List<Shopping> shoppings = shoppingService.searchShoppings(shopping.getDatefrom(), shopping.getDateuntil(),
 					shopping.getPlace(), shopping.getNumshop());
 			model.addObject("shoppings", shoppings);
-			model.addObject("shoppingForm", new Shopping());
+			model.addObject(ConstantsJsp.SHOPPINGFORM, new Shopping());
 			model.setViewName("resultshoppings");
 		}
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		return model;
 	}
 
@@ -125,20 +131,20 @@ public class ShoppingsAdminController {
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/updateShoppings")
-	public ModelAndView updateShoppings(@ModelAttribute("shoppingForm") Shopping shopping) {
+	public ModelAndView updateShoppings(@ModelAttribute(ConstantsJsp.SHOPPINGFORM) Shopping shopping) {
 		ModelAndView model = new ModelAndView();
 		Long idshop = shopping.getId();
 		if (idshop == null) {
-			model.addObject("shoppingForm", new ShoppingSearch());
-			model.addObject("places", placeService.getAllPlaces());
-			model.setViewName("searchshoppings");
+			model.addObject(ConstantsJsp.SHOPPINGFORM, new ShoppingSearch());
+			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+			model.setViewName(VIEWSEARCHSHOPPINGS);
 		} else {
 			shopping = shoppingService.findShopByPK(idshop);
-			model.addObject("shoppingForm", shopping);
+			model.addObject(ConstantsJsp.SHOPPINGFORM, shopping);
 			model.setViewName("updateshopping");
-			model.addObject("materials", materialService.getAllMetals());
+			model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
 		}
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		return model;
 	}
 
@@ -146,9 +152,9 @@ public class ShoppingsAdminController {
 	public ModelAndView updateShopping(@PathVariable("id") long id) {
 		ModelAndView model = new ModelAndView("updateshopping");
 		Shopping shopping = shoppingService.findShopByPK(id);
-		model.addObject("shoppingForm", shopping);
-		model.addObject("adminForm", new AdminForm());
-		model.addObject("materials", materialService.getAllMetals());
+		model.addObject(ConstantsJsp.SHOPPINGFORM, shopping);
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
 		return model;
 	}
 
@@ -162,7 +168,7 @@ public class ShoppingsAdminController {
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/saveShopping")
-	public ModelAndView saveShopping(@ModelAttribute("shoppingForm") Shopping shoppingForm) {
+	public ModelAndView saveShopping(@ModelAttribute(ConstantsJsp.SHOPPINGFORM) Shopping shoppingForm) {
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		shoppingForm.setUser(user);
 		shoppingService.update(shoppingForm);
@@ -179,13 +185,13 @@ public class ShoppingsAdminController {
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/saveshop")
-	public ModelAndView saveShop(@ModelAttribute("shopform") Shopping shoppingForm, BindingResult result) {
-		ModelAndView model = new ModelAndView();
+	public ModelAndView saveShop(@ModelAttribute(FORMSHOP) Shopping shoppingForm, BindingResult result) {
+		ModelAndView model;
 		newshoppingFormValidator.validate(shoppingForm, result);
 		if (result.hasErrors()) {
 			List<MetalEntity> materials = materialService.getAllMetalsActive();
 			Iterator<MetalEntity> imaterials = materials.iterator();
-			List<ObjectShopEntity> lop = new ArrayList<ObjectShopEntity>();
+			List<ObjectShopEntity> lop = new ArrayList<>();
 			while (imaterials.hasNext()) {
 				ObjectShopEntity op = new ObjectShopEntity();
 				op.setMetal(imaterials.next());
@@ -193,10 +199,10 @@ public class ShoppingsAdminController {
 			}
 			shoppingForm.setObjects(lop);
 			model = new ModelAndView();
-			model.addObject("shopform", shoppingForm);
-			model.addObject("adminForm", new AdminForm());
-			model.addObject("tracks", trackservice.getTracks());
-			model.addObject("nations", nationservice.getNations());
+			model.addObject(FORMSHOP, shoppingForm);
+			model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+			model.addObject(ConstantsJsp.TRACKS, trackservice.getTracks());
+			model.addObject(ConstantsJsp.NATIONS, nationservice.getNations());
 			model.setViewName("newshop");
 		} else {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -210,28 +216,29 @@ public class ShoppingsAdminController {
 	@RequestMapping(value = "/searchquarter")
 	public ModelAndView searchquarter() {
 		ModelAndView model = new ModelAndView("searchquarter");
-		model.addObject("adminForm", new AdminForm());
-		model.addObject("shoppingForm", new SearchForm());
-		model.addObject("places", placeService.getAllPlaces());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsJsp.SHOPPINGFORM, new SearchForm());
+		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
 		return model;
 	}
 
 	@RequestMapping(value = "/searchquartermaterial")
 	public ModelAndView searchQuarterMetal() {
 		ModelAndView model = new ModelAndView("searchquartermaterial");
-		model.addObject("adminForm", new AdminForm());
-		model.addObject("shoppingForm", new SearchForm());
-		model.addObject("places", placeService.getAllPlaces());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsJsp.SHOPPINGFORM, new SearchForm());
+		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
 		return model;
 	}
 
 	@RequestMapping(value = "/quartermaterial")
-	public ModelAndView quarterMetal(@ModelAttribute("shoppingForm") SearchForm shopping, BindingResult result) {
+	public ModelAndView quarterMetal(@ModelAttribute(ConstantsJsp.SHOPPINGFORM) SearchForm shopping,
+			BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		adminSearchValidator.validate(shopping, result);
 		if (result.hasErrors()) {
 			model.setViewName("searchquartermaterial");
-			model.addObject("places", placeService.getAllPlaces());
+			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
 		} else {
 			List<QuarterMetal> quarters = shoppingService.searchGramsByMetal(shopping.getDatefrom(),
 					shopping.getDateuntil(), shopping.getPlace());
@@ -239,29 +246,29 @@ public class ShoppingsAdminController {
 			model.setViewName("quartermaterial");
 			shopping.setPlace(placeService.getPlace(shopping.getPlace().getIdplace()));
 		}
-		model.addObject("shoppingForm", shopping);
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.SHOPPINGFORM, shopping);
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		return model;
 	}
 
 	@RequestMapping(value = "/searchgramsnull")
 	public ModelAndView searchGramsNull() {
 		ModelAndView model = new ModelAndView("searchgramsnull");
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject("adminSearchForm", new SearchForm());
-		model.addObject("places", placeService.getAllPlaces());
+		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
 		return model;
 	}
 
 	@RequestMapping(value = "/resultgramsnull")
-	public ModelAndView resultGramsNull(@ModelAttribute("adminForm") SearchForm form, BindingResult result) {
+	public ModelAndView resultGramsNull(@ModelAttribute(ConstantsJsp.ADMINFORM) SearchForm form, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		adminSearchValidator.validate(form, result);
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		if (result.hasErrors()) {
 			model.setViewName("searchgramsnull");
 			model.addObject("adminSearchForm", form);
-			model.addObject("places", placeService.getAllPlaces());
+			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
 		} else {
 			List<Long> numshops = shoppingService.searchGramsNull(form.getDatefrom(), form.getDateuntil(),
 					form.getPlace());
@@ -273,13 +280,13 @@ public class ShoppingsAdminController {
 
 	@RequestMapping(value = "/tomelloso")
 	public ModelAndView searchClient() {
-		ModelAndView model = new ModelAndView("searchclientadmin");
+		ModelAndView model = new ModelAndView(VIEWSEARCHCLIENTADMIN);
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		Shopping pawn = new Shopping();
 		pawn.setNumshop(shoppingService.getNextNumber(user));
 		pawn.setUser(user);
-		model.addObject("shopform", pawn);
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(FORMSHOP, pawn);
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		return model;
 	}
 
@@ -289,20 +296,20 @@ public class ShoppingsAdminController {
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/newshop")
-	public ModelAndView newshop(@ModelAttribute("shopform") Shopping pawn, BindingResult errors) {
+	public ModelAndView newshop(@ModelAttribute(FORMSHOP) Shopping pawn, BindingResult errors) {
 		String dni = pawn.getNif();
 		ModelAndView model = new ModelAndView();
 		if (dni != null && dni.length() > 12) {
-			errors.rejectValue("nif", "niftoolong");
+			errors.rejectValue(ConstantsJsp.NIF, "niftoolong");
 			model.setViewName("searchclientadmin");
 		} else if (!Util.isNifNie(dni)) {
-			errors.rejectValue("nif", "nifnotvalid");
+			errors.rejectValue(ConstantsJsp.NIF, "nifnotvalid");
 			model.setViewName("searchclientadmin");
 		} else {
 			Shopping client = shoppingService.searchClient(Util.refactorNIF(pawn.getNif()));
 			List<MetalEntity> materials = materialService.getAllMetalsActive();
 			Iterator<MetalEntity> imaterials = materials.iterator();
-			List<ObjectShopEntity> lop = new ArrayList<ObjectShopEntity>();
+			List<ObjectShopEntity> lop = new ArrayList<>();
 			while (imaterials.hasNext()) {
 				ObjectShopEntity op = new ObjectShopEntity();
 				op.setMetal(imaterials.next());
@@ -317,29 +324,29 @@ public class ShoppingsAdminController {
 			pawn.setTrack(client.getTrack());
 			pawn.setObjects(lop);
 			model.setViewName("newshop");
-			model.addObject("tracks", trackservice.getTracks());
-			model.addObject("nations", nationservice.getNations());
+			model.addObject(ConstantsJsp.TRACKS, trackservice.getTracks());
+			model.addObject(ConstantsJsp.NATIONS, nationservice.getNations());
 		}
-		model.addObject("shopform", pawn);
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(FORMSHOP, pawn);
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		return model;
 	}
 
 	@RequestMapping(value = "/exceltomelloso")
 	public ModelAndView excelTomelloso() {
 		ModelAndView model = new ModelAndView("exceltomelloso");
-		model.addObject("adminForm", new AdminForm());
-		model.addObject("searchForm", new SearchForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsJsp.FORMSEARCH, new SearchForm());
 		return model;
 	}
 
 	@RequestMapping(value = "/downloadexcel")
-	public ModelAndView downloadexcel(@ModelAttribute("searchForm") SearchForm form, BindingResult result,
+	public ModelAndView downloadexcel(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm form, BindingResult result,
 			HttpServletResponse response) {
 		ModelAndView model = new ModelAndView("exceltomelloso");
 		adminSearchValidator.validate(form, result);
 		if (result.hasErrors()) {
-			model.addObject("searchForm", new SearchForm());
+			model.addObject(ConstantsJsp.FORMSEARCH, new SearchForm());
 		} else {
 			PlaceEntity place = new PlaceEntity();
 			place.setIdplace(13700L);
@@ -360,9 +367,11 @@ public class ShoppingsAdminController {
 				inputStream.close();
 			} catch (IOException e) {
 				e.printStackTrace();
+			} finally {
+
 			}
 		}
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		return model;
 	}
 }

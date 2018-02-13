@@ -1,4 +1,4 @@
-package com.je.util;
+package com.je.utils;
 
 /**
  * The Class Error.

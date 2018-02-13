@@ -7,8 +7,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -24,13 +22,14 @@ import com.je.dbaccess.entities.MetalEntity;
 import com.je.dbaccess.entities.ObjectPawnEntity;
 import com.je.employee.validators.NewPawnFormValidator;
 import com.je.employee.validators.PawnFormValidator;
-import com.je.services.material.MetalService;
+import com.je.services.metal.MetalService;
 import com.je.services.nations.NationService;
 import com.je.services.pawns.NewPawn;
 import com.je.services.pawns.Pawn;
 import com.je.services.pawns.PawnService;
 import com.je.services.tracks.TrackService;
 import com.je.utils.constants.Constants;
+import com.je.utils.constants.ConstantsJsp;
 import com.je.utils.date.DateUtil;
 import com.je.utils.string.Util;
 
@@ -61,8 +60,9 @@ public class PawnsController {
 	@Autowired
 	private MetalService materialService;
 
-	/** The log. */
-	private static Logger log = LoggerFactory.getLogger(PawnsController.class);
+	private static final String VIEWNEWPAWN = "newPawn";
+	private static final String VIEWSEARCHCLIENT = "searchclient";
+	private static final String FORMSEARCHPAWN = "searchPawnForm";
 
 	/**
 	 * Save pawn.
@@ -74,66 +74,53 @@ public class PawnsController {
 	 * @return the string
 	 */
 	@RequestMapping(value = "/employee/savePawn")
-	public ModelAndView savePawn(@ModelAttribute("pawnForm") NewPawn pawn, BindingResult result) {
+	public ModelAndView savePawn(@ModelAttribute(ConstantsJsp.PAWNFORM) NewPawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		newPawnFormValidator.validate(pawn, result);
 		if (result.hasErrors()) {
 			List<MetalEntity> materials = materialService.getAllMetalsActive();
 			Iterator<MetalEntity> imaterials = materials.iterator();
-			List<ObjectPawnEntity> lop = new ArrayList<ObjectPawnEntity>();
+			List<ObjectPawnEntity> lop = new ArrayList<>();
 			while (imaterials.hasNext()) {
 				ObjectPawnEntity op = new ObjectPawnEntity();
 				op.setMetal(imaterials.next());
 				lop.add(op);
 			}
 			pawn.setObjects(lop);
-			model.addObject("pawnForm", pawn);
-			model.addObject("tracks", trackservice.getTracks());
-			model.addObject("nations", nationservice.getNations());
-			model.setViewName("newPawn");
+			model.addObject(ConstantsJsp.PAWNFORM, pawn);
+			model.addObject(ConstantsJsp.TRACKS, trackservice.getTracks());
+			model.addObject(ConstantsJsp.NATIONS, nationservice.getNations());
+			model.setViewName(VIEWNEWPAWN);
 		} else {
 			Calendar c = Calendar.getInstance();
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			String numpawn = pawn.getNumpawn();
-			log.info("usuario conectado:" + user);
 			pawn.setUser(user);
 			pawn.setRetired(false);
 			boolean repeat = pawnService.isRepeatNumber(numpawn, user, c.get(Calendar.YEAR));
 			if (repeat) {
 				List<MetalEntity> materials = materialService.getAllMetalsActive();
 				Iterator<MetalEntity> imaterials = materials.iterator();
-				List<ObjectPawnEntity> lop = new ArrayList<ObjectPawnEntity>();
+				List<ObjectPawnEntity> lop = new ArrayList<>();
 				while (imaterials.hasNext()) {
 					ObjectPawnEntity op = new ObjectPawnEntity();
 					op.setMetal(imaterials.next());
 					lop.add(op);
 				}
 				pawn.setObjects(lop);
-				model.addObject("pawnForm", pawn);
-				model.addObject("tracks", trackservice.getTracks());
-				model.addObject("nations", nationservice.getNations());
-				model.setViewName("newPawn");
-				result.rejectValue("numpawn", "numrepited");
+				model.addObject(ConstantsJsp.PAWNFORM, pawn);
+				model.addObject(ConstantsJsp.TRACKS, trackservice.getTracks());
+				model.addObject(ConstantsJsp.NATIONS, nationservice.getNations());
+				model.setViewName(VIEWNEWPAWN);
+				result.rejectValue(Constants.NUMPAWN, "numrepited");
 			} else {
-				/*
-				 * boolean isCorrectNumber = pawnService.isCorrectNumber(numpawn, user,
-				 * c.get(Calendar.YEAR)); if (!isCorrectNumber) { List<MetalEntity> materials =
-				 * materialService.getAllMetalsActive(); Iterator<MetalEntity> imaterials =
-				 * materials.iterator(); List<ObjectPawnEntity> lop = new
-				 * ArrayList<ObjectPawnEntity>(); while (imaterials.hasNext()) { ObjectPawnEntity
-				 * op = new ObjectPawnEntity(); op.setMetal(imaterials.next()); lop.add(op); }
-				 * pawn.setObjects(lop); model.addObject("pawnForm", pawn);
-				 * model.setViewName("newPawn"); result.rejectValue("numpawn", "wrongnumber"); }
-				 * else {
-				 */
 				Date date = DateUtil.getDate(pawn.getCreationdate());
 				if (date == null) {
 					date = new Date();
 				}
-				model.addObject("daily", pawnService.save(pawn));
-				model.setViewName("dailyarrow");
-				model.addObject("datedaily", date);
-				// }
+				model.addObject(ConstantsJsp.DAILY, pawnService.save(pawn));
+				model.setViewName(ConstantsJsp.VIEWDAILYARROW);
+				model.addObject(ConstantsJsp.DATEDAILY, date);
 			}
 		}
 		return model;
@@ -147,7 +134,7 @@ public class PawnsController {
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/employee/resultSearchPawn")
-	public ModelAndView resultSearchPawn(@RequestParam("idpawn") Long idpawn) {
+	public ModelAndView resultSearchPawn(@RequestParam(Constants.IDPAWN) Long idpawn) {
 		Pawn pawn = pawnService.searchByIdpawn(idpawn);
 		ModelAndView model = new ModelAndView("resultsearchpawn");
 		model.addObject("pawn", pawn);
@@ -160,41 +147,41 @@ public class PawnsController {
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/employee/newPawn")
-	public ModelAndView newPawn(@ModelAttribute("pawnForm") NewPawn pawn, BindingResult errors) {
+	public ModelAndView newPawn(@ModelAttribute(ConstantsJsp.PAWNFORM) NewPawn pawn, BindingResult errors) {
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		String dni = Util.refactorNIF(pawn.getNif());
 		ModelAndView model = new ModelAndView();
 		if (dni != null && dni.length() > 12) {
-			errors.rejectValue("nif", "niftoolong");
-			model.setViewName("searchclient");
+			errors.rejectValue(ConstantsJsp.NIF, "niftoolong");
+			model.setViewName(VIEWSEARCHCLIENT);
 		} else if (!Util.isNifNie(dni)) {
-			errors.rejectValue("nif", "nifnotvalid");
-			model.setViewName("searchclient");
+			errors.rejectValue(ConstantsJsp.NIF, "nifnotvalid");
+			model.setViewName(VIEWSEARCHCLIENT);
 		} else {
 			pawn = pawnService.searchClient(dni);
 			pawn.setUser(user);
 			List<MetalEntity> materials = materialService.getAllMetalsActive();
 			Iterator<MetalEntity> imaterials = materials.iterator();
-			List<ObjectPawnEntity> lop = new ArrayList<ObjectPawnEntity>();
+			List<ObjectPawnEntity> lop = new ArrayList<>();
 			while (imaterials.hasNext()) {
 				ObjectPawnEntity op = new ObjectPawnEntity();
 				op.setMetal(imaterials.next());
 				lop.add(op);
 			}
 			pawn.setObjects(lop);
-			model.addObject("tracks", trackservice.getTracks());
-			model.addObject("nations", nationservice.getNations());
-			model.setViewName("newPawn");
+			model.addObject(ConstantsJsp.TRACKS, trackservice.getTracks());
+			model.addObject(ConstantsJsp.NATIONS, nationservice.getNations());
+			model.setViewName(VIEWNEWPAWN);
 		}
-		model.addObject("pawnForm", pawn);
+		model.addObject(ConstantsJsp.PAWNFORM, pawn);
 		return model;
 	}
 
 	@RequestMapping(value = "/employee/searchclientpawn")
 	public ModelAndView searchClientPawn() {
-		ModelAndView model = new ModelAndView("searchclient");
+		ModelAndView model = new ModelAndView(VIEWSEARCHCLIENT);
 		NewPawn pawn = new NewPawn();
-		model.addObject("pawnForm", pawn);
+		model.addObject(ConstantsJsp.PAWNFORM, pawn);
 		return model;
 	}
 
@@ -206,7 +193,7 @@ public class PawnsController {
 	@RequestMapping(value = "/employee/removePawn")
 	public ModelAndView removePawn() {
 		ModelAndView model = new ModelAndView("searchremovepawn");
-		model.addObject("searchPawnForm", new Pawn());
+		model.addObject(FORMSEARCHPAWN, new Pawn());
 		return model;
 	}
 
@@ -218,7 +205,7 @@ public class PawnsController {
 	@RequestMapping(value = "/employee/renewPawn")
 	public ModelAndView renewPawn() {
 		ModelAndView model = new ModelAndView("searchrenewpawn");
-		model.addObject("searchPawnForm", new Pawn());
+		model.addObject(FORMSEARCHPAWN, new Pawn());
 		return model;
 	}
 
@@ -236,14 +223,14 @@ public class PawnsController {
 		ModelAndView model = new ModelAndView();
 		pawnFormValidator.validate(pawn, result);
 		if (result.hasErrors()) {
-			model.addObject("searchPawnForm", new Pawn());
+			model.addObject(FORMSEARCHPAWN, new Pawn());
 			model.setViewName("searchrenewpawn");
 		} else {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			pawn.setUser(user);
 			List<Pawn> pawns = pawnService.searchRenewByNumpawn(pawn);
-			model.addObject("pawnForm", new Pawn());
-			model.addObject("pawns", pawns);
+			model.addObject(ConstantsJsp.PAWNFORM, new Pawn());
+			model.addObject(ConstantsJsp.PAWNS, pawns);
 			model.setViewName("renewpawn");
 		}
 		return model;
@@ -257,11 +244,11 @@ public class PawnsController {
 	 * @return the string
 	 */
 	@RequestMapping(value = "/employee/renewpawn")
-	public ModelAndView renew(@ModelAttribute("pawnForm") Pawn pawn) {
+	public ModelAndView renew(@ModelAttribute(ConstantsJsp.PAWNFORM) Pawn pawn) {
 		ModelAndView model = new ModelAndView();
-		model.addObject("daily", pawnService.renew(pawn));
-		model.setViewName("dailyarrow");
-		model.addObject("datedaily", new Date());
+		model.addObject(ConstantsJsp.DAILY, pawnService.renew(pawn));
+		model.setViewName(ConstantsJsp.VIEWDAILYARROW);
+		model.addObject(ConstantsJsp.DATEDAILY, new Date());
 		return model;
 	}
 
@@ -273,7 +260,7 @@ public class PawnsController {
 	 * @return the string
 	 */
 	@RequestMapping(value = "/employee/removepawn")
-	public ModelAndView remove(@ModelAttribute("pawnForm") Pawn pawn) {
+	public ModelAndView remove(@ModelAttribute(ConstantsJsp.PAWNFORM) Pawn pawn) {
 		ModelAndView model = new ModelAndView();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Collection<? extends GrantedAuthority> collection = authentication.getAuthorities();
@@ -285,9 +272,9 @@ public class PawnsController {
 		if ((Constants.ROLE_AR.equals(role) && pawn.getMonths() <= 0) || pawn.getId() == null) {
 			model.setViewName("noselected");
 		} else {
-			model.addObject("daily", pawnService.remove(pawn));
-			model.setViewName("dailyarrow");
-			model.addObject("datedaily", new Date());
+			model.addObject(ConstantsJsp.DAILY, pawnService.remove(pawn));
+			model.setViewName(ConstantsJsp.VIEWDAILYARROW);
+			model.addObject(ConstantsJsp.DATEDAILY, new Date());
 		}
 		return model;
 	}
@@ -302,11 +289,11 @@ public class PawnsController {
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/employee/searchRemovePawn")
-	public ModelAndView searchRemovePawn(@ModelAttribute("pawnForm") Pawn pawn, BindingResult result) {
+	public ModelAndView searchRemovePawn(@ModelAttribute(ConstantsJsp.PAWNFORM) Pawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		pawnFormValidator.validate(pawn, result);
 		if (result.hasErrors()) {
-			model.addObject("pawnForm", new Pawn());
+			model.addObject(ConstantsJsp.PAWNFORM, new Pawn());
 			model.setViewName("searchremovepawn");
 		} else {
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -319,7 +306,7 @@ public class PawnsController {
 			}
 			pawn.setUser(user);
 			List<Pawn> pawns = pawnService.searchRenewByNumpawn(pawn);
-			model.addObject("pawns", pawns);
+			model.addObject(ConstantsJsp.PAWNS, pawns);
 			if (Constants.ROLE_AR.equals(role)) {
 				model.setViewName("removepawnfive");
 			} else {

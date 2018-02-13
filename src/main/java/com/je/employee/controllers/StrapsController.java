@@ -21,6 +21,7 @@ import com.je.services.places.PlaceService;
 import com.je.services.sales.Sale;
 import com.je.services.sales.SaleService;
 import com.je.services.straps.StrapsService;
+import com.je.utils.constants.ConstantsJsp;
 
 @Controller
 public class StrapsController {
@@ -43,11 +44,14 @@ public class StrapsController {
 	@Autowired
 	private StrapFormValidator strapFormValidator;
 
+	private static final String VIEWSALESTRAP = "newsalestrap";
+	private static final String FORMSTRAP = "strapForm";
+
 	@RequestMapping(value = "/employee/newsalestrap")
 	public ModelAndView newsalestrap() {
-		ModelAndView model = new ModelAndView("newsalestrap");
-		model.addObject("payments", paymentService.findAllActive());
-		model.addObject("strapForm", new StrapEntity());
+		ModelAndView model = new ModelAndView(VIEWSALESTRAP);
+		model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
+		model.addObject(FORMSTRAP, new StrapEntity());
 		return model;
 	}
 
@@ -57,28 +61,28 @@ public class StrapsController {
 		ModelAndView model = new ModelAndView();
 		strapFormValidator.validate(strap, arg1);
 		if (arg1.hasErrors()) {
-			model.setViewName("newsalestrap");
-			model.addObject("strapForm", strap);
+			model.setViewName(VIEWSALESTRAP);
+			model.addObject(FORMSTRAP, strap);
 		} else {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			PlaceEntity place = placeService.getPlaceUser(user);
 			// comprobamos primero que no exista este número de venta
 			Sale sale = saleService.searchByNumsaleAndPlace(strap.getNumsale(), place.getIdplace());
 			if (sale != null) {
-				model.setViewName("newsalestrap");
-				model.addObject("strapForm", strap);
-				arg1.rejectValue("numsale", "numrepited");
+				model.setViewName(VIEWSALESTRAP);
+				model.addObject(FORMSTRAP, strap);
+				arg1.rejectValue(ConstantsJsp.NUMSALE, "numrepited");
 			} else {
-				String ipAddress = request.getHeader("X-FORWARDED-FOR");
+				String ipAddress = request.getHeader(ConstantsJsp.XFORWARDEDFOR);
 				if (ipAddress == null) {
 					ipAddress = request.getRemoteAddr();
 				}
 				Date today = new Date();
-				model.setViewName("dailyarrow");
+				model.setViewName(ConstantsJsp.VIEWDAILYARROW);
 				strap.setPlace(place);
 				strapsService.saveSaleStrap(strap);
-				model.addObject("daily", dailyService.getDaily(today, place, ipAddress));
-				model.addObject("datedaily", today);
+				model.addObject(ConstantsJsp.DAILY, dailyService.getDaily(today, place, ipAddress));
+				model.addObject(ConstantsJsp.DATEDAILY, today);
 			}
 		}
 		return model;

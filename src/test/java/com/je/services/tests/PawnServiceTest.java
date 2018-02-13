@@ -39,7 +39,7 @@ public class PawnServiceTest {
 		ObjectPawnEntity object = new ObjectPawnEntity();
 		MetalEntity material = new MetalEntity();
 		material.setIdmetal(1L);
-		object.setGrossgrams(new BigDecimal(6));
+		object.setGrossgrams(BigDecimal.valueOf(6));
 		object.setMetal(material);
 		pawn.setNumpawn("908");
 		pawn.setNif("06285380D");
@@ -48,8 +48,8 @@ public class PawnServiceTest {
 		pawn.setName("Ainhoa");
 		pawn.setSurname("Gonzalez Gonzalez");
 		pawn.setDatebirth("21-01-1973");
-		pawn.setAmount(new BigDecimal(130));
-		pawn.setPercent(new BigDecimal(20));
+		pawn.setAmount(BigDecimal.valueOf(130));
+		pawn.setPercent(BigDecimal.valueOf(20));
 		pawn.setObjects(objects);
 		// pawnService.save(pawn);
 	}

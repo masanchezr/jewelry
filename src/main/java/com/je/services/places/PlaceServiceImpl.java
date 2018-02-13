@@ -10,6 +10,7 @@ import com.je.dbaccess.entities.PlaceEntity;
 import com.je.dbaccess.entities.PlaceUserEntity;
 import com.je.dbaccess.repositories.PlaceRepository;
 import com.je.dbaccess.repositories.PlaceUserRepository;
+import com.je.utils.constants.Constants;
 
 /**
  * The Class PlaceServiceImpl.
@@ -25,12 +26,12 @@ public class PlaceServiceImpl implements PlaceService {
 
 	@Override
 	public Iterable<PlaceEntity> getAllPlaces() {
-		return placeRepository.findAll(new Sort(Direction.ASC, "description"));
+		return placeRepository.findAll(new Sort(Direction.ASC, Constants.DESCRIPTION));
 	}
 
 	@Override
 	public PlaceEntity getPlace(Long idplace) {
-		return placeRepository.findById(idplace).get();
+		return placeRepository.findById(idplace).orElse(null);
 	}
 
 	@Override

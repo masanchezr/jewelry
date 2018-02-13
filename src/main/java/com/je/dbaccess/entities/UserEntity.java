@@ -5,15 +5,17 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.je.utils.constants.Constants;
+
 @Entity
 @Table(name = "users")
 public class UserEntity {
 
 	@Id
-	@Column(name = "username")
+	@Column(name = Constants.USERNAME)
 	private String username;
 
-	@Column(name = "password")
+	@Column(name = Constants.CONTRASE)
 	private String password;
 
 	@Column(name = "enabled")

@@ -14,6 +14,7 @@ import com.je.employee.validators.AdjustmentValidator;
 import com.je.services.adjustments.Adjustment;
 import com.je.services.adjustments.AdjustmentService;
 import com.je.services.payment.PaymentService;
+import com.je.utils.constants.ConstantsJsp;
 
 /**
  * The Class AdjustmentsController.
@@ -40,8 +41,8 @@ public class AdjustmentsController {
 	@RequestMapping(value = "/employee/newadjustment")
 	public ModelAndView newadjustment() {
 		ModelAndView model = new ModelAndView("newadjustment");
-		model.addObject("adjustment", new Adjustment());
-		model.addObject("payments", paymentService.findAllActive());
+		model.addObject(ConstantsJsp.FORMADJUSTMENT, new Adjustment());
+		model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
 		return model;
 	}
 
@@ -55,19 +56,19 @@ public class AdjustmentsController {
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/employee/saveAdjustment")
-	public ModelAndView saveAdjustment(@ModelAttribute("adjustment") Adjustment adjustment, BindingResult result) {
+	public ModelAndView saveAdjustment(@ModelAttribute(ConstantsJsp.FORMADJUSTMENT) Adjustment adjustment, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		adjustmentValidator.validate(adjustment, result);
 		if (result.hasErrors()) {
 			model.setViewName("newadjustment");
-			model.addObject("adjustment", adjustment);
-			model.addObject("payments", paymentService.findAllActive());
+			model.addObject(ConstantsJsp.FORMADJUSTMENT, adjustment);
+			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
 		} else {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			adjustment.setUser(user);
-			model.addObject("daily", adjustmentService.save(adjustment));
-			model.setViewName("dailyarrow");
-			model.addObject("datedaily", new Date());
+			model.addObject(ConstantsJsp.DAILY, adjustmentService.save(adjustment));
+			model.setViewName(ConstantsJsp.VIEWDAILYARROW);
+			model.addObject(ConstantsJsp.DATEDAILY, new Date());
 		}
 		return model;
 	}

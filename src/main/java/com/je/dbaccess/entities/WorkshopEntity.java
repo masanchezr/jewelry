@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.je.utils.constants.Constants;
+
 /**
  * The Class WorkshopEntity.
  */
@@ -32,20 +34,20 @@ public class WorkshopEntity implements Serializable {
 	private Long idworkshop;
 
 	/** The amount. */
-	@Column(name = "AMOUNT")
+	@Column(name = Constants.AMOUNT)
 	private BigDecimal amount;
 
 	/** The description. */
-	@Column(name = "DESCRIPTION")
+	@Column(name = Constants.DESCRIPTION)
 	private String description;
 
 	/** The creationdate. */
 	@Temporal(TemporalType.DATE)
-	@Column(name = "creationdate")
+	@Column(name = Constants.CREATIONDATE)
 	private Date creationdate;
 
 	/** The gramsgold. */
-	@Column(name = "grams")
+	@Column(name = Constants.GRAMS)
 	private BigDecimal grams;
 
 	/** The material. */

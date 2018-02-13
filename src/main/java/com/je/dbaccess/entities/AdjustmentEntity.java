@@ -13,11 +13,13 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.je.utils.constants.Constants;
+
 /**
  * The Class AdjustmentEntity.
  */
 @Entity
-@Table(name = "adjustments")
+@Table(name = Constants.ADJUSTMENTS)
 public class AdjustmentEntity implements Serializable {
 
 	/** The Constant serialVersionUID. */

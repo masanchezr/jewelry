@@ -107,8 +107,8 @@ public class AdjustmentServiceImpl implements AdjustmentService {
 
 	@Override
 	public Map<String, BigDecimal> sumAdjustmentByDates(Date from, Date until, PlaceEntity place) {
-		Map<String, BigDecimal> sums = new HashMap<String, BigDecimal>();
-		sums.put("amount", adjustmentRepository.sumAmountByCreationdateAndPlace(from, until,
+		Map<String, BigDecimal> sums = new HashMap<>();
+		sums.put(Constants.AMOUNT, adjustmentRepository.sumAmountByCreationdateAndPlace(from, until,
 				mapper.map(place, PlaceEntity.class)));
 		sums.put("amountwork", adjustmentRepository.sumAmountworkByCreationdateAndPlace(from, until,
 				mapper.map(place, PlaceEntity.class)));

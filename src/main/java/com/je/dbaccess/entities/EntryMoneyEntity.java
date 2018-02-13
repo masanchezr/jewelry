@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.je.utils.constants.Constants;
+
 @Entity
 @Table(name = "entrymoney")
 public class EntryMoneyEntity {
@@ -27,7 +29,7 @@ public class EntryMoneyEntity {
 	private BigDecimal amount;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "creationdate")
+	@Column(name = Constants.CREATIONDATE)
 	private Date creationdate;
 
 	/** The place. */

@@ -18,6 +18,7 @@ import com.je.dbaccess.entities.PaymentEntity;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.dbaccess.entities.SaleEntity;
 import com.je.dbaccess.repositories.SaleRepository;
+import com.je.utils.constants.ConstantsJsp;
 
 /**
  * The Class SaleRepositoryTest.
@@ -51,7 +52,7 @@ public class SaleRepositoryTest {
 		addressmailing.setPostalcode(28017L);
 		addressmailing.setCountry("España");
 		sale.setAddressmailing(addressmailing);
-		sale.setTotal(new BigDecimal(400));
+		sale.setTotal(BigDecimal.valueOf(400));
 		// descomentar para que el test sea real
 		// saleRepository.save(sale);
 	}
@@ -67,7 +68,7 @@ public class SaleRepositoryTest {
 			if (isales != null) {
 				while (isales.hasNext()) {
 					SaleEntity sale = isales.next();
-					System.out.println("idsale" + sale.getIdsale());
+					System.out.println(ConstantsJsp.IDSALE + sale.getIdsale());
 				}
 			}
 		} else {
@@ -88,7 +89,8 @@ public class SaleRepositoryTest {
 			if (isales != null) {
 				while (isales.hasNext()) {
 					SaleEntity sale = isales.next();
-					System.out.println("idsale" + sale.getIdsale() + "client:" + sale.getClient().getNifclient());
+					System.out.println(
+							ConstantsJsp.IDSALE + sale.getIdsale() + "client:" + sale.getClient().getNifclient());
 				}
 			}
 		} else {

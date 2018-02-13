@@ -15,6 +15,7 @@ import com.je.dbaccess.entities.CategoryEntity;
 import com.je.dbaccess.entities.JewelEntity;
 import com.je.dbaccess.entities.PaymentEntity;
 import com.je.services.search.SearchService;
+import com.je.utils.constants.ConstantsJsp;
 import com.je.web.forms.SearchJewelForm;
 
 /**
@@ -48,7 +49,7 @@ public class AdminController {
 	 */
 	@RequestMapping(value = "/admin")
 	public ModelAndView admin() {
-		return new ModelAndView("admin", "adminForm", new AdminForm());
+		return new ModelAndView("admin", ConstantsJsp.ADMINFORM, new AdminForm());
 	}
 
 	/**
@@ -60,8 +61,8 @@ public class AdminController {
 	public ModelAndView newCategory() {
 		ModelAndView model = new ModelAndView();
 		model.setViewName("newCategory");
-		model.addObject("category", new CategoryEntity());
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.CATEGORY, new CategoryEntity());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		return model;
 	}
 
@@ -73,9 +74,9 @@ public class AdminController {
 	@RequestMapping(value = "/newPayment")
 	public ModelAndView newPayment() {
 		ModelAndView model = new ModelAndView("newPayment");
-		model.addObject("payment", new PaymentEntity());
-		model.addObject("searchForm", new SearchJewelForm());
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.FORMPAYMENT, new PaymentEntity());
+		model.addObject(ConstantsJsp.FORMSEARCH, new SearchJewelForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		return model;
 	}
 
@@ -88,12 +89,11 @@ public class AdminController {
 	 */
 	@RequestMapping(value = "/searchJewels")
 	public ModelAndView searchJewels(@RequestParam String search) {
-		log.info("probando busqueda(" + search + ")");
 		ModelAndView model = new ModelAndView("resultsearchbyreference");
 		List<JewelEntity> jewels = searchService.search(search);
-		model.addObject("jewels", jewels);
+		model.addObject(ConstantsJsp.JEWELS, jewels);
 		model.addObject("toUpdate", new JewelEntity());
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		return model;
 	}
 
@@ -115,7 +115,7 @@ public class AdminController {
 	@RequestMapping("/403admin")
 	public ModelAndView accessDeniedPage() {
 		ModelAndView model = new ModelAndView("403admin");
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		return model;
 	}
 }

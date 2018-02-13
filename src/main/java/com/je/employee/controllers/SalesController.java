@@ -23,12 +23,13 @@ import com.je.employee.validators.RemoveSaleFormValidator;
 import com.je.services.categories.CategoriesService;
 import com.je.services.dailies.DailyService;
 import com.je.services.jewels.JewelService;
-import com.je.services.material.MetalService;
+import com.je.services.metal.MetalService;
 import com.je.services.payment.PaymentService;
 import com.je.services.places.PlaceService;
 import com.je.services.sales.Sale;
 import com.je.services.sales.SaleService;
 import com.je.utils.constants.Constants;
+import com.je.utils.constants.ConstantsJsp;
 import com.je.utils.string.Util;
 import com.je.validators.SaleFormValidator;
 
@@ -65,7 +66,7 @@ public class SalesController {
 
 	/** The sale form validator. */
 	@Autowired
-	private SaleFormValidator saleFormValidator;
+	private SaleFormValidator saleValidator;
 
 	/** The remove sale validator. */
 	@Autowired
@@ -74,23 +75,29 @@ public class SalesController {
 	@Autowired
 	private PartialCancelSaleValidator partialCancelSaleValidator;
 
+	private static final String VIEWNEWSALE = "newsale";
+	private static final String VIEWREMOVEPARCIALSALE = "removeparcialsale";
+	private static final String VIEWREMOVESALE = "removesale";
+	private static final String FORMREMOVESALE = "removeSaleForm";
+	private static final String VIEWCANCELPARCIALSALE = "cancelparcialsale";
+
 	/**
 	 * Sale.
 	 *
-	 * @param saleForm
+	 * @param sale
 	 *            the sale form
 	 * @param result
 	 *            the result
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/employee/resultsale")
-	public ModelAndView sale(@ModelAttribute("saleForm") Sale saleForm, BindingResult result) {
+	public ModelAndView sale(@ModelAttribute(ConstantsJsp.FORMSALE) Sale sale, BindingResult result) {
 		ModelAndView model = new ModelAndView();
-		saleFormValidator.validate(saleForm, result);
+		saleValidator.validate(sale, result);
 		if (!result.hasErrors()) {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
-			List<JewelEntity> jewels = saleForm.getJewels();
-			List<JewelEntity> newjewels = new ArrayList<JewelEntity>();
+			List<JewelEntity> jewels = sale.getJewels();
+			List<JewelEntity> newjewels = new ArrayList<>();
 			JewelEntity jewel;
 			boolean exists = true;
 			PlaceEntity place = placeService.getPlaceUser(user);
@@ -109,36 +116,36 @@ public class SalesController {
 				}
 			}
 			if (!jewels.isEmpty() && exists) {
-				saleForm.setJewels(newjewels);
-				saleForm.setPlace(place);
+				sale.setJewels(newjewels);
+				sale.setPlace(place);
 				// comprobamos si ya existe la venta
-				Sale sale = saleService.searchByNumsaleAndPlace(saleForm.getNumsale(), place.getIdplace());
-				if (sale == null) {
-					saleService.buy(saleForm);
+				Sale entitysale = saleService.searchByNumsaleAndPlace(sale.getNumsale(), place.getIdplace());
+				if (entitysale == null) {
+					saleService.buy(sale);
 					model.setViewName("finishsale");
-					model.addObject("sale", saleForm);
+					model.addObject(ConstantsJsp.FORMSALE, sale);
 				} else {
-					model.addObject("materials", materialService.getAllMetals());
-					model.addObject("categories", categoriesService.getAllCategoriesOrderByName());
-					model.addObject("payments", paymentService.findAllActive());
-					result.rejectValue("idsale", "numsalerepeated");
-					model.addObject("saleForm", saleForm);
-					model.setViewName("newsale");
+					model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
+					model.addObject(ConstantsJsp.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
+					model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
+					result.rejectValue(ConstantsJsp.IDSALE, ConstantsJsp.ERRORNUMSALEREPEATED);
+					model.addObject(ConstantsJsp.FORMSALE, sale);
+					model.setViewName(VIEWNEWSALE);
 				}
 			} else {
-				model.addObject("materials", materialService.getAllMetals());
-				model.addObject("categories", categoriesService.getAllCategoriesOrderByName());
-				model.addObject("payments", paymentService.findAllActive());
-				result.rejectValue("numsale", "jewelnoexist");
-				model.addObject("saleForm", saleForm);
-				model.setViewName("newsale");
+				model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
+				model.addObject(ConstantsJsp.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
+				model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
+				result.rejectValue(ConstantsJsp.NUMSALE, "jewelnoexist");
+				model.addObject(ConstantsJsp.FORMSALE, sale);
+				model.setViewName(VIEWNEWSALE);
 			}
 		} else {
-			model.addObject("materials", materialService.getAllMetals());
-			model.addObject("categories", categoriesService.getAllCategoriesOrderByName());
-			model.addObject("payments", paymentService.findAllActive());
-			model.addObject("saleForm", saleForm);
-			model.setViewName("newsale");
+			model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
+			model.addObject(ConstantsJsp.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
+			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
+			model.addObject(ConstantsJsp.FORMSALE, sale);
+			model.setViewName(VIEWNEWSALE);
 		}
 		return model;
 	}
@@ -150,63 +157,63 @@ public class SalesController {
 	 */
 	@RequestMapping(value = "/employee/removeparcialsale")
 	public ModelAndView removeParcialSale() {
-		ModelAndView model = new ModelAndView("removeparcialsale");
-		model.addObject("saleForm", new Sale());
+		ModelAndView model = new ModelAndView(VIEWREMOVEPARCIALSALE);
+		model.addObject(ConstantsJsp.FORMSALE, new Sale());
 		return model;
 	}
 
 	/**
 	 * Cancel parcial sale.
 	 *
-	 * @param saleForm
+	 * @param sale
 	 *            the sale form
 	 * @param result
 	 *            the result
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/employee/cancelparcialsale")
-	public ModelAndView cancelParcialSale(@ModelAttribute("saleForm") Sale saleForm, HttpServletRequest request,
+	public ModelAndView cancelParcialSale(@ModelAttribute(ConstantsJsp.FORMSALE) Sale sale, HttpServletRequest request,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
-		Long numsale = saleForm.getNumsale();
+		Long numsale = sale.getNumsale();
 		if (numsale == null || numsale.equals(0L)) {
-			model.setViewName("removeparcialsale");
-			model.addObject("saleForm", saleForm);
+			model.setViewName(VIEWREMOVEPARCIALSALE);
+			model.addObject(ConstantsJsp.FORMSALE, sale);
 		} else {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			PlaceEntity place = placeService.getPlaceUser(user);
-			Sale sale = saleService.searchByNumsaleAndPlace(saleForm.getNumsale(), place.getIdplace());
-			if (sale != null) {
-				model.setViewName("cancelparcialsale");
-				model.addObject("payments", paymentService.findAllActive());
-				model.addObject("saleForm", sale);
+			Sale entitysale = saleService.searchByNumsaleAndPlace(sale.getNumsale(), place.getIdplace());
+			if (entitysale != null) {
+				model.setViewName(VIEWCANCELPARCIALSALE);
+				model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
+				model.addObject(ConstantsJsp.FORMSALE, sale);
 			} else {
-				model.setViewName("removeparcialsale");
-				model.addObject("saleForm", saleForm);
-				result.rejectValue("numsale", "salenotexit");
+				model.setViewName(VIEWREMOVEPARCIALSALE);
+				model.addObject(ConstantsJsp.FORMSALE, sale);
+				result.rejectValue(ConstantsJsp.NUMSALE, "salenotexit");
 			}
 		}
 		return model;
 	}
 
 	@RequestMapping(value = "/employee/savecancelparcial")
-	public ModelAndView savecancelparcial(@ModelAttribute("saleForm") Sale saleForm, BindingResult result) {
+	public ModelAndView savecancelparcial(@ModelAttribute(ConstantsJsp.FORMSALE) Sale sale, BindingResult result) {
 		ModelAndView model = new ModelAndView();
-		partialCancelSaleValidator.validate(saleForm, result);
+		partialCancelSaleValidator.validate(sale, result);
 		if (result.hasErrors()) {
-			Sale sale = saleService.searchByPK(saleForm.getIdsale());
-			model.setViewName("cancelparcialsale");
-			model.addObject("payments", paymentService.findAllActive());
-			model.addObject("saleForm", sale);
+			Sale entitysale = saleService.searchByPK(sale.getIdsale());
+			model.setViewName(VIEWCANCELPARCIALSALE);
+			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
+			model.addObject(ConstantsJsp.FORMSALE, entitysale);
 		} else {
-			if (saleService.removeSaleParcial(saleForm)) {
+			if (saleService.removeSaleParcial(sale)) {
 				model.setViewName("successemployee");
 			} else {
-				Sale sale = saleService.searchByPK(saleForm.getIdsale());
-				model.setViewName("cancelparcialsale");
-				model.addObject("payments", paymentService.findAllActive());
-				model.addObject("saleForm", sale);
-				result.rejectValue("idsale", "notcancelparcial");
+				Sale entitysale = saleService.searchByPK(sale.getIdsale());
+				model.setViewName(VIEWCANCELPARCIALSALE);
+				model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
+				model.addObject(ConstantsJsp.FORMSALE, entitysale);
+				result.rejectValue(ConstantsJsp.IDSALE, "notcancelparcial");
 			}
 		}
 		return model;
@@ -219,14 +226,14 @@ public class SalesController {
 	 */
 	@RequestMapping(value = "/employee/removesale")
 	public ModelAndView removeSale() {
-		ModelAndView model = new ModelAndView("removesale");
+		ModelAndView model = new ModelAndView(VIEWREMOVESALE);
 		List<PaymentEntity> payments = paymentService.findAllActive();
 		PaymentEntity pve = new PaymentEntity();
 		pve.setIdpayment(6L);
 		pve.setName("Vale descuento y efectivo");
 		payments.add(pve);
-		model.addObject("removeSaleForm", new Sale());
-		model.addObject("payments", payments);
+		model.addObject(FORMREMOVESALE, new Sale());
+		model.addObject(ConstantsJsp.PAYMENTS, payments);
 		return model;
 	}
 
@@ -244,32 +251,32 @@ public class SalesController {
 		ModelAndView model = new ModelAndView();
 		removeSaleValidator.validate(removeSaleForm, result);
 		if (result.hasErrors()) {
-			model.addObject("removeSaleForm", new Sale());
-			model.setViewName("removesale");
-			model.addObject("payments", paymentService.findAllActive());
+			model.addObject(FORMREMOVESALE, new Sale());
+			model.setViewName(VIEWREMOVESALE);
+			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
 		} else {
 			// ahora hay que mirar si existe la venta para ese lugar
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			PlaceEntity place = placeService.getPlaceUser(user);
 			Sale searchSale = saleService.searchByNumsaleAndPlace(removeSaleForm.getNumsale(), place.getIdplace());
 			if (searchSale == null) {
-				model.addObject("removeSaleForm", new Sale());
-				model.setViewName("removesale");
-				model.addObject("payments", paymentService.findAllActive());
-				result.rejectValue("idsale", "notfoundsale");
+				model.addObject(FORMREMOVESALE, new Sale());
+				model.setViewName(VIEWREMOVESALE);
+				model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
+				result.rejectValue(ConstantsJsp.IDSALE, "notfoundsale");
 			} else {
-				String ipAddress = request.getHeader("X-FORWARDED-FOR");
+				String ipAddress = request.getHeader(ConstantsJsp.XFORWARDEDFOR);
 				Date today = new Date();
 				if (ipAddress == null) {
 					ipAddress = request.getRemoteAddr();
 				}
-				model.setViewName("dailyarrow");
+				model.setViewName(ConstantsJsp.VIEWDAILYARROW);
 				searchSale.setPlace(place);
 				searchSale.setIddiscount(removeSaleForm.getIddiscount());
 				searchSale.setPayment(removeSaleForm.getPayment());
 				saleService.removeSale(searchSale);
-				model.addObject("daily", dailyService.getDaily(today, place, ipAddress));
-				model.addObject("datedaily", today);
+				model.addObject(ConstantsJsp.DAILY, dailyService.getDaily(today, place, ipAddress));
+				model.addObject(ConstantsJsp.DATEDAILY, today);
 			}
 		}
 		return model;
@@ -282,17 +289,17 @@ public class SalesController {
 	 */
 	@RequestMapping(value = "/employee/newsale")
 	public ModelAndView newSale() {
-		ModelAndView model = new ModelAndView("newsale");
+		ModelAndView model = new ModelAndView(VIEWNEWSALE);
 		Sale sale = new Sale();
-		List<JewelEntity> jewels = new ArrayList<JewelEntity>();
+		List<JewelEntity> jewels = new ArrayList<>();
 		for (int i = 0; i < Constants.MAXJEWELS; i++) {
 			jewels.add(new JewelEntity());
 		}
 		sale.setJewels(jewels);
-		model.addObject("materials", materialService.getAllMetals());
-		model.addObject("categories", categoriesService.getAllCategoriesOrderByName());
-		model.addObject("payments", paymentService.findAllActive());
-		model.addObject("saleForm", sale);
+		model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
+		model.addObject(ConstantsJsp.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
+		model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
+		model.addObject(ConstantsJsp.FORMSALE, sale);
 		return model;
 	}
 }

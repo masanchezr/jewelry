@@ -317,9 +317,9 @@ public class PawnServiceImpl implements PawnService {
 				Integer months = pawnEntity.getMonths();
 				if (months != null && months.intValue() > 0
 						&& pawnEntity.getPlace().getIdplace().equals(Constants.STODOMINGO)) {
-					percent = percent.multiply(new BigDecimal(months));
+					percent = percent.multiply(BigDecimal.valueOf(months));
 				}
-				BigDecimal percentamount = amount.multiply(percent).divide(new BigDecimal(100));
+				BigDecimal percentamount = amount.multiply(percent).divide(BigDecimal.valueOf(100));
 				/**
 				 * if (percentamount - ((int) percentamount) != 0) { percentamount += 1; }
 				 **/
@@ -338,7 +338,7 @@ public class PawnServiceImpl implements PawnService {
 				pawn = renovation.getPawn();
 				re.setNumpawn(pawn.getNumpawn());
 				renovationamount = pawn.getAmount().multiply(pawn.getPercent());
-				renovationamount = renovationamount.divide(new BigDecimal(100));
+				renovationamount = renovationamount.divide(BigDecimal.valueOf(100));
 				/**
 				 * if ((renovationamount - ((int) renovationamount) != 0)) { renovationamount +=
 				 * 1; }

@@ -5,6 +5,20 @@ package com.je.utils.constants;
  */
 public class Constants {
 
+	public static final String AMOUNT = "amount";
+
+	public static final String CREATIONDATE = "creationdate";
+
+	public static final String DESCRIPTION = "description";
+
+	public static final String PLACE = "place";
+
+	public static final String NUMPAWN = "numpawn";
+
+	private Constants() {
+
+	}
+
 	/** The Constant CHECKED. 1 */
 	public static final int CHECKED = 1;
 
@@ -67,5 +81,27 @@ public class Constants {
 	public static final Long DISCOUNT = 4L;
 
 	public static final String JPG = ".jpg";
+
+	public static final String NUMSALE = "numsale";
+
+	public static final String STRAPS = "straps";
+
+	public static final String GRAMS = "grams";
+
+	public static final String BATTERIES = "batteries";
+
+	public static final String RECORDINGS = "recordings";
+
+	public static final String ADJUSTMENTS = "adjustments";
+
+	public static final String SALES = "sales";
+
+	public static final String IDPAWN = "idpawn";
+
+	public static final String NAME = "name";
+
+	public static final String USERNAME = "username";
+
+	public static final String CONTRASE = "password";
 
 }

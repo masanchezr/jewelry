@@ -41,7 +41,7 @@ public class JewelServiceTest {
 		thing.setPlace(place);
 		thing.setName("bicolor");
 		thing.setDescription("bicolor");
-		thing.setPrice(new BigDecimal(224));
+		thing.setPrice(BigDecimal.valueOf(224));
 		thing.setActive(true);
 		thing.setReference("9332p");
 		thing.setCategory(category);

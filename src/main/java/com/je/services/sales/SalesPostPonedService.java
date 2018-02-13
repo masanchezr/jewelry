@@ -6,7 +6,7 @@ import com.je.dbaccess.entities.SalePostponedEntity;
 
 public interface SalesPostPonedService {
 
-	public void buy(SalePostPoned saleForm);
+	public void buy(SalePostPoned sale);
 
 	public SalePostponedEntity searchByNumsale(Long numsale);
 

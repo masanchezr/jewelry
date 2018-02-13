@@ -22,7 +22,7 @@
 	<bean id="saleService" class="com.je.services.sales.SaleServiceImpl" />
 	<bean id="pawnService" class="com.je.services.pawns.PawnServiceImpl" />
 	<bean id="placeService" class="com.je.services.places.PlaceServiceImpl" />
-	<bean id="materialService" class="com.je.services.material.MetalServiceImpl" />
+	<bean id="materialService" class="com.je.services.metal.MetalServiceImpl" />
 	<bean id="setService" class="com.je.services.sets.SetServiceImpl" />
 	<bean id="coinService" class="com.je.services.coins.CoinServiceImpl" />
 	<bean id="adjustmentService" class="com.je.services.adjustments.AdjustmentServiceImpl" />
@@ -81,6 +81,6 @@
 	<bean id="recordingValidator" class="com.je.employee.validators.RecordingValidator" />
 	<bean id="searchDailyFormValidator" class="com.je.admin.validators.SearchDailyFormValidator" />
 	<bean id="partialCancelSaleValidator" class="com.je.employee.validators.PartialCancelSaleValidator" />
-	<bean id="salepostponedvalidator" class="com.je.employee.validators.SalePostPonedValidator" />	
+	<bean id="salepostponedvalidator" class="com.je.employee.validators.SalePostPonedValidator" />
 	<bean id="installmentvalidator" class="com.je.employee.validators.InstallmentValidator" />
 </beans>

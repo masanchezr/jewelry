@@ -1,4 +1,4 @@
-package com.je.services.material;
+package com.je.services.metal;
 
 import java.util.List;
 
@@ -28,6 +28,6 @@ public class MetalServiceImpl implements MetalService {
 
 	@Override
 	public MetalEntity findById(long l) {
-		return materialRepository.findById(l).get();
+		return materialRepository.findById(l).orElse(null);
 	}
 }

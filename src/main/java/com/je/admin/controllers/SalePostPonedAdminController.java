@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.je.admin.forms.AdminForm;
 import com.je.services.sales.SalesPostPonedService;
+import com.je.utils.constants.ConstantsJsp;
 
 @Controller
 public class SalePostPonedAdminController {
@@ -18,8 +19,8 @@ public class SalePostPonedAdminController {
 	@RequestMapping(value = "/showsalepost{id}")
 	public ModelAndView showsale(@PathVariable("id") long id) {
 		ModelAndView model = new ModelAndView("showsalepost");
-		model.addObject("adminForm", new AdminForm());
-		model.addObject("sale", salesPostPonedService.searchByPK(id));
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsJsp.FORMSALE, salesPostPonedService.searchByPK(id));
 		return model;
 	}
 

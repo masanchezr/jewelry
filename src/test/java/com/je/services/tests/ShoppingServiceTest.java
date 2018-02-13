@@ -43,7 +43,7 @@ public class ShoppingServiceTest {
 	public void saveShoppingTest() {
 		Shopping shopping = new Shopping();
 		shopping.setCreationdate("02-03-2017");
-		shopping.setAmount(new BigDecimal(85));
+		shopping.setAmount(BigDecimal.valueOf(85));
 		shopping.setNumshop(9L);
 		shopping.setUser("13700");
 		shopping.setNif("04189105T");
@@ -55,8 +55,8 @@ public class ShoppingServiceTest {
 		ObjectShopEntity os = new ObjectShopEntity();
 		MetalEntity material = new MetalEntity();
 		material.setIdmetal(1L);
-		os.setAmount(new BigDecimal(85));
-		os.setGrossgrams(new BigDecimal(5));
+		os.setAmount(BigDecimal.valueOf(85));
+		os.setGrossgrams(BigDecimal.valueOf(5));
 		os.setMetal(material);
 		los.add(os);
 		shopping.setObjects(los);

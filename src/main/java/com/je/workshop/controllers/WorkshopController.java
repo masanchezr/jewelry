@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.je.services.material.MetalService;
+import com.je.services.metal.MetalService;
 import com.je.services.workshop.Workshop;
 import com.je.services.workshop.WorkshopService;
+import com.je.utils.constants.ConstantsJsp;
 import com.je.workshop.validators.WorkshopValidator;
 
 /**
@@ -58,7 +59,7 @@ public class WorkshopController {
 	public ModelAndView newWorkshop() {
 		ModelAndView model = new ModelAndView("newWorkshop");
 		model.addObject("workshop", new Workshop());
-		model.addObject("materials", materialService.getAllMetals());
+		model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
 		return model;
 	}
 
@@ -82,8 +83,7 @@ public class WorkshopController {
 	 * @return the model and view
 	 */
 	@RequestMapping("/workshop/saveworkshop")
-	public ModelAndView saveworkshop(
-			@ModelAttribute("workshop") Workshop workshop, BindingResult result) {
+	public ModelAndView saveworkshop(@ModelAttribute("workshop") Workshop workshop, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		workShopValidator.validate(workshop, result);
 		if (result.hasErrors()) {

@@ -12,8 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.je.utils.constants.Constants;
+
 @Entity
-@Table(name = "recordings")
+@Table(name = Constants.RECORDINGS)
 public class RecordingEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

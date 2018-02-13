@@ -14,6 +14,7 @@ import com.je.forms.SearchForm;
 import com.je.services.adjustments.Adjustment;
 import com.je.services.adjustments.AdjustmentService;
 import com.je.services.places.PlaceService;
+import com.je.utils.constants.ConstantsJsp;
 import com.je.utils.date.DateUtil;
 import com.je.validators.SearchFormValidator;
 
@@ -31,24 +32,27 @@ public class AdjustmentsAdminController {
 	@Autowired
 	private SearchFormValidator adminSearchFormValidator;
 
+	private static final String VIEWSEARCHADJUSTMENT = "searchadjustment";
+	private static final String VIEWSEARCHSUMADJUSTMENTS = "searchsumadjustments";
+
 	@RequestMapping(value = "/searchsumadjustments")
 	public ModelAndView searchSumAdjustments() {
-		ModelAndView model = new ModelAndView("searchsumadjustments");
-		model.addObject("adminForm", new AdminForm());
-		model.addObject("searchForm", new SearchForm());
-		model.addObject("places", placeService.getAllPlaces());
+		ModelAndView model = new ModelAndView(VIEWSEARCHSUMADJUSTMENTS);
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsJsp.FORMSEARCH, new SearchForm());
+		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
 		return model;
 	}
 
 	@RequestMapping(value = "/sumadjustments")
-	public ModelAndView sumAdjustments(@ModelAttribute("searchForm") SearchForm searchForm, BindingResult result) {
+	public ModelAndView sumAdjustments(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm searchForm, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		adminSearchFormValidator.validate(searchForm, result);
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		if (result.hasErrors()) {
-			model.addObject("searchForm", searchForm);
-			model.addObject("places", placeService.getAllPlaces());
-			model.setViewName("searchsumadjustments");
+			model.addObject(ConstantsJsp.FORMSEARCH, searchForm);
+			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+			model.setViewName(VIEWSEARCHSUMADJUSTMENTS);
 		} else {
 			Date from = DateUtil.getDate(searchForm.getDatefrom());
 			Date until = DateUtil.getDate(searchForm.getDateuntil());
@@ -60,25 +64,25 @@ public class AdjustmentsAdminController {
 
 	@RequestMapping(value = "/searchadjustment")
 	public ModelAndView searchAdjustment() {
-		ModelAndView model = new ModelAndView("searchadjustment");
-		model.addObject("adjustment", new Adjustment());
-		model.addObject("adminForm", new AdminForm());
+		ModelAndView model = new ModelAndView(VIEWSEARCHADJUSTMENT);
+		model.addObject(ConstantsJsp.FORMADJUSTMENT, new Adjustment());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		return model;
 	}
 
 	@RequestMapping(value = "/resultadjustment")
-	public ModelAndView resultadjustment(@ModelAttribute("adjustment") Adjustment adjustment) {
+	public ModelAndView resultadjustment(@ModelAttribute(ConstantsJsp.FORMADJUSTMENT) Adjustment adjustment) {
 		ModelAndView model = new ModelAndView();
 		Long idadjustment = adjustment.getIdadjustment();
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		if (idadjustment == null || idadjustment.compareTo(1L) < 0) {
-			model.setViewName("searchadjustment");
+			model.setViewName(VIEWSEARCHADJUSTMENT);
 		} else {
 			adjustment = adjustmentService.findById(idadjustment);
-			model.addObject("adjustment", adjustment);
+			model.addObject(ConstantsJsp.FORMADJUSTMENT, adjustment);
 			model.setViewName("resultadjustment");
 		}
-		model.addObject("adjustment", adjustment);
+		model.addObject(ConstantsJsp.FORMADJUSTMENT, adjustment);
 		return model;
 	}
 

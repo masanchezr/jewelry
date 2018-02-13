@@ -9,6 +9,7 @@ import org.springframework.validation.Validator;
 
 import com.je.dbaccess.entities.ObjectShopEntity;
 import com.je.services.shoppings.Shopping;
+import com.je.utils.constants.ConstantsJsp;
 
 /**
  * The Class ShoppingsValidator.
@@ -22,19 +23,21 @@ public class NewShoppingFormValidator implements Validator {
 
 	@Override
 	public void validate(Object arg0, Errors arg1) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "numshop", "selectnumshop");
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsJsp.NUMSHOP, ConstantsJsp.ERRORSELECTNUMSHOP);
 		Shopping shopping = (Shopping) arg0;
 		Long numshop = shopping.getNumshop();
 		String description;
 		Iterator<ObjectShopEntity> ios = shopping.getObjects().iterator();
 		ObjectShopEntity os;
-		BigDecimal cashamount = shopping.getCashamount(), grossgrams, amount = BigDecimal.ZERO;
+		BigDecimal cashamount = shopping.getCashamount();
+		BigDecimal grossgrams;
+		BigDecimal amount = BigDecimal.ZERO;
 		// comprobamos que es positivo el numero
 		if (numshop != null && numshop.compareTo(0L) <= 0) {
-			arg1.rejectValue("numshop", "numpositive");
+			arg1.rejectValue(ConstantsJsp.NUMSHOP, "numpositive");
 		}
 		if (cashamount == null) {
-			arg1.rejectValue("cashamount", "selectamount");
+			arg1.rejectValue(ConstantsJsp.CASHAMOUNT, ConstantsJsp.ERRORSELECTAMOUNT);
 		}
 		while (ios.hasNext()) {
 			os = ios.next();
@@ -43,17 +46,15 @@ public class NewShoppingFormValidator implements Validator {
 				grossgrams = os.getGrossgrams();
 				description = os.getDescription();
 				if (description == null) {
-					arg1.rejectValue("numshop", "selectdescription");
+					arg1.rejectValue(ConstantsJsp.NUMSHOP, ConstantsJsp.ERRORSELECTDESCRIPTION);
 				}
-				if (grossgrams != null && grossgrams.compareTo(BigDecimal.ZERO) <= 0) {
-					arg1.rejectValue("numshop", "selectgrams");
-				} else if (grossgrams == null) {
-					arg1.rejectValue("numshop", "selectgrams");
+				if (grossgrams == null || (grossgrams != null && grossgrams.compareTo(BigDecimal.ZERO) <= 0)) {
+					arg1.rejectValue(ConstantsJsp.NUMSHOP, ConstantsJsp.ERRORSELECTGRAMS);
 				}
 			}
 		}
 		if (cashamount != null && amount.compareTo(cashamount) != 0) {
-			arg1.rejectValue("cashamount", "sumamounts");
+			arg1.rejectValue(ConstantsJsp.CASHAMOUNT, ConstantsJsp.ERRORSUMAMOUNTS);
 		}
 	}
 }

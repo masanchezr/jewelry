@@ -12,6 +12,7 @@ import com.je.admin.validators.SearchMissingNumbersValidator;
 import com.je.services.places.PlaceService;
 import com.je.services.searchmissingnumbers.SearchMissingNumberService;
 import com.je.services.searchmissingnumbers.SearchMissingNumbers;
+import com.je.utils.constants.ConstantsJsp;
 
 @Controller
 public class SearchMissingShoppingsPawnsController {
@@ -26,26 +27,27 @@ public class SearchMissingShoppingsPawnsController {
 	@Autowired
 	private SearchMissingNumbersValidator searchMissingNumbersValidator;
 
+	private static final String SEARCHMISSINGSHOPPINGS = "searchmissingshoppings";
+
 	@RequestMapping(value = "/searchPosibleRepeated")
 	public ModelAndView searchMissingShoppings() {
-		ModelAndView model = new ModelAndView("searchmissingshoppings");
-		model.addObject("adminForm", new AdminForm());
-		model.addObject("places", placeService.getAllPlaces());
-		model.addObject("searchmissingshoppings", new SearchMissingNumbers());
+		ModelAndView model = new ModelAndView(SEARCHMISSINGSHOPPINGS);
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+		model.addObject(SEARCHMISSINGSHOPPINGS, new SearchMissingNumbers());
 		return model;
 	}
 
 	@RequestMapping(value = "/resultmissingshoppings")
 	public ModelAndView resultMissingShoppings(
-			@ModelAttribute("searchmissingshoppings") SearchMissingNumbers searchmissingshoppings,
-			BindingResult result) {
+			@ModelAttribute(SEARCHMISSINGSHOPPINGS) SearchMissingNumbers searchmissingshoppings, BindingResult result) {
 		ModelAndView model = new ModelAndView();
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		searchMissingNumbersValidator.validate(searchmissingshoppings, result);
 		if (result.hasErrors()) {
-			model.addObject("places", placeService.getAllPlaces());
-			model.addObject("searchmissingshoppings", new SearchMissingNumbers());
-			model.setViewName("searchmissingshoppings");
+			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+			model.addObject(SEARCHMISSINGSHOPPINGS, new SearchMissingNumbers());
+			model.setViewName(SEARCHMISSINGSHOPPINGS);
 		} else {
 			model.addObject("nummissing", searchMissingNumberService.searchMissingShoppings(searchmissingshoppings));
 			model.setViewName("resultmissingshoppings");

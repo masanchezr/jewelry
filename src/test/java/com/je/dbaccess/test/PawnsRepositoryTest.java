@@ -52,8 +52,8 @@ public class PawnsRepositoryTest {
 		cpe.setName("empeños");
 		cpe.setSurname("que trajo jose en una lista de leon");
 		pawn.setNumpawn("1069");
-		pawn.setAmount(new BigDecimal(80));
-		pawn.setPercent(new BigDecimal(5));
+		pawn.setAmount(BigDecimal.valueOf(80));
+		pawn.setPercent(BigDecimal.valueOf(5));
 		pawn.setPlace(place);
 		pawn.setClient(cpe);
 		calendar.set(2015, 3, 27);

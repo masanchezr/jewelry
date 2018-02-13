@@ -21,7 +21,6 @@ import com.je.dbaccess.entities.PlaceEntity;
 import com.je.dbaccess.entities.SaleEntity;
 import com.je.dbaccess.entities.SalesJewels;
 import com.je.dbaccess.entities.SalesPayments;
-import com.je.dbaccess.managers.JewelsManager;
 import com.je.dbaccess.managers.SaleManager;
 
 /**
@@ -34,9 +33,6 @@ public class SaleManagerTest {
 	/** The sale manager. */
 	@Autowired
 	private SaleManager saleManager;
-
-	@Autowired
-	private JewelsManager jewelsManager;
 
 	/**
 	 * Save test.
@@ -64,7 +60,7 @@ public class SaleManagerTest {
 		saleJewels.setSale(sale);
 		jewels.add(saleJewels);
 		sale.setSjewels(jewels);
-		sale.setTotal(new BigDecimal(189));
+		sale.setTotal(BigDecimal.valueOf(189));
 		sale.setPlace(place);
 		// saleManager.buy(sale);
 		System.out.println("fin savetest");
@@ -115,28 +111,6 @@ public class SaleManagerTest {
 		} else {
 			System.out.println("nulo2");
 		}
-	}
-
-	/**
-	 * Cancel sale test.
-	 */
-	@Test
-	public void cancelSaleTest() {
-		SaleEntity sale = saleManager.searchByPK(17L);
-		PaymentEntity payment = new PaymentEntity();
-		payment.setIdpayment(2L);
-		// saleManager.cancelSale(sale, payment);
-	}
-
-	@Test
-	public void cancelSaleParcialTest() {
-		SaleEntity sale = saleManager.searchByPK(16L);
-		JewelEntity jewel = jewelsManager.searchById(1L);
-		List<JewelEntity> jewels = new ArrayList<JewelEntity>();
-		PaymentEntity payment = new PaymentEntity();
-		payment.setIdpayment(2L);
-		jewels.add(jewel);
-		// saleManager.cancelSale(sale, jewels, payment);
 	}
 
 	@Test

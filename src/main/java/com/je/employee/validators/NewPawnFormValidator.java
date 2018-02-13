@@ -15,6 +15,7 @@ import org.springframework.validation.Validator;
 import com.je.dbaccess.entities.ObjectPawnEntity;
 import com.je.services.pawns.NewPawn;
 import com.je.utils.constants.Constants;
+import com.je.utils.constants.ConstantsJsp;
 import com.je.utils.date.DateUtil;
 import com.je.utils.string.Util;
 
@@ -22,6 +23,8 @@ import com.je.utils.string.Util;
  * The Class NewPawnFormValidator.
  */
 public class NewPawnFormValidator implements Validator {
+
+	private static final String ERRORDATEBIRTH = "datebirth";
 
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -31,12 +34,12 @@ public class NewPawnFormValidator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 		NewPawn pawn = (NewPawn) target;
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "numpawn", "idpawn");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "selectname");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "surname", "selectsurname");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nif", "selectnif");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address", "selectaddress");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "percent", "selectpercent");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, Constants.NUMPAWN, Constants.IDPAWN);
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, Constants.NAME, ConstantsJsp.ERRORSELECTNAME);
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, ConstantsJsp.SURNAME, ConstantsJsp.ERRORSURNAME);
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, ConstantsJsp.NIF, ConstantsJsp.ERRORSELECTNIF);
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, ConstantsJsp.ADDRESS, ConstantsJsp.ERRORSELECTADDRESS);
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, ConstantsJsp.PERCENT, ConstantsJsp.ERRORSELECTPERCENT);
 		String sdate = pawn.getCreationdate();
 		String birthday = pawn.getDatebirth();
 		String dni = pawn.getNif();
@@ -44,34 +47,27 @@ public class NewPawnFormValidator implements Validator {
 		BigDecimal percent = pawn.getPercent();
 		BigDecimal amount = pawn.getAmount();
 		if (amount.compareTo(BigDecimal.ZERO) <= 0) {
-			errors.rejectValue("amount", "selectamount");
+			errors.rejectValue(Constants.AMOUNT, ConstantsJsp.ERRORSELECTAMOUNT);
 		}
 		if (!Util.isEmpty(sdate) && !DateUtil.isDate(sdate)) {
-			errors.rejectValue("creationdate", "selectdate");
+			errors.rejectValue(Constants.CREATIONDATE, ConstantsJsp.SELECTDATE);
 		}
 		if (!Util.isEmpty(birthday)) {
 			if (!DateUtil.isDate(birthday)) {
-				errors.rejectValue("datebirth", "selectdate");
+				errors.rejectValue(ERRORDATEBIRTH, ConstantsJsp.SELECTDATE);
 			} else {
-				Date dbirthdaty = DateUtil.getDate(birthday);
+				Date dbirthday = DateUtil.getDate(birthday);
 				Calendar c = Calendar.getInstance();
 				Calendar cbirthday = Calendar.getInstance();
-				cbirthday.setTime(dbirthdaty);
-				if (c.get(Calendar.YEAR) < cbirthday.get(Calendar.YEAR) + Constants.AGE) {
-					errors.rejectValue("datebirth", "no18");
-				} else if (c.get(Calendar.YEAR) == cbirthday.get(Calendar.YEAR) + Constants.AGE) {
-					if (c.get(Calendar.MONTH) < c.get(Calendar.MONTH)) {
-						errors.rejectValue("datebirth", "no18");
-					} else if (c.get(Calendar.MONTH) == c.get(Calendar.MONTH)) {
-						if (c.get(Calendar.DAY_OF_MONTH) < c.get(Calendar.DAY_OF_MONTH)) {
-							errors.rejectValue("datebirth", "no18");
-						}
-					}
+				cbirthday.setTime(dbirthday);
+				cbirthday.add(Calendar.YEAR, Constants.AGE);
+				if (c.before(cbirthday)) {
+					errors.rejectValue(ERRORDATEBIRTH, "no18");
 				}
 			}
 		}
 		if (percent.compareTo(BigDecimal.ZERO) <= 0) {
-			errors.rejectValue("percent", "selectpercent");
+			errors.rejectValue(ConstantsJsp.ERRORSELECTADDRESS, ConstantsJsp.ERRORSELECTPERCENT);
 		}
 		List<ObjectPawnEntity> lop = pawn.getObjects();
 		Iterator<ObjectPawnEntity> ilop = lop.iterator();
@@ -80,28 +76,28 @@ public class NewPawnFormValidator implements Validator {
 		while (ilop.hasNext()) {
 			op = ilop.next();
 			if (op.getGrossgrams() != null && Util.isEmpty(op.getDescription())) {
-				errors.rejectValue("numpawn", "selectdescription");
+				errors.rejectValue(Constants.NUMPAWN, ConstantsJsp.ERRORSELECTDESCRIPTION);
 			} else if (op.getGrossgrams() == null && !Util.isEmpty(op.getDescription())) {
-				errors.rejectValue("numpawn", "selectgrams");
+				errors.rejectValue(Constants.NUMPAWN, ConstantsJsp.ERRORSELECTGRAMS);
 			} else if (op.getGrossgrams() != null && !Util.isEmpty(op.getDescription())) {
 				isEmpty = false;
 			}
 		}
 		if (isEmpty) {
-			errors.rejectValue("numpawn", "selectdescription");
-			errors.rejectValue("numpawn", "selectgrams");
+			errors.rejectValue(Constants.NUMPAWN, ConstantsJsp.ERRORSELECTDESCRIPTION);
+			errors.rejectValue(Constants.NUMPAWN, ConstantsJsp.ERRORSELECTGRAMS);
 		}
 		if (dni != null && dni.length() > 10) {
-			errors.rejectValue("nif", "niftoolong");
+			errors.rejectValue(ConstantsJsp.NIF, "niftoolong");
 		} else if (!Util.isNifNie(dni)) {
-			errors.rejectValue("nif", "nifnotvalid");
+			errors.rejectValue(ConstantsJsp.NIF, "nifnotvalid");
 		}
 		if (numpawn != null) {
 			String pattern = "[a-zA-Z0-9]*";
 			Pattern pa = Pattern.compile(pattern);
 			Matcher matcher = pa.matcher(numpawn);
 			if (!matcher.matches()) {
-				errors.rejectValue("numpawn", "novalidcaracter");
+				errors.rejectValue(Constants.NUMPAWN, "novalidcaracter");
 			}
 		}
 	}

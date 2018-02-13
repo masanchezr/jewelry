@@ -222,10 +222,10 @@ public class DailyServiceImpl implements DailyService {
 					BigDecimal percent = pawnEntity.getPercent();
 					Integer months = pawnEntity.getMonths();
 					if (months != null && pawnEntity.getPlace().getIdplace().equals(Constants.STODOMINGO)) {
-						percent = percent.multiply(new BigDecimal(months));
+						percent = percent.multiply(BigDecimal.valueOf(months));
 					}
 					if (percent.compareTo(BigDecimal.ZERO) > 0) {
-						BigDecimal percentamount = amount.multiply(percent).divide(new BigDecimal(100));
+						BigDecimal percentamount = amount.multiply(percent).divide(BigDecimal.valueOf(100));
 						amount = amount.add(percentamount);
 					}
 					retiredpawnsamount = retiredpawnsamount.add(amount);
@@ -349,7 +349,7 @@ public class DailyServiceImpl implements DailyService {
 					pawn = renovation.getPawn();
 					re.setNumpawn(pawn.getNumpawn());
 					renovationamount = pawn.getAmount().multiply(pawn.getPercent());
-					renovationamount = renovationamount.divide(new BigDecimal(100));
+					renovationamount = renovationamount.divide(BigDecimal.valueOf(100));
 					/**
 					 * if ((renovationamount - ((int) renovationamount) != 0)) { renovationamount +=
 					 * 1; }
@@ -490,10 +490,10 @@ public class DailyServiceImpl implements DailyService {
 				}
 			}
 			finalamount = previousamount.add(adjusmentsamount).add(adjustmentsworkamount).add(renovationsamount)
-					.add(new BigDecimal(salesamount)).add(shoppingsamount).add(retiredpawnsamount)
-					.add(otherconceptsamount).add(newpawnsamount).add(cancelsamount).add(new BigDecimal(payrollamount))
+					.add(BigDecimal.valueOf(salesamount)).add(shoppingsamount).add(retiredpawnsamount)
+					.add(otherconceptsamount).add(newpawnsamount).add(cancelsamount).add(BigDecimal.valueOf(payrollamount))
 					.add(entriesmoneyamount).add(batteriesamount).add(strapsamount).add(rentalsamount)
-					.add(discountsamount).add(recordingsAmount).add(new BigDecimal(salespostamount));
+					.add(discountsamount).add(recordingsAmount).add(BigDecimal.valueOf(salespostamount));
 			dEntity.setFinalamount(finalamount);
 			dEntity.setIpaddress(ipaddress);
 			daily.setFinalamount(finalamount);

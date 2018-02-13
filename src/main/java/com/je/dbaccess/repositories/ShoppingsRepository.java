@@ -12,6 +12,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.dbaccess.entities.ShoppingEntity;
+import com.je.utils.constants.Constants;
 
 /**
  * The Interface ShoppingsRepository.
@@ -81,7 +82,7 @@ public interface ShoppingsRepository extends CrudRepository<ShoppingEntity, Long
 	public ShoppingEntity findByNumshopAndPlaceAndYear(Long numshop, PlaceEntity place, Integer year);
 
 	@Query("select s.numshop from ShoppingEntity s, ObjectShopEntity os where s.place=:place and s.creationdate>=:dateFrom and s.creationdate<=:dateUntil and os.shop.idshop=s.idshop and os.realgrams is null")
-	public List<Long> findGramsNull(@Param("place") PlaceEntity place,
+	public List<Long> findGramsNull(@Param(Constants.PLACE) PlaceEntity place,
 			@Param("dateFrom") @Temporal(TemporalType.DATE) Date datefrom,
 			@Param("dateUntil") @Temporal(TemporalType.DATE) Date dateuntil);
 

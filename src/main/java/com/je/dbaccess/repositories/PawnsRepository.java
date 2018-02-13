@@ -12,6 +12,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.je.dbaccess.entities.PawnEntity;
 import com.je.dbaccess.entities.PlaceEntity;
+import com.je.utils.constants.Constants;
 
 /**
  * The Interface PawnsRepository.
@@ -59,7 +60,7 @@ public interface PawnsRepository extends CrudRepository<PawnEntity, Long> {
 			Date creationdate);
 
 	@Query("select sum(p.amount) from PawnEntity p join p.objects o where p.place=:place and p.dateretired=null and o.realgrams is null")
-	public Double sumPawnsActive(@Param("place") PlaceEntity placeEntity);
+	public Double sumPawnsActive(@Param(Constants.PLACE) PlaceEntity placeEntity);
 
 	/**
 	 * Find by numpawn and place and retired.
@@ -73,8 +74,8 @@ public interface PawnsRepository extends CrudRepository<PawnEntity, Long> {
 	 * @return the list
 	 */
 	@Query("select distinct p from PawnEntity p join p.objects o where p.numpawn=:numpawn and p.place=:place and p.dateretired is null and o.realgrams is null")
-	public List<PawnEntity> findByNumpawnAndPlaceAndRetired(@Param("numpawn") String numpawn,
-			@Param("place") PlaceEntity placeEntity);
+	public List<PawnEntity> findByNumpawnAndPlaceAndRetired(@Param(Constants.NUMPAWN) String numpawn,
+			@Param(Constants.PLACE) PlaceEntity placeEntity);
 
 	public List<PawnEntity> findByDateretiredAndPlace(@Temporal(TemporalType.DATE) Date date, PlaceEntity placeEntity);
 
@@ -83,13 +84,13 @@ public interface PawnsRepository extends CrudRepository<PawnEntity, Long> {
 	public List<PawnEntity> findByDateretiredBetweenAndPlace(Date dfrom, Date duntil, PlaceEntity place);
 
 	@Query("select distinct p from PawnEntity p join p.objects o where p.place=:place and p.dateretired is null and o.realgrams is null")
-	public List<PawnEntity> searchByPlaceAndNotRetired(@Param("place") PlaceEntity placeEntity);
+	public List<PawnEntity> searchByPlaceAndNotRetired(@Param(Constants.PLACE) PlaceEntity placeEntity);
 
 	@Query("select p from PawnEntity p where p.idpawn=:idpawn and PERIOD_DIFF(DATE_FORMAT(p.dateretired,'%Y%m'),DATE_FORMAT(p.creationdate,'%Y%m'))>(SELECT COUNT(*) FROM RenovationEntity where idpawn=:idpawn)+1")
-	public List<PawnEntity> searchMissingRenovations(@Param("idpawn") Long idpawn);
+	public List<PawnEntity> searchMissingRenovations(@Param(Constants.IDPAWN) Long idpawn);
 
 	@Query("select p from PawnEntity p where p.idpawn=:idpawn and PERIOD_DIFF(DATE_FORMAT(p.dateretired,'%Y%m'),DATE_FORMAT(p.creationdate,'%Y%m'))>p.months")
-	public List<PawnEntity> searchMissingMonths(@Param("idpawn") Long idpawn);
+	public List<PawnEntity> searchMissingMonths(@Param(Constants.IDPAWN) Long idpawn);
 
 	public List<PawnEntity> findByPlaceAndYearOrderByCreationdateDesc(PlaceEntity placeEntity, int i);
 }

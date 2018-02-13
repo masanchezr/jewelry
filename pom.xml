@@ -32,6 +32,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-war-plugin</artifactId>
+						<version>3.2.0</version>
 						<configuration>
 							<webXml>src\main\webapp\WEB-INF\web.xml</webXml>
 						</configuration>
@@ -39,6 +40,11 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-compiler-plugin</artifactId>
+						<version>3.7.0</version>
+						<configuration>
+							<source>1.8</source>
+							<target>1.8</target>
+						</configuration>
 					</plugin>
 				</plugins>
 				<resources>

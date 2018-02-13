@@ -35,7 +35,7 @@ public class PayrollServiceImpl implements PayrollService {
 		calendar.setTime(date);
 		String id = String.valueOf(calendar.get(Calendar.YEAR)).concat(String.valueOf(calendar.get(Calendar.MONTH) + 1))
 				.concat(String.valueOf(place.getIdplace()));
-		payrollentity.setAmount(new BigDecimal(payroll.getAmount()));
+		payrollentity.setAmount(BigDecimal.valueOf(payroll.getAmount()));
 		payrollentity.setPlace(place);
 		payrollentity.setCreationdate(new Date());
 		payrollentity.setIdpayroll(Long.valueOf(id));

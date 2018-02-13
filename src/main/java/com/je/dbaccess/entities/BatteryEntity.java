@@ -14,8 +14,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.je.utils.constants.Constants;
+
 @Entity
-@Table(name = "batteries")
+@Table(name = Constants.BATTERIES)
 public class BatteryEntity {
 
 	@Id
@@ -27,10 +29,10 @@ public class BatteryEntity {
 	private BigDecimal amount;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "creationdate")
+	@Column(name = Constants.CREATIONDATE)
 	private Date creationdate;
 
-	@Column(name = "numsale")
+	@Column(name = Constants.NUMSALE)
 	private Long numsale;
 
 	/** The pay. */

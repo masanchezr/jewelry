@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.je.utils.constants.Constants;
+
 @Entity
 @Table(name = "payroll")
 public class PayrollEntity implements Serializable {
@@ -26,11 +28,11 @@ public class PayrollEntity implements Serializable {
 	@Column(name = "idpayroll")
 	private Long idpayroll;
 
-	@Column(name = "amount")
+	@Column(name = Constants.AMOUNT)
 	private BigDecimal amount;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "creationdate")
+	@Column(name = Constants.CREATIONDATE)
 	private Date creationdate;
 
 	/** The place. */

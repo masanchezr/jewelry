@@ -7,25 +7,31 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.je.services.rentals.Rental;
+import com.je.utils.constants.Constants;
+import com.je.utils.constants.ConstantsJsp;
 import com.je.utils.date.DateUtil;
 
 public class RentalValidator implements Validator {
 
+	public static final String RENTALDATE = "rentaldate";
+
+	@Override
 	public boolean supports(Class<?> arg0) {
 		return Rental.class.isAssignableFrom(arg0);
 	}
 
+	@Override
 	public void validate(Object arg0, Errors arg1) {
 
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "amount", "selectamount");
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "rentaldate", "selectdate");
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.AMOUNT, ConstantsJsp.ERRORSELECTAMOUNT);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, RENTALDATE, ConstantsJsp.SELECTDATE);
 
 		Rental rental = (Rental) arg0;
 		if (rental.getAmount() == null || rental.getAmount().compareTo(BigDecimal.ZERO) == 0) {
-			arg1.rejectValue("amount", "selectamount");
+			arg1.rejectValue(Constants.AMOUNT, ConstantsJsp.ERRORSELECTAMOUNT);
 		}
 		if (!DateUtil.isDate(rental.getRentaldate())) {
-			arg1.rejectValue("rentaldate", "selectdate");
+			arg1.rejectValue(RENTALDATE, ConstantsJsp.SELECTDATE);
 		}
 	}
 

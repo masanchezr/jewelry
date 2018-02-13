@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.je.employee.validators.OtherConceptValidator;
 import com.je.services.otherconcepts.OtherConcept;
 import com.je.services.otherconcepts.OthersConceptsService;
+import com.je.utils.constants.ConstantsJsp;
 
 /**
  * The Class OthersConceptsController.
@@ -28,6 +29,8 @@ public class OthersConceptsController {
 	@Autowired
 	private OtherConceptValidator otherConceptValidator;
 
+	private static final String FORMOTHERCONCEPT = "otherconcept";
+
 	/**
 	 * Newconcept.
 	 *
@@ -36,7 +39,7 @@ public class OthersConceptsController {
 	@RequestMapping(value = "/employee/newconcept")
 	public ModelAndView newconcept() {
 		ModelAndView model = new ModelAndView("newconcept");
-		model.addObject("otherconcept", new OtherConcept());
+		model.addObject(FORMOTHERCONCEPT, new OtherConcept());
 		return model;
 	}
 
@@ -54,14 +57,14 @@ public class OthersConceptsController {
 		ModelAndView model = new ModelAndView();
 		otherConceptValidator.validate(otherconcept, result);
 		if (result.hasErrors()) {
-			model.addObject("otherconcept", otherconcept);
+			model.addObject(FORMOTHERCONCEPT, otherconcept);
 			model.setViewName("newconcept");
 		} else {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			otherconcept.setUser(user);
-			model.addObject("daily", othersConceptsService.save(otherconcept));
-			model.setViewName("dailyarrow");
-			model.addObject("datedaily", new Date());
+			model.addObject(ConstantsJsp.DAILY, othersConceptsService.save(otherconcept));
+			model.setViewName(ConstantsJsp.VIEWDAILYARROW);
+			model.addObject(ConstantsJsp.DATEDAILY, new Date());
 		}
 		return model;
 	}

@@ -242,7 +242,7 @@ public class JewelsManagerImpl implements JewelsManager {
 				referencegrams = new BigDecimal(reference);
 				grams = referencegrams.divide(hundred);
 				pricegram = jewel.getPrice().divide(grams, RoundingMode.HALF_UP);
-				if (pricegram.compareTo(hundred) <= 0 && pricegram.compareTo(new BigDecimal(30)) > 0) {
+				if (pricegram.compareTo(hundred) <= 0 && pricegram.compareTo(BigDecimal.valueOf(30)) > 0) {
 					jewel.setGrams(grams);
 					jewelRepository.save(jewel);
 				}

@@ -5,6 +5,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.je.utils.constants.Constants;
+import com.je.utils.constants.ConstantsJsp;
 import com.je.web.forms.BuyForm;
 
 /**
@@ -12,30 +13,30 @@ import com.je.web.forms.BuyForm;
  */
 public class BuyFormValidator implements Validator {
 
+	@Override
 	public boolean supports(Class<?> arg0) {
 
 		return BuyForm.class.isAssignableFrom(arg0);
 	}
 
+	@Override
 	public void validate(Object arg0, Errors arg1) {
-		// Es todo obligatorio excepto el mail y el telefono, aunque uno de los
-		// dos si debe estar
 		BuyForm buyform = (BuyForm) arg0;
 		if (buyform.getIdaddressmailing() == null) {
-			ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "address", "selectaddress");
+			ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsJsp.ADDRESS, ConstantsJsp.ERRORSELECTADDRESS);
 			ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "postalcode", "selectpostcode");
 			ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "city", "selectcity");
 		}
 		// valido campos facturación
 		if (buyform.getBilling_same_as_shipping() == Constants.CHECKED) {
-			ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "namebilling", "selectname");
-			ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "cif", "selectnif");
-			ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "addressbilling", "selectaddress");
+			ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "namebilling", ConstantsJsp.ERRORSELECTNAME);
+			ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "cif", ConstantsJsp.ERRORSELECTNIF);
+			ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "addressbilling", ConstantsJsp.ERRORSELECTADDRESS);
 			ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "postalcodebilling", "selectpostcode");
 			ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "citybilling", "selectcity");
 		}
 		if (buyform.getPayment() == null) {
-			arg1.reject("payment", "selectpayment");
+			arg1.reject(ConstantsJsp.FORMPAYMENT, "selectpayment");
 		}
 	}
 }

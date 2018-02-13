@@ -14,6 +14,7 @@ import com.je.admin.forms.AdminForm;
 import com.je.admin.forms.BillingForm;
 import com.je.admin.validators.BillingFormValidator;
 import com.je.services.workshop.BillingService;
+import com.je.utils.constants.ConstantsJsp;
 import com.je.utils.date.DateUtil;
 import com.je.utils.string.Util;
 
@@ -25,25 +26,27 @@ public class BillingAdminController {
 	@Autowired
 	private BillingFormValidator billingFormValidator;
 
+	private static final String FORMBILLING = "billingForm";
+	private static final String VIEWBILLINGADMIN = "billingadmin";
+	private static final String VIEWSEARCHBILL = "searchbill";
+
 	@RequestMapping(value = "/searchbill")
 	public ModelAndView searchBill() {
-		ModelAndView model = new ModelAndView("searchbill");
-		model.addObject("adminForm", new AdminForm());
-		model.addObject("billingForm", new BillingForm());
+		ModelAndView model = new ModelAndView(VIEWSEARCHBILL);
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(FORMBILLING, new BillingForm());
 		return model;
 	}
 
 	@RequestMapping(value = "/bill")
-	public ModelAndView bill(
-			@ModelAttribute("billingForm") BillingForm billingForm,
-			BindingResult result) {
-		ModelAndView model = new ModelAndView("billingadmin");
+	public ModelAndView bill(@ModelAttribute(FORMBILLING) BillingForm billingForm, BindingResult result) {
+		ModelAndView model = new ModelAndView(VIEWBILLINGADMIN);
 		String sdate = billingForm.getDate();
 		Date date;
 		String jsp;
 		billingFormValidator.validate(billingForm, result);
 		if (result.hasErrors()) {
-			jsp = "searchbill";
+			jsp = VIEWSEARCHBILL;
 		} else {
 			if (Util.isEmpty(sdate)) {
 				date = new Date();
@@ -53,9 +56,9 @@ public class BillingAdminController {
 			Calendar cdate = Calendar.getInstance();
 			cdate.setTime(date);
 			model.addAllObjects(billingService.getBill(cdate));
-			jsp = "billingadmin";
+			jsp = VIEWBILLINGADMIN;
 		}
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.setViewName(jsp);
 		return model;
 	}

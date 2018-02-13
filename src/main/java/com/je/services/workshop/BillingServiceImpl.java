@@ -16,7 +16,7 @@ import com.je.dbaccess.entities.MetalEntity;
 import com.je.dbaccess.entities.WorkshopEntity;
 import com.je.dbaccess.repositories.AdjustmentRepository;
 import com.je.dbaccess.repositories.WorkshopRepository;
-import com.je.services.material.MetalService;
+import com.je.services.metal.MetalService;
 import com.je.utils.constants.Constants;
 
 /**
@@ -35,9 +35,10 @@ public class BillingServiceImpl implements BillingService {
 	@Autowired
 	private MetalService materialService;
 
+	@Override
 	public Map<String, Object> getBill(Calendar current) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		List<Billing> billing = new ArrayList<Billing>();
+		Map<String, Object> map = new HashMap<>();
+		List<Billing> billing = new ArrayList<>();
 		Calendar from = new GregorianCalendar(current.get(Calendar.YEAR), current.get(Calendar.MONTH), 1);
 		Calendar until = new GregorianCalendar(current.get(Calendar.YEAR), current.get(Calendar.MONTH),
 				current.getActualMaximum(Calendar.DAY_OF_MONTH));
@@ -46,13 +47,16 @@ public class BillingServiceImpl implements BillingService {
 		List<WorkshopEntity> works = workshopRepository.findByCreationdateBetween(from.getTime(), until.getTime());
 		Iterator<AdjustmentEntity> iadjustments = adjustments.iterator();
 		Iterator<WorkshopEntity> iworks = works.iterator();
-		List<Worngrams> lworngrams = new ArrayList<Worngrams>(), lwg = new ArrayList<Worngrams>();
+		List<Worngrams> lworngrams = new ArrayList<>();
+		List<Worngrams> lwg = new ArrayList<>();
 		Billing bill;
 		AdjustmentEntity adjustment;
 		WorkshopEntity work;
 		MetalEntity materialEntity;
 		Worngrams worngrams;
-		BigDecimal amount, grams = BigDecimal.ZERO, totalamount = BigDecimal.ZERO;
+		BigDecimal amount;
+		BigDecimal grams = BigDecimal.ZERO;
+		BigDecimal totalamount = BigDecimal.ZERO;
 		MetalEntity material = materialService.findById(Constants.ORO18K);
 		while (iadjustments.hasNext()) {
 			bill = new Billing();
@@ -111,7 +115,7 @@ public class BillingServiceImpl implements BillingService {
 		}
 		map.put("totalamount", totalamount);
 		map.put("billing", billing);
-		map.put("grams", lwg);
+		map.put(Constants.GRAMS, lwg);
 		return map;
 	}
 }

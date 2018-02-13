@@ -42,14 +42,14 @@ public class JewelRepositoryTest {
 		// jewel.setIdjewel(978L);
 		jewel.setActive(true);
 		jewel.setMetal(material);
-		jewel.setPrice(new BigDecimal(195));
+		jewel.setPrice(BigDecimal.valueOf(195));
 		jewel.setReference("PORTAFOTOSG120");
 		jewel.setCategory(category);
 		// jewel.setImg("dfasf");
 		jewel.setPlace(place);
 		// jewel.setName("pendientes");
 		jewel.setDescription("portafotos de plata");
-		jewel.setGrams(new BigDecimal(1.20));
+		jewel.setGrams(BigDecimal.valueOf(1.20));
 		// jewelRepository.save(jewel);
 	}
 

@@ -307,8 +307,8 @@ public class SaleServiceImpl implements SaleService {
 		}
 		Map<String, Object> map = saleManager.searchByDatesAndPlace(DateUtil.getDate(sDateFrom), until,
 				mapper.map(place, PlaceEntity.class));
-		List<Sale> sales = mapper(((List<SaleEntity>) map.get("sales")).iterator());
-		map.put("sales", sales);
+		List<Sale> sales = mapper(((List<SaleEntity>) map.get(Constants.SALES)).iterator());
+		map.put(Constants.SALES, sales);
 		return map;
 	}
 

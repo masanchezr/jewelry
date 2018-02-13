@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.je.admin.forms.AdminForm;
 import com.je.services.users.Client;
 import com.je.services.users.SearchClientsService;
+import com.je.utils.constants.ConstantsJsp;
 
 /**
  * The Class ClientsController.
@@ -31,7 +32,7 @@ public class ClientsController {
 		ModelAndView model = new ModelAndView();
 		List<Client> clients = searchClientsService.getDataClients();
 		model.addObject("clients", clients);
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.setViewName("resultClients");
 		return model;
 	}

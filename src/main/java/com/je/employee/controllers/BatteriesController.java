@@ -21,6 +21,7 @@ import com.je.services.payment.PaymentService;
 import com.je.services.places.PlaceService;
 import com.je.services.sales.Sale;
 import com.je.services.sales.SaleService;
+import com.je.utils.constants.ConstantsJsp;
 
 @Controller
 public class BatteriesController {
@@ -43,11 +44,14 @@ public class BatteriesController {
 	@Autowired
 	private PaymentService paymentService;
 
+	private static final String BATTERYFORM = "batteryForm";
+	private static final String VIEWNEWSALEBATTERY = "newsalebattery";
+
 	@RequestMapping(value = "/employee/newsalebattery")
 	public ModelAndView newsalebattery() {
-		ModelAndView model = new ModelAndView("newsalebattery");
-		model.addObject("batteryForm", new BatteryEntity());
-		model.addObject("payments", paymentService.findAllActive());
+		ModelAndView model = new ModelAndView(VIEWNEWSALEBATTERY);
+		model.addObject(BATTERYFORM, new BatteryEntity());
+		model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
 		return model;
 	}
 
@@ -57,11 +61,11 @@ public class BatteriesController {
 		ModelAndView model = new ModelAndView();
 		batteryFormValidator.validate(battery, arg1);
 		if (arg1.hasErrors()) {
-			model.setViewName("newsalebattery");
-			model.addObject("batteryForm", battery);
+			model.setViewName(VIEWNEWSALEBATTERY);
+			model.addObject(BATTERYFORM, battery);
 		} else {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
-			String ipAddress = request.getHeader("X-FORWARDED-FOR");
+			String ipAddress = request.getHeader(ConstantsJsp.XFORWARDEDFOR);
 			if (ipAddress == null) {
 				ipAddress = request.getRemoteAddr();
 			}
@@ -69,16 +73,16 @@ public class BatteriesController {
 			// comprobamos primero que no exista este número de venta
 			Sale sale = saleService.searchByNumsaleAndPlace(battery.getNumsale(), place.getIdplace());
 			if (sale != null) {
-				arg1.rejectValue("numsale", "numrepited");
-				model.setViewName("newsalebattery");
-				model.addObject("batteryForm", battery);
+				arg1.rejectValue(ConstantsJsp.NUMSALE, "numrepited");
+				model.setViewName(VIEWNEWSALEBATTERY);
+				model.addObject(BATTERYFORM, battery);
 			} else {
 				Date today = new Date();
-				model.setViewName("dailyarrow");
+				model.setViewName(ConstantsJsp.VIEWDAILYARROW);
 				battery.setPlace(place);
 				batteriesService.saveSaleBattery(battery);
-				model.addObject("daily", dailyService.getDaily(today, place, ipAddress));
-				model.addObject("datedaily", today);
+				model.addObject(ConstantsJsp.DAILY, dailyService.getDaily(today, place, ipAddress));
+				model.addObject(ConstantsJsp.DATEDAILY, today);
 			}
 		}
 		return model;

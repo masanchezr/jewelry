@@ -16,6 +16,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import com.je.utils.constants.Constants;
+
 @Entity
 @Table(name = "salespostponed")
 public class SalePostponedEntity {
@@ -30,7 +32,7 @@ public class SalePostponedEntity {
 	@Column(name = "dateretired")
 	private Date dateretired;
 
-	@Column(name = "creationdate")
+	@Column(name = Constants.CREATIONDATE)
 	private Date creationdate;
 
 	@Column(name = "deadline")

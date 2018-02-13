@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.je.admin.forms.AdminForm;
 import com.je.dbaccess.entities.PaymentEntity;
 import com.je.services.payment.PaymentService;
+import com.je.utils.constants.ConstantsJsp;
 
 /**
  * The Class PaymentsController.
@@ -28,9 +29,9 @@ public class PaymentsController {
 	 * @return the string
 	 */
 	@RequestMapping(value = "/savePayment")
-	public ModelAndView savePayment(@ModelAttribute("payment") PaymentEntity payment) {
-		ModelAndView model = new ModelAndView("success");
-		model.addObject("adminForm", new AdminForm());
+	public ModelAndView savePayment(@ModelAttribute(ConstantsJsp.FORMPAYMENT) PaymentEntity payment) {
+		ModelAndView model = new ModelAndView(ConstantsJsp.SUCCESS);
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		paymentService.save(payment);
 		return model;
 	}
@@ -44,8 +45,8 @@ public class PaymentsController {
 	public ModelAndView allpayments() {
 		ModelAndView model = new ModelAndView("allpayments");
 		Iterable<PaymentEntity> payments = paymentService.findAll();
-		model.addObject("adminForm", new AdminForm());
-		model.addObject("payments", payments);
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsJsp.PAYMENTS, payments);
 		return model;
 	}
 }

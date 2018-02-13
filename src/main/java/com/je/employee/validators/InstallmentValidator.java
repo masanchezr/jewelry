@@ -7,6 +7,8 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.je.services.sales.Installment;
+import com.je.utils.constants.Constants;
+import com.je.utils.constants.ConstantsJsp;
 
 public class InstallmentValidator implements Validator {
 
@@ -17,12 +19,12 @@ public class InstallmentValidator implements Validator {
 
 	@Override
 	public void validate(Object arg0, Errors arg1) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "idsalepostponed", "selectidsale");
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "amount", "selectamount");
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "idsalepostponed", ConstantsJsp.ERRORSELECTIDSALE);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "amount", ConstantsJsp.ERRORSELECTAMOUNT);
 		Installment installment = (Installment) arg0;
 		BigDecimal amount = installment.getAmount();
 		if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
-			arg1.rejectValue("amount", "selectamount");
+			arg1.rejectValue(Constants.AMOUNT, ConstantsJsp.ERRORSELECTAMOUNT);
 		}
 	}
 }

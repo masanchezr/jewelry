@@ -8,6 +8,7 @@ import org.springframework.validation.Validator;
 
 import com.je.dbaccess.entities.JewelEntity;
 import com.je.services.sales.Sale;
+import com.je.utils.constants.ConstantsJsp;
 
 public class PartialCancelSaleValidator implements Validator {
 
@@ -28,7 +29,7 @@ public class PartialCancelSaleValidator implements Validator {
 			}
 		}
 		if (!isValid) {
-			arg1.rejectValue("idsale", "selectjeweltocancel");
+			arg1.rejectValue(ConstantsJsp.IDSALE, "selectjeweltocancel");
 		}
 	}
 

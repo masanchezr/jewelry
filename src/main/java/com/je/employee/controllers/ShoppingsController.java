@@ -17,10 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.je.dbaccess.entities.MetalEntity;
 import com.je.dbaccess.entities.ObjectShopEntity;
 import com.je.employee.validators.ShoppingsValidator;
-import com.je.services.material.MetalService;
+import com.je.services.metal.MetalService;
 import com.je.services.pawns.PawnService;
 import com.je.services.shoppings.Shopping;
 import com.je.services.shoppings.ShoppingService;
+import com.je.utils.constants.ConstantsJsp;
 
 /**
  * The Class ShoppingsController.
@@ -42,6 +43,8 @@ public class ShoppingsController {
 	@Autowired
 	private ShoppingsValidator shoppingsValidator;
 
+	private static final String VIEWNEWSHOPPING = "newshopping";
+
 	/**
 	 * New shopping.
 	 *
@@ -49,9 +52,9 @@ public class ShoppingsController {
 	 */
 	@RequestMapping(value = "/employee/newshopping")
 	public ModelAndView newShopping() {
-		ModelAndView model = new ModelAndView("newshopping");
+		ModelAndView model = new ModelAndView(VIEWNEWSHOPPING);
 		Shopping shopping = new Shopping();
-		List<ObjectShopEntity> los = new ArrayList<ObjectShopEntity>();
+		List<ObjectShopEntity> los = new ArrayList<>();
 		List<MetalEntity> materials = materialService.getAllMetalsActive();
 		Iterator<MetalEntity> imaterials = materials.iterator();
 		while (imaterials.hasNext()) {
@@ -60,8 +63,8 @@ public class ShoppingsController {
 			los.add(os);
 		}
 		shopping.setObjects(los);
-		model.addObject("materials", materials);
-		model.addObject("shoppingForm", shopping);
+		model.addObject(ConstantsJsp.MATERIALS, materials);
+		model.addObject(ConstantsJsp.SHOPPINGFORM, shopping);
 		return model;
 	}
 
@@ -75,13 +78,14 @@ public class ShoppingsController {
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/employee/saveShopping")
-	public ModelAndView saveShopping(@ModelAttribute("shoppingForm") Shopping shoppingForm, BindingResult result) {
+	public ModelAndView saveShopping(@ModelAttribute(ConstantsJsp.SHOPPINGFORM) Shopping shoppingForm,
+			BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		shoppingsValidator.validate(shoppingForm, result);
 		if (result.hasErrors()) {
-			model.setViewName("newshopping");
+			model.setViewName(VIEWNEWSHOPPING);
 			List<ObjectShopEntity> los = shoppingForm.getObjects();
-			List<ObjectShopEntity> nlos = new ArrayList<ObjectShopEntity>();
+			List<ObjectShopEntity> nlos = new ArrayList<>();
 			Iterator<ObjectShopEntity> ilos = los.iterator();
 			while (ilos.hasNext()) {
 				ObjectShopEntity os = ilos.next();
@@ -89,7 +93,7 @@ public class ShoppingsController {
 				nlos.add(os);
 			}
 			shoppingForm.setObjects(nlos);
-			model.addObject("shoppingForm", shoppingForm);
+			model.addObject(ConstantsJsp.SHOPPINGFORM, shoppingForm);
 		} else {
 			Calendar c = Calendar.getInstance();
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -97,9 +101,9 @@ public class ShoppingsController {
 			shoppingForm.setUser(user);
 			boolean repeat = pawnService.isRepeatNumber(String.valueOf(numshop), user, c.get(Calendar.YEAR));
 			if (repeat) {
-				model.setViewName("newshopping");
+				model.setViewName(VIEWNEWSHOPPING);
 				List<ObjectShopEntity> los = shoppingForm.getObjects();
-				List<ObjectShopEntity> newlos = new ArrayList<ObjectShopEntity>();
+				List<ObjectShopEntity> newlos = new ArrayList<>();
 				List<MetalEntity> materials = materialService.getAllMetalsActive();
 				ObjectShopEntity os;
 				for (int i = 0; i < materials.size(); i++) {
@@ -108,26 +112,12 @@ public class ShoppingsController {
 					newlos.add(os);
 				}
 				shoppingForm.setObjects(newlos);
-				model.addObject("shoppingForm", shoppingForm);
-				result.rejectValue("numshop", "numrepited");
+				model.addObject(ConstantsJsp.SHOPPINGFORM, shoppingForm);
+				result.rejectValue(ConstantsJsp.NUMSHOP, "numrepited");
 			} else {
-				/*
-				 * boolean iscorrectnumber =
-				 * pawnService.isCorrectNumber(String.valueOf(numshop), user,
-				 * c.get(Calendar.YEAR)); if (!iscorrectnumber) {
-				 * model.setViewName("newshopping"); List<ObjectShopEntity> los =
-				 * shoppingForm.getObjects(); List<ObjectShopEntity> newlos = new
-				 * ArrayList<ObjectShopEntity>(); List<MetalEntity> materials =
-				 * materialService.getAllMetalsActive(); ObjectShopEntity os; for (int i = 0; i <
-				 * materials.size(); i++) { os = los.get(i); os.setMetal(materials.get(i));
-				 * newlos.add(os); } shoppingForm.setObjects(newlos);
-				 * model.addObject("shoppingForm", shoppingForm); result.rejectValue("numshop",
-				 * "wrongnumber"); } else {
-				 */
-				model.addObject("daily", shoppingService.save(shoppingForm));
-				model.setViewName("dailyarrow");
-				model.addObject("datedaily", new Date());
-				// }
+				model.addObject(ConstantsJsp.DAILY, shoppingService.save(shoppingForm));
+				model.setViewName(ConstantsJsp.VIEWDAILYARROW);
+				model.addObject(ConstantsJsp.DATEDAILY, new Date());
 			}
 		}
 		return model;

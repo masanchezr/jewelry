@@ -14,22 +14,24 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.je.utils.constants.Constants;
+
 @Entity
-@Table(name = "straps")
+@Table(name = Constants.STRAPS)
 public class StrapEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idstrap")
 	private Long idstrap;
 
-	@Column(name = "amount")
+	@Column(name = Constants.AMOUNT)
 	private BigDecimal amount;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "creationdate")
+	@Column(name = Constants.CREATIONDATE)
 	private Date creationdate;
 
-	@Column(name = "numsale")
+	@Column(name = Constants.NUMSALE)
 	private Long numsale;
 
 	/** The place. */

@@ -14,7 +14,7 @@ import com.je.admin.forms.AdminForm;
 import com.je.admin.validators.UpdatePawnFormValidator;
 import com.je.employee.validators.PawnFormValidator;
 import com.je.forms.SearchForm;
-import com.je.services.material.MetalService;
+import com.je.services.metal.MetalService;
 import com.je.services.nations.NationService;
 import com.je.services.pawns.NewPawn;
 import com.je.services.pawns.Pawn;
@@ -23,6 +23,7 @@ import com.je.services.pawns.Quarter;
 import com.je.services.pawns.RenovationDates;
 import com.je.services.places.PlaceService;
 import com.je.services.tracks.TrackService;
+import com.je.utils.constants.ConstantsJsp;
 import com.je.utils.string.Util;
 import com.je.validators.SearchFormValidator;
 
@@ -61,6 +62,9 @@ public class PawnsAdminController {
 	@Autowired
 	private SearchFormValidator adminSearchFormValidator;
 
+	private static final String VIEWSEARCHPAWN = "searchpawn";
+	private static final String VIEWUPDATEPAWN = "updatepawn";
+
 	/**
 	 * Search pawns.
 	 *
@@ -68,10 +72,10 @@ public class PawnsAdminController {
 	 */
 	@RequestMapping(value = "/searchPawns")
 	public ModelAndView searchPawns() {
-		ModelAndView model = new ModelAndView("searchpawn");
-		model.addObject("adminForm", new AdminForm());
-		model.addObject("places", placeService.getAllPlaces());
-		model.addObject("pawnForm", new Pawn());
+		ModelAndView model = new ModelAndView(VIEWSEARCHPAWN);
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+		model.addObject(ConstantsJsp.PAWNFORM, new Pawn());
 		return model;
 	}
 
@@ -85,17 +89,17 @@ public class PawnsAdminController {
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/resultPawns")
-	public ModelAndView resultPawns(@ModelAttribute("pawnForm") Pawn pawn, BindingResult result) {
+	public ModelAndView resultPawns(@ModelAttribute(ConstantsJsp.PAWNFORM) Pawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		pawnFormValidator.validate(pawn, result);
 		if (result.hasErrors()) {
-			model.setViewName("searchpawn");
-			model.addObject("places", placeService.getAllPlaces());
-			model.addObject("pawnForm", new Pawn());
+			model.setViewName(VIEWSEARCHPAWN);
+			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+			model.addObject(ConstantsJsp.PAWNFORM, new Pawn());
 		} else {
 			model.setViewName("resultpawns");
-			model.addObject("pawns", pawnService.searchByNumpawn(pawn));
+			model.addObject(ConstantsJsp.PAWNS, pawnService.searchByNumpawn(pawn));
 		}
 		return model;
 	}
@@ -110,17 +114,17 @@ public class PawnsAdminController {
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/updatepawn")
-	public ModelAndView updatePawn(@ModelAttribute("pawnForm") Pawn pawn, BindingResult result) {
+	public ModelAndView updatePawn(@ModelAttribute(ConstantsJsp.PAWNFORM) Pawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		Long idpawn = pawn.getId();
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		if (idpawn == null) {
 			model.setViewName("errorupdatepawn");
 		} else {
 			NewPawn p = pawnService.findByIdpawn(idpawn);
-			model.setViewName("updatepawn");
-			model.addObject("pawnForm", p);
-			model.addObject("materials", materialService.getAllMetals());
+			model.setViewName(VIEWUPDATEPAWN);
+			model.addObject(ConstantsJsp.PAWNFORM, p);
+			model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
 			model.addObject("nations", nationservice.getNations());
 			model.addObject("tracks", trackservice.getTracks());
 		}
@@ -130,20 +134,20 @@ public class PawnsAdminController {
 	@RequestMapping(value = "/searchpawn{id}")
 	public ModelAndView searchPawn(@PathVariable long id) {
 		ModelAndView model = new ModelAndView();
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		NewPawn p = pawnService.findByIdpawn(id);
-		model.setViewName("updatepawn");
-		model.addObject("pawnForm", p);
+		model.setViewName(VIEWUPDATEPAWN);
+		model.addObject(ConstantsJsp.PAWNFORM, p);
 		model.addObject("nations", nationservice.getNations());
 		model.addObject("tracks", trackservice.getTracks());
 		return model;
 	}
 
 	@RequestMapping(value = "/resultrenovations")
-	public ModelAndView resultrenovations(@ModelAttribute("pawnForm") Pawn pawn, BindingResult result) {
+	public ModelAndView resultrenovations(@ModelAttribute(ConstantsJsp.PAWNFORM) Pawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		Long idpawn = pawn.getId();
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		if (idpawn == null) {
 			model.setViewName("errorupdatepawn");
 		} else {
@@ -157,7 +161,7 @@ public class PawnsAdminController {
 	@RequestMapping(value = "/renovations{id}")
 	public ModelAndView renovations(@PathVariable("id") long id) {
 		ModelAndView model = new ModelAndView();
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		List<RenovationDates> renovations = pawnService.searchRenovations(id);
 		model.setViewName("resultrenovations");
 		model.addObject("renovations", renovations);
@@ -174,13 +178,13 @@ public class PawnsAdminController {
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/savePawn")
-	public ModelAndView savePawn(@ModelAttribute("pawnForm") NewPawn pawn, BindingResult result) {
+	public ModelAndView savePawn(@ModelAttribute(ConstantsJsp.PAWNFORM) NewPawn pawn, BindingResult result) {
 		ModelAndView model;
 		updatePawnFormValidator.validate(pawn, result);
 		if (result.hasErrors()) {
 			model = new ModelAndView();
-			model.addObject("adminForm", new AdminForm());
-			model.setViewName("updatepawn");
+			model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+			model.setViewName(VIEWUPDATEPAWN);
 			model.addObject("pawn", pawn);
 		} else {
 			model = searchPawns();
@@ -193,24 +197,24 @@ public class PawnsAdminController {
 	@RequestMapping(value = "/searchrenovations")
 	public ModelAndView searchrenovations() {
 		ModelAndView model = new ModelAndView("searchrenovations");
-		model.addObject("adminForm", new AdminForm());
-		model.addObject("places", placeService.getAllPlaces());
-		model.addObject("pawnForm", new Pawn());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+		model.addObject(ConstantsJsp.PAWNFORM, new Pawn());
 		return model;
 	}
 
 	@RequestMapping(value = "/resultRenovationsPawns")
-	public ModelAndView resultRenovationsPawns(@ModelAttribute("pawnForm") Pawn pawn, BindingResult result) {
+	public ModelAndView resultRenovationsPawns(@ModelAttribute(ConstantsJsp.PAWNFORM) Pawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		pawnFormValidator.validate(pawn, result);
 		if (result.hasErrors()) {
-			model.setViewName("searchpawn");
-			model.addObject("places", placeService.getAllPlaces());
-			model.addObject("pawnForm", new Pawn());
+			model.setViewName(VIEWSEARCHPAWN);
+			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+			model.addObject(ConstantsJsp.PAWNFORM, new Pawn());
 		} else {
 			model.setViewName("resultpawnsrenovations");
-			model.addObject("pawns", pawnService.searchByNumpawn(pawn));
+			model.addObject(ConstantsJsp.PAWNS, pawnService.searchByNumpawn(pawn));
 		}
 		return model;
 	}
@@ -218,17 +222,17 @@ public class PawnsAdminController {
 	@RequestMapping(value = "/searchquarterpawns")
 	public ModelAndView searchquarterpawns() {
 		ModelAndView model = new ModelAndView("searchquarterpawns");
-		model.addObject("adminForm", new AdminForm());
-		model.addObject("searchForm", new SearchForm());
-		model.addObject("places", placeService.getAllPlaces());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsJsp.FORMSEARCH, new SearchForm());
+		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
 		return model;
 	}
 
 	@RequestMapping(value = "/quarterpawns")
-	public ModelAndView quarterpawns(@ModelAttribute("searchForm") SearchForm search, BindingResult result) {
+	public ModelAndView quarterpawns(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm search, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		adminSearchFormValidator.validate(search, result);
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		if (result.hasErrors()) {
 			model.setViewName("searchquarterpawns");
 		} else {
@@ -238,7 +242,7 @@ public class PawnsAdminController {
 			model.addObject("quarter", quarter);
 			search.setPlace(placeService.getPlace(search.getPlace().getIdplace()));
 		}
-		model.addObject("searchForm", search);
+		model.addObject(ConstantsJsp.FORMSEARCH, search);
 		return model;
 	}
 
@@ -250,12 +254,12 @@ public class PawnsAdminController {
 	}
 
 	@RequestMapping(value = "/commissions")
-	public ModelAndView commisions(@ModelAttribute("searchForm") SearchForm search, BindingResult result) {
+	public ModelAndView commisions(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm search, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		adminSearchFormValidator.validate(search, result);
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		if (result.hasErrors()) {
-			model.addObject("searchForm", search);
+			model.addObject(ConstantsJsp.FORMSEARCH, search);
 			model.setViewName("searchcommissions");
 		} else {
 			model.addObject("commissions",
@@ -273,35 +277,35 @@ public class PawnsAdminController {
 	}
 
 	@RequestMapping(value = "/searchpawnsoutofdate")
-	public ModelAndView searchPawnsoutofdate(@ModelAttribute("searchForm") SearchForm search) {
+	public ModelAndView searchPawnsoutofdate(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm search) {
 		ModelAndView model = new ModelAndView("resultpawnsoutofdate");
-		model.addObject("adminForm", new AdminForm());
-		model.addObject("pawns", pawnService.pawnsOutofdate(search.getPlace()));
-		model.addObject("pawnForm", new Pawn());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsJsp.PAWNS, pawnService.pawnsOutofdate(search.getPlace()));
+		model.addObject(ConstantsJsp.PAWNFORM, new Pawn());
 		return model;
 	}
 
 	@RequestMapping(value = "/investedmoney")
 	public ModelAndView searchInvestedMoney() {
 		ModelAndView model = new ModelAndView("searchinvestedmoney");
-		model.addObject("pawnForm", new Pawn());
-		model.addObject("adminForm", new AdminForm());
-		model.addObject("places", placeService.getAllPlaces());
+		model.addObject(ConstantsJsp.PAWNFORM, new Pawn());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
 		return model;
 	}
 
 	@RequestMapping(value = "/resultinvestedmoney")
-	public ModelAndView resultInvestedMoney(@ModelAttribute("pawnForm") Pawn pawn) {
+	public ModelAndView resultInvestedMoney(@ModelAttribute(ConstantsJsp.PAWNFORM) Pawn pawn) {
 		ModelAndView model = new ModelAndView("investedmoney");
 		pawnService.sumPawnsActiveByPlace(pawn.getPlace());
-		model.addObject("adminForm", new AdminForm());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject("investedmoney", pawnService.sumPawnsActiveByPlace(pawn.getPlace()));
 		return model;
 	}
 
 	private void modelComun(ModelAndView model) {
-		model.addObject("adminForm", new AdminForm());
-		model.addObject("searchForm", new SearchForm());
-		model.addObject("places", placeService.getAllPlaces());
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsJsp.FORMSEARCH, new SearchForm());
+		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
 	}
 }

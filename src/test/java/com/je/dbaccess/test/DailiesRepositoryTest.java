@@ -41,7 +41,7 @@ public class DailiesRepositoryTest {
 		DailyEntity daily = dailyRepository.findByPlaceAndDailydate(place, calendar.getTime());
 		daily.setDailydate(calendar.getTime());
 		daily.setPlace(place);
-		daily.setFinalamount(new BigDecimal(8950));
+		daily.setFinalamount(BigDecimal.valueOf(8950));
 		dailyRepository.save(daily);
 	}
 

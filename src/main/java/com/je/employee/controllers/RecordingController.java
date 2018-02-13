@@ -19,6 +19,7 @@ import com.je.services.dailies.DailyService;
 import com.je.services.payment.PaymentService;
 import com.je.services.places.PlaceService;
 import com.je.services.recordings.RecordingService;
+import com.je.utils.constants.ConstantsJsp;
 
 @Controller
 public class RecordingController {
@@ -38,26 +39,29 @@ public class RecordingController {
 	@Autowired
 	private RecordingValidator recordingValidator;
 
+	private static final String FORMRECORDING = "recording";
+	private static final String VIEWNEWRECORDING = "newrecording";
+
 	@RequestMapping("/employee/newrecording")
 	public ModelAndView newrecording() {
-		ModelAndView model = new ModelAndView("newrecording");
-		model.addObject("recording", new RecordingEntity());
-		model.addObject("payments", paymentService.findAllActive());
+		ModelAndView model = new ModelAndView(VIEWNEWRECORDING);
+		model.addObject(FORMRECORDING, new RecordingEntity());
+		model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
 		return model;
 	}
 
 	@RequestMapping(value = "/employee/saverecording")
-	public ModelAndView saveRecording(@ModelAttribute("recording") RecordingEntity recording,
+	public ModelAndView saveRecording(@ModelAttribute(FORMRECORDING) RecordingEntity recording,
 			HttpServletRequest request, BindingResult errors) {
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		ModelAndView model = new ModelAndView();
 		recordingValidator.validate(recording, errors);
 		if (errors.hasErrors()) {
-			model.setViewName("newrecording");
-			model.addObject("recording", recording);
-			model.addObject("payments", paymentService.findAllActive());
+			model.setViewName(VIEWNEWRECORDING);
+			model.addObject(FORMRECORDING, recording);
+			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
 		} else {
-			String ipAddress = request.getHeader("X-FORWARDED-FOR");
+			String ipAddress = request.getHeader(ConstantsJsp.XFORWARDEDFOR);
 			if (ipAddress == null) {
 				ipAddress = request.getRemoteAddr();
 			}
@@ -65,9 +69,9 @@ public class RecordingController {
 			PlaceEntity place = placeService.getPlaceUser(user);
 			recording.setPlace(place);
 			recordingService.save(recording);
-			model.setViewName("dailyarrow");
-			model.addObject("daily", dailyService.getDaily(today, place, ipAddress));
-			model.addObject("datedaily", today);
+			model.setViewName(ConstantsJsp.VIEWDAILYARROW);
+			model.addObject(ConstantsJsp.DAILY, dailyService.getDaily(today, place, ipAddress));
+			model.addObject(ConstantsJsp.DATEDAILY, today);
 		}
 		return model;
 	}

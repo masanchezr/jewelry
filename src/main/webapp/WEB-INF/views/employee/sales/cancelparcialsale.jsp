@@ -2,7 +2,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<form:form action="savecancelparcial" modelAttribute="saleForm" role="form">
+<form:form action="savecancelparcial" modelAttribute="sale" role="form">
 	<form:hidden path="idsale" />
 	<!-- Breadcrumbs-->
 	<ol class="breadcrumb">
@@ -29,8 +29,7 @@
 						<td></td>
 						<td></td>
 					</tr>
-					<c:forEach items="${saleForm.jewels}" var="jewel"
-						varStatus="status">
+					<c:forEach items="${sale.jewels}" var="jewel" varStatus="status">
 						<tr class="success">
 							<td><form:checkbox
 									path="jewelstocancel[${status.index}].idjewel"
