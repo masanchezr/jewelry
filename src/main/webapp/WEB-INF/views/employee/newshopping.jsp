@@ -33,10 +33,10 @@
 							<td><form:hidden
 									path="objects[${status.index}].idobjectshop" /> <form:select
 									class="form-control"
-									path="objects[${status.index}].metal.idmaterial">
-									<form:option value="${os.metal.idmaterial}"
+									path="objects[${status.index}].metal.idmetal">
+									<form:option value="${os.metal.idmetal}"
 										label="${os.metal.description}" />
-									<form:options items="${materials}" itemValue="idmaterial"
+									<form:options items="${materials}" itemValue="metal"
 										itemLabel="description" />
 								</form:select></td>
 							<td><spring:message code="grossgrams" var="grossgrams" /> <form:input

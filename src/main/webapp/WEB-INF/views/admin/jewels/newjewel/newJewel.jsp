@@ -32,8 +32,8 @@
 							</form:select>
 						</div>
 						<div class="form-group">
-							<form:select class="form-control" path="material.idmaterial">
-								<form:options items="${materials}" itemValue="idmaterial"
+							<form:select class="form-control" path="material.idmetal">
+								<form:options items="${materials}" itemValue="metal"
 									itemLabel="description" />
 							</form:select>
 						</div>

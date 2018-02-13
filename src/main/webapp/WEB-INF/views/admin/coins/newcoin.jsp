@@ -37,8 +37,8 @@
 						<div class="col-lg-4">
 							<div class="form-group col-3">
 								<spring:message code="material" />
-								<form:select class="form-control" path="idmaterial">
-									<form:options items="${materials}" itemValue="idmaterial"
+								<form:select class="form-control" path="metal">
+									<form:options items="${materials}" itemValue="metal"
 										itemLabel="description" />
 								</form:select>
 							</div>

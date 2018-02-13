@@ -20,7 +20,7 @@ public class MetalEntity implements Serializable {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	/** The idmaterial. */
+	/** The metal. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "IDMETAL")
@@ -39,7 +39,7 @@ public class MetalEntity implements Serializable {
 	private Boolean active;
 
 	/**
-	 * Gets the idmaterial.
+	 * Gets the metal.
 	 *
 	 * @return the idMetal
 	 */
@@ -48,13 +48,13 @@ public class MetalEntity implements Serializable {
 	}
 
 	/**
-	 * Sets the idmaterial.
+	 * Sets the metal.
 	 *
-	 * @param idmaterial
-	 *            the new idmaterial
+	 * @param metal
+	 *            the new metal
 	 */
-	public void setIdmetal(Long idmaterial) {
-		this.idmetal = idmaterial;
+	public void setIdmetal(Long metal) {
+		this.idmetal = metal;
 	}
 
 	/**

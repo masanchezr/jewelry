@@ -13,7 +13,7 @@
 			<div class="card-body">
 				<div class="row">
 					<div class="col-lg-6">
-						<div class="form-group col-3">
+						<div class="form-group">
 							<div id="sandbox-container">
 								<spring:message code="datefrom" />
 								<form:input class="form-control" path="datefrom" type="text" />
@@ -23,7 +23,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="form-group col-3">
+						<div class="form-group">
 							<div id="sandbox-container">
 								<spring:message code="dateuntil" />
 								<form:input class="form-control" path="dateuntil" type="text" />
@@ -35,7 +35,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="form-group col-3">
+				<div class="form-group">
 					<form:button class="btn btn-primary" value="submit">
 						<spring:message code="search" />
 					</form:button>

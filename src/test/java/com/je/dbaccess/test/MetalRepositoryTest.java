@@ -46,7 +46,7 @@ public class MetalRepositoryTest {
 			MetalEntity material;
 			while (imaterials.hasNext()) {
 				material = imaterials.next();
-				System.out.println("idmaterial:" + material.getIdmetal()
+				System.out.println("metal:" + material.getIdmetal()
 						+ " description:" + material.getDescription());
 			}
 		}

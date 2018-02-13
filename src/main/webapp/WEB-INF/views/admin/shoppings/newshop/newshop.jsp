@@ -105,7 +105,7 @@
 				<c:forEach items="${shopform.objects}" varStatus="status" var="os">
 					<tr>
 						<td><strong><form:hidden
-									path="objects[${status.index}].metal.idmaterial" /> <c:out
+									path="objects[${status.index}].metal.idmetal" /> <c:out
 									value="${os.metal.description}" /></strong></td>
 						<td><spring:message code="description" var="description" />
 							<form:input class="form-control"

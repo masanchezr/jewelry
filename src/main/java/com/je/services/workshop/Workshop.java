@@ -18,7 +18,7 @@ public class Workshop {
 	/** The grams. */
 	private BigDecimal grams;
 
-	private MetalEntity material;
+	private MetalEntity metal;
 
 	/**
 	 * Gets the amount.
@@ -67,10 +67,10 @@ public class Workshop {
 	}
 
 	public MetalEntity getMetal() {
-		return material;
+		return metal;
 	}
 
-	public void setMetal(MetalEntity material) {
-		this.material = material;
+	public void setMetal(MetalEntity metal) {
+		this.metal = metal;
 	}
 }

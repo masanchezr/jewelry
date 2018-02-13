@@ -40,8 +40,8 @@
 										itemLabel="namecategory" />
 								</form:select></td>
 							<td><form:select class="form-control"
-									path="jewels[${status.index}].metal.idmaterial">
-									<form:options items="${materials}" itemValue="idmaterial"
+									path="jewels[${status.index}].metal.idmetal">
+									<form:options items="${materials}" itemValue="metal"
 										itemLabel="description" />
 								</form:select></td>
 						</tr>
