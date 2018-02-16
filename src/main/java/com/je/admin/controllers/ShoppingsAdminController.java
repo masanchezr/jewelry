@@ -201,7 +201,7 @@ public class ShoppingsAdminController {
 			model = new ModelAndView();
 			model.addObject(FORMSHOP, shoppingForm);
 			model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
-			model.addObject(ConstantsJsp.TRACKS, trackservice.getTracks());
+			model.addObject(Constants.TRACKS, trackservice.getTracks());
 			model.addObject(ConstantsJsp.NATIONS, nationservice.getNations());
 			model.setViewName("newshop");
 		} else {
@@ -301,10 +301,10 @@ public class ShoppingsAdminController {
 		ModelAndView model = new ModelAndView();
 		if (dni != null && dni.length() > 12) {
 			errors.rejectValue(ConstantsJsp.NIF, "niftoolong");
-			model.setViewName("searchclientadmin");
+			model.setViewName(VIEWSEARCHCLIENTADMIN);
 		} else if (!Util.isNifNie(dni)) {
 			errors.rejectValue(ConstantsJsp.NIF, "nifnotvalid");
-			model.setViewName("searchclientadmin");
+			model.setViewName(VIEWSEARCHCLIENTADMIN);
 		} else {
 			Shopping client = shoppingService.searchClient(Util.refactorNIF(pawn.getNif()));
 			List<MetalEntity> materials = materialService.getAllMetalsActive();
@@ -324,7 +324,7 @@ public class ShoppingsAdminController {
 			pawn.setTrack(client.getTrack());
 			pawn.setObjects(lop);
 			model.setViewName("newshop");
-			model.addObject(ConstantsJsp.TRACKS, trackservice.getTracks());
+			model.addObject(Constants.TRACKS, trackservice.getTracks());
 			model.addObject(ConstantsJsp.NATIONS, nationservice.getNations());
 		}
 		model.addObject(FORMSHOP, pawn);

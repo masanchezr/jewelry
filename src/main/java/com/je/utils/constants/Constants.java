@@ -5,6 +5,10 @@ package com.je.utils.constants;
  */
 public class Constants {
 
+	private Constants() {
+
+	}
+
 	public static final String AMOUNT = "amount";
 
 	public static final String CREATIONDATE = "creationdate";
@@ -15,9 +19,7 @@ public class Constants {
 
 	public static final String NUMPAWN = "numpawn";
 
-	private Constants() {
-
-	}
+	public static final String TRACKS = "tracks";
 
 	/** The Constant CHECKED. 1 */
 	public static final int CHECKED = 1;

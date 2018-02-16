@@ -23,6 +23,7 @@ import com.je.services.pawns.Quarter;
 import com.je.services.pawns.RenovationDates;
 import com.je.services.places.PlaceService;
 import com.je.services.tracks.TrackService;
+import com.je.utils.constants.Constants;
 import com.je.utils.constants.ConstantsJsp;
 import com.je.utils.string.Util;
 import com.je.validators.SearchFormValidator;
@@ -126,7 +127,7 @@ public class PawnsAdminController {
 			model.addObject(ConstantsJsp.PAWNFORM, p);
 			model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
 			model.addObject("nations", nationservice.getNations());
-			model.addObject("tracks", trackservice.getTracks());
+			model.addObject(Constants.TRACKS, trackservice.getTracks());
 		}
 		return model;
 	}
@@ -138,8 +139,8 @@ public class PawnsAdminController {
 		NewPawn p = pawnService.findByIdpawn(id);
 		model.setViewName(VIEWUPDATEPAWN);
 		model.addObject(ConstantsJsp.PAWNFORM, p);
-		model.addObject("nations", nationservice.getNations());
-		model.addObject("tracks", trackservice.getTracks());
+		model.addObject(ConstantsJsp.NATIONS, nationservice.getNations());
+		model.addObject(Constants.TRACKS, trackservice.getTracks());
 		return model;
 	}
 

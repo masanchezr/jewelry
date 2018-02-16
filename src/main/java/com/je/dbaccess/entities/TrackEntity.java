@@ -5,8 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.je.utils.constants.Constants;
+
 @Entity
-@Table(name = "tracks")
+@Table(name = Constants.TRACKS)
 public class TrackEntity {
 
 	@Id

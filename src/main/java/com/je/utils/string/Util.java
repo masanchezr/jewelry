@@ -38,8 +38,13 @@ public class Util {
 		return name.toLowerCase().replaceAll(" ", "-");
 	}
 
-	public static boolean isNumeric(String str) {
-		return (str.matches("[+-]?\\d*(\\.\\d+)?") && str.equals(""));
+	public static boolean isNumeric(String cadena) {
+		try {
+			Integer.parseInt(cadena);
+			return true;
+		} catch (NumberFormatException excepcion) {
+			return false;
+		}
 	}
 
 	public static String refactorNIF(String nif) {

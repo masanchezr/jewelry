@@ -63,6 +63,7 @@ public class PawnsController {
 	private static final String VIEWNEWPAWN = "newPawn";
 	private static final String VIEWSEARCHCLIENT = "searchclient";
 	private static final String FORMSEARCHPAWN = "searchPawnForm";
+	private static final String VIEWSEARCHREMOVEPAWN = "searchremovepawn";
 
 	/**
 	 * Save pawn.
@@ -88,7 +89,7 @@ public class PawnsController {
 			}
 			pawn.setObjects(lop);
 			model.addObject(ConstantsJsp.PAWNFORM, pawn);
-			model.addObject(ConstantsJsp.TRACKS, trackservice.getTracks());
+			model.addObject(Constants.TRACKS, trackservice.getTracks());
 			model.addObject(ConstantsJsp.NATIONS, nationservice.getNations());
 			model.setViewName(VIEWNEWPAWN);
 		} else {
@@ -109,7 +110,7 @@ public class PawnsController {
 				}
 				pawn.setObjects(lop);
 				model.addObject(ConstantsJsp.PAWNFORM, pawn);
-				model.addObject(ConstantsJsp.TRACKS, trackservice.getTracks());
+				model.addObject(Constants.TRACKS, trackservice.getTracks());
 				model.addObject(ConstantsJsp.NATIONS, nationservice.getNations());
 				model.setViewName(VIEWNEWPAWN);
 				result.rejectValue(Constants.NUMPAWN, "numrepited");
@@ -169,7 +170,7 @@ public class PawnsController {
 				lop.add(op);
 			}
 			pawn.setObjects(lop);
-			model.addObject(ConstantsJsp.TRACKS, trackservice.getTracks());
+			model.addObject(Constants.TRACKS, trackservice.getTracks());
 			model.addObject(ConstantsJsp.NATIONS, nationservice.getNations());
 			model.setViewName(VIEWNEWPAWN);
 		}
@@ -192,7 +193,7 @@ public class PawnsController {
 	 */
 	@RequestMapping(value = "/employee/removePawn")
 	public ModelAndView removePawn() {
-		ModelAndView model = new ModelAndView("searchremovepawn");
+		ModelAndView model = new ModelAndView(VIEWSEARCHREMOVEPAWN);
 		model.addObject(FORMSEARCHPAWN, new Pawn());
 		return model;
 	}
@@ -294,7 +295,7 @@ public class PawnsController {
 		pawnFormValidator.validate(pawn, result);
 		if (result.hasErrors()) {
 			model.addObject(ConstantsJsp.PAWNFORM, new Pawn());
-			model.setViewName("searchremovepawn");
+			model.setViewName(VIEWSEARCHREMOVEPAWN);
 		} else {
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			String user = authentication.getName();

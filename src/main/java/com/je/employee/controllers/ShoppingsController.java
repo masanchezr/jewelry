@@ -104,11 +104,11 @@ public class ShoppingsController {
 				model.setViewName(VIEWNEWSHOPPING);
 				List<ObjectShopEntity> los = shoppingForm.getObjects();
 				List<ObjectShopEntity> newlos = new ArrayList<>();
-				List<MetalEntity> materials = materialService.getAllMetalsActive();
+				Iterator<ObjectShopEntity> ilos = los.iterator();
 				ObjectShopEntity os;
-				for (int i = 0; i < materials.size(); i++) {
-					os = los.get(i);
-					os.setMetal(materials.get(i));
+				while (ilos.hasNext()) {
+					os = ilos.next();
+					os.setMetal(materialService.findById(os.getMetal().getIdmetal()));
 					newlos.add(os);
 				}
 				shoppingForm.setObjects(newlos);
