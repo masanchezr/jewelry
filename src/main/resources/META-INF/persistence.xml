@@ -52,5 +52,6 @@
 		<class>com.je.dbaccess.entities.InstallmentEntity</class>
 		<class>com.je.dbaccess.entities.NationEntity</class>
 		<class>com.je.dbaccess.entities.TrackEntity</class>
+		<class>com.je.dbaccess.entities.MessageEntity</class>
 	</persistence-unit>
 </persistence>

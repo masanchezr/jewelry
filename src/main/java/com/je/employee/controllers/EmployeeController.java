@@ -1,13 +1,21 @@
 package com.je.employee.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.je.services.messages.MessageService;
 
 /**
  * The Class EmployeeController.
  */
 @Controller
 public class EmployeeController {
+
+	@Autowired
+	private MessageService messageservice;
 
 	/**
 	 * Login.
@@ -25,8 +33,11 @@ public class EmployeeController {
 	 * @return the string
 	 */
 	@RequestMapping("/employee/admin")
-	public String admin() {
-		return "adminemployee";
+	public ModelAndView admin() {
+		ModelAndView model = new ModelAndView("adminemployee");
+		String user = SecurityContextHolder.getContext().getAuthentication().getName();
+		model.addObject("messages", messageservice.getMessagesActiveNow(user));
+		return model;
 	}
 
 	/**

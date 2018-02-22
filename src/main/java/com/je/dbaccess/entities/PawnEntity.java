@@ -156,9 +156,6 @@ public class PawnEntity implements Serializable {
 	 * @return the renovations
 	 */
 	public List<RenovationEntity> getRenovations() {
-		/*
-		 * if (renovations == null) { renovations = new ArrayList<RenovationEntity>(); }
-		 */
 		return renovations;
 	}
 
