@@ -47,6 +47,7 @@
 	<bean id="trackservice" class="com.je.services.tracks.TrackServiceImpl" />
 	<bean id="salesCardService" class="com.je.services.sales.SalesCardServiceImpl" />
 	<bean id="saleservicepostponed" class="com.je.services.sales.SalesPostPonedServiceImpl" />
+	<bean id="messageservice" class="com.je.services.messages.MessageServiceImpl" />
 	<bean id="selectCategoryValidator" class="com.je.admin.validators.SelectCategoryValidator" />
 	<bean id="dataClientFormValidator" class="com.je.web.validators.DataClientFormValidator" />
 	<bean id="newPawnFormValidator" class="com.je.employee.validators.NewPawnFormValidator" />

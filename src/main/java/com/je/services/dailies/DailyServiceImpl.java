@@ -157,16 +157,26 @@ public class DailyServiceImpl implements DailyService {
 			List<RecordingEntity> recordings = recordingRepository.findByCreationdateAndPlace(date, place);
 			List<SalePostponedEntity> salespost = salespostponedrepository.findByDateretiredAndPlace(date, place);
 			int numoperations = 0;
-			BigDecimal discountsamount = BigDecimal.ZERO, finalamount = BigDecimal.ZERO,
-					adjustmentsworkamount = BigDecimal.ZERO, renovationsamount = BigDecimal.ZERO,
-					otherconceptsamount = BigDecimal.ZERO, newpawnsamount = BigDecimal.ZERO,
-					retiredpawnsamount = BigDecimal.ZERO, shoppingsamount = BigDecimal.ZERO,
-					recordingsAmount = BigDecimal.ZERO, adjusmentsamount = BigDecimal.ZERO,
-					rentalsamount = BigDecimal.ZERO, cancelsamount = BigDecimal.ZERO, batteriesamount = BigDecimal.ZERO,
-					strapsamount = BigDecimal.ZERO, entriesmoneyamount = BigDecimal.ZERO;
-			double salesamount = 0, payrollamount = 0, salespostamount = 0;
+			BigDecimal discountsamount = BigDecimal.ZERO;
+			BigDecimal finalamount;
+			BigDecimal adjustmentsworkamount = BigDecimal.ZERO;
+			BigDecimal renovationsamount = BigDecimal.ZERO;
+			BigDecimal otherconceptsamount = BigDecimal.ZERO;
+			BigDecimal newpawnsamount = BigDecimal.ZERO;
+			BigDecimal retiredpawnsamount = BigDecimal.ZERO;
+			BigDecimal shoppingsamount = BigDecimal.ZERO;
+			BigDecimal recordingsAmount = BigDecimal.ZERO;
+			BigDecimal adjusmentsamount = BigDecimal.ZERO;
+			BigDecimal rentalsamount = BigDecimal.ZERO;
+			BigDecimal cancelsamount = BigDecimal.ZERO;
+			BigDecimal batteriesamount = BigDecimal.ZERO;
+			BigDecimal strapsamount = BigDecimal.ZERO;
+			BigDecimal entriesmoneyamount = BigDecimal.ZERO;
+			double salesamount = 0;
+			double payrollamount = 0;
+			double salespostamount = 0;
 			if (adjustments != null && !adjustments.isEmpty()) {
-				List<Adjustment> ladjustments = new ArrayList<Adjustment>();
+				List<Adjustment> ladjustments = new ArrayList<>();
 				Iterator<AdjustmentEntity> iadjustments = adjustments.iterator();
 				AdjustmentEntity adjustment;
 				while (iadjustments.hasNext()) {
@@ -183,7 +193,7 @@ public class DailyServiceImpl implements DailyService {
 				Iterator<AdjustmentEntity> iadjustments = adjustmentswork.iterator();
 				AdjustmentEntity adjustment;
 				BigDecimal amountwork;
-				List<Adjustment> ladjustmentsw = new ArrayList<Adjustment>();
+				List<Adjustment> ladjustmentsw = new ArrayList<>();
 				while (iadjustments.hasNext()) {
 					adjustment = iadjustments.next();
 					amountwork = adjustment.getAmountwork();
@@ -197,7 +207,7 @@ public class DailyServiceImpl implements DailyService {
 			}
 			if (newpawns != null && !newpawns.isEmpty()) {
 				Iterator<PawnEntity> ipawns = newpawns.iterator();
-				List<Pawn> lpawns = new ArrayList<Pawn>();
+				List<Pawn> lpawns = new ArrayList<>();
 				PawnEntity pawnEntity;
 				Pawn pawn;
 				while (ipawns.hasNext()) {
@@ -211,7 +221,7 @@ public class DailyServiceImpl implements DailyService {
 			}
 			if (retiredpawns != null && !retiredpawns.isEmpty()) {
 				Iterator<PawnEntity> ipawns = retiredpawns.iterator();
-				List<Pawn> lpawns = new ArrayList<Pawn>();
+				List<Pawn> lpawns = new ArrayList<>();
 				PawnEntity pawnEntity;
 				BigDecimal amount;
 				Pawn pawn;
@@ -237,9 +247,9 @@ public class DailyServiceImpl implements DailyService {
 			}
 			if (sales != null && !sales.isEmpty()) {
 				Iterator<SaleEntity> isales = sales.iterator();
-				List<Sale> lsales = new ArrayList<Sale>();
+				List<Sale> lsales = new ArrayList<>();
 				SaleEntity sale;
-				List<SalesPayments> spayments = new ArrayList<SalesPayments>();
+				List<SalesPayments> spayments;
 				Iterator<SalesPayments> ipayments;
 				PaymentEntity payment;
 				SalesPayments sp;
@@ -267,9 +277,9 @@ public class DailyServiceImpl implements DailyService {
 			}
 			if (salespost != null && !salespost.isEmpty()) {
 				Iterator<SalePostponedEntity> isalespost = salespost.iterator();
-				List<SalePostPoned> lsalespost = new ArrayList<SalePostPoned>();
+				List<SalePostPoned> lsalespost = new ArrayList<>();
 				SalePostponedEntity sale;
-				List<InstallmentEntity> spayments = new ArrayList<InstallmentEntity>();
+				List<InstallmentEntity> spayments;
 				Iterator<InstallmentEntity> ipayments;
 				PaymentEntity payment;
 				InstallmentEntity sp;
@@ -299,7 +309,7 @@ public class DailyServiceImpl implements DailyService {
 			}
 			if (otherconcepts != null && !otherconcepts.isEmpty()) {
 				Iterator<OtherConceptEntity> iotherconcepts = otherconcepts.iterator();
-				List<OtherConcept> lotherconcepts = new ArrayList<OtherConcept>();
+				List<OtherConcept> lotherconcepts = new ArrayList<>();
 				OtherConceptEntity otherconcept;
 				while (iotherconcepts.hasNext()) {
 					otherconcept = iotherconcepts.next();
@@ -311,7 +321,7 @@ public class DailyServiceImpl implements DailyService {
 			}
 			if (shoppings != null && !shoppings.isEmpty()) {
 				Iterator<ShoppingEntity> ishoppings = shoppings.iterator();
-				List<Shopping> lshoppings = new ArrayList<Shopping>();
+				List<Shopping> lshoppings = new ArrayList<>();
 				ShoppingEntity shopping;
 				List<PaymentShopEntity> paymentshop;
 				Iterator<PaymentShopEntity> ipaymentshop;
@@ -338,7 +348,7 @@ public class DailyServiceImpl implements DailyService {
 			}
 			if (renovations != null && !renovations.isEmpty()) {
 				Iterator<RenovationEntity> irenovations = renovations.iterator();
-				List<Renovation> lrenovations = new ArrayList<Renovation>();
+				List<Renovation> lrenovations = new ArrayList<>();
 				RenovationEntity renovation;
 				Renovation re;
 				PawnEntity pawn;
@@ -350,10 +360,6 @@ public class DailyServiceImpl implements DailyService {
 					re.setNumpawn(pawn.getNumpawn());
 					renovationamount = pawn.getAmount().multiply(pawn.getPercent());
 					renovationamount = renovationamount.divide(BigDecimal.valueOf(100));
-					/**
-					 * if ((renovationamount - ((int) renovationamount) != 0)) { renovationamount +=
-					 * 1; }
-					 **/
 					re.setRenovationamount(renovationamount);
 					lrenovations.add(re);
 					renovationsamount = renovationsamount.add(re.getRenovationamount());
@@ -363,8 +369,8 @@ public class DailyServiceImpl implements DailyService {
 			}
 			if (cancels != null && !cancels.isEmpty()) {
 				Iterator<CancelSaleEntity> icancels = cancels.iterator();
-				List<CancelSale> lcancels = new ArrayList<CancelSale>();
-				List<CancelSalePaymentEntity> lcancelpayments = new ArrayList<CancelSalePaymentEntity>();
+				List<CancelSale> lcancels = new ArrayList<>();
+				List<CancelSalePaymentEntity> lcancelpayments;
 				CancelSaleEntity cse;
 				CancelSale cs;
 				Iterator<CancelSalePaymentEntity> ilcancelpayments;
@@ -408,7 +414,7 @@ public class DailyServiceImpl implements DailyService {
 			if (batteriesEntity != null && !batteriesEntity.isEmpty()) {
 				Iterator<BatteryEntity> ibatteries = batteriesEntity.iterator();
 				BatteryEntity be;
-				List<BatteryEntity> batteries = new ArrayList<BatteryEntity>();
+				List<BatteryEntity> batteries = new ArrayList<>();
 				while (ibatteries.hasNext()) {
 					be = ibatteries.next();
 					if (be.getPayment().getIdpayment().equals(Constants.EFECTIVO)) {
@@ -435,7 +441,7 @@ public class DailyServiceImpl implements DailyService {
 				Iterator<RentalEntity> irentals = rentalsEntity.iterator();
 				RentalEntity re;
 				Rental r;
-				List<Rental> rentals = new ArrayList<Rental>();
+				List<Rental> rentals = new ArrayList<>();
 				while (irentals.hasNext()) {
 					re = irentals.next();
 					r = mapper.map(re, Rental.class);
@@ -449,7 +455,7 @@ public class DailyServiceImpl implements DailyService {
 			if (discounts != null && !discounts.isEmpty()) {
 				Iterator<DiscountEntity> idiscounts = discounts.iterator();
 				DiscountEntity discount;
-				List<Discount> ldiscounts = new ArrayList<Discount>();
+				List<Discount> ldiscounts = new ArrayList<>();
 				while (idiscounts.hasNext()) {
 					discount = idiscounts.next();
 					numoperations = numoperations + 1;
@@ -472,7 +478,7 @@ public class DailyServiceImpl implements DailyService {
 				}
 				daily.setRecordings(recordings);
 			}
-			BigDecimal previousamount = BigDecimal.ZERO;
+			BigDecimal previousamount;
 			if (dEntity == null) {
 				// tengo que sacar el importe del día anterior para calcularlo
 				DailyEntity previousdaily = dailyRepository.findFirstByPlaceOrderByIddailyDesc(place);
@@ -491,9 +497,10 @@ public class DailyServiceImpl implements DailyService {
 			}
 			finalamount = previousamount.add(adjusmentsamount).add(adjustmentsworkamount).add(renovationsamount)
 					.add(BigDecimal.valueOf(salesamount)).add(shoppingsamount).add(retiredpawnsamount)
-					.add(otherconceptsamount).add(newpawnsamount).add(cancelsamount).add(BigDecimal.valueOf(payrollamount))
-					.add(entriesmoneyamount).add(batteriesamount).add(strapsamount).add(rentalsamount)
-					.add(discountsamount).add(recordingsAmount).add(BigDecimal.valueOf(salespostamount));
+					.add(otherconceptsamount).add(newpawnsamount).add(cancelsamount)
+					.add(BigDecimal.valueOf(payrollamount)).add(entriesmoneyamount).add(batteriesamount)
+					.add(strapsamount).add(rentalsamount).add(discountsamount).add(recordingsAmount)
+					.add(BigDecimal.valueOf(salespostamount));
 			dEntity.setFinalamount(finalamount);
 			dEntity.setIpaddress(ipaddress);
 			daily.setFinalamount(finalamount);

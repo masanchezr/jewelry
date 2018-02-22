@@ -21,6 +21,7 @@ import com.je.admin.validators.SearchDailyFormValidator;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.services.dailies.Daily;
 import com.je.services.dailies.DailyService;
+import com.je.services.dailies.DailyThread;
 import com.je.services.places.PlaceService;
 import com.je.utils.constants.Constants;
 import com.je.utils.constants.ConstantsJsp;
@@ -138,7 +139,8 @@ public class DailiesController {
 				c.set(2015, 2, 31);
 				date = DateUtil.getDate(sdate);
 				if (date.after(c.getTime())) {
-					dailyService.calculateDailies(date, sdf.getPlace());
+					DailyThread dailythread = new DailyThread(dailyService, date, sdf.getPlace());
+					dailythread.start();
 					model.setViewName(ConstantsJsp.SUCCESS);
 				} else {
 					model.setViewName(VIEWSEARCHCALCULATEDAILIES);

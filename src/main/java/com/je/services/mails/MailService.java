@@ -28,15 +28,12 @@ public class MailService extends Thread {
 	public void run() {
 		// La dirección de envío (to)
 		String to = "mangeles.sanchez0807@gmail.com";
-		// String cc = "josetmoreno@hotmail.es";
 
 		// La dirección de la cuenta de envío (from)
-		// final String from = "desarrollomancha@gmail.com";
 		final String from = "webmariangeless@hotmail.com";
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
-		// props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.host", "smtp.live.com");
 		props.put("mail.smtp.port", "587");
 
