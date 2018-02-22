@@ -31,7 +31,7 @@ public class UpdatePawnFormValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsJsp.SURNAME, ConstantsJsp.ERRORSURNAME);
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsJsp.NIF, ConstantsJsp.ERRORSELECTNIF);
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsJsp.ADDRESS, ConstantsJsp.ERRORSELECTADDRESS);
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsJsp.ERRORSELECTADDRESS, ConstantsJsp.ERRORSELECTPERCENT);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsJsp.PERCENT, ConstantsJsp.ERRORSELECTPERCENT);
 		String sdate = pawn.getCreationdate();
 		BigDecimal percent = pawn.getPercent();
 		if (!Util.isEmpty(sdate) && !DateUtil.isDate(sdate)) {

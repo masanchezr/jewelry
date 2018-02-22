@@ -67,7 +67,7 @@ public class NewPawnFormValidator implements Validator {
 			}
 		}
 		if (percent.compareTo(BigDecimal.ZERO) <= 0) {
-			errors.rejectValue(ConstantsJsp.ERRORSELECTADDRESS, ConstantsJsp.ERRORSELECTPERCENT);
+			errors.rejectValue(ConstantsJsp.PERCENT, ConstantsJsp.ERRORSELECTPERCENT);
 		}
 		List<ObjectPawnEntity> lop = pawn.getObjects();
 		Iterator<ObjectPawnEntity> ilop = lop.iterator();
