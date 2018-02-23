@@ -10,6 +10,9 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class MailService extends Thread {
 
 	private String message;
@@ -17,6 +20,9 @@ public class MailService extends Thread {
 	private String cc;
 
 	private String subject;
+
+	/** The log. */
+	private static Logger log = LoggerFactory.getLogger(MailService.class);
 
 	public MailService(String message, String cc, String subject) {
 		this.message = message;
@@ -62,7 +68,7 @@ public class MailService extends Thread {
 			// Enviamos el correo
 			Transport.send(mensaje);
 		} catch (MessagingException e) {
-			e.printStackTrace();
+			log.debug(to);
 		}
 	}
 
