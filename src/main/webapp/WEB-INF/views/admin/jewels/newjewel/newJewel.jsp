@@ -86,9 +86,9 @@
 								placeholder="${cost}" />
 						</div>
 						<div class="form-group">
-							<spring:message code="nameimage" var="imageName" />
-							<form:input class="form-control" path="img"
-								placeholder="${imageName}" />
+							<spring:message code="idwork" var="idwork" />
+							<form:input class="form-control" path="work.idworkshop"
+								placeholder="${idwork}" />
 						</div>
 						<!--<form:button value="Examinar">
 				<spring:message code="inspect" />

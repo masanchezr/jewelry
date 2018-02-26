@@ -59,6 +59,11 @@ public class JewelEntity implements Serializable {
 	@JoinColumn(name = "IDCATEGORY", referencedColumnName = "IDCATEGORY")
 	private CategoryEntity category;
 
+	/** The category. */
+	@ManyToOne
+	@JoinColumn(name = "IDWORK", referencedColumnName = "IDWORKSHOP")
+	private WorkshopEntity work;
+
 	/** The reference. */
 	@Column(name = "REFERENCE")
 	private String reference;
@@ -337,5 +342,13 @@ public class JewelEntity implements Serializable {
 
 	public void setGrams(BigDecimal grams) {
 		this.grams = grams;
+	}
+
+	public WorkshopEntity getWork() {
+		return work;
+	}
+
+	public void setWork(WorkshopEntity work) {
+		this.work = work;
 	}
 }
