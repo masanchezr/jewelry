@@ -26,9 +26,11 @@ public class EntryMoneyAdminController {
 	@Autowired
 	private SearchFormValidator adminSearchValidator;
 
+	private static final String VIEWSEARCHENTRIES = "searchentries";
+
 	@RequestMapping(value = "/searchEntries")
 	public ModelAndView searchEntries() {
-		ModelAndView model = new ModelAndView("searchentries");
+		ModelAndView model = new ModelAndView(VIEWSEARCHENTRIES);
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject(ConstantsJsp.FORMSEARCH, new SearchForm());
 		return model;
@@ -40,7 +42,7 @@ public class EntryMoneyAdminController {
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		adminSearchValidator.validate(asf, arg1);
 		if (arg1.hasErrors()) {
-			model.setViewName("searchentries");
+			model.setViewName("VIEWSEARCHENTRIES");
 			model.addObject(ConstantsJsp.FORMSEARCH, asf);
 		} else {
 			model.setViewName("resultentriesmoney");

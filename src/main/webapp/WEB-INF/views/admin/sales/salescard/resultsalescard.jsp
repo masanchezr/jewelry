@@ -46,7 +46,7 @@
 									<td><c:out value="${adjustment.idadjustment}" /></td>
 									<td><c:out value="${adjustment.amount}" /></td>
 									<td><c:out value="${adjustment.user}" /></td>
-									<td><spring:message code="adjustmen" /></td>
+									<td><spring:message code="adjustment" /></td>
 									<td></td>
 								</tr>
 							</c:forEach>
