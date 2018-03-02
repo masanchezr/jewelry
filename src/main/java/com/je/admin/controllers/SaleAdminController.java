@@ -188,27 +188,8 @@ public class SaleAdminController {
 		saleValidator.validate(sale, result);
 		if (!result.hasErrors()) {
 			List<JewelEntity> jewels = sale.getJewels();
-			List<JewelEntity> newjewels = new ArrayList<>();
-			JewelEntity jewel;
-			boolean exists = true;
 			PlaceEntity place = sale.getPlace();
-			Iterator<JewelEntity> ijewels = jewels.iterator();
-			while (ijewels.hasNext() && exists) {
-				jewel = ijewels.next();
-				if (!Util.isEmpty(jewel.getReference())) {
-					jewel.setPlace(place);
-					jewel.setActive(true);
-					jewel = jewelService.searchByReferenceCategoryMetalPlaceActive(jewel);
-					if (jewel != null && jewel.getIdjewel() != null) {
-						newjewels.add(jewel);
-					} else {
-						exists = false;
-					}
-				}
-			}
-			if (!jewels.isEmpty() && exists) {
-				sale.setJewels(newjewels);
-				sale.setPlace(place);
+			if (!jewels.isEmpty() && existsJewels(jewels, place)) {
 				// comprobamos si ya existe la venta
 				Sale entitySale = saleService.searchByNumsaleAndPlace(sale.getNumsale(), place.getIdplace());
 				if (entitySale == null) {
@@ -242,6 +223,24 @@ public class SaleAdminController {
 			model.setViewName(VIEWNEWSALEADMIN);
 		}
 		return model;
+	}
+
+	private boolean existsJewels(List<JewelEntity> jewels, PlaceEntity place) {
+		JewelEntity jewel;
+		boolean exists = true;
+		Iterator<JewelEntity> ijewels = jewels.iterator();
+		while (ijewels.hasNext() && exists) {
+			jewel = ijewels.next();
+			if (!Util.isEmpty(jewel.getReference())) {
+				jewel.setPlace(place);
+				jewel.setActive(true);
+				jewel = jewelService.searchByReferenceCategoryMetalPlaceActive(jewel);
+				if (jewel == null || jewel.getIdjewel() == null) {
+					exists = false;
+				}
+			}
+		}
+		return exists;
 	}
 
 	/**
