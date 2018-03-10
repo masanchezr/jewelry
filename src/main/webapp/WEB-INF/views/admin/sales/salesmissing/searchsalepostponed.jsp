@@ -8,7 +8,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="searchsalepostponed" /></li>
 </ol>
-<form:form action="salepostponed" modelAttribute="searchForm">
+<form:form action="salepostponed" modelAttribute="searchDateForm">
 	<div class="row">
 		<div class="col-lg-6">
 			<div class="card-body">

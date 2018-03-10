@@ -30,7 +30,7 @@ public class ConstantsJsp {
 	public static final String NUMSALE = Constants.NUMSALE;
 	public static final String NUMSHOP = "numshop";
 	public static final String FORMADJUSTMENT = "adjustment";
-	public static final String FORMSEARCH = "searchForm";
+	public static final String FORMSEARCH = "searchDateForm";
 	public static final String CATEGORY = "category";
 	public static final String FORMPAYMENT = "payment";
 	public static final String VIEWNOTDAILYADMIN = "notdailyadmin";

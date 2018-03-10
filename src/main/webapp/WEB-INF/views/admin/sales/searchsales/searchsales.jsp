@@ -5,7 +5,7 @@
 <ol class="breadcrumb">
 	<li class="breadcrumb-item active"><spring:message code="sales" /></li>
 </ol>
-<form:form action="resultSales" modelAttribute="searchForm">
+<form:form action="resultSales" modelAttribute="searchDateForm">
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card-body">

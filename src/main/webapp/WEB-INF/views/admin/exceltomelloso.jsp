@@ -9,7 +9,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="generatexls" /></li>
 </ol>
-<form:form action="downloadexcel" modelAttribute="searchForm">
+<form:form action="downloadexcel" modelAttribute="searchDateForm">
 	<div class="row">
 		<div class="col-lg-7">
 			<div class="card-body">

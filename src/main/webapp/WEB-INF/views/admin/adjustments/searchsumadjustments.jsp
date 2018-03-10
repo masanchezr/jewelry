@@ -8,7 +8,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="searchsumadjustments" /></li>
 </ol>
-<form:form action="sumadjustments" modelAttribute="searchForm">
+<form:form action="sumadjustments" modelAttribute="searchDateForm">
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card-body">

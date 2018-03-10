@@ -6,7 +6,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="searchentries" /></li>
 </ol>
-<form:form action="resultentries" modelAttribute="searchForm">
+<form:form action="resultentries" modelAttribute="searchDateForm">
 	<div class="row">
 		<div class="col-lg-6">
 			<div class="card-body">

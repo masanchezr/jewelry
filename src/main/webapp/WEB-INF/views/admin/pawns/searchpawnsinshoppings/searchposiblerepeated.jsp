@@ -8,7 +8,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="searchshoppings" /></li>
 </ol>
-<form:form action="resultPosibleRepeated" modelAttribute="searchForm">
+<form:form action="resultPosibleRepeated" modelAttribute="searchDateForm">
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="panel card-default">
