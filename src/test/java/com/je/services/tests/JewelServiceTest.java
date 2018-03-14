@@ -37,7 +37,7 @@ public class JewelServiceTest {
 		MetalEntity material = new MetalEntity();
 		material.setIdmetal(1L);
 		category.setIdcategory(4L);
-		place.setIdplace(13700L);
+		place.setIdplace(28017L);
 		thing.setPlace(place);
 		thing.setName("bicolor");
 		thing.setDescription("bicolor");

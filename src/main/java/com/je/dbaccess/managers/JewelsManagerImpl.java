@@ -39,6 +39,9 @@ public class JewelsManagerImpl implements JewelsManager {
 		if (Util.isEmpty(object.getImg())) {
 			object.setImg(null);
 		}
+		if (object.getWork() == null || object.getWork().getIdworkshop() == null) {
+			object.setWork(null);
+		}
 		return jewelRepository.save(object);
 	}
 
