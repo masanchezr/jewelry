@@ -2,6 +2,7 @@ package com.je.services.sales;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -56,8 +57,8 @@ public class SaleServiceImpl implements SaleService {
 		SaleEntity saleEntity = new SaleEntity();
 		MailService mailService;
 		saleEntity.setNumsale(sale.getNumsale());
-		List<SalesJewels> salesJewels = new ArrayList<SalesJewels>();
-		List<SalesPayments> payments = new ArrayList<SalesPayments>();
+		List<SalesJewels> salesJewels = new ArrayList<>();
+		List<SalesPayments> payments = new ArrayList<>();
 		Client saleclient = sale.getClient();
 		if (saleclient != null) {
 			ClientEntity client = mapper.map(sale.getClient(), ClientEntity.class);
@@ -81,7 +82,7 @@ public class SaleServiceImpl implements SaleService {
 			e.setJewelEntity(jewel);
 			salesJewels.add(e);
 		}
-		List<AddressEntity> addresses = new ArrayList<AddressEntity>();
+		List<AddressEntity> addresses = new ArrayList<>();
 		AddressEntity invoice = sale.getInvoice();
 		if (invoice != null) {
 			invoice.setDatecreation(new Date());
@@ -97,14 +98,16 @@ public class SaleServiceImpl implements SaleService {
 		BigDecimal discount = sale.getDiscount();
 		Long iddiscount = sale.getIddiscount();
 		if (iddiscount != null) {
-			DiscountEntity discountEntity = discountsRepository.findById(iddiscount).get();
+			DiscountEntity discountEntity = discountsRepository.findById(iddiscount).orElse(null);
 			if (discount == null) {
 				discount = BigDecimal.ZERO;
 			}
-			discount = discount.add(discountEntity.getDiscount());
-			discountEntity.setNumsaleaplication(sale.getNumsale());
-			discountEntity.setModificationdate(new Date());
-			discountsRepository.save(discountEntity);
+			if (discountEntity != null) {
+				discount = discount.add(discountEntity.getDiscount());
+				discountEntity.setNumsaleaplication(sale.getNumsale());
+				discountEntity.setModificationdate(new Date());
+				discountsRepository.save(discountEntity);
+			}
 		}
 		if (discount != null) {
 			saleEntity.setTotal(importeTotal.subtract(discount));
@@ -134,12 +137,12 @@ public class SaleServiceImpl implements SaleService {
 		saleEntity.setDiscount(discount);
 		saleEntity.setSpayments(payments);
 		sale.setTotal(saleEntity.getTotal());
-		if (sale.getNumsale() > 0) {
-			boolean s = saleManager.existSale(sale.getNumsale() - 1, saleEntity.getPlace().getIdplace());
-			if (!s) {
-				mailService = new MailService("Numero de venta " + sale.getNumsale(), null, "REVISAR NUMERO VENTA.");
-				mailService.start();
-			}
+		if (sale.getNumsale() > 0
+				&& !saleManager.existSale(sale.getNumsale() - 1, saleEntity.getPlace().getIdplace())) {
+			mailService = new MailService(
+					"Numero de venta " + sale.getNumsale() + " lugar: " + saleEntity.getPlace().getIdplace(), null,
+					"REVISAR NUMERO VENTA.");
+			mailService.start();
 		}
 		return saleManager.buy(saleEntity);
 	}
@@ -150,7 +153,7 @@ public class SaleServiceImpl implements SaleService {
 		if (sales != null) {
 			return mapper(sales.iterator());
 		} else {
-			return null;
+			return Collections.emptyList();
 		}
 	}
 
@@ -162,7 +165,7 @@ public class SaleServiceImpl implements SaleService {
 	 * @return the list
 	 */
 	private List<Sale> mapper(Iterator<SaleEntity> isales) {
-		List<Sale> sales = new ArrayList<Sale>();
+		List<Sale> sales = new ArrayList<>();
 		while (isales.hasNext()) {
 			SaleEntity saleEntity = isales.next();
 			Sale sale = mapper.map(saleEntity, Sale.class);
@@ -181,7 +184,7 @@ public class SaleServiceImpl implements SaleService {
 	 */
 	private List<JewelEntity> mapperListJewels(List<SalesJewels> sjewels) {
 		Iterator<SalesJewels> ijewels = sjewels.iterator();
-		List<JewelEntity> jewels = new ArrayList<JewelEntity>();
+		List<JewelEntity> jewels = new ArrayList<>();
 		while (ijewels != null && ijewels.hasNext()) {
 			jewels.add(mapper.map(ijewels.next().getJewelEntity(), JewelEntity.class));
 		}
@@ -194,7 +197,7 @@ public class SaleServiceImpl implements SaleService {
 		if (sales != null) {
 			return mapper(sales.iterator());
 		} else {
-			return null;
+			return Collections.emptyList();
 		}
 	}
 
@@ -216,7 +219,7 @@ public class SaleServiceImpl implements SaleService {
 	@Override
 	public void removeSale(Sale removeSaleForm) {
 		Long iddiscount = removeSaleForm.getIddiscount();
-		List<CancelSalePaymentEntity> payments = new ArrayList<CancelSalePaymentEntity>();
+		List<CancelSalePaymentEntity> payments = new ArrayList<>();
 		PaymentEntity payment = null;
 		CancelSalePaymentEntity csp = new CancelSalePaymentEntity();
 		DiscountEntity discount = null;
@@ -262,7 +265,7 @@ public class SaleServiceImpl implements SaleService {
 	@Override
 	public boolean removeSaleParcial(Sale removeSaleForm) {
 		SaleEntity sale = saleManager.searchByPK(removeSaleForm.getIdsale());
-		List<CancelSalePaymentEntity> payments = new ArrayList<CancelSalePaymentEntity>();
+		List<CancelSalePaymentEntity> payments = new ArrayList<>();
 		Long iddiscount = removeSaleForm.getIddiscount();
 		DiscountEntity discount = null;
 		CancelSaleEntity cancel = new CancelSaleEntity();
@@ -281,7 +284,6 @@ public class SaleServiceImpl implements SaleService {
 			discount.setPlace(mapper.map(removeSaleForm.getPlace(), PlaceEntity.class));
 		}
 		csp.setPay(removeSaleForm.getPayment());
-		// csp.setAmount(removeSaleForm.getTotal());
 		csp.setCancelsale(cancel);
 		payments.add(csp);
 		cancel.setSpayments(payments);
@@ -307,7 +309,9 @@ public class SaleServiceImpl implements SaleService {
 		}
 		Map<String, Object> map = saleManager.searchByDatesAndPlace(DateUtil.getDate(sDateFrom), until,
 				mapper.map(place, PlaceEntity.class));
-		List<Sale> sales = mapper(((List<SaleEntity>) map.get(Constants.SALES)).iterator());
+		@SuppressWarnings("unchecked")
+		List<SaleEntity> list = (List<SaleEntity>) map.get(Constants.SALES);
+		List<Sale> sales = mapper(list.iterator());
 		map.put(Constants.SALES, sales);
 		return map;
 	}

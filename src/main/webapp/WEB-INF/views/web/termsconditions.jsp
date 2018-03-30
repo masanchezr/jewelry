@@ -14,17 +14,7 @@
 						<spring:message code="general" />
 					</h4>
 
-					<p>Este sitio web es propiedad y est&aacute; mantenido por
-						Joyer&iacute;a Santo Domingo y est&aacute; disponible en los
-						siguientes t&eacute;rminos y condiciones. Al utilizar el sitio
-						usted acepta estos t&eacute;rminos y condiciones, que se
-						interpretar&aacute; de acuerdo con las leyes de Espa&nacute;a.
-						Todo el texto y las im&aacute;genes son propiedad de
-						Joyer&iacute;a Santo Domingo no debe utilizarlas sin
-						consentimiento previo. Si desea utilizar las im&aacute;genes de
-						este sitio, por favor p&oacute;ngase en contacto con nosotros.
-						Joyer&iacute;a Santo Domingo se compromete a proteger la
-						privacidad de sus visitantes y clientes.</p>
+					<p>Este sitio web ......</p>
 
 					<h4>
 						<spring:message code="websitechanges" />

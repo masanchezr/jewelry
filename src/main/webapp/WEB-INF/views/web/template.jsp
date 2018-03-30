@@ -22,9 +22,11 @@
 <link href="<spring:url value="/resources/styles/web/jquery-ui.css"/>"
 	rel='stylesheet' type='text/css' />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script type="application/x-javascript">							
+<script type="application/x-javascript">
+								
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); 
 	 function hideURLbar(){ window.scrollTo(0,1); }
+
 </script>
 
 <!----webfonts---->
@@ -151,9 +153,6 @@
 							<form:input path="searchname" class="form-control"
 								placeholder="${find}" />
 						</div>
-						<button type="Find" class="btn btn-default">
-							<spring:message code="find" />
-						</button>
 					</form:form>
 				</div>
 			</div>

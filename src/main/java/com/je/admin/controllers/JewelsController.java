@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,9 +43,6 @@ import com.je.utils.constants.ConstantsJsp;
 @Controller
 @SessionAttributes({ "placeselected" })
 public class JewelsController {
-
-	/** The log. */
-	private static Logger log = LoggerFactory.getLogger(JewelsController.class);
 
 	/** The select category validator. */
 	@Autowired
@@ -218,12 +213,10 @@ public class JewelsController {
 	@RequestMapping(value = "/saveJewel")
 	public ModelAndView addJewelEntity(@ModelAttribute(FORMJEWEL) JewelEntity jewelForm, BindingResult result,
 			Model m) {
-		log.info("antes de validar");
 		selectCategoryValidator.validate(jewelForm, result);
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		if (result.hasErrors()) {
-			log.info("en el if de hay errores");
 			model.addObject(ConstantsJsp.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
 			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
 			model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());

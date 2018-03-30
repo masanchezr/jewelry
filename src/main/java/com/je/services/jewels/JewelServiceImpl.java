@@ -1,16 +1,10 @@
 package com.je.services.jewels;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import org.dozer.Mapper;
-import org.krysalis.barcode4j.impl.code39.Code39Bean;
-import org.krysalis.barcode4j.output.bitmap.BitmapCanvasProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -48,33 +42,6 @@ public class JewelServiceImpl implements JewelService {
 			thing.setImg(null);
 		}
 		return jewelsManager.findById(jewelsManager.save(thing).getIdjewel());
-	}
-
-	private void getBarCode(JewelEntity jewel) {
-		// intento crear código de barras
-		try {
-			String barCodePath = System.getenv(Constants.OPENSHIFT_DATA_DIR);
-			// puede ser con 128 o 39 no se cual es la diferencia
-			Code39Bean bean = new Code39Bean();
-			final int dpi = 160;
-			// Configure the barcode generator
-			bean.setModuleWidth(1.0);
-			bean.setFontSize(5.0);
-			bean.setQuietZone(2.0);
-			bean.doQuietZone(true);
-			// Open output file
-			File outputFile = new File(barCodePath.concat(jewel.getReference()).concat(Constants.PNG));
-			FileOutputStream out = new FileOutputStream(outputFile);
-			BitmapCanvasProvider canvas = new BitmapCanvasProvider(out, "image/x-png", dpi,
-					BufferedImage.TYPE_BYTE_BINARY, false, 0);
-			// Generate the barcode
-			bean.generateBarcode(canvas, jewel.getReference().toUpperCase());
-			// Signal end of generation
-			canvas.finish();
-		} catch (IOException ex) {
-
-		}
-
 	}
 
 	@Override

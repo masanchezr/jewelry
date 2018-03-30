@@ -23,13 +23,9 @@
 									href="#" class="b-link-stripe b-animate-go thickbox"><img
 									width="150" height="142"
 									src="<c:out value="${urlimg}"/><c:out value="${jewel.idjewel}" />.jpg" />
-									<div class="b-wrapper">
-										<h2 class="b-animate b-from-left b-delay03 ">
-											<img
-												src="<spring:url value="/resources/img/web/link-ico.png"/>"
-												alt="" />
-										</h2>
-									</div> </a>
+									<img
+									src="<spring:url value="/resources/img/web/link-ico.png"/>"
+									alt="" /> </a>
 							</div>
 						</div>
 						<p class="text-center">

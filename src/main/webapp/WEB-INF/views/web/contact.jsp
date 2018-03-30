@@ -15,16 +15,10 @@
 			<h1>
 				<spring:message code="visitus" />
 			</h1>
-			<a href="mailto:numisgoldsl@gmail.com"
-				class="btn btn-default btn-lg marge"><spring:message
-					code="email" /></a>
-			<a href="<spring:url value="/faqs"/>" class="btn btn-default btn-lg">FAQ's</a>
 		</hgroup>
-
 	</header>
 	<section class="text-content white">
 		<div class="container">
-
 			<header class="row noborder">
 				<h3>
 					<spring:message code="goldburgos" />

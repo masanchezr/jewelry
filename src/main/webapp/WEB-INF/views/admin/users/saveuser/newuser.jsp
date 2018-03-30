@@ -11,8 +11,8 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card-body">
-				<div class="col-lg-6">
-					<div class="row">
+				<div class="row">
+					<div class="col-lg-6">
 						<div class="form-group">
 							<spring:message code="username" var="usermessage" />
 							<form:input class="form-control" path="username"
@@ -22,7 +22,7 @@
 							</p>
 						</div>
 						<div class="form-group">
-							<spring:message code="password" var="passmessage" />
+							<spring:message code="enterpassword" var="passmessage" />
 							<form:input class="form-control" path="password"
 								placeholder="${passmessage}" />
 							<p class="text-danger">

@@ -139,8 +139,9 @@
 								var="searchshoppings" /> <a href="${searchshoppings}"> <spring:message
 									code="searchshoppings" /></a></li>
 						<li><spring:url value="/searchquartermaterial"
-								var="searchquartermaterial" /> <a href="${searchquartermaterial}">
-								<spring:message code="gramsformaterial" />
+								var="searchquartermaterial" /> <a
+							href="${searchquartermaterial}"> <spring:message
+									code="gramsformaterial" />
 						</a></li>
 						<li><spring:url value="/searchgramsnull"
 								var="searchgramsnull" /> <a href="${searchgramsnull}"> <spring:message
@@ -240,20 +241,10 @@
 									code="searchsalepostponed" /></a></li>
 					</ul></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
-					title="<spring:message code="users"/>"><a
-					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
-					href="#collapseUsers" data-parent="#exampleAccordion"><i
-						class="fa fa-users fa-fw"></i> <span class="nav-link-text"><spring:message
-								code="users" /></span> </a>
-					<ul class="sidenav-second-level collapse" id="collapseUsers">
-						<li><spring:url value="/enabledisableuser"
-								var="enabledisableuser" /> <a href="${enabledisableuser}">
-								<spring:message code="enabledisable" />
-						</a></li>
-						<li><spring:url value="/newuser" var="newuser" /> <a
-							href="${newuser}"> <spring:message code="newuser" />
-						</a></li>
-					</ul></li>
+					title="<spring:message code="users"/>"><spring:url
+						value="/newuser" var="newuser" /> <a href="${newuser}"
+					class="nav-link"><i class="fa fa-users fa-fw"></i><span
+						class="nav-link-text"> <spring:message code="newuser" /></span></a></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message
 									code="pendingissues" />"><spring:url
