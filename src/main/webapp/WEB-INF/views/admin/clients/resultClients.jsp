@@ -6,13 +6,6 @@
 </ol>
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="page-header">
-			<spring:message code="clients" />
-		</h1>
-	</div>
-</div>
-<div class="row">
-	<div class="col-lg-12">
 		<div class="card-body">
 			<div class="table-responsive">
 				<table class="table table-striped table-bordered table-hover"
@@ -21,17 +14,15 @@
 						<tr>
 							<th><spring:message code="niforcif" /></th>
 							<th><spring:message code="name" /></th>
-							<th><spring:message code="email" /></th>
-							<th><spring:message code="telephone" /></th>
+							<th><spring:message code="surname" /></th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${clients}" var="client">
 							<tr>
-								<td><c:out value="${client.nifclient}" /></td>
-								<td><c:out value="${client.nameuser}" /></td>
-								<td><c:out value="${client.email}" /></td>
-								<td><c:out value="${client.telephone}" /></td>
+								<td><c:out value="${client.nif}" /></td>
+								<td><c:out value="${client.name}" /></td>
+								<td><c:out value="${client.surname}" /></td>
 							</tr>
 						</c:forEach>
 					</tbody>

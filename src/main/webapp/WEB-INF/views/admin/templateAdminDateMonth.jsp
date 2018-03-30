@@ -251,6 +251,13 @@
 						class="fa fa-exclamation-triangle fa-fw"></i> <span
 						class="nav-link-text"><spring:message code="pendingissues" /></span></a></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
+					title="<spring:message
+									code="searchclients" />"><spring:url
+						value="/searchclients" var="searchclients" /> <a
+					href="${searchclients}" class="nav-link"><i
+						class="fa fa-users fa-fw"></i> <span class="nav-link-text"><spring:message
+								code="searchclients" /></span></a></li>
+				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message code="newcategory"/>"><spring:url
 						value="/newCategory" var="newcategory"></spring:url> <a
 					href="${newcategory}" class="nav-link"><i

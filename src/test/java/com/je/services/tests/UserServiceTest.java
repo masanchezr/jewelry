@@ -20,7 +20,7 @@ public class UserServiceTest {
 	public void newUserTest() {
 		User user = new User();
 		user.setUsername("masanchez");
-		user.setPassword("rambaldi");
+		user.setPassword("josetequiero");
 		user.setEnabled(Boolean.TRUE);
 		userservice.newUser(user);
 	}

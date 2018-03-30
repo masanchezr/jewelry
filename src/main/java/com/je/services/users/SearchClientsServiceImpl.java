@@ -36,8 +36,7 @@ public class SearchClientsServiceImpl implements SearchClientsService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.je.services.users.SearchClientsService#getClient(java.lang.String)
+	 * @see com.je.services.users.SearchClientsService#getClient(java.lang.String)
 	 */
 	public Client getClient(String nif) {
 		Client client = new Client();
@@ -55,7 +54,7 @@ public class SearchClientsServiceImpl implements SearchClientsService {
 	private List<Client> mapperListObjects(List<ClientEntity> clients) {
 		List<Client> lclients = null;
 		if (clients != null) {
-			lclients = new ArrayList<Client>();
+			lclients = new ArrayList<>();
 			Iterator<ClientEntity> iclients = clients.iterator();
 			while (iclients.hasNext()) {
 				Client client = new Client();

@@ -104,7 +104,7 @@
 		<intercept-url pattern="/newPawn" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/savePayment" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/error" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/searchClients" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/searchclients" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/disablejewel" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/searchtodisablejewel" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/saveCategory" access="hasRole('ROLE_ADMIN')" />

@@ -58,7 +58,11 @@
 	</definition>
 	<definition name="resultClients" extends="templateAdmin">
 		<put-attribute name="body"
-			value="/WEB-INF/views/admin/resultClients.jsp" />
+			value="/WEB-INF/views/admin/clients/resultClients.jsp" />
+	</definition>
+	<definition name="searchclients" extends="templateAdmin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/clients/searchclients.jsp" />
 	</definition>
 	<definition name="searchbyreference" extends="templateAdmin">
 		<put-attribute name="body"

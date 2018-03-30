@@ -7,7 +7,10 @@ import com.je.dbaccess.entities.ClientPawnEntity;
 /**
  * The Interface ClientPawnsRepository.
  */
-public interface ClientPawnsRepository extends
-		CrudRepository<ClientPawnEntity, String> {
+public interface ClientPawnsRepository extends CrudRepository<ClientPawnEntity, String> {
+
+	public ClientPawnEntity findByNameLike(String name);
+
+	public ClientPawnEntity findBySurnameLike(String surname);
 
 }
