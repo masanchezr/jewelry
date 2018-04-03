@@ -23,7 +23,7 @@ public class InstallmentEntity {
 	private Long idinstallment;
 
 	@ManyToOne
-	@JoinColumn(name = "idsalepostponed")
+	@JoinColumn(name = Constants.IDSALEPOSTPONED)
 	private SalePostponedEntity salepostponed;
 
 	/** The pay. */

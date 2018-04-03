@@ -3,7 +3,6 @@ package com.je.employee.controllers;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +33,6 @@ import com.je.services.sales.SalePostPoned;
 import com.je.services.sales.SalesPostPonedService;
 import com.je.utils.constants.Constants;
 import com.je.utils.constants.ConstantsJsp;
-import com.je.utils.string.Util;
 
 @Controller
 public class SalePostPonedController {
@@ -97,25 +95,9 @@ public class SalePostPonedController {
 		if (!result.hasErrors()) {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			List<JewelEntity> jewels = sale.getJewels();
-			List<JewelEntity> newjewels = new ArrayList<>();
-			JewelEntity jewel;
-			boolean exists = true;
 			PlaceEntity place = placeService.getPlaceUser(user);
-			Iterator<JewelEntity> ijewels = jewels.iterator();
-			while (ijewels.hasNext() && exists) {
-				jewel = ijewels.next();
-				if (!Util.isEmpty(jewel.getReference())) {
-					jewel.setPlace(place);
-					jewel.setActive(true);
-					jewel = jewelService.searchByReferenceCategoryMetalPlaceActive(jewel);
-					if (jewel != null && jewel.getIdjewel() != null) {
-						newjewels.add(jewel);
-					} else {
-						exists = false;
-					}
-				}
-			}
-			if (!jewels.isEmpty() && exists) {
+			List<JewelEntity> newjewels = jewelService.searchJewels(jewels, place);
+			if (!jewels.isEmpty() && newjewels != null) {
 				sale.setJewels(newjewels);
 				sale.setPlace(place);
 				// comprobamos si ya existe la venta
@@ -171,19 +153,7 @@ public class SalePostPonedController {
 			SalePostPoned sale = saleservicepostponed.addInstallment(installment);
 			if (sale != null) {
 				if (sale.getDateretired() != null) {
-					String user = SecurityContextHolder.getContext().getAuthentication().getName();
-					String ipAddress = request.getHeader(ConstantsJsp.XFORWARDEDFOR);
-					if (ipAddress == null) {
-						ipAddress = request.getRemoteAddr();
-					}
-					Daily daily = dailyService.getDaily(new Date(), placeService.getPlaceUser(user), ipAddress);
-					if (daily.getFinalamount() == null) {
-						model.setViewName(ConstantsJsp.VIEWNOTDAILY);
-					} else {
-						model.addObject(ConstantsJsp.DAILY, daily);
-						model.setViewName(ConstantsJsp.VIEWDAILYARROW);
-						model.addObject(ConstantsJsp.DATEDAILY, new Date());
-					}
+					model = getModelDaily(request);
 				} else {
 					model.setViewName("finishaddinstallment");
 					model.addObject(ConstantsJsp.FORMSALE, sale);
@@ -192,8 +162,26 @@ public class SalePostPonedController {
 				model.setViewName(ADDINSTALLMENT);
 				model.addObject(INSTALLMENT, installment);
 				model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
-				result.rejectValue("idsalepostponed", "salenotexit");
+				result.rejectValue(Constants.IDSALEPOSTPONED, ConstantsJsp.ERRORSALENOTEXIST);
 			}
+		}
+		return model;
+	}
+
+	private ModelAndView getModelDaily(HttpServletRequest request) {
+		ModelAndView model = new ModelAndView();
+		String user = SecurityContextHolder.getContext().getAuthentication().getName();
+		String ipAddress = request.getHeader(ConstantsJsp.XFORWARDEDFOR);
+		if (ipAddress == null) {
+			ipAddress = request.getRemoteAddr();
+		}
+		Daily daily = dailyService.getDaily(new Date(), placeService.getPlaceUser(user), ipAddress);
+		if (daily.getFinalamount() == null) {
+			model.setViewName(ConstantsJsp.VIEWNOTDAILY);
+		} else {
+			model.addObject(ConstantsJsp.DAILY, daily);
+			model.setViewName(ConstantsJsp.VIEWDAILYARROW);
+			model.addObject(ConstantsJsp.DATEDAILY, new Date());
 		}
 		return model;
 	}
@@ -209,7 +197,7 @@ public class SalePostPonedController {
 			model.addObject("howmany", howmany);
 			model.addObject("installments", sale.getSpayments());
 		} else {
-			arg1.rejectValue(ConstantsJsp.IDSALE, "salenotexit");
+			arg1.rejectValue(ConstantsJsp.IDSALE, ConstantsJsp.ERRORSALENOTEXIST);
 		}
 		return model;
 	}

@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.je.utils.constants.Constants;
+
 @Entity
 @Table(name = "salespostponedjewels")
 public class SalePostPonedJewel {
@@ -21,7 +23,7 @@ public class SalePostPonedJewel {
 	private Long idsalepostponedjewel;
 
 	@ManyToOne
-	@JoinColumn(name = "idsalepostponed")
+	@JoinColumn(name = Constants.IDSALEPOSTPONED)
 	private SalePostponedEntity salepostponed;
 
 	/** The jewel. */

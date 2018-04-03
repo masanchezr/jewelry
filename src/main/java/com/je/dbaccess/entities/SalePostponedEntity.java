@@ -23,7 +23,7 @@ import com.je.utils.constants.Constants;
 public class SalePostponedEntity {
 
 	@Id
-	@Column(name = "idsalepostponed")
+	@Column(name = Constants.IDSALEPOSTPONED)
 	private Long idsalepostponed;
 
 	@Column(name = "totalamount")
@@ -46,12 +46,12 @@ public class SalePostponedEntity {
 	@JoinColumn(name = "IDPLACE", referencedColumnName = "IDPLACE")
 	private PlaceEntity place;
 
-	@JoinColumn(name = "idsalepostponed")
+	@JoinColumn(name = Constants.IDSALEPOSTPONED)
 	@OneToMany(cascade = CascadeType.ALL)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<SalePostPonedJewel> sjewels;
 
-	@JoinColumn(name = "idsalepostponed")
+	@JoinColumn(name = Constants.IDSALEPOSTPONED)
 	@OneToMany(cascade = CascadeType.ALL)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<InstallmentEntity> spayments;

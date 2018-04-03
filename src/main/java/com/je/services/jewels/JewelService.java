@@ -93,4 +93,6 @@ public interface JewelService {
 
 	public List<JewelEntity> searchJewelsByKeyWordCategory(String keyword);
 
+	public List<JewelEntity> searchJewels(List<JewelEntity> jewels, PlaceEntity place);
+
 }

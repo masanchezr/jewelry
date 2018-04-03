@@ -19,7 +19,7 @@ public class InstallmentValidator implements Validator {
 
 	@Override
 	public void validate(Object arg0, Errors arg1) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "idsalepostponed", ConstantsJsp.ERRORSELECTIDSALE);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.IDSALEPOSTPONED, ConstantsJsp.ERRORSELECTIDSALE);
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "amount", ConstantsJsp.ERRORSELECTAMOUNT);
 		Installment installment = (Installment) arg0;
 		BigDecimal amount = installment.getAmount();

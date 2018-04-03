@@ -2,6 +2,7 @@ package com.je.services.jewels;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import org.dozer.Mapper;
@@ -139,5 +140,25 @@ public class JewelServiceImpl implements JewelService {
 	@Override
 	public Page<JewelEntity> searchWithImg(int i) {
 		return jewelsManager.searchWithImg(PageRequest.of(i - 1, Constants.PAGE_SIZE));
+	}
+
+	public List<JewelEntity> searchJewels(List<JewelEntity> jewels, PlaceEntity place) {
+		JewelEntity jewel;
+		List<JewelEntity> newjewels = new ArrayList<>();
+		Iterator<JewelEntity> ijewels = jewels.iterator();
+		while (ijewels.hasNext() && newjewels != null) {
+			jewel = ijewels.next();
+			if (!Util.isEmpty(jewel.getReference())) {
+				jewel.setPlace(place);
+				jewel.setActive(true);
+				jewel = searchByReferenceCategoryMetalPlaceActive(jewel);
+				if (jewel != null && jewel.getIdjewel() != null) {
+					newjewels.add(jewel);
+				} else {
+					newjewels = null;
+				}
+			}
+		}
+		return newjewels;
 	}
 }

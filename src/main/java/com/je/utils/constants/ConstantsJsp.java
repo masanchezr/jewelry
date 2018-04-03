@@ -71,5 +71,6 @@ public class ConstantsJsp {
 	public static final String PERCENT = "percent";
 	public static final String ERRORSELECTPERCENT = "selectpercent";
 	public static final String ERRORNUMSALEREPEATED = "numsalerepeated";
+	public static final String ERRORSALENOTEXIST = "salenotexist";
 
 }

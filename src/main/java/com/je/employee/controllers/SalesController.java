@@ -2,7 +2,6 @@ package com.je.employee.controllers;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +29,6 @@ import com.je.services.sales.Sale;
 import com.je.services.sales.SaleService;
 import com.je.utils.constants.Constants;
 import com.je.utils.constants.ConstantsJsp;
-import com.je.utils.string.Util;
 import com.je.validators.SaleFormValidator;
 
 /**
@@ -97,25 +95,9 @@ public class SalesController {
 		if (!result.hasErrors()) {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			List<JewelEntity> jewels = sale.getJewels();
-			List<JewelEntity> newjewels = new ArrayList<>();
-			JewelEntity jewel;
-			boolean exists = true;
 			PlaceEntity place = placeService.getPlaceUser(user);
-			Iterator<JewelEntity> ijewels = jewels.iterator();
-			while (ijewels.hasNext() && exists) {
-				jewel = ijewels.next();
-				if (!Util.isEmpty(jewel.getReference())) {
-					jewel.setPlace(place);
-					jewel.setActive(true);
-					jewel = jewelService.searchByReferenceCategoryMetalPlaceActive(jewel);
-					if (jewel != null && jewel.getIdjewel() != null) {
-						newjewels.add(jewel);
-					} else {
-						exists = false;
-					}
-				}
-			}
-			if (!jewels.isEmpty() && exists) {
+			List<JewelEntity> newjewels = jewelService.searchJewels(jewels, place);
+			if (!jewels.isEmpty() && newjewels != null) {
 				sale.setJewels(newjewels);
 				sale.setPlace(place);
 				// comprobamos si ya existe la venta
@@ -190,7 +172,7 @@ public class SalesController {
 			} else {
 				model.setViewName(VIEWREMOVEPARCIALSALE);
 				model.addObject(ConstantsJsp.FORMSALE, sale);
-				result.rejectValue(ConstantsJsp.NUMSALE, "salenotexit");
+				result.rejectValue(ConstantsJsp.NUMSALE, ConstantsJsp.ERRORSALENOTEXIST);
 			}
 		}
 		return model;

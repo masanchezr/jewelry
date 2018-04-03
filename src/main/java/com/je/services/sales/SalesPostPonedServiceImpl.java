@@ -36,8 +36,8 @@ public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 		// Tengo que crear un saleentity y varios salesjewels
 		SalePostponedEntity saleEntity = new SalePostponedEntity();
 		saleEntity.setIdsalepostponed(sale.getIdsale());
-		List<SalePostPonedJewel> salesJewels = new ArrayList<SalePostPonedJewel>();
-		List<InstallmentEntity> payments = new ArrayList<InstallmentEntity>();
+		List<SalePostPonedJewel> salesJewels = new ArrayList<>();
+		List<InstallmentEntity> payments = new ArrayList<>();
 		saleEntity.setCreationdate(new Date());
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date());
@@ -78,7 +78,8 @@ public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 
 	@Override
 	public SalePostPoned addInstallment(Installment installment) {
-		SalePostponedEntity sppentity = salespostponedrepository.findById(installment.getIdsalepostponed()).get();
+		SalePostponedEntity sppentity = salespostponedrepository.findById(installment.getIdsalepostponed())
+				.orElse(null);
 		SalePostPoned sale = null;
 		if (sppentity != null) {
 			InstallmentEntity entity = mapper.map(installment, InstallmentEntity.class);
@@ -90,7 +91,7 @@ public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 				sppentity.setDateretired(new Date());
 				salespostponedrepository.save(sppentity);
 			}
-			sppentity = salespostponedrepository.findById(installment.getIdsalepostponed()).get();
+			sppentity = salespostponedrepository.findById(installment.getIdsalepostponed()).orElse(null);
 			sale = mapper.map(sppentity, SalePostPoned.class);
 		}
 		return sale;
@@ -109,14 +110,18 @@ public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 
 	@Override
 	public SalePostPoned searchByPK(long id) {
-		SalePostponedEntity saleEntity = salespostponedrepository.findById(id).get();
-		SalePostPoned sale = mapper.map(saleEntity, SalePostPoned.class);
-		List<SalePostPonedJewel> sjewels = saleEntity.getSjewels();
-		Iterator<SalePostPonedJewel> isjewels = sjewels.iterator();
-		sale.setJewels(new ArrayList<JewelEntity>());
-		while (isjewels.hasNext()) {
-			sale.getJewels().add(isjewels.next().getJewel());
+		SalePostponedEntity saleEntity = salespostponedrepository.findById(id).orElse(null);
+		if (saleEntity != null) {
+			SalePostPoned sale = mapper.map(saleEntity, SalePostPoned.class);
+			List<SalePostPonedJewel> sjewels = saleEntity.getSjewels();
+			Iterator<SalePostPonedJewel> isjewels = sjewels.iterator();
+			sale.setJewels(new ArrayList<JewelEntity>());
+			while (isjewels.hasNext()) {
+				sale.getJewels().add(isjewels.next().getJewel());
+			}
+			return sale;
+		} else {
+			return null;
 		}
-		return sale;
 	}
 }

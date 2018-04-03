@@ -266,10 +266,8 @@ public class JewelsController {
 	 */
 	@RequestMapping(value = "/addset")
 	public ModelAndView addSet(@ModelAttribute("setForm") NewSet set) {
-		ModelAndView model = new ModelAndView(ConstantsJsp.SUCCESS);
 		setService.saveSet(set);
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
-		return model;
+		return allsets();
 	}
 
 	/**
