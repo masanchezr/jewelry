@@ -152,17 +152,9 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/dailies/dailyarrow.jsp" />
 	</definition>
-	<definition name="quarter" extends="templateAdmin">
-		<put-attribute name="body"
-			value="/WEB-INF/views/admin/shoppings/quarters/quarter.jsp" />
-	</definition>
-	<definition name="searchquarter" extends="templateAdmin">
-		<put-attribute name="body"
-			value="/WEB-INF/views/admin/shoppings/quarters/searchquarter.jsp" />
-	</definition>
 	<definition name="quartermaterial" extends="templateAdmin">
 		<put-attribute name="body"
-			value="/WEB-INF/views/admin/shoppings/quartersmaterial/quarter.jsp" />
+			value="/WEB-INF/views/admin/shoppings/quartersmetal/quarter.jsp" />
 	</definition>
 	<definition name="newshop" extends="templateAdmin">
 		<put-attribute name="body"
@@ -174,7 +166,7 @@
 	</definition>
 	<definition name="searchquartermaterial" extends="templateAdmin">
 		<put-attribute name="body"
-			value="/WEB-INF/views/admin/shoppings/quartersmaterial/searchquarter.jsp" />
+			value="/WEB-INF/views/admin/shoppings/quartersmetal/searchquarter.jsp" />
 	</definition>
 	<definition name="quarterpawns" extends="templateAdmin">
 		<put-attribute name="body"

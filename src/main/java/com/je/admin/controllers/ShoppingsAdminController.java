@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -75,6 +77,9 @@ public class ShoppingsAdminController {
 
 	@Autowired
 	private SearchFormValidator adminSearchValidator;
+
+	/** The logger. */
+	private static Logger logger = LoggerFactory.getLogger(ShoppingsAdminController.class);
 
 	private static final String VIEWSEARCHSHOPPINGS = "searchshoppings";
 	private static final String VIEWSEARCHCLIENTADMIN = "searchclientadmin";
@@ -352,23 +357,24 @@ public class ShoppingsAdminController {
 			place.setIdplace(13700L);
 			String path = System.getenv(Constants.OPENSHIFT_DATA_DIR);
 			XSSFWorkbook myWorkBook = shoppingService.generateExcel(form.getDatefrom(), form.getDateuntil(), place);
+			File file = new File(path.concat("workbook.xlsx"));
+			FileOutputStream out;
 			try {
-				File file = new File(path.concat("workbook.xlsx"));
-				FileOutputStream out = new FileOutputStream(file);
+				out = new FileOutputStream(file);
 				// write operation workbook using file out object
 				myWorkBook.write(out);
 				myWorkBook.close();
 				out.close();
-				InputStream inputStream = new FileInputStream(file);
+			} catch (IOException e) {
+				logger.error(java.util.logging.Level.SEVERE.getName());
+			}
+			try (InputStream inputStream = new FileInputStream(file)) {
 				response.setContentType("application/force-download");
 				response.setHeader("Content-Disposition", "attachment; filename=workbook.xlsx");
 				IOUtils.copy(inputStream, response.getOutputStream());
 				response.flushBuffer();
-				inputStream.close();
 			} catch (IOException e) {
-				e.printStackTrace();
-			} finally {
-
+				logger.error(java.util.logging.Level.SEVERE.getName());
 			}
 		}
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());

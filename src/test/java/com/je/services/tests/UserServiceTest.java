@@ -19,8 +19,8 @@ public class UserServiceTest {
 	@Test
 	public void newUserTest() {
 		User user = new User();
-		user.setUsername("masanchez");
-		user.setPassword("josetequiero");
+		user.setUsername("jorge");
+		user.setPassword("moraluna");
 		user.setEnabled(Boolean.TRUE);
 		userservice.newUser(user);
 	}
