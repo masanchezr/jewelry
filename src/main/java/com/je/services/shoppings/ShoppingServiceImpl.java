@@ -1,5 +1,6 @@
 package com.je.services.shoppings;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -14,6 +15,8 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.dozer.Mapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.je.dbaccess.entities.ClientPawnEntity;
@@ -24,7 +27,6 @@ import com.je.dbaccess.entities.PaymentShopEntity;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.dbaccess.entities.ShoppingEntity;
 import com.je.dbaccess.repositories.ClientPawnsRepository;
-import com.je.dbaccess.repositories.MetalRepository;
 import com.je.dbaccess.repositories.PlaceUserRepository;
 import com.je.dbaccess.repositories.ShoppingsRepository;
 import com.je.services.dailies.Daily;
@@ -48,9 +50,6 @@ public class ShoppingServiceImpl implements ShoppingService {
 
 	@Autowired
 	private PlaceUserRepository placeUserRepository;
-
-	@Autowired
-	private MetalRepository materialRepository;
 
 	/** The client pawns repository. */
 	@Autowired
@@ -76,12 +75,13 @@ public class ShoppingServiceImpl implements ShoppingService {
 		Calendar calendar = Calendar.getInstance();
 		PlaceEntity place = placeUserRepository.findByUsername(shopping.getUser()).get(0).getPlace();
 		List<ObjectShopEntity> objects = shoppingEntity.getObjects();
-		List<ObjectShopEntity> newobjects = new ArrayList<ObjectShopEntity>();
+		List<ObjectShopEntity> newobjects = new ArrayList<>();
 		Iterator<ObjectShopEntity> iobjects = objects.iterator();
 		ObjectShopEntity ose;
-		List<PaymentShopEntity> paymentshop = new ArrayList<PaymentShopEntity>();
-		BigDecimal wiretransfer = shopping.getWiretransfer(), cashamount = shopping.getCashamount(),
-				totalamount = BigDecimal.ZERO;
+		List<PaymentShopEntity> paymentshop = new ArrayList<>();
+		BigDecimal wiretransfer = shopping.getWiretransfer();
+		BigDecimal cashamount = shopping.getCashamount();
+		BigDecimal totalamount = BigDecimal.ZERO;
 		while (iobjects.hasNext()) {
 			ose = iobjects.next();
 			if (ose.getGrossgrams() != null) {
@@ -135,7 +135,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 			Shopping shopping;
 			ShoppingEntity shoppingEntity;
 			ClientPawnEntity client;
-			shoppings = new ArrayList<Shopping>();
+			shoppings = new ArrayList<>();
 			while (ishoppingsEntity.hasNext()) {
 				shoppingEntity = ishoppingsEntity.next();
 				client = shoppingEntity.getClient();
@@ -153,7 +153,8 @@ public class ShoppingServiceImpl implements ShoppingService {
 	public List<Shopping> searchShoppings(String sDateFrom, String sDateUntil, PlaceEntity place, Long numshop) {
 		List<Shopping> shoppings = null;
 		if (numshop != null && sDateFrom != null && !Util.isEmpty(sDateUntil)) {
-			Date datefrom = DateUtil.getDate(sDateFrom), dateuntil = DateUtil.getDate(sDateUntil);
+			Date datefrom = DateUtil.getDate(sDateFrom);
+			Date dateuntil = DateUtil.getDate(sDateUntil);
 			shoppings = mapper(shoppingsRepository.findByNumshopAndPlaceAndCreationdateBetween(numshop, place, datefrom,
 					dateuntil));
 		} else if (numshop != null && !Util.isEmpty(sDateFrom) && Util.isEmpty(sDateUntil)) {
@@ -163,7 +164,8 @@ public class ShoppingServiceImpl implements ShoppingService {
 		} else if (numshop != null && Util.isEmpty(sDateFrom) && Util.isEmpty(sDateUntil)) {
 			shoppings = mapper(shoppingsRepository.findByNumshopAndPlace(numshop, place));
 		} else if (sDateFrom != null && !Util.isEmpty(sDateUntil)) {
-			Date datefrom = DateUtil.getDate(sDateFrom), dateuntil = DateUtil.getDate(sDateUntil);
+			Date datefrom = DateUtil.getDate(sDateFrom);
+			Date dateuntil = DateUtil.getDate(sDateUntil);
 			shoppings = mapper(shoppingsRepository.findByCreationdateBetweenAndPlace(datefrom, dateuntil, place));
 		} else {
 			Date datefrom = DateUtil.getDate(sDateFrom);
@@ -174,108 +176,72 @@ public class ShoppingServiceImpl implements ShoppingService {
 
 	@Override
 	public Shopping findShopByPK(Long idshop) {
-		ShoppingEntity shopping = shoppingsRepository.findById(idshop).get();
-		return mapper.map(shopping, Shopping.class);
+		ShoppingEntity shopping = shoppingsRepository.findById(idshop).orElse(null);
+		Shopping shop = null;
+		if (shopping != null) {
+			shop = mapper.map(shopping, Shopping.class);
+		}
+		return shop;
 	}
 
 	@Override
 	public void update(Shopping shopping) {
-		ShoppingEntity shoppingEntity = shoppingsRepository.findById(shopping.getId()).get();
-		List<ObjectShopEntity> objects = shoppingEntity.getObjects();
-		Iterator<ObjectShopEntity> iobjects;
-		List<ObjectShopEntity> newobjects = new ArrayList<ObjectShopEntity>();
-		List<ObjectShopEntity> los = shopping.getObjects();
-		Iterator<ObjectShopEntity> ilos = los.iterator();
-		ObjectShopEntity object, os;
-		while (ilos.hasNext()) {
-			os = ilos.next();
-			iobjects = objects.iterator();
-			while (iobjects.hasNext()) {
-				object = iobjects.next();
-				if (object.getIdobjectshop().equals(os.getIdobjectshop())) {
-					object.setRealgrams(os.getRealgrams());
-					object.setGrossgrams(os.getGrossgrams());
-					object.setAmount(os.getAmount());
-					object.setMetal(os.getMetal());
-					newobjects.add(object);
+		ShoppingEntity shoppingEntity = shoppingsRepository.findById(shopping.getId()).orElse(null);
+		if (shoppingEntity != null) {
+			List<ObjectShopEntity> objects = shoppingEntity.getObjects();
+			Iterator<ObjectShopEntity> iobjects;
+			List<ObjectShopEntity> newobjects = new ArrayList<>();
+			List<ObjectShopEntity> los = shopping.getObjects();
+			Iterator<ObjectShopEntity> ilos = los.iterator();
+			ObjectShopEntity object;
+			ObjectShopEntity os;
+			while (ilos.hasNext()) {
+				os = ilos.next();
+				iobjects = objects.iterator();
+				while (iobjects.hasNext()) {
+					object = iobjects.next();
+					if (object.getIdobjectshop().equals(os.getIdobjectshop())) {
+						object.setRealgrams(os.getRealgrams());
+						object.setGrossgrams(os.getGrossgrams());
+						object.setAmount(os.getAmount());
+						object.setMetal(os.getMetal());
+						newobjects.add(object);
+					}
 				}
 			}
+			shoppingEntity.setObjects(newobjects);
+			shoppingEntity.setMeltdate(new Date());
+			shoppingsRepository.save(shoppingEntity);
 		}
-		shoppingEntity.setObjects(newobjects);
-		shoppingEntity.setMeltdate(new Date());
-		shoppingsRepository.save(shoppingEntity);
 	}
 
 	@Override
 	public List<QuarterMetal> searchGramsByMetal(String sDateFrom, String sDateUntil, PlaceEntity place) {
-		Date datefrom = DateUtil.getDate(sDateFrom), dateuntil = DateUtil.getDate(sDateUntil);
-		List<QuarterMetal> lquartermaterial = new ArrayList<QuarterMetal>();
-		List<ShoppingEntity> shoppings = shoppingsRepository.findByCreationdateBetweenAndPlace(datefrom, dateuntil,
-				place);
-		List<ObjectShopEntity> lose;
-		Iterator<ObjectShopEntity> ilose;
-		Iterator<ShoppingEntity> ishoppings = shoppings.iterator();
-		ObjectShopEntity ose;
+		Date datefrom = DateUtil.getDate(sDateFrom);
+		Date dateuntil = DateUtil.getDate(sDateUntil);
+		List<QuarterMetal> lquartermaterial = new ArrayList<>();
+		List<Object[]> shoppings = shoppingsRepository.findGramsByMetal(datefrom, dateuntil, place);
+		Object[] lose;
+		Iterator<Object[]> ishoppings = shoppings.iterator();
 		while (ishoppings.hasNext()) {
-			lose = ishoppings.next().getObjects();
-			ilose = lose.iterator();
-			while (ilose.hasNext()) {
-				ose = ilose.next();
-				QuarterMetal qm = new QuarterMetal();
-				qm.setGrossgrams(ose.getGrossgrams());
-				qm.setNetgrams(ose.getNetgrams());
-				if (ose.getRealgrams() != null) {
-					qm.setRealgrams(ose.getRealgrams());
-				}
-				qm.setAmount(ose.getAmount());
-				qm.setMetal(ose.getMetal());
-				lquartermaterial.add(qm);
+			lose = ishoppings.next();
+			QuarterMetal qm = new QuarterMetal();
+			if (lose[0] != null) {
+				qm.setRealgrams((BigDecimal) lose[0]);
 			}
+			qm.setGrossgrams((BigDecimal) lose[1]);
+			qm.setNetgrams((BigDecimal) lose[2]);
+			qm.setAmount((BigDecimal) lose[3]);
+			qm.setMetal((MetalEntity) lose[4]);
+			lquartermaterial.add(qm);
 		}
-		Iterable<MetalEntity> materials = materialRepository.findAll();
-		Iterator<MetalEntity> imaterials = materials.iterator();
-		List<QuarterMetal> lqm = new ArrayList<QuarterMetal>();
-		MetalEntity material;
-		QuarterMetal qm;
-		BigDecimal realgrams, grossgrams, netgrams, amount, amountmaterial;
-		boolean ismaterial;
-		while (imaterials.hasNext()) {
-			material = imaterials.next();
-			ismaterial = false;
-			realgrams = BigDecimal.ZERO;
-			grossgrams = BigDecimal.ZERO;
-			netgrams = BigDecimal.ZERO;
-			amount = BigDecimal.ZERO;
-			for (QuarterMetal quarterMetal : lquartermaterial) {
-				if (quarterMetal.getMetal().getIdmetal().equals(material.getIdmetal())) {
-					if (quarterMetal.getRealgrams() != null) {
-						realgrams = realgrams.add(quarterMetal.getRealgrams());
-					}
-					netgrams = netgrams.add(quarterMetal.getNetgrams());
-					grossgrams = grossgrams.add(quarterMetal.getGrossgrams());
-					amountmaterial = quarterMetal.getAmount();
-					if (amountmaterial != null) {
-						amount = amount.add(amountmaterial);
-					}
-					ismaterial = true;
-				}
-			}
-			if (ismaterial) {
-				qm = new QuarterMetal();
-				qm.setGrossgrams(grossgrams);
-				qm.setNetgrams(netgrams);
-				qm.setRealgrams(realgrams);
-				qm.setAmount(amount);
-				qm.setMetal(material);
-				lqm.add(qm);
-			}
-		}
-		return lqm;
+		return lquartermaterial;
 	}
 
 	@Override
 	public List<Long> searchGramsNull(String sDateFrom, String sDateUntil, PlaceEntity place) {
-		Date datefrom = DateUtil.getDate(sDateFrom), dateuntil = DateUtil.getDate(sDateUntil);
+		Date datefrom = DateUtil.getDate(sDateFrom);
+		Date dateuntil = DateUtil.getDate(sDateUntil);
 		return shoppingsRepository.findGramsNull(place, datefrom, dateuntil);
 	}
 
@@ -293,113 +259,131 @@ public class ShoppingServiceImpl implements ShoppingService {
 
 	@Override
 	public XSSFWorkbook generateExcel(String datefrom, String dateuntil, PlaceEntity place) {
-		XSSFWorkbook myWorkBook = new XSSFWorkbook();
-		XSSFSheet spreadsheet = myWorkBook.createSheet("Hoja1");
-		XSSFFont font = myWorkBook.createFont();
-		XSSFCellStyle style = myWorkBook.createCellStyle();
-		Shopping shop;
-		XSSFRow row = spreadsheet.createRow(0);
-		Cell numshop = row.createCell(0), date = row.createCell(1), name = row.createCell(2), nif = row.createCell(3),
-				address = row.createCell(4), town = row.createCell(5), country = row.createCell(6),
-				objects = row.createCell(7), material = row.createCell(8), record = row.createCell(9),
+		Logger logger = LoggerFactory.getLogger(ShoppingServiceImpl.class);
+		try (XSSFWorkbook myWorkBook = new XSSFWorkbook()) {
+			XSSFSheet spreadsheet = myWorkBook.createSheet("Hoja1");
+			XSSFFont font = myWorkBook.createFont();
+			XSSFCellStyle style = myWorkBook.createCellStyle();
+			Shopping shop;
+			XSSFRow row = spreadsheet.createRow(0);
+			Cell numshop = row.createCell(0);
+			Cell date = row.createCell(1);
+			Cell name = row.createCell(2);
+			Cell nif = row.createCell(3);
+			Cell address = row.createCell(4);
+			Cell town = row.createCell(5);
+			Cell country = row.createCell(6);
+			Cell objects = row.createCell(7);
+			Cell material = row.createCell(8);
+			Cell record = row.createCell(9);
+			Cell rock = row.createCell(10);
+			List<Shopping> shoppings = searchShoppings(datefrom, dateuntil, place, null);
+			List<ObjectShopEntity> lobjects;
+			Iterator<ObjectShopEntity> ilobjects;
+			Iterator<Shopping> ishoppings = shoppings.iterator();
+			ObjectShopEntity os;
+			String description;
+			String[] descriptions;
+			int i = 1;
+			font.setBold(true);
+			style.setFont(font);
+			numshop.setCellValue("LOTE");
+			numshop.setCellStyle(style);
+			date.setCellValue("FECHA");
+			date.setCellStyle(style);
+			name.setCellValue("APELLIDOS Y NOMBRE");
+			name.setCellStyle(style);
+			nif.setCellValue("DNI,NIF O PASAPORTE");
+			nif.setCellStyle(style);
+			address.setCellValue("DOMICILIO");
+			address.setCellStyle(style);
+			town.setCellValue("LOCALIDAD");
+			town.setCellStyle(style);
+			country.setCellValue("PROVINCIA O PAIS");
+			country.setCellStyle(style);
+			objects.setCellValue("OBJETOS");
+			objects.setCellStyle(style);
+			material.setCellValue("METAL");
+			material.setCellStyle(style);
+			record.setCellValue("GRABACIONES");
+			record.setCellStyle(style);
+			rock.setCellValue("PIEDRAS");
+			rock.setCellStyle(style);
+			while (ishoppings.hasNext()) {
+				row = spreadsheet.createRow(i);
+				numshop = row.createCell(0);
+				date = row.createCell(1);
+				name = row.createCell(2);
+				nif = row.createCell(3);
+				address = row.createCell(4);
+				town = row.createCell(5);
+				country = row.createCell(6);
+				objects = row.createCell(7);
+				material = row.createCell(8);
+				record = row.createCell(9);
 				rock = row.createCell(10);
-		List<Shopping> shoppings = searchShoppings(datefrom, dateuntil, place, null);
-		List<ObjectShopEntity> lobjects;
-		Iterator<ObjectShopEntity> ilobjects;
-		Iterator<Shopping> ishoppings = shoppings.iterator();
-		ObjectShopEntity os;
-		String description, descrip;
-		String[] descriptions;
-		int i = 1;
-		font.setBold(true);
-		style.setFont(font);
-		numshop.setCellValue("LOTE");
-		numshop.setCellStyle(style);
-		date.setCellValue("FECHA");
-		date.setCellStyle(style);
-		name.setCellValue("APELLIDOS Y NOMBRE");
-		name.setCellStyle(style);
-		nif.setCellValue("DNI,NIF O PASAPORTE");
-		nif.setCellStyle(style);
-		address.setCellValue("DOMICILIO");
-		address.setCellStyle(style);
-		town.setCellValue("LOCALIDAD");
-		town.setCellStyle(style);
-		country.setCellValue("PROVINCIA O PAIS");
-		country.setCellStyle(style);
-		objects.setCellValue("OBJETOS");
-		objects.setCellStyle(style);
-		material.setCellValue("METAL");
-		material.setCellStyle(style);
-		record.setCellValue("GRABACIONES");
-		record.setCellStyle(style);
-		rock.setCellValue("PIEDRAS");
-		rock.setCellStyle(style);
-		while (ishoppings.hasNext()) {
-			row = spreadsheet.createRow(i);
-			numshop = row.createCell(0);
-			date = row.createCell(1);
-			name = row.createCell(2);
-			nif = row.createCell(3);
-			address = row.createCell(4);
-			town = row.createCell(5);
-			country = row.createCell(6);
-			objects = row.createCell(7);
-			material = row.createCell(8);
-			record = row.createCell(9);
-			rock = row.createCell(10);
-			shop = ishoppings.next();
-			numshop.setCellValue(shop.getNumshop());
-			date.setCellValue(shop.getCreationdate());
-			name.setCellValue(shop.getSurname().concat(", ").concat(shop.getName()));
-			nif.setCellValue(shop.getNif());
-			address.setCellValue(shop.getAddress());
-			town.setCellValue(shop.getTown());
-			country.setCellValue(shop.getNation().getNation());
-			lobjects = shop.getObjects();
-			ilobjects = lobjects.iterator();
-			while (ilobjects.hasNext()) {
-				os = ilobjects.next();
-				System.out.println(os.getIdobjectshop());
-				material.setCellValue(os.getMetal().getDescription());
-				description = os.getDescription();
-				descriptions = description.split(";");
-				for (int d = 0; d < descriptions.length; d++) {
-					descrip = descriptions[d];
-					if (d > 0) {
+				shop = ishoppings.next();
+				numshop.setCellValue(shop.getNumshop());
+				date.setCellValue(shop.getCreationdate());
+				name.setCellValue(shop.getSurname().concat(", ").concat(shop.getName()));
+				nif.setCellValue(shop.getNif());
+				address.setCellValue(shop.getAddress());
+				town.setCellValue(shop.getTown());
+				country.setCellValue(shop.getNation().getNation());
+				lobjects = shop.getObjects();
+				ilobjects = lobjects.iterator();
+				while (ilobjects.hasNext()) {
+					os = ilobjects.next();
+					material.setCellValue(os.getMetal().getDescription());
+					description = os.getDescription();
+					descriptions = description.split(";");
+					setCells(descriptions, spreadsheet, objects, record, rock, i);
+					i = i + descriptions.length;
+					if (ilobjects.hasNext()) {
 						row = spreadsheet.createRow(i);
 						objects = row.createCell(7);
+						material = row.createCell(8);
 						record = row.createCell(9);
 						rock = row.createCell(10);
 					}
-					if (descrip.contains("p:") && descrip.contains("g:")) {
-						rock.setCellValue(descrip.substring(descrip.indexOf("p:"), descrip.indexOf("g:")));
-						record.setCellValue(descrip.substring(descrip.indexOf("g:") + 2, descrip.length()));
-						objects.setCellValue(descrip.substring(0, descrip.indexOf("p:")));
-					} else if (descrip.contains("g:")) {
-						record.setCellValue(descrip.substring(descrip.indexOf("g:") + 2, descrip.length()));
-						objects.setCellValue(descrip.substring(0, descrip.indexOf("g:")));
-					} else if (descrip.contains("p:")) {
-						rock.setCellValue(descrip.substring(descrip.indexOf("p:") + 2, descrip.length()));
-						objects.setCellValue(descrip.substring(0, descrip.indexOf("p:")));
-					} else {
-						objects.setCellValue(descriptions[d]);
-					}
-					i++;
 				}
-				if (ilobjects.hasNext()) {
-					row = spreadsheet.createRow(i);
-					objects = row.createCell(7);
-					material = row.createCell(8);
-					record = row.createCell(9);
-					rock = row.createCell(10);
-				}
+			} // fin recorrido compras
+			for (i = 0; i < 10; i++) {
+				spreadsheet.autoSizeColumn(i);
 			}
-		} // fin recorrido compras
-		for (i = 0; i < 10; i++) {
-			spreadsheet.autoSizeColumn(i);
+			return myWorkBook;
+		} catch (IOException e) {
+			logger.error(java.util.logging.Level.SEVERE.getName());
+			return null;
 		}
-		return myWorkBook;
+	}
+
+	private void setCells(String[] descriptions, XSSFSheet spreadsheet, Cell objects, Cell record, Cell rock, int i) {
+		String descrip;
+		XSSFRow row;
+		for (int d = 0; d < descriptions.length; d++) {
+			descrip = descriptions[d];
+			if (d > 0) {
+				row = spreadsheet.createRow(i);
+				objects = row.createCell(7);
+				record = row.createCell(9);
+				rock = row.createCell(10);
+			}
+			if (descrip.contains("p:") && descrip.contains("g:")) {
+				rock.setCellValue(descrip.substring(descrip.indexOf("p:"), descrip.indexOf("g:")));
+				record.setCellValue(descrip.substring(descrip.indexOf("g:") + 2, descrip.length()));
+				objects.setCellValue(descrip.substring(0, descrip.indexOf("p:")));
+			} else if (descrip.contains("g:")) {
+				record.setCellValue(descrip.substring(descrip.indexOf("g:") + 2, descrip.length()));
+				objects.setCellValue(descrip.substring(0, descrip.indexOf("g:")));
+			} else if (descrip.contains("p:")) {
+				rock.setCellValue(descrip.substring(descrip.indexOf("p:") + 2, descrip.length()));
+				objects.setCellValue(descrip.substring(0, descrip.indexOf("p:")));
+			} else {
+				objects.setCellValue(descriptions[d]);
+			}
+			i++;
+		}
 	}
 
 	@Override

@@ -82,7 +82,7 @@ public interface PawnService {
 
 	public List<RenovationDates> searchRenovations(Long idpawn);
 
-	public Quarter searchGramsByDates(String sDateFrom, String sDateUntil, PlaceEntity place);
+	public List<Quarter> searchGramsByDates(String sDateFrom, String sDateUntil);
 
 	public BigDecimal getCommissions(String sDateFrom, String sDateUntil, PlaceEntity place);
 
@@ -93,6 +93,4 @@ public interface PawnService {
 	public Double sumPawnsActiveByPlace(PlaceEntity place);
 
 	public boolean isRepeatNumber(String num, String user, int year);
-
-	public boolean isCorrectNumber(String num, String user, int i);
 }

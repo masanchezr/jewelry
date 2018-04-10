@@ -105,12 +105,17 @@ public class Constants {
 	public static final String USERNAME = "username";
 
 	public static final String CONTRASE = "password";
+
 	public static final String DATEFROM = "datefrom";
+
 	public static final String DATEUNTIL = "dateuntil";
+
 	public static final String MESSAGE = "message";
 
 	public static final String ACTIVE = "active";
 
 	public static final String IDSALEPOSTPONED = "idsalepostponed";
+
+	public static final String NATIONS = "nations";
 
 }

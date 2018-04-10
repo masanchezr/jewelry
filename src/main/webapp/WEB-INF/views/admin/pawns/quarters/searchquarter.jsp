@@ -20,8 +20,9 @@
 								<form:input class="form-control" type="text" path="datefrom"
 									placeholder="${datefrommessage}" />
 							</div>
-							<p class="text-danger"><form:errors
-										path="datefrom" /></p>
+							<p class="text-danger">
+								<form:errors path="datefrom" />
+							</p>
 						</div>
 						<div class="form-group">
 							<spring:message code="dateuntil" var="dateuntilmessage" />
@@ -29,15 +30,9 @@
 								<form:input class="form-control" type="text" path="dateuntil"
 									placeholder="${dateuntilmessage}" />
 							</div>
-							<p class="text-danger"><form:errors
-										path="dateuntil" /></p>
-						</div>
-						<div class="form-group">
-							<spring:message code="place" />
-							<form:select class="form-control" path="place.idplace">
-								<form:options items="${places}" itemValue="idplace"
-									itemLabel="description" />
-							</form:select>
+							<p class="text-danger">
+								<form:errors path="dateuntil" />
+							</p>
 						</div>
 						<div class="form-group">
 							<form:button class="btn btn-primary" value="submit">

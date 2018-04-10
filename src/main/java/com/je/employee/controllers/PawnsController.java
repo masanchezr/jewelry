@@ -90,7 +90,7 @@ public class PawnsController {
 			pawn.setObjects(lop);
 			model.addObject(ConstantsJsp.PAWNFORM, pawn);
 			model.addObject(Constants.TRACKS, trackservice.getTracks());
-			model.addObject(ConstantsJsp.NATIONS, nationservice.getNations());
+			model.addObject(Constants.NATIONS, nationservice.getNations());
 			model.setViewName(VIEWNEWPAWN);
 		} else {
 			Calendar c = Calendar.getInstance();
@@ -111,7 +111,7 @@ public class PawnsController {
 				pawn.setObjects(lop);
 				model.addObject(ConstantsJsp.PAWNFORM, pawn);
 				model.addObject(Constants.TRACKS, trackservice.getTracks());
-				model.addObject(ConstantsJsp.NATIONS, nationservice.getNations());
+				model.addObject(Constants.NATIONS, nationservice.getNations());
 				model.setViewName(VIEWNEWPAWN);
 				result.rejectValue(Constants.NUMPAWN, "numrepited");
 			} else {
@@ -171,7 +171,7 @@ public class PawnsController {
 			}
 			pawn.setObjects(lop);
 			model.addObject(Constants.TRACKS, trackservice.getTracks());
-			model.addObject(ConstantsJsp.NATIONS, nationservice.getNations());
+			model.addObject(Constants.NATIONS, nationservice.getNations());
 			model.setViewName(VIEWNEWPAWN);
 		}
 		model.addObject(ConstantsJsp.PAWNFORM, pawn);

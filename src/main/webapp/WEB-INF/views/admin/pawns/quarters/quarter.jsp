@@ -7,8 +7,6 @@
 				code="pawns" /></a></li>
 	<li class="breadcrumb-item active"><spring:message code="summary" /></li>
 	<li class="breadcrumb-item active"><c:out
-			value="${searchForm.place.description}" /></li>
-	<li class="breadcrumb-item active"><c:out
 			value="${searchForm.datefrom}" /></li>
 	<li class="breadcrumb-item active"><c:out
 			value="${searchForm.dateuntil}" /></li>
@@ -21,54 +19,22 @@
 					id="dataTables-example">
 					<thead>
 						<tr>
-							<th><spring:message code="gold" /></th>
-							<th></th>
+							<th><spring:message code="realgrams" /></th>
+							<th><spring:message code="grossgrams" /></th>
+							<th><spring:message code="amount" /></th>
+							<th><spring:message code="place" /></th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td><spring:message code="realgrams" /></td>
-							<td><c:out value="${quarter.gramsreal}" /></td>
-						</tr>
-						<tr>
-							<td><spring:message code="grossgrams" /></td>
-							<td><c:out value="${quarter.grossgrams}" /></td>
-						</tr>
-						<tr>
-							<td><spring:message code="amount" /></td>
-							<td><c:out value="${quarter.amount}" /><i
-								class="fa fa-euro"></i></td>
-						</tr>
-						<tr>
-							<td><spring:message code="average" /></td>
-							<td><c:out value="${quarter.averagegold}" /></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
-	<div class="panel card-default">
-		<div class="card-body">
-			<div class="table-responsive">
-				<table class="table table-striped table-bordered table-hover"
-					id="dataTables-example">
-					<thead>
-						<tr>
-							<th><spring:message code="materialag" /></th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td><spring:message code="grams" /></td>
-							<td><c:out value="${quarter.gramsAg}" /></td>
-						</tr>
-						<tr>
-							<td><spring:message code="amount" /></td>
-							<td><c:out value="${quarter.amountag}" /><i
-								class="fa fa-euro"></i></td>
-						</tr>
+						<c:forEach items="${quarters}" var="quarter">
+							<tr>
+								<td><c:out value="${quarter.gramsreal}" /></td>
+								<td><c:out value="${quarter.grossgrams}" /></td>
+								<td><c:out value="${quarter.amount}" /><i
+									class="fa fa-euro"></i></td>
+								<td><c:out value="${quarter.place.description}" /></td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>

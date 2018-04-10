@@ -126,7 +126,7 @@ public class PawnsAdminController {
 			model.setViewName(VIEWUPDATEPAWN);
 			model.addObject(ConstantsJsp.PAWNFORM, p);
 			model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
-			model.addObject("nations", nationservice.getNations());
+			model.addObject(Constants.NATIONS, nationservice.getNations());
 			model.addObject(Constants.TRACKS, trackservice.getTracks());
 		}
 		return model;
@@ -139,7 +139,7 @@ public class PawnsAdminController {
 		NewPawn p = pawnService.findByIdpawn(id);
 		model.setViewName(VIEWUPDATEPAWN);
 		model.addObject(ConstantsJsp.PAWNFORM, p);
-		model.addObject(ConstantsJsp.NATIONS, nationservice.getNations());
+		model.addObject(Constants.NATIONS, nationservice.getNations());
 		model.addObject(Constants.TRACKS, trackservice.getTracks());
 		return model;
 	}
@@ -237,11 +237,9 @@ public class PawnsAdminController {
 		if (result.hasErrors()) {
 			model.setViewName("searchquarterpawns");
 		} else {
-			Quarter quarter = pawnService.searchGramsByDates(search.getDatefrom(), search.getDateuntil(),
-					search.getPlace());
+			List<Quarter> quarter = pawnService.searchGramsByDates(search.getDatefrom(), search.getDateuntil());
 			model.setViewName("quarterpawns");
 			model.addObject("quarter", quarter);
-			search.setPlace(placeService.getPlace(search.getPlace().getIdplace()));
 		}
 		model.addObject(ConstantsJsp.FORMSEARCH, search);
 		return model;

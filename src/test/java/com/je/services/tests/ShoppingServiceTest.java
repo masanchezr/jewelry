@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.je.dbaccess.entities.MetalEntity;
 import com.je.dbaccess.entities.ObjectShopEntity;
 import com.je.dbaccess.entities.PlaceEntity;
+import com.je.services.shoppings.QuarterMetal;
 import com.je.services.shoppings.Shopping;
 import com.je.services.shoppings.ShoppingService;
 
@@ -80,4 +81,11 @@ public class ShoppingServiceTest {
 		}
 	}
 
+	@Test
+	public void searchGramsByMetalTest() {
+		PlaceEntity place = new PlaceEntity();
+		place.setIdplace(13700L);
+		List<QuarterMetal> lqm = shoppingService.searchGramsByMetal("01-01-2017", "31-03-2017", place);
+		lqm.iterator();
+	}
 }

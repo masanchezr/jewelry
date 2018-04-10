@@ -90,4 +90,8 @@ public interface ShoppingsRepository extends CrudRepository<ShoppingEntity, Long
 
 	public List<ShoppingEntity> findByPlaceAndYearOrderByNumshopDesc(PlaceEntity placeEntity, int i);
 
+	@Query("select sum(os.realgrams), sum(os.grossgrams), sum(os.netgrams), sum(os.amount), os.metal from ShoppingEntity s, ObjectShopEntity os where s.place=:place and s.creationdate>=:dateFrom and s.creationdate<=:dateUntil and os.shop.idshop=s.idshop GROUP BY os.metal")
+	public List<Object[]> findGramsByMetal(@Param("dateFrom") @Temporal(TemporalType.DATE) Date datefrom,
+			@Param("dateUntil") @Temporal(TemporalType.DATE) Date dateuntil, @Param(Constants.PLACE) PlaceEntity place);
+
 }

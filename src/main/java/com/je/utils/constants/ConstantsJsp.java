@@ -13,7 +13,6 @@ public class ConstantsJsp {
 	public static final String CATEGORIES = "categories";
 	public static final String IDSALE = "idsale";
 	public static final String PAWNFORM = "pawnForm";
-	public static final String NATIONS = "nations";
 	/** The Constant adminForm */
 	public static final String ADMINFORM = "adminForm";
 	public static final String PLACES = "places";

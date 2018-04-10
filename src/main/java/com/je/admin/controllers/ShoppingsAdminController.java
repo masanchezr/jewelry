@@ -83,6 +83,7 @@ public class ShoppingsAdminController {
 
 	private static final String VIEWSEARCHSHOPPINGS = "searchshoppings";
 	private static final String VIEWSEARCHCLIENTADMIN = "searchclientadmin";
+	private static final String VIEWNEWSHOP = "newshop";
 	private static final String FORMSHOP = "shopform";
 
 	/**
@@ -207,8 +208,8 @@ public class ShoppingsAdminController {
 			model.addObject(FORMSHOP, shoppingForm);
 			model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 			model.addObject(Constants.TRACKS, trackservice.getTracks());
-			model.addObject(ConstantsJsp.NATIONS, nationservice.getNations());
-			model.setViewName("newshop");
+			model.addObject(Constants.NATIONS, nationservice.getNations());
+			model.setViewName(VIEWNEWSHOP);
 		} else {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			shoppingForm.setUser(user);
@@ -328,9 +329,9 @@ public class ShoppingsAdminController {
 			pawn.setNation(client.getNation());
 			pawn.setTrack(client.getTrack());
 			pawn.setObjects(lop);
-			model.setViewName("newshop");
+			model.setViewName(VIEWNEWSHOP);
 			model.addObject(Constants.TRACKS, trackservice.getTracks());
-			model.addObject(ConstantsJsp.NATIONS, nationservice.getNations());
+			model.addObject(Constants.NATIONS, nationservice.getNations());
 		}
 		model.addObject(FORMSHOP, pawn);
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());

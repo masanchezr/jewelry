@@ -5,8 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.je.utils.constants.Constants;
+
 @Entity
-@Table(name = "nations")
+@Table(name = Constants.NATIONS)
 public class NationEntity {
 
 	@Id

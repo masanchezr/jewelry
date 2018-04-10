@@ -1,9 +1,9 @@
 package com.je.services.pawns;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -72,7 +72,7 @@ public class PawnServiceImpl implements PawnService {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(pawnEntity.getCreationdate());
 		int year = calendar.get(Calendar.YEAR);
-		List<ObjectPawnEntity> newobjects = new ArrayList<ObjectPawnEntity>();
+		List<ObjectPawnEntity> newobjects = new ArrayList<>();
 		List<ObjectPawnEntity> object = pawnEntity.getObjects();
 		Iterator<ObjectPawnEntity> iobjects = object.iterator();
 		if (cpe == null) {
@@ -98,40 +98,43 @@ public class PawnServiceImpl implements PawnService {
 
 	@Override
 	public void update(NewPawn pawn) {
-		PawnEntity pawnEntity = pawnsRepository.findById(pawn.getId()).get();
-		List<ObjectPawnEntity> objects = pawnEntity.getObjects();
-		List<ObjectPawnEntity> newobjects = new ArrayList<ObjectPawnEntity>();
+		PawnEntity pawnEntity = pawnsRepository.findById(pawn.getId()).orElse(null);
+		List<ObjectPawnEntity> newobjects = new ArrayList<>();
 		Iterator<ObjectPawnEntity> iobjects;
-		ObjectPawnEntity object, op;
+		ObjectPawnEntity object;
+		ObjectPawnEntity op;
 		Iterator<ObjectPawnEntity> iop = pawn.getObjects().iterator();
 		boolean exists;
-		while (iop.hasNext()) {
-			op = iop.next();
-			iobjects = objects.iterator();
-			exists = false;
-			while (iobjects.hasNext() && !exists) {
-				object = iobjects.next();
-				if (object.getMetal().getIdmetal().equals(op.getMetal().getIdmetal())) {
-					exists = true;
-					object.setRealgrams(op.getRealgrams());
-					object.setDescription(op.getDescription());
-					newobjects.add(object);
+		if (pawnEntity != null) {
+			List<ObjectPawnEntity> objects = pawnEntity.getObjects();
+			while (iop.hasNext()) {
+				op = iop.next();
+				iobjects = objects.iterator();
+				exists = false;
+				while (iobjects.hasNext() && !exists) {
+					object = iobjects.next();
+					if (object.getMetal().getIdmetal().equals(op.getMetal().getIdmetal())) {
+						exists = true;
+						object.setRealgrams(op.getRealgrams());
+						object.setDescription(op.getDescription());
+						newobjects.add(object);
+					}
+				}
+				if (!exists) {
+					op.setPawn(pawnEntity);
+					newobjects.add(op);
 				}
 			}
-			if (!exists) {
-				op.setPawn(pawnEntity);
-				newobjects.add(op);
-			}
+			ClientPawnEntity cpe = clientPawnsRepository.findById(pawn.getNif()).orElse(new ClientPawnEntity());
+			mapper.map(pawn, cpe);
+			cpe.setCreationclient(new Date());
+			clientPawnsRepository.save(cpe);
+			pawnEntity.setMeltdate(new Date());
+			pawnEntity.setObjects(newobjects);
+			pawnEntity.setPercent(pawn.getPercent());
+			pawnEntity.setAmount(pawn.getAmount());
+			pawnsRepository.save(pawnEntity);
 		}
-		ClientPawnEntity cpe = clientPawnsRepository.findById(pawn.getNif()).orElse(new ClientPawnEntity());
-		mapper.map(pawn, cpe);
-		cpe.setCreationclient(new Date());
-		clientPawnsRepository.save(cpe);
-		pawnEntity.setMeltdate(new Date());
-		pawnEntity.setObjects(newobjects);
-		pawnEntity.setPercent(pawn.getPercent());
-		pawnEntity.setAmount(pawn.getAmount());
-		pawnsRepository.save(pawnEntity);
 	}
 
 	@Override
@@ -141,9 +144,12 @@ public class PawnServiceImpl implements PawnService {
 
 	@Override
 	public NewPawn findByIdpawn(Long idpawn) {
-		PawnEntity pawnEntity = pawnsRepository.findById(idpawn).get();
-		NewPawn pawn = mapper.map(pawnEntity, NewPawn.class);
-		mapper.map(pawnEntity.getClient(), pawn);
+		PawnEntity pawnEntity = pawnsRepository.findById(idpawn).orElse(null);
+		NewPawn pawn = null;
+		if (pawnEntity != null) {
+			mapper.map(pawnEntity, NewPawn.class);
+			mapper.map(pawnEntity.getClient(), pawn);
+		}
 		return pawn;
 	}
 
@@ -170,7 +176,7 @@ public class PawnServiceImpl implements PawnService {
 		List<Pawn> pawns = null;
 		if (entities != null) {
 			Iterator<PawnEntity> ipawns = entities.iterator();
-			pawns = new ArrayList<Pawn>();
+			pawns = new ArrayList<>();
 			while (ipawns.hasNext()) {
 				pawns.add(mapper.map(ipawns.next(), Pawn.class));
 			}
@@ -180,7 +186,8 @@ public class PawnServiceImpl implements PawnService {
 
 	@Override
 	public Daily renew(Pawn pawn) {
-		PawnEntity pawnEntity = pawnsRepository.findById(pawn.getId()).get();
+		Daily daily = null;
+		PawnEntity pawnEntity = pawnsRepository.findById(pawn.getId()).orElse(null);
 		if (pawnEntity != null) {
 			Date date;
 			List<RenovationEntity> renovations = pawnEntity.getRenovations();
@@ -206,43 +213,47 @@ public class PawnServiceImpl implements PawnService {
 			entity.setCreationdate(new Date());
 			entity.setNextrenovationdate(calendar.getTime());
 			renovationsRepository.save(entity);
+			daily = dailyService.getDaily(new Date(), pawnEntity.getPlace(), null);
 		}
-		return dailyService.getDaily(new Date(), pawnEntity.getPlace(), null);
+		return daily;
 	}
 
 	@Override
 	public Daily remove(Pawn pawn) {
 		MailService mailService;
 		Long idpawn = pawn.getId();
-		PawnEntity pawnEntity = pawnsRepository.findById(idpawn).get();
-		PlaceEntity place = pawnEntity.getPlace();
-		Long idplace = place.getIdplace();
-		int months = pawn.getMonths();
-		if (months > 0) {
-			pawnEntity.setMonths(months);
-		}
-		pawnEntity.setDateretired(new Date());
-		pawnsRepository.save(pawnEntity);
-		// una vez retirado vamos a calcular si faltan renovaciones
-		List<PawnEntity> pawns;
-		if (Constants.STODOMINGO.equals(idplace)) {
-			pawns = pawnsRepository.searchMissingMonths(idpawn);
-		} else {
-			pawns = pawnsRepository.searchMissingRenovations(idpawn);
-		}
-		if (pawns != null && !pawns.isEmpty()) {
-			mailService = new MailService("N&uacute;mero empe&ntilde;o: " + pawnEntity.getNumpawn()
-					+ ", fecha creaci&oacute;n: " + pawnEntity.getCreationdate() + ", lugar:" + idplace, null,
-					"REVISAR EMPE&Ntilde;O.");
-			mailService.start();
+		PawnEntity pawnEntity = pawnsRepository.findById(idpawn).orElse(null);
+		PlaceEntity place = null;
+		if (pawnEntity != null) {
+			place = pawnEntity.getPlace();
+			Long idplace = place.getIdplace();
+			int months = pawn.getMonths();
+			if (months > 0) {
+				pawnEntity.setMonths(months);
+			}
+			pawnEntity.setDateretired(new Date());
+			pawnsRepository.save(pawnEntity);
+			// una vez retirado vamos a calcular si faltan renovaciones
+			List<PawnEntity> pawns;
+			if (Constants.STODOMINGO.equals(idplace)) {
+				pawns = pawnsRepository.searchMissingMonths(idpawn);
+			} else {
+				pawns = pawnsRepository.searchMissingRenovations(idpawn);
+			}
+			if (pawns != null && !pawns.isEmpty()) {
+				mailService = new MailService("N&uacute;mero empe&ntilde;o: " + pawnEntity.getNumpawn()
+						+ ", fecha creaci&oacute;n: " + pawnEntity.getCreationdate() + ", lugar:" + idplace, null,
+						"REVISAR EMPE&Ntilde;O.");
+				mailService.start();
+			}
 		}
 		return dailyService.getDaily(new Date(), place, null);
 	}
 
 	@Override
 	public List<RenovationDates> searchRenovations(Long idpawn) {
-		PawnEntity pawnEntity = pawnsRepository.findById(idpawn).get();
-		List<RenovationDates> renovationdates = new ArrayList<RenovationDates>();
+		PawnEntity pawnEntity = pawnsRepository.findById(idpawn).orElse(null);
+		List<RenovationDates> renovationdates = new ArrayList<>();
 		if (pawnEntity != null) {
 			List<RenovationEntity> renovations = pawnEntity.getRenovations();
 			if (renovations != null) {
@@ -256,45 +267,22 @@ public class PawnServiceImpl implements PawnService {
 	}
 
 	@Override
-	public Quarter searchGramsByDates(String sDateFrom, String sDateUntil, PlaceEntity place) {
-		PawnEntity pawnEntity = null;
-		Date datefrom = DateUtil.getDate(sDateFrom), dateuntil = DateUtil.getDate(sDateUntil);
-		List<PawnEntity> pawns = pawnsRepository.findByCreationdateBetweenAndPlace(datefrom, dateuntil,
-				mapper.map(place, PlaceEntity.class));
+	public List<Quarter> searchGramsByDates(String sDateFrom, String sDateUntil) {
+		Object[] pawnEntity = null;
+		Date datefrom = DateUtil.getDate(sDateFrom);
+		Date dateuntil = DateUtil.getDate(sDateUntil);
+		List<Object[]> pawns = pawnsRepository.findGrossGramsByMetal(datefrom, dateuntil);
 		Quarter quarter = new Quarter();
-		List<ObjectPawnEntity> lose;
-		Iterator<ObjectPawnEntity> ilose;
-		Iterator<PawnEntity> ipawns = pawns.iterator();
-		ObjectPawnEntity ose;
-		BigDecimal gramsreal = BigDecimal.ZERO, grossgrams = BigDecimal.ZERO, amount = BigDecimal.ZERO;
-		double gramsAg = 0, amountag = 0;
+		List<Quarter> lose = new ArrayList<>();
+		Iterator<Object[]> ipawns = pawns.iterator();
 		while (ipawns.hasNext()) {
 			pawnEntity = ipawns.next();
-			// cuidado el importe de la plata también se está sumando aquí
-			amount = amount.add(pawnEntity.getAmount());
-			lose = pawnEntity.getObjects();
-			ilose = lose.iterator();
-			while (ilose.hasNext()) {
-				ose = ilose.next();
-				if (!ose.getMetal().getIdmetal().equals(Constants.PLATA)) {
-					if (ose.getRealgrams() != null) {
-						gramsreal = gramsreal.add(ose.getRealgrams());
-					}
-					grossgrams = grossgrams.add(ose.getGrossgrams());
-				}
-			}
+			quarter.setGramsreal((BigDecimal) pawnEntity[0]);
+			quarter.setGrossgrams((BigDecimal) pawnEntity[1]);
+			quarter.setAmount((BigDecimal) pawnEntity[2]);
+			quarter.setPlace((PlaceEntity) pawnEntity[3]);
 		}
-		quarter.setAmount(amount);
-		quarter.setGramsreal(gramsreal);
-		quarter.setGrossgrams(grossgrams);
-		quarter.setGramsAg(gramsAg);
-		quarter.setAmountag(amountag);
-		if (gramsreal != null && gramsreal.compareTo(BigDecimal.ZERO) > 0) {
-			quarter.setAveragegold(amount.divide(gramsreal, 2, RoundingMode.HALF_UP));
-		} else {
-			quarter.setAveragegold(amount.divide(grossgrams, 2, RoundingMode.HALF_UP));
-		}
-		return quarter;
+		return lose;
 	}
 
 	@Override
@@ -368,7 +356,7 @@ public class PawnServiceImpl implements PawnService {
 		Calendar calendar;
 		List<PawnEntity> entities = pawnsRepository.searchByPlaceAndNotRetired(place);
 		if (entities != null) {
-			pawns = new ArrayList<Pawn>();
+			pawns = new ArrayList<>();
 			Iterator<PawnEntity> ientities = entities.iterator();
 			PawnEntity entity;
 			while (ientities.hasNext()) {
@@ -380,15 +368,19 @@ public class PawnServiceImpl implements PawnService {
 						pawns.add(mapper.map(entity, Pawn.class));
 					}
 				} else {
-					List<RenovationEntity> renovations = renovationsRepository.searchPawnsExpired(new Date(), entity);
-					calendar.add(Calendar.MONTH, -1);
-					if (renovations == null || renovations.isEmpty()) {
-						if (entity.getCreationdate().before(calendar.getTime())) {
-							pawns.add(mapper.map(entity, Pawn.class));
-						}
-					}
+					pawns.addAll(searchRenovations(entity, calendar));
 				}
 			}
+		}
+		return pawns;
+	}
+
+	private Collection<? extends Pawn> searchRenovations(PawnEntity entity, Calendar calendar) {
+		List<Pawn> pawns = new ArrayList<>();
+		List<RenovationEntity> renovations = renovationsRepository.searchPawnsExpired(new Date(), entity);
+		calendar.add(Calendar.MONTH, -1);
+		if ((renovations == null || renovations.isEmpty()) && entity.getCreationdate().before(calendar.getTime())) {
+			pawns.add(mapper.map(entity, Pawn.class));
 		}
 		return pawns;
 	}
@@ -412,69 +404,5 @@ public class PawnServiceImpl implements PawnService {
 			repeat = false;
 		}
 		return repeat;
-	}
-
-	/**
-	 * elimino temporalmente este método ya que si ordenamos los empeños por fecha
-	 * puede que no nos los de bien y si los ordenamos por id y hemos metido un
-	 * empeño de otra fecha ya tenemos el lío otra vez
-	 **/
-	@Override
-	public boolean isCorrectNumber(String num, String user, int i) {
-		boolean isCorrectNumber = false;
-		if (Util.isNumeric(num)) {
-			Long number = Long.valueOf(num);
-			if (number >= 3000) {
-				isCorrectNumber = true;
-			} else {
-				PlaceEntity placeEntity = placeUserRepository.findByUsername(user).get(0).getPlace();
-				List<ShoppingEntity> shoppings = shoppingsRepository.findByPlaceAndYearOrderByNumshopDesc(placeEntity,
-						i);
-				List<PawnEntity> pawns = pawnsRepository.findByPlaceAndYearOrderByCreationdateDesc(placeEntity, i);
-				if ((shoppings == null || shoppings.isEmpty()) && (pawns == null || pawns.isEmpty())) {
-					isCorrectNumber = true;
-				} else if (shoppings != null) {
-					ShoppingEntity searchShopping;
-					Iterator<ShoppingEntity> ishoppings = shoppings.iterator();
-					Long nshop;
-					while (ishoppings.hasNext()) {
-						searchShopping = ishoppings.next();
-						nshop = searchShopping.getNumshop();
-						if (nshop < 3000) {
-							if (number == nshop + 1) {
-								isCorrectNumber = true;
-							} else {
-								isCorrectNumber = false;
-							}
-							break;
-						}
-					}
-				}
-				if (pawns != null && !isCorrectNumber) {
-					PawnEntity pawn;
-					String snpawn;
-					Long npawn;
-					Iterator<PawnEntity> ipawns = pawns.iterator();
-					while (ipawns.hasNext()) {
-						pawn = ipawns.next();
-						snpawn = pawn.getNumpawn();
-						if (Util.isNumeric(snpawn)) {
-							npawn = Long.valueOf(snpawn);
-							if (npawn < 3000) {
-								if (number == npawn + 1) {
-									isCorrectNumber = true;
-								} else {
-									isCorrectNumber = false;
-								}
-								break;
-							}
-						}
-					}
-				}
-			}
-		} else {
-			isCorrectNumber = true;
-		}
-		return isCorrectNumber;
 	}
 }
