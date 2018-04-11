@@ -94,7 +94,7 @@ public interface PawnsRepository extends CrudRepository<PawnEntity, Long> {
 
 	public List<PawnEntity> findByPlaceAndYearOrderByCreationdateDesc(PlaceEntity placeEntity, int i);
 
-	@Query("select sum(os.realgrams), sum(os.grossgrams), sum(os.amount), os.metal from PawnEntity sjoin p.objects os where s.creationdate>=:dateFrom and s.creationdate<=:dateUntil and os.pawn.idpawn=s.idpawn GROUP BY os.metal")
+	@Query("select sum(os.realgrams), sum(os.grossgrams), sum(os.amount), os.metal from PawnEntity s join s.objects os where s.creationdate>=:dateFrom and s.creationdate<=:dateUntil and os.pawn.idpawn=s.idpawn GROUP BY os.metal")
 	public List<Object[]> findGrossGramsByMetal(@Param("dateFrom") @Temporal(TemporalType.DATE) Date datefrom,
 			@Param("dateUntil") @Temporal(TemporalType.DATE) Date dateuntil);
 }
