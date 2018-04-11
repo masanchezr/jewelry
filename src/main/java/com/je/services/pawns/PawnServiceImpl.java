@@ -147,7 +147,7 @@ public class PawnServiceImpl implements PawnService {
 		PawnEntity pawnEntity = pawnsRepository.findById(idpawn).orElse(null);
 		NewPawn pawn = null;
 		if (pawnEntity != null) {
-			mapper.map(pawnEntity, NewPawn.class);
+			pawn = mapper.map(pawnEntity, NewPawn.class);
 			mapper.map(pawnEntity.getClient(), pawn);
 		}
 		return pawn;
