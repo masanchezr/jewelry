@@ -23,9 +23,11 @@
 	rel='stylesheet' type='text/css' />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script type="application/x-javascript">
+	
 								
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); 
 	 function hideURLbar(){ window.scrollTo(0,1); }
+
 
 </script>
 
@@ -146,7 +148,7 @@
 						<li><a href="<spring:url value="/contacto" />"><spring:message
 									code="contact" /></a></li>
 					</ul>
-					<form:form action='busqueda' modelAttribute="search"
+					<form:form action='busqueda' modelAttribute="searchDateForm"
 						class="navbar-form pull-right" role="search">
 						<div class="form-group col-3">
 							<spring:message code="find" var="find" />

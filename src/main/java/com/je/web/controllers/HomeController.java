@@ -91,7 +91,6 @@ public class HomeController {
 		model.addObject("beginIndex", begin);
 		model.addObject("endIndex", end);
 		model.addObject("currentIndex", current);
-		model.addObject(ConstantsJsp.FORMSEARCH, new SearchJewelForm());
 		return model;
 	}
 

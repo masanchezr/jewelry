@@ -337,15 +337,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 					material.setCellValue(os.getMetal().getDescription());
 					description = os.getDescription();
 					descriptions = description.split(";");
-					setCells(descriptions, spreadsheet, objects, record, rock, i);
-					i = i + descriptions.length;
-					if (ilobjects.hasNext()) {
-						row = spreadsheet.createRow(i);
-						objects = row.createCell(7);
-						material = row.createCell(8);
-						record = row.createCell(9);
-						rock = row.createCell(10);
-					}
+					i = setCells(descriptions, spreadsheet, objects, record, rock, i);
 				}
 			} // fin recorrido compras
 			for (i = 0; i < 10; i++) {
@@ -358,7 +350,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 		}
 	}
 
-	private void setCells(String[] descriptions, XSSFSheet spreadsheet, Cell objects, Cell record, Cell rock, int i) {
+	private int setCells(String[] descriptions, XSSFSheet spreadsheet, Cell objects, Cell record, Cell rock, int i) {
 		String descrip;
 		XSSFRow row;
 		for (int d = 0; d < descriptions.length; d++) {
@@ -384,6 +376,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 			}
 			i++;
 		}
+		return i;
 	}
 
 	@Override

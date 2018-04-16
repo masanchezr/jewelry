@@ -75,7 +75,6 @@ public class SalesCardServiceImpl implements SalesCardService {
 		size += putStraps(map, from, until, payment, total);
 		size += putSalesPost(map, from, until, payment, total);
 		map.put("numsales", size);
-		map.put(ConstantsJsp.TOTAL, total);
 		return map;
 	}
 
@@ -93,6 +92,7 @@ public class SalesCardServiceImpl implements SalesCardService {
 				total = total.add(sale.getTotal());
 			}
 			size = sales.size();
+			map.put(ConstantsJsp.TOTAL, total.add((BigDecimal) map.get(ConstantsJsp.TOTAL)));
 			map.put(Constants.SALES, sales);
 		}
 		return size;
@@ -113,6 +113,7 @@ public class SalesCardServiceImpl implements SalesCardService {
 				total = total.add(adjustment.getAmount());
 			}
 			size = ladjustments.size();
+			map.put(ConstantsJsp.TOTAL, total.add((BigDecimal) map.get(ConstantsJsp.TOTAL)));
 			map.put(Constants.ADJUSTMENTS, ladjustments);
 		}
 		return size;
@@ -127,6 +128,7 @@ public class SalesCardServiceImpl implements SalesCardService {
 				total = total.add(irecordings.next().getAmount());
 			}
 			size = recordings.size();
+			map.put(ConstantsJsp.TOTAL, total.add((BigDecimal) map.get(ConstantsJsp.TOTAL)));
 			map.put(Constants.RECORDINGS, recordings);
 		}
 		return size;
@@ -141,6 +143,7 @@ public class SalesCardServiceImpl implements SalesCardService {
 				total = total.add(ibatteries.next().getAmount());
 			}
 			size = batteries.size();
+			map.put(ConstantsJsp.TOTAL, total.add((BigDecimal) map.get(ConstantsJsp.TOTAL)));
 			map.put(Constants.BATTERIES, batteries);
 		}
 		return size;
@@ -155,6 +158,7 @@ public class SalesCardServiceImpl implements SalesCardService {
 				total = total.add(istraps.next().getAmount());
 			}
 			size = straps.size();
+			map.put(ConstantsJsp.TOTAL, total.add((BigDecimal) map.get(ConstantsJsp.TOTAL)));
 			map.put(Constants.STRAPS, straps);
 		}
 		return size;
@@ -171,6 +175,7 @@ public class SalesCardServiceImpl implements SalesCardService {
 			}
 			size = salespost.size();
 		}
+		map.put(ConstantsJsp.TOTAL, total.add((BigDecimal) map.get(ConstantsJsp.TOTAL)));
 		map.put("salespost", salespost);
 		return size;
 	}
