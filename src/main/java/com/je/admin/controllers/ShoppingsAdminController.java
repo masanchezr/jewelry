@@ -2,7 +2,6 @@ package com.je.admin.controllers;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -12,7 +11,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +28,6 @@ import com.je.admin.validators.NewShoppingFormValidator;
 import com.je.admin.validators.ShoppingFormValidator;
 import com.je.dbaccess.entities.MetalEntity;
 import com.je.dbaccess.entities.ObjectShopEntity;
-import com.je.dbaccess.entities.PlaceEntity;
 import com.je.forms.SearchForm;
 import com.je.services.metal.MetalService;
 import com.je.services.nations.NationService;
@@ -354,21 +351,7 @@ public class ShoppingsAdminController {
 		if (result.hasErrors()) {
 			model.addObject(ConstantsJsp.FORMSEARCH, new SearchForm());
 		} else {
-			PlaceEntity place = new PlaceEntity();
-			place.setIdplace(13700L);
-			String path = System.getenv(Constants.OPENSHIFT_DATA_DIR);
-			XSSFWorkbook myWorkBook = shoppingService.generateExcel(form.getDatefrom(), form.getDateuntil(), place);
-			File file = new File(path.concat("workbook.xlsx"));
-			FileOutputStream out;
-			try {
-				out = new FileOutputStream(file);
-				// write operation workbook using file out object
-				myWorkBook.write(out);
-				myWorkBook.close();
-				out.close();
-			} catch (IOException e) {
-				logger.error(java.util.logging.Level.SEVERE.getName());
-			}
+			File file = shoppingService.generateExcel(form.getDatefrom(), form.getDateuntil());
 			try (InputStream inputStream = new FileInputStream(file)) {
 				response.setContentType("application/force-download");
 				response.setHeader("Content-Disposition", "attachment; filename=workbook.xlsx");

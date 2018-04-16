@@ -1,8 +1,7 @@
 package com.je.services.shoppings;
 
+import java.io.File;
 import java.util.List;
-
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.services.dailies.Daily;
@@ -53,7 +52,7 @@ public interface ShoppingService {
 
 	public Shopping searchClient(String refactorNIF);
 
-	public XSSFWorkbook generateExcel(String datefrom, String dateuntil, PlaceEntity place);
+	public File generateExcel(String datefrom, String dateuntil);
 
 	public boolean isCorrectNumber(Shopping shoppingForm);
 

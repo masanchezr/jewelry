@@ -66,19 +66,19 @@ public class SalesCardServiceImpl implements SalesCardService {
 		}
 		PaymentEntity payment = searchSale.getPay();
 		Date from = DateUtil.getDate(searchSale.getSfrom());
-		BigDecimal total = BigDecimal.ZERO;
 		int size = 0;
-		size += putSales(map, from, until, payment, total);
-		size += putAdjustments(map, from, until, payment, total);
-		size += putRecordings(map, from, until, payment, total);
-		size += putBatteries(map, from, until, payment, total);
-		size += putStraps(map, from, until, payment, total);
-		size += putSalesPost(map, from, until, payment, total);
+		size += putSales(map, from, until, payment);
+		size += putAdjustments(map, from, until, payment);
+		size += putRecordings(map, from, until, payment);
+		size += putBatteries(map, from, until, payment);
+		size += putStraps(map, from, until, payment);
+		size += putSalesPost(map, from, until, payment);
 		map.put("numsales", size);
 		return map;
 	}
 
-	private int putSales(Map<String, Object> map, Date from, Date until, PaymentEntity payment, BigDecimal total) {
+	private int putSales(Map<String, Object> map, Date from, Date until, PaymentEntity payment) {
+		BigDecimal total = BigDecimal.ZERO;
 		int size = 0;
 		Iterable<SaleEntity> salesEntity = saleManager.searchByDatesAndPayment(from, until, payment);
 		if (salesEntity != null) {
@@ -98,8 +98,8 @@ public class SalesCardServiceImpl implements SalesCardService {
 		return size;
 	}
 
-	private int putAdjustments(Map<String, Object> map, Date from, Date until, PaymentEntity payment,
-			BigDecimal total) {
+	private int putAdjustments(Map<String, Object> map, Date from, Date until, PaymentEntity payment) {
+		BigDecimal total = BigDecimal.ZERO;
 		int size = 0;
 		List<AdjustmentEntity> adjustments = adjustmentRepository.findByCarrydateBetweenAndPayment(from, until,
 				payment);
@@ -119,7 +119,8 @@ public class SalesCardServiceImpl implements SalesCardService {
 		return size;
 	}
 
-	private int putRecordings(Map<String, Object> map, Date from, Date until, PaymentEntity payment, BigDecimal total) {
+	private int putRecordings(Map<String, Object> map, Date from, Date until, PaymentEntity payment) {
+		BigDecimal total = BigDecimal.ZERO;
 		List<RecordingEntity> recordings = recordingRepository.findByCreationdateBetweenAndPay(from, until, payment);
 		int size = 0;
 		if (recordings != null && !recordings.isEmpty()) {
@@ -134,7 +135,8 @@ public class SalesCardServiceImpl implements SalesCardService {
 		return size;
 	}
 
-	private int putBatteries(Map<String, Object> map, Date from, Date until, PaymentEntity payment, BigDecimal total) {
+	private int putBatteries(Map<String, Object> map, Date from, Date until, PaymentEntity payment) {
+		BigDecimal total = BigDecimal.ZERO;
 		List<BatteryEntity> batteries = batteriesRepository.findByCreationdateBetweenAndPayment(from, until, payment);
 		int size = 0;
 		if (batteries != null && !batteries.isEmpty()) {
@@ -149,8 +151,9 @@ public class SalesCardServiceImpl implements SalesCardService {
 		return size;
 	}
 
-	private int putStraps(Map<String, Object> map, Date from, Date until, PaymentEntity payment, BigDecimal total) {
+	private int putStraps(Map<String, Object> map, Date from, Date until, PaymentEntity payment) {
 		List<StrapEntity> straps = strapsRepository.findByCreationdateBetweenAndPayment(from, until, payment);
+		BigDecimal total = BigDecimal.ZERO;
 		int size = 0;
 		if (straps != null && !straps.isEmpty()) {
 			Iterator<StrapEntity> istraps = straps.iterator();
@@ -164,9 +167,10 @@ public class SalesCardServiceImpl implements SalesCardService {
 		return size;
 	}
 
-	private int putSalesPost(Map<String, Object> map, Date from, Date until, PaymentEntity payment, BigDecimal total) {
+	private int putSalesPost(Map<String, Object> map, Date from, Date until, PaymentEntity payment) {
 		List<SalePostponedEntity> salespost = salespostponedrepository.findByCreationdateBetweenPay(from, until,
 				payment);
+		BigDecimal total = BigDecimal.ZERO;
 		int size = 0;
 		if (salespost != null && !salespost.isEmpty()) {
 			Iterator<SalePostponedEntity> isalespost = salespost.iterator();

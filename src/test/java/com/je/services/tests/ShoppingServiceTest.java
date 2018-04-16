@@ -1,13 +1,9 @@
 package com.je.services.tests;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,20 +61,8 @@ public class ShoppingServiceTest {
 	}
 
 	@Test
-	public void generateExcel() {
-		PlaceEntity place = new PlaceEntity();
-		place.setIdplace(13700L);
-		try {
-			XSSFWorkbook myWorkBook = shoppingService.generateExcel("20-03-2017", "20-03-2017", place);
-			File file = new File("F://workbook.xlsx");
-			FileOutputStream out = new FileOutputStream(file);
-			// write operation workbook using file out object
-			myWorkBook.write(out);
-			myWorkBook.close();
-			out.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public void generateExcelTest() {
+		shoppingService.generateExcel("16-03-2017", "20-03-2018");
 	}
 
 	@Test

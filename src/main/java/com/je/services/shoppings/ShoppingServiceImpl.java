@@ -1,5 +1,7 @@
 package com.je.services.shoppings;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -258,8 +260,10 @@ public class ShoppingServiceImpl implements ShoppingService {
 	}
 
 	@Override
-	public XSSFWorkbook generateExcel(String datefrom, String dateuntil, PlaceEntity place) {
+	public File generateExcel(String datefrom, String dateuntil) {
 		Logger logger = LoggerFactory.getLogger(ShoppingServiceImpl.class);
+		PlaceEntity place = new PlaceEntity();
+		place.setIdplace(13700L);
 		try (XSSFWorkbook myWorkBook = new XSSFWorkbook()) {
 			XSSFSheet spreadsheet = myWorkBook.createSheet("Hoja1");
 			XSSFFont font = myWorkBook.createFont();
@@ -309,8 +313,8 @@ public class ShoppingServiceImpl implements ShoppingService {
 			record.setCellStyle(style);
 			rock.setCellValue("PIEDRAS");
 			rock.setCellStyle(style);
+			row = spreadsheet.createRow(i);
 			while (ishoppings.hasNext()) {
-				row = spreadsheet.createRow(i);
 				numshop = row.createCell(0);
 				date = row.createCell(1);
 				name = row.createCell(2);
@@ -338,12 +342,21 @@ public class ShoppingServiceImpl implements ShoppingService {
 					description = os.getDescription();
 					descriptions = description.split(";");
 					i = setCells(descriptions, spreadsheet, objects, record, rock, i);
+					row = spreadsheet.createRow(i);
+					material = row.createCell(8);
+					objects = row.createCell(7);
 				}
 			} // fin recorrido compras
 			for (i = 0; i < 10; i++) {
 				spreadsheet.autoSizeColumn(i);
 			}
-			return myWorkBook;
+			String path = System.getenv(Constants.OPENSHIFT_DATA_DIR);
+			File file = new File(path.concat("workbook.xlsx"));
+			FileOutputStream out = new FileOutputStream(file);
+			// write operation workbook using file out object
+			myWorkBook.write(out);
+			out.close();
+			return file;
 		} catch (IOException e) {
 			logger.error(java.util.logging.Level.SEVERE.getName());
 			return null;
