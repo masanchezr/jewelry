@@ -25,8 +25,8 @@ public class ConstantsJsp {
 	public static final String VIEWDAILYARROWS = "dailyarrows";
 	public static final String FORMENTRYMONEY = "entrymoney";
 	public static final String VIEWNEWENTRYMONEY = "newentrymoney";
-	public static final String FORMSALE = "sale";
-	public static final String NUMSALE = Constants.NUMSALE;
+	public static final String FORMSALE = "saleForm";
+	public static final String NUMSALE = "numsale";
 	public static final String NUMSHOP = "numshop";
 	public static final String FORMADJUSTMENT = "adjustment";
 	public static final String FORMSEARCH = "searchDateForm";
@@ -71,5 +71,6 @@ public class ConstantsJsp {
 	public static final String ERRORSELECTPERCENT = "selectpercent";
 	public static final String ERRORNUMSALEREPEATED = "numsalerepeated";
 	public static final String ERRORSALENOTEXIST = "salenotexist";
+	public static final String SALEPOSTPONED = "salepostponed";
 
 }

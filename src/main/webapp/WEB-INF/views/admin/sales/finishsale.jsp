@@ -15,7 +15,7 @@
 					<i class="fa fa-fw fa-comments"></i>
 				</div>
 				<div class="mr-5">
-					<c:out value="${sale.numsale}" />
+					<c:out value="${saleForm.numsale}" />
 					<spring:message code="idsale" />
 				</div>
 			</div>
@@ -28,7 +28,7 @@
 					<i class="fa fa-fw fa-shopping-cart"></i>
 				</div>
 				<div class="mr-5">
-					<c:out value="${sale.total}" />
+					<c:out value="${saleForm.total}" />
 					<spring:message code="totalamount" />
 				</div>
 			</div>
@@ -42,7 +42,7 @@
 				</div>
 				<div class="mr-5">
 					<spring:message code="discount" />
-					<c:out value="${sale.discount}" />
+					<c:out value="${saleForm.discount}" />
 				</div>
 			</div>
 		</div>
@@ -71,7 +71,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${sale.jewels}" var="jewel">
+					<c:forEach items="${saleForm.jewels}" var="jewel">
 						<tr>
 							<td><c:out value="${jewel.reference}" /></td>
 							<td><c:out value="${jewel.name}" /></td>
@@ -93,12 +93,12 @@
 		<div class="list-group">
 			<a href="#" class="list-group-item"><spring:message
 					code="principalpay" /><span class="pull-right text-muted small"><em><c:out
-							value="${sale.payment.name}" /></em> </span> </a>
+							value="${saleForm.payment.name}" /></em> </span> </a>
 		</div>
 		<div class="list-group">
 			<a href="#" class="list-group-item"><spring:message
 					code="optionalpayment" /><span class="pull-right text-muted small"><em><c:out
-							value="${sale.optionalpayment}" /></em> </span> </a>
+							value="${saleForm.optionalpayment}" /></em> </span> </a>
 		</div>
 	</div>
 </div>

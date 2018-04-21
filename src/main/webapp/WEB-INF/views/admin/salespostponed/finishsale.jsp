@@ -17,7 +17,7 @@
 					<i class="fa fa-shopping-cart fa-fw"></i>
 				</div>
 				<div class="mr-5">
-					<c:out value="${sale.idsale}" />
+					<c:out value="${saleForm.idsale}" />
 					<spring:message code="idsale" />
 				</div>
 			</div>
@@ -30,7 +30,7 @@
 					<i class="fa fa-euro fa-fw"></i>
 				</div>
 				<div class="mr-5">
-					<c:out value="${sale.total}" />
+					<c:out value="${saleForm.total}" />
 					<spring:message code="totalamount" />
 				</div>
 			</div>
@@ -64,7 +64,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${sale.jewels}" var="jewel">
+						<c:forEach items="${saleForm.jewels}" var="jewel">
 							<tr>
 								<td><c:out value="${jewel.reference}" /></td>
 								<td><c:out value="${jewel.name}" /></td>
@@ -98,7 +98,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${sale.spayments}" var="jewel">
+						<c:forEach items="${saleForm.spayments}" var="jewel">
 							<tr>
 								<td><fmt:formatDate value="${jewel.creationdate}"
 										type="date" /></td>

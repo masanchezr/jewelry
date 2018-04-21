@@ -110,7 +110,7 @@ public class SalesController {
 					model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
 					model.addObject(ConstantsJsp.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
 					model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
-					result.rejectValue(ConstantsJsp.IDSALE, ConstantsJsp.ERRORNUMSALEREPEATED);
+					result.rejectValue(ConstantsJsp.NUMSALE, ConstantsJsp.ERRORNUMSALEREPEATED);
 					model.addObject(ConstantsJsp.FORMSALE, sale);
 					model.setViewName(VIEWNEWSALE);
 				}

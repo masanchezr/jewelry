@@ -113,6 +113,9 @@
 						<li><spring:url value="/employee/addinstallment"
 								var="installment"></spring:url><a href="${installment}"><spring:message
 									code="addinstallment" /></a></li>
+						<li><spring:url value="/employee/getsptimeout"
+								var="getsptimeout"></spring:url><a href="${getsptimeout}"><spring:message
+									code="salespostponedtimeout" /></a></li>
 					</ul></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message

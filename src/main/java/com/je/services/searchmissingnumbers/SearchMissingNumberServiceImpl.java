@@ -32,7 +32,7 @@ public class SearchMissingNumberServiceImpl implements SearchMissingNumberServic
 	private Mapper mapper;
 
 	public List<Long> searchMissingShoppings(SearchMissingNumbers form) {
-		List<Long> nummissings = new ArrayList<Long>();
+		List<Long> nummissings = new ArrayList<>();
 		PlaceEntity place = mapper.map(form.getPlace(), PlaceEntity.class);
 		int year = form.getYear();
 		ShoppingEntity entity;
@@ -42,14 +42,12 @@ public class SearchMissingNumberServiceImpl implements SearchMissingNumberServic
 			if (entity == null) {
 				pawn = pawnsRepository.findByNumpawnAndPlaceAndYear(String.valueOf(i), place, year);
 				if (pawn == null) {
-					nummissings.add(new Long(i));
+					nummissings.add(i);
 				}
 			} else {
 				pawn = pawnsRepository.findByNumpawnAndPlaceAndYear(String.valueOf(i), place, year);
-				if (pawn != null) {
-					if (entity.getTotalamount().equals(pawn.getAmount())) {
-						nummissings.add(new Long(i));
-					}
+				if (pawn != null && entity.getTotalamount().equals(pawn.getAmount())) {
+					nummissings.add(i);
 				}
 			}
 		}
@@ -59,9 +57,5 @@ public class SearchMissingNumberServiceImpl implements SearchMissingNumberServic
 	public List<Long> calculateMissingSales(SearchMissingNumbers form) {
 		return saleManager.calculateNumberMissing(form.getNumfrom(), form.getNumuntil(),
 				mapper.map(form.getPlace(), PlaceEntity.class));
-	}
-
-	public Long getSalePostponedMissing(PlaceEntity place) {
-		return saleManager.numsalepostponed(place);
 	}
 }

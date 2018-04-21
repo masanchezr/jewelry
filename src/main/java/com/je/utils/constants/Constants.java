@@ -118,4 +118,6 @@ public class Constants {
 
 	public static final String NATIONS = "nations";
 
+	public static final String SALESPOSTPONED = "salespostponed";
+
 }

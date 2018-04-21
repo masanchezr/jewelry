@@ -88,7 +88,5 @@ public interface SaleManager {
 
 	public SaleEntity searchByPK(Long idsale);
 
-	public Long numsalepostponed(PlaceEntity place);
-
 	public SaleEntity searchByNumsaleAndPlace(Long numsale, Long idplace);
 }

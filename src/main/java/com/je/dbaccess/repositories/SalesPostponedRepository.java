@@ -23,4 +23,24 @@ public interface SalesPostponedRepository extends CrudRepository<SalePostponedEn
 	public List<SalePostponedEntity> findByCreationdateBetweenPay(@Param("from") Date from, @Param("until") Date until,
 			@Param("pay") PaymentEntity pay);
 
+	/**
+	 * 
+	 * @return número más alto
+	 */
+	public SalePostponedEntity findFirstByOrderByIdsalepostponedDesc();
+
+	/**
+	 * 
+	 * @return número más bajo
+	 */
+	public SalePostponedEntity findFirstByOrderByIdsalepostponed();
+
+	/**
+	 * 
+	 * @return lista ventas caducadas en tienda
+	 */
+
+	public List<SalePostponedEntity> findByDeadlineBeforeAndPlaceAndTimeoutFalseAndDateretiredIsNull(
+			@Temporal(TemporalType.DATE) Date date, PlaceEntity place);
+
 }

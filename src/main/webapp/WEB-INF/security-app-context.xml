@@ -1,5 +1,7 @@
-<beans:beans xmlns="http://www.springframework.org/schema/security"
-	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans:beans
+	xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
                     http://www.springframework.org/schema/beans/spring-beans.xsd
                     http://www.springframework.org/schema/security
@@ -7,7 +9,8 @@
 	<beans:import resource="classpath*:applicationContext.xml" />
 	<beans:bean name="pbkdf2Encoder"
 		class="org.springframework.security.crypto.password.Pbkdf2PasswordEncoder" />
-	<http pattern="/employee/**" authentication-manager-ref="authenticationMgr">
+	<http pattern="/employee/**"
+		authentication-manager-ref="authenticationMgr">
 		<access-denied-handler error-page="/403" />
 		<logout logout-url="/employee/j_spring_security_logout"
 			logout-success-url="/employee/login" invalidate-session="true" />
@@ -47,7 +50,8 @@
 			access="hasAnyRole('ROLE_USER','ROLE_AR','ROLE_NA')" />
 		<intercept-url pattern="/employee/newsalestrap"
 			access="hasAnyRole('ROLE_USER','ROLE_AR','ROLE_NA')" />
-		<intercept-url pattern="/employee/localrental" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/employee/localrental"
+			access="hasRole('ROLE_USER')" />
 		<intercept-url pattern="/employee/searchdaily"
 			access="hasAnyRole('ROLE_USER','ROLE_AR','ROLE_NA')" />
 		<intercept-url pattern="/employee/newincident"
@@ -70,22 +74,35 @@
 			access="hasAnyRole('ROLE_USER','ROLE_AR','ROLE_NA')" />
 		<intercept-url pattern="/employee/addinstallment"
 			access="hasAnyRole('ROLE_USER','ROLE_AR','ROLE_NA')" />
+		<intercept-url pattern="/employee/getsptimeout"
+			access="hasAnyRole('ROLE_USER','ROLE_AR','ROLE_NA')" />
+		<intercept-url pattern="/employee/searchsalepostponed"
+			access="hasAnyRole('ROLE_USER','ROLE_AR','ROLE_NA')" />
 		<form-login login-page="/employee/login"
-			default-target-url="/employee/admin" authentication-failure-url="/employee/login"
-			always-use-default-target="true" login-processing-url="/employee/jspringsecuritycheck" />
+			default-target-url="/employee/admin"
+			authentication-failure-url="/employee/login"
+			always-use-default-target="true"
+			login-processing-url="/employee/jspringsecuritycheck" />
 	</http>
 
-	<http pattern="/workshop/**" authentication-manager-ref="authenticationMgr">
+	<http pattern="/workshop/**"
+		authentication-manager-ref="authenticationMgr">
 		<access-denied-handler error-page="/403wks" />
 		<logout logout-url="/workshop/j_spring_security_logout"
 			logout-success-url="/workshop/login" invalidate-session="true" />
-		<intercept-url pattern="/workshop/admin" access="hasRole('ROLE_JORGE')" />
-		<intercept-url pattern="/workshop/newadjustment" access="hasRole('ROLE_JORGE')" />
-		<intercept-url pattern="/workshop/newWorkshop" access="hasRole('ROLE_JORGE')" />
-		<intercept-url pattern="/workshop/billing" access="hasRole('ROLE_JORGE')" />
+		<intercept-url pattern="/workshop/admin"
+			access="hasRole('ROLE_JORGE')" />
+		<intercept-url pattern="/workshop/newadjustment"
+			access="hasRole('ROLE_JORGE')" />
+		<intercept-url pattern="/workshop/newWorkshop"
+			access="hasRole('ROLE_JORGE')" />
+		<intercept-url pattern="/workshop/billing"
+			access="hasRole('ROLE_JORGE')" />
 		<form-login login-page="/workshop/login"
-			default-target-url="/workshop/admin" authentication-failure-url="/workshop/login"
-			always-use-default-target="true" login-processing-url="/workshop/jspringsecuritycheckws" />
+			default-target-url="/workshop/admin"
+			authentication-failure-url="/workshop/login"
+			always-use-default-target="true"
+			login-processing-url="/workshop/jspringsecuritycheckws" />
 	</http>
 
 	<http authentication-manager-ref="authenticationMgr">
@@ -94,64 +111,120 @@
 			logout-success-url="/login" invalidate-session="true" />
 		<form-login login-page="/login" default-target-url="/admin"
 			authentication-failure-url="/login" always-use-default-target="true" />
-		<intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/newJewel" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/saveJewel" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/updateJewels" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/searchJewels" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/newCategory" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/newPayment" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/newPawn" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/savePayment" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/error" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/searchclients" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/disablejewel" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/searchtodisablejewel" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/saveCategory" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/newJewel" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/addset" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/newSet" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/newJewel"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/saveJewel"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/updateJewels"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/searchJewels"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/newCategory"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/newPayment"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/newPawn"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/savePayment"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/error"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/searchclients"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/disablejewel"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/searchtodisablejewel"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/saveCategory"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/newJewel"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/addset"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/newSet"
+			access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/resultSearchUpdateJewels"
 			access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/searchUpdateJewels" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/searchShoppings" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/allpayments" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/searchPawns" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/newHoliday" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/allHolidays" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/dailyplace" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/searchquarter" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/searchquarterpawns" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/quarter" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/searchbill" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/bill" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/quarter" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/searchSalesCard" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/searchSales" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/searchDaily" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/searchholidays" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/searchNumMissing" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/searchByReference" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/searchPosibleRepeated" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/searchrenovations" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/resultpawns" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/newuser" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/allincidents" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/pendingissues" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/searchquartermaterial" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/searchincident" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/searchcalculatedailies" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/outofdate" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/searchEntries" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/upload" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/investedmoney" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/checkinventory" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/searchgramsnull" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/searchsumadjustments" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/tomelloso" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/exceltomelloso" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/newsale" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/searchsalepostponed" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/searchUpdateJewels"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/searchShoppings"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/allpayments"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/searchPawns"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/newHoliday"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/allHolidays"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/dailyplace"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/searchquarter"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/searchquarterpawns"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/quarter"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/searchbill"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/bill"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/quarter"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/searchSalesCard"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/searchSales"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/searchDaily"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/searchholidays"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/searchNumMissing"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/searchByReference"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/searchPosibleRepeated"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/searchrenovations"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/resultpawns"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/newuser"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/allincidents"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/pendingissues"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/searchquartermaterial"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/searchincident"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/searchcalculatedailies"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/outofdate"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/searchEntries"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/upload"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/investedmoney"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/checkinventory"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/searchgramsnull"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/searchsumadjustments"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/tomelloso"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/exceltomelloso"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/newsale"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/searchsalepostponed"
+			access="hasRole('ROLE_ADMIN')" />
 	</http>
 
 	<authentication-manager id="authenticationMgr">

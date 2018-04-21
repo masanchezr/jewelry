@@ -56,10 +56,10 @@ public class SaleServiceImpl implements SaleService {
 		// Tengo que crear un saleentity y varios salesjewels
 		SaleEntity saleEntity = new SaleEntity();
 		MailService mailService;
-		saleEntity.setNumsale(sale.getNumsale());
 		List<SalesJewels> salesJewels = new ArrayList<>();
 		List<SalesPayments> payments = new ArrayList<>();
 		Client saleclient = sale.getClient();
+		saleEntity.setNumsale(sale.getNumsale());
 		if (saleclient != null) {
 			ClientEntity client = mapper.map(sale.getClient(), ClientEntity.class);
 			client.setCreationdate(new Date());
@@ -71,30 +71,8 @@ public class SaleServiceImpl implements SaleService {
 			saleEntity.setCreationdate(DateUtil.getDate(sale.getSaledate()));
 		}
 		Iterator<JewelEntity> ijewels = sale.getJewels().iterator();
-		BigDecimal importeTotal = BigDecimal.ZERO;
-		while (ijewels.hasNext()) {
-			// Deshabilito el objeto comprado
-			JewelEntity jewel = ijewels.next();
-			jewel.setActive(false);
-			importeTotal = importeTotal.add(jewel.getPrice());
-			SalesJewels e = new SalesJewels();
-			e.setSale(saleEntity);
-			e.setJewelEntity(jewel);
-			salesJewels.add(e);
-		}
-		List<AddressEntity> addresses = new ArrayList<>();
-		AddressEntity invoice = sale.getInvoice();
-		if (invoice != null) {
-			invoice.setDatecreation(new Date());
-			saleEntity.setAddressinvoice(invoice);
-			addresses.add(invoice);
-		}
-		AddressEntity mailing = sale.getMailing();
-		if (mailing != null) {
-			mailing.setDatecreation(new Date());
-			addresses.add(mailing);
-			saleEntity.setAddressmailing(mailing);
-		}
+		BigDecimal importeTotal = getTotalAmount(salesJewels, saleEntity, ijewels);
+		setAddresses(sale, saleEntity);
 		BigDecimal discount = sale.getDiscount();
 		Long iddiscount = sale.getIddiscount();
 		if (iddiscount != null) {
@@ -145,6 +123,38 @@ public class SaleServiceImpl implements SaleService {
 			mailService.start();
 		}
 		return saleManager.buy(saleEntity);
+	}
+
+	private BigDecimal getTotalAmount(List<SalesJewels> salesJewels, SaleEntity saleEntity,
+			Iterator<JewelEntity> ijewels) {
+		BigDecimal importeTotal = BigDecimal.ZERO;
+		while (ijewels.hasNext()) {
+			// Deshabilito el objeto comprado
+			JewelEntity jewel = ijewels.next();
+			jewel.setActive(false);
+			importeTotal = importeTotal.add(jewel.getPrice());
+			SalesJewels e = new SalesJewels();
+			e.setSale(saleEntity);
+			e.setJewelEntity(jewel);
+			salesJewels.add(e);
+		}
+		return importeTotal;
+	}
+
+	private void setAddresses(Sale sale, SaleEntity saleEntity) {
+		List<AddressEntity> addresses = new ArrayList<>();
+		AddressEntity invoice = sale.getInvoice();
+		if (invoice != null) {
+			invoice.setDatecreation(new Date());
+			saleEntity.setAddressinvoice(invoice);
+			addresses.add(invoice);
+		}
+		AddressEntity mailing = sale.getMailing();
+		if (mailing != null) {
+			mailing.setDatecreation(new Date());
+			addresses.add(mailing);
+			saleEntity.setAddressmailing(mailing);
+		}
 	}
 
 	@Override

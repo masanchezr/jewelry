@@ -201,7 +201,7 @@ public class SaleAdminController {
 					model.addObject(ConstantsJsp.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
 					model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
 					model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
-					result.rejectValue(ConstantsJsp.IDSALE, ConstantsJsp.ERRORNUMSALEREPEATED);
+					result.rejectValue(ConstantsJsp.NUMSALE, ConstantsJsp.ERRORNUMSALEREPEATED);
 					model.addObject(ConstantsJsp.FORMSALE, sale);
 					model.setViewName(VIEWNEWSALEADMIN);
 				}
@@ -263,24 +263,6 @@ public class SaleAdminController {
 		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject(ConstantsJsp.FORMSALE, sale);
-		return model;
-	}
-
-	@RequestMapping(value = "/searchsalepostponed")
-	public ModelAndView searchsalepostponed() {
-		ModelAndView model = new ModelAndView("searchsalepostponed");
-		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
-		model.addObject(ConstantsJsp.FORMSEARCH, new SearchForm());
-		return model;
-	}
-
-	@RequestMapping(value = "/salepostponed")
-	public ModelAndView salepostponed(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm searchForm) {
-		ModelAndView model = new ModelAndView("salepostponed");
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
-		model.addObject(ConstantsJsp.NUMSALE,
-				searchMissingNumberService.getSalePostponedMissing(searchForm.getPlace()));
 		return model;
 	}
 

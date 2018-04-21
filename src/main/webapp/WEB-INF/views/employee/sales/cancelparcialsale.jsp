@@ -2,7 +2,8 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<form:form action="savecancelparcial" modelAttribute="sale" role="form">
+<form:form action="savecancelparcial" modelAttribute="saleForm"
+	role="form">
 	<form:hidden path="idsale" />
 	<!-- Breadcrumbs-->
 	<ol class="breadcrumb">

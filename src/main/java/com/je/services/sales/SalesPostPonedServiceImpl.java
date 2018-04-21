@@ -124,4 +124,38 @@ public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 			return null;
 		}
 	}
+
+	public SalePostPoned searchByIdAndPlace(long id, PlaceEntity place) {
+		SalePostponedEntity saleEntity = salespostponedrepository.findById(id).orElse(null);
+		if (saleEntity != null && saleEntity.getPlace().equals(place)) {
+			SalePostPoned sale = mapper.map(saleEntity, SalePostPoned.class);
+			List<SalePostPonedJewel> sjewels = saleEntity.getSjewels();
+			Iterator<SalePostPonedJewel> isjewels = sjewels.iterator();
+			sale.setJewels(new ArrayList<JewelEntity>());
+			while (isjewels.hasNext()) {
+				sale.getJewels().add(isjewels.next().getJewel());
+			}
+			return sale;
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public long getMissing() {
+		long number = 0;
+		SalePostponedEntity last = salespostponedrepository.findFirstByOrderByIdsalepostponedDesc();
+		SalePostponedEntity first = salespostponedrepository.findFirstByOrderByIdsalepostponed();
+		for (long l = first.getIdsalepostponed(); l < last.getIdsalepostponed() && number == 0; l++) {
+			if (!salespostponedrepository.findById(l).isPresent()) {
+				number = l;
+			}
+		}
+		return number;
+	}
+
+	public List<SalePostponedEntity> getListTimeout(PlaceEntity place) {
+		return salespostponedrepository.findByDeadlineBeforeAndPlaceAndTimeoutFalseAndDateretiredIsNull(new Date(),
+				place);
+	}
 }

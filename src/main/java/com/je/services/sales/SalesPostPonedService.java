@@ -1,7 +1,9 @@
 package com.je.services.sales;
 
 import java.math.BigDecimal;
+import java.util.List;
 
+import com.je.dbaccess.entities.PlaceEntity;
 import com.je.dbaccess.entities.SalePostponedEntity;
 
 public interface SalesPostPonedService {
@@ -15,5 +17,11 @@ public interface SalesPostPonedService {
 	public BigDecimal howmanyamount(SalePostponedEntity sale);
 
 	public SalePostPoned searchByPK(long id);
+
+	public SalePostPoned searchByIdAndPlace(long id, PlaceEntity place);
+
+	public List<SalePostponedEntity> getListTimeout(PlaceEntity place);
+
+	public long getMissing();
 
 }

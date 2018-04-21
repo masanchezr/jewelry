@@ -112,11 +112,4 @@ public class SaleManagerTest {
 			System.out.println("nulo2");
 		}
 	}
-
-	@Test
-	public void numsalepostponedTest() {
-		PlaceEntity place = new PlaceEntity();
-		place.setIdplace(28017L);
-		System.out.println(saleManager.numsalepostponed(place));
-	}
 }

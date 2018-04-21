@@ -2,7 +2,6 @@ package com.je.dbaccess.managers;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -23,7 +22,6 @@ import com.je.dbaccess.entities.PaymentEntity;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.dbaccess.entities.RecordingEntity;
 import com.je.dbaccess.entities.SaleEntity;
-import com.je.dbaccess.entities.SalePostponedEntity;
 import com.je.dbaccess.entities.SalesJewels;
 import com.je.dbaccess.entities.StrapEntity;
 import com.je.dbaccess.repositories.BatteriesRepository;
@@ -32,7 +30,6 @@ import com.je.dbaccess.repositories.DiscountsRepository;
 import com.je.dbaccess.repositories.JewelRepository;
 import com.je.dbaccess.repositories.RecordingRepository;
 import com.je.dbaccess.repositories.SaleRepository;
-import com.je.dbaccess.repositories.SalesPostponedRepository;
 import com.je.dbaccess.repositories.StrapsRepository;
 import com.je.utils.constants.Constants;
 import com.je.utils.constants.ConstantsJsp;
@@ -65,9 +62,6 @@ public class SaleManagerImpl implements SaleManager {
 
 	@Autowired
 	private RecordingRepository recordingRepository;
-
-	@Autowired
-	private SalesPostponedRepository salespostponedrepository;
 
 	@Override
 	@Transactional
@@ -229,42 +223,44 @@ public class SaleManagerImpl implements SaleManager {
 		SaleEntity sale;
 		CancelSaleEntity cancelSale;
 		Long idsale;
-		boolean iscancel = false;
-		BigDecimal costjewel;
-		BigDecimal cost = BigDecimal.ZERO;
 		BigDecimal total = BigDecimal.ZERO;
+		BigDecimal cost = BigDecimal.ZERO;
 		while (itsales.hasNext()) {
 			sale = itsales.next();
 			idsale = sale.getIdsale();
 			cancels = cancelSaleRepository.findByNumsaleAndPlace(idsale, place);
-			if (cancels != null && !cancels.isEmpty()) {
+			if (cancels != null) {
 				Iterator<CancelSaleEntity> icancels = cancels.iterator();
 				while (icancels.hasNext()) {
 					cancelSale = icancels.next();
 					if (cancelSale.getNumsale().equals(idsale)) {
-						iscancel = true;
 						total = total.subtract(cancelSale.getAmount());
+					} else {
+						sales.add(sale);
+						total = total.add(sale.getTotal());
 					}
 				}
 			}
-			if (!iscancel) {
-				sales.add(sale);
-				total = total.add(sale.getTotal());
-			}
-			iscancel = false;
 			List<SalesJewels> sjewels = sale.getSjewels();
 			Iterator<SalesJewels> isjewels = sjewels.iterator();
-			while (isjewels.hasNext()) {
-				costjewel = isjewels.next().getJewelEntity().getCost();
-				if (costjewel != null) {
-					cost = cost.add(costjewel);
-				}
-			}
+			cost = cost.add(getCost(isjewels));
 		}
 		map.put(Constants.SALES, sales);
 		map.put(ConstantsJsp.TOTAL, total);
 		map.put("cost", cost);
 		return map;
+	}
+
+	private BigDecimal getCost(Iterator<SalesJewels> isjewels) {
+		BigDecimal costjewel;
+		BigDecimal cost = BigDecimal.ZERO;
+		while (isjewels.hasNext()) {
+			costjewel = isjewels.next().getJewelEntity().getCost();
+			if (costjewel != null) {
+				cost = cost.add(costjewel);
+			}
+		}
+		return cost;
 	}
 
 	@Override
@@ -301,32 +297,6 @@ public class SaleManagerImpl implements SaleManager {
 	@Override
 	public SaleEntity searchByPK(Long idsale) {
 		return saleRepository.findById(idsale).orElse(null);
-	}
-
-	@Override
-	public Long numsalepostponed(PlaceEntity place) {
-		Calendar c = Calendar.getInstance();
-		Long num = null;
-		c.set(Calendar.MONTH, c.get(Calendar.MONTH) - 6);
-		List<SaleEntity> sales = saleRepository.findByPlaceAndCreationdateBeforeAndNumsaleLessThan(place, c.getTime(),
-				0L);
-		Iterator<SaleEntity> isales = sales.iterator();
-		SaleEntity sale;
-		SalePostponedEntity sp;
-		while (isales.hasNext() && num == null) {
-			sale = isales.next();
-			num = sale.getNumsale() + 1;
-			sale = saleRepository.findByNumsaleAndPlace(num, place);
-			if (sale == null) {
-				sp = salespostponedrepository.findById(Math.abs(num)).orElse(null);
-				if (sp != null) {
-					num = null;
-				}
-			} else {
-				num = null;
-			}
-		}
-		return num;
 	}
 
 	@Override

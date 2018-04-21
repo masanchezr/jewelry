@@ -201,4 +201,37 @@ public class SalePostPonedController {
 		}
 		return model;
 	}
+
+	@RequestMapping(value = "/employee/getsptimeout")
+	public ModelAndView getsptimeout() {
+		ModelAndView model = new ModelAndView("resultsalespostponed");
+		String user = SecurityContextHolder.getContext().getAuthentication().getName();
+		model.addObject(Constants.SALESPOSTPONED, saleservicepostponed.getListTimeout(placeService.getPlaceUser(user)));
+		return model;
+	}
+
+	@RequestMapping(value = "/employee/searchsalepostponed")
+	public ModelAndView searchsalepostponed() {
+		ModelAndView model = new ModelAndView("searchsalepostponedemployee");
+		model.addObject(ConstantsJsp.SALEPOSTPONED, new SalePostponedEntity());
+		return model;
+	}
+
+	@RequestMapping(value = "/employee/resultsalepostponed")
+	public ModelAndView resultsalepostponed(@ModelAttribute(ConstantsJsp.SALEPOSTPONED) SalePostponedEntity sale,
+			BindingResult arg1) {
+		ModelAndView model = new ModelAndView();
+		String user = SecurityContextHolder.getContext().getAuthentication().getName();
+		SalePostPoned salep = saleservicepostponed.searchByIdAndPlace(sale.getIdsalepostponed(),
+				placeService.getPlaceUser(user));
+		if (salep != null) {
+			model.setViewName("finishaddinstallment");
+			model.addObject(ConstantsJsp.FORMSALE, salep);
+		} else {
+			model.setViewName("searchsalepostponedemployee");
+			model.addObject(ConstantsJsp.SALEPOSTPONED, sale);
+			arg1.rejectValue(ConstantsJsp.IDSALE, ConstantsJsp.ERRORSALENOTEXIST);
+		}
+		return model;
+	}
 }

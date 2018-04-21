@@ -19,7 +19,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 import com.je.utils.constants.Constants;
 
 @Entity
-@Table(name = "salespostponed")
+@Table(name = Constants.SALESPOSTPONED)
 public class SalePostponedEntity {
 
 	@Id
