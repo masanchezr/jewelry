@@ -113,9 +113,6 @@
 						<li><spring:url value="/employee/addinstallment"
 								var="installment"></spring:url><a href="${installment}"><spring:message
 									code="addinstallment" /></a></li>
-						<li><spring:url value="/employee/getsptimeout"
-								var="getsptimeout"></spring:url><a href="${getsptimeout}"><spring:message
-									code="salespostponedtimeout" /></a></li>
 						<li><spring:url value="/employee/searchsalepostponed"
 								var="searchsalepostponed"></spring:url><a
 							href="${searchsalepostponed}"><spring:message
