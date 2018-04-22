@@ -213,7 +213,7 @@ public class SalePostPonedController {
 	@RequestMapping(value = "/employee/searchsalepostponed")
 	public ModelAndView searchsalepostponed() {
 		ModelAndView model = new ModelAndView("searchsalepostponedemployee");
-		model.addObject(ConstantsJsp.SALEPOSTPONED, new SalePostponedEntity());
+		model.addObject(ConstantsJsp.FORMSALE, new SalePostponedEntity());
 		return model;
 	}
 
@@ -225,12 +225,12 @@ public class SalePostPonedController {
 		SalePostPoned salep = saleservicepostponed.searchByIdAndPlace(sale.getIdsalepostponed(),
 				placeService.getPlaceUser(user));
 		if (salep != null) {
-			model.setViewName("finishaddinstallment");
+			model.setViewName("salepostponed");
 			model.addObject(ConstantsJsp.FORMSALE, salep);
 		} else {
 			model.setViewName("searchsalepostponedemployee");
-			model.addObject(ConstantsJsp.SALEPOSTPONED, sale);
-			arg1.rejectValue(ConstantsJsp.IDSALE, ConstantsJsp.ERRORSALENOTEXIST);
+			model.addObject(ConstantsJsp.FORMSALE, sale);
+			arg1.rejectValue("idsalepostponed", ConstantsJsp.ERRORSALENOTEXIST);
 		}
 		return model;
 	}

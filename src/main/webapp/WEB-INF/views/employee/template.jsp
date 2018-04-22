@@ -116,6 +116,10 @@
 						<li><spring:url value="/employee/getsptimeout"
 								var="getsptimeout"></spring:url><a href="${getsptimeout}"><spring:message
 									code="salespostponedtimeout" /></a></li>
+						<li><spring:url value="/employee/searchsalepostponed"
+								var="searchsalepostponed"></spring:url><a
+							href="${searchsalepostponed}"><spring:message
+									code="searchsalepostponed" /></a></li>
 					</ul></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message

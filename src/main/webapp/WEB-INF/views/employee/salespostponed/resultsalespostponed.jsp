@@ -1,5 +1,4 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!-- Breadcrumbs-->
 <ol class="breadcrumb">
@@ -17,7 +16,7 @@
 						id="dataTables-example">
 						<thead>
 							<tr>
-								<th><spring:message code="idsalepostponed" /></th>
+								<th><spring:message code="number" /></th>
 								<th><spring:message code="totalamount" /></th>
 								<th><spring:message code="creationdate" /></th>
 								<th><spring:message code="deadline" /></th>
@@ -34,18 +33,11 @@
 							</c:forEach>
 						</tbody>
 					</table>
-					<div>
-						<form:button class="btn btn-primary" value="submit">
-							<spring:message code="edit" />
-						</form:button>
-					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </c:if>
-<div>
-	<c:if test="${empty salespostponed}">
-		<spring:message code="noresults" />
-	</c:if>
-</div>
+<c:if test="${empty salespostponed}">
+	<spring:message code="noresults" />
+</c:if>

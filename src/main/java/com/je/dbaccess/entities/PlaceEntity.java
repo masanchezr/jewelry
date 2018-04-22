@@ -88,4 +88,27 @@ public class PlaceEntity implements Serializable {
 		this.description = description;
 	}
 
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		} else {
+			PlaceEntity place = (PlaceEntity) o;
+			Long id = place.getIdplace();
+			if (id != null) {
+				return id.equals(getIdplace());
+			} else {
+				return false;
+			}
+		}
+	}
+
+	public int hashCode() {
+		int hash = 1;
+		hash = hash * 17 + creationdate.hashCode();
+		hash = hash * 31 + description.hashCode();
+		return hash;
+	}
 }

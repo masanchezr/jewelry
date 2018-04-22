@@ -34,6 +34,10 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/salespostponed/finishsale.jsp" />
 	</definition>
+	<definition name="salepostponed" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/salespostponed/sale.jsp" />
+	</definition>
 	<definition name="finishaddinstallment"
 		extends="templateEmployee">
 		<put-attribute name="body"
