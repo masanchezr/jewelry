@@ -40,7 +40,7 @@ public class AdjustmentsAdminController {
 		ModelAndView model = new ModelAndView(VIEWSEARCHSUMADJUSTMENTS);
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject(ConstantsJsp.FORMSEARCH, new SearchForm());
-		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		return model;
 	}
 
@@ -51,7 +51,7 @@ public class AdjustmentsAdminController {
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		if (result.hasErrors()) {
 			model.addObject(ConstantsJsp.FORMSEARCH, searchForm);
-			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 			model.setViewName(VIEWSEARCHSUMADJUSTMENTS);
 		} else {
 			Date from = DateUtil.getDate(searchForm.getDatefrom());

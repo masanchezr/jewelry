@@ -31,6 +31,9 @@ public class PlaceEntity implements Serializable {
 	@Column(name = "DESCRIPTION")
 	private String description;
 
+	@Column(name = "ACTIVE")
+	private Boolean active;
+
 	/**
 	 * Gets the idplace.
 	 *
@@ -110,5 +113,13 @@ public class PlaceEntity implements Serializable {
 		hash = hash * 17 + creationdate.hashCode();
 		hash = hash * 31 + description.hashCode();
 		return hash;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean enabled) {
+		this.active = enabled;
 	}
 }

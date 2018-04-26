@@ -10,7 +10,7 @@
 	rel="stylesheet">
 <!-- Custom Fonts -->
 <link
-	href="<spring:url value="/resources/styles/admin/font-awesome-4.5.0/css/font-awesome.min.css"/>"
+	href="<spring:url value="/resources/styles/admin/font-awesome-5.0.10/css/fontawesome-all.css"/>"
 	rel="stylesheet" type="text/css">
 <!-- MetisMenu CSS -->
 <link
@@ -54,8 +54,9 @@
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item"><a class="nav-link" data-toggle="modal"
-					data-target="#exampleModal"> <i class="fa fa-fw fa-sign-out"></i>
-						<spring:message code="logout" />
+					data-target="#exampleModal"> <i
+						class="fa fa-fw fa-sign-out-alt"></i> <spring:message
+							code="logout" />
 				</a></li>
 			</ul>
 			<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
@@ -123,7 +124,7 @@
 							code="pawns" />"><a
 					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
 					href="#collapsePawns" data-parent="#exampleAccordion"> <i
-						class="fa fa-fw fa-money"></i> <span class="nav-link-text"><spring:message
+						class="fa fa-fw fa-money-bill-alt"></i> <span class="nav-link-text"><spring:message
 								code="pawns" /></span>
 				</a>
 					<ul class="sidenav-second-level collapse" id="collapsePawns">
@@ -149,8 +150,9 @@
 								code="entrymoney" />"><spring:url
 						value="/employee/newentrymoney" var="entrymoney"></spring:url> <a
 					href="${entrymoney}" class="nav-link"><i
-						class="fa fa-euro fa-fw"></i><span class="nav-link-text"> <spring:message
-								code="entrymoney" /></span></a></li>
+						class="fa fa-euro-sign fa-fw"></i><span class="nav-link-text">
+							<spring:message code="entrymoney" />
+					</span></a></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message
 							code="otherconcepts" />"><a

@@ -120,4 +120,6 @@ public class Constants {
 
 	public static final String SALESPOSTPONED = "salespostponed";
 
+	public static final Long ALLPLACES = 0L;
+
 }

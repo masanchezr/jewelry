@@ -24,7 +24,7 @@
 			<a class="card-footer text-white clearfix small z-1"
 				href="${newsale}"> <span class="float-left"><spring:message
 						code="newsalepostponed" /></span> <span class="float-right"><i
-					class="fa fa-angle-right"></i></span>
+					class="nav-link-text"></i></span>
 			</a>
 		</div>
 	</div>
@@ -32,7 +32,7 @@
 		<div class="card text-white bg-success o-hidden">
 			<div class="card-body">
 				<div class="card-body-icon">
-					<i class="fa fa-euro fa-fw"></i>
+					<i class="fa fa-euro-sign fa-fw"></i>
 				</div>
 				<div class="mr-5">
 					<c:out value="${saleForm.total}" />
@@ -42,7 +42,7 @@
 			<spring:url value="/employee/daily" var="daily"></spring:url>
 			<a class="card-footer text-white clearfix small z-1" href="${daily}">
 				<span class="float-left"><spring:message code="daily" /></span> <span
-				class="float-right"><i class="fa fa-angle-right"></i></span>
+				class="float-right"><i class="nav-link-text"></i></span>
 			</a>
 		</div>
 	</div>
@@ -74,7 +74,7 @@
 								<td><c:out value="${jewel.reference}" /></td>
 								<td><c:out value="${jewel.name}" /></td>
 								<td><c:out value="${jewel.description}" /></td>
-								<td><c:out value="${jewel.price}" /><i class="fa fa-euro"></i></td>
+								<td><c:out value="${jewel.price}" /><i class="fa fa-euro-sign"></i></td>
 								<td><c:out value="${jewel.category.namecategory}" /></td>
 								<td><c:out value="${jewel.metal.description}" /></td>
 							</tr>
@@ -107,7 +107,7 @@
 							<tr>
 								<td><fmt:formatDate value="${jewel.creationdate}"
 										type="date" /></td>
-								<td><c:out value="${jewel.amount}" /><i class="fa fa-euro"></i></td>
+								<td><c:out value="${jewel.amount}" /><i class="fa fa-euro-sign"></i></td>
 							</tr>
 						</c:forEach>
 					</tbody>

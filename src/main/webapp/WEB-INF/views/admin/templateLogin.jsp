@@ -11,7 +11,7 @@
 	rel="stylesheet">
 <!-- Custom Fonts -->
 <link
-	href="<spring:url value="/resources/styles/admin/font-awesome-4.5.0/css/font-awesome.min.css"/>"
+	href="<spring:url value="/resources/styles/admin/font-awesome-5.0.10/css/fontawesome-all.css"/>"
 	rel="stylesheet" type="text/css">
 <title><spring:message code="titleAdmin" /></title>
 </head>

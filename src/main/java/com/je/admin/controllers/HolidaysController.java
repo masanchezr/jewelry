@@ -14,6 +14,7 @@ import com.je.admin.validators.HolidayValidator;
 import com.je.services.holidays.Holiday;
 import com.je.services.holidays.HolidayService;
 import com.je.services.places.PlaceService;
+import com.je.utils.constants.Constants;
 import com.je.utils.constants.ConstantsJsp;
 
 /**
@@ -62,16 +63,16 @@ public class HolidaysController {
 		holidayValidator.validate(holiday, result);
 		if (result.hasErrors()) {
 			model.addObject(ConstantsJsp.FORMHOLIDAY, holiday);
-			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 			model.setViewName(VIEWNEWHOLIDAY);
 		} else if (holidayService.existsHoliday(holiday)) {
 			result.rejectValue(ConstantsJsp.FORMHOLIDAY, "holidayexists");
 			model.addObject(ConstantsJsp.FORMHOLIDAY, holiday);
-			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 			model.setViewName(VIEWNEWHOLIDAY);
 		} else {
 			model.setViewName(ConstantsJsp.SUCCESS);
-			if (holiday.isAllplaces()) {
+			if (holiday.getPlace().getIdplace().equals(Constants.ALLPLACES)) {
 				holidayService.addHolidayAllPlaces(holiday);
 			} else {
 				holidayService.addHoliday(holiday);

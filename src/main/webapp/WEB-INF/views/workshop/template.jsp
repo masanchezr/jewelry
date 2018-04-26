@@ -10,7 +10,7 @@
 	rel="stylesheet">
 <!-- Custom Fonts -->
 <link
-	href="<spring:url value="/resources/styles/admin/font-awesome-4.5.0/css/font-awesome.min.css"/>"
+	href="<spring:url value="/resources/styles/admin/font-awesome-5.0.10/css/fontawesome-all.css"/>"
 	rel="stylesheet" type="text/css">
 <!-- MetisMenu CSS -->
 <link
@@ -51,8 +51,9 @@
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item"><a class="nav-link" data-toggle="modal"
-					data-target="#exampleModal"> <i class="fa fa-fw fa-sign-out"></i>
-						<spring:message code="logout" />
+					data-target="#exampleModal"> <i
+						class="fa fa-fw fa-sign-out-alt"></i> <spring:message
+							code="logout" />
 				</a></li>
 			</ul>
 			<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
@@ -69,7 +70,7 @@
 								code="workshop" />"><spring:url
 						value="/workshop/newWorkshop" var="workshop"></spring:url> <a
 					class="nav-link" href="${workshop}"><i
-						class="fa fa-diamond fa-fw"></i> <span class="nav-link-text"><spring:message
+						class="fa fa-gem fa-fw"></i> <span class="nav-link-text"><spring:message
 								code="workshop" /></span></a></li>
 
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"

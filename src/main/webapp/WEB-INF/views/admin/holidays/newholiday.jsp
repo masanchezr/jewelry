@@ -28,28 +28,25 @@
 							<spring:message code="description" var="desc" />
 							<form:input class="form-control" path="description"
 								placeholder="${desc}" />
-							<p class="text-danger"><form:errors
-										path="description" /></p>
-					</div>
-					<div class="form-group">
-						<spring:message code="allplaces" />
-						<form:checkbox path="allplaces" />
-					</div>
-					<div class="form-group">
-						<spring:message code="place" />
-						<form:select class="form-control" path="place.idplace">
-							<form:options items="${places}" itemValue="idplace"
-								itemLabel="description" />
-						</form:select>
+							<p class="text-danger">
+								<form:errors path="description" />
+							</p>
+						</div>
+						<div class="form-group">
+							<spring:message code="place" />
+							<form:select class="form-control" path="place.idplace">
+								<form:options items="${places}" itemValue="idplace"
+									itemLabel="description" />
+							</form:select>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<form:button class="btn btn-primary" value="submit">
-					<spring:message code="save" />
-				</form:button>
+				<div class="form-group">
+					<form:button class="btn btn-primary" value="submit">
+						<spring:message code="save" />
+					</form:button>
+				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 </form:form>

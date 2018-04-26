@@ -115,7 +115,7 @@ public class SaleAdminController {
 		ModelAndView model = new ModelAndView("searchsales");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject(ConstantsJsp.FORMSEARCH, new SearchForm());
-		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		return model;
 	}
 
@@ -124,7 +124,7 @@ public class SaleAdminController {
 		ModelAndView model = new ModelAndView("searchnummissing");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject(ConstantsJsp.FORMSEARCH, new SearchMissingNumbers());
-		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		return model;
 	}
 
@@ -137,7 +137,7 @@ public class SaleAdminController {
 		if (bindingResult.hasErrors()) {
 			model.setViewName("searchnummissing");
 			model.addObject(ConstantsJsp.FORMSEARCH, searchForm);
-			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		} else {
 			model.addObject("nummissing", searchMissingNumberService.calculateMissingSales(searchForm));
 			model.setViewName("resultnummissing");
@@ -154,7 +154,7 @@ public class SaleAdminController {
 		if (bindingResult.hasErrors()) {
 			model.setViewName("searchsales");
 			model.addObject(ConstantsJsp.FORMSEARCH, searchSaleForm);
-			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		} else {
 			model.addAllObjects(saleService.searchByDatesAndPlace(searchSaleForm.getDatefrom(),
 					searchSaleForm.getDateuntil(), searchSaleForm.getPlace()));
@@ -200,7 +200,7 @@ public class SaleAdminController {
 					model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
 					model.addObject(ConstantsJsp.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
 					model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
-					model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+					model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 					result.rejectValue(ConstantsJsp.NUMSALE, ConstantsJsp.ERRORNUMSALEREPEATED);
 					model.addObject(ConstantsJsp.FORMSALE, sale);
 					model.setViewName(VIEWNEWSALEADMIN);
@@ -209,7 +209,7 @@ public class SaleAdminController {
 				model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
 				model.addObject(ConstantsJsp.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
 				model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
-				model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+				model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 				result.rejectValue(ConstantsJsp.NUMSALE, "jewelnoexist");
 				model.addObject(ConstantsJsp.FORMSALE, sale);
 				model.setViewName(VIEWNEWSALEADMIN);
@@ -218,7 +218,7 @@ public class SaleAdminController {
 			model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
 			model.addObject(ConstantsJsp.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
 			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
-			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 			model.addObject(ConstantsJsp.FORMSALE, sale);
 			model.setViewName(VIEWNEWSALEADMIN);
 		}
@@ -260,7 +260,7 @@ public class SaleAdminController {
 		model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
 		model.addObject(ConstantsJsp.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
 		model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
-		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject(ConstantsJsp.FORMSALE, sale);
 		return model;

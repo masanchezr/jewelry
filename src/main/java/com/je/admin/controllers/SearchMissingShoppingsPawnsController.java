@@ -33,7 +33,7 @@ public class SearchMissingShoppingsPawnsController {
 	public ModelAndView searchMissingShoppings() {
 		ModelAndView model = new ModelAndView(SEARCHMISSINGSHOPPINGS);
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
-		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		model.addObject(SEARCHMISSINGSHOPPINGS, new SearchMissingNumbers());
 		return model;
 	}
@@ -45,7 +45,7 @@ public class SearchMissingShoppingsPawnsController {
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		searchMissingNumbersValidator.validate(searchmissingshoppings, result);
 		if (result.hasErrors()) {
-			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 			model.addObject(SEARCHMISSINGSHOPPINGS, new SearchMissingNumbers());
 			model.setViewName(SEARCHMISSINGSHOPPINGS);
 		} else {

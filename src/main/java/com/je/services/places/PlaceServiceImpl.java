@@ -25,7 +25,7 @@ public class PlaceServiceImpl implements PlaceService {
 	private PlaceUserRepository placeUserRepository;
 
 	@Override
-	public Iterable<PlaceEntity> getAllPlaces() {
+	public Iterable<PlaceEntity> getAllPlacesActive() {
 		return placeRepository.findAll(new Sort(Direction.ASC, Constants.DESCRIPTION));
 	}
 
@@ -42,5 +42,10 @@ public class PlaceServiceImpl implements PlaceService {
 			place = placeuser.get(0).getPlace();
 		}
 		return place;
+	}
+
+	@Override
+	public Iterable<PlaceEntity> getAllPlaces() {
+		return placeRepository.findByActiveTrueOrderByDescription();
 	}
 }

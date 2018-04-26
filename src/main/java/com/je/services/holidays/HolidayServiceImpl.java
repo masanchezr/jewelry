@@ -52,7 +52,7 @@ public class HolidayServiceImpl implements HolidayService {
 
 	public boolean existsHoliday(Holiday holiday) {
 		HolidayEntity entity = holidayRepository.findByHolidayAndPlace(
-				DateUtil.getDate(holiday.getHoliday()),
+				DateUtil.getDate(holiday.getDateholiday()),
 				mapper.map(holiday.getPlace(), PlaceEntity.class));
 		boolean exists = false;
 		if (entity != null) {
@@ -62,7 +62,7 @@ public class HolidayServiceImpl implements HolidayService {
 	}
 
 	public List<Holiday> findByBetweenDates(Holiday holiday) {
-		Date from = DateUtil.getDate(holiday.getHoliday());
+		Date from = DateUtil.getDate(holiday.getDateholiday());
 		Date until = new Date();
 		String suntil = holiday.getUntildate();
 		if (!Util.isEmpty(suntil)) {

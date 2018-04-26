@@ -42,8 +42,9 @@
 						</tr>
 					</c:forEach>
 					<tr>
-						<td><spring:message code="firstinstallment" /> <form:input
-								class="form-control" path="optionalpayment" /></td>
+						<td><spring:message code="firstinstallment"
+								var="firstinstallment" /> <form:input class="form-control"
+								path="optionalpayment" placeholder="${firstinstallment}" /></td>
 						<td><form:select class="form-control"
 								path="payment.idpayment">
 								<form:options items="${payments}" itemValue="idpayment"

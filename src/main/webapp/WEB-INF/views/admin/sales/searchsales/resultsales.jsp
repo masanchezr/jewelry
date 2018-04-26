@@ -43,12 +43,12 @@
 						<div class="form-group">
 							<spring:message code="totalamount" />
 							<c:out value="${total}" />
-							<i class="fa fa-euro"></i>
+							<i class="fa fa-euro-sign"></i>
 						</div>
 						<div class="form-group">
 							<spring:message code="cost" />
 							<c:out value="${cost}" />
-							<i class="fa fa-euro"></i>
+							<i class="fa fa-euro-sign"></i>
 						</div>
 					</div>
 				</div>

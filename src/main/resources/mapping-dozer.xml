@@ -6,7 +6,8 @@
 	<mapping>
 		<class-a>com.je.services.sales.Sale</class-a>
 		<class-b>com.je.dbaccess.entities.SaleEntity</class-b>
-		<field custom-converter="com.je.services.converters.StringToDateConverter">
+		<field
+			custom-converter="com.je.services.converters.StringToDateConverter">
 			<a>saledate</a>
 			<b>creationdate</b>
 		</field>
@@ -14,7 +15,8 @@
 	<mapping>
 		<class-a>com.je.services.shoppings.Shopping</class-a>
 		<class-b>com.je.dbaccess.entities.ShoppingEntity</class-b>
-		<field custom-converter="com.je.services.converters.StringToDateConverter">
+		<field
+			custom-converter="com.je.services.converters.StringToDateConverter">
 			<a>creationdate</a>
 			<b>creationdate</b>
 		</field>
@@ -30,7 +32,8 @@
 	<mapping>
 		<class-a>com.je.services.pawns.NewPawn</class-a>
 		<class-b>com.je.dbaccess.entities.PawnEntity</class-b>
-		<field custom-converter="com.je.services.converters.StringToDateConverter">
+		<field
+			custom-converter="com.je.services.converters.StringToDateConverter">
 			<a>creationdate</a>
 			<b>creationdate</b>
 		</field>
@@ -42,7 +45,8 @@
 	<mapping trim-strings="true">
 		<class-a>com.je.services.pawns.NewPawn</class-a>
 		<class-b>com.je.dbaccess.entities.ClientPawnEntity</class-b>
-		<field custom-converter="com.je.services.converters.StringToDateConverter">
+		<field
+			custom-converter="com.je.services.converters.StringToDateConverter">
 			<a>datebirth</a>
 			<b>datebirth</b>
 		</field>
@@ -50,8 +54,9 @@
 	<mapping>
 		<class-a>com.je.services.holidays.Holiday</class-a>
 		<class-b>com.je.dbaccess.entities.HolidayEntity</class-b>
-		<field custom-converter="com.je.services.converters.StringToDateConverter">
-			<a>holiday</a>
+		<field
+			custom-converter="com.je.services.converters.StringToDateConverter">
+			<a>dateholiday</a>
 			<b>holiday</b>
 		</field>
 	</mapping>

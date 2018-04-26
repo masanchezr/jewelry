@@ -93,7 +93,7 @@ public class ShoppingsAdminController {
 		ModelAndView model = new ModelAndView(VIEWSEARCHSHOPPINGS);
 		model.addObject(ConstantsJsp.SHOPPINGFORM, new ShoppingSearch());
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
-		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		return model;
 	}
 
@@ -113,7 +113,7 @@ public class ShoppingsAdminController {
 		shoppingFormValidator.validate(shopping, result);
 		if (result.hasErrors()) {
 			model.addObject("shopping", shopping);
-			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 			model.setViewName(VIEWSEARCHSHOPPINGS);
 		} else {
 			List<Shopping> shoppings = shoppingService.searchShoppings(shopping.getDatefrom(), shopping.getDateuntil(),
@@ -139,7 +139,7 @@ public class ShoppingsAdminController {
 		Long idshop = shopping.getId();
 		if (idshop == null) {
 			model.addObject(ConstantsJsp.SHOPPINGFORM, new ShoppingSearch());
-			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 			model.setViewName(VIEWSEARCHSHOPPINGS);
 		} else {
 			shopping = shoppingService.findShopByPK(idshop);
@@ -221,7 +221,7 @@ public class ShoppingsAdminController {
 		ModelAndView model = new ModelAndView("searchquarter");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject(ConstantsJsp.SHOPPINGFORM, new SearchForm());
-		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		return model;
 	}
 
@@ -230,7 +230,7 @@ public class ShoppingsAdminController {
 		ModelAndView model = new ModelAndView("searchquartermaterial");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject(ConstantsJsp.SHOPPINGFORM, new SearchForm());
-		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		return model;
 	}
 
@@ -241,7 +241,7 @@ public class ShoppingsAdminController {
 		adminSearchValidator.validate(shopping, result);
 		if (result.hasErrors()) {
 			model.setViewName("searchquartermaterial");
-			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		} else {
 			List<QuarterMetal> quarters = shoppingService.searchGramsByMetal(shopping.getDatefrom(),
 					shopping.getDateuntil(), shopping.getPlace());
@@ -259,7 +259,7 @@ public class ShoppingsAdminController {
 		ModelAndView model = new ModelAndView("searchgramsnull");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject("adminSearchForm", new SearchForm());
-		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		return model;
 	}
 
@@ -271,7 +271,7 @@ public class ShoppingsAdminController {
 		if (result.hasErrors()) {
 			model.setViewName("searchgramsnull");
 			model.addObject("adminSearchForm", form);
-			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		} else {
 			List<Long> numshops = shoppingService.searchGramsNull(form.getDatefrom(), form.getDateuntil(),
 					form.getPlace());

@@ -21,7 +21,7 @@ public class HolidayValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "holiday", ConstantsJsp.SELECTDATE);
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.DESCRIPTION, ConstantsJsp.ERRORSELECTDESCRIPTION);
 		Holiday holiday = (Holiday) arg0;
-		if (!DateUtil.isDate(holiday.getHoliday())) {
+		if (!DateUtil.isDate(holiday.getDateholiday())) {
 			arg1.rejectValue(ConstantsJsp.FORMHOLIDAY, ConstantsJsp.SELECTDATE);
 		}
 	}

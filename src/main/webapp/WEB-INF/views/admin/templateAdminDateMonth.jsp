@@ -10,7 +10,7 @@
 	rel="stylesheet">
 <!-- Custom Fonts -->
 <link
-	href="<spring:url value="/resources/styles/admin/font-awesome-4.5.0/css/font-awesome.min.css"/>"
+	href="<spring:url value="/resources/styles/admin/font-awesome-5.0.10/css/fontawesome-all.css"/>"
 	rel="stylesheet" type="text/css">
 <!-- MetisMenu CSS -->
 <link
@@ -70,7 +70,7 @@
 					</form>
 				</li>
 				<li class="nav-item"><a class="nav-link" data-toggle="modal"
-					data-target="#exampleModal"> <i class="fa fa-fw fa-sign-out"></i>
+					data-target="#exampleModal"> <i class="fa fa-fw fa-sign-out-alt"></i>
 						<spring:message code="logout" />
 				</a></li>
 			</ul>
@@ -80,7 +80,7 @@
 								code="searchentries" />"><spring:url
 						value="/searchEntries" var="searchEntries"></spring:url> <a
 					href="${searchEntries}" class="nav-link"><i
-						class="fa fa-eur fa-fw"></i> <span class="nav-link-text"><spring:message
+						class="fa fa-euro-sign fa-fw"></i> <span class="nav-link-text"><spring:message
 								code="searchentries" /></span></a></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message code="adjustments"/>"><a
@@ -100,7 +100,7 @@
 					title="<spring:message code="jewels"/>"><a
 					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
 					href="#collapseJewels" data-parent="#exampleAccordion"><i
-						class="fa fa-diamond fa-fw"></i> <span class="nav-link-text"><spring:message
+						class="fa fa-gem fa-fw"></i> <span class="nav-link-text"><spring:message
 								code="jewels" /></span></a>
 					<ul class="sidenav-second-level collapse" id="collapseJewels">
 						<li><spring:url value="/newJewel" var="newjewels"></spring:url>
@@ -154,7 +154,7 @@
 					title="<spring:message code="pawns"/>"><a
 					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
 					href="#collapsePawns" data-parent="#exampleAccordion"><i
-						class="fa fa-money fa-fw"></i> <span class="nav-link-text"><spring:message
+						class="fa fa-money-bill-alt-bill-alt fa-fw"></i> <span class="nav-link-text"><spring:message
 								code="pawns" /></span> </a>
 					<ul class="sidenav-second-level collapse" id="collapsePawns">
 						<li><spring:url value="/searchPawns" var="searchpawns" /><a

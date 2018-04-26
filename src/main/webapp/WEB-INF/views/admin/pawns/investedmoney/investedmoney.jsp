@@ -5,7 +5,7 @@
 		<div class="card text-white bg-success o-hidden h-100">
 			<div class="card-body">
 				<div class="card-body-icon">
-					<i class="fa fa-fw fa-euro"></i>
+					<i class="fa fa-fw fa-euro-sign"></i>
 				</div>
 				<div class="mr-5">
 					<spring:message code="totalamount" />

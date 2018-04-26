@@ -8,14 +8,12 @@ import com.je.dbaccess.entities.PlaceEntity;
 public class Holiday {
 
 	/** The holiday. */
-	private String holiday;
+	private String dateholiday;
 
 	/** The place. */
 	private PlaceEntity place;
 
 	private String description;
-
-	private boolean allplaces;
 
 	private String untildate;
 
@@ -24,8 +22,8 @@ public class Holiday {
 	 *
 	 * @return the holiday
 	 */
-	public String getHoliday() {
-		return holiday;
+	public String getDateholiday() {
+		return dateholiday;
 	}
 
 	/**
@@ -34,8 +32,8 @@ public class Holiday {
 	 * @param holiday
 	 *            the new holiday
 	 */
-	public void setHoliday(String holiday) {
-		this.holiday = holiday;
+	public void setDateholiday(String holiday) {
+		this.dateholiday = holiday;
 	}
 
 	/**
@@ -63,14 +61,6 @@ public class Holiday {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public boolean isAllplaces() {
-		return allplaces;
-	}
-
-	public void setAllplaces(boolean allplaces) {
-		this.allplaces = allplaces;
 	}
 
 	public String getUntildate() {

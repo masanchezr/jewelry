@@ -32,7 +32,7 @@ public class UsersController {
 		ModelAndView model = new ModelAndView("newuser");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject(ConstantsJsp.USER, new User());
-		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		return model;
 	}
 
@@ -44,7 +44,7 @@ public class UsersController {
 		if (result.hasErrors()) {
 			model.setViewName("newuser");
 			model.addObject(ConstantsJsp.USER, new User());
-			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		} else {
 			model.setViewName("resultuser");
 			model.addObject(ConstantsJsp.USER, user);

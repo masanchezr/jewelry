@@ -31,7 +31,7 @@
 			<a class="card-footer text-white clearfix small z-1"
 				href="${newjewels}"> <span class="float-left"><spring:message
 						code="newjewel" /></span> <span class="float-right"> <i
-					class="fa fa-angle-right"></i>
+					class="nav-link-text"></i>
 			</span>
 			</a>
 		</div>
@@ -40,7 +40,7 @@
 		<div class="card text-white bg-success o-hidden">
 			<div class="card-body">
 				<div class="card-body-icon">
-					<i class="fa fa-fw fa-euro"></i>
+					<i class="fa fa-fw fa-euro-sign"></i>
 				</div>
 				<div class="mr-5">
 					<c:out value="${jewel.price}" />
@@ -50,7 +50,7 @@
 			<a class="card-footer text-white clearfix small z-1"
 				href="${updatejewels}"> <span class="float-left"><spring:message
 						code="updatejewels" /></span> <span class="float-right"> <i
-					class="fa fa-angle-right"></i>
+					class="nav-link-text"></i>
 			</span>
 			</a>
 		</div>

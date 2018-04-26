@@ -58,7 +58,7 @@ public class DailiesController {
 	public ModelAndView dailyPlace() {
 		ModelAndView model = new ModelAndView("searchdaily");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
-		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		model.addObject(ConstantsJsp.FORMSEARCHDAILY, new SearchDailyForm());
 		return model;
 	}
@@ -67,7 +67,7 @@ public class DailiesController {
 	public ModelAndView searchCalculateDailies() {
 		ModelAndView model = new ModelAndView(VIEWSEARCHCALCULATEDAILIES);
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
-		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		model.addObject(ConstantsJsp.FORMSEARCHDAILY, new SearchDailyForm());
 		return model;
 	}
@@ -96,7 +96,7 @@ public class DailiesController {
 			searchDailyFormValidator.validate(sdf, arg1);
 			if (arg1.hasErrors()) {
 				model = new ModelAndView();
-				model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+				model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 				model.addObject(ConstantsJsp.FORMSEARCHDAILY, sdf);
 				model.setViewName("searchdaily");
 				model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -130,7 +130,7 @@ public class DailiesController {
 		searchDailyFormValidator.validate(sdf, arg1);
 		if (arg1.hasErrors()) {
 			model.setViewName(VIEWSEARCHCALCULATEDAILIES);
-			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		} else {
 			String sdate = sdf.getDate();
 			Date date = DateUtil.getDate(sdf.getDate());
@@ -144,7 +144,7 @@ public class DailiesController {
 					model.setViewName(ConstantsJsp.SUCCESS);
 				} else {
 					model.setViewName(VIEWSEARCHCALCULATEDAILIES);
-					model.addObject(ConstantsJsp.PLACES, placeService.getAllPlaces());
+					model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 				}
 			}
 		}
