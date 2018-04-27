@@ -22,15 +22,6 @@
 <link href="<spring:url value="/resources/styles/web/jquery-ui.css"/>"
 	rel='stylesheet' type='text/css' />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script type="application/x-javascript">
-	
-								
-	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); 
-	 function hideURLbar(){ window.scrollTo(0,1); }
-
-
-</script>
-
 <!----webfonts---->
 <link
 	href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300'

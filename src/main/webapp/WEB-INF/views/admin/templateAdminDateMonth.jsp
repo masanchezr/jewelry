@@ -12,7 +12,9 @@
 <link
 	href="<spring:url value="/resources/styles/admin/font-awesome-5.0.10/css/fontawesome-all.css"/>"
 	rel="stylesheet" type="text/css">
-<!-- MetisMenu CSS -->
+<link
+	href="<spring:url value="/resources/styles/font-awesome-5.0.10/css/font-awesome.min.css"/>"
+	rel="stylesheet" type="text/css">
 <link
 	href="<spring:url value="/resources/styles/admin/dataTables.bootstrap4.css"/>"
 	rel="stylesheet">
@@ -70,8 +72,9 @@
 					</form>
 				</li>
 				<li class="nav-item"><a class="nav-link" data-toggle="modal"
-					data-target="#exampleModal"> <i class="fa fa-fw fa-sign-out-alt"></i>
-						<spring:message code="logout" />
+					data-target="#exampleModal"> <i
+						class="fa fa-fw fa-sign-out-alt"></i> <spring:message
+							code="logout" />
 				</a></li>
 			</ul>
 			<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
@@ -154,8 +157,8 @@
 					title="<spring:message code="pawns"/>"><a
 					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
 					href="#collapsePawns" data-parent="#exampleAccordion"><i
-						class="fa fa-money-bill-alt-bill-alt fa-fw"></i> <span class="nav-link-text"><spring:message
-								code="pawns" /></span> </a>
+						class="fa fa-money-bill-alt fa-fw"></i> <span
+						class="nav-link-text"><spring:message code="pawns" /></span> </a>
 					<ul class="sidenav-second-level collapse" id="collapsePawns">
 						<li><spring:url value="/searchPawns" var="searchpawns" /><a
 							href="${searchpawns}"><spring:message code="searchpawns" /></a></li>

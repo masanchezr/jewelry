@@ -12,7 +12,9 @@
 <link
 	href="<spring:url value="/resources/styles/admin/font-awesome-5.0.10/css/fontawesome-all.css"/>"
 	rel="stylesheet" type="text/css">
-<!-- MetisMenu CSS -->
+<link
+	href="<spring:url value="/resources/styles/font-awesome-5.0.10/css/font-awesome.min.css"/>"
+	rel="stylesheet" type="text/css">
 <link
 	href="<spring:url value="/resources/styles/admin/dataTables.bootstrap4.css"/>"
 	rel="stylesheet">
@@ -54,8 +56,9 @@
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item"><a class="nav-link" data-toggle="modal"
-					data-target="#exampleModal"> <i class="fa fa-fw fa-sign-out-alt"></i>
-						<spring:message code="logout" />
+					data-target="#exampleModal"> <i
+						class="fa fa-fw fa-sign-out-alt"></i> <spring:message
+							code="logout" />
 				</a></li>
 			</ul>
 			<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
@@ -123,8 +126,8 @@
 							code="pawns" />"><a
 					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
 					href="#collapsePawns" data-parent="#exampleAccordion"> <i
-						class="fa fa-fw fa-money-bill-alt"></i> <span class="nav-link-text"><spring:message
-								code="pawns" /></span>
+						class="fa fa-fw fa-money-bill-alt"></i> <span
+						class="nav-link-text"><spring:message code="pawns" /></span>
 				</a>
 					<ul class="sidenav-second-level collapse" id="collapsePawns">
 						<li><spring:url value="/employee/searchclientpawn"
@@ -149,8 +152,9 @@
 								code="entrymoney" />"><spring:url
 						value="/employee/newentrymoney" var="entrymoney"></spring:url> <a
 					href="${entrymoney}" class="nav-link"><i
-						class="fa fa-euro-sign fa-fw"></i><span class="nav-link-text"> <spring:message
-								code="entrymoney" /></span></a></li>
+						class="fa fa-euro-sign fa-fw"></i><span class="nav-link-text">
+							<spring:message code="entrymoney" />
+					</span></a></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message
 							code="otherconcepts" />"><a

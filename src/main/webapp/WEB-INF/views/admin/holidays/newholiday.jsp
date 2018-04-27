@@ -17,11 +17,11 @@
 						<div class="form-group">
 							<spring:message code="date" var="date" />
 							<div id="sandbox-container">
-								<form:input class="form-control" type="text" path="holiday"
+								<form:input class="form-control" type="text" path="dateholiday"
 									placeholder="${date}" />
 							</div>
 							<p class="text-danger">
-								<form:errors path="holiday" />
+								<form:errors path="dateholiday" />
 							</p>
 						</div>
 						<div class="form-group">

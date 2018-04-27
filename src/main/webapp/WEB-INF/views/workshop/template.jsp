@@ -12,7 +12,9 @@
 <link
 	href="<spring:url value="/resources/styles/admin/font-awesome-5.0.10/css/fontawesome-all.css"/>"
 	rel="stylesheet" type="text/css">
-<!-- MetisMenu CSS -->
+<link
+	href="<spring:url value="/resources/styles/font-awesome-5.0.10/css/font-awesome.min.css"/>"
+	rel="stylesheet" type="text/css">
 <link
 	href="<spring:url value="/resources/styles/admin/dataTables.bootstrap4.css"/>"
 	rel="stylesheet">
@@ -69,9 +71,8 @@
 					title="<spring:message
 								code="workshop" />"><spring:url
 						value="/workshop/newWorkshop" var="workshop"></spring:url> <a
-					class="nav-link" href="${workshop}"><i
-						class="fa fa-gem fa-fw"></i> <span class="nav-link-text"><spring:message
-								code="workshop" /></span></a></li>
+					class="nav-link" href="${workshop}"><i class="fa fa-gem fa-fw"></i>
+						<span class="nav-link-text"><spring:message code="workshop" /></span></a></li>
 
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message
@@ -80,7 +81,6 @@
 					class="nav-link" href="${billing}"><i
 						class="fa fa-bar-chart fa-fw"></i> <span class="nav-link-text"><spring:message
 								code="currentmonthbill" /></span></a></li>
-
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message
 								code="monthpreviousbill" />"><spring:url
