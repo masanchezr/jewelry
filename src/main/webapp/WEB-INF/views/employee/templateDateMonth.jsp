@@ -126,7 +126,7 @@
 							code="pawns" />"><a
 					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
 					href="#collapsePawns" data-parent="#exampleAccordion"> <i
-						class="fa fa-fw fa-money"></i> <span
+						class="fa fa-fw fa-money-bill-alt"></i> <span
 						class="nav-link-text"><spring:message code="pawns" /></span>
 				</a>
 					<ul class="sidenav-second-level collapse" id="collapsePawns">
