@@ -448,9 +448,7 @@ public class DailyServiceImpl implements DailyService {
 					if (payment.getIdpayment().equals(Constants.EFECTIVO)) {
 						salespostamount += sp.getAmount().doubleValue();
 					}
-					if (payments.length() < 16) {
-						payments = payments.concat(payment.getName()).concat(" ");
-					}
+					payments = payments.concat(payment.getName()).concat(" ");
 				}
 				saleView = mapper.map(sale, SalePostPoned.class);
 				saleView.setPayments(payments);
