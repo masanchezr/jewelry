@@ -226,7 +226,7 @@
 	<definition name="searchsalepostponed"
 		extends="templateAdmin">
 		<put-attribute name="body"
-			value="/WEB-INF/views/admin/sales/salesmissing/searchsalepostponed.jsp" />
+			value="/WEB-INF/views/admin/salespostponed/searchsalepostponed.jsp" />
 	</definition>
 	<definition name="salepostponed" extends="templateAdmin">
 		<put-attribute name="body"

@@ -5,7 +5,6 @@
 <ol class="breadcrumb">
 	<li class="breadcrumb-item"><a href="#"><spring:message
 				code="salespostponed" /></a></li>
-	<li class="breadcrumb-item active"><spring:message code="newsale" /></li>
 	<li class="breadcrumb-item active"><spring:message
 			code="savedsale" /></li>
 </ol>
@@ -41,6 +40,19 @@
 			</a>
 		</div>
 	</div>
+	<div class="col-xl-3 col-sm-6 mb-3">
+		<div class="card text-white bg-danger o-hidden">
+			<div class="card-body">
+				<div class="card-body-icon">
+					<i class="fa fa-fw fa-support"></i>
+				</div>
+				<div class="mr-5">
+					<c:out value="${saleForm.place.description}" />
+					<spring:message code="idsale" />
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <!-- /.row -->
 <div class="row">
@@ -69,7 +81,8 @@
 								<td><c:out value="${jewel.reference}" /></td>
 								<td><c:out value="${jewel.name}" /></td>
 								<td><c:out value="${jewel.description}" /></td>
-								<td><c:out value="${jewel.price}" /><i class="fa fa-euro-sign"></i></td>
+								<td><c:out value="${jewel.price}" /><i
+									class="fa fa-euro-sign"></i></td>
 								<td><c:out value="${jewel.category.namecategory}" /></td>
 								<td><c:out value="${jewel.metal.description}" /></td>
 							</tr>
@@ -102,7 +115,8 @@
 							<tr>
 								<td><fmt:formatDate value="${jewel.creationdate}"
 										type="date" /></td>
-								<td><c:out value="${jewel.amount}" /><i class="fa fa-euro-sign"></i></td>
+								<td><c:out value="${jewel.amount}" /><i
+									class="fa fa-euro-sign"></i></td>
 							</tr>
 						</c:forEach>
 					</tbody>

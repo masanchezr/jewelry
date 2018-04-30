@@ -11,6 +11,8 @@ import com.je.utils.date.DateUtil;
 
 public class HolidayValidator implements Validator {
 
+	public static final String DATEHOLIDAY = "dateholiday";
+
 	@Override
 	public boolean supports(Class<?> arg0) {
 		return Holiday.class.isAssignableFrom(arg0);
@@ -18,11 +20,11 @@ public class HolidayValidator implements Validator {
 
 	@Override
 	public void validate(Object arg0, Errors arg1) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "holiday", ConstantsJsp.SELECTDATE);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, DATEHOLIDAY, ConstantsJsp.SELECTDATE);
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.DESCRIPTION, ConstantsJsp.ERRORSELECTDESCRIPTION);
 		Holiday holiday = (Holiday) arg0;
 		if (!DateUtil.isDate(holiday.getDateholiday())) {
-			arg1.rejectValue(ConstantsJsp.FORMHOLIDAY, ConstantsJsp.SELECTDATE);
+			arg1.rejectValue(DATEHOLIDAY, ConstantsJsp.SELECTDATE);
 		}
 	}
 

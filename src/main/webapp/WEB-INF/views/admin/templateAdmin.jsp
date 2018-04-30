@@ -242,6 +242,25 @@
 									code="searchsalepostponed" /></a></li>
 					</ul></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
+					title="<spring:message
+							code="salespostponed" />"><a
+					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
+					href="#collapseSalesPostPoned" data-parent="#exampleAccordion">
+						<i class="fa fa-fw fa-tasks"></i> <span class="nav-link-text"><spring:message
+								code="salespostponed" /></span>
+				</a>
+					<ul class="sidenav-second-level collapse"
+						id="collapseSalesPostPoned">
+						<li><spring:url value="/searchsalepostponed"
+								var="searchsalepostponed"></spring:url><a
+							href="${searchsalepostponed}"><spring:message
+									code="searchsalepostponed" /></a></li>
+						<li><spring:url value="/searchmissingsalepostponed"
+								var="searchNumMissingSalePost" /> <a
+							href="${searchNumMissingSalePost}"> <spring:message
+									code="searchnummissing" /></a>
+					</ul></li>
+				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message code="users"/>"><spring:url
 						value="/newuser" var="newuser" /> <a href="${newuser}"
 					class="nav-link"><i class="fa fa-users fa-fw"></i><span
