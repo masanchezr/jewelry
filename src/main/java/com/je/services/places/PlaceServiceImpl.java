@@ -26,7 +26,7 @@ public class PlaceServiceImpl implements PlaceService {
 
 	@Override
 	public Iterable<PlaceEntity> getAllPlacesActive() {
-		return placeRepository.findAll(new Sort(Direction.ASC, Constants.DESCRIPTION));
+		return placeRepository.findByActiveTrueOrderByDescription();
 	}
 
 	@Override
@@ -46,6 +46,6 @@ public class PlaceServiceImpl implements PlaceService {
 
 	@Override
 	public Iterable<PlaceEntity> getAllPlaces() {
-		return placeRepository.findByActiveTrueOrderByDescription();
+		return placeRepository.findAll(new Sort(Direction.ASC, Constants.DESCRIPTION));
 	}
 }
