@@ -78,9 +78,12 @@ public class SalesCardServiceImpl implements SalesCardService {
 	}
 
 	private int putSales(Map<String, Object> map, Date from, Date until, PaymentEntity payment) {
-		BigDecimal total = BigDecimal.ZERO;
+		BigDecimal total = (BigDecimal) map.get(ConstantsJsp.TOTAL);
 		int size = 0;
 		Iterable<SaleEntity> salesEntity = saleManager.searchByDatesAndPayment(from, until, payment);
+		if (total == null) {
+			total = BigDecimal.ZERO;
+		}
 		if (salesEntity != null) {
 			Iterator<SaleEntity> isales = salesEntity.iterator();
 			List<Sale> sales = new ArrayList<>();
@@ -92,18 +95,21 @@ public class SalesCardServiceImpl implements SalesCardService {
 				total = total.add(sale.getTotal());
 			}
 			size = sales.size();
-			map.put(ConstantsJsp.TOTAL, total.add((BigDecimal) map.get(ConstantsJsp.TOTAL)));
+			map.put(ConstantsJsp.TOTAL, total);
 			map.put(Constants.SALES, sales);
 		}
 		return size;
 	}
 
 	private int putAdjustments(Map<String, Object> map, Date from, Date until, PaymentEntity payment) {
-		BigDecimal total = BigDecimal.ZERO;
+		BigDecimal total = (BigDecimal) map.get(ConstantsJsp.TOTAL);
 		int size = 0;
 		List<AdjustmentEntity> adjustments = adjustmentRepository.findByCarrydateBetweenAndPayment(from, until,
 				payment);
 		List<Adjustment> ladjustments = null;
+		if (total == null) {
+			total = BigDecimal.ZERO;
+		}
 		if (adjustments != null && !adjustments.isEmpty()) {
 			Iterator<AdjustmentEntity> iadjustments = adjustments.iterator();
 			ladjustments = new ArrayList<>();
@@ -113,39 +119,45 @@ public class SalesCardServiceImpl implements SalesCardService {
 				total = total.add(adjustment.getAmount());
 			}
 			size = ladjustments.size();
-			map.put(ConstantsJsp.TOTAL, total.add((BigDecimal) map.get(ConstantsJsp.TOTAL)));
+			map.put(ConstantsJsp.TOTAL, total);
 			map.put(Constants.ADJUSTMENTS, ladjustments);
 		}
 		return size;
 	}
 
 	private int putRecordings(Map<String, Object> map, Date from, Date until, PaymentEntity payment) {
-		BigDecimal total = BigDecimal.ZERO;
+		BigDecimal total = (BigDecimal) map.get(ConstantsJsp.TOTAL);
 		List<RecordingEntity> recordings = recordingRepository.findByCreationdateBetweenAndPay(from, until, payment);
 		int size = 0;
+		if (total == null) {
+			total = BigDecimal.ZERO;
+		}
 		if (recordings != null && !recordings.isEmpty()) {
 			Iterator<RecordingEntity> irecordings = recordings.iterator();
 			while (irecordings.hasNext()) {
 				total = total.add(irecordings.next().getAmount());
 			}
 			size = recordings.size();
-			map.put(ConstantsJsp.TOTAL, total.add((BigDecimal) map.get(ConstantsJsp.TOTAL)));
+			map.put(ConstantsJsp.TOTAL, total);
 			map.put(Constants.RECORDINGS, recordings);
 		}
 		return size;
 	}
 
 	private int putBatteries(Map<String, Object> map, Date from, Date until, PaymentEntity payment) {
-		BigDecimal total = BigDecimal.ZERO;
+		BigDecimal total = (BigDecimal) map.get(ConstantsJsp.TOTAL);
 		List<BatteryEntity> batteries = batteriesRepository.findByCreationdateBetweenAndPayment(from, until, payment);
 		int size = 0;
+		if (total == null) {
+			total = BigDecimal.ZERO;
+		}
 		if (batteries != null && !batteries.isEmpty()) {
 			Iterator<BatteryEntity> ibatteries = batteries.iterator();
 			while (ibatteries.hasNext()) {
 				total = total.add(ibatteries.next().getAmount());
 			}
 			size = batteries.size();
-			map.put(ConstantsJsp.TOTAL, total.add((BigDecimal) map.get(ConstantsJsp.TOTAL)));
+			map.put(ConstantsJsp.TOTAL, total);
 			map.put(Constants.BATTERIES, batteries);
 		}
 		return size;
@@ -153,15 +165,18 @@ public class SalesCardServiceImpl implements SalesCardService {
 
 	private int putStraps(Map<String, Object> map, Date from, Date until, PaymentEntity payment) {
 		List<StrapEntity> straps = strapsRepository.findByCreationdateBetweenAndPayment(from, until, payment);
-		BigDecimal total = BigDecimal.ZERO;
+		BigDecimal total = (BigDecimal) map.get(ConstantsJsp.TOTAL);
 		int size = 0;
+		if (total == null) {
+			total = BigDecimal.ZERO;
+		}
 		if (straps != null && !straps.isEmpty()) {
 			Iterator<StrapEntity> istraps = straps.iterator();
 			while (istraps.hasNext()) {
 				total = total.add(istraps.next().getAmount());
 			}
 			size = straps.size();
-			map.put(ConstantsJsp.TOTAL, total.add((BigDecimal) map.get(ConstantsJsp.TOTAL)));
+			map.put(ConstantsJsp.TOTAL, total);
 			map.put(Constants.STRAPS, straps);
 		}
 		return size;
@@ -170,8 +185,11 @@ public class SalesCardServiceImpl implements SalesCardService {
 	private int putSalesPost(Map<String, Object> map, Date from, Date until, PaymentEntity payment) {
 		List<SalePostponedEntity> salespost = salespostponedrepository.findByCreationdateBetweenPay(from, until,
 				payment);
-		BigDecimal total = BigDecimal.ZERO;
+		BigDecimal total = (BigDecimal) map.get(ConstantsJsp.TOTAL);
 		int size = 0;
+		if (total == null) {
+			total = BigDecimal.ZERO;
+		}
 		if (salespost != null && !salespost.isEmpty()) {
 			Iterator<SalePostponedEntity> isalespost = salespost.iterator();
 			while (isalespost.hasNext()) {
@@ -179,7 +197,7 @@ public class SalesCardServiceImpl implements SalesCardService {
 			}
 			size = salespost.size();
 		}
-		map.put(ConstantsJsp.TOTAL, total.add((BigDecimal) map.get(ConstantsJsp.TOTAL)));
+		map.put(ConstantsJsp.TOTAL, total);
 		map.put("salespost", salespost);
 		return size;
 	}

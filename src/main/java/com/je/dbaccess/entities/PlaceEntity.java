@@ -110,8 +110,7 @@ public class PlaceEntity implements Serializable {
 
 	public int hashCode() {
 		int hash = 1;
-		hash = hash * 17 + creationdate.hashCode();
-		hash = hash * 31 + description.hashCode();
+		hash = hash * 31 + idplace.hashCode();
 		return hash;
 	}
 
