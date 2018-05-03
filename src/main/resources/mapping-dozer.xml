@@ -4,7 +4,7 @@
 	xsi:schemaLocation='http://dozer.sourceforge.net 
                    http://dozer.sourceforge.net/schema/beanmapping.xsd'>
 	<mapping>
-		<class-a>com.je.services.sales.Sale</class-a>
+		<class-a>com.je.forms.Sale</class-a>
 		<class-b>com.je.dbaccess.entities.SaleEntity</class-b>
 		<field
 			custom-converter="com.je.services.converters.StringToDateConverter">
@@ -69,7 +69,7 @@
 		</field>
 	</mapping>
 	<mapping>
-		<class-a>com.je.services.sales.SalePostPoned</class-a>
+		<class-a>com.je.forms.SalePostPoned</class-a>
 		<class-b>com.je.dbaccess.entities.SalePostponedEntity</class-b>
 		<field>
 			<a>idsale</a>

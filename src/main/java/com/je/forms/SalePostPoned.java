@@ -1,4 +1,4 @@
-package com.je.services.sales;
+package com.je.forms;
 
 import java.util.Date;
 import java.util.List;
@@ -10,6 +10,7 @@ public class SalePostPoned extends SaleParent {
 	private List<InstallmentEntity> spayments;
 
 	private Date dateretired;
+	private Boolean timeout;
 
 	public List<InstallmentEntity> getSpayments() {
 		return spayments;
@@ -25,6 +26,14 @@ public class SalePostPoned extends SaleParent {
 
 	public void setDateretired(Date dateretired) {
 		this.dateretired = dateretired;
+	}
+
+	public Boolean getTimeout() {
+		return timeout;
+	}
+
+	public void setTimeout(Boolean timeout) {
+		this.timeout = timeout;
 	}
 
 }

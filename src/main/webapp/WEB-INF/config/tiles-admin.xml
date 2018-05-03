@@ -201,11 +201,11 @@
 	</definition>
 	<definition name="resultsalescard" extends="templateAdmin">
 		<put-attribute name="body"
-			value="/WEB-INF/views/admin/sales/salescard/resultsalescard.jsp" />
+			value="/WEB-INF/views/admin/salescard/resultsalescard.jsp" />
 	</definition>
 	<definition name="searchsalescard" extends="templateAdmin">
 		<put-attribute name="body"
-			value="/WEB-INF/views/admin/sales/salescard/searchsalescard.jsp" />
+			value="/WEB-INF/views/admin/salescard/searchsalescard.jsp" />
 	</definition>
 	<definition name="resultsales" extends="templateAdmin">
 		<put-attribute name="body"

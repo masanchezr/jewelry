@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.dbaccess.entities.SalePostponedEntity;
+import com.je.forms.SalePostPoned;
 
 public interface SalesPostPonedService {
 
@@ -23,5 +24,7 @@ public interface SalesPostPonedService {
 	public List<SalePostponedEntity> getListTimeout(PlaceEntity place);
 
 	public long getMissing();
+
+	public void timeout(long id);
 
 }

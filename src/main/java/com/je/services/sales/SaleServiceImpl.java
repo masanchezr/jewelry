@@ -25,6 +25,7 @@ import com.je.dbaccess.entities.SalesPayments;
 import com.je.dbaccess.managers.SaleManager;
 import com.je.dbaccess.managers.UsersManager;
 import com.je.dbaccess.repositories.DiscountsRepository;
+import com.je.forms.Sale;
 import com.je.services.mails.MailService;
 import com.je.services.users.Client;
 import com.je.utils.constants.Constants;

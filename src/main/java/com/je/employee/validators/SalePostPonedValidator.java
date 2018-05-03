@@ -9,7 +9,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.je.dbaccess.entities.JewelEntity;
-import com.je.services.sales.SalePostPoned;
+import com.je.forms.SalePostPoned;
 import com.je.utils.constants.ConstantsJsp;
 import com.je.utils.string.Util;
 

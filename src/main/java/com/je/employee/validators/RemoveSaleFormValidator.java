@@ -4,7 +4,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.je.services.sales.Sale;
+import com.je.forms.Sale;
 import com.je.utils.constants.ConstantsJsp;
 
 /**

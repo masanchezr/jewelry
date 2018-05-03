@@ -47,6 +47,21 @@
 			</a>
 		</div>
 	</div>
+	<c:if test="${saleForm.dateretired==null}">
+		<div class="col-xl-3 col-sm-6 mb-3">
+			<div class="card text-white bg-warning o-hidden">
+				<div class="card-body">
+					<div class="card-body-icon">
+						<i class="fa fa-fw fa-gift"></i>
+					</div>
+					<div class="mr-5">
+						<spring:message code="timedout" />
+						<c:out value="${saleForm.timeout}" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</c:if>
 </div>
 <!-- /.row -->
 <div class="row">
@@ -75,7 +90,8 @@
 								<td><c:out value="${jewel.reference}" /></td>
 								<td><c:out value="${jewel.name}" /></td>
 								<td><c:out value="${jewel.description}" /></td>
-								<td><c:out value="${jewel.price}" /><i class="fa fa-euro-sign"></i></td>
+								<td><c:out value="${jewel.price}" /><i
+									class="fa fa-euro-sign"></i></td>
 								<td><c:out value="${jewel.category.namecategory}" /></td>
 								<td><c:out value="${jewel.metal.description}" /></td>
 							</tr>
@@ -108,7 +124,8 @@
 							<tr>
 								<td><fmt:formatDate value="${jewel.creationdate}"
 										type="date" /></td>
-								<td><c:out value="${jewel.amount}" /><i class="fa fa-euro-sign"></i></td>
+								<td><c:out value="${jewel.amount}" /><i
+									class="fa fa-euro-sign"></i></td>
 							</tr>
 						</c:forEach>
 					</tbody>

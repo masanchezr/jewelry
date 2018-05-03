@@ -1,6 +1,8 @@
-package com.je.services.sales;
+package com.je.services.salescard;
 
 import java.util.Map;
+
+import com.je.services.sales.SearchSale;
 
 public interface SalesCardService {
 

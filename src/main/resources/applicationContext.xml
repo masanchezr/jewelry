@@ -48,7 +48,7 @@
 	<bean id="discountService" class="com.je.services.discounts.DiscountServiceImpl" />
 	<bean id="nationservice" class="com.je.services.nations.NationServiceImpl" />
 	<bean id="trackservice" class="com.je.services.tracks.TrackServiceImpl" />
-	<bean id="salesCardService" class="com.je.services.sales.SalesCardServiceImpl" />
+	<bean id="salesCardService" class="com.je.services.salescard.SalesCardServiceImpl" />
 	<bean id="saleservicepostponed" class="com.je.services.sales.SalesPostPonedServiceImpl" />
 	<bean id="messageservice" class="com.je.services.messages.MessageServiceImpl" />
 </beans>

@@ -49,6 +49,8 @@ import com.je.dbaccess.repositories.RentalsRepository;
 import com.je.dbaccess.repositories.SalesPostponedRepository;
 import com.je.dbaccess.repositories.ShoppingsRepository;
 import com.je.dbaccess.repositories.StrapsRepository;
+import com.je.forms.Sale;
+import com.je.forms.SalePostPoned;
 import com.je.services.adjustments.Adjustment;
 import com.je.services.discounts.Discount;
 import com.je.services.otherconcepts.OtherConcept;
@@ -57,8 +59,6 @@ import com.je.services.pawns.Renovation;
 import com.je.services.payroll.Payroll;
 import com.je.services.rentals.Rental;
 import com.je.services.sales.CancelSale;
-import com.je.services.sales.Sale;
-import com.je.services.sales.SalePostPoned;
 import com.je.services.shoppings.Shopping;
 import com.je.utils.constants.Constants;
 

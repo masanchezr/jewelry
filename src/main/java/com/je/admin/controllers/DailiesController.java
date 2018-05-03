@@ -5,8 +5,6 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -43,9 +41,6 @@ public class DailiesController {
 
 	@Autowired
 	private SearchDailyFormValidator searchDailyFormValidator;
-
-	/** The log. */
-	private static Logger log = LoggerFactory.getLogger(DailiesController.class);
 
 	private static final String VIEWSEARCHCALCULATEDAILIES = "searchcalculatedailies";
 
@@ -161,7 +156,6 @@ public class DailiesController {
 		if (ipAddress == null) {
 			ipAddress = request.getRemoteAddr();
 		}
-		log.info("ip remote address:", ipAddress);
 		Calendar c = Calendar.getInstance();
 		c.set(2015, 2, 31);
 		Date date = DateUtil.getDate(sdate);
@@ -198,7 +192,6 @@ public class DailiesController {
 		if (ipAddress == null) {
 			ipAddress = request.getRemoteAddr();
 		}
-		log.info("ip remote address:", ipAddress);
 		Date date = DateUtil.getDate(sdate);
 		boolean existdaily = false;
 		while (!existdaily) {

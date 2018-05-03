@@ -48,11 +48,34 @@
 				</div>
 				<div class="mr-5">
 					<c:out value="${saleForm.place.description}" />
-					<spring:message code="idsale" />
+					<spring:message code="place" />
 				</div>
 			</div>
 		</div>
 	</div>
+	<c:if test="${saleForm.dateretired==null}">
+		<div class="col-xl-3 col-sm-6 mb-3">
+			<div class="card text-white bg-warning o-hidden">
+				<div class="card-body">
+					<div class="card-body-icon">
+						<i class="fa fa-fw fa-gift"></i>
+					</div>
+					<div class="mr-5">
+						<spring:message code="timedout" />
+						<c:out value="${saleForm.timeout}" />
+					</div>
+				</div>
+				<c:if test="${!saleForm.timeout}">
+					<spring:url value="/timeout" var="timeout"></spring:url>
+					<a class="card-footer text-white clearfix small z-1"
+						href="${timeout}${saleForm.idsale}"> <span class="float-left"><spring:message
+								code="timeout" /></span> <span class="float-right"><i
+							class="nav-link-text"></i></span>
+					</a>
+				</c:if>
+			</div>
+		</div>
+	</c:if>
 </div>
 <!-- /.row -->
 <div class="row">

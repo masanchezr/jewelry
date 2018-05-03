@@ -13,8 +13,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.je.dbaccess.entities.AddressEntity;
 import com.je.dbaccess.entities.JewelEntity;
 import com.je.dbaccess.entities.PaymentEntity;
+import com.je.forms.Sale;
 import com.je.services.sales.Addresses;
-import com.je.services.sales.Sale;
 import com.je.services.sales.SaleService;
 
 /**

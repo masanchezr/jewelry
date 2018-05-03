@@ -1,4 +1,4 @@
-package com.je.services.sales;
+package com.je.services.salescard;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -26,7 +26,9 @@ import com.je.dbaccess.repositories.BatteriesRepository;
 import com.je.dbaccess.repositories.RecordingRepository;
 import com.je.dbaccess.repositories.SalesPostponedRepository;
 import com.je.dbaccess.repositories.StrapsRepository;
+import com.je.forms.Sale;
 import com.je.services.adjustments.Adjustment;
+import com.je.services.sales.SearchSale;
 import com.je.utils.constants.Constants;
 import com.je.utils.constants.ConstantsJsp;
 import com.je.utils.date.DateUtil;

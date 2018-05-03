@@ -21,6 +21,7 @@ import com.je.dbaccess.entities.PlaceEntity;
 import com.je.dbaccess.entities.SalePostponedEntity;
 import com.je.employee.validators.InstallmentValidator;
 import com.je.employee.validators.SalePostPonedValidator;
+import com.je.forms.SalePostPoned;
 import com.je.services.categories.CategoriesService;
 import com.je.services.dailies.Daily;
 import com.je.services.dailies.DailyService;
@@ -29,7 +30,6 @@ import com.je.services.metal.MetalService;
 import com.je.services.payment.PaymentService;
 import com.je.services.places.PlaceService;
 import com.je.services.sales.Installment;
-import com.je.services.sales.SalePostPoned;
 import com.je.services.sales.SalesPostPonedService;
 import com.je.utils.constants.Constants;
 import com.je.utils.constants.ConstantsJsp;
@@ -218,19 +218,19 @@ public class SalePostPonedController {
 	}
 
 	@RequestMapping(value = "/employee/resultsalepostponed")
-	public ModelAndView resultsalepostponed(@ModelAttribute(ConstantsJsp.SALEPOSTPONED) SalePostponedEntity sale,
+	public ModelAndView resultsalepostponed(@ModelAttribute(ConstantsJsp.FORMSALEPOSTPONED) SalePostponedEntity sale,
 			BindingResult arg1) {
 		ModelAndView model = new ModelAndView();
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		SalePostPoned salep = saleservicepostponed.searchByIdAndPlace(sale.getIdsalepostponed(),
 				placeService.getPlaceUser(user));
 		if (salep != null) {
-			model.setViewName("salepostponed");
+			model.setViewName(ConstantsJsp.FORMSALEPOSTPONED);
 			model.addObject(ConstantsJsp.FORMSALE, salep);
 		} else {
 			model.setViewName("searchsalepostponedemployee");
 			model.addObject(ConstantsJsp.FORMSALE, sale);
-			arg1.rejectValue("idsalepostponed", ConstantsJsp.ERRORSALENOTEXIST);
+			arg1.rejectValue(Constants.IDSALEPOSTPONED, ConstantsJsp.ERRORSALENOTEXIST);
 		}
 		return model;
 	}

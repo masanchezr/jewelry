@@ -1,4 +1,4 @@
-package com.je.services.sales;
+package com.je.forms;
 
 import java.math.BigDecimal;
 import java.util.List;

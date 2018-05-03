@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.je.dbaccess.entities.PlaceEntity;
+import com.je.forms.Sale;
 
 /**
  * The Interface SaleService.

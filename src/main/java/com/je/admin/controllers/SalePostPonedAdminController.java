@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.admin.forms.AdminForm;
+import com.je.forms.SalePostPoned;
 import com.je.forms.SearchForm;
-import com.je.services.sales.SalePostPoned;
 import com.je.services.sales.SalesPostPonedService;
 import com.je.utils.constants.ConstantsJsp;
 
@@ -26,7 +26,7 @@ public class SalePostPonedAdminController {
 
 	@RequestMapping(value = "/searchmissingsalepostponed")
 	public ModelAndView salepostponed(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm searchForm) {
-		ModelAndView model = new ModelAndView(ConstantsJsp.SALEPOSTPONED);
+		ModelAndView model = new ModelAndView(ConstantsJsp.FORMSALEPOSTPONED);
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject(ConstantsJsp.NUMSALE, salesPostPonedService.getMissing());
 		return model;
@@ -36,12 +36,12 @@ public class SalePostPonedAdminController {
 	public ModelAndView searchsalepostponed() {
 		ModelAndView model = new ModelAndView("searchsalepostponed");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
-		model.addObject("salepostponed", new SalePostPoned());
+		model.addObject(ConstantsJsp.FORMSALEPOSTPONED, new SalePostPoned());
 		return model;
 	}
 
 	@RequestMapping(value = "/showsale")
-	public ModelAndView showsale(@ModelAttribute("salepostponed") SalePostPoned salepostponed) {
+	public ModelAndView showsale(@ModelAttribute(ConstantsJsp.FORMSALEPOSTPONED) SalePostPoned salepostponed) {
 		return getModelSalePostponed(salepostponed.getIdsale());
 	}
 
@@ -50,5 +50,11 @@ public class SalePostPonedAdminController {
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject(ConstantsJsp.FORMSALE, salesPostPonedService.searchByPK(id));
 		return model;
+	}
+
+	@RequestMapping(value = "/timeout{id}")
+	public ModelAndView timeout(@PathVariable long id) {
+		salesPostPonedService.timeout(id);
+		return getModelSalePostponed(id);
 	}
 }

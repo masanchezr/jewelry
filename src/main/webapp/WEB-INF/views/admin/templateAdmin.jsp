@@ -220,15 +220,19 @@
 									code="searchholidays" /></a></li>
 					</ul></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
+					title="<spring:message code="salescard" />"><spring:url
+						value="/searchSalesCard" var="searchsalescard" /> <a
+					href="${searchsalescard}" class="nav-link"><i
+						class="fa fa-credit-card fa-fw"></i> <span class="nav-link-text">
+							<spring:message code="salescard" />
+					</span></a></li>
+				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message code="sales"/>"><a
 					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
 					href="#collapseSales" data-parent="#exampleAccordion"><i
 						class="fa fa-tags fa-fw"></i> <span class="nav-link-text"><spring:message
 								code="sales" /></span> </a>
 					<ul class="sidenav-second-level collapse" id="collapseSales">
-						<li><spring:url value="/searchSalesCard"
-								var="searchsalescard" /> <a href="${searchsalescard}"> <spring:message
-									code="salescard" /></a></li>
 						<li><spring:url value="/searchSales" var="searchsales" /> <a
 							href="${searchsales}"> <spring:message code="sales" /></a></li>
 						<li><spring:url value="/searchNumMissing"
@@ -237,9 +241,6 @@
 						</a></li>
 						<li><spring:url value="/newsale" var="newsale" /> <a
 							href="${newsale}"> <spring:message code="newsale" /></a></li>
-						<li><spring:url value="/searchsalepostponed"
-								var="searchsalepostponed" /> <a href="${searchsalepostponed}"><spring:message
-									code="searchsalepostponed" /></a></li>
 					</ul></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message

@@ -15,11 +15,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.je.dbaccess.entities.BatteryEntity;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.employee.validators.BatteryFormValidator;
+import com.je.forms.Sale;
 import com.je.services.batteries.BatteriesService;
 import com.je.services.dailies.DailyService;
 import com.je.services.payment.PaymentService;
 import com.je.services.places.PlaceService;
-import com.je.services.sales.Sale;
 import com.je.services.sales.SaleService;
 import com.je.utils.constants.ConstantsJsp;
 
