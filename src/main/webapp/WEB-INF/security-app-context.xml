@@ -179,7 +179,7 @@
 			access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/searchDaily"
 			access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/searchholidays"
+		<intercept-url pattern="/searchHolidays"
 			access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/searchNumMissing"
 			access="hasRole('ROLE_ADMIN')" />

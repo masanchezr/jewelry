@@ -6,10 +6,10 @@ import java.util.List;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.je.admin.forms.SearchMissingNumbers;
 import com.je.dbaccess.entities.PawnEntity;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.dbaccess.entities.ShoppingEntity;
-import com.je.dbaccess.managers.SaleManager;
 import com.je.dbaccess.repositories.PawnsRepository;
 import com.je.dbaccess.repositories.ShoppingsRepository;
 
@@ -22,11 +22,6 @@ public class SearchMissingNumberServiceImpl implements SearchMissingNumberServic
 	/** The pawns repository. */
 	@Autowired
 	private PawnsRepository pawnsRepository;
-
-	/** The sale manager. */
-	@Autowired
-	private SaleManager saleManager;
-
 	/** The mapper. */
 	@Autowired
 	private Mapper mapper;
@@ -52,10 +47,5 @@ public class SearchMissingNumberServiceImpl implements SearchMissingNumberServic
 			}
 		}
 		return nummissings;
-	}
-
-	public List<Long> calculateMissingSales(SearchMissingNumbers form) {
-		return saleManager.calculateNumberMissing(form.getNumfrom(), form.getNumuntil(),
-				mapper.map(form.getPlace(), PlaceEntity.class));
 	}
 }

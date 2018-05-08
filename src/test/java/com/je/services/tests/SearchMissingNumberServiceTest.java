@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.je.admin.forms.SearchMissingNumbers;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.services.searchmissingnumbers.SearchMissingNumberService;
-import com.je.services.searchmissingnumbers.SearchMissingNumbers;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:application-context-test.xml" })

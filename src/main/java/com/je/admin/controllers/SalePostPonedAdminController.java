@@ -26,7 +26,7 @@ public class SalePostPonedAdminController {
 
 	@RequestMapping(value = "/searchmissingsalepostponed")
 	public ModelAndView salepostponed(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm searchForm) {
-		ModelAndView model = new ModelAndView(ConstantsJsp.FORMSALEPOSTPONED);
+		ModelAndView model = new ModelAndView("salepostponedadmin");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject(ConstantsJsp.NUMSALE, salesPostPonedService.getMissing());
 		return model;

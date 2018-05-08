@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.je.admin.forms.SearchMissingNumbers;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.forms.Sale;
 
@@ -70,4 +71,6 @@ public interface SaleService {
 	public Map<String, Object> searchByDatesAndPlace(String sDateFrom, String sDateUntil, PlaceEntity place);
 
 	public Sale searchByPK(Long idsale);
+
+	public List<Long> calculateMissingSales(SearchMissingNumbers form);
 }

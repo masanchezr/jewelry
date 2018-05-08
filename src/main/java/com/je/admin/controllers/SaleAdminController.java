@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.admin.forms.AdminForm;
+import com.je.admin.forms.SearchMissingNumbers;
 import com.je.admin.validators.SearchMissingNumbersValidator;
 import com.je.admin.validators.SearchSalesValidator;
 import com.je.dbaccess.entities.JewelEntity;
@@ -28,8 +29,6 @@ import com.je.services.places.PlaceService;
 import com.je.services.sales.SaleService;
 import com.je.services.sales.SearchSale;
 import com.je.services.salescard.SalesCardService;
-import com.je.services.searchmissingnumbers.SearchMissingNumberService;
-import com.je.services.searchmissingnumbers.SearchMissingNumbers;
 import com.je.utils.constants.Constants;
 import com.je.utils.constants.ConstantsJsp;
 import com.je.utils.string.Util;
@@ -46,9 +45,6 @@ public class SaleAdminController {
 	/** The place service. */
 	@Autowired
 	private PlaceService placeService;
-
-	@Autowired
-	private SearchMissingNumberService searchMissingNumberService;
 
 	@Autowired
 	private SalesCardService salesCardService;
@@ -139,7 +135,7 @@ public class SaleAdminController {
 			model.addObject(ConstantsJsp.FORMSEARCH, searchForm);
 			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		} else {
-			model.addObject("nummissing", searchMissingNumberService.calculateMissingSales(searchForm));
+			model.addObject("nummissing", saleService.calculateMissingSales(searchForm));
 			model.setViewName("resultnummissing");
 		}
 		return model;

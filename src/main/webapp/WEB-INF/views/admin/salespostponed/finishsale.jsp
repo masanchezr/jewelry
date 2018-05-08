@@ -131,6 +131,7 @@
 						<tr>
 							<th><spring:message code="date" /></th>
 							<th><spring:message code="amount" /></th>
+							<th><spring:message code="payment" /></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -140,6 +141,7 @@
 										type="date" /></td>
 								<td><c:out value="${jewel.amount}" /><i
 									class="fa fa-euro-sign"></i></td>
+								<td><c:out value="${jewel.pay.name}" /></td>
 							</tr>
 						</c:forEach>
 					</tbody>

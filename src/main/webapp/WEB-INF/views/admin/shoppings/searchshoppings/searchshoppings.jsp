@@ -10,10 +10,10 @@
 </ol>
 <form:form action="resultShoppings" modelAttribute="shoppingForm">
 	<div class="row">
-		<div class="col-lg-6">
+		<div class="col-lg-8">
 			<div class="card-body">
 				<div class="row">
-					<div class="col-lg-6">
+					<div class="col-lg-4">
 						<div class="form-group">
 							<spring:message code="numshop" var="numshopmessage" />
 							<form:input class="form-control" path="numshop"
@@ -21,6 +21,12 @@
 							<p class="text-danger">
 								<form:errors path="numshop" />
 							</p>
+						</div>
+						<div class="form-group">
+							<form:select class="form-control" path="place.idplace">
+								<form:options items="${places}" itemValue="idplace"
+									itemLabel="description" />
+							</form:select>
 						</div>
 						<div class="form-group">
 							<spring:message code="datefrom" var="messagedatefrom" />
@@ -41,13 +47,6 @@
 							<p class="text-danger">
 								<form:errors path="dateuntil" />
 							</p>
-						</div>
-						<div class="form-group">
-							<spring:message code="place" />
-							<form:select class="form-control" path="place.idplace">
-								<form:options items="${places}" itemValue="idplace"
-									itemLabel="description" />
-							</form:select>
 						</div>
 						<div class="form-group">
 							<form:button class="btn btn-primary" value="submit">

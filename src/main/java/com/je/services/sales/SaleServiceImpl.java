@@ -11,6 +11,7 @@ import java.util.Map;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.je.admin.forms.SearchMissingNumbers;
 import com.je.dbaccess.entities.AddressEntity;
 import com.je.dbaccess.entities.CancelSaleEntity;
 import com.je.dbaccess.entities.CancelSalePaymentEntity;
@@ -338,5 +339,10 @@ public class SaleServiceImpl implements SaleService {
 			sale.setOptionalpayment(payments.get(1).getAmount());
 		}
 		return sale;
+	}
+
+	public List<Long> calculateMissingSales(SearchMissingNumbers form) {
+		return saleManager.calculateNumberMissing(form.getNumfrom(), form.getNumuntil(),
+				mapper.map(form.getPlace(), PlaceEntity.class));
 	}
 }
