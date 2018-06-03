@@ -9,7 +9,7 @@
 			data-title="Contacto">
 			<img
 				src="<spring:url value="/resources/img/web/DDHeaderContact.jpg"/>"
-				class="img-responsive">
+				class="img-fluid">
 		</figure>
 		<hgroup class="text-center">
 			<h1>
