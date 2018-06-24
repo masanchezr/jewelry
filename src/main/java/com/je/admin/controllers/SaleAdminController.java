@@ -185,7 +185,9 @@ public class SaleAdminController {
 		if (!result.hasErrors()) {
 			List<JewelEntity> jewels = sale.getJewels();
 			PlaceEntity place = sale.getPlace();
+			List<JewelEntity> newjewels = jewelService.searchJewels(jewels, place);
 			if (!jewels.isEmpty() && existsJewels(jewels, place)) {
+				sale.setJewels(newjewels);
 				// comprobamos si ya existe la venta
 				Sale entitySale = saleService.searchByNumsaleAndPlace(sale.getNumsale(), place.getIdplace());
 				if (entitySale == null) {
