@@ -1,6 +1,7 @@
 package com.je.services.clients;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.dozer.Mapper;
@@ -20,6 +21,7 @@ public class ClientServiceImpl implements ClientService {
 
 	public List<Client> searchClients(Client client) {
 		List<Client> clients = new ArrayList<>();
+		List<ClientPawnEntity> lclients = null;
 		ClientPawnEntity entity;
 		String name = client.getName();
 		String surname = client.getSurname();
@@ -31,15 +33,15 @@ public class ClientServiceImpl implements ClientService {
 			}
 		}
 		if (!Util.isEmpty(name)) {
-			entity = clientpawnsrepository.findByNameLike(name);
-			if (entity != null) {
-				clients.add(mapper.map(entity, Client.class));
-			}
+			lclients = clientpawnsrepository.findByNameLike(name);
 		}
 		if (!Util.isEmpty(surname)) {
-			entity = clientpawnsrepository.findBySurnameLike(surname);
-			if (entity != null) {
-				clients.add(mapper.map(entity, Client.class));
+			lclients = clientpawnsrepository.findBySurnameLike(surname);
+		}
+		if (lclients != null) {
+			Iterator<ClientPawnEntity> iclients = lclients.iterator();
+			while (iclients.hasNext()) {
+				clients.add(mapper.map(iclients.next(), Client.class));
 			}
 		}
 		return clients;

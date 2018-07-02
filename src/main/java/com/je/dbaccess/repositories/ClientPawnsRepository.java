@@ -1,5 +1,7 @@
 package com.je.dbaccess.repositories;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 
 import com.je.dbaccess.entities.ClientPawnEntity;
@@ -9,8 +11,8 @@ import com.je.dbaccess.entities.ClientPawnEntity;
  */
 public interface ClientPawnsRepository extends CrudRepository<ClientPawnEntity, String> {
 
-	public ClientPawnEntity findByNameLike(String name);
+	public List<ClientPawnEntity> findByNameLike(String name);
 
-	public ClientPawnEntity findBySurnameLike(String surname);
+	public List<ClientPawnEntity> findBySurnameLike(String surname);
 
 }
