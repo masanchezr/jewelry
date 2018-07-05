@@ -2,7 +2,7 @@ package com.je.services.pawns;
 
 import java.math.BigDecimal;
 
-import com.je.dbaccess.entities.PlaceEntity;
+import com.je.dbaccess.entities.MetalEntity;
 
 public class Quarter {
 
@@ -12,7 +12,7 @@ public class Quarter {
 
 	private BigDecimal amount;
 
-	private PlaceEntity place;
+	private MetalEntity metal;
 
 	public BigDecimal getAmount() {
 		return amount;
@@ -38,11 +38,11 @@ public class Quarter {
 		this.grossgrams = grossgrams;
 	}
 
-	public PlaceEntity getPlace() {
-		return place;
+	public MetalEntity getMetal() {
+		return metal;
 	}
 
-	public void setPlace(PlaceEntity place) {
-		this.place = place;
+	public void setMetal(MetalEntity metal) {
+		this.metal = metal;
 	}
 }

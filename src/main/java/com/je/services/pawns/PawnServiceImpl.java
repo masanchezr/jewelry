@@ -12,6 +12,7 @@ import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.je.dbaccess.entities.ClientPawnEntity;
+import com.je.dbaccess.entities.MetalEntity;
 import com.je.dbaccess.entities.ObjectPawnEntity;
 import com.je.dbaccess.entities.PawnEntity;
 import com.je.dbaccess.entities.PlaceEntity;
@@ -168,8 +169,7 @@ public class PawnServiceImpl implements PawnService {
 	/**
 	 * Mapper.
 	 *
-	 * @param findByNumpawnAndPlace
-	 *            the find by numpawn and place
+	 * @param findByNumpawnAndPlace the find by numpawn and place
 	 * @return the list
 	 */
 	private List<Pawn> mapper(List<PawnEntity> entities) {
@@ -267,22 +267,19 @@ public class PawnServiceImpl implements PawnService {
 	}
 
 	@Override
-	public List<Quarter> searchGramsByDates(String sDateFrom, String sDateUntil) {
+	public Quarter searchGramsByDates(String sDateFrom, String sDateUntil) {
 		Object[] pawnEntity = null;
 		Date datefrom = DateUtil.getDate(sDateFrom);
 		Date dateuntil = DateUtil.getDate(sDateUntil);
 		List<Object[]> pawns = pawnsRepository.findGrossGramsByMetal(datefrom, dateuntil);
 		Quarter quarter = new Quarter();
-		List<Quarter> lose = new ArrayList<>();
 		Iterator<Object[]> ipawns = pawns.iterator();
-		while (ipawns.hasNext()) {
-			pawnEntity = ipawns.next();
-			quarter.setGramsreal((BigDecimal) pawnEntity[0]);
-			quarter.setGrossgrams((BigDecimal) pawnEntity[1]);
-			quarter.setAmount((BigDecimal) pawnEntity[2]);
-			quarter.setPlace((PlaceEntity) pawnEntity[3]);
-		}
-		return lose;
+		pawnEntity = ipawns.next();
+		quarter.setGramsreal((BigDecimal) pawnEntity[0]);
+		quarter.setGrossgrams((BigDecimal) pawnEntity[1]);
+		quarter.setAmount((BigDecimal) pawnEntity[2]);
+		quarter.setMetal((MetalEntity) pawnEntity[3]);
+		return quarter;
 	}
 
 	@Override

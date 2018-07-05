@@ -83,10 +83,8 @@ public class PawnsAdminController {
 	/**
 	 * Result pawns.
 	 *
-	 * @param pawn
-	 *            the pawn
-	 * @param result
-	 *            the result
+	 * @param pawn   the pawn
+	 * @param result the result
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/resultPawns")
@@ -108,10 +106,8 @@ public class PawnsAdminController {
 	/**
 	 * Update pawn.
 	 *
-	 * @param pawn
-	 *            the pawn
-	 * @param result
-	 *            the result
+	 * @param pawn   the pawn
+	 * @param result the result
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/updatepawn")
@@ -172,10 +168,8 @@ public class PawnsAdminController {
 	/**
 	 * Save pawn.
 	 *
-	 * @param pawn
-	 *            the pawn
-	 * @param result
-	 *            the result
+	 * @param pawn   the pawn
+	 * @param result the result
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/savePawn")
@@ -225,7 +219,6 @@ public class PawnsAdminController {
 		ModelAndView model = new ModelAndView("searchquarterpawns");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject(ConstantsJsp.FORMSEARCH, new SearchForm());
-		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		return model;
 	}
 
@@ -237,7 +230,7 @@ public class PawnsAdminController {
 		if (result.hasErrors()) {
 			model.setViewName("searchquarterpawns");
 		} else {
-			List<Quarter> quarter = pawnService.searchGramsByDates(search.getDatefrom(), search.getDateuntil());
+			Quarter quarter = pawnService.searchGramsByDates(search.getDatefrom(), search.getDateuntil());
 			model.setViewName("quarterpawns");
 			model.addObject("quarter", quarter);
 		}

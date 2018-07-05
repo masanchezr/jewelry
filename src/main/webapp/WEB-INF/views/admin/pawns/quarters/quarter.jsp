@@ -26,15 +26,13 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${quarters}" var="quarter">
-							<tr>
-								<td><c:out value="${quarter.gramsreal}" /></td>
-								<td><c:out value="${quarter.grossgrams}" /></td>
-								<td><c:out value="${quarter.amount}" /><i
-									class="fa fa-euro-sign"></i></td>
-								<td><c:out value="${quarter.place.description}" /></td>
-							</tr>
-						</c:forEach>
+						<tr>
+							<td><c:out value="${quarter.gramsreal}" /></td>
+							<td><c:out value="${quarter.grossgrams}" /></td>
+							<td><c:out value="${quarter.amount}" /><i
+								class="fa fa-euro-sign"></i></td>
+							<td><c:out value="${quarter.metal.description}" /></td>
+						</tr>
 					</tbody>
 				</table>
 			</div>

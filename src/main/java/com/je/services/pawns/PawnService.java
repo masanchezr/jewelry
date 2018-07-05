@@ -14,16 +14,14 @@ public interface PawnService {
 	/**
 	 * Save.
 	 *
-	 * @param pawn
-	 *            the pawn
+	 * @param pawn the pawn
 	 */
 	public Daily save(NewPawn pawn);
 
 	/**
 	 * Search by idpawn.
 	 *
-	 * @param idpawn
-	 *            the idpawn
+	 * @param idpawn the idpawn
 	 * @return the pawn
 	 */
 	public Pawn searchByIdpawn(Long idpawn);
@@ -31,8 +29,7 @@ public interface PawnService {
 	/**
 	 * Search renew by numpawn.
 	 *
-	 * @param pawn
-	 *            the pawn
+	 * @param pawn the pawn
 	 * @return the list
 	 */
 	public List<Pawn> searchRenewByNumpawn(Pawn pawn);
@@ -40,8 +37,7 @@ public interface PawnService {
 	/**
 	 * Renew.
 	 *
-	 * @param pawn
-	 *            the pawn
+	 * @param pawn the pawn
 	 * @return
 	 */
 	public Daily renew(Pawn pawn);
@@ -49,16 +45,14 @@ public interface PawnService {
 	/**
 	 * Removes the.
 	 *
-	 * @param pawn
-	 *            the pawn
+	 * @param pawn the pawn
 	 */
 	public Daily remove(Pawn pawn);
 
 	/**
 	 * Search by numpawn.
 	 *
-	 * @param pawn
-	 *            the pawn
+	 * @param pawn the pawn
 	 * @return the list
 	 */
 	public List<Pawn> searchByNumpawn(Pawn pawn);
@@ -66,8 +60,7 @@ public interface PawnService {
 	/**
 	 * Find by idpawn.
 	 *
-	 * @param l
-	 *            the l
+	 * @param l the l
 	 * @return the new pawn
 	 */
 	public NewPawn findByIdpawn(Long l);
@@ -75,14 +68,13 @@ public interface PawnService {
 	/**
 	 * Update.
 	 *
-	 * @param pawn
-	 *            the pawn
+	 * @param pawn the pawn
 	 */
 	public void update(NewPawn pawn);
 
 	public List<RenovationDates> searchRenovations(Long idpawn);
 
-	public List<Quarter> searchGramsByDates(String sDateFrom, String sDateUntil);
+	public Quarter searchGramsByDates(String sDateFrom, String sDateUntil);
 
 	public BigDecimal getCommissions(String sDateFrom, String sDateUntil, PlaceEntity place);
 
