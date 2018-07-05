@@ -22,10 +22,8 @@ public interface PawnsRepository extends CrudRepository<PawnEntity, Long> {
 	/**
 	 * Find by creationdate and place.
 	 *
-	 * @param creationdate
-	 *            the creationdate
-	 * @param placeEntity
-	 *            the place entity
+	 * @param creationdate the creationdate
+	 * @param placeEntity  the place entity
 	 * @return the list
 	 */
 	public List<PawnEntity> findByCreationdateAndPlace(@Temporal(TemporalType.DATE) Date creationdate,
@@ -37,10 +35,8 @@ public interface PawnsRepository extends CrudRepository<PawnEntity, Long> {
 	/**
 	 * Find by numpawn and place.
 	 *
-	 * @param numpawn
-	 *            the numpawn
-	 * @param placeEntity
-	 *            the place entity
+	 * @param numpawn     the numpawn
+	 * @param placeEntity the place entity
 	 * @return the list
 	 */
 	public List<PawnEntity> findByNumpawnAndPlace(String numpawn, PlaceEntity placeEntity);
@@ -48,12 +44,9 @@ public interface PawnsRepository extends CrudRepository<PawnEntity, Long> {
 	/**
 	 * Find by numpawn and place and creationdate.
 	 *
-	 * @param numpawn
-	 *            the numpawn
-	 * @param placeEntity
-	 *            the place entity
-	 * @param creationdate
-	 *            the creationdate
+	 * @param numpawn      the numpawn
+	 * @param placeEntity  the place entity
+	 * @param creationdate the creationdate
 	 * @return the list
 	 */
 	public List<PawnEntity> findByNumpawnAndPlaceAndCreationdate(String numpawn, PlaceEntity placeEntity,
@@ -65,12 +58,9 @@ public interface PawnsRepository extends CrudRepository<PawnEntity, Long> {
 	/**
 	 * Find by numpawn and place and retired.
 	 *
-	 * @param numpawn
-	 *            the numpawn
-	 * @param placeEntity
-	 *            the place entity
-	 * @param retired
-	 *            the retired
+	 * @param numpawn     the numpawn
+	 * @param placeEntity the place entity
+	 * @param retired     the retired
 	 * @return the list
 	 */
 	@Query("select distinct p from PawnEntity p join p.objects o where p.numpawn=:numpawn and p.place=:place and p.dateretired is null and o.realgrams is null")
@@ -94,7 +84,7 @@ public interface PawnsRepository extends CrudRepository<PawnEntity, Long> {
 
 	public List<PawnEntity> findByPlaceAndYearOrderByCreationdateDesc(PlaceEntity placeEntity, int i);
 
-	@Query("select sum(os.realgrams), sum(os.grossgrams), sum(os.amount), os.metal from PawnEntity s join s.objects os where s.creationdate>=:dateFrom and s.creationdate<=:dateUntil and os.pawn.idpawn=s.idpawn GROUP BY os.metal")
+	@Query("select sum(os.realgrams), sum(os.grossgrams), sum(s.amount), os.metal from PawnEntity s join s.objects os where s.creationdate>=:dateFrom and s.creationdate<=:dateUntil and os.pawn.idpawn=s.idpawn GROUP BY os.metal")
 	public List<Object[]> findGrossGramsByMetal(@Param("dateFrom") @Temporal(TemporalType.DATE) Date datefrom,
 			@Param("dateUntil") @Temporal(TemporalType.DATE) Date dateuntil);
 }
