@@ -7,9 +7,9 @@
 				code="pawns" /></a></li>
 	<li class="breadcrumb-item active"><spring:message code="summary" /></li>
 	<li class="breadcrumb-item active"><c:out
-			value="${searchForm.datefrom}" /></li>
+			value="${searchDateForm.datefrom}" /></li>
 	<li class="breadcrumb-item active"><c:out
-			value="${searchForm.dateuntil}" /></li>
+			value="${searchDateForm.dateuntil}" /></li>
 </ol>
 <div class="row">
 	<div class="col-lg-12">
@@ -22,7 +22,7 @@
 							<th><spring:message code="realgrams" /></th>
 							<th><spring:message code="grossgrams" /></th>
 							<th><spring:message code="amount" /></th>
-							<th><spring:message code="place" /></th>
+							<th><spring:message code="metal" /></th>
 						</tr>
 					</thead>
 					<tbody>

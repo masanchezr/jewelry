@@ -7,27 +7,32 @@
 <div class="row">
 	<div class="col-lg-12">
 		<div class="card-body">
-			<div class="table-responsive">
-				<table class="table table-striped table-bordered table-hover"
-					id="dataTables-example">
-					<thead>
-						<tr>
-							<th><spring:message code="niforcif" /></th>
-							<th><spring:message code="name" /></th>
-							<th><spring:message code="surname" /></th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${clients}" var="client">
+			<c:if test="${not empty clients}">
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered table-hover"
+						id="dataTables-example">
+						<thead>
 							<tr>
-								<td><c:out value="${client.nif}" /></td>
-								<td><c:out value="${client.name}" /></td>
-								<td><c:out value="${client.surname}" /></td>
+								<th><spring:message code="niforcif" /></th>
+								<th><spring:message code="name" /></th>
+								<th><spring:message code="surname" /></th>
 							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-			</div>
+						</thead>
+						<tbody>
+							<c:forEach items="${clients}" var="client">
+								<tr>
+									<td><c:out value="${client.nif}" /></td>
+									<td><c:out value="${client.name}" /></td>
+									<td><c:out value="${client.surname}" /></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</c:if>
+			<c:if test="${empty clients}">
+				<spring:message code="noresults" />
+			</c:if>
 		</div>
 	</div>
 </div>
