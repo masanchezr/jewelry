@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.je.web</groupId>
@@ -22,9 +21,9 @@
 				</property>
 			</activation>
 			<properties>
-				<database.url>jdbc:mysql://localhost:3307/jewelry?useSSL=false</database.url>
+				<database.url>jdbc:mysql://localhost:3306/joyeria</database.url>
 				<database.user>root</database.user>
-				<database.password>mariangeles</database.password>
+				<database.password>Noviembre2012</database.password>
 				<anyvalue.name>God</anyvalue.name>
 			</properties>
 			<build>

@@ -172,7 +172,8 @@ public class SaleServiceImpl implements SaleService {
 	/**
 	 * Mapper.
 	 * 
-	 * @param salesJewels the sales jewels
+	 * @param salesJewels
+	 *            the sales jewels
 	 * @return the list
 	 */
 	private List<Sale> mapper(Iterator<SaleEntity> isales) {
@@ -189,7 +190,8 @@ public class SaleServiceImpl implements SaleService {
 	/**
 	 * Mapper list jewels.
 	 * 
-	 * @param sjewels the sjewels
+	 * @param sjewels
+	 *            the sjewels
 	 * @return the list
 	 */
 	private List<JewelEntity> mapperListJewels(List<SalesJewels> sjewels) {
@@ -317,7 +319,8 @@ public class SaleServiceImpl implements SaleService {
 		if (!Util.isEmpty(sDateUntil)) {
 			until = DateUtil.getDate(sDateUntil);
 		}
-		Map<String, Object> map = saleManager.searchByDatesAndPlace(DateUtil.getDate(sDateFrom), until, place);
+		Map<String, Object> map = saleManager.searchByDatesAndPlace(DateUtil.getDate(sDateFrom), until,
+				mapper.map(place, PlaceEntity.class));
 		@SuppressWarnings("unchecked")
 		List<SaleEntity> list = (List<SaleEntity>) map.get(Constants.SALES);
 		List<Sale> sales = mapper(list.iterator());

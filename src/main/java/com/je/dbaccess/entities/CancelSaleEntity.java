@@ -29,7 +29,7 @@ public class CancelSaleEntity implements Serializable {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	/** The idcancelsale. */
+	/** The idcancelsave. */
 	@Id
 	@Column(name = "IDCANCELSALE")
 	private Long idcancelsale;
@@ -73,7 +73,8 @@ public class CancelSaleEntity implements Serializable {
 	/**
 	 * Sets the amount.
 	 *
-	 * @param amount the new amount
+	 * @param amount
+	 *            the new amount
 	 */
 	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
@@ -91,7 +92,8 @@ public class CancelSaleEntity implements Serializable {
 	/**
 	 * Sets the creationdate.
 	 *
-	 * @param creationdate the new creationdate
+	 * @param creationdate
+	 *            the new creationdate
 	 */
 	public void setCreationdate(Date creationdate) {
 		this.creationdate = creationdate;
@@ -109,7 +111,8 @@ public class CancelSaleEntity implements Serializable {
 	/**
 	 * Sets the parcial.
 	 *
-	 * @param parcial the new parcial
+	 * @param parcial
+	 *            the new parcial
 	 */
 	public void setParcial(Boolean parcial) {
 		this.parcial = parcial;
@@ -127,7 +130,8 @@ public class CancelSaleEntity implements Serializable {
 	/**
 	 * Sets the place.
 	 *
-	 * @param place the new place
+	 * @param place
+	 *            the new place
 	 */
 	public void setPlace(PlaceEntity place) {
 		this.place = place;

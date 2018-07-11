@@ -3,7 +3,6 @@ package com.je.services.tests;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,11 +13,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.je.dbaccess.entities.AddressEntity;
 import com.je.dbaccess.entities.JewelEntity;
 import com.je.dbaccess.entities.PaymentEntity;
-import com.je.dbaccess.entities.PlaceEntity;
 import com.je.forms.Sale;
 import com.je.services.sales.Addresses;
 import com.je.services.sales.SaleService;
-import com.je.utils.constants.Constants;
 
 /**
  * The Class SaleServiceTest.
@@ -97,11 +94,19 @@ public class SaleServiceTest {
 		}
 	}
 
+	/**
+	 * Removes the sale.
+	 */
 	@Test
-	public void searchByDatesAndPlaceTest() {
-		PlaceEntity place = new PlaceEntity();
-		place.setIdplace(24002L);
-		Map<String, Object> sales = saleService.searchByDatesAndPlace("01-04-2018", "11-07-2018", place);
-		sales.get(Constants.SALES);
+	public void removeSale() {
+		Sale removeSaleForm = new Sale();
+		removeSaleForm.setIdsale(123L);
+		// saleService.removeSale(removeSaleForm);
+	}
+
+	@Test
+	public void removeParcialSale() {
+		Sale removeSaleForm = new Sale();
+		removeSaleForm.setIdsale(123L);
 	}
 }
