@@ -135,6 +135,9 @@
 									code="newpawn" /></a></li>
 						<li><spring:url value="/employee/renewPawn" var="renewpawn"></spring:url><a
 							href="${renewpawn}"><spring:message code="renewpawn" /></a></li>
+						<li><spring:url value="/employee/searchrenovations"
+								var="searchrenovations" /><a href="${searchrenovations}"><spring:message
+									code="searchrenovations" /></a></li>
 						<li><spring:url value="/employee/removePawn" var="removePawn"></spring:url><strong><a
 								href="${removePawn}" class="text-danger"><spring:message
 										code="removepawn" /></a></strong></li>

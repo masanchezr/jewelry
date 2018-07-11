@@ -27,6 +27,7 @@ import com.je.services.nations.NationService;
 import com.je.services.pawns.NewPawn;
 import com.je.services.pawns.Pawn;
 import com.je.services.pawns.PawnService;
+import com.je.services.places.PlaceService;
 import com.je.services.tracks.TrackService;
 import com.je.utils.constants.Constants;
 import com.je.utils.constants.ConstantsJsp;
@@ -59,6 +60,9 @@ public class PawnsController {
 
 	@Autowired
 	private MetalService materialService;
+
+	@Autowired
+	private PlaceService placeService;
 
 	private static final String VIEWNEWPAWN = "newPawn";
 	private static final String VIEWSEARCHCLIENT = "searchclient";
@@ -305,6 +309,30 @@ public class PawnsController {
 			} else {
 				model.setViewName("removepawn");
 			}
+		}
+		return model;
+	}
+
+	@RequestMapping(value = "/employee/searchrenovations")
+	public ModelAndView searchrenovations() {
+		ModelAndView model = new ModelAndView("searchrenovationsemployee");
+		model.addObject(ConstantsJsp.PAWNFORM, new Pawn());
+		return model;
+	}
+
+	@RequestMapping(value = "/employee/resultRenovationsPawns")
+	public ModelAndView resultRenovationsPawns(@ModelAttribute(ConstantsJsp.PAWNFORM) Pawn pawn, BindingResult result) {
+		ModelAndView model = new ModelAndView();
+		pawnFormValidator.validate(pawn, result);
+		if (result.hasErrors()) {
+			model.setViewName("searchrenovationsemployee");
+			model.addObject(ConstantsJsp.PAWNFORM, pawn);
+		} else {
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			String user = authentication.getName();
+			pawn.setPlace(placeService.getPlaceUser(user));
+			model.setViewName("resultpawnsrenovationsemployee");
+			model.addObject(ConstantsJsp.PAWNS, pawnService.searchByNumpawn(pawn));
 		}
 		return model;
 	}

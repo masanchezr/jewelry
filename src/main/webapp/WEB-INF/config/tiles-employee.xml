@@ -191,4 +191,14 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/salespostponed/searchsalepostponed.jsp" />
 	</definition>
+	<definition name="searchrenovationsemployee"
+		extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/pawns/searchrenovations/searchpawn.jsp" />
+	</definition>
+	<definition name="resultpawnsrenovationsemployee"
+		extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/pawns/searchrenovations/resultpawn.jsp" />
+	</definition>
 </tiles-definitions>

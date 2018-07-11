@@ -38,6 +38,11 @@
 			access="hasAnyRole('ROLE_USER','ROLE_AR','ROLE_NA')" />
 		<intercept-url pattern="/employee/renewPawn"
 			access="hasAnyRole('ROLE_USER','ROLE_NA')" />
+		<intercept-url pattern="/employee/searchrenovations"
+			access="hasAnyRole('ROLE_USER','ROLE_NA')" />
+		<intercept-url
+			pattern="/employee/resultRenovationsPawns"
+			access="hasAnyRole('ROLE_USER','ROLE_NA')" />
 		<intercept-url pattern="/employee/cancelparcialsale"
 			access="hasAnyRole('ROLE_USER','ROLE_AR','ROLE_NA')" />
 		<intercept-url pattern="/employee/removeparcialsale"
