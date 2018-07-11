@@ -158,10 +158,8 @@ public class SaleManagerImpl implements SaleManager {
 	/**
 	 * Cancel sale.
 	 *
-	 * @param sale
-	 *            the sale
-	 * @param idjewels
-	 *            the idjewels
+	 * @param sale     the sale
+	 * @param idjewels the idjewels
 	 * @return true, if successful
 	 */
 	@Override
@@ -222,28 +220,24 @@ public class SaleManagerImpl implements SaleManager {
 		Map<String, Object> map = new HashMap<>();
 		SaleEntity sale;
 		CancelSaleEntity cancelSale;
-		Long idsale;
 		BigDecimal total = BigDecimal.ZERO;
 		BigDecimal cost = BigDecimal.ZERO;
 		while (itsales.hasNext()) {
 			sale = itsales.next();
-			idsale = sale.getIdsale();
-			cancels = cancelSaleRepository.findByNumsaleAndPlace(idsale, place);
-			if (cancels != null) {
+			cancels = cancelSaleRepository.findByNumsaleAndPlace(sale.getNumsale(), place);
+			if (cancels != null && !cancels.isEmpty()) {
 				Iterator<CancelSaleEntity> icancels = cancels.iterator();
 				while (icancels.hasNext()) {
 					cancelSale = icancels.next();
-					if (cancelSale.getNumsale().equals(idsale)) {
-						total = total.subtract(cancelSale.getAmount());
-					} else {
-						sales.add(sale);
-						total = total.add(sale.getTotal());
-					}
+					total = total.subtract(cancelSale.getAmount());
 				}
+			} else {
+				sales.add(sale);
+				total = total.add(sale.getTotal());
+				List<SalesJewels> sjewels = sale.getSjewels();
+				Iterator<SalesJewels> isjewels = sjewels.iterator();
+				cost = cost.add(getCost(isjewels));
 			}
-			List<SalesJewels> sjewels = sale.getSjewels();
-			Iterator<SalesJewels> isjewels = sjewels.iterator();
-			cost = cost.add(getCost(isjewels));
 		}
 		map.put(Constants.SALES, sales);
 		map.put(ConstantsJsp.TOTAL, total);

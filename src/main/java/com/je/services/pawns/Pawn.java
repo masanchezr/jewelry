@@ -24,6 +24,8 @@ public class Pawn extends OperationForm {
 
 	private PlaceEntity place;
 
+	private int multiplerenew;
+
 	/**
 	 * Gets the numpawn.
 	 *
@@ -36,8 +38,7 @@ public class Pawn extends OperationForm {
 	/**
 	 * Sets the numpawn.
 	 *
-	 * @param numpawn
-	 *            the new numpawn
+	 * @param numpawn the new numpawn
 	 */
 	public void setNumpawn(String numpawn) {
 		this.numpawn = numpawn;
@@ -55,8 +56,7 @@ public class Pawn extends OperationForm {
 	/**
 	 * Sets the percent.
 	 *
-	 * @param percent
-	 *            the new percent
+	 * @param percent the new percent
 	 */
 	public void setPercent(double percent) {
 		this.percent = percent;
@@ -74,8 +74,7 @@ public class Pawn extends OperationForm {
 	/**
 	 * Sets the retired.
 	 *
-	 * @param retired
-	 *            the new retired
+	 * @param retired the new retired
 	 */
 	public void setDateretired(Date dateretired) {
 		this.dateretired = dateretired;
@@ -93,8 +92,7 @@ public class Pawn extends OperationForm {
 	/**
 	 * Sets the months.
 	 *
-	 * @param months
-	 *            the new months
+	 * @param months the new months
 	 */
 	public void setMonths(int months) {
 		this.months = months;
@@ -106,5 +104,13 @@ public class Pawn extends OperationForm {
 
 	public void setPlace(PlaceEntity place) {
 		this.place = place;
+	}
+
+	public int getMultiplerenew() {
+		return multiplerenew;
+	}
+
+	public void setMultiplerenew(int multiplerenovation) {
+		this.multiplerenew = multiplerenovation;
 	}
 }

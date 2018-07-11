@@ -72,10 +72,6 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/sales/removesale.jsp" />
 	</definition>
-	<definition name="renewpawn" extends="templateEmployee">
-		<put-attribute name="body"
-			value="/WEB-INF/views/employee/pawns/renewpawn/renewpawn.jsp" />
-	</definition>
 	<definition name="removepawn" extends="templateEmployee">
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/pawns/removepawn/removepawn.jsp" />
@@ -93,6 +89,20 @@
 		extends="templateEmployee">
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/pawns/renewpawn/searchpawn.jsp" />
+	</definition>
+	<definition name="renewpawn" extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/pawns/renewpawn/renewpawn.jsp" />
+	</definition>
+	<definition name="searchrenewmultiplepawn"
+		extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/pawns/renewmultiplepawn/searchpawn.jsp" />
+	</definition>
+	<definition name="renewmultiplepawn"
+		extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/pawns/renewmultiplepawn/renewpawn.jsp" />
 	</definition>
 	<definition name="dailyarrows" extends="templateEmployee">
 		<put-attribute name="body"

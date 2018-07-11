@@ -39,6 +39,10 @@ public class DiscountEntity {
 	@Column(name = "numsalechange")
 	private Long numsalechange;
 
+	/**
+	 * este campo no entra desde ningún formulario, es el número de una venta nueva
+	 * al que se aplica el descuento, se hace el set en el buy del service
+	 */
 	@Column(name = "numsaleaplication")
 	private Long numsaleaplication;
 

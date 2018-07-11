@@ -40,7 +40,9 @@ public interface PawnService {
 	 * @param pawn the pawn
 	 * @return
 	 */
-	public Daily renew(Pawn pawn);
+	public Daily renewSimple(Pawn pawn);
+
+	public Daily renewMultiple(Pawn pawn);
 
 	/**
 	 * Removes the.

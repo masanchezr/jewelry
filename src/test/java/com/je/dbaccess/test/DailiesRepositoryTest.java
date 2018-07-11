@@ -36,7 +36,7 @@ public class DailiesRepositoryTest {
 	@Test
 	public void saveTest() {
 		PlaceEntity place = new PlaceEntity();
-		place.setIdplace(13700L);
+		place.setIdplace(28017L);
 		Calendar calendar = new GregorianCalendar(2017, 2, 14);
 		DailyEntity daily = dailyRepository.findByPlaceAndDailydate(place, calendar.getTime());
 		daily.setDailydate(calendar.getTime());

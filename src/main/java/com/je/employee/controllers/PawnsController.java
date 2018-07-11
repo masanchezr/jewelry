@@ -68,10 +68,8 @@ public class PawnsController {
 	/**
 	 * Save pawn.
 	 *
-	 * @param pawn
-	 *            the pawn
-	 * @param result
-	 *            the result
+	 * @param pawn   the pawn
+	 * @param result the result
 	 * @return the string
 	 */
 	@RequestMapping(value = "/employee/savePawn")
@@ -130,8 +128,7 @@ public class PawnsController {
 	/**
 	 * Result search pawn.
 	 *
-	 * @param idpawn
-	 *            the idpawn
+	 * @param idpawn the idpawn
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/employee/resultSearchPawn")
@@ -210,13 +207,18 @@ public class PawnsController {
 		return model;
 	}
 
+	@RequestMapping(value = "/employee/renewMultiplePawn")
+	public ModelAndView renewMultiplePawn() {
+		ModelAndView model = new ModelAndView("searchrenewmultiplepawn");
+		model.addObject(FORMSEARCHPAWN, new Pawn());
+		return model;
+	}
+
 	/**
 	 * Search renew pawn.
 	 *
-	 * @param pawn
-	 *            the pawn
-	 * @param result
-	 *            the result
+	 * @param pawn   the pawn
+	 * @param result the result
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/employee/searchRenewPawn")
@@ -237,17 +239,44 @@ public class PawnsController {
 		return model;
 	}
 
+	@RequestMapping(value = "/employee/searchRenewMultiplePawn")
+	public ModelAndView searchRenewMultiplePawn(@ModelAttribute("searchPawnForm") Pawn pawn, BindingResult result) {
+		ModelAndView model = new ModelAndView();
+		pawnFormValidator.validate(pawn, result);
+		if (result.hasErrors()) {
+			model.addObject(FORMSEARCHPAWN, new Pawn());
+			model.setViewName("searchrenewmultiplepawn");
+		} else {
+			String user = SecurityContextHolder.getContext().getAuthentication().getName();
+			pawn.setUser(user);
+			List<Pawn> pawns = pawnService.searchRenewByNumpawn(pawn);
+			model.addObject(ConstantsJsp.PAWNFORM, new Pawn());
+			model.addObject(ConstantsJsp.PAWNS, pawns);
+			model.addObject("times", new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+			model.setViewName("renewmultiplepawn");
+		}
+		return model;
+	}
+
 	/**
 	 * Renew.
 	 *
-	 * @param pawn
-	 *            the pawn
+	 * @param pawn the pawn
 	 * @return the string
 	 */
 	@RequestMapping(value = "/employee/renewpawn")
 	public ModelAndView renew(@ModelAttribute(ConstantsJsp.PAWNFORM) Pawn pawn) {
 		ModelAndView model = new ModelAndView();
-		model.addObject(ConstantsJsp.DAILY, pawnService.renew(pawn));
+		model.addObject(ConstantsJsp.DAILY, pawnService.renewSimple(pawn));
+		model.setViewName(ConstantsJsp.VIEWDAILYARROW);
+		model.addObject(ConstantsJsp.DATEDAILY, new Date());
+		return model;
+	}
+
+	@RequestMapping(value = "/employee/renewMultiplePawn")
+	public ModelAndView renewMultiple(@ModelAttribute(ConstantsJsp.PAWNFORM) Pawn pawn) {
+		ModelAndView model = new ModelAndView();
+		model.addObject(ConstantsJsp.DAILY, pawnService.renewMultiple(pawn));
 		model.setViewName(ConstantsJsp.VIEWDAILYARROW);
 		model.addObject(ConstantsJsp.DATEDAILY, new Date());
 		return model;
@@ -256,8 +285,7 @@ public class PawnsController {
 	/**
 	 * Removes the.
 	 *
-	 * @param pawn
-	 *            the pawn
+	 * @param pawn the pawn
 	 * @return the string
 	 */
 	@RequestMapping(value = "/employee/removepawn")
@@ -283,10 +311,8 @@ public class PawnsController {
 	/**
 	 * Search remove pawn.
 	 *
-	 * @param pawn
-	 *            the pawn
-	 * @param result
-	 *            the result
+	 * @param pawn   the pawn
+	 * @param result the result
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/employee/searchRemovePawn")
