@@ -189,33 +189,40 @@ public class PawnServiceImpl implements PawnService {
 		Daily daily = null;
 		PawnEntity pawnEntity = pawnsRepository.findById(pawn.getId()).orElse(null);
 		if (pawnEntity != null) {
-			Date date;
-			List<RenovationEntity> renovations = pawnEntity.getRenovations();
-			Calendar calendar = Calendar.getInstance();
-			if (renovations != null && !renovations.isEmpty()) {
-				Date daterenovation;
-				date = renovations.get(0).getNextrenovationdate();
-				for (int i = 1; i < renovations.size(); i++) {
-					daterenovation = renovations.get(i).getNextrenovationdate();
-					if (daterenovation.after(date)) {
-						date = daterenovation;
-					}
-				}
-				calendar.setTime(date);
-				calendar.add(Calendar.MONTH, 1);
-			} else {
-				date = pawnEntity.getCreationdate();
-				calendar.setTime(date);
-				calendar.add(Calendar.MONTH, 2);
+			for (int i = 0; i < pawn.getRenovations(); i++) {
+				createRenovation(pawnEntity);
 			}
-			RenovationEntity entity = new RenovationEntity();
-			entity.setPawn(pawnEntity);
-			entity.setCreationdate(new Date());
-			entity.setNextrenovationdate(calendar.getTime());
-			renovationsRepository.save(entity);
 			daily = dailyService.getDaily(new Date(), pawnEntity.getPlace(), null);
 		}
 		return daily;
+	}
+
+	private void createRenovation(PawnEntity pawnEntity) {
+		List<RenovationEntity> renovations = pawnEntity.getRenovations();
+		Calendar calendar = Calendar.getInstance();
+		Date date;
+		if (renovations != null && !renovations.isEmpty()) {
+			Date daterenovation;
+			date = renovations.get(0).getNextrenovationdate();
+			for (int r = 1; r < renovations.size(); r++) {
+				daterenovation = renovations.get(r).getNextrenovationdate();
+				if (daterenovation.after(date)) {
+					date = daterenovation;
+				}
+			}
+			calendar.setTime(date);
+			calendar.add(Calendar.MONTH, 1);
+		} else {
+			date = pawnEntity.getCreationdate();
+			calendar.setTime(date);
+			calendar.add(Calendar.MONTH, 2);
+		}
+		RenovationEntity entity = new RenovationEntity();
+		entity.setPawn(pawnEntity);
+		entity.setCreationdate(new Date());
+		entity.setNextrenovationdate(calendar.getTime());
+		renovationsRepository.save(entity);
+
 	}
 
 	@Override

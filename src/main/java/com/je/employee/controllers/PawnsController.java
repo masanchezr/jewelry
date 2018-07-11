@@ -68,10 +68,8 @@ public class PawnsController {
 	/**
 	 * Save pawn.
 	 *
-	 * @param pawn
-	 *            the pawn
-	 * @param result
-	 *            the result
+	 * @param pawn   the pawn
+	 * @param result the result
 	 * @return the string
 	 */
 	@RequestMapping(value = "/employee/savePawn")
@@ -130,8 +128,7 @@ public class PawnsController {
 	/**
 	 * Result search pawn.
 	 *
-	 * @param idpawn
-	 *            the idpawn
+	 * @param idpawn the idpawn
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/employee/resultSearchPawn")
@@ -213,10 +210,8 @@ public class PawnsController {
 	/**
 	 * Search renew pawn.
 	 *
-	 * @param pawn
-	 *            the pawn
-	 * @param result
-	 *            the result
+	 * @param pawn   the pawn
+	 * @param result the result
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/employee/searchRenewPawn")
@@ -232,6 +227,7 @@ public class PawnsController {
 			List<Pawn> pawns = pawnService.searchRenewByNumpawn(pawn);
 			model.addObject(ConstantsJsp.PAWNFORM, new Pawn());
 			model.addObject(ConstantsJsp.PAWNS, pawns);
+			model.addObject("times", new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
 			model.setViewName("renewpawn");
 		}
 		return model;
@@ -240,8 +236,7 @@ public class PawnsController {
 	/**
 	 * Renew.
 	 *
-	 * @param pawn
-	 *            the pawn
+	 * @param pawn the pawn
 	 * @return the string
 	 */
 	@RequestMapping(value = "/employee/renewpawn")
@@ -256,8 +251,7 @@ public class PawnsController {
 	/**
 	 * Removes the.
 	 *
-	 * @param pawn
-	 *            the pawn
+	 * @param pawn the pawn
 	 * @return the string
 	 */
 	@RequestMapping(value = "/employee/removepawn")
@@ -283,10 +277,8 @@ public class PawnsController {
 	/**
 	 * Search remove pawn.
 	 *
-	 * @param pawn
-	 *            the pawn
-	 * @param result
-	 *            the result
+	 * @param pawn   the pawn
+	 * @param result the result
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/employee/searchRemovePawn")
