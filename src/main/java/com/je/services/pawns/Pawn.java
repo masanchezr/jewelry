@@ -25,7 +25,7 @@ public class Pawn extends OperationForm {
 	/**
 	 * Número de veces a renovar
 	 */
-	private int renovations;
+	private int numrenovations;
 
 	private PlaceEntity place;
 
@@ -109,11 +109,11 @@ public class Pawn extends OperationForm {
 		this.place = place;
 	}
 
-	public int getRenovations() {
-		return renovations;
+	public int getNumrenovations() {
+		return numrenovations;
 	}
 
-	public void setRenovations(int renovations) {
-		this.renovations = renovations;
+	public void setNumrenovations(int renovations) {
+		this.numrenovations = renovations;
 	}
 }

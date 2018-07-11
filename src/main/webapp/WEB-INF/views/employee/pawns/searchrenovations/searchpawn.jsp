@@ -22,13 +22,6 @@
 							</p>
 						</div>
 						<div class="form-group">
-							<spring:message code="place" />
-							<form:select class="form-control" path="place.idplace">
-								<form:options items="${places}" itemValue="idplace"
-									itemLabel="description" />
-							</form:select>
-						</div>
-						<div class="form-group">
 							<form:button class="btn btn-primary" value="submit">
 								<spring:message code="search" />
 							</form:button>

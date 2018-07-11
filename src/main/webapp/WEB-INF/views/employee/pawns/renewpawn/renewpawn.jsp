@@ -40,7 +40,7 @@
 				</div>
 				<div class="form-group">
 					<spring:message code="explicationmultiplerenews" />
-					<form:select class="form-control" path="renovations">
+					<form:select class="form-control" path="numrenovations">
 						<form:options items="${times}" />
 					</form:select>
 				</div>

@@ -20,7 +20,6 @@
 								<th><spring:message code="total" /></th>
 								<th><spring:message code="place" /></th>
 								<th><spring:message code="saledate" /></th>
-								<th><spring:message code="payment" /></th>
 								<th><spring:message code="discount" /></th>
 							</tr>
 						</thead>
@@ -28,11 +27,12 @@
 							<c:forEach items="${sales}" var="sale">
 								<tr>
 									<td><c:out value="${sale.numsale}" /></td>
-									<td><c:out value="${sale.total}" /></td>
+									<td><c:out value="${sale.total}" /><i
+										class="fa fa-euro-sign"></i></td>
 									<td><c:out value="${sale.place.description}" /></td>
 									<td><c:out value="${sale.saledate}" /></td>
-									<td><c:out value="${sale.payment.name}" /></td>
-									<td><c:out value="${sale.discount}" /></td>
+									<td><c:out value="${sale.discount}" /><i
+										class="fa fa-euro-sign"></i></td>
 								</tr>
 							</c:forEach>
 						</tbody>

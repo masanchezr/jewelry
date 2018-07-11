@@ -189,7 +189,7 @@ public class PawnServiceImpl implements PawnService {
 		Daily daily = null;
 		PawnEntity pawnEntity = pawnsRepository.findById(pawn.getId()).orElse(null);
 		if (pawnEntity != null) {
-			for (int i = 0; i < pawn.getRenovations(); i++) {
+			for (int i = 0; i < pawn.getNumrenovations(); i++) {
 				createRenovation(pawnEntity);
 			}
 			daily = dailyService.getDaily(new Date(), pawnEntity.getPlace(), null);

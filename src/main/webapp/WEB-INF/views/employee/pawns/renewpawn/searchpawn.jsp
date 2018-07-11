@@ -15,15 +15,15 @@
 			<div class="card-body">
 				<div class="row">
 					<div class="col-lg-6">
-						<div class="form-group col-3">
+						<div class="form-group">
 							<spring:message code="numpawn" />
 							<form:input class="form-control" path="numpawn" />
-							<div class="form-group col-3 has-error">
+							<div class="form-group has-error">
 								<label class="control-label" for="inputSuccess"><form:errors
 										path="numpawn" /></label>
 							</div>
 						</div>
-						<div class="form-group col-3">
+						<div class="form-group">
 							<form:button class="btn btn-primary" value="submit">
 								<spring:message code="search" />
 							</form:button>
