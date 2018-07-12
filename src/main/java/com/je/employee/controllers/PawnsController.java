@@ -27,6 +27,7 @@ import com.je.services.nations.NationService;
 import com.je.services.pawns.NewPawn;
 import com.je.services.pawns.Pawn;
 import com.je.services.pawns.PawnService;
+import com.je.services.pawns.RenovationDates;
 import com.je.services.places.PlaceService;
 import com.je.services.tracks.TrackService;
 import com.je.utils.constants.Constants;
@@ -229,9 +230,10 @@ public class PawnsController {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			pawn.setUser(user);
 			List<Pawn> pawns = pawnService.searchRenewByNumpawn(pawn);
+			Integer[] numrenovations = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
 			model.addObject(ConstantsJsp.PAWNFORM, new Pawn());
 			model.addObject(ConstantsJsp.PAWNS, pawns);
-			model.addObject("times", new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+			model.addObject("times", numrenovations);
 			model.setViewName("renewpawn");
 		}
 		return model;
@@ -246,6 +248,8 @@ public class PawnsController {
 	@RequestMapping(value = "/employee/renewpawn")
 	public ModelAndView renew(@ModelAttribute(ConstantsJsp.PAWNFORM) Pawn pawn) {
 		ModelAndView model = new ModelAndView();
+		String user = SecurityContextHolder.getContext().getAuthentication().getName();
+		pawn.setUser(user);
 		model.addObject(ConstantsJsp.DAILY, pawnService.renew(pawn));
 		model.setViewName(ConstantsJsp.VIEWDAILYARROW);
 		model.addObject(ConstantsJsp.DATEDAILY, new Date());
@@ -333,6 +337,20 @@ public class PawnsController {
 			pawn.setPlace(placeService.getPlaceUser(user));
 			model.setViewName("resultpawnsrenovationsemployee");
 			model.addObject(ConstantsJsp.PAWNS, pawnService.searchByNumpawn(pawn));
+		}
+		return model;
+	}
+
+	@RequestMapping(value = "/employee/resultrenovations")
+	public ModelAndView resultrenovations(@ModelAttribute(ConstantsJsp.PAWNFORM) Pawn pawn, BindingResult result) {
+		ModelAndView model = new ModelAndView();
+		Long idpawn = pawn.getId();
+		if (idpawn == null) {
+			model.setViewName("errorupdatepawn");
+		} else {
+			List<RenovationDates> renovations = pawnService.searchRenovations(idpawn);
+			model.setViewName("resultrenovationsemployee");
+			model.addObject("renovations", renovations);
 		}
 		return model;
 	}

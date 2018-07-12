@@ -201,4 +201,9 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/pawns/searchrenovations/resultpawn.jsp" />
 	</definition>
+	<definition name="resultrenovationsemployee"
+		extends="templateEmployee">
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/pawns/searchrenovations/renovations.jsp" />
+	</definition>
 </tiles-definitions>

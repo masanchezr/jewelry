@@ -36,13 +36,15 @@
 						<form:button class="btn btn-primary" value="submit">
 							<spring:message code="renew" />
 						</form:button>
+						<div class="form-group">
+							<spring:message code="explicationmultiplerenews" />
+						</div>
+						<div class="form-group col-1">
+							<form:select class="form-control" path="numrenovations">
+								<form:options items="${times}" />
+							</form:select>
+						</div>
 					</form:form>
-				</div>
-				<div class="form-group">
-					<spring:message code="explicationmultiplerenews" />
-					<form:select class="form-control" path="numrenovations">
-						<form:options items="${times}" />
-					</form:select>
 				</div>
 			</c:if>
 			<c:if test="${empty pawns}">

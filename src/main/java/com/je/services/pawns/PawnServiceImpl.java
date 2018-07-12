@@ -187,13 +187,15 @@ public class PawnServiceImpl implements PawnService {
 	@Override
 	public Daily renew(Pawn pawn) {
 		Daily daily = null;
-		PawnEntity pawnEntity = pawnsRepository.findById(pawn.getId()).orElse(null);
-		if (pawnEntity != null) {
-			for (int i = 0; i < pawn.getNumrenovations(); i++) {
+		PawnEntity pawnEntity;
+		for (int i = 0; i < pawn.getNumrenovations(); i++) {
+			pawnEntity = pawnsRepository.findById(pawn.getId()).orElse(null);
+			if (pawnEntity != null) {
 				createRenovation(pawnEntity);
 			}
-			daily = dailyService.getDaily(new Date(), pawnEntity.getPlace(), null);
 		}
+		daily = dailyService.getDaily(new Date(), placeUserRepository.findByUsername(pawn.getUser()).get(0).getPlace(),
+				null);
 		return daily;
 	}
 
