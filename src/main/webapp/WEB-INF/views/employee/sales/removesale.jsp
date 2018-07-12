@@ -1,7 +1,8 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<form:form action="deletesale" modelAttribute="removeSaleForm" role="form">
+<form:form action="deletesale" modelAttribute="removeSaleForm"
+	role="form">
 	<!-- Breadcrumbs-->
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item"><a href="#"><spring:message
@@ -27,7 +28,7 @@
 							itemLabel="name" />
 					</form:select>
 				</div>
-				<div id="discount" class="hidden">
+				<div id="discount" class="d-none">
 					<div class="form-group">
 						<spring:message code="iddiscount" />
 						<form:input class="form-control" path="iddiscount" />
@@ -37,7 +38,7 @@
 						<form:input class="form-control" path="numsalechange" />
 					</div>
 				</div>
-				<div class="hidden" id="accordion">
+				<div class="d-none" id="accordion">
 					<div class="form-group">
 						<spring:message code="cancelpayments" />
 						<form:input class="form-control" path="optionalpayment" />

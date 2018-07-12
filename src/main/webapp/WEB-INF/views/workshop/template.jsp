@@ -139,7 +139,6 @@
 	<script src="<spring:url value="/resources/js/admin/sb-admin.min.js"/>"></script>
 	<script
 		src="<spring:url value="/resources/js/admin/sb-admin-datatables.min.js"/>"></script>
-	<script src="<spring:url value="/resources/js/employee/discounts.js"/>"></script>
 	<script
 		src="<spring:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
 	<script

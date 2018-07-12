@@ -1,19 +1,19 @@
 $('#payments').change(function() {
 	var selected = $(this).find("option:selected").val();
 	if (selected == 4) {
-		$('#discount').removeClass('hidden');
-		$('#discount').addClass('show');
-		$('#accordion').removeClass('show');
-		$('#accordion').addClass('hidden');
+		$('#discount').removeClass('d-none');
+		$('#discount').addClass('d-print-none');
+		$('#accordion').removeClass('d-print-none');
+		$('#accordion').addClass('d-none');
 	} else if (selected == 6) {
-		$('#discount').removeClass('hidden');
-		$('#discount').addClass('show');
-		$('#accordion').removeClass('hidden');
-		$('#accordion').addClass('show');
+		$('#discount').removeClass('d-none');
+		$('#discount').addClass('d-print-none');
+		$('#accordion').removeClass('d-none');
+		$('#accordion').addClass('d-print-none');
 	} else {
-		$('#discount').removeClass('show');
-		$('#discount').addClass('hidden');
-		$('#accordion').removeClass('show');
-		$('#accordion').addClass('hidden');
+		$('#discount').removeClass('d-print-none');
+		$('#discount').addClass('d-none');
+		$('#accordion').removeClass('d-print-none');
+		$('#accordion').addClass('d-none');
 	}
 });
