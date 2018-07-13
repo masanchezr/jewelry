@@ -32,6 +32,9 @@
 					<div class="form-group">
 						<spring:message code="iddiscount" />
 						<form:input class="form-control" path="iddiscount" />
+						<p class="text-danger">
+							<form:errors path="numsale" />
+						</p>
 					</div>
 					<div class="form-group">
 						<spring:message code="numsalechange" />
@@ -42,6 +45,9 @@
 					<div class="form-group">
 						<spring:message code="cancelpayments" />
 						<form:input class="form-control" path="optionalpayment" />
+						<p class="text-danger">
+							<form:errors path="optionalpayment" />
+						</p>
 					</div>
 				</div>
 			</div>

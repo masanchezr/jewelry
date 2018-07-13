@@ -10,12 +10,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.je.utils.constants.Constants;
+
 @Entity
 @Table(name = "discounts")
 public class DiscountEntity {
 
 	@Id
-	@Column(name = "iddiscount")
+	@Column(name = Constants.IDDISCOUNT)
 	private Long iddiscount;
 
 	/** The place. */
@@ -30,7 +32,7 @@ public class DiscountEntity {
 	@Column(name = "modificationdate")
 	private Date modificationdate;
 
-	@Column(name = "discount")
+	@Column(name = Constants.SDISCOUNT)
 	private BigDecimal discount;
 
 	@Column(name = "numsalecancel")

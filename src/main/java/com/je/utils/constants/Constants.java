@@ -82,6 +82,8 @@ public class Constants {
 
 	public static final Long DISCOUNT = 4L;
 
+	public static final String SDISCOUNT = "discount";
+
 	public static final String JPG = ".jpg";
 
 	public static final String NUMSALE = "numsale";
@@ -121,5 +123,7 @@ public class Constants {
 	public static final String SALESPOSTPONED = "salespostponed";
 
 	public static final Long ALLPLACES = 0L;
+
+	public static final String IDDISCOUNT = "iddiscount";
 
 }

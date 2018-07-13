@@ -82,10 +82,8 @@ public class SalesController {
 	/**
 	 * Sale.
 	 *
-	 * @param sale
-	 *            the sale form
-	 * @param result
-	 *            the result
+	 * @param sale   the sale form
+	 * @param result the result
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/employee/resultsale")
@@ -147,10 +145,8 @@ public class SalesController {
 	/**
 	 * Cancel parcial sale.
 	 *
-	 * @param sale
-	 *            the sale form
-	 * @param result
-	 *            the result
+	 * @param sale   the sale form
+	 * @param result the result
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/employee/cancelparcialsale")
@@ -211,7 +207,7 @@ public class SalesController {
 		ModelAndView model = new ModelAndView(VIEWREMOVESALE);
 		List<PaymentEntity> payments = paymentService.findAllActive();
 		PaymentEntity pve = new PaymentEntity();
-		pve.setIdpayment(6L);
+		pve.setIdpayment(ConstantsJsp.DISCOUNTANDCASH);
 		pve.setName("Vale descuento y efectivo");
 		payments.add(pve);
 		model.addObject(FORMREMOVESALE, new Sale());
@@ -222,10 +218,8 @@ public class SalesController {
 	/**
 	 * Delete sale.
 	 *
-	 * @param removeSaleForm
-	 *            the remove sale form
-	 * @param result
-	 *            the result
+	 * @param removeSaleForm the remove sale form
+	 * @param result         the result
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/employee/deletesale")
