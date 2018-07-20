@@ -100,10 +100,8 @@ public class ShoppingsAdminController {
 	/**
 	 * Result shoppings.
 	 *
-	 * @param shopping
-	 *            the shopping
-	 * @param result
-	 *            the result
+	 * @param shopping the shopping
+	 * @param result   the result
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/resultShoppings")
@@ -129,8 +127,7 @@ public class ShoppingsAdminController {
 	/**
 	 * hay que codificar este metodo para devolver la compra que se va a modificar.
 	 *
-	 * @param shopping
-	 *            the shopping
+	 * @param shopping the shopping
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/updateShoppings")
@@ -164,10 +161,8 @@ public class ShoppingsAdminController {
 	/**
 	 * Save shopping.
 	 *
-	 * @param shoppingForm
-	 *            the shopping form
-	 * @param result
-	 *            the result
+	 * @param shoppingForm the shopping form
+	 * @param result       the result
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/saveShopping")
@@ -181,10 +176,8 @@ public class ShoppingsAdminController {
 	/**
 	 * Save shopping.
 	 *
-	 * @param shoppingForm
-	 *            the shopping form
-	 * @param result
-	 *            the result
+	 * @param shoppingForm the shopping form
+	 * @param result       the result
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/saveshop")
@@ -258,19 +251,20 @@ public class ShoppingsAdminController {
 	public ModelAndView searchGramsNull() {
 		ModelAndView model = new ModelAndView("searchgramsnull");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
-		model.addObject("adminSearchForm", new SearchForm());
+		model.addObject(ConstantsJsp.FORMSEARCH, new SearchForm());
 		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		return model;
 	}
 
 	@RequestMapping(value = "/resultgramsnull")
-	public ModelAndView resultGramsNull(@ModelAttribute(ConstantsJsp.ADMINFORM) SearchForm form, BindingResult result) {
+	public ModelAndView resultGramsNull(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm form,
+			BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		adminSearchValidator.validate(form, result);
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		if (result.hasErrors()) {
 			model.setViewName("searchgramsnull");
-			model.addObject("adminSearchForm", form);
+			model.addObject(ConstantsJsp.FORMSEARCH, form);
 			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		} else {
 			List<Long> numshops = shoppingService.searchGramsNull(form.getDatefrom(), form.getDateuntil(),
