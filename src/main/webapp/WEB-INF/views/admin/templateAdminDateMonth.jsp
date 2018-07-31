@@ -13,9 +13,6 @@
 	href="<spring:url value="/resources/styles/admin/font-awesome-5.0.10/css/fontawesome-all.css"/>"
 	rel="stylesheet" type="text/css">
 <link
-	href="<spring:url value="/resources/styles/font-awesome-5.0.10/css/font-awesome.min.css"/>"
-	rel="stylesheet" type="text/css">
-<link
 	href="<spring:url value="/resources/styles/admin/dataTables.bootstrap4.css"/>"
 	rel="stylesheet">
 <!-- Custom CSS -->

@@ -13,9 +13,6 @@
 	href="<spring:url value="/resources/styles/admin/font-awesome-5.0.10/css/fontawesome-all.css"/>"
 	rel="stylesheet" type="text/css">
 <link
-	href="<spring:url value="/resources/styles/font-awesome-5.0.10/css/font-awesome.min.css"/>"
-	rel="stylesheet" type="text/css">
-<link
 	href="<spring:url value="/resources/styles/admin/dataTables.bootstrap4.css"/>"
 	rel="stylesheet">
 <!-- Custom CSS -->
@@ -256,13 +253,10 @@
 	<script type="text/javascript"
 		src="<spring:url value="/resources/js/jquery.min.js"/>"></script>
 	<script src="<spring:url value="/resources/js/popper.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/js/bootstrap.min.js"/>"></script>
+	<script src="<spring:url value="/resources/js/bootstrap.min.js"/>"></script>
 	<!-- Custom Theme JavaScript -->
-	<script
-		src="<spring:url value="/resources/js/jquery.easing.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/js/jquery.dataTables.js"/>"></script>
+	<script src="<spring:url value="/resources/js/jquery.easing.min.js"/>"></script>
+	<script src="<spring:url value="/resources/js/jquery.dataTables.js"/>"></script>
 	<script
 		src="<spring:url value="/resources/js/dataTables.bootstrap4.js"/>"></script>
 	<script src="<spring:url value="/resources/js/sb-admin.min.js"/>"></script>
