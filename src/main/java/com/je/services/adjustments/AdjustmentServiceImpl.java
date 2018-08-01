@@ -117,6 +117,11 @@ public class AdjustmentServiceImpl implements AdjustmentService {
 
 	@Override
 	public Adjustment findById(Long idadjustment) {
-		return mapper.map(adjustmentRepository.findById(idadjustment), Adjustment.class);
+		AdjustmentEntity adjustment = adjustmentRepository.findById(idadjustment).orElse(null);
+		if (adjustment != null) {
+			return mapper.map(adjustment, Adjustment.class);
+		} else {
+			return null;
+		}
 	}
 }
