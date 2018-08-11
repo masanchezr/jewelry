@@ -27,7 +27,7 @@ public class OtherConceptEntity implements Serializable {
 
 	/** The idotherconcept. */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "IDOTHERCONCEPT")
 	private Long idotherconcept;
 
@@ -61,8 +61,7 @@ public class OtherConceptEntity implements Serializable {
 	/**
 	 * Sets the idotherconcept.
 	 *
-	 * @param idotherconcept
-	 *            the new idotherconcept
+	 * @param idotherconcept the new idotherconcept
 	 */
 	public void setIdotherconcept(Long idotherconcept) {
 		this.idotherconcept = idotherconcept;
@@ -80,8 +79,7 @@ public class OtherConceptEntity implements Serializable {
 	/**
 	 * Sets the description.
 	 *
-	 * @param description
-	 *            the new description
+	 * @param description the new description
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -99,8 +97,7 @@ public class OtherConceptEntity implements Serializable {
 	/**
 	 * Sets the amount.
 	 *
-	 * @param amount
-	 *            the new amount
+	 * @param amount the new amount
 	 */
 	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
@@ -118,8 +115,7 @@ public class OtherConceptEntity implements Serializable {
 	/**
 	 * Sets the creationdate.
 	 *
-	 * @param creationdate
-	 *            the new creationdate
+	 * @param creationdate the new creationdate
 	 */
 	public void setCreationdate(Date creationdate) {
 		this.creationdate = creationdate;
@@ -137,8 +133,7 @@ public class OtherConceptEntity implements Serializable {
 	/**
 	 * Sets the place.
 	 *
-	 * @param place
-	 *            the new place
+	 * @param place the new place
 	 */
 	public void setPlace(PlaceEntity place) {
 		this.place = place;

@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.je.employee.validators.OtherConceptValidator;
 import com.je.services.otherconcepts.OtherConcept;
-import com.je.services.otherconcepts.OthersConceptsService;
+import com.je.services.otherconcepts.OtherConceptService;
 import com.je.utils.constants.ConstantsJsp;
 
 /**
@@ -23,7 +23,7 @@ public class OthersConceptsController {
 
 	/** The others concepts service. */
 	@Autowired
-	private OthersConceptsService othersConceptsService;
+	private OtherConceptService otherConceptService;
 
 	/** The other concept validator. */
 	@Autowired
@@ -62,7 +62,7 @@ public class OthersConceptsController {
 		} else {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			otherconcept.setUser(user);
-			model.addObject(ConstantsJsp.DAILY, othersConceptsService.save(otherconcept));
+			model.addObject(ConstantsJsp.DAILY, otherConceptService.save(otherconcept));
 			model.setViewName(ConstantsJsp.VIEWDAILYARROW);
 			model.addObject(ConstantsJsp.DATEDAILY, new Date());
 		}

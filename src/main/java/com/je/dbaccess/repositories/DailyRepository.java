@@ -18,10 +18,8 @@ public interface DailyRepository extends CrudRepository<DailyEntity, Long> {
 	/**
 	 * Find by place and dailydate.
 	 *
-	 * @param place
-	 *            the place
-	 * @param dailydate
-	 *            the dailydate
+	 * @param place     the place
+	 * @param dailydate the dailydate
 	 * @return the list
 	 */
 	public DailyEntity findByPlaceAndDailydate(PlaceEntity place, @Temporal(TemporalType.DATE) Date dailydate);
@@ -29,8 +27,7 @@ public interface DailyRepository extends CrudRepository<DailyEntity, Long> {
 	/**
 	 * Find first by place order by iddaily desc.
 	 *
-	 * @param place
-	 *            the place
+	 * @param place the place
 	 * @return the daily entity
 	 */
 	public DailyEntity findFirstByPlaceOrderByIddailyDesc(PlaceEntity place);

@@ -15,9 +15,9 @@ import com.je.services.dailies.Daily;
 import com.je.services.dailies.DailyService;
 
 /**
- * The Class OthersConceptsServiceImpl.
+ * The Class OtherConceptServiceImpl.
  */
-public class OthersConceptsServiceImpl implements OthersConceptsService {
+public class OtherConceptServiceImpl implements OtherConceptService {
 
 	/** The daily service. */
 	@Autowired
@@ -38,9 +38,13 @@ public class OthersConceptsServiceImpl implements OthersConceptsService {
 		OtherConceptEntity otherConceptEntity = mapper.map(otherconcept, OtherConceptEntity.class);
 		List<PlaceUserEntity> places = placeUserRepository.findByUsername(otherconcept.getUser());
 		PlaceEntity place = places.get(0).getPlace();
+		List<OtherConceptEntity> othersconcepts = othersConceptsRepository
+				.findByDescription(otherConceptEntity.getDescription());
 		otherConceptEntity.setPlace(place);
 		otherConceptEntity.setCreationdate(new Date());
-		othersConceptsRepository.save(otherConceptEntity);
+		if (othersconcepts == null || othersconcepts.isEmpty()) {
+			othersConceptsRepository.save(otherConceptEntity);
+		}
 		return dailyService.getDaily(new Date(), place, null);
 	}
 }

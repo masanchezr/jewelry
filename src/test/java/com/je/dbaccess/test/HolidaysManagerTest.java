@@ -4,11 +4,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.dbaccess.managers.HolidaysManager;
@@ -16,7 +16,7 @@ import com.je.dbaccess.managers.HolidaysManager;
 /**
  * The Class HolidaysManagerTest.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = { "classpath*:spring-db-context-test.xml" })
 public class HolidaysManagerTest {
 
@@ -43,8 +43,7 @@ public class HolidaysManagerTest {
 		PlaceEntity place = new PlaceEntity();
 		Calendar calendar = new GregorianCalendar(2015, 3, 24);
 		place.setIdplace(13700L);
-		boolean isholiday = holidaysManager
-				.isHoliday(calendar.getTime(), place);
+		boolean isholiday = holidaysManager.isHoliday(calendar.getTime(), place);
 		System.out.println("isholiday:" + isholiday);
 	}
 }

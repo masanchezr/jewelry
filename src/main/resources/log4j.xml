@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE log4j:configuration SYSTEM "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
 
-<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+<log4j:configuration
+	xmlns:log4j="http://jakarta.apache.org/log4j/">
 
 	<!-- Appenders -->
-	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+	<appender name="console"
+		class="org.apache.log4j.ConsoleAppender">
 		<param name="Target" value="System.out" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
@@ -12,7 +14,7 @@
 	</appender>
 
 	<!-- Application logger -->
-	<logger name="usera">
+	<logger name="jewelry">
 		<level value="info" />
 	</logger>
 
@@ -20,7 +22,7 @@
 	<logger name="org.springframework.beans">
 		<level value="debug" />
 	</logger>
-	
+
 	<logger name="org.springframework.jdbc">
 		<level value="debug" />
 	</logger>
@@ -36,11 +38,19 @@
 	<logger name="org.springframework.web">
 		<level value="debug" />
 	</logger>
-	
+	<logger name="org.hibernate" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="console" />
+	</logger>
+	<logger name="org.hibernate.type" additivity="false">
+		<level value="TRACE" />
+		<appender-ref ref="console" />
+	</logger>
+
 	<!-- Root Logger -->
 	<root>
 		<priority value="debug" />
 		<appender-ref ref="console" />
 	</root>
-	
+
 </log4j:configuration>

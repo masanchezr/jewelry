@@ -11,23 +11,33 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * The Class DateUtil.
  */
 public class DateUtil {
 
+	private DateUtil() {
+
+	}
+
+	/** The logger. */
+	private static Logger logger = LoggerFactory.getLogger(DateUtil.class);
+
 	/**
 	 * Gets the date.
 	 *
-	 * @param sdate
-	 *            the sdate
+	 * @param sdate the sdate
 	 * @return the date
 	 */
 	public static Date getDate(String sdate) {
 		Date date = null;
-		String pattern = null, p;
+		String pattern = null;
+		String p;
 		SimpleDateFormat sdf = null;
-		Map<String, String> patterns = new HashMap<String, String>();
+		Map<String, String> patterns = new HashMap<>();
 		patterns.put("\\d{2}/\\d{2}/\\d{4}", "dd/MM/yyyy");
 		patterns.put("(\\d{2})-(\\d{2})-(\\d{4})", "dd-MM-yyyy");
 		patterns.put("(\\d{4})-(\\d{2})-(\\d{2})", "yyyy-MM-dd");
@@ -47,7 +57,7 @@ public class DateUtil {
 			try {
 				date = sdf.parse(sdate);
 			} catch (ParseException e) {
-				e.printStackTrace();
+				logger.error("No se ha podido parsear la fecha", e);
 			}
 		}
 		return date;
@@ -56,13 +66,12 @@ public class DateUtil {
 	/**
 	 * Checks if is date.
 	 *
-	 * @param sdate
-	 *            the sdate
+	 * @param sdate the sdate
 	 * @return true, if is date
 	 */
 	public static boolean isDate(String sdate) {
 		boolean isdate = false;
-		List<String> patterns = new ArrayList<String>();
+		List<String> patterns = new ArrayList<>();
 		// dd/MM/yyyy
 		patterns.add("\\d\\d/\\d\\d/\\d\\d\\d\\d");
 		// dd.MM.yyyy
@@ -89,8 +98,19 @@ public class DateUtil {
 		return calendar.getTime();
 	}
 
-	public static String getStringDateFormatdd_MM_yyyy(Date date) {
+	/**
+	 * Convert Date to String format dd-MM-yyy
+	 * 
+	 * @param date
+	 * @return date in format string
+	 */
+	public static String getStringDateFormatddMMyyyy(Date date) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		return sdf.format(date);
+	}
+
+	public static Date today() {
+		Calendar c = Calendar.getInstance();
+		return c.getTime();
 	}
 }

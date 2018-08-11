@@ -3,9 +3,9 @@ package com.je.services.otherconcepts;
 import com.je.services.dailies.Daily;
 
 /**
- * The Interface OthersConceptsService.
+ * The Interface OtherConceptService.
  */
-public interface OthersConceptsService {
+public interface OtherConceptService {
 
 	/**
 	 * Save.

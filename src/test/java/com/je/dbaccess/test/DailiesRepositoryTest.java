@@ -2,33 +2,32 @@ package com.je.dbaccess.test;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.je.dbaccess.entities.DailyEntity;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.dbaccess.repositories.DailyRepository;
 
+import junit.framework.Assert;
+
 /**
  * The Class DailiesRepositoryTest.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = { "classpath*:spring-db-context-test.xml" })
 public class DailiesRepositoryTest {
 
 	/** The daily repository. */
 	@Autowired
 	private DailyRepository dailyRepository;
-
-	private static final Logger logger = LoggerFactory.getLogger(DailiesRepositoryTest.class);
 
 	/**
 	 * Save test.
@@ -50,13 +49,10 @@ public class DailiesRepositoryTest {
 	 */
 	@Test
 	public void findByDailydateAndPlaceTest() {
-		Calendar calendar = new GregorianCalendar(2017, 6, 21);
 		PlaceEntity place = new PlaceEntity();
-		place.setIdplace(28017L);
-		calendar.add(Calendar.DAY_OF_MONTH, -1);
-		DailyEntity daily = dailyRepository.findByPlaceAndDailydate(place, calendar.getTime());
-		logger.debug(daily.getFinalamount().toString());
-		logger.debug(daily.getDailydate().toString());
+		place.setIdplace(13700L);
+		DailyEntity daily = dailyRepository.findByPlaceAndDailydate(place, new Date());
+		Assert.assertNull(daily);
 	}
 
 	/**

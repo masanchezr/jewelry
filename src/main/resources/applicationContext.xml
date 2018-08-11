@@ -29,7 +29,7 @@
 	<bean id="setService" class="com.je.services.sets.SetServiceImpl" />
 	<bean id="coinService" class="com.je.services.coins.CoinServiceImpl" />
 	<bean id="adjustmentService" class="com.je.services.adjustments.AdjustmentServiceImpl" />
-	<bean id="othersConceptsService" class="com.je.services.otherconcepts.OthersConceptsServiceImpl" />
+	<bean id="othersConceptsService" class="com.je.services.otherconcepts.OtherConceptServiceImpl" />
 	<bean id="shoppingService" class="com.je.services.shoppings.ShoppingServiceImpl" />
 	<bean id="dailyService" class="com.je.services.dailies.DailyServiceImpl" />
 	<bean id="workshopService" class="com.je.services.workshop.WorkshopServiceImpl" />

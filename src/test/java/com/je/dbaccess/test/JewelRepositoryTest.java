@@ -4,11 +4,11 @@ import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.List;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.je.dbaccess.entities.CategoryEntity;
 import com.je.dbaccess.entities.JewelEntity;
@@ -19,7 +19,7 @@ import com.je.dbaccess.repositories.JewelRepository;
 /**
  * The Class JewelRepositoryTest.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = { "classpath*:spring-db-context-test.xml" })
 public class JewelRepositoryTest {
 
@@ -161,8 +161,7 @@ public class JewelRepositoryTest {
 	/**
 	 * Prints the.
 	 *
-	 * @param ijewels
-	 *            the ijewels
+	 * @param ijewels the ijewels
 	 */
 	private void print(Iterator<JewelEntity> ijewels) {
 		while (ijewels != null && ijewels.hasNext()) {

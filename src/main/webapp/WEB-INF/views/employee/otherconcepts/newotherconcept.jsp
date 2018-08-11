@@ -1,6 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ page contentType="text/html charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <form:form action="saveConcept" modelAttribute="otherconcept">
 	<!-- Breadcrumbs-->
 	<ol class="breadcrumb">

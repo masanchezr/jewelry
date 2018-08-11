@@ -30,6 +30,7 @@
 		$("#logoutForm").submit();
 	}
 </script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 	<c:url value="/employee/j_spring_security_logout" var="logoutUrl" />
@@ -43,7 +44,7 @@
 		id="mainNav">
 		<a class="navbar-brand" href="index.html"><spring:message
 				code="goldburgos" /></a>
-		<!-- Botón para dispositivos móviles -->
+		<!-- Botï¿½n para dispositivos mï¿½viles -->
 		<button class="navbar-toggler navbar-toggler-right" type="button"
 			data-toggle="collapse" data-target="#navbarResponsive"
 			aria-controls="navbarResponsive" aria-expanded="false"
@@ -232,7 +233,7 @@
 					</h5>
 					<button class="close" type="button" data-dismiss="modal"
 						aria-label="Close">
-						<span aria-hidden="true">×</span>
+						<span aria-hidden="true">ï¿½</span>
 					</button>
 				</div>
 				<div class="modal-body">

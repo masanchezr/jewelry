@@ -8,11 +8,11 @@ import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.je.dbaccess.entities.ClientPawnEntity;
 import com.je.dbaccess.entities.PawnEntity;
@@ -23,7 +23,7 @@ import com.je.dbaccess.repositories.PawnsRepository;
 /**
  * The Class PawnsRepositoryTest.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = { "classpath*:spring-db-context-test.xml" })
 public class PawnsRepositoryTest {
 

@@ -19,13 +19,13 @@ public interface OtherConceptsRepository extends CrudRepository<OtherConceptEnti
 	/**
 	 * Find by creationdate and place.
 	 *
-	 * @param creationdate
-	 *            the creationdate
-	 * @param placeEntity
-	 *            the place entity
+	 * @param creationdate the creationdate
+	 * @param placeEntity  the place entity
 	 * @return the list
 	 */
 	List<OtherConceptEntity> findByCreationdateAndPlace(@Temporal(TemporalType.DATE) Date creationdate,
 			PlaceEntity placeEntity);
+
+	List<OtherConceptEntity> findByDescription(String description);
 
 }

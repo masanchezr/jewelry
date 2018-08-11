@@ -2,12 +2,12 @@ package com.je.services.tests;
 
 import java.math.BigDecimal;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.je.dbaccess.entities.CategoryEntity;
 import com.je.dbaccess.entities.JewelEntity;
@@ -18,7 +18,7 @@ import com.je.services.jewels.JewelService;
 /**
  * The Class JewelServiceTest.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = { "classpath*:application-context-test.xml" })
 public class JewelServiceTest {
 
@@ -87,8 +87,7 @@ public class JewelServiceTest {
 	/**
 	 * Prints the.
 	 *
-	 * @param objects
-	 *            the objects
+	 * @param objects the objects
 	 */
 	private void print(Iterable<JewelEntity> objects) {
 		if (objects != null) {

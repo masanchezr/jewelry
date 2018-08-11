@@ -2,13 +2,13 @@ package com.je.dbaccess.test;
 
 import java.util.Iterator;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.je.dbaccess.entities.CategoryEntity;
 import com.je.dbaccess.repositories.CategoriesRepository;
@@ -17,7 +17,7 @@ import com.je.utils.string.Util;
 /**
  * The Class CategoriesRepositoryTest.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = { "classpath*:spring-db-context-test.xml" })
 public class CategoriesRepositoryTest {
 
