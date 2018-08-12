@@ -99,8 +99,8 @@ public class SalesController {
 				sale.setJewels(newjewels);
 				sale.setPlace(place);
 				// comprobamos si ya existe la venta
-				Sale entitysale = saleService.searchByNumsaleAndPlace(sale.getNumsale(), place.getIdplace());
-				if (entitysale == null) {
+				boolean exists = saleService.exists(sale.getNumsale(), place.getIdplace());
+				if (!exists) {
 					saleService.buy(sale);
 					model.setViewName("finishsale");
 					model.addObject(ConstantsJsp.FORMSALE, sale);

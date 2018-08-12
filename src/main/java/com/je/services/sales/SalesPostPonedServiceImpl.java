@@ -83,17 +83,17 @@ public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 				.orElse(null);
 		SalePostPoned sale = null;
 		if (sppentity != null) {
-			InstallmentEntity entity = mapper.map(installment, InstallmentEntity.class);
-			entity.setSalepostponed(sppentity);
-			entity.setCreationdate(new Date());
-			installmentsrepository.save(entity);
 			BigDecimal amount = installmentsrepository.sumBySalepostponed(sppentity);
-			if (amount.compareTo(sppentity.getTotalamount()) == 0) {
+			if (amount.add(installment.getAmount()).compareTo(sppentity.getTotalamount()) <= 0) {
+				InstallmentEntity entity = mapper.map(installment, InstallmentEntity.class);
+				entity.setSalepostponed(sppentity);
+				entity.setCreationdate(new Date());
+				installmentsrepository.save(entity);
 				sppentity.setDateretired(new Date());
 				salespostponedrepository.save(sppentity);
+				sppentity = salespostponedrepository.findById(installment.getIdsalepostponed()).orElse(null);
+				sale = mapper.map(sppentity, SalePostPoned.class);
 			}
-			sppentity = salespostponedrepository.findById(installment.getIdsalepostponed()).orElse(null);
-			sale = mapper.map(sppentity, SalePostPoned.class);
 		}
 		return sale;
 	}

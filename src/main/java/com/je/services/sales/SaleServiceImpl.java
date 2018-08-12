@@ -172,8 +172,7 @@ public class SaleServiceImpl implements SaleService {
 	/**
 	 * Mapper.
 	 * 
-	 * @param salesJewels
-	 *            the sales jewels
+	 * @param salesJewels the sales jewels
 	 * @return the list
 	 */
 	private List<Sale> mapper(Iterator<SaleEntity> isales) {
@@ -190,8 +189,7 @@ public class SaleServiceImpl implements SaleService {
 	/**
 	 * Mapper list jewels.
 	 * 
-	 * @param sjewels
-	 *            the sjewels
+	 * @param sjewels the sjewels
 	 * @return the list
 	 */
 	private List<JewelEntity> mapperListJewels(List<SalesJewels> sjewels) {
@@ -344,5 +342,10 @@ public class SaleServiceImpl implements SaleService {
 	public List<Long> calculateMissingSales(SearchMissingNumbers form) {
 		return saleManager.calculateNumberMissing(form.getNumfrom(), form.getNumuntil(),
 				mapper.map(form.getPlace(), PlaceEntity.class));
+	}
+
+	@Override
+	public boolean exists(Long numsale, Long idplace) {
+		return saleManager.existSale(numsale, idplace);
 	}
 }

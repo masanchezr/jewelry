@@ -150,6 +150,8 @@ public class SalePostPonedController {
 			model.addObject(INSTALLMENT, installment);
 			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
 		} else {
+			// comprobamos primero que el importe no supera el total
+
 			SalePostPoned sale = saleservicepostponed.addInstallment(installment);
 			if (sale != null) {
 				if (sale.getDateretired() != null) {

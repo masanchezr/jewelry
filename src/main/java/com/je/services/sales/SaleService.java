@@ -16,8 +16,7 @@ public interface SaleService {
 	/**
 	 * Buy.
 	 *
-	 * @param sale
-	 *            the sale
+	 * @param sale the sale
 	 * @return the long
 	 */
 	public Long buy(Sale sale);
@@ -32,8 +31,7 @@ public interface SaleService {
 	/**
 	 * Search by date.
 	 *
-	 * @param date
-	 *            the date
+	 * @param date the date
 	 * @return the list
 	 */
 	public List<Sale> searchByDate(Date date);
@@ -41,8 +39,7 @@ public interface SaleService {
 	/**
 	 * Search address by client.
 	 *
-	 * @param nif
-	 *            the nif
+	 * @param nif the nif
 	 * @return the addresses
 	 */
 	public Addresses searchAddressByClient(String nif);
@@ -50,8 +47,7 @@ public interface SaleService {
 	/**
 	 * Removes the sale.
 	 *
-	 * @param removeSaleForm
-	 *            the remove sale form
+	 * @param removeSaleForm the remove sale form
 	 */
 	public void removeSale(Sale removeSaleForm);
 
@@ -60,10 +56,8 @@ public interface SaleService {
 	/**
 	 * Search by id and place.
 	 *
-	 * @param idsale
-	 *            the idsale
-	 * @param valueOf
-	 *            the value of
+	 * @param idsale  the idsale
+	 * @param valueOf the value of
 	 * @return the sale
 	 */
 	public Sale searchByNumsaleAndPlace(Long numsale, Long valueOf);
@@ -73,4 +67,6 @@ public interface SaleService {
 	public Sale searchByPK(Long idsale);
 
 	public List<Long> calculateMissingSales(SearchMissingNumbers form);
+
+	public boolean exists(Long numsale, Long idplace);
 }
