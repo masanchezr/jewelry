@@ -19,8 +19,10 @@ import javax.persistence.Table;
 @Table(name = "objectspawns")
 public class ObjectPawnEntity implements Serializable {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6763850600388215701L;
 
 	/** The idobjectpawn. */
 	@Id
@@ -62,8 +64,7 @@ public class ObjectPawnEntity implements Serializable {
 	/**
 	 * Sets the idobjectpawn.
 	 *
-	 * @param idobjectpawn
-	 *            the new idobjectpawn
+	 * @param idobjectpawn the new idobjectpawn
 	 */
 	public void setIdobjectpawn(Long idobjectpawn) {
 		this.idobjectpawn = idobjectpawn;
@@ -81,8 +82,7 @@ public class ObjectPawnEntity implements Serializable {
 	/**
 	 * Sets the material.
 	 *
-	 * @param material
-	 *            the new material
+	 * @param material the new material
 	 */
 	public void setMetal(MetalEntity material) {
 		this.metal = material;
@@ -100,8 +100,7 @@ public class ObjectPawnEntity implements Serializable {
 	/**
 	 * Sets the description.
 	 *
-	 * @param description
-	 *            the new description
+	 * @param description the new description
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -119,8 +118,7 @@ public class ObjectPawnEntity implements Serializable {
 	/**
 	 * Sets the pawn.
 	 *
-	 * @param pawn
-	 *            the new pawn
+	 * @param pawn the new pawn
 	 */
 	public void setPawn(PawnEntity pawn) {
 		this.pawn = pawn;
@@ -138,8 +136,7 @@ public class ObjectPawnEntity implements Serializable {
 	/**
 	 * Sets the grossgrams.
 	 *
-	 * @param grossgrams
-	 *            the new grossgrams
+	 * @param grossgrams the new grossgrams
 	 */
 	public void setGrossgrams(BigDecimal grossgrams) {
 		this.grossgrams = grossgrams;
@@ -157,8 +154,7 @@ public class ObjectPawnEntity implements Serializable {
 	/**
 	 * Sets the realgrams.
 	 *
-	 * @param realgrams
-	 *            the new realgrams
+	 * @param realgrams the new realgrams
 	 */
 	public void setRealgrams(BigDecimal realgrams) {
 		this.realgrams = realgrams;

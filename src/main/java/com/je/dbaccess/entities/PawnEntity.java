@@ -1,5 +1,6 @@
 package com.je.dbaccess.entities;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -25,7 +26,12 @@ import org.hibernate.annotations.LazyCollectionOption;
  */
 @Entity
 @Table(name = "pawns")
-public class PawnEntity {
+public class PawnEntity implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3552052359623109615L;
 
 	/** The idpawn. */
 	@Id
@@ -101,8 +107,7 @@ public class PawnEntity {
 	/**
 	 * Sets the idpawn.
 	 *
-	 * @param idpawn
-	 *            the new idpawn
+	 * @param idpawn the new idpawn
 	 */
 	public void setIdpawn(Long idpawn) {
 		this.idpawn = idpawn;
@@ -120,8 +125,7 @@ public class PawnEntity {
 	/**
 	 * Sets the creationdate.
 	 *
-	 * @param creationdate
-	 *            the new creationdate
+	 * @param creationdate the new creationdate
 	 */
 	public void setCreationdate(Date creationdate) {
 		this.creationdate = creationdate;
@@ -139,8 +143,7 @@ public class PawnEntity {
 	/**
 	 * Sets the place.
 	 *
-	 * @param place
-	 *            the new place
+	 * @param place the new place
 	 */
 	public void setPlace(PlaceEntity place) {
 		this.place = place;
@@ -158,8 +161,7 @@ public class PawnEntity {
 	/**
 	 * Sets the renovations.
 	 *
-	 * @param renovations
-	 *            the new renovations
+	 * @param renovations the new renovations
 	 */
 	public void setRenovations(List<RenovationEntity> renovations) {
 		this.renovations = renovations;
@@ -177,8 +179,7 @@ public class PawnEntity {
 	/**
 	 * Sets the client.
 	 *
-	 * @param client
-	 *            the new client
+	 * @param client the new client
 	 */
 	public void setClient(ClientPawnEntity client) {
 		this.client = client;
@@ -196,8 +197,7 @@ public class PawnEntity {
 	/**
 	 * Sets the amount.
 	 *
-	 * @param amount
-	 *            the new amount
+	 * @param amount the new amount
 	 */
 	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
@@ -215,8 +215,7 @@ public class PawnEntity {
 	/**
 	 * Sets the retired.
 	 *
-	 * @param retired
-	 *            the new retired
+	 * @param retired the new retired
 	 */
 	public void setDateretired(Date retired) {
 		this.dateretired = retired;
@@ -234,8 +233,7 @@ public class PawnEntity {
 	/**
 	 * Sets the percent.
 	 *
-	 * @param percent
-	 *            the new percent
+	 * @param percent the new percent
 	 */
 	public void setPercent(BigDecimal percent) {
 		this.percent = percent;
@@ -253,8 +251,7 @@ public class PawnEntity {
 	/**
 	 * Sets the numpawn.
 	 *
-	 * @param numpawn
-	 *            the new numpawn
+	 * @param numpawn the new numpawn
 	 */
 	public void setNumpawn(String numpawn) {
 		this.numpawn = numpawn;
@@ -272,8 +269,7 @@ public class PawnEntity {
 	/**
 	 * Sets the objects.
 	 *
-	 * @param objects
-	 *            the new objects
+	 * @param objects the new objects
 	 */
 	public void setObjects(List<ObjectPawnEntity> objects) {
 		this.objects = objects;
@@ -291,8 +287,7 @@ public class PawnEntity {
 	/**
 	 * Sets the months.
 	 *
-	 * @param months
-	 *            the new months
+	 * @param months the new months
 	 */
 	public void setMonths(Integer months) {
 		this.months = months;

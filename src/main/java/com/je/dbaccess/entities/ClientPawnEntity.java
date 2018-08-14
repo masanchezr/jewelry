@@ -1,5 +1,6 @@
 package com.je.dbaccess.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -16,7 +17,12 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "clientspawns")
-public class ClientPawnEntity {
+public class ClientPawnEntity implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5401244114358600473L;
 
 	/** The nif. */
 	@Id
@@ -68,8 +74,7 @@ public class ClientPawnEntity {
 	/**
 	 * Sets the nif.
 	 *
-	 * @param nif
-	 *            the new nif
+	 * @param nif the new nif
 	 */
 	public void setNif(String nif) {
 		this.nif = nif;
@@ -87,8 +92,7 @@ public class ClientPawnEntity {
 	/**
 	 * Sets the address.
 	 *
-	 * @param address
-	 *            the new address
+	 * @param address the new address
 	 */
 	public void setAddress(String address) {
 		this.address = address;
@@ -106,8 +110,7 @@ public class ClientPawnEntity {
 	/**
 	 * Sets the name.
 	 *
-	 * @param name
-	 *            the new name
+	 * @param name the new name
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -125,8 +128,7 @@ public class ClientPawnEntity {
 	/**
 	 * Sets the surname.
 	 *
-	 * @param surname
-	 *            the new surname
+	 * @param surname the new surname
 	 */
 	public void setSurname(String surname) {
 		this.surname = surname;
@@ -144,8 +146,7 @@ public class ClientPawnEntity {
 	/**
 	 * Sets the creationclient.
 	 *
-	 * @param creationdate
-	 *            the new creationclient
+	 * @param creationdate the new creationclient
 	 */
 	public void setCreationclient(Date creationdate) {
 		this.creationclient = creationdate;
@@ -163,8 +164,7 @@ public class ClientPawnEntity {
 	/**
 	 * Sets the datebirth.
 	 *
-	 * @param datebirth
-	 *            the new datebirth
+	 * @param datebirth the new datebirth
 	 */
 	public void setDatebirth(Date datebirth) {
 		this.datebirth = datebirth;
