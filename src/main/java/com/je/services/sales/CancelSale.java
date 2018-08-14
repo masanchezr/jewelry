@@ -8,7 +8,7 @@ import com.je.dbaccess.entities.PaymentEntity;
 public class CancelSale {
 
 	/** The amount. */
-	private double amount;
+	private String amount;
 
 	/** The numsale. */
 	private long numsale;
@@ -23,17 +23,16 @@ public class CancelSale {
 	 *
 	 * @return the amount
 	 */
-	public double getAmount() {
+	public String getAmount() {
 		return amount;
 	}
 
 	/**
 	 * Sets the amount.
 	 *
-	 * @param amount
-	 *            the new amount
+	 * @param amount the new amount
 	 */
-	public void setAmount(double amount) {
+	public void setAmount(String amount) {
 		this.amount = amount;
 	}
 
@@ -49,8 +48,7 @@ public class CancelSale {
 	/**
 	 * Sets the s parcial.
 	 *
-	 * @param sParcial
-	 *            the new s parcial
+	 * @param sParcial the new s parcial
 	 */
 	public void setParcial(String parcial) {
 		this.parcial = parcial;

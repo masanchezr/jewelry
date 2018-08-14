@@ -1,6 +1,5 @@
 package com.je.services.payroll;
 
-import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -13,6 +12,7 @@ import com.je.dbaccess.repositories.PlaceUserRepository;
 import com.je.services.dailies.Daily;
 import com.je.services.dailies.DailyService;
 import com.je.utils.date.DateUtil;
+import com.je.utils.string.Util;
 
 public class PayrollServiceImpl implements PayrollService {
 
@@ -35,7 +35,7 @@ public class PayrollServiceImpl implements PayrollService {
 		calendar.setTime(date);
 		String id = String.valueOf(calendar.get(Calendar.YEAR)).concat(String.valueOf(calendar.get(Calendar.MONTH) + 1))
 				.concat(String.valueOf(place.getIdplace()));
-		payrollentity.setAmount(BigDecimal.valueOf(payroll.getAmount()));
+		payrollentity.setAmount(Util.getNumber(payroll.getAmount()));
 		payrollentity.setPlace(place);
 		payrollentity.setCreationdate(new Date());
 		payrollentity.setIdpayroll(Long.valueOf(id));

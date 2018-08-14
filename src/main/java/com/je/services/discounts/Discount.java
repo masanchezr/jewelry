@@ -1,12 +1,12 @@
 package com.je.services.discounts;
 
-import java.math.BigDecimal;
-
 import com.je.dbaccess.entities.PlaceEntity;
 
 public class Discount {
+
 	private Long iddiscount;
-	private BigDecimal discount;
+
+	private String sdiscount;
 
 	private PlaceEntity place;
 
@@ -18,12 +18,12 @@ public class Discount {
 		this.iddiscount = iddiscount;
 	}
 
-	public BigDecimal getDiscount() {
-		return discount;
+	public String getSdiscount() {
+		return sdiscount;
 	}
 
-	public void setDiscount(BigDecimal discount) {
-		this.discount = discount;
+	public void setSdiscount(String discount) {
+		this.sdiscount = discount;
 	}
 
 	public PlaceEntity getPlace() {

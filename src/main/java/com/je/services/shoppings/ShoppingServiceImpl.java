@@ -81,8 +81,8 @@ public class ShoppingServiceImpl implements ShoppingService {
 		Iterator<ObjectShopEntity> iobjects = objects.iterator();
 		ObjectShopEntity ose;
 		List<PaymentShopEntity> paymentshop = new ArrayList<>();
-		BigDecimal wiretransfer = shopping.getWiretransfer();
-		BigDecimal cashamount = shopping.getCashamount();
+		BigDecimal wiretransfer = Util.getNumber(shopping.getWiretransfer());
+		BigDecimal cashamount = Util.getNumber(shopping.getCashamount());
 		BigDecimal totalamount = BigDecimal.ZERO;
 		while (iobjects.hasNext()) {
 			ose = iobjects.next();
@@ -126,8 +126,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 	/**
 	 * Mapper.
 	 *
-	 * @param shoppingsEntity
-	 *            the shoppings entity
+	 * @param shoppingsEntity the shoppings entity
 	 * @return the list
 	 */
 	private List<Shopping> mapper(List<ShoppingEntity> shoppingsEntity) {

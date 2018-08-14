@@ -44,28 +44,12 @@ public class NewPawnFormValidator implements Validator {
 		String birthday = pawn.getDatebirth();
 		String dni = pawn.getNif();
 		String numpawn = pawn.getNumpawn();
-		BigDecimal percent = pawn.getPercent();
-		BigDecimal amount = pawn.getAmount();
+		BigDecimal percent = Util.getNumber(pawn.getPercent());
+		BigDecimal amount = Util.getNumber(pawn.getAmount());
 		if (amount.compareTo(BigDecimal.ZERO) <= 0) {
 			errors.rejectValue(Constants.AMOUNT, ConstantsJsp.ERRORSELECTAMOUNT);
 		}
-		if (!Util.isEmpty(sdate) && !DateUtil.isDate(sdate)) {
-			errors.rejectValue(Constants.CREATIONDATE, ConstantsJsp.SELECTDATE);
-		}
-		if (!Util.isEmpty(birthday)) {
-			if (!DateUtil.isDate(birthday)) {
-				errors.rejectValue(ERRORDATEBIRTH, ConstantsJsp.SELECTDATE);
-			} else {
-				Date dbirthday = DateUtil.getDate(birthday);
-				Calendar c = Calendar.getInstance();
-				Calendar cbirthday = Calendar.getInstance();
-				cbirthday.setTime(dbirthday);
-				cbirthday.add(Calendar.YEAR, Constants.AGE);
-				if (c.before(cbirthday)) {
-					errors.rejectValue(ERRORDATEBIRTH, "no18");
-				}
-			}
-		}
+		validateDates(sdate, birthday, errors);
 		if (percent.compareTo(BigDecimal.ZERO) <= 0) {
 			errors.rejectValue(ConstantsJsp.PERCENT, ConstantsJsp.ERRORSELECTPERCENT);
 		}
@@ -92,12 +76,36 @@ public class NewPawnFormValidator implements Validator {
 		} else if (!Util.isNifNie(dni)) {
 			errors.rejectValue(ConstantsJsp.NIF, "nifnotvalid");
 		}
+		validateNumpawn(numpawn, errors);
+	}
+
+	private void validateNumpawn(String numpawn, Errors errors) {
 		if (numpawn != null) {
 			String pattern = "[a-zA-Z0-9]*";
 			Pattern pa = Pattern.compile(pattern);
 			Matcher matcher = pa.matcher(numpawn);
 			if (!matcher.matches()) {
 				errors.rejectValue(Constants.NUMPAWN, "novalidcaracter");
+			}
+		}
+	}
+
+	private void validateDates(String sdate, String birthday, Errors errors) {
+		if (!Util.isEmpty(sdate) && !DateUtil.isDate(sdate)) {
+			errors.rejectValue(Constants.CREATIONDATE, ConstantsJsp.SELECTDATE);
+		}
+		if (!Util.isEmpty(birthday)) {
+			if (!DateUtil.isDate(birthday)) {
+				errors.rejectValue(ERRORDATEBIRTH, ConstantsJsp.SELECTDATE);
+			} else {
+				Date dbirthday = DateUtil.getDate(birthday);
+				Calendar c = Calendar.getInstance();
+				Calendar cbirthday = Calendar.getInstance();
+				cbirthday.setTime(dbirthday);
+				cbirthday.add(Calendar.YEAR, Constants.AGE);
+				if (c.before(cbirthday)) {
+					errors.rejectValue(ERRORDATEBIRTH, "no18");
+				}
 			}
 		}
 	}

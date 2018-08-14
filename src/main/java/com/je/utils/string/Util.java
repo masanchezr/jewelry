@@ -1,5 +1,6 @@
 package com.je.utils.string;
 
+import java.math.BigDecimal;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,8 +16,7 @@ public class Util {
 	/**
 	 * Checks if is empty.
 	 * 
-	 * @param string
-	 *            the string
+	 * @param string the string
 	 * @return true, if is empty
 	 */
 	public static boolean isEmpty(String string) {
@@ -30,8 +30,7 @@ public class Util {
 	/**
 	 * Gets the keyword.
 	 *
-	 * @param name
-	 *            the name
+	 * @param name the name
 	 * @return the keyword
 	 */
 	public static String getKeyword(String name) {
@@ -47,6 +46,14 @@ public class Util {
 		}
 	}
 
+	public static BigDecimal getNumber(String cadena) {
+		try {
+			return new BigDecimal(cadena.replace(',', '.'));
+		} catch (NumberFormatException excepcion) {
+			return null;
+		}
+	}
+
 	public static String refactorNIF(String nif) {
 		nif = nif.replaceAll("-", "");
 		nif = nif.toUpperCase();
@@ -54,6 +61,7 @@ public class Util {
 	}
 
 	public static boolean isNifNie(String nif) {
+		boolean isValid = false;
 		if (Character.isLetter(nif.charAt(nif.length() - 1))) {
 			// si es NIE, eliminar la x,y,z inicial para tratarlo como nif
 			if (nif.startsWith("X") || nif.startsWith("Y") || nif.startsWith("Z")) {
@@ -69,23 +77,28 @@ public class Util {
 				}
 				nif = firstLetter.concat(nif.substring(1));
 			}
-			Pattern nifPattern = Pattern.compile("(\\d{1,8})([TRWAGMYFPDXBNJZSQVHLCKE])");
-			Matcher m = nifPattern.matcher(nif);
-			if (m.matches()) {
-				String letra = m.group(2);
-				// Extraer letra del NIF
-				String letras = "TRWAGMYFPDXBNJZSQVHLCKEtrwagmyfpdxbnjzsqvhlcke";
-				int dni = Integer.parseInt(m.group(1));
-				dni = dni % 23;
-				String reference = letras.substring(dni, dni + 1);
-				return reference.equalsIgnoreCase(letra);
-			} else {
-				return false;
-			}
+			isValid = matches(nif);
 		} else if (Character.isLetter(nif.charAt(0))) {
-			return true;
+			isValid = true;
 		} else {
-			return nif.length() > 9;
+			isValid = nif.length() > 9;
+		}
+		return isValid;
+	}
+
+	private static boolean matches(String nif) {
+		Pattern nifPattern = Pattern.compile("(\\d{1,8})([TRWAGMYFPDXBNJZSQVHLCKE])");
+		Matcher m = nifPattern.matcher(nif);
+		if (m.matches()) {
+			String letra = m.group(2);
+			// Extraer letra del NIF
+			String letras = "TRWAGMYFPDXBNJZSQVHLCKEtrwagmyfpdxbnjzsqvhlcke";
+			int dni = Integer.parseInt(m.group(1));
+			dni = dni % 23;
+			String reference = letras.substring(dni, dni + 1);
+			return reference.equalsIgnoreCase(letra);
+		} else {
+			return false;
 		}
 	}
 }

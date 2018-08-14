@@ -9,7 +9,7 @@ public class OtherConcept {
 	private String description;
 
 	/** The amount. */
-	private double amount;
+	private String amount;
 
 	private String user;
 
@@ -25,8 +25,7 @@ public class OtherConcept {
 	/**
 	 * Sets the description.
 	 *
-	 * @param description
-	 *            the new description
+	 * @param description the new description
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -37,17 +36,16 @@ public class OtherConcept {
 	 *
 	 * @return the amount
 	 */
-	public double getAmount() {
+	public String getAmount() {
 		return amount;
 	}
 
 	/**
 	 * Sets the amount.
 	 *
-	 * @param amount
-	 *            the new amount
+	 * @param amount the new amount
 	 */
-	public void setAmount(double amount) {
+	public void setAmount(String amount) {
 		this.amount = amount;
 	}
 

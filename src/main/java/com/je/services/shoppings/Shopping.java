@@ -1,6 +1,5 @@
 package com.je.services.shoppings;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import com.je.dbaccess.entities.ObjectShopEntity;
@@ -14,10 +13,10 @@ public class Shopping extends OperationForm {
 	/** The numshop. */
 	private Long numshop;
 
-	private BigDecimal cashamount;
+	private String cashamount;
 
 	/** The wiretransfer. */
-	private BigDecimal wiretransfer;
+	private String wiretransfer;
 
 	private List<ObjectShopEntity> objects;
 
@@ -37,8 +36,6 @@ public class Shopping extends OperationForm {
 
 	private String town;
 
-	private String description;
-
 	/**
 	 * Gets the numshop.
 	 *
@@ -51,8 +48,7 @@ public class Shopping extends OperationForm {
 	/**
 	 * Sets the numshop.
 	 *
-	 * @param numshop
-	 *            the new numshop
+	 * @param numshop the new numshop
 	 */
 	public void setNumshop(Long numshop) {
 		this.numshop = numshop;
@@ -63,17 +59,16 @@ public class Shopping extends OperationForm {
 	 *
 	 * @return true, if is wiretransfer
 	 */
-	public BigDecimal getWiretransfer() {
+	public String getWiretransfer() {
 		return wiretransfer;
 	}
 
 	/**
 	 * Sets the wiretransfer.
 	 *
-	 * @param wiretransfer
-	 *            the new wiretransfer
+	 * @param wiretransfer the new wiretransfer
 	 */
-	public void setWiretransfer(BigDecimal wiretransfer) {
+	public void setWiretransfer(String wiretransfer) {
 		this.wiretransfer = wiretransfer;
 	}
 
@@ -85,11 +80,11 @@ public class Shopping extends OperationForm {
 		this.objects = objects;
 	}
 
-	public BigDecimal getCashamount() {
+	public String getCashamount() {
 		return cashamount;
 	}
 
-	public void setCashamount(BigDecimal cashamount) {
+	public void setCashamount(String cashamount) {
 		this.cashamount = cashamount;
 	}
 
@@ -139,13 +134,5 @@ public class Shopping extends OperationForm {
 
 	public void setTown(String town) {
 		this.town = town;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 }

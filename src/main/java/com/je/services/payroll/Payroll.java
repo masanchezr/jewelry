@@ -4,7 +4,7 @@ public class Payroll {
 
 	private String payrolldate;
 
-	private double amount;
+	private String amount;
 
 	private String user;
 
@@ -16,11 +16,11 @@ public class Payroll {
 		this.payrolldate = payrolldate;
 	}
 
-	public double getAmount() {
+	public String getAmount() {
 		return amount;
 	}
 
-	public void setAmount(double amount) {
+	public void setAmount(String amount) {
 		this.amount = amount;
 	}
 

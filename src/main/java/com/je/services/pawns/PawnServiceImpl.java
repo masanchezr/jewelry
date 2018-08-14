@@ -132,8 +132,8 @@ public class PawnServiceImpl implements PawnService {
 			clientPawnsRepository.save(cpe);
 			pawnEntity.setMeltdate(new Date());
 			pawnEntity.setObjects(newobjects);
-			pawnEntity.setPercent(pawn.getPercent());
-			pawnEntity.setAmount(pawn.getAmount());
+			pawnEntity.setPercent(Util.getNumber(pawn.getPercent()));
+			pawnEntity.setAmount(Util.getNumber(pawn.getAmount()));
 			pawnsRepository.save(pawnEntity);
 		}
 	}
@@ -250,9 +250,8 @@ public class PawnServiceImpl implements PawnService {
 				pawns = pawnsRepository.searchMissingRenovations(idpawn);
 			}
 			if (pawns != null && !pawns.isEmpty()) {
-				mailService = new MailService("N&uacute;mero empe&ntilde;o: " + pawnEntity.getNumpawn()
-						+ ", fecha creaci&oacute;n: " + pawnEntity.getCreationdate() + ", lugar:" + idplace, null,
-						"REVISAR EMPE&Ntilde;O.");
+				mailService = new MailService("Número empeño: " + pawnEntity.getNumpawn() + ", fecha creación: "
+						+ pawnEntity.getCreationdate() + ", lugar:" + idplace, null, "REVISAR EMPEÑO.");
 				mailService.start();
 			}
 		}

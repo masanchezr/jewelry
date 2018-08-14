@@ -40,7 +40,7 @@ public class ShoppingServiceTest {
 	public void saveShoppingTest() {
 		Shopping shopping = new Shopping();
 		shopping.setCreationdate("02-03-2017");
-		shopping.setAmount(BigDecimal.valueOf(85));
+		shopping.setAmount("85");
 		shopping.setNumshop(9L);
 		shopping.setUser("13700");
 		shopping.setNif("04189105T");

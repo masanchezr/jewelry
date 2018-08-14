@@ -1,7 +1,5 @@
 package com.je.forms;
 
-import java.math.BigDecimal;
-
 import com.je.dbaccess.entities.NationEntity;
 import com.je.dbaccess.entities.TrackEntity;
 
@@ -16,7 +14,7 @@ public class OperationForm {
 	private String creationdate;
 
 	/** The amount. */
-	private BigDecimal amount;
+	private String amount;
 
 	private Long id;
 
@@ -65,11 +63,11 @@ public class OperationForm {
 		this.creationdate = creationdate;
 	}
 
-	public BigDecimal getAmount() {
+	public String getAmount() {
 		return amount;
 	}
 
-	public void setAmount(BigDecimal amount) {
+	public void setAmount(String amount) {
 		this.amount = amount;
 	}
 

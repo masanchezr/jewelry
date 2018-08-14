@@ -1,7 +1,5 @@
 package com.je.services.adjustments;
 
-import java.math.BigDecimal;
-
 import com.je.dbaccess.entities.PaymentEntity;
 
 /**
@@ -18,16 +16,16 @@ public class Adjustment {
 	private String user;
 
 	/** The amount. */
-	private BigDecimal amount;
+	private String amount;
 
 	/** The amountwork. */
-	private double amountwork;
+	private String amountwork;
 
 	/** The recommendedprice. */
-	private double recommendedprice;
+	private String recommendedprice;
 
 	/** The grams. */
-	private double grams;
+	private String grams;
 
 	private PaymentEntity payment;
 
@@ -43,8 +41,7 @@ public class Adjustment {
 	/**
 	 * Sets the idadjustment.
 	 *
-	 * @param idadjustment
-	 *            the new idadjustment
+	 * @param idadjustment the new idadjustment
 	 */
 	public void setIdadjustment(Long idadjustment) {
 		this.idadjustment = idadjustment;
@@ -62,8 +59,7 @@ public class Adjustment {
 	/**
 	 * Sets the description.
 	 *
-	 * @param description
-	 *            the new description
+	 * @param description the new description
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -74,17 +70,16 @@ public class Adjustment {
 	 *
 	 * @return the amount
 	 */
-	public BigDecimal getAmount() {
+	public String getAmount() {
 		return amount;
 	}
 
 	/**
 	 * Sets the amount.
 	 *
-	 * @param amount
-	 *            the new amount
+	 * @param amount the new amount
 	 */
-	public void setAmount(BigDecimal amount) {
+	public void setAmount(String amount) {
 		this.amount = amount;
 	}
 
@@ -93,17 +88,16 @@ public class Adjustment {
 	 *
 	 * @return the recommendedprice
 	 */
-	public double getRecommendedprice() {
+	public String getRecommendedprice() {
 		return recommendedprice;
 	}
 
 	/**
 	 * Sets the recommendedprice.
 	 *
-	 * @param recommendedprice
-	 *            the new recommendedprice
+	 * @param recommendedprice the new recommendedprice
 	 */
-	public void setRecommendedprice(double recommendedprice) {
+	public void setRecommendedprice(String recommendedprice) {
 		this.recommendedprice = recommendedprice;
 	}
 
@@ -112,17 +106,16 @@ public class Adjustment {
 	 *
 	 * @return the amountwork
 	 */
-	public double getAmountwork() {
+	public String getAmountwork() {
 		return amountwork;
 	}
 
 	/**
 	 * Sets the amountwork.
 	 *
-	 * @param amountwork
-	 *            the new amountwork
+	 * @param amountwork the new amountwork
 	 */
-	public void setAmountwork(double amountwork) {
+	public void setAmountwork(String amountwork) {
 		this.amountwork = amountwork;
 	}
 
@@ -131,17 +124,16 @@ public class Adjustment {
 	 *
 	 * @return the grams
 	 */
-	public double getGrams() {
+	public String getGrams() {
 		return grams;
 	}
 
 	/**
 	 * Sets the grams.
 	 *
-	 * @param grams
-	 *            the new grams
+	 * @param grams the new grams
 	 */
-	public void setGrams(double grams) {
+	public void setGrams(String grams) {
 		this.grams = grams;
 	}
 

@@ -49,8 +49,8 @@ public class PawnServiceTest {
 		pawn.setName("Ainhoa");
 		pawn.setSurname("Gonzalez Gonzalez");
 		pawn.setDatebirth("21-01-1973");
-		pawn.setAmount(BigDecimal.valueOf(130));
-		pawn.setPercent(BigDecimal.valueOf(20));
+		pawn.setAmount("130");
+		pawn.setPercent("20");
 		pawn.setObjects(objects);
 		// pawnService.save(pawn);
 	}

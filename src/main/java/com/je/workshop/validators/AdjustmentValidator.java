@@ -1,5 +1,7 @@
 package com.je.workshop.validators;
 
+import java.math.BigDecimal;
+
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -7,6 +9,7 @@ import org.springframework.validation.Validator;
 import com.je.services.adjustments.Adjustment;
 import com.je.utils.constants.Constants;
 import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.string.Util;
 
 /**
  * The Class AdjustmentValidator.
@@ -20,10 +23,11 @@ public class AdjustmentValidator implements Validator {
 
 	@Override
 	public void validate(Object arg0, Errors arg1) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsJsp.IDADJUSTMENT, ConstantsJsp.ERRORSELECTIDADJUSTMENT);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsJsp.IDADJUSTMENT,
+				ConstantsJsp.ERRORSELECTIDADJUSTMENT);
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.DESCRIPTION, ConstantsJsp.ERRORSELECTDESCRIPTION);
 		Adjustment adjustment = (Adjustment) arg0;
-		if (adjustment.getAmountwork() <= 0) {
+		if (Util.getNumber(adjustment.getAmountwork()).compareTo(BigDecimal.ZERO) <= 0) {
 			arg1.rejectValue("amountwork", ConstantsJsp.ERRORSELECTAMOUNT);
 		}
 	}

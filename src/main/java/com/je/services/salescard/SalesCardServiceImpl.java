@@ -114,11 +114,13 @@ public class SalesCardServiceImpl implements SalesCardService {
 		}
 		if (adjustments != null && !adjustments.isEmpty()) {
 			Iterator<AdjustmentEntity> iadjustments = adjustments.iterator();
+			AdjustmentEntity entity;
 			ladjustments = new ArrayList<>();
 			while (iadjustments.hasNext()) {
-				Adjustment adjustment = mapper.map(iadjustments.next(), Adjustment.class);
+				entity = iadjustments.next();
+				Adjustment adjustment = mapper.map(entity, Adjustment.class);
 				ladjustments.add(adjustment);
-				total = total.add(adjustment.getAmount());
+				total = total.add(entity.getAmount());
 			}
 			size = ladjustments.size();
 			map.put(ConstantsJsp.TOTAL, total);
@@ -207,8 +209,7 @@ public class SalesCardServiceImpl implements SalesCardService {
 	/**
 	 * Mapper list jewels.
 	 * 
-	 * @param sjewels
-	 *            the sjewels
+	 * @param sjewels the sjewels
 	 * @return the list
 	 */
 	private List<JewelEntity> mapperListJewels(List<SalesJewels> sjewels) {

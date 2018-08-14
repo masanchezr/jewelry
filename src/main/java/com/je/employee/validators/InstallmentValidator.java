@@ -9,6 +9,7 @@ import org.springframework.validation.Validator;
 import com.je.services.sales.Installment;
 import com.je.utils.constants.Constants;
 import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.string.Util;
 
 public class InstallmentValidator implements Validator {
 
@@ -22,7 +23,7 @@ public class InstallmentValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.IDSALEPOSTPONED, ConstantsJsp.ERRORSELECTIDSALE);
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "amount", ConstantsJsp.ERRORSELECTAMOUNT);
 		Installment installment = (Installment) arg0;
-		BigDecimal amount = installment.getAmount();
+		BigDecimal amount = Util.getNumber(installment.getAmount());
 		if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
 			arg1.rejectValue(Constants.AMOUNT, ConstantsJsp.ERRORSELECTAMOUNT);
 		}

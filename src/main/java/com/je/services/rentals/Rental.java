@@ -1,12 +1,10 @@
 package com.je.services.rentals;
 
-import java.math.BigDecimal;
-
 public class Rental {
 
 	private String rentaldate;
 
-	private BigDecimal amount;
+	private String amount;
 
 	private String user;
 
@@ -18,11 +16,11 @@ public class Rental {
 		this.rentaldate = rentaldate;
 	}
 
-	public BigDecimal getAmount() {
+	public String getAmount() {
 		return amount;
 	}
 
-	public void setAmount(BigDecimal amount) {
+	public void setAmount(String amount) {
 		this.amount = amount;
 	}
 

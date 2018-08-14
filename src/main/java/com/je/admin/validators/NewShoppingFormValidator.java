@@ -10,6 +10,7 @@ import org.springframework.validation.Validator;
 import com.je.dbaccess.entities.ObjectShopEntity;
 import com.je.services.shoppings.Shopping;
 import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.string.Util;
 
 /**
  * The Class ShoppingsValidator.
@@ -29,7 +30,7 @@ public class NewShoppingFormValidator implements Validator {
 		String description;
 		Iterator<ObjectShopEntity> ios = shopping.getObjects().iterator();
 		ObjectShopEntity os;
-		BigDecimal cashamount = shopping.getCashamount();
+		BigDecimal cashamount = Util.getNumber(shopping.getCashamount());
 		BigDecimal grossgrams;
 		BigDecimal amount = BigDecimal.ZERO;
 		// comprobamos que es positivo el numero
@@ -38,6 +39,8 @@ public class NewShoppingFormValidator implements Validator {
 		}
 		if (cashamount == null) {
 			arg1.rejectValue(ConstantsJsp.CASHAMOUNT, ConstantsJsp.ERRORSELECTAMOUNT);
+		} else if (amount.compareTo(cashamount) != 0) {
+			arg1.rejectValue(ConstantsJsp.CASHAMOUNT, ConstantsJsp.ERRORSUMAMOUNTS);
 		}
 		while (ios.hasNext()) {
 			os = ios.next();
@@ -52,9 +55,6 @@ public class NewShoppingFormValidator implements Validator {
 					arg1.rejectValue(ConstantsJsp.NUMSHOP, ConstantsJsp.ERRORSELECTGRAMS);
 				}
 			}
-		}
-		if (cashamount != null && amount.compareTo(cashamount) != 0) {
-			arg1.rejectValue(ConstantsJsp.CASHAMOUNT, ConstantsJsp.ERRORSUMAMOUNTS);
 		}
 	}
 }

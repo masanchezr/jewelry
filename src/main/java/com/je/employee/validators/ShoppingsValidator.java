@@ -10,6 +10,7 @@ import org.springframework.validation.Validator;
 import com.je.dbaccess.entities.ObjectShopEntity;
 import com.je.services.shoppings.Shopping;
 import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.string.Util;
 
 /**
  * The Class ShoppingsValidator.
@@ -26,8 +27,8 @@ public class ShoppingsValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsJsp.NUMSHOP, ConstantsJsp.ERRORSELECTNUMSHOP);
 		Shopping shopping = (Shopping) arg0;
 		Long numshop = shopping.getNumshop();
-		BigDecimal cashamount = shopping.getCashamount();
-		BigDecimal wiretransfer = shopping.getWiretransfer();
+		BigDecimal cashamount = Util.getNumber(shopping.getCashamount());
+		BigDecimal wiretransfer = Util.getNumber(shopping.getWiretransfer());
 		// comprobamos que es positivo el numero
 		if (numshop != null && numshop.compareTo(0L) <= 0) {
 			arg1.rejectValue(ConstantsJsp.NUMSHOP, "numpositive");

@@ -31,23 +31,24 @@ public class IncidentServiceImpl implements IncidentService {
 		entity.setCreationdate(new Date());
 		entity = incidentRepository.save(entity);
 		incident.setIdincident(entity.getIdincident());
-		mailIncidentService = new MailService("Numero de incidencia: " + entity.getIdincident() + " usuario: "
-				+ incident.getUser() + " descripcion: " + incident.getDescription(), null, "NUEVA INCIDENCIA");
+		mailIncidentService = new MailService("Número de incidencia: " + entity.getIdincident() + " usuario: "
+				+ incident.getUser() + " descripción: " + incident.getDescription(), null, "NUEVA INCIDENCIA");
 		mailIncidentService.start();
 	}
 
 	@Override
 	public void resolve(Incident incident) {
-		IncidentEntity entity = incidentRepository.findById(incident.getIdincident()).get();
-		entity.setDescription(incident.getDescription());
-		entity.setState(Boolean.TRUE);
-		incidentRepository.save(entity);
+		IncidentEntity entity = incidentRepository.findById(incident.getIdincident()).orElse(null);
+		if (entity != null) {
+			entity.setDescription(incident.getDescription());
+			entity.setState(Boolean.TRUE);
+			incidentRepository.save(entity);
+		}
 	}
 
 	@Override
 	public List<Incident> searchAllIncidents() {
-		List<Incident> incidents = mapper(incidentRepository.findAll());
-		return incidents;
+		return mapper(incidentRepository.findAll());
 	}
 
 	@Override
@@ -63,7 +64,7 @@ public class IncidentServiceImpl implements IncidentService {
 	}
 
 	private List<Incident> mapper(Iterable<IncidentEntity> entities) {
-		List<Incident> incidents = new ArrayList<Incident>();
+		List<Incident> incidents = new ArrayList<>();
 		Iterator<IncidentEntity> ientities = entities.iterator();
 		Incident incident;
 		IncidentEntity entity;
@@ -80,7 +81,12 @@ public class IncidentServiceImpl implements IncidentService {
 
 	@Override
 	public Incident searchIncident(Incident incident) {
-		return mapper.map(incidentRepository.findById(incident.getIdincident()).get(), Incident.class);
+		IncidentEntity entity = incidentRepository.findById(incident.getIdincident()).orElse(null);
+		if (entity != null) {
+			return mapper.map(entity, Incident.class);
+		} else {
+			return null;
+		}
 	}
 
 	@Override
@@ -93,7 +99,8 @@ public class IncidentServiceImpl implements IncidentService {
 	@Override
 	public List<Incident> searchByUserAndDates(String user, SearchForm form) {
 		UserEntity entity = new UserEntity();
-		Date from = DateUtil.getDate(form.getDatefrom()), until;
+		Date from = DateUtil.getDate(form.getDatefrom());
+		Date until;
 		String suntil = form.getDateuntil();
 		if (Util.isEmpty(suntil)) {
 			until = new Date();

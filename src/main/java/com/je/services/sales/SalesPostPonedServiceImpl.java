@@ -19,6 +19,7 @@ import com.je.dbaccess.entities.SalePostponedEntity;
 import com.je.dbaccess.repositories.InstallmentsRepository;
 import com.je.dbaccess.repositories.SalesPostponedRepository;
 import com.je.forms.SalePostPoned;
+import com.je.utils.string.Util;
 
 public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 
@@ -84,7 +85,14 @@ public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 		SalePostPoned sale = null;
 		if (sppentity != null) {
 			BigDecimal amount = installmentsrepository.sumBySalepostponed(sppentity);
-			if (amount.add(installment.getAmount()).compareTo(sppentity.getTotalamount()) <= 0) {
+			if (amount.add(Util.getNumber(installment.getAmount())).compareTo(sppentity.getTotalamount()) < 0) {
+				InstallmentEntity entity = mapper.map(installment, InstallmentEntity.class);
+				entity.setSalepostponed(sppentity);
+				entity.setCreationdate(new Date());
+				installmentsrepository.save(entity);
+				sppentity = salespostponedrepository.findById(installment.getIdsalepostponed()).orElse(null);
+				sale = mapper.map(sppentity, SalePostPoned.class);
+			} else if (amount.add(Util.getNumber(installment.getAmount())).compareTo(sppentity.getTotalamount()) == 0) {
 				InstallmentEntity entity = mapper.map(installment, InstallmentEntity.class);
 				entity.setSalepostponed(sppentity);
 				entity.setCreationdate(new Date());

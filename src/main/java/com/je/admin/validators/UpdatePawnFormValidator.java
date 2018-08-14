@@ -24,7 +24,6 @@ public class UpdatePawnFormValidator implements Validator {
 
 	@Override
 	public void validate(Object arg0, Errors arg1) {
-
 		NewPawn pawn = (NewPawn) arg0;
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.NUMPAWN, Constants.IDPAWN);
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.NAME, ConstantsJsp.ERRORSELECTNAME);
@@ -33,7 +32,7 @@ public class UpdatePawnFormValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsJsp.ADDRESS, ConstantsJsp.ERRORSELECTADDRESS);
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsJsp.PERCENT, ConstantsJsp.ERRORSELECTPERCENT);
 		String sdate = pawn.getCreationdate();
-		BigDecimal percent = pawn.getPercent();
+		BigDecimal percent = Util.getNumber(pawn.getPercent());
 		if (!Util.isEmpty(sdate) && !DateUtil.isDate(sdate)) {
 			arg1.rejectValue(Constants.CREATIONDATE, ConstantsJsp.SELECTDATE);
 		}

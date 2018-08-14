@@ -1,6 +1,5 @@
 package com.je.services.pawns;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import com.je.dbaccess.entities.ObjectPawnEntity;
@@ -37,7 +36,7 @@ public class NewPawn extends OperationForm {
 	private boolean retired;
 
 	/** The percent. */
-	private BigDecimal percent;
+	private String percent;
 
 	private int months;
 
@@ -55,8 +54,7 @@ public class NewPawn extends OperationForm {
 	/**
 	 * Sets the nif.
 	 *
-	 * @param nif
-	 *            the new nif
+	 * @param nif the new nif
 	 */
 	public void setNif(String nif) {
 		this.nif = nif;
@@ -74,8 +72,7 @@ public class NewPawn extends OperationForm {
 	/**
 	 * Sets the address.
 	 *
-	 * @param address
-	 *            the new address
+	 * @param address the new address
 	 */
 	public void setAddress(String address) {
 		this.address = address;
@@ -93,8 +90,7 @@ public class NewPawn extends OperationForm {
 	/**
 	 * Sets the name.
 	 *
-	 * @param name
-	 *            the new name
+	 * @param name the new name
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -112,8 +108,7 @@ public class NewPawn extends OperationForm {
 	/**
 	 * Sets the surname.
 	 *
-	 * @param surname
-	 *            the new surname
+	 * @param surname the new surname
 	 */
 	public void setSurname(String surname) {
 		this.surname = surname;
@@ -131,8 +126,7 @@ public class NewPawn extends OperationForm {
 	/**
 	 * Sets the datebirth.
 	 *
-	 * @param datebirth
-	 *            the new datebirth
+	 * @param datebirth the new datebirth
 	 */
 	public void setDatebirth(String datebirth) {
 		this.datebirth = datebirth;
@@ -150,8 +144,7 @@ public class NewPawn extends OperationForm {
 	/**
 	 * Sets the retired.
 	 *
-	 * @param retired
-	 *            the new retired
+	 * @param retired the new retired
 	 */
 	public void setRetired(boolean retired) {
 		this.retired = retired;
@@ -169,8 +162,7 @@ public class NewPawn extends OperationForm {
 	/**
 	 * Sets the numpawn.
 	 *
-	 * @param numpawn
-	 *            the new numpawn
+	 * @param numpawn the new numpawn
 	 */
 	public void setNumpawn(String numpawn) {
 		this.numpawn = numpawn;
@@ -181,17 +173,16 @@ public class NewPawn extends OperationForm {
 	 *
 	 * @return the percent
 	 */
-	public BigDecimal getPercent() {
+	public String getPercent() {
 		return percent;
 	}
 
 	/**
 	 * Sets the percent.
 	 *
-	 * @param percent
-	 *            the new percent
+	 * @param percent the new percent
 	 */
-	public void setPercent(BigDecimal percent) {
+	public void setPercent(String percent) {
 		this.percent = percent;
 	}
 

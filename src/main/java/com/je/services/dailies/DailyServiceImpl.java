@@ -155,7 +155,7 @@ public class DailyServiceImpl implements DailyService {
 			BigDecimal strapsamount = getStrapsAmount(date, place, daily);
 			BigDecimal entriesmoneyamount = getEntriesMoneyAmount(date, place, daily);
 			double salesamount = getSalesAmount(date, place, daily);
-			double payrollamount = getPayrollAmount(date, place, daily);
+			BigDecimal payrollamount = getPayrollAmount(date, place, daily);
 			double salespostamount = getSalesPostAmount(date, place, daily);
 			if (dEntity == null) {
 				// tengo que sacar el importe del día anterior para calcularlo
@@ -175,10 +175,9 @@ public class DailyServiceImpl implements DailyService {
 			}
 			finalamount = previousamount.add(adjusmentsamount).add(adjustmentsworkamount).add(renovationsamount)
 					.add(BigDecimal.valueOf(salesamount)).add(shoppingsamount).add(retiredpawnsamount)
-					.add(otherconceptsamount).add(newpawnsamount).add(cancelsamount)
-					.add(BigDecimal.valueOf(payrollamount)).add(entriesmoneyamount).add(batteriesamount)
-					.add(strapsamount).add(rentalsamount).add(discountsamount).add(recordingsAmount)
-					.add(BigDecimal.valueOf(salespostamount));
+					.add(otherconceptsamount).add(newpawnsamount).add(cancelsamount).add(payrollamount)
+					.add(entriesmoneyamount).add(batteriesamount).add(strapsamount).add(rentalsamount)
+					.add(discountsamount).add(recordingsAmount).add(BigDecimal.valueOf(salespostamount));
 			dEntity.setFinalamount(finalamount);
 			dEntity.setIpaddress(ipaddress);
 			daily.setFinalamount(finalamount);
@@ -237,7 +236,7 @@ public class DailyServiceImpl implements DailyService {
 				re = irentals.next();
 				r = mapper.map(re, Rental.class);
 				r.setRentaldate(String.valueOf(re.getIdrental()).substring(0, 5));
-				rentalsamount = rentalsamount.subtract(r.getAmount());
+				rentalsamount = rentalsamount.subtract(re.getAmount());
 				rentals.add(r);
 			}
 			daily.setRentals(rentals);
@@ -298,8 +297,8 @@ public class DailyServiceImpl implements DailyService {
 		return entriesmoneyamount;
 	}
 
-	private double getPayrollAmount(Date date, PlaceEntity place, Daily daily) {
-		double payrollamount = 0;
+	private BigDecimal getPayrollAmount(Date date, PlaceEntity place, Daily daily) {
+		BigDecimal payrollamount = BigDecimal.ZERO;
 		List<PayrollEntity> payrolls = payrollRepository.findByCreationdateAndPlace(date, place);
 		if (payrolls != null && !payrolls.isEmpty()) {
 			Iterator<PayrollEntity> ipayroll = payrolls.iterator();
@@ -308,7 +307,7 @@ public class DailyServiceImpl implements DailyService {
 			while (ipayroll.hasNext()) {
 				pre = ipayroll.next();
 				pr = mapper.map(pre, Payroll.class);
-				payrollamount -= pr.getAmount();
+				payrollamount = payrollamount.subtract(pre.getAmount());
 				daily.setPayroll(pr);
 			}
 			daily.setNumoperations(daily.getNumoperations() + payrolls.size());
@@ -519,7 +518,7 @@ public class DailyServiceImpl implements DailyService {
 					amount = amount.add(percentamount);
 				}
 				retiredpawnsamount = retiredpawnsamount.add(amount);
-				pawn.setAmount(amount);
+				pawn.setAmount(amount.toString());
 				lpawns.add(pawn);
 			}
 			daily.setRetiredpawns(lpawns);
