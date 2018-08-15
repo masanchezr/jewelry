@@ -180,6 +180,9 @@ public class PawnsAdminController {
 			model = new ModelAndView();
 			model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 			model.setViewName(VIEWUPDATEPAWN);
+			model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
+			model.addObject(Constants.NATIONS, nationservice.getNations());
+			model.addObject(Constants.TRACKS, trackservice.getTracks());
 			model.addObject("pawn", pawn);
 		} else {
 			model = searchPawns();
