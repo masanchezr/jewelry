@@ -88,4 +88,12 @@
 			<b>idpawn</b>
 		</field>
 	</mapping>
+	<mapping>
+		<class-a>com.je.dbaccess.entities.DiscountEntity</class-a>
+		<class-b>com.je.services.discounts.Discount</class-b>
+		<field>
+			<a>discount</a>
+			<b>sdiscount</b>
+		</field>
+	</mapping>
 </mappings>
