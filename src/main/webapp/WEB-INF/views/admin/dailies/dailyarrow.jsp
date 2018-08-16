@@ -178,7 +178,7 @@
 							<tr>
 								<td><spring:message code="iddiscount" /></td>
 								<td><c:out value="${discount.iddiscount}" /></td>
-								<td><c:out value="${discount.discount}" /><i
+								<td><c:out value="${discount.sdiscount}" /><i
 									class="fa fa-euro-sign"></i></td>
 								<td></td>
 							</tr>
