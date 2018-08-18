@@ -32,7 +32,7 @@ public class NewShoppingFormValidator implements Validator {
 		ObjectShopEntity os;
 		BigDecimal cashamount = Util.getNumber(shopping.getCashamount());
 		BigDecimal grossgrams;
-		BigDecimal amount = BigDecimal.ZERO;
+		BigDecimal amount = Util.getNumber(shopping.getAmount());
 		// comprobamos que es positivo el numero
 		if (numshop != null && numshop.compareTo(0L) <= 0) {
 			arg1.rejectValue(ConstantsJsp.NUMSHOP, "numpositive");
