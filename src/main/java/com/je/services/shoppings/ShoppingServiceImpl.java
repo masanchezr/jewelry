@@ -81,7 +81,11 @@ public class ShoppingServiceImpl implements ShoppingService {
 		Iterator<ObjectShopEntity> iobjects = objects.iterator();
 		ObjectShopEntity ose;
 		List<PaymentShopEntity> paymentshop = new ArrayList<>();
-		BigDecimal wiretransfer = Util.getNumber(shopping.getWiretransfer());
+		BigDecimal wiretransfer = null;
+		String swiretransfer = shopping.getWiretransfer();
+		if (!Util.isEmpty(swiretransfer)) {
+			wiretransfer = Util.getNumber(swiretransfer);
+		}
 		BigDecimal cashamount = Util.getNumber(shopping.getCashamount());
 		BigDecimal totalamount = BigDecimal.ZERO;
 		while (iobjects.hasNext()) {
