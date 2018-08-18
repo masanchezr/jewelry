@@ -32,15 +32,13 @@ public class NewShoppingFormValidator implements Validator {
 		ObjectShopEntity os;
 		BigDecimal cashamount = Util.getNumber(shopping.getCashamount());
 		BigDecimal grossgrams;
-		BigDecimal amount = Util.getNumber(shopping.getAmount());
+		BigDecimal amount = BigDecimal.ZERO;
 		// comprobamos que es positivo el numero
 		if (numshop != null && numshop.compareTo(0L) <= 0) {
 			arg1.rejectValue(ConstantsJsp.NUMSHOP, "numpositive");
 		}
 		if (cashamount == null) {
 			arg1.rejectValue(ConstantsJsp.CASHAMOUNT, ConstantsJsp.ERRORSELECTAMOUNT);
-		} else if (amount.compareTo(cashamount) != 0) {
-			arg1.rejectValue(ConstantsJsp.CASHAMOUNT, ConstantsJsp.ERRORSUMAMOUNTS);
 		}
 		while (ios.hasNext()) {
 			os = ios.next();
@@ -55,6 +53,9 @@ public class NewShoppingFormValidator implements Validator {
 					arg1.rejectValue(ConstantsJsp.NUMSHOP, ConstantsJsp.ERRORSELECTGRAMS);
 				}
 			}
+		}
+		if (amount.compareTo(cashamount) != 0) {
+			arg1.rejectValue(ConstantsJsp.CASHAMOUNT, ConstantsJsp.ERRORSUMAMOUNTS);
 		}
 	}
 }
