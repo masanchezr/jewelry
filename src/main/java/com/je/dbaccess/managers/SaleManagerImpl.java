@@ -276,8 +276,8 @@ public class SaleManagerImpl implements SaleManager {
 		if (batteries == null) {
 			StrapEntity straps = strapsRepository.findByNumsaleAndPlace(i, place);
 			if (straps == null) {
-				List<RecordingEntity> recordings = recordingRepository.findByNumsaleAndPlace(i, place);
-				if (recordings == null || recordings.isEmpty()) {
+				RecordingEntity recording = recordingRepository.findByNumsaleAndPlace(i, place);
+				if (recording == null) {
 					DiscountEntity discount = discountsRepository.findById(i).orElse(null);
 					if (discount == null) {
 						num = i;
