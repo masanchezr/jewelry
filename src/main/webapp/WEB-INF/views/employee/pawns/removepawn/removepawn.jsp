@@ -4,7 +4,7 @@
 <!-- Breadcrumbs-->
 <ol class="breadcrumb">
 	<li class="breadcrumb-item"><a href="#"><spring:message
-				code="newpawn" /></a></li>
+				code="pawns" /></a></li>
 	<li class="breadcrumb-item active"><spring:message
 			code="removepawn" /></li>
 </ol>
