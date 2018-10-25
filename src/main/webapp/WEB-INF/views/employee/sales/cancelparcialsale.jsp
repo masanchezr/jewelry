@@ -30,7 +30,8 @@
 						<td></td>
 						<td></td>
 					</tr>
-					<c:forEach items="${sale.jewels}" var="jewel" varStatus="status">
+					<c:forEach items="${saleForm.jewels}" var="jewel"
+						varStatus="status">
 						<tr class="success">
 							<td><form:checkbox
 									path="jewelstocancel[${status.index}].idjewel"
