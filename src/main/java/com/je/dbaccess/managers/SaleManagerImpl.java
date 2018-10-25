@@ -244,9 +244,15 @@ public class SaleManagerImpl implements SaleManager {
 				total = total.add(sale.getTotal());
 			}
 		}
-		total = total.add(sumsalespostponed);
-		total = total.add(sumstraps);
-		total = total.add(sumbatteries);
+		if (sumsalespostponed != null) {
+			total = total.add(sumsalespostponed);
+		}
+		if (sumstraps != null) {
+			total = total.add(sumstraps);
+		}
+		if (sumbatteries != null) {
+			total = total.add(sumbatteries);
+		}
 		map.put(Constants.SALES, sales);
 		map.put(Constants.SALESPOSTPONED, salespostponed);
 		map.put(Constants.STRAPS, straps);

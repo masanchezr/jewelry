@@ -164,7 +164,7 @@ public class SalesController {
 			if (entitysale != null) {
 				model.setViewName(VIEWCANCELPARCIALSALE);
 				model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
-				model.addObject(ConstantsJsp.FORMSALE, sale);
+				model.addObject(ConstantsJsp.FORMSALE, entitysale);
 			} else {
 				model.setViewName(VIEWREMOVEPARCIALSALE);
 				model.addObject(ConstantsJsp.FORMSALE, sale);
