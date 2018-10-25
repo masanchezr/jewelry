@@ -34,11 +34,9 @@ public class MessageEntity {
 	@Column(name = Constants.CREATIONDATE)
 	private Date creationdate;
 
-	@Temporal(TemporalType.TIME)
 	@Column(name = Constants.DATEFROM)
 	private Date datefrom;
 
-	@Temporal(TemporalType.TIME)
 	@Column(name = Constants.DATEUNTIL)
 	private Date dateuntil;
 
