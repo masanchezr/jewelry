@@ -1,5 +1,6 @@
 package com.je.dbaccess.repositories;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -42,5 +43,12 @@ public interface SalesPostponedRepository extends CrudRepository<SalePostponedEn
 
 	public List<SalePostponedEntity> findByDeadlineBeforeAndPlaceAndTimeoutFalseAndDateretiredIsNull(
 			@Temporal(TemporalType.DATE) Date date, PlaceEntity place);
+
+	public List<SalePostponedEntity> findByDateretiredBetweenAndPlace(@Temporal(TemporalType.DATE) Date from,
+			@Temporal(TemporalType.DATE) Date until, PlaceEntity place);
+
+	@Query("select sum(s.amount) from SalePostponedEntity s where s.dateretired>=:from and s.dateretired<=:until and s.place=:place")
+	public BigDecimal sumDateretiredBetweenAndPlace(@Param("from") Date from, @Param("until") Date until,
+			@Param("place") PlaceEntity place);
 
 }

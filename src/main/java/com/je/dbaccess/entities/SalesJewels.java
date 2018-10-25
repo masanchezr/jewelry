@@ -1,7 +1,5 @@
 package com.je.dbaccess.entities;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,10 +15,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "salesjewels")
-public class SalesJewels implements Serializable {
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+public class SalesJewels {
 
 	/** The sale. */
 	@Id
@@ -50,8 +45,7 @@ public class SalesJewels implements Serializable {
 	/**
 	 * Sets the sale.
 	 * 
-	 * @param sale
-	 *            the sale to set
+	 * @param sale the sale to set
 	 */
 	public void setSale(SaleEntity sale) {
 		this.sale = sale;
@@ -69,8 +63,7 @@ public class SalesJewels implements Serializable {
 	/**
 	 * Sets the jewel.
 	 * 
-	 * @param jewel
-	 *            the jewel to set
+	 * @param jewel the jewel to set
 	 */
 	public void setJewelEntity(JewelEntity jewel) {
 		this.jewel = jewel;

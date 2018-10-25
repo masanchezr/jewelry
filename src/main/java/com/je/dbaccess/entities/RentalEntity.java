@@ -17,6 +17,7 @@ import com.je.utils.constants.Constants;
 @Entity
 @Table(name = "rentals")
 public class RentalEntity {
+
 	@Id
 	@Column(name = "idrental")
 	private Long idrental;

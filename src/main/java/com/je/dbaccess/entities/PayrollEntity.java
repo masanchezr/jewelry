@@ -1,6 +1,5 @@
 package com.je.dbaccess.entities;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -17,12 +16,7 @@ import com.je.utils.constants.Constants;
 
 @Entity
 @Table(name = "payroll")
-public class PayrollEntity implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class PayrollEntity {
 
 	@Id
 	@Column(name = "idpayroll")

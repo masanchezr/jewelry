@@ -1,7 +1,5 @@
 package com.je.dbaccess.entities;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -11,12 +9,7 @@ import com.je.utils.constants.Constants;
 
 @Entity
 @Table(name = Constants.NATIONS)
-public class NationEntity implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -1791642369451676481L;
+public class NationEntity {
 
 	@Id
 	@Column(name = "IDNATION")

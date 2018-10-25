@@ -1,6 +1,5 @@
 package com.je.dbaccess.entities;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -26,12 +25,7 @@ import org.hibernate.annotations.LazyCollectionOption;
  */
 @Entity
 @Table(name = "pawns")
-public class PawnEntity implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3552052359623109615L;
+public class PawnEntity {
 
 	/** The idpawn. */
 	@Id

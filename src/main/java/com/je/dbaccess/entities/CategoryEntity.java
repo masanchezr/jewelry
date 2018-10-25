@@ -1,7 +1,5 @@
 package com.je.dbaccess.entities;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,10 +12,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "categories")
-public class CategoryEntity implements Serializable {
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+public class CategoryEntity {
 
 	/** The idcategory. */
 	@Id
@@ -49,8 +44,7 @@ public class CategoryEntity implements Serializable {
 	/**
 	 * Sets the idcategory.
 	 * 
-	 * @param idcategory
-	 *            the new idcategory
+	 * @param idcategory the new idcategory
 	 */
 	public void setIdcategory(Long idcategory) {
 		this.idcategory = idcategory;
@@ -72,8 +66,7 @@ public class CategoryEntity implements Serializable {
 	/**
 	 * Sets the namecategory.
 	 * 
-	 * @param namecategory
-	 *            the new namecategory
+	 * @param namecategory the new namecategory
 	 */
 	public void setNamecategory(String namecategory) {
 		this.namecategory = namecategory;
@@ -91,8 +84,7 @@ public class CategoryEntity implements Serializable {
 	/**
 	 * Sets the keyword.
 	 *
-	 * @param keyword
-	 *            the new keyword
+	 * @param keyword the new keyword
 	 */
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;

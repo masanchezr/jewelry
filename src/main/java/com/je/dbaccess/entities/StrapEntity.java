@@ -19,6 +19,7 @@ import com.je.utils.constants.Constants;
 @Entity
 @Table(name = Constants.STRAPS)
 public class StrapEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idstrap")

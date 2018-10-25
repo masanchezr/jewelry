@@ -46,8 +46,7 @@ public class PaymentShopEntity {
 	/**
 	 * Sets the payment.
 	 *
-	 * @param payment
-	 *            the new payment
+	 * @param payment the new payment
 	 */
 	public void setPayment(PaymentEntity payment) {
 		this.payment = payment;

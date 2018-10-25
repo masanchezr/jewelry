@@ -1,6 +1,5 @@
 package com.je.dbaccess.entities;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -20,10 +19,7 @@ import com.je.utils.constants.Constants;
  */
 @Entity
 @Table(name = Constants.ADJUSTMENTS)
-public class AdjustmentEntity implements Serializable {
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+public class AdjustmentEntity {
 
 	/** The idadjustment. */
 	@Id
@@ -90,8 +86,7 @@ public class AdjustmentEntity implements Serializable {
 	/**
 	 * Sets the idadjustment.
 	 *
-	 * @param idadjustment
-	 *            the new idadjustment
+	 * @param idadjustment the new idadjustment
 	 */
 	public void setIdadjustment(Long idadjustment) {
 		this.idadjustment = idadjustment;
@@ -109,8 +104,7 @@ public class AdjustmentEntity implements Serializable {
 	/**
 	 * Sets the description.
 	 *
-	 * @param description
-	 *            the new description
+	 * @param description the new description
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -128,8 +122,7 @@ public class AdjustmentEntity implements Serializable {
 	/**
 	 * Sets the amount.
 	 *
-	 * @param amount
-	 *            the new amount
+	 * @param amount the new amount
 	 */
 	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
@@ -147,8 +140,7 @@ public class AdjustmentEntity implements Serializable {
 	/**
 	 * Sets the creationdate.
 	 *
-	 * @param creationdate
-	 *            the new creationdate
+	 * @param creationdate the new creationdate
 	 */
 	public void setCreationdate(Date creationdate) {
 		this.creationdate = creationdate;
@@ -166,8 +158,7 @@ public class AdjustmentEntity implements Serializable {
 	/**
 	 * Sets the place.
 	 *
-	 * @param place
-	 *            the new place
+	 * @param place the new place
 	 */
 	public void setPlace(PlaceEntity place) {
 		this.place = place;
@@ -185,8 +176,7 @@ public class AdjustmentEntity implements Serializable {
 	/**
 	 * Sets the recommendedprice.
 	 *
-	 * @param recommendedprice
-	 *            the new recommendedprice
+	 * @param recommendedprice the new recommendedprice
 	 */
 	public void setRecommendedprice(BigDecimal recommendedprice) {
 		this.recommendedprice = recommendedprice;
@@ -204,8 +194,7 @@ public class AdjustmentEntity implements Serializable {
 	/**
 	 * Sets the amountwork.
 	 *
-	 * @param amountwork
-	 *            the new amountwork
+	 * @param amountwork the new amountwork
 	 */
 	public void setAmountwork(BigDecimal amountwork) {
 		this.amountwork = amountwork;
@@ -223,8 +212,7 @@ public class AdjustmentEntity implements Serializable {
 	/**
 	 * Sets the carrydate.
 	 *
-	 * @param carrydate
-	 *            the new carrydate
+	 * @param carrydate the new carrydate
 	 */
 	public void setCarrydate(Date carrydate) {
 		this.carrydate = carrydate;
@@ -242,8 +230,7 @@ public class AdjustmentEntity implements Serializable {
 	/**
 	 * Sets the grams.
 	 *
-	 * @param grams
-	 *            the new grams
+	 * @param grams the new grams
 	 */
 	public void setGrams(BigDecimal grams) {
 		this.grams = grams;

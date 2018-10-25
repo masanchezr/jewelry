@@ -1,6 +1,5 @@
 package com.je.dbaccess.entities;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -17,10 +16,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "coins")
-public class CoinEntity implements Serializable {
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+public class CoinEntity {
 
 	/** The idcoin. */
 	@Id
@@ -61,8 +57,7 @@ public class CoinEntity implements Serializable {
 	/**
 	 * Sets the idcoin.
 	 *
-	 * @param idcoin
-	 *            the new idcoin
+	 * @param idcoin the new idcoin
 	 */
 	public void setIdcoin(Long idcoin) {
 		this.idcoin = idcoin;
@@ -80,8 +75,7 @@ public class CoinEntity implements Serializable {
 	/**
 	 * Sets the place.
 	 *
-	 * @param place
-	 *            the new place
+	 * @param place the new place
 	 */
 	public void setPlace(PlaceEntity place) {
 		this.place = place;
@@ -99,8 +93,7 @@ public class CoinEntity implements Serializable {
 	/**
 	 * Sets the material.
 	 *
-	 * @param material
-	 *            the new material
+	 * @param material the new material
 	 */
 	public void setMetal(MetalEntity material) {
 		this.metal = material;
@@ -118,8 +111,7 @@ public class CoinEntity implements Serializable {
 	/**
 	 * Sets the description.
 	 *
-	 * @param description
-	 *            the new description
+	 * @param description the new description
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -137,8 +129,7 @@ public class CoinEntity implements Serializable {
 	/**
 	 * Sets the price.
 	 *
-	 * @param price
-	 *            the new price
+	 * @param price the new price
 	 */
 	public void setPrice(Double price) {
 		this.price = price;
@@ -156,8 +147,7 @@ public class CoinEntity implements Serializable {
 	/**
 	 * Sets the creationdate.
 	 *
-	 * @param creationdate
-	 *            the new creationdate
+	 * @param creationdate the new creationdate
 	 */
 	public void setCreationdate(Date creationdate) {
 		this.creationdate = creationdate;

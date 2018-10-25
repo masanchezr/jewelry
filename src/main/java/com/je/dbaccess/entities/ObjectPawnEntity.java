@@ -1,6 +1,5 @@
 package com.je.dbaccess.entities;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
@@ -17,12 +16,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "objectspawns")
-public class ObjectPawnEntity implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 6763850600388215701L;
+public class ObjectPawnEntity {
 
 	/** The idobjectpawn. */
 	@Id

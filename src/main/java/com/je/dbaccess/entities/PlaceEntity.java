@@ -1,6 +1,5 @@
 package com.je.dbaccess.entities;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -13,10 +12,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "places")
-public class PlaceEntity implements Serializable {
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+public class PlaceEntity {
 
 	/** The idplace. */
 	@Id
@@ -46,8 +42,7 @@ public class PlaceEntity implements Serializable {
 	/**
 	 * Sets the idplace.
 	 *
-	 * @param idplace
-	 *            the idplace to set
+	 * @param idplace the idplace to set
 	 */
 	public void setIdplace(Long idplace) {
 		this.idplace = idplace;
@@ -65,8 +60,7 @@ public class PlaceEntity implements Serializable {
 	/**
 	 * Sets the creationdate.
 	 *
-	 * @param creationdate
-	 *            the creationdate to set
+	 * @param creationdate the creationdate to set
 	 */
 	public void setCreationdate(Date creationdate) {
 		this.creationdate = creationdate;
@@ -84,8 +78,7 @@ public class PlaceEntity implements Serializable {
 	/**
 	 * Sets the description.
 	 *
-	 * @param description
-	 *            the description to set
+	 * @param description the description to set
 	 */
 	public void setDescription(String description) {
 		this.description = description;

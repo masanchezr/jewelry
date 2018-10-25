@@ -43,7 +43,7 @@
 		id="mainNav">
 		<a class="navbar-brand" href="admin"><spring:message
 				code="goldburgos" /></a>
-		<!-- Botón para dispositivos móviles -->
+		<!-- Botï¿½n para dispositivos mï¿½viles -->
 		<button class="navbar-toggler navbar-toggler-right" type="button"
 			data-toggle="collapse" data-target="#navbarResponsive"
 			aria-controls="navbarResponsive" aria-expanded="false"
@@ -217,6 +217,13 @@
 									code="searchholidays" /></a></li>
 					</ul></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
+					title="<spring:message code="totalsales" />"><spring:url
+						value="/searchSales" var="searchsales" /> <a
+					href="${searchsales}" class="nav-link"><i
+						class="fa fa-gift fa-fw"></i> <span class="nav-link-text">
+							<spring:message code="totalsales" />
+					</span></a></li>
+				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="<spring:message code="salescard" />"><spring:url
 						value="/searchSalesCard" var="searchsalescard" /> <a
 					href="${searchsalescard}" class="nav-link"><i
@@ -338,7 +345,7 @@
 					</h5>
 					<button class="close" type="button" data-dismiss="modal"
 						aria-label="Close">
-						<span aria-hidden="true">×</span>
+						<span aria-hidden="true">ï¿½</span>
 					</button>
 				</div>
 				<div class="modal-body">

@@ -22,6 +22,7 @@ import com.je.dbaccess.entities.PaymentEntity;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.dbaccess.entities.RecordingEntity;
 import com.je.dbaccess.entities.SaleEntity;
+import com.je.dbaccess.entities.SalePostponedEntity;
 import com.je.dbaccess.entities.SalesJewels;
 import com.je.dbaccess.entities.StrapEntity;
 import com.je.dbaccess.repositories.BatteriesRepository;
@@ -30,6 +31,7 @@ import com.je.dbaccess.repositories.DiscountsRepository;
 import com.je.dbaccess.repositories.JewelRepository;
 import com.je.dbaccess.repositories.RecordingRepository;
 import com.je.dbaccess.repositories.SaleRepository;
+import com.je.dbaccess.repositories.SalesPostponedRepository;
 import com.je.dbaccess.repositories.StrapsRepository;
 import com.je.utils.constants.Constants;
 import com.je.utils.constants.ConstantsJsp;
@@ -62,6 +64,9 @@ public class SaleManagerImpl implements SaleManager {
 
 	@Autowired
 	private RecordingRepository recordingRepository;
+
+	@Autowired
+	private SalesPostponedRepository salespostponedrepository;
 
 	@Override
 	@Transactional
@@ -216,22 +221,22 @@ public class SaleManagerImpl implements SaleManager {
 		List<CancelSaleEntity> cancels;
 		Iterable<SaleEntity> isales = saleRepository.findByCreationdateBetweenAndPlaceOrderByIdsaleAsc(from, until,
 				place);
+		List<SalePostponedEntity> salespostponed = salespostponedrepository.findByDateretiredBetweenAndPlace(from,
+				until, place);
+		List<StrapEntity> straps = strapsRepository.findByCreationdateBetweenAndPlace(from, until, place);
+		List<BatteryEntity> batteries = batteriesRepository.findByCreationdateBetweenAndPlace(from, until, place);
+		BigDecimal sumsalespostponed = salespostponedrepository.sumDateretiredBetweenAndPlace(from, until, place);
+		BigDecimal sumstraps = strapsRepository.sumCreationdateBetweenAndPlace(from, until, place);
+		BigDecimal sumbatteries = batteriesRepository.sumCreationdateBetweenAndPlace(from, until, place);
 		Iterator<SaleEntity> itsales = isales.iterator();
 		Map<String, Object> map = new HashMap<>();
 		SaleEntity sale;
-		CancelSaleEntity cancelSale;
 		BigDecimal total = BigDecimal.ZERO;
 		BigDecimal cost = BigDecimal.ZERO;
 		while (itsales.hasNext()) {
 			sale = itsales.next();
 			cancels = cancelSaleRepository.findByNumsaleAndPlace(sale.getNumsale(), place);
-			if (cancels != null && !cancels.isEmpty()) {
-				Iterator<CancelSaleEntity> icancels = cancels.iterator();
-				while (icancels.hasNext()) {
-					cancelSale = icancels.next();
-					total = total.subtract(cancelSale.getAmount());
-				}
-			} else {
+			if (cancels == null || cancels.isEmpty()) {
 				List<SalesJewels> sjewels = sale.getSjewels();
 				Iterator<SalesJewels> isjewels = sjewels.iterator();
 				cost = cost.add(getCost(isjewels));
@@ -239,7 +244,13 @@ public class SaleManagerImpl implements SaleManager {
 				total = total.add(sale.getTotal());
 			}
 		}
+		total = total.add(sumsalespostponed);
+		total = total.add(sumstraps);
+		total = total.add(sumbatteries);
 		map.put(Constants.SALES, sales);
+		map.put(Constants.SALESPOSTPONED, salespostponed);
+		map.put(Constants.STRAPS, straps);
+		map.put(Constants.BATTERIES, batteries);
 		map.put(ConstantsJsp.TOTAL, total);
 		map.put("cost", cost);
 		return map;

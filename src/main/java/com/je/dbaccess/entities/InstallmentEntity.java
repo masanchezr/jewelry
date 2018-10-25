@@ -17,6 +17,7 @@ import com.je.utils.constants.Constants;
 @Entity
 @Table(name = "installments")
 public class InstallmentEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "IDINSTALLMENT")

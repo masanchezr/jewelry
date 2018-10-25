@@ -1,6 +1,5 @@
 package com.je.dbaccess.entities;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -20,10 +19,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "dailies")
-public class DailyEntity implements Serializable {
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+public class DailyEntity {
 
 	/** The iddaily. */
 	@Id
@@ -60,8 +56,7 @@ public class DailyEntity implements Serializable {
 	/**
 	 * Sets the iddaily.
 	 *
-	 * @param iddaily
-	 *            the new iddaily
+	 * @param iddaily the new iddaily
 	 */
 	public void setIddaily(Long iddaily) {
 		this.iddaily = iddaily;
@@ -79,8 +74,7 @@ public class DailyEntity implements Serializable {
 	/**
 	 * Sets the finalamount.
 	 *
-	 * @param finalamount
-	 *            the new finalamount
+	 * @param finalamount the new finalamount
 	 */
 	public void setFinalamount(BigDecimal finalamount) {
 		this.finalamount = finalamount;
@@ -98,8 +92,7 @@ public class DailyEntity implements Serializable {
 	/**
 	 * Sets the dailydate.
 	 *
-	 * @param dailydate
-	 *            the new dailydate
+	 * @param dailydate the new dailydate
 	 */
 	public void setDailydate(Date dailydate) {
 		this.dailydate = dailydate;
@@ -117,8 +110,7 @@ public class DailyEntity implements Serializable {
 	/**
 	 * Sets the place.
 	 *
-	 * @param place
-	 *            the new place
+	 * @param place the new place
 	 */
 	public void setPlace(PlaceEntity place) {
 		this.place = place;

@@ -1,6 +1,5 @@
 package com.je.dbaccess.entities;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -26,10 +25,7 @@ import com.je.utils.constants.Constants;
  */
 @Entity
 @Table(name = Constants.SALES)
-public class SaleEntity implements Serializable {
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+public class SaleEntity {
 
 	/** The idsale. */
 	@Id
@@ -103,8 +99,7 @@ public class SaleEntity implements Serializable {
 	/**
 	 * Sets the creationdate.
 	 * 
-	 * @param creationdate
-	 *            the new creationdate
+	 * @param creationdate the new creationdate
 	 */
 	public void setCreationdate(Date creationdate) {
 		this.creationdate = creationdate;
@@ -122,8 +117,7 @@ public class SaleEntity implements Serializable {
 	/**
 	 * Sets the idsale.
 	 *
-	 * @param idsale
-	 *            the idsale to set
+	 * @param idsale the idsale to set
 	 */
 	public void setIdsale(Long idsale) {
 		this.idsale = idsale;
@@ -141,8 +135,7 @@ public class SaleEntity implements Serializable {
 	/**
 	 * Sets the client.
 	 *
-	 * @param nif
-	 *            the nif to set
+	 * @param nif the nif to set
 	 */
 	public void setClient(ClientEntity nif) {
 		this.client = nif;
@@ -160,8 +153,7 @@ public class SaleEntity implements Serializable {
 	/**
 	 * Sets the sjewels.
 	 *
-	 * @param sjewels
-	 *            the sjewels to set
+	 * @param sjewels the sjewels to set
 	 */
 	public void setSjewels(List<SalesJewels> sjewels) {
 		this.sjewels = sjewels;
@@ -170,8 +162,7 @@ public class SaleEntity implements Serializable {
 	/**
 	 * Sets the total.
 	 *
-	 * @param importeTotal
-	 *            the new total
+	 * @param importeTotal the new total
 	 */
 	public void setTotal(BigDecimal importeTotal) {
 		this.total = importeTotal;
@@ -199,8 +190,7 @@ public class SaleEntity implements Serializable {
 	/**
 	 * Sets the addressmailing.
 	 *
-	 * @param addressmailing
-	 *            the new addressmailing
+	 * @param addressmailing the new addressmailing
 	 */
 	public void setAddressmailing(AddressEntity addressmailing) {
 		this.addressmailing = addressmailing;
@@ -218,8 +208,7 @@ public class SaleEntity implements Serializable {
 	/**
 	 * Sets the addressinvoice.
 	 *
-	 * @param addressinvoice
-	 *            the new addressinvoice
+	 * @param addressinvoice the new addressinvoice
 	 */
 	public void setAddressinvoice(AddressEntity addressinvoice) {
 		this.addressinvoice = addressinvoice;
@@ -237,8 +226,7 @@ public class SaleEntity implements Serializable {
 	/**
 	 * Sets the discount.
 	 *
-	 * @param discount
-	 *            the new discount
+	 * @param discount the new discount
 	 */
 	public void setDiscount(BigDecimal discount) {
 		this.discount = discount;
@@ -256,8 +244,7 @@ public class SaleEntity implements Serializable {
 	/**
 	 * Sets the place.
 	 *
-	 * @param place
-	 *            the new place
+	 * @param place the new place
 	 */
 	public void setPlace(PlaceEntity place) {
 		this.place = place;

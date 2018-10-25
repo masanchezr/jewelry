@@ -1,6 +1,5 @@
 package com.je.dbaccess.entities;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -27,10 +26,7 @@ import org.hibernate.annotations.LazyCollectionOption;
  */
 @Entity
 @Table(name = "shoppings")
-public class ShoppingEntity implements Serializable {
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+public class ShoppingEntity {
 
 	/** The idshop. */
 	@Id
@@ -94,8 +90,7 @@ public class ShoppingEntity implements Serializable {
 	/**
 	 * Sets the idshop.
 	 *
-	 * @param idshop
-	 *            the new idshop
+	 * @param idshop the new idshop
 	 */
 	public void setIdshop(Long idshop) {
 		this.idshop = idshop;
@@ -113,8 +108,7 @@ public class ShoppingEntity implements Serializable {
 	/**
 	 * Sets the numshop.
 	 *
-	 * @param numshop
-	 *            the new numshop
+	 * @param numshop the new numshop
 	 */
 	public void setNumshop(Long numshop) {
 		this.numshop = numshop;
@@ -132,8 +126,7 @@ public class ShoppingEntity implements Serializable {
 	/**
 	 * Sets the totalamount.
 	 *
-	 * @param totalamount
-	 *            the new totalamount
+	 * @param totalamount the new totalamount
 	 */
 	public void setTotalamount(BigDecimal totalamount) {
 		this.totalamount = totalamount;
@@ -151,8 +144,7 @@ public class ShoppingEntity implements Serializable {
 	/**
 	 * Sets the creationdate.
 	 *
-	 * @param creationdate
-	 *            the new creationdate
+	 * @param creationdate the new creationdate
 	 */
 	public void setCreationdate(Date creationdate) {
 		this.creationdate = creationdate;
@@ -170,8 +162,7 @@ public class ShoppingEntity implements Serializable {
 	/**
 	 * Sets the place.
 	 *
-	 * @param place
-	 *            the new place
+	 * @param place the new place
 	 */
 	public void setPlace(PlaceEntity place) {
 		this.place = place;
@@ -189,8 +180,7 @@ public class ShoppingEntity implements Serializable {
 	/**
 	 * Sets the objects.
 	 *
-	 * @param objects
-	 *            the new objects
+	 * @param objects the new objects
 	 */
 	public void setObjects(List<ObjectShopEntity> objects) {
 		this.objects = objects;

@@ -1,6 +1,5 @@
 package com.je.dbaccess.entities;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
@@ -14,9 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "salespayment")
-public class SalesPayments implements Serializable {
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+public class SalesPayments {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

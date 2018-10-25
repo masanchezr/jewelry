@@ -10,40 +10,45 @@
 		<div class="col-lg-8">
 			<div class="card-body">
 				<div class="row">
-					<div class="col-lg-4">
+					<div class="col-lg-8">
 						<div class="form-group">
-							<spring:message code="datefrom" var="messagedatefrom" />
-							<div id="sandbox-container">
-								<form:input class="form-control" type="text" path="datefrom"
-									placeholder="${messagedatefrom}" />
-							</div>
-							<p class="text-danger">
-								<form:errors path="datefrom" />
+							<p class="form-control-static">
+								<spring:message code="summarysales" />
 							</p>
 						</div>
-						<div class="form-group">
-							<spring:message code="place" />
-							<form:select class="form-control" path="place.idplace">
-								<form:options items="${places}" itemValue="idplace"
-									itemLabel="description" />
-							</form:select>
-						</div>
-						<div class="form-group">
-							<form:button class="btn btn-primary" value="submit">
-								<spring:message code="search" />
-							</form:button>
-						</div>
-					</div>
-					<div class="col-lg-4">
-						<div class="form-group">
-							<spring:message code="dateuntil" var="messagedateuntil" />
-							<div id="sandbox-container">
-								<form:input class="form-control" type="text" path="dateuntil"
-									placeholder="${messagedateuntil}" />
+						<div class="col-lg-4">
+							<div class="form-group">
+								<spring:message code="place" />
+								<form:select class="form-control" path="place.idplace">
+									<form:options items="${places}" itemValue="idplace"
+										itemLabel="description" />
+								</form:select>
 							</div>
-							<p class="text-danger">
-								<form:errors path="dateuntil" />
-							</p>
+							<div class="form-group">
+								<spring:message code="datefrom" var="messagedatefrom" />
+								<div id="sandbox-container">
+									<form:input class="form-control" type="text" path="datefrom"
+										placeholder="${messagedatefrom}" />
+								</div>
+								<p class="text-danger">
+									<form:errors path="datefrom" />
+								</p>
+							</div>
+							<div class="form-group">
+								<spring:message code="dateuntil" var="messagedateuntil" />
+								<div id="sandbox-container">
+									<form:input class="form-control" type="text" path="dateuntil"
+										placeholder="${messagedateuntil}" />
+								</div>
+								<p class="text-danger">
+									<form:errors path="dateuntil" />
+								</p>
+							</div>
+							<div class="form-group">
+								<form:button class="btn btn-primary" value="submit">
+									<spring:message code="search" />
+								</form:button>
+							</div>
 						</div>
 					</div>
 				</div>

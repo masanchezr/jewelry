@@ -17,6 +17,7 @@ import com.je.utils.constants.Constants;
 @Entity
 @Table(name = Constants.RECORDINGS)
 public class RecordingEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "IDRECORDING")

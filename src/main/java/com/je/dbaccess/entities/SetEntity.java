@@ -1,7 +1,5 @@
 package com.je.dbaccess.entities;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,11 +14,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "sets")
-public class SetEntity implements Serializable {
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-
+public class SetEntity {
 	/** The idset. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -79,8 +73,7 @@ public class SetEntity implements Serializable {
 	/**
 	 * Sets the idset.
 	 *
-	 * @param idset
-	 *            the idset to set
+	 * @param idset the idset to set
 	 */
 	public void setIdset(Long idset) {
 		this.idset = idset;
@@ -98,8 +91,7 @@ public class SetEntity implements Serializable {
 	/**
 	 * Sets the idring.
 	 *
-	 * @param idring
-	 *            the idring to set
+	 * @param idring the idring to set
 	 */
 	public void setRing(JewelEntity idring) {
 		this.ring = idring;
@@ -117,8 +109,7 @@ public class SetEntity implements Serializable {
 	/**
 	 * Sets the idpendant.
 	 *
-	 * @param idpendant
-	 *            the idpendant to set
+	 * @param idpendant the idpendant to set
 	 */
 	public void setPendant(JewelEntity idpendant) {
 		this.pendant = idpendant;
@@ -136,8 +127,7 @@ public class SetEntity implements Serializable {
 	/**
 	 * Sets the idearrings.
 	 *
-	 * @param idearrings
-	 *            the idearrings to set
+	 * @param idearrings the idearrings to set
 	 */
 	public void setEarrings(JewelEntity idearrings) {
 		this.earrings = idearrings;
@@ -155,8 +145,7 @@ public class SetEntity implements Serializable {
 	/**
 	 * Sets the idbracelet.
 	 *
-	 * @param idbracelet
-	 *            the idbracelet to set
+	 * @param idbracelet the idbracelet to set
 	 */
 	public void setBracelet(JewelEntity idbracelet) {
 		this.bracelet = idbracelet;
@@ -174,8 +163,7 @@ public class SetEntity implements Serializable {
 	/**
 	 * Sets the idchocker.
 	 *
-	 * @param idchocker
-	 *            the new idchocker
+	 * @param idchocker the new idchocker
 	 */
 	public void setChocker(JewelEntity idchocker) {
 		this.chocker = idchocker;
@@ -193,8 +181,7 @@ public class SetEntity implements Serializable {
 	/**
 	 * Sets the idtiepin.
 	 *
-	 * @param idtiepin
-	 *            the new idtiepin
+	 * @param idtiepin the new idtiepin
 	 */
 	public void setTiepin(JewelEntity idtiepin) {
 		this.tiepin = idtiepin;
@@ -212,8 +199,7 @@ public class SetEntity implements Serializable {
 	/**
 	 * Sets the idcufflins.
 	 *
-	 * @param idcufflins
-	 *            the new idcufflins
+	 * @param idcufflins the new idcufflins
 	 */
 	public void setCufflins(JewelEntity idcufflins) {
 		this.cufflins = idcufflins;

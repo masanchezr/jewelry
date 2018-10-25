@@ -1,6 +1,5 @@
 package com.je.dbaccess.entities;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -24,10 +23,7 @@ import org.hibernate.annotations.LazyCollectionOption;
  */
 @Entity
 @Table(name = "cancelsales")
-public class CancelSaleEntity implements Serializable {
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+public class CancelSaleEntity {
 
 	/** The idcancelsave. */
 	@Id
@@ -73,8 +69,7 @@ public class CancelSaleEntity implements Serializable {
 	/**
 	 * Sets the amount.
 	 *
-	 * @param amount
-	 *            the new amount
+	 * @param amount the new amount
 	 */
 	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
@@ -92,8 +87,7 @@ public class CancelSaleEntity implements Serializable {
 	/**
 	 * Sets the creationdate.
 	 *
-	 * @param creationdate
-	 *            the new creationdate
+	 * @param creationdate the new creationdate
 	 */
 	public void setCreationdate(Date creationdate) {
 		this.creationdate = creationdate;
@@ -111,8 +105,7 @@ public class CancelSaleEntity implements Serializable {
 	/**
 	 * Sets the parcial.
 	 *
-	 * @param parcial
-	 *            the new parcial
+	 * @param parcial the new parcial
 	 */
 	public void setParcial(Boolean parcial) {
 		this.parcial = parcial;
@@ -130,8 +123,7 @@ public class CancelSaleEntity implements Serializable {
 	/**
 	 * Sets the place.
 	 *
-	 * @param place
-	 *            the new place
+	 * @param place the new place
 	 */
 	public void setPlace(PlaceEntity place) {
 		this.place = place;

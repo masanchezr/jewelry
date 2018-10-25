@@ -14,10 +14,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "clients")
-public class ClientEntity implements java.io.Serializable {
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+public class ClientEntity {
 
 	/** The nifclient. */
 	@Id
@@ -67,8 +64,7 @@ public class ClientEntity implements java.io.Serializable {
 	/**
 	 * Sets the email.
 	 * 
-	 * @param email
-	 *            the new email
+	 * @param email the new email
 	 */
 	public void setEmail(String email) {
 		this.email = email;
@@ -86,8 +82,7 @@ public class ClientEntity implements java.io.Serializable {
 	/**
 	 * Sets the name.
 	 *
-	 * @param nameuser
-	 *            the new name
+	 * @param nameuser the new name
 	 */
 	public void setName(String nameuser) {
 		this.name = nameuser;
@@ -119,8 +114,7 @@ public class ClientEntity implements java.io.Serializable {
 	/**
 	 * Sets the nifclient.
 	 * 
-	 * @param nifclient
-	 *            the new nifclient
+	 * @param nifclient the new nifclient
 	 */
 	public void setNifclient(String nifclient) {
 		this.nifclient = nifclient;
@@ -129,8 +123,7 @@ public class ClientEntity implements java.io.Serializable {
 	/**
 	 * Sets the creationdate.
 	 * 
-	 * @param creationdate
-	 *            the new creationdate
+	 * @param creationdate the new creationdate
 	 */
 	public void setCreationdate(Date creationdate) {
 		this.creationdate = creationdate;
@@ -157,8 +150,7 @@ public class ClientEntity implements java.io.Serializable {
 	/**
 	 * Sets the telephone.
 	 *
-	 * @param telephone
-	 *            the new telephone
+	 * @param telephone the new telephone
 	 */
 	public void setTelephone(Long telephone) {
 		this.telephone = telephone;
@@ -173,10 +165,9 @@ public class ClientEntity implements java.io.Serializable {
 	 * 
 	 *         /** Sets the userlogin.
 	 * 
-	 * @param userlogin
-	 *            the new userlogin
+	 * @param userlogin the new userlogin
 	 * 
-	 *            public void setUserlogin(String userlogin) { this.userlogin =
-	 *            userlogin; }
+	 *                  public void setUserlogin(String userlogin) { this.userlogin
+	 *                  = userlogin; }
 	 */
 }

@@ -1,6 +1,5 @@
 package com.je.dbaccess.entities;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -20,10 +19,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "otherconcepts")
-public class OtherConceptEntity implements Serializable {
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+public class OtherConceptEntity {
 
 	/** The idotherconcept. */
 	@Id

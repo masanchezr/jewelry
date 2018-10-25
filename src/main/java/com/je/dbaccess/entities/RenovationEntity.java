@@ -1,6 +1,5 @@
 package com.je.dbaccess.entities;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -19,10 +18,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "renovations")
-public class RenovationEntity implements Serializable {
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+public class RenovationEntity {
 
 	/** The idrenovation. */
 	@Id
@@ -57,8 +53,7 @@ public class RenovationEntity implements Serializable {
 	/**
 	 * Sets the nextrenovationdate.
 	 *
-	 * @param nextrenovationdate
-	 *            the new nextrenovationdate
+	 * @param nextrenovationdate the new nextrenovationdate
 	 */
 	public void setNextrenovationdate(Date nextrenovationdate) {
 		this.nextrenovationdate = nextrenovationdate;
@@ -76,8 +71,7 @@ public class RenovationEntity implements Serializable {
 	/**
 	 * Sets the pawn.
 	 *
-	 * @param pawn
-	 *            the new pawn
+	 * @param pawn the new pawn
 	 */
 	public void setPawn(PawnEntity pawn) {
 		this.pawn = pawn;
@@ -95,8 +89,7 @@ public class RenovationEntity implements Serializable {
 	/**
 	 * Sets the idrenovation.
 	 *
-	 * @param idrenovation
-	 *            the new idrenovation
+	 * @param idrenovation the new idrenovation
 	 */
 	public void setIdrenovation(Long idrenovation) {
 		this.idrenovation = idrenovation;
@@ -114,8 +107,7 @@ public class RenovationEntity implements Serializable {
 	/**
 	 * Sets the creationdate.
 	 *
-	 * @param creationdate
-	 *            the new creationdate
+	 * @param creationdate the new creationdate
 	 */
 	public void setCreationdate(Date creationdate) {
 		this.creationdate = creationdate;

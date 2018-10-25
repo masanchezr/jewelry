@@ -1,6 +1,5 @@
 package com.je.dbaccess.entities;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -17,12 +16,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "clientspawns")
-public class ClientPawnEntity implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 5401244114358600473L;
+public class ClientPawnEntity {
 
 	/** The nif. */
 	@Id

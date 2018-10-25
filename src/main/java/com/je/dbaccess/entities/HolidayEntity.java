@@ -1,6 +1,5 @@
 package com.je.dbaccess.entities;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -19,10 +18,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "holidays")
-public class HolidayEntity implements Serializable {
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+public class HolidayEntity {
 
 	/** The idholiday. */
 	@Id
@@ -55,8 +51,7 @@ public class HolidayEntity implements Serializable {
 	/**
 	 * Sets the idholiday.
 	 *
-	 * @param idholiday
-	 *            the new idholiday
+	 * @param idholiday the new idholiday
 	 */
 	public void setIdholiday(Long idholiday) {
 		this.idholiday = idholiday;
@@ -74,8 +69,7 @@ public class HolidayEntity implements Serializable {
 	/**
 	 * Sets the holiday.
 	 *
-	 * @param holiday
-	 *            the new holiday
+	 * @param holiday the new holiday
 	 */
 	public void setHoliday(Date holiday) {
 		this.holiday = holiday;
@@ -93,8 +87,7 @@ public class HolidayEntity implements Serializable {
 	/**
 	 * Sets the place.
 	 *
-	 * @param place
-	 *            the new place
+	 * @param place the new place
 	 */
 	public void setPlace(PlaceEntity place) {
 		this.place = place;

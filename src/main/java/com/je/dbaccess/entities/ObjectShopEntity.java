@@ -1,6 +1,5 @@
 package com.je.dbaccess.entities;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
@@ -17,10 +16,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "objectshoppings")
-public class ObjectShopEntity implements Serializable {
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+public class ObjectShopEntity {
 
 	/** The idobjectshop. */
 	@Id
@@ -74,8 +70,7 @@ public class ObjectShopEntity implements Serializable {
 	/**
 	 * Sets the material.
 	 *
-	 * @param material
-	 *            the new material
+	 * @param material the new material
 	 */
 	public void setMetal(MetalEntity material) {
 		this.metal = material;
@@ -93,8 +88,7 @@ public class ObjectShopEntity implements Serializable {
 	/**
 	 * Sets the description.
 	 *
-	 * @param description
-	 *            the new description
+	 * @param description the new description
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -112,8 +106,7 @@ public class ObjectShopEntity implements Serializable {
 	/**
 	 * Sets the shop.
 	 *
-	 * @param shop
-	 *            the new shop
+	 * @param shop the new shop
 	 */
 	public void setShop(ShoppingEntity shop) {
 		this.shop = shop;
@@ -131,8 +124,7 @@ public class ObjectShopEntity implements Serializable {
 	/**
 	 * Sets the netgrams.
 	 *
-	 * @param netgrams
-	 *            the new netgrams
+	 * @param netgrams the new netgrams
 	 */
 	public void setNetgrams(BigDecimal netgrams) {
 		this.netgrams = netgrams;
@@ -150,8 +142,7 @@ public class ObjectShopEntity implements Serializable {
 	/**
 	 * Sets the grossgrams.
 	 *
-	 * @param grossgrams
-	 *            the new grossgrams
+	 * @param grossgrams the new grossgrams
 	 */
 	public void setGrossgrams(BigDecimal grossgrams) {
 		this.grossgrams = grossgrams;
@@ -169,8 +160,7 @@ public class ObjectShopEntity implements Serializable {
 	/**
 	 * Sets the realgrams.
 	 *
-	 * @param realgrams
-	 *            the new realgrams
+	 * @param realgrams the new realgrams
 	 */
 	public void setRealgrams(BigDecimal realgrams) {
 		this.realgrams = realgrams;
@@ -188,8 +178,7 @@ public class ObjectShopEntity implements Serializable {
 	/**
 	 * Sets the eurograms.
 	 *
-	 * @param eurograms
-	 *            the new eurograms
+	 * @param eurograms the new eurograms
 	 */
 	public void setEurograms(Double eurograms) {
 		this.eurograms = eurograms;
@@ -207,8 +196,7 @@ public class ObjectShopEntity implements Serializable {
 	/**
 	 * Sets the amount.
 	 *
-	 * @param amount
-	 *            the new amount
+	 * @param amount the new amount
 	 */
 	public void setAmount(BigDecimal amount) {
 		this.amount = amount;

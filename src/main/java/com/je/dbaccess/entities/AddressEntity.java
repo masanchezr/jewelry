@@ -1,6 +1,5 @@
 package com.je.dbaccess.entities;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -17,10 +16,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "addresses")
-public class AddressEntity implements Serializable {
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+public class AddressEntity {
 
 	/** The idaddress. */
 	@Id
@@ -69,8 +65,7 @@ public class AddressEntity implements Serializable {
 	/**
 	 * Sets the datecreation.
 	 *
-	 * @param datecreation
-	 *            the new datecreation
+	 * @param datecreation the new datecreation
 	 */
 	public void setDatecreation(Date datecreation) {
 		this.datecreation = datecreation;
@@ -88,8 +83,7 @@ public class AddressEntity implements Serializable {
 	/**
 	 * Sets the idaddress.
 	 *
-	 * @param idaddress
-	 *            the new idaddress
+	 * @param idaddress the new idaddress
 	 */
 	public void setIdaddress(Long idaddress) {
 		this.idaddress = idaddress;
@@ -107,8 +101,7 @@ public class AddressEntity implements Serializable {
 	/**
 	 * Sets the postalcode.
 	 *
-	 * @param postalcode
-	 *            the new postalcode
+	 * @param postalcode the new postalcode
 	 */
 	public void setPostalcode(Long postalcode) {
 		this.postalcode = postalcode;
@@ -126,8 +119,7 @@ public class AddressEntity implements Serializable {
 	/**
 	 * Sets the city.
 	 *
-	 * @param city
-	 *            the new city
+	 * @param city the new city
 	 */
 	public void setCity(String city) {
 		this.city = city;
@@ -145,8 +137,7 @@ public class AddressEntity implements Serializable {
 	/**
 	 * Sets the country.
 	 *
-	 * @param country
-	 *            the new country
+	 * @param country the new country
 	 */
 	public void setCountry(String country) {
 		this.country = country;
@@ -164,8 +155,7 @@ public class AddressEntity implements Serializable {
 	/**
 	 * Sets the invoicename.
 	 *
-	 * @param invoicename
-	 *            the new invoicename
+	 * @param invoicename the new invoicename
 	 */
 	public void setInvoicename(String invoicename) {
 		this.invoicename = invoicename;
@@ -183,8 +173,7 @@ public class AddressEntity implements Serializable {
 	/**
 	 * Sets the address.
 	 *
-	 * @param address
-	 *            the new address
+	 * @param address the new address
 	 */
 	public void setAddress(String address) {
 		this.address = address;
@@ -202,8 +191,7 @@ public class AddressEntity implements Serializable {
 	/**
 	 * Sets the cif.
 	 *
-	 * @param cif
-	 *            the new cif
+	 * @param cif the new cif
 	 */
 	public void setCif(String cif) {
 		this.cif = cif;

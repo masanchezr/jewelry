@@ -1,6 +1,5 @@
 package com.je.dbaccess.entities;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -18,10 +17,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "jewels")
-public class JewelEntity implements Serializable {
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+public class JewelEntity {
 
 	/** The idjewel. */
 	@Id
@@ -104,8 +100,7 @@ public class JewelEntity implements Serializable {
 	/**
 	 * Sets the description.
 	 * 
-	 * @param description
-	 *            the new description
+	 * @param description the new description
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -123,8 +118,7 @@ public class JewelEntity implements Serializable {
 	/**
 	 * Sets the idjewel.
 	 *
-	 * @param idjewel
-	 *            the new idjewel
+	 * @param idjewel the new idjewel
 	 */
 	public void setIdjewel(Long idjewel) {
 		this.idjewel = idjewel;
@@ -142,8 +136,7 @@ public class JewelEntity implements Serializable {
 	/**
 	 * Sets the name.
 	 *
-	 * @param name
-	 *            the new name
+	 * @param name the new name
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -161,8 +154,7 @@ public class JewelEntity implements Serializable {
 	/**
 	 * Sets the price.
 	 *
-	 * @param price
-	 *            the new price
+	 * @param price the new price
 	 */
 	public void setPrice(BigDecimal price) {
 		this.price = price;
@@ -180,8 +172,7 @@ public class JewelEntity implements Serializable {
 	/**
 	 * Sets the img.
 	 *
-	 * @param img
-	 *            the img to set
+	 * @param img the img to set
 	 */
 	public void setImg(String img) {
 		this.img = img;
@@ -199,8 +190,7 @@ public class JewelEntity implements Serializable {
 	/**
 	 * Sets the place.
 	 *
-	 * @param place
-	 *            the new place
+	 * @param place the new place
 	 */
 	public void setPlace(PlaceEntity place) {
 		this.place = place;
@@ -218,8 +208,7 @@ public class JewelEntity implements Serializable {
 	/**
 	 * Sets the category.
 	 *
-	 * @param category
-	 *            the new category
+	 * @param category the new category
 	 */
 	public void setCategory(CategoryEntity category) {
 		this.category = category;
@@ -237,8 +226,7 @@ public class JewelEntity implements Serializable {
 	/**
 	 * Sets the reference.
 	 *
-	 * @param reference
-	 *            the new reference
+	 * @param reference the new reference
 	 */
 	public void setReference(String reference) {
 		this.reference = reference;
@@ -256,8 +244,7 @@ public class JewelEntity implements Serializable {
 	/**
 	 * Sets the material.
 	 *
-	 * @param material
-	 *            the new material
+	 * @param material the new material
 	 */
 	public void setMetal(MetalEntity metal) {
 		this.metal = metal;
@@ -275,8 +262,7 @@ public class JewelEntity implements Serializable {
 	/**
 	 * Sets the creationdate.
 	 *
-	 * @param creationdate
-	 *            the new creationdate
+	 * @param creationdate the new creationdate
 	 */
 	public void setCreationdate(Date creationdate) {
 		this.creationdate = creationdate;
@@ -294,8 +280,7 @@ public class JewelEntity implements Serializable {
 	/**
 	 * Sets the saledate.
 	 *
-	 * @param saledate
-	 *            the new saledate
+	 * @param saledate the new saledate
 	 */
 	public void setSaledate(Date saledate) {
 		this.saledate = saledate;
@@ -313,8 +298,7 @@ public class JewelEntity implements Serializable {
 	/**
 	 * Sets the cost.
 	 *
-	 * @param cost
-	 *            the new cost
+	 * @param cost the new cost
 	 */
 	public void setCost(BigDecimal cost) {
 		this.cost = cost;

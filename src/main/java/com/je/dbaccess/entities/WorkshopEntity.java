@@ -1,6 +1,5 @@
 package com.je.dbaccess.entities;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -22,10 +21,7 @@ import com.je.utils.constants.Constants;
  */
 @Entity
 @Table(name = "workshop")
-public class WorkshopEntity implements Serializable {
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+public class WorkshopEntity {
 
 	/** The idworkshop. */
 	@Id
@@ -67,8 +63,7 @@ public class WorkshopEntity implements Serializable {
 	/**
 	 * Sets the idworkshop.
 	 *
-	 * @param idworkshop
-	 *            the new idworkshop
+	 * @param idworkshop the new idworkshop
 	 */
 	public void setIdworkshop(Long idworkshop) {
 		this.idworkshop = idworkshop;
@@ -86,8 +81,7 @@ public class WorkshopEntity implements Serializable {
 	/**
 	 * Sets the amount.
 	 *
-	 * @param amount
-	 *            the new amount
+	 * @param amount the new amount
 	 */
 	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
@@ -105,8 +99,7 @@ public class WorkshopEntity implements Serializable {
 	/**
 	 * Sets the description.
 	 *
-	 * @param description
-	 *            the new description
+	 * @param description the new description
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -124,8 +117,7 @@ public class WorkshopEntity implements Serializable {
 	/**
 	 * Sets the creationdate.
 	 *
-	 * @param creationdate
-	 *            the new creationdate
+	 * @param creationdate the new creationdate
 	 */
 	public void setCreationdate(Date creationdate) {
 		this.creationdate = creationdate;
