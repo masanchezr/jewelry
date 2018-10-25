@@ -31,7 +31,7 @@ public interface BatteriesRepository extends CrudRepository<BatteryEntity, Long>
 	public List<BatteryEntity> findByCreationdateBetweenAndPlace(@Temporal(TemporalType.DATE) Date from,
 			@Temporal(TemporalType.DATE) Date until, PlaceEntity place);
 
-	@Query("select sum(b.amount) from BatteryEntity where b.creationdate>=:from and b.creationdate<=:until and b.place=:place")
+	@Query("select sum(b.amount) from BatteryEntity b where b.creationdate>=:from and b.creationdate<=:until and b.place=:place")
 	public BigDecimal sumCreationdateBetweenAndPlace(@Param("from") Date from, @Param("until") Date until,
 			@Param("place") PlaceEntity place);
 
