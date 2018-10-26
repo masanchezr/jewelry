@@ -70,8 +70,7 @@ public class DailiesController {
 	/**
 	 * Search daily.
 	 *
-	 * @param sdf
-	 *            the sdf
+	 * @param sdf the sdf
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/searchDaily")
@@ -119,7 +118,7 @@ public class DailiesController {
 
 	@RequestMapping(value = "/calculatedailies")
 	public ModelAndView calculateDailies(@ModelAttribute(ConstantsJsp.FORMSEARCHDAILY) SearchDailyForm sdf,
-			HttpServletRequest request, BindingResult arg1) {
+			BindingResult arg1) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		searchDailyFormValidator.validate(sdf, arg1);

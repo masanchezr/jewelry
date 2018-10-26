@@ -45,6 +45,8 @@
 		<class>com.je.dbaccess.entities.NationEntity</class>
 		<class>com.je.dbaccess.entities.TrackEntity</class>
 		<class>com.je.dbaccess.entities.MessageEntity</class>
+		<class>com.je.dbaccess.entities.IPEntity</class>
+		<class>com.je.dbaccess.entities.ConnectionEntity</class>
 		<properties>
 			<property name="hibernate.query.factory_class"
 				value="org.hibernate.hql.internal.classic.ClassicQueryTranslatorFactory" />

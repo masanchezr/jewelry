@@ -2,6 +2,8 @@ package com.je.admin.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import com.je.admin.forms.AdminForm;
 import com.je.dbaccess.entities.CategoryEntity;
 import com.je.dbaccess.entities.JewelEntity;
 import com.je.dbaccess.entities.PaymentEntity;
+import com.je.services.connections.ConnectionService;
 import com.je.services.search.SearchService;
 import com.je.utils.constants.ConstantsJsp;
 import com.je.web.forms.SearchJewelForm;
@@ -27,6 +30,9 @@ public class AdminController {
 	/** The search service. */
 	@Autowired
 	private SearchService searchService;
+
+	@Autowired
+	private ConnectionService connectionService;
 
 	/** The log. */
 	private static Logger log = LoggerFactory.getLogger(AdminController.class);
@@ -48,7 +54,12 @@ public class AdminController {
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/admin")
-	public ModelAndView admin() {
+	public ModelAndView admin(HttpServletRequest request) {
+		String ipAddress = request.getHeader(ConstantsJsp.XFORWARDEDFOR);
+		if (ipAddress == null) {
+			ipAddress = request.getRemoteAddr();
+		}
+		connectionService.saveConnection(ipAddress);
 		return new ModelAndView("admin", ConstantsJsp.ADMINFORM, new AdminForm());
 	}
 
@@ -83,8 +94,7 @@ public class AdminController {
 	/**
 	 * Search jewels.
 	 *
-	 * @param search
-	 *            the search
+	 * @param search the search
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/searchJewels")
