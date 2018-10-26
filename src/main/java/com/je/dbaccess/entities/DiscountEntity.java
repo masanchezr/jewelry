@@ -32,7 +32,7 @@ public class DiscountEntity {
 	@Column(name = "modificationdate")
 	private Date modificationdate;
 
-	@Column(name = Constants.SDISCOUNT)
+	@Column(name = "discount")
 	private BigDecimal discount;
 
 	@Column(name = "numsalecancel")

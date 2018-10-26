@@ -82,7 +82,7 @@ public class Constants {
 
 	public static final Long DISCOUNT = 4L;
 
-	public static final String SDISCOUNT = "discount";
+	public static final String SDISCOUNT = "sdiscount";
 
 	public static final String JPG = ".jpg";
 
