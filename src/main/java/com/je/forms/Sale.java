@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import com.je.dbaccess.entities.AddressEntity;
-import com.je.dbaccess.entities.JewelEntity;
 import com.je.services.users.Client;
 
 /**
@@ -15,7 +14,7 @@ public class Sale extends SaleParent {
 	/** The client. */
 	private Client client;
 
-	private List<JewelEntity> jewelstocancel;
+	private List<Long> jewelstocancel;
 
 	/** The invoice. */
 	private AddressEntity invoice;
@@ -48,8 +47,7 @@ public class Sale extends SaleParent {
 	/**
 	 * Sets the client.
 	 *
-	 * @param client
-	 *            the new client
+	 * @param client the new client
 	 */
 	public void setClient(Client client) {
 		this.client = client;
@@ -67,8 +65,7 @@ public class Sale extends SaleParent {
 	/**
 	 * Sets the mailing.
 	 *
-	 * @param mailing
-	 *            the mailing to set
+	 * @param mailing the mailing to set
 	 */
 	public void setMailing(AddressEntity mailing) {
 		this.mailing = mailing;
@@ -86,8 +83,7 @@ public class Sale extends SaleParent {
 	/**
 	 * Sets the invoice.
 	 *
-	 * @param invoice
-	 *            the invoice to set
+	 * @param invoice the invoice to set
 	 */
 	public void setInvoice(AddressEntity invoice) {
 		this.invoice = invoice;
@@ -105,8 +101,7 @@ public class Sale extends SaleParent {
 	/**
 	 * Sets the saledate.
 	 *
-	 * @param saledate
-	 *            the new saledate
+	 * @param saledate the new saledate
 	 */
 	public void setSaledate(String saledate) {
 		this.saledate = saledate;
@@ -124,8 +119,7 @@ public class Sale extends SaleParent {
 	/**
 	 * Sets the discount.
 	 *
-	 * @param discount
-	 *            the new discount
+	 * @param discount the new discount
 	 */
 	public void setDiscount(BigDecimal discount) {
 		this.discount = discount;
@@ -155,11 +149,11 @@ public class Sale extends SaleParent {
 		this.numsalechange = numsalechange;
 	}
 
-	public List<JewelEntity> getJewelstocancel() {
+	public List<Long> getJewelstocancel() {
 		return jewelstocancel;
 	}
 
-	public void setJewelstocancel(List<JewelEntity> jewelstocancel) {
+	public void setJewelstocancel(List<Long> jewelstocancel) {
 		this.jewelstocancel = jewelstocancel;
 	}
 }

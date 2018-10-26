@@ -8,7 +8,6 @@ import com.je.dbaccess.entities.Addresses;
 import com.je.dbaccess.entities.CancelSaleEntity;
 import com.je.dbaccess.entities.ClientEntity;
 import com.je.dbaccess.entities.DiscountEntity;
-import com.je.dbaccess.entities.JewelEntity;
 import com.je.dbaccess.entities.PaymentEntity;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.dbaccess.entities.SaleEntity;
@@ -22,8 +21,7 @@ public interface SaleManager {
 	/**
 	 * Buy.
 	 * 
-	 * @param salesJewels
-	 *            the sales jewels
+	 * @param salesJewels the sales jewels
 	 * @return the long
 	 */
 	public Long buy(SaleEntity salesJewels);
@@ -38,8 +36,7 @@ public interface SaleManager {
 	/**
 	 * Search by date.
 	 * 
-	 * @param date
-	 *            the date
+	 * @param date the date
 	 * @return the iterable
 	 */
 	public Iterable<SaleEntity> searchByDate(Date date);
@@ -47,8 +44,7 @@ public interface SaleManager {
 	/**
 	 * Search address by client.
 	 * 
-	 * @param client
-	 *            the client
+	 * @param client the client
 	 * @return the addresses
 	 */
 	public Addresses searchAddressByClient(ClientEntity client);
@@ -56,10 +52,8 @@ public interface SaleManager {
 	/**
 	 * Search by creation date and place.
 	 *
-	 * @param date
-	 *            the date
-	 * @param placeEntity
-	 *            the place entity
+	 * @param date        the date
+	 * @param placeEntity the place entity
 	 * @return the list
 	 */
 	public List<SaleEntity> searchByCreationDateAndPlace(Date date, PlaceEntity placeEntity);
@@ -67,16 +61,14 @@ public interface SaleManager {
 	/**
 	 * Cancel sale.
 	 *
-	 * @param cancel
-	 *            the sale
+	 * @param cancel   the sale
 	 * @param payment
 	 * @param discount
 	 * @return true, if successful
 	 */
 	public boolean cancelSale(CancelSaleEntity cancel, List<SalesJewels> salesjewels, DiscountEntity discount);
 
-	public boolean cancelParcialSale(CancelSaleEntity cancel, List<JewelEntity> jewelsToCancel,
-			DiscountEntity discount);
+	public boolean cancelParcialSale(CancelSaleEntity cancel, List<Long> jewelsToCancel, DiscountEntity discount);
 
 	public boolean existSale(Long numsale, Long idplace);
 

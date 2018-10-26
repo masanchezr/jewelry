@@ -12,43 +12,21 @@
 		<li class="breadcrumb-item active"><spring:message
 				code="removeparcialsale" /></li>
 	</ol>
-	<div class="card-body">
-		<div class="table-responsive">
-			<table class="table">
-				<tbody>
-					<tr>
-						<td></td>
-						<td></td>
-						<td><spring:message code="selectjeweltocancel" /></td>
-						<td class="form-group has-error"><label class="control-label"
-							for="inputSuccess"> <form:errors path="idsale" /></label></td>
-						<td></td>
-						<td><spring:message code="idsale" /> <form:input
-								class="form-control" path="numsale" disabled="true" /></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<c:forEach items="${saleForm.jewels}" var="jewel"
-						varStatus="status">
-						<tr class="success">
-							<td><form:checkbox
-									path="jewelstocancel[${status.index}].idjewel"
-									value="${jewel.idjewel}" /></td>
-							<td><c:out value="${jewel.reference}" /></td>
-							<td><c:out value="${jewel.name}" /></td>
-							<td><c:out value="${jewel.description}" /></td>
-							<td><c:out value="${jewel.price}" /></td>
-							<td><c:out value="${jewel.category.namecategory}" /></td>
-							<td><c:out value="${jewel.metal.description}" /></td>
-							<td><c:out value="${jewel.place.description}" /></td>
-							<td><c:out value="${jewel.active}" /></td>
-							<td><c:out value="${jewel.saledate}" /></td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
+	<div class="row">
+		<div class="col-lg-3">
+			<div class="form-group">
+				<spring:message code="idsale" />
+				<form:input class="form-control" path="numsale" disabled="true" />
+			</div>
+			<div class="form-group has-error">
+				<label class="control-label" for="inputSuccess"> <form:errors
+						path="idsale" /></label>
+			</div>
+			<div class="form-group">
+				<spring:message code="selectjeweltocancel" />
+			</div>
+			<form:checkboxes items="${saleForm.jewels}" path="jewelstocancel"
+				itemValue="idjewel" itemLabel="reference" />
 		</div>
 	</div>
 	<div class="row">

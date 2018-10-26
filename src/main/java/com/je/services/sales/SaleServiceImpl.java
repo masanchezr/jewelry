@@ -291,7 +291,7 @@ public class SaleServiceImpl implements SaleService {
 			discount.setCreationdate(new Date());
 			discount.setNumsalecancel(removeSaleForm.getNumsale());
 			discount.setNumsalechange(removeSaleForm.getNumsalechange());
-			discount.setPlace(mapper.map(removeSaleForm.getPlace(), PlaceEntity.class));
+			discount.setPlace(sale.getPlace());
 		}
 		csp.setPay(removeSaleForm.getPayment());
 		csp.setCancelsale(cancel);

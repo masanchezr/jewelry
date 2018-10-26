@@ -168,15 +168,15 @@ public class SaleManagerImpl implements SaleManager {
 	 * @return true, if successful
 	 */
 	@Override
-	public boolean cancelParcialSale(CancelSaleEntity cancel, List<JewelEntity> jewelsToCancel,
-			DiscountEntity discount) {
-		Iterator<JewelEntity> isalesjewels = jewelsToCancel.iterator();
+	public boolean cancelParcialSale(CancelSaleEntity cancel, List<Long> jewelsToCancel, DiscountEntity discount) {
+		Iterator<Long> isalesjewels = jewelsToCancel.iterator();
+		Long idjewel;
 		JewelEntity jewel;
 		boolean exit = true;
 		BigDecimal amount = BigDecimal.ZERO;
 		while (isalesjewels.hasNext() && exit) {
-			jewel = isalesjewels.next();
-			jewel = jewelRepository.findById(jewel.getIdjewel()).orElse(null);
+			idjewel = isalesjewels.next();
+			jewel = jewelRepository.findById(idjewel).orElse(null);
 			if (jewel != null && !jewel.getActive()) {
 				amount = amount.add(jewel.getPrice());
 				jewel.setActive(true);
@@ -192,6 +192,7 @@ public class SaleManagerImpl implements SaleManager {
 			cancelSaleRepository.save(cancel);
 			if (discount != null) {
 				discount.setDiscount(amount);
+				discount.setNumsalecancel(cancel.getNumsale());
 				discountsRepository.save(discount);
 			}
 		}
