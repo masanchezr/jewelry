@@ -28,7 +28,7 @@
 							<form:input class="form-control" path="sdiscount" />
 							<div class="form-group">
 								<label class="control-label" for="inputSuccess"><form:errors
-										path="discount" /></label>
+										path="sdiscount" /></label>
 							</div>
 						</div>
 						<div class="form-group">
