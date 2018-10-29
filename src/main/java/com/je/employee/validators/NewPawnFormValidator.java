@@ -71,7 +71,7 @@ public class NewPawnFormValidator implements Validator {
 			errors.rejectValue(Constants.NUMPAWN, ConstantsJsp.ERRORSELECTDESCRIPTION);
 			errors.rejectValue(Constants.NUMPAWN, ConstantsJsp.ERRORSELECTGRAMS);
 		}
-		if (dni != null && dni.length() > 10) {
+		if (dni != null && dni.length() > 13) {
 			errors.rejectValue(ConstantsJsp.NIF, "niftoolong");
 		} else if (!Util.isNifNie(dni)) {
 			errors.rejectValue(ConstantsJsp.NIF, "nifnotvalid");

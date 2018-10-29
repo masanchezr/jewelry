@@ -18,7 +18,7 @@ import org.springframework.data.annotation.CreatedDate;
 public class ConnectionEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "IDCONNECTION")
 	private Long idconnection;
 

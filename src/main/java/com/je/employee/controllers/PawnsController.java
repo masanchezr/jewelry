@@ -154,7 +154,7 @@ public class PawnsController {
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		String dni = Util.refactorNIF(pawn.getNif());
 		ModelAndView model = new ModelAndView();
-		if (dni != null && dni.length() > 12) {
+		if (dni != null && dni.length() > 13) {
 			errors.rejectValue(ConstantsJsp.NIF, "niftoolong");
 			model.setViewName(VIEWSEARCHCLIENT);
 		} else if (!Util.isNifNie(dni)) {
