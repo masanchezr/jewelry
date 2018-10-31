@@ -47,7 +47,7 @@ public interface SalesPostponedRepository extends CrudRepository<SalePostponedEn
 	public List<SalePostponedEntity> findByDateretiredBetweenAndPlace(@Temporal(TemporalType.DATE) Date from,
 			@Temporal(TemporalType.DATE) Date until, PlaceEntity place);
 
-	@Query("select sum(s.amount) from SalePostponedEntity s where s.dateretired>=:from and s.dateretired<=:until and s.place=:place")
+	@Query("select sum(s.totalamount) from SalePostponedEntity s where s.dateretired>=:from and s.dateretired<=:until and s.place=:place")
 	public BigDecimal sumDateretiredBetweenAndPlace(@Param("from") Date from, @Param("until") Date until,
 			@Param("place") PlaceEntity place);
 
