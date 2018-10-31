@@ -167,7 +167,7 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/daily/notdaily.jsp" />
 	</definition>
-	<definition name="newpayroll" extends="templateDate">
+	<definition name="newpayroll" extends="templateEmployee">
 		<put-attribute name="header"
 			value="/WEB-INF/views/employee/headerDateMonth.jsp" />
 		<put-attribute name="body"
@@ -191,7 +191,7 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/sales/newsalestrap.jsp" />
 	</definition>
-	<definition name="localrental" extends="templateDate">
+	<definition name="localrental" extends="templateEmployee">
 		<put-attribute name="header"
 			value="/WEB-INF/views/employee/headerDateMonth.jsp" />
 		<put-attribute name="body"
