@@ -10,52 +10,74 @@
 <div class="row">
 	<div class="col-lg-12">
 		<div class="card-body">
-			<c:if test="${not empty sales}">
-				<div class="table-responsive">
-					<table class="table table-striped table-bordered table-hover"
-						id="dataTables-example">
-						<thead>
+			<div class="table-responsive">
+				<table class="table table-striped table-bordered table-hover"
+					id="dataTables-example">
+					<thead>
+						<tr>
+							<th><spring:message code="idsale" /></th>
+							<th><spring:message code="total" /></th>
+							<th><spring:message code="place" /></th>
+							<th><spring:message code="saledate" /></th>
+							<th><spring:message code="discount" /></th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${sales}" var="sale">
 							<tr>
-								<th><spring:message code="idsale" /></th>
-								<th><spring:message code="total" /></th>
-								<th><spring:message code="place" /></th>
-								<th><spring:message code="saledate" /></th>
-								<th><spring:message code="discount" /></th>
+								<td><c:out value="${sale.numsale}" /></td>
+								<td><c:out value="${sale.total}" /><i
+									class="fa fa-euro-sign"></i></td>
+								<td><c:out value="${sale.place.description}" /></td>
+								<td><c:out value="${sale.saledate}" /></td>
+								<td><c:out value="${sale.discount}" /><i
+									class="fa fa-euro-sign"></i></td>
 							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${sales}" var="sale">
-								<tr>
-									<td><c:out value="${sale.numsale}" /></td>
-									<td><c:out value="${sale.total}" /><i
-										class="fa fa-euro-sign"></i></td>
-									<td><c:out value="${sale.place.description}" /></td>
-									<td><c:out value="${sale.saledate}" /></td>
-									<td><c:out value="${sale.discount}" /><i
-										class="fa fa-euro-sign"></i></td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="form-group">
-							<spring:message code="totalamount" />
-							<c:out value="${total}" />
-							<i class="fa fa-euro-sign"></i>
-						</div>
-						<div class="form-group">
-							<spring:message code="cost" />
-							<c:out value="${cost}" />
-							<i class="fa fa-euro-sign"></i>
-						</div>
+						</c:forEach>
+						<c:forEach items="${salespost}" var="sale">
+							<tr>
+								<td><c:out value="${sale.idsalepostponed}" /></td>
+								<td><c:out value="${sale.totalamount}" /></td>
+								<td><c:out value="${sale.place.description}" /></td>
+								<td><c:out value="${sale.dateretired}" /></td>
+								<td><spring:message code="salepostponed" /></td>
+							</tr>
+						</c:forEach>
+						<c:forEach items="${straps}" var="strap">
+							<tr>
+								<td><c:out value="${strap.numsale}" /></td>
+								<td><c:out value="${strap.amount}" /></td>
+								<td><c:out value="${strap.place.description}" /></td>
+								<td><spring:message code="strap" /></td>
+								<td></td>
+							</tr>
+						</c:forEach>
+						<c:forEach items="${batteries}" var="battery">
+							<tr>
+								<td><c:out value="${battery.numsale}" /></td>
+								<td><c:out value="${battery.amount}" /></td>
+								<td><c:out value="${battery.place.description}" /></td>
+								<td><spring:message code="battery" /></td>
+								<td></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="form-group">
+						<spring:message code="totalamount" />
+						<c:out value="${total}" />
+						<i class="fa fa-euro-sign"></i>
+					</div>
+					<div class="form-group">
+						<spring:message code="cost" />
+						<c:out value="${cost}" />
+						<i class="fa fa-euro-sign"></i>
 					</div>
 				</div>
-			</c:if>
-			<c:if test="${empty sales}">
-				<spring:message code="noresults" />
-			</c:if>
+			</div>
 		</div>
 	</div>
 </div>
