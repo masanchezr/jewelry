@@ -10,6 +10,8 @@
 	<definition name="templateLoginEmployee"
 		template="/WEB-INF/views/employee/templateLogin.jsp" />
 	<definition name="adminemployee" extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/admin.jsp" />
 	</definition>
