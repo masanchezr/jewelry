@@ -14,8 +14,7 @@ public interface ShoppingService {
 	/**
 	 * Save.
 	 *
-	 * @param shopping
-	 *            the shopping
+	 * @param shopping the shopping
 	 * @return Daily
 	 */
 	public Daily save(Shopping shopping);
@@ -23,8 +22,7 @@ public interface ShoppingService {
 	/**
 	 * Search shoppings.
 	 *
-	 * @param shopping
-	 *            the shopping
+	 * @param shopping the shopping
 	 * @return the list
 	 */
 	public List<Shopping> searchShoppings(String sDateFrom, String sDateUntil, PlaceEntity place, Long numshop);
@@ -32,8 +30,7 @@ public interface ShoppingService {
 	/**
 	 * Find shop by pk.
 	 *
-	 * @param idshop
-	 *            the idshop
+	 * @param idshop the idshop
 	 * @return the shopping
 	 */
 	public Shopping findShopByPK(Long idshop);
@@ -41,8 +38,7 @@ public interface ShoppingService {
 	/**
 	 * Update.
 	 *
-	 * @param shoppingForm
-	 *            the shopping form
+	 * @param shoppingForm the shopping form
 	 */
 	public void update(Shopping shoppingForm);
 
@@ -57,5 +53,7 @@ public interface ShoppingService {
 	public boolean isCorrectNumber(Shopping shoppingForm);
 
 	public Long getNextNumber(String user);
+
+	public void saveAdmin(Shopping shoppingForm);
 
 }

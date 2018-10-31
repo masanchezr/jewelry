@@ -27,4 +27,6 @@ public interface SalesPostPonedService {
 
 	public void timeout(long id);
 
+	public List<SalePostponedEntity> getListTimeout();
+
 }

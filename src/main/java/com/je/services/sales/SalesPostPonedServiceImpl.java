@@ -154,8 +154,7 @@ public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 	public long getMissing() {
 		long number = 0;
 		SalePostponedEntity last = salespostponedrepository.findFirstByOrderByIdsalepostponedDesc();
-		SalePostponedEntity first = salespostponedrepository.findFirstByOrderByIdsalepostponed();
-		for (long l = first.getIdsalepostponed(); l < last.getIdsalepostponed() && number == 0; l++) {
+		for (long l = 1; l < last.getIdsalepostponed() && number == 0; l++) {
 			if (!salespostponedrepository.findById(l).isPresent()) {
 				number = l;
 			}
@@ -176,5 +175,10 @@ public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 			salespostponedrepository.save(spe);
 		}
 
+	}
+
+	@Override
+	public List<SalePostponedEntity> getListTimeout() {
+		return salespostponedrepository.findByDeadlineBeforeAndTimeoutFalseAndDateretiredIsNull(new Date());
 	}
 }

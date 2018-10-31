@@ -118,9 +118,10 @@ public class SaleAdminController {
 	@RequestMapping(value = "/searchNumMissing")
 	public ModelAndView searchNumMissing() {
 		ModelAndView model = new ModelAndView("searchnummissing");
+		SearchMissingNumbers smn = new SearchMissingNumbers();
+		smn.setNumfrom(49L);
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
-		model.addObject(ConstantsJsp.FORMSEARCH, new SearchMissingNumbers());
-		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
+		model.addObject(ConstantsJsp.FORMSEARCH, smn);
 		return model;
 	}
 
@@ -133,7 +134,6 @@ public class SaleAdminController {
 		if (bindingResult.hasErrors()) {
 			model.setViewName("searchnummissing");
 			model.addObject(ConstantsJsp.FORMSEARCH, searchForm);
-			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		} else {
 			model.addObject("nummissing", saleService.calculateMissingSales(searchForm));
 			model.setViewName("resultnummissing");
@@ -171,10 +171,8 @@ public class SaleAdminController {
 	/**
 	 * Sale.
 	 *
-	 * @param sale
-	 *            the sale form
-	 * @param result
-	 *            the result
+	 * @param sale   the sale form
+	 * @param result the result
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/resultsale")

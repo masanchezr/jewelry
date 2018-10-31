@@ -19,6 +19,6 @@ public interface RecordingRepository extends CrudRepository<RecordingEntity, Lon
 	List<RecordingEntity> findByCreationdateBetweenAndPay(@Temporal(TemporalType.DATE) Date from,
 			@Temporal(TemporalType.DATE) Date until, PaymentEntity payment);
 
-	RecordingEntity findByNumsaleAndPlace(long i, PlaceEntity place);
+	RecordingEntity findByNumsale(Long numsale);
 
 }

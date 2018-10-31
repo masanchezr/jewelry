@@ -427,4 +427,49 @@ public class ShoppingServiceImpl implements ShoppingService {
 		}
 		return number;
 	}
+
+	@Override
+	public void saveAdmin(Shopping shopping) {
+		ShoppingEntity shoppingEntity = mapper.map(shopping, ShoppingEntity.class);
+		ClientPawnEntity cpe = mapper.map(shopping, ClientPawnEntity.class);
+		cpe.setCreationclient(new Date());
+		clientPawnsRepository.save(cpe);
+		shoppingEntity.setClient(cpe);
+		Calendar calendar = Calendar.getInstance();
+		PlaceEntity place = placeUserRepository.findByUsername(shopping.getUser()).get(0).getPlace();
+		List<ObjectShopEntity> objects = shoppingEntity.getObjects();
+		List<ObjectShopEntity> newobjects = new ArrayList<>();
+		Iterator<ObjectShopEntity> iobjects = objects.iterator();
+		ObjectShopEntity ose;
+		List<PaymentShopEntity> paymentshop = new ArrayList<>();
+		BigDecimal cashamount = Util.getNumber(shopping.getCashamount());
+		BigDecimal totalamount = BigDecimal.ZERO;
+		while (iobjects.hasNext()) {
+			ose = iobjects.next();
+			if (ose.getGrossgrams() != null) {
+				ose.setShop(shoppingEntity);
+				newobjects.add(ose);
+			}
+		}
+		if (cashamount != null) {
+			PaymentEntity payment = new PaymentEntity();
+			PaymentShopEntity payshop = new PaymentShopEntity();
+			payment.setIdpayment(Constants.EFECTIVO);
+			payshop.setPayment(payment);
+			payshop.setAmount(cashamount);
+			payshop.setShop(shoppingEntity);
+			paymentshop.add(payshop);
+			totalamount = totalamount.add(cashamount);
+		}
+		if (shoppingEntity.getCreationdate() == null) {
+			shoppingEntity.setCreationdate(new Date());
+		}
+		shoppingEntity.setPlace(place);
+		shoppingEntity.setSpayments(paymentshop);
+		shoppingEntity.setObjects(newobjects);
+		shoppingEntity.setYear(calendar.get(Calendar.YEAR));
+		shoppingEntity.setTotalamount(totalamount);
+		shoppingsRepository.save(shoppingEntity);
+
+	}
 }

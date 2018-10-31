@@ -76,7 +76,7 @@ public interface SaleManager {
 
 	public Map<String, Object> searchByDatesAndPlace(Date from, Date until, PlaceEntity place);
 
-	public List<Long> calculateNumberMissing(Long numFrom, Long numUntil, PlaceEntity place);
+	public List<Long> calculateNumberMissing(Long numFrom, Long numUntil);
 
 	public SaleEntity searchByPK(Long idsale);
 

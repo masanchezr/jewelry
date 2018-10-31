@@ -203,7 +203,7 @@ public class ShoppingsAdminController {
 		} else {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			shoppingForm.setUser(user);
-			shoppingService.save(shoppingForm);
+			shoppingService.saveAdmin(shoppingForm);
 			model = searchClient();
 		}
 		return model;

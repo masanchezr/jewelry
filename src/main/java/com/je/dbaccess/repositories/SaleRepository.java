@@ -23,8 +23,7 @@ public interface SaleRepository extends CrudRepository<SaleEntity, Long> {
 	/**
 	 * Find by date.
 	 * 
-	 * @param date
-	 *            the date
+	 * @param date the date
 	 * @return the iterable
 	 */
 	@Query("select s from SaleEntity s where s.creationdate>=?1")
@@ -33,8 +32,7 @@ public interface SaleRepository extends CrudRepository<SaleEntity, Long> {
 	/**
 	 * Find by client.
 	 * 
-	 * @param client
-	 *            the client
+	 * @param client the client
 	 * @return the iterable
 	 */
 	public Iterable<SaleEntity> findByClient(ClientEntity client);
@@ -42,10 +40,8 @@ public interface SaleRepository extends CrudRepository<SaleEntity, Long> {
 	/**
 	 * Find by creationdate and place.
 	 *
-	 * @param creationdate
-	 *            the creationdate
-	 * @param place
-	 *            the place
+	 * @param creationdate the creationdate
+	 * @param place        the place
 	 * @return the list
 	 */
 	public List<SaleEntity> findByCreationdateAndPlace(@Temporal(TemporalType.DATE) Date creationdate,
@@ -54,10 +50,8 @@ public interface SaleRepository extends CrudRepository<SaleEntity, Long> {
 	/**
 	 * Find by idsale and place.
 	 *
-	 * @param idsale
-	 *            the idsale
-	 * @param place
-	 *            the place
+	 * @param idsale the idsale
+	 * @param place  the place
 	 * @return the sale entity
 	 */
 	public SaleEntity findByNumsaleAndPlace(Long idsale, PlaceEntity place);
@@ -71,4 +65,6 @@ public interface SaleRepository extends CrudRepository<SaleEntity, Long> {
 
 	public List<SaleEntity> findByPlaceAndCreationdateBeforeAndNumsaleLessThan(PlaceEntity place,
 			@Temporal(TemporalType.DATE) Date from, Long numsale);
+
+	public List<SaleEntity> findByNumsale(Long numsale);
 }

@@ -205,7 +205,7 @@ public class SaleManagerImpl implements SaleManager {
 		place.setIdplace(idplace);
 		SaleEntity sale = saleRepository.findByNumsaleAndPlace(numsale, place);
 		boolean exists = true;
-		if (sale == null && checkAllSales(numsale, place) != 0) {
+		if (sale == null && checkAllSales(numsale) != 0) {
 			exists = false;
 		}
 		return exists;
@@ -276,25 +276,25 @@ public class SaleManagerImpl implements SaleManager {
 	}
 
 	@Override
-	public List<Long> calculateNumberMissing(Long numFrom, Long numUntil, PlaceEntity place) {
+	public List<Long> calculateNumberMissing(Long numFrom, Long numUntil) {
 		List<Long> numbers = new ArrayList<>();
-		SaleEntity sale;
+		List<SaleEntity> sales;
 		for (long i = numFrom; i <= numUntil; i++) {
-			sale = saleRepository.findByNumsaleAndPlace(i, place);
-			if (sale == null && checkAllSales(i, place) != 0) {
+			sales = saleRepository.findByNumsale(i);
+			if ((sales == null || sales.isEmpty()) && checkAllSales(i) != 0) {
 				numbers.add(i);
 			}
 		}
 		return numbers;
 	}
 
-	private long checkAllSales(long i, PlaceEntity place) {
+	private long checkAllSales(long i) {
 		long num = 0;
-		BatteryEntity batteries = batteriesRepository.findByNumsaleAndPlace(i, place);
+		BatteryEntity batteries = batteriesRepository.findByNumsale(i);
 		if (batteries == null) {
-			StrapEntity straps = strapsRepository.findByNumsaleAndPlace(i, place);
+			StrapEntity straps = strapsRepository.findByNumsale(i);
 			if (straps == null) {
-				RecordingEntity recording = recordingRepository.findByNumsaleAndPlace(i, place);
+				RecordingEntity recording = recordingRepository.findByNumsale(i);
 				if (recording == null) {
 					DiscountEntity discount = discountsRepository.findById(i).orElse(null);
 					if (discount == null) {

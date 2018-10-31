@@ -9,7 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.je.admin.forms.AdminForm;
 import com.je.forms.SalePostPoned;
-import com.je.forms.SearchForm;
 import com.je.services.sales.SalesPostPonedService;
 import com.je.utils.constants.ConstantsJsp;
 
@@ -25,7 +24,7 @@ public class SalePostPonedAdminController {
 	}
 
 	@RequestMapping(value = "/searchmissingsalepostponed")
-	public ModelAndView salepostponed(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm searchForm) {
+	public ModelAndView salepostponed() {
 		ModelAndView model = new ModelAndView("salepostponedadmin");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject(ConstantsJsp.NUMSALE, salesPostPonedService.getMissing());
@@ -56,5 +55,13 @@ public class SalePostPonedAdminController {
 	public ModelAndView timeout(@PathVariable long id) {
 		salesPostPonedService.timeout(id);
 		return getModelSalePostponed(id);
+	}
+
+	@RequestMapping(value = "/searchexpired")
+	public ModelAndView searchExpired() {
+		ModelAndView model = new ModelAndView("expired");
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject("resultexpired", salesPostPonedService.getListTimeout());
+		return model;
 	}
 }

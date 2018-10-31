@@ -7,8 +7,6 @@
 	<!-- employee -->
 	<definition name="templateEmployee"
 		template="/WEB-INF/views/employee/template.jsp" />
-	<definition name="templateDate"
-		template="/WEB-INF/views/employee/templateDateMonth.jsp" />
 	<definition name="templateLoginEmployee"
 		template="/WEB-INF/views/employee/templateLogin.jsp" />
 	<definition name="adminemployee" extends="templateEmployee">
@@ -21,93 +19,135 @@
 			value="/WEB-INF/views/employee/login.jsp" />
 	</definition>
 	<definition name="newsale" extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/sales/newsale.jsp" />
 	</definition>
 	<definition name="newsalepostponed"
 		extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/salespostponed/newsale.jsp" />
 	</definition>
 	<definition name="finishsalepostponed"
 		extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/salespostponed/finishsale.jsp" />
 	</definition>
 	<definition name="salepostponed" extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/salespostponed/sale.jsp" />
 	</definition>
 	<definition name="finishaddinstallment"
 		extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/salespostponed/finishaddinstallment.jsp" />
 	</definition>
 	<definition name="finishsale" extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/sales/finishsale.jsp" />
 	</definition>
 	<definition name="newPawn" extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/pawns/newpawn/newPawn.jsp" />
 	</definition>
 	<definition name="newadjustment" extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/adjustments/newadjustment.jsp" />
 	</definition>
 	<definition name="successemployee"
 		extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/success.jsp" />
 	</definition>
 	<definition name="newconcept" extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/otherconcepts/newotherconcept.jsp" />
 	</definition>
 	<definition name="newshopping" extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/newshopping.jsp" />
 	</definition>
 	<definition name="removesale" extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/sales/removesale.jsp" />
 	</definition>
 	<definition name="renewpawn" extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/pawns/renewpawn/renewpawn.jsp" />
 	</definition>
 	<definition name="removepawn" extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/pawns/removepawn/removepawn.jsp" />
 	</definition>
 	<definition name="removepawnfive" extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/pawns/removepawn/removepawnfive.jsp" />
 	</definition>
 	<definition name="searchremovepawn"
 		extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/pawns/removepawn/searchpawn.jsp" />
 	</definition>
 	<definition name="searchrenewpawn"
 		extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/pawns/renewpawn/searchpawn.jsp" />
 	</definition>
 	<definition name="dailyarrows" extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/daily/dailyarrows.jsp" />
 	</definition>
 	<definition name="dailyarrow" extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/daily/dailyarrow.jsp" />
 	</definition>
 	<definition name="searchdailyem" extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/daily/searchdaily.jsp" />
 	</definition>
 	<definition name="removeparcialsale"
 		extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/sales/removeparcialsale.jsp" />
 	</definition>
@@ -116,93 +156,135 @@
 			value="/WEB-INF/views/employee/403.jsp" />
 	</definition>
 	<definition name="noselected" extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/noselected.jsp" />
 	</definition>
 	<definition name="notdaily" extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/daily/notdaily.jsp" />
 	</definition>
 	<definition name="newpayroll" extends="templateDate">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/headerDateMonth.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/otherconcepts/payroll.jsp" />
 	</definition>
 	<definition name="newentrymoney" extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/newentrymoney.jsp" />
 	</definition>
 	<definition name="newsalebattery" extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/sales/newsalebattery.jsp" />
 	</definition>
 	<definition name="newsalestrap" extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/sales/newsalestrap.jsp" />
 	</definition>
 	<definition name="localrental" extends="templateDate">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/headerDateMonth.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/otherconcepts/localrental.jsp" />
 	</definition>
 	<definition name="newincident" extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/incidents/newincident.jsp" />
 	</definition>
 	<definition name="saveincident" extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/incidents/resultsaveincident.jsp" />
 	</definition>
 	<definition name="myincidents" extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/incidents/myincidents.jsp" />
 	</definition>
 	<definition name="searchclient" extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/pawns/newpawn/searchclient.jsp" />
 	</definition>
 	<definition name="newdiscount" extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/sales/newdiscount.jsp" />
 	</definition>
 	<definition name="newrecording" extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/sales/newrecording.jsp" />
 	</definition>
 	<definition name="cancelparcialsale"
 		extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/sales/cancelparcialsale.jsp" />
 	</definition>
 	<definition name="searchincidents"
 		extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/incidents/searchincidents.jsp" />
 	</definition>
 	<definition name="addinstallment" extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/salespostponed/addinstallment.jsp" />
 	</definition>
 	<definition name="resultsalespostponed"
 		extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/salespostponed/resultsalespostponed.jsp" />
 	</definition>
 	<definition name="searchsalepostponedemployee"
 		extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/salespostponed/searchsalepostponed.jsp" />
 	</definition>
 	<definition name="searchrenovationsemployee"
 		extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/pawns/searchrenovations/searchpawn.jsp" />
 	</definition>
 	<definition name="resultpawnsrenovationsemployee"
 		extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/pawns/searchrenovations/resultpawn.jsp" />
 	</definition>
 	<definition name="resultrenovationsemployee"
 		extends="templateEmployee">
+		<put-attribute name="header"
+			value="/WEB-INF/views/employee/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/pawns/searchrenovations/renovations.jsp" />
 	</definition>
