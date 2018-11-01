@@ -34,7 +34,7 @@
 									class="fa fa-euro-sign"></i></td>
 							</tr>
 						</c:forEach>
-						<c:forEach items="${salespost}" var="sale">
+						<c:forEach items="${salespostponed}" var="sale">
 							<tr>
 								<td><c:out value="${sale.idsalepostponed}" /></td>
 								<td><c:out value="${sale.totalamount}" /></td>
