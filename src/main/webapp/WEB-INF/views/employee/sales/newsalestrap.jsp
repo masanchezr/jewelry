@@ -1,6 +1,6 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html;charset=UTF-8"%>
 <form:form action="savesalestrap" modelAttribute="strapForm" role="form">
 	<!-- Breadcrumbs-->
 	<ol class="breadcrumb">
