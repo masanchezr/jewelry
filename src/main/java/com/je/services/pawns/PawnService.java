@@ -3,6 +3,7 @@ package com.je.services.pawns;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.je.dbaccess.entities.PawnEntity;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.services.dailies.Daily;
 
@@ -85,4 +86,6 @@ public interface PawnService {
 	public Double sumPawnsActiveByPlace(PlaceEntity place);
 
 	public boolean isRepeatNumber(String num, String user, int year);
+
+	public List<PawnEntity> getByNIF(String nif);
 }

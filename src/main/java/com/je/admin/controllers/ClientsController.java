@@ -10,6 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.je.admin.forms.AdminForm;
 import com.je.services.clients.Client;
 import com.je.services.clients.ClientService;
+import com.je.services.pawns.PawnService;
+import com.je.services.shoppings.ShoppingService;
 import com.je.utils.constants.ConstantsJsp;
 
 /**
@@ -21,6 +23,12 @@ public class ClientsController {
 	/** The search clients service. */
 	@Autowired
 	private ClientService searchClientsService;
+
+	@Autowired
+	private ShoppingService shoppingService;
+
+	@Autowired
+	private PawnService pawnService;
 
 	/**
 	 * Search clients.
@@ -42,6 +50,14 @@ public class ClientsController {
 		model.addObject("clients", clients);
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.setViewName("resultClients");
+		return model;
+	}
+
+	@RequestMapping(value = "/showoperations")
+	public ModelAndView showoperations(Client client) {
+		ModelAndView model = new ModelAndView("operations");
+		model.addObject("shoppings", shoppingService.getByNIF(client.getNif()));
+		model.addObject("pawns", pawnService.getByNIF(client.getNif()));
 		return model;
 	}
 }

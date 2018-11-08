@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Temporal;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import com.je.dbaccess.entities.ClientPawnEntity;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.dbaccess.entities.ShoppingEntity;
 import com.je.utils.constants.Constants;
@@ -22,10 +23,8 @@ public interface ShoppingsRepository extends CrudRepository<ShoppingEntity, Long
 	/**
 	 * Find by creationdate and place.
 	 *
-	 * @param creationdate
-	 *            the creationdate
-	 * @param place
-	 *            the place
+	 * @param creationdate the creationdate
+	 * @param place        the place
 	 * @return the list
 	 */
 	public List<ShoppingEntity> findByCreationdateAndPlace(@Temporal(TemporalType.DATE) Date creationdate,
@@ -34,10 +33,8 @@ public interface ShoppingsRepository extends CrudRepository<ShoppingEntity, Long
 	/**
 	 * Find by numshop and place.
 	 *
-	 * @param numshop
-	 *            the numshop
-	 * @param place
-	 *            the place
+	 * @param numshop the numshop
+	 * @param place   the place
 	 * @return the list
 	 */
 	public List<ShoppingEntity> findByNumshopAndPlace(Long numshop, PlaceEntity place);
@@ -45,12 +42,9 @@ public interface ShoppingsRepository extends CrudRepository<ShoppingEntity, Long
 	/**
 	 * Find by numshop and creationdate and place.
 	 *
-	 * @param numshop
-	 *            the numshop
-	 * @param creationdate
-	 *            the creationdate
-	 * @param place
-	 *            the place
+	 * @param numshop      the numshop
+	 * @param creationdate the creationdate
+	 * @param place        the place
 	 * @return the list
 	 */
 	public List<ShoppingEntity> findByNumshopAndCreationdateAndPlace(Long numshop,
@@ -59,12 +53,9 @@ public interface ShoppingsRepository extends CrudRepository<ShoppingEntity, Long
 	/**
 	 * Find by creationdate between and place.
 	 *
-	 * @param datefrom
-	 *            the datefrom
-	 * @param dateuntil
-	 *            the dateuntil
-	 * @param place
-	 *            the place
+	 * @param datefrom  the datefrom
+	 * @param dateuntil the dateuntil
+	 * @param place     the place
 	 * @return the list
 	 */
 	public List<ShoppingEntity> findByCreationdateBetweenAndPlace(@Temporal(TemporalType.DATE) Date datefrom,
@@ -94,4 +85,5 @@ public interface ShoppingsRepository extends CrudRepository<ShoppingEntity, Long
 	public List<Object[]> findGramsByMetal(@Param("dateFrom") @Temporal(TemporalType.DATE) Date datefrom,
 			@Param("dateUntil") @Temporal(TemporalType.DATE) Date dateuntil, @Param(Constants.PLACE) PlaceEntity place);
 
+	public List<ShoppingEntity> findByClient(ClientPawnEntity client);
 }

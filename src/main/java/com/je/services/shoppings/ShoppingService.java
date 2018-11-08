@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import com.je.dbaccess.entities.PlaceEntity;
+import com.je.dbaccess.entities.ShoppingEntity;
 import com.je.services.dailies.Daily;
 
 /**
@@ -55,5 +56,7 @@ public interface ShoppingService {
 	public Long getNextNumber(String user);
 
 	public void saveAdmin(Shopping shoppingForm);
+
+	public List<ShoppingEntity> getByNIF(String nif);
 
 }

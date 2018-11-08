@@ -410,4 +410,11 @@ public class PawnServiceImpl implements PawnService {
 		}
 		return repeat;
 	}
+
+	@Override
+	public List<PawnEntity> getByNIF(String nif) {
+		ClientPawnEntity client = new ClientPawnEntity();
+		client.setNif(nif);
+		return pawnsRepository.findByClient(client);
+	}
 }

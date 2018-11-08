@@ -566,4 +566,10 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/adjustments/resultadjustment.jsp" />
 	</definition>
+	<definition name="operations" extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/admin/header.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/clients/resultoperations.jsp" />
+	</definition>
 </tiles-definitions>

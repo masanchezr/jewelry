@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Temporal;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import com.je.dbaccess.entities.ClientPawnEntity;
 import com.je.dbaccess.entities.PawnEntity;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.utils.constants.Constants;
@@ -87,4 +88,6 @@ public interface PawnsRepository extends CrudRepository<PawnEntity, Long> {
 	@Query("select sum(os.realgrams), sum(os.grossgrams), sum(s.amount), os.metal from PawnEntity s join s.objects os where s.creationdate>=:dateFrom and s.creationdate<=:dateUntil and os.pawn.idpawn=s.idpawn GROUP BY os.metal")
 	public List<Object[]> findGrossGramsByMetal(@Param("dateFrom") @Temporal(TemporalType.DATE) Date datefrom,
 			@Param("dateUntil") @Temporal(TemporalType.DATE) Date dateuntil);
+
+	public List<PawnEntity> findByClient(ClientPawnEntity client);
 }

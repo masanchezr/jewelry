@@ -472,4 +472,11 @@ public class ShoppingServiceImpl implements ShoppingService {
 		shoppingsRepository.save(shoppingEntity);
 
 	}
+
+	@Override
+	public List<ShoppingEntity> getByNIF(String nif) {
+		ClientPawnEntity client = new ClientPawnEntity();
+		client.setNif(nif);
+		return shoppingsRepository.findByClient(client);
+	}
 }
