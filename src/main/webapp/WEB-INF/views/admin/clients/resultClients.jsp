@@ -5,7 +5,7 @@
 <ol class="breadcrumb">
 	<li class="breadcrumb-item active"><spring:message code="clients" /></li>
 </ol>
-<form:form action="updateJewels" modelAttribute="toUpdate">
+<form:form action="showoperations" modelAttribute="clientModel">
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card-body">

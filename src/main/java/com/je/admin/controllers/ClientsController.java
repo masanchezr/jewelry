@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -44,9 +45,10 @@ public class ClientsController {
 	}
 
 	@RequestMapping(value = "/resultclients")
-	public ModelAndView resultclients(Client client) {
+	public ModelAndView resultclients(@ModelAttribute("client") Client client) {
 		ModelAndView model = new ModelAndView();
 		List<Client> clients = searchClientsService.searchClients(client);
+		model.addObject("clientModel", new Client());
 		model.addObject("clients", clients);
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.setViewName("resultClients");
@@ -54,10 +56,11 @@ public class ClientsController {
 	}
 
 	@RequestMapping(value = "/showoperations")
-	public ModelAndView showoperations(Client client) {
+	public ModelAndView showoperations(@ModelAttribute("clientModel") Client client) {
 		ModelAndView model = new ModelAndView("operations");
 		model.addObject("shoppings", shoppingService.getByNIF(client.getNif()));
 		model.addObject("pawns", pawnService.getByNIF(client.getNif()));
+		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		return model;
 	}
 }

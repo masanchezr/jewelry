@@ -12,13 +12,15 @@
 <div class="row">
 	<div class="col-lg-6">
 		<div class="card-body">
+			<h5 class="card-title">
+				<spring:message code="shoppings" />
+			</h5>
 			<c:if test="${not empty shoppings}">
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered table-hover"
 						id="dataTables-example">
 						<thead>
 							<tr>
-								<th></th>
 								<th><spring:message code="numshop" /></th>
 								<th><spring:message code="totalamount" /></th>
 								<th><spring:message code="date" /></th>
@@ -28,7 +30,7 @@
 							<c:forEach items="${shoppings}" var="shopping">
 								<tr>
 									<td><c:out value="${shopping.numshop}" /></td>
-									<td><c:out value="${shopping.amount}" /></td>
+									<td><c:out value="${shopping.totalamount}" /></td>
 									<td><c:out value="${shopping.creationdate}" /></td>
 								</tr>
 							</c:forEach>
@@ -46,6 +48,9 @@
 	<div class="col-lg-12">
 		<!-- /.card-heading -->
 		<div class="card-body">
+			<h5 class="card-title">
+				<spring:message code="shoppings" />
+			</h5>
 			<c:if test="${not empty pawns}">
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered table-hover"
