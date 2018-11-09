@@ -49,7 +49,7 @@
 		<!-- /.card-heading -->
 		<div class="card-body">
 			<h5 class="card-title">
-				<spring:message code="shoppings" />
+				<spring:message code="pawns" />
 			</h5>
 			<c:if test="${not empty pawns}">
 				<div class="table-responsive">
