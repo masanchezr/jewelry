@@ -154,7 +154,7 @@ public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 	public long getMissing() {
 		long number = 0;
 		SalePostponedEntity last = salespostponedrepository.findFirstByOrderByIdsalepostponedDesc();
-		for (long l = 148; l < last.getIdsalepostponed() && number == 0; l++) {
+		for (long l = 201; l < last.getIdsalepostponed() && number == 0; l++) {
 			if (!salespostponedrepository.findById(l).isPresent()) {
 				number = l;
 			}

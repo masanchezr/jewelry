@@ -290,12 +290,12 @@ public class SaleManagerImpl implements SaleManager {
 
 	private long checkAllSales(long i) {
 		long num = 0;
-		BatteryEntity batteries = batteriesRepository.findByNumsale(i);
-		if (batteries == null) {
-			StrapEntity straps = strapsRepository.findByNumsale(i);
-			if (straps == null) {
-				RecordingEntity recording = recordingRepository.findByNumsale(i);
-				if (recording == null) {
+		List<BatteryEntity> batteries = batteriesRepository.findByNumsale(i);
+		if (batteries == null || batteries.isEmpty()) {
+			List<StrapEntity> straps = strapsRepository.findByNumsale(i);
+			if (straps == null || straps.isEmpty()) {
+				List<RecordingEntity> recording = recordingRepository.findByNumsale(i);
+				if (recording == null || recording.isEmpty()) {
 					DiscountEntity discount = discountsRepository.findById(i).orElse(null);
 					if (discount == null) {
 						num = i;
