@@ -16,7 +16,7 @@
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName"
-			value="com.mysql.jdbc.Driver" />
+			value="com.mysql.cj.jdbc.Driver" />
 		<property name="url" value="${database.url}" />
 		<property name="username" value="${database.user}" />
 		<property name="password" value="${database.password}" />
