@@ -10,7 +10,7 @@
 		<org.springframework-version>5.1.1.RELEASE</org.springframework-version>
 		<spring-security-version>5.1.1.RELEASE</spring-security-version>
 		<tiles-version>3.0.8</tiles-version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<sourceEncoding>UTF-8</sourceEncoding>
 	</properties>
 	<profiles>
 		<profile>
