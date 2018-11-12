@@ -82,6 +82,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-war-plugin</artifactId>
+						<version>3.2.2</version>
 						<configuration>
 							<encoding>${sourceEncoding}</encoding>
 							<webXml>src\main\webapp\WEB-INF\web.xml</webXml>
@@ -94,6 +95,7 @@
 						<artifactId>maven-compiler-plugin</artifactId>
 						<version>3.8.0</version>
 						<configuration>
+							<encoding>${sourceEncoding}</encoding>
 							<source>1.8</source>
 							<target>1.8</target>
 						</configuration>
