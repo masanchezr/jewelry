@@ -237,7 +237,6 @@ public class SaleServiceImpl implements SaleService {
 		SaleEntity sale = saleManager.searchByNumsaleAndPlace(removeSaleForm.getNumsale(),
 				removeSaleForm.getPlace().getIdplace());
 		CancelSaleEntity cancel = new CancelSaleEntity();
-		cancel.setIdcancelsale(sale.getIdsale());
 		cancel.setNumsale(sale.getNumsale());
 		cancel.setCreationdate(new Date());
 		cancel.setParcial(Boolean.FALSE);
