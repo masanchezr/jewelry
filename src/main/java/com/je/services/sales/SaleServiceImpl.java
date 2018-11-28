@@ -280,7 +280,6 @@ public class SaleServiceImpl implements SaleService {
 		DiscountEntity discount = null;
 		CancelSaleEntity cancel = new CancelSaleEntity();
 		CancelSalePaymentEntity csp = new CancelSalePaymentEntity();
-		cancel.setIdcancelsale(sale.getIdsale());
 		cancel.setNumsale(sale.getNumsale());
 		cancel.setCreationdate(new Date());
 		cancel.setParcial(Boolean.TRUE);
