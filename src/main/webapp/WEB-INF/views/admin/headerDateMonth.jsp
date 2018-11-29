@@ -21,7 +21,10 @@
 	href="<spring:url value="/resources/img/favicon.png"/>"
 	type="image/png">
 <title><spring:message code="titleAdmin" /></title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- html5-->
+<meta charset="utf-8" />
+<!-- html4-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script>
 	function formSubmit() {
 		document.getElementById("logoutForm").submit();
@@ -29,7 +32,6 @@
 </script>
 <script type="text/javascript"
 	src="<spring:url value="/resources/js/jquery.min.js"/>"></script>
-<script src="<spring:url value="/resources/js/popper.min.js"/>"></script>
 <script src="<spring:url value="/resources/js/bootstrap.min.js"/>"></script>
 <script src="<spring:url value="/resources/js/jquery.easing.min.js"/>"></script>
 <script src="<spring:url value="/resources/js/jquery.dataTables.js"/>"></script>

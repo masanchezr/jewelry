@@ -21,6 +21,10 @@
 	href="<spring:url value="/resources/img/favicon.png"/>"
 	type="image/png">
 <title><spring:message code="goldburgos" /></title>
+<!-- html5-->
+<meta charset="utf-8" />
+<!-- html4-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script>
 	function formSubmit() {
 		$("#logoutForm").submit();
@@ -29,7 +33,6 @@
 <!-- jQuery -->
 <script type="text/javascript"
 	src="<spring:url value="/resources/js/jquery.min.js"/>"></script>
-<script src="<spring:url value="/resources/js/popper.min.js"/>"></script>
 <script src="<spring:url value="/resources/js/bootstrap.min.js"/>"></script>
 <!-- Custom Theme JavaScript -->
 <script src="<spring:url value="/resources/js/jquery.easing.min.js"/>"></script>
@@ -39,7 +42,6 @@
 <script src="<spring:url value="/resources/js/sb-admin.min.js"/>"></script>
 <script
 	src="<spring:url value="/resources/js/sb-admin-datatables.min.js"/>"></script>
-<script src="<spring:url value="/resources/js/employee/discounts.js"/>"></script>
 <script
 	src="<spring:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
 <script

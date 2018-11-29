@@ -16,7 +16,7 @@
 				<div class="form-group">
 					<spring:message code="idsale" />
 					<form:input class="form-control" path="numsale" />
-					<div class="form-group col-3 has-error">
+					<div class="form-group has-error">
 						<label class="control-label" for="inputSuccess"> <form:errors
 								path="numsale" /></label>
 					</div>

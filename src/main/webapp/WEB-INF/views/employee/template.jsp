@@ -222,5 +222,6 @@
 			</div>
 		</div>
 	</div>
+	<script src="<spring:url value="/resources/js/employee/discounts.js"/>"></script>
 </body>
 </html>

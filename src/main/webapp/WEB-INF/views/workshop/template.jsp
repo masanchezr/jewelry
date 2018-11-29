@@ -40,7 +40,7 @@
 		id="mainNav">
 		<a class="navbar-brand" href="index.html"><spring:message
 				code="goldburgos" /></a>
-		<!-- Botón para dispositivos móviles -->
+		<!-- Botï¿½n para dispositivos mï¿½viles -->
 		<button class="navbar-toggler navbar-toggler-right" type="button"
 			data-toggle="collapse" data-target="#navbarResponsive"
 			aria-controls="navbarResponsive" aria-expanded="false"
@@ -103,7 +103,7 @@
 					</h5>
 					<button class="close" type="button" data-dismiss="modal"
 						aria-label="Close">
-						<span aria-hidden="true">×</span>
+						<span aria-hidden="true">ï¿½</span>
 					</button>
 				</div>
 				<div class="modal-body">
@@ -123,7 +123,6 @@
 	<!-- jQuery -->
 	<script type="text/javascript"
 		src="<spring:url value="/resources/js/jquery.min.js"/>"></script>
-	<script src="<spring:url value="/resources/js/popper.min.js"/>"></script>
 	<script src="<spring:url value="/resources/js/bootstrap.min.js"/>"></script>
 	<!-- Custom Theme JavaScript -->
 	<script src="<spring:url value="/resources/js/jquery.easing.min.js"/>"></script>

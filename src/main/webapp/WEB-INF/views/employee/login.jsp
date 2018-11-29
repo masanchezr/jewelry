@@ -44,8 +44,6 @@
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
 <!-- Bootstrap Core JavaScript -->
-<script src="<spring:url value="/resources/js/popper.min.js"/>" /></script>
 <script src="<spring:url value="/resources/js/bootstrap.min.js"/>" /></script>
 <!-- Core plugin JavaScript-->
-<script
-	src="<spring:url value="/resources/js/jquery.easing.min.js"/>" /></script>
+<script src="<spring:url value="/resources/js/jquery.easing.min.js"/>" /></script>

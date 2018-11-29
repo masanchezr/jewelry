@@ -14,6 +14,10 @@
 	href="<spring:url value="/resources/styles/admin/font-awesome-5.0.10/css/fontawesome-all.css"/>"
 	rel="stylesheet" type="text/css">
 <title><spring:message code="titleAdmin" /></title>
+<!-- html5-->
+<meta charset="utf-8" />
+<!-- html4-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <body class="bg-dark">
 	<tiles:insertAttribute name="body" />
