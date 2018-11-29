@@ -39,7 +39,7 @@
 						itemLabel="name" />
 				</form:select>
 			</div>
-			<div id="discount" class="hidden">
+			<div id="discount" class="d-none">
 				<div class="form-group">
 					<spring:message code="iddiscount" />
 					<form:input class="form-control" path="iddiscount" />
