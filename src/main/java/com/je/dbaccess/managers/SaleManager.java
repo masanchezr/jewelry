@@ -70,7 +70,7 @@ public interface SaleManager {
 
 	public boolean cancelParcialSale(CancelSaleEntity cancel, List<Long> jewelsToCancel, DiscountEntity discount);
 
-	public boolean existSale(Long numsale, Long idplace);
+	public boolean existSale(Long numsale);
 
 	public Iterable<SaleEntity> searchByDatesAndPayment(Date from, Date until, PaymentEntity pay);
 

@@ -25,7 +25,7 @@
 							<c:forEach items="${holidays}" var="holiday">
 								<tr>
 									<td><c:out value="${holiday.place.description}" /></td>
-									<td><c:out value="${holiday.holiday}" /></td>
+									<td><c:out value="${holiday.dateholiday}" /></td>
 									<td><c:out value="${holiday.description}" /></td>
 								</tr>
 							</c:forEach>

@@ -212,10 +212,6 @@
 					<ul class="sidenav-second-level collapse" id="collapseSales">
 						<li><spring:url value="/searchSales" var="searchsales" /> <a
 							href="${searchsales}"> <spring:message code="sales" /></a></li>
-						<li><spring:url value="/searchNumMissing"
-								var="searchNumMissing" /> <a href="${searchNumMissing}"> <spring:message
-									code="searchnummissing" />
-						</a></li>
 						<li><spring:url value="/newsale" var="newsale" /> <a
 							href="${newsale}"> <spring:message code="newsale" /></a></li>
 					</ul></li>

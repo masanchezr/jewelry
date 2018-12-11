@@ -14,7 +14,7 @@
 		<div class="col-lg-6">
 			<div class="card-body">
 				<div class="form-group">
-					<spring:message code="idsale" />
+					<spring:message code="numsale" />
 					<form:input class="form-control" path="numsale" />
 					<div class="form-group has-error">
 						<label class="control-label" for="inputSuccess"> <form:errors

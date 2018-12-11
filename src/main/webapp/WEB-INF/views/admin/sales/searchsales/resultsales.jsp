@@ -15,7 +15,7 @@
 					id="dataTables-example">
 					<thead>
 						<tr>
-							<th><spring:message code="idsale" /></th>
+							<th><spring:message code="numsale" /></th>
 							<th><spring:message code="total" /></th>
 							<th><spring:message code="place" /></th>
 							<th><spring:message code="saledate" /></th>

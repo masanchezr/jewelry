@@ -12,7 +12,7 @@
 			<table class="table">
 				<tbody>
 					<tr>
-						<td><spring:message code="idsale" var="numsalemessage" /> <form:input
+						<td><spring:message code="numberofsale" var="numsalemessage" /> <form:input
 								class="form-control" path="numsale"
 								placeholder="${numsalemessage}" /></td>
 						<td><p class="text-danger">

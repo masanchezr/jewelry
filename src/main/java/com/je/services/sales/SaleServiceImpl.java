@@ -117,8 +117,7 @@ public class SaleServiceImpl implements SaleService {
 		saleEntity.setDiscount(discount);
 		saleEntity.setSpayments(payments);
 		sale.setTotal(saleEntity.getTotal());
-		if (sale.getNumsale() > 0
-				&& !saleManager.existSale(sale.getNumsale() - 1, saleEntity.getPlace().getIdplace())) {
+		if (sale.getNumsale() > 0 && !saleManager.existSale(sale.getNumsale() - 1)) {
 			mailService = new MailService(
 					"Numero de venta " + sale.getNumsale() + " lugar: " + saleEntity.getPlace().getIdplace(), null,
 					"REVISAR NUMERO VENTA.");
@@ -342,7 +341,7 @@ public class SaleServiceImpl implements SaleService {
 	}
 
 	@Override
-	public boolean exists(Long numsale, Long idplace) {
-		return saleManager.existSale(numsale, idplace);
+	public boolean exists(Long numsale) {
+		return saleManager.existSale(numsale);
 	}
 }

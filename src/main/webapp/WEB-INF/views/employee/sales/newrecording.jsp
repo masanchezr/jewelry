@@ -14,7 +14,7 @@
 		<div class="row">
 			<div class="col-lg-6">
 				<div class="form-group">
-					<spring:message code="idsale" />
+					<spring:message code="numsale" />
 					<spring:message code="optional" />
 					<form:input class="form-control" path="numsale" />
 				</div>

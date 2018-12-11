@@ -15,7 +15,7 @@
 	<div class="row">
 		<div class="col-lg-3">
 			<div class="form-group">
-				<spring:message code="idsale" />
+				<spring:message code="numsale" />
 				<form:input class="form-control" path="numsale" disabled="true" />
 			</div>
 			<div class="form-group has-error">
@@ -47,6 +47,13 @@
 				<div class="form-group">
 					<spring:message code="numsalechange" />
 					<form:input class="form-control" path="numsalechange" />
+				</div>
+				<div class="form-group">
+					<spring:message code="cancelpayments" />
+					<form:input class="form-control" path="optionalpayment" />
+					<p class="text-danger">
+						<form:errors path="optionalpayment" />
+					</p>
 				</div>
 			</div>
 			<div class="form-group">

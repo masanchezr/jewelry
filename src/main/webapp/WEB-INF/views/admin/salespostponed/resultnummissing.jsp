@@ -10,7 +10,7 @@
 <div class="row">
 	<div class="col-lg-12">
 		<div class="card-body">
-			<spring:message code="idsale" />
+			<spring:message code="numsale" />
 			<c:out value="${numsale}" />
 		</div>
 	</div>

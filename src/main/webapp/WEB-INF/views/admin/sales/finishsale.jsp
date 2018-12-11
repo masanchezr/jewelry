@@ -16,7 +16,7 @@
 				</div>
 				<div class="mr-5">
 					<c:out value="${saleForm.numsale}" />
-					<spring:message code="idsale" />
+					<spring:message code="numsale" />
 				</div>
 			</div>
 		</div>

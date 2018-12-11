@@ -28,7 +28,7 @@
 					</form:select>
 				</div>
 				<div class="form-group">
-					<spring:message code="idsale" />
+					<spring:message code="numsale" />
 					<form:input class="form-control" path="numsale" />
 					<form:errors path="numsale" />
 				</div>

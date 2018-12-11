@@ -68,5 +68,5 @@ public interface SaleService {
 
 	public List<Long> calculateMissingSales(SearchMissingNumbers form);
 
-	public boolean exists(Long numsale, Long idplace);
+	public boolean exists(Long numsale);
 }

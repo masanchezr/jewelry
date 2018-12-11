@@ -99,7 +99,7 @@ public class SalesController {
 				sale.setJewels(newjewels);
 				sale.setPlace(place);
 				// comprobamos si ya existe la venta
-				boolean exists = saleService.exists(sale.getNumsale(), place.getIdplace());
+				boolean exists = saleService.exists(sale.getNumsale());
 				if (!exists) {
 					saleService.buy(sale);
 					model.setViewName("finishsale");

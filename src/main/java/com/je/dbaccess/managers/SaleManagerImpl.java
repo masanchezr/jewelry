@@ -200,12 +200,10 @@ public class SaleManagerImpl implements SaleManager {
 	}
 
 	@Override
-	public boolean existSale(Long numsale, Long idplace) {
-		PlaceEntity place = new PlaceEntity();
-		place.setIdplace(idplace);
-		SaleEntity sale = saleRepository.findByNumsaleAndPlace(numsale, place);
+	public boolean existSale(Long numsale) {
+		List<SaleEntity> sales = saleRepository.findByNumsale(numsale);
 		boolean exists = true;
-		if (sale == null && checkAllSales(numsale) != 0) {
+		if ((sales == null || sales.isEmpty()) && checkAllSales(numsale) != 0) {
 			exists = false;
 		}
 		return exists;

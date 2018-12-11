@@ -16,7 +16,7 @@
 						id="dataTables-example">
 						<thead>
 							<tr>
-								<th><spring:message code="idsale" /></th>
+								<th><spring:message code="numsale" /></th>
 							</tr>
 						</thead>
 						<tbody>
