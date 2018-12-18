@@ -21,10 +21,10 @@
 	href="<spring:url value="/resources/img/favicon.png"/>"
 	type="image/png">
 <title><spring:message code="goldburgos" /></title>
-<!-- html5-->
-<meta charset="utf-8" />
-<!-- html4-->
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- html5
+<meta charset="utf-8" />-->
+<!-- html4
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
 <script>
 	function formSubmit() {
 		$("#logoutForm").submit();
