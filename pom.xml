@@ -7,8 +7,8 @@
 	<version>0.0.8-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<properties>
-		<org.springframework-version>5.1.1.RELEASE</org.springframework-version>
-		<spring-security-version>5.1.1.RELEASE</spring-security-version>
+		<org.springframework-version>5.1.2.RELEASE</org.springframework-version>
+		<spring-security-version>5.1.2.RELEASE</spring-security-version>
 		<tiles-version>3.0.8</tiles-version>
 		<sourceEncoding>UTF-8</sourceEncoding>
 	</properties>
