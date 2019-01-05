@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Iterator;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -36,7 +35,7 @@ public class DailiesRepositoryTest {
 	public void saveTest() {
 		PlaceEntity place = new PlaceEntity();
 		place.setIdplace(24002L);
-		Calendar calendar = new GregorianCalendar(2018, 3, 16);
+		Calendar calendar = new GregorianCalendar(2018, 5, 16);
 		DailyEntity daily = dailyRepository.findByPlaceAndDailydate(place, calendar.getTime());
 		daily.setDailydate(calendar.getTime());
 		daily.setPlace(place);
@@ -53,18 +52,6 @@ public class DailiesRepositoryTest {
 		place.setIdplace(13700L);
 		DailyEntity daily = dailyRepository.findByPlaceAndDailydate(place, new Date());
 		Assert.assertNull(daily);
-	}
-
-	/**
-	 * Find all test.
-	 */
-	@Test
-	public void findAllTest() {
-		Iterable<DailyEntity> idailies = dailyRepository.findAll();
-		Iterator<DailyEntity> itdailies = idailies.iterator();
-		while (itdailies.hasNext()) {
-			System.out.println(itdailies.next().getDailydate());
-		}
 	}
 
 	/**

@@ -69,33 +69,9 @@ public class JewelServiceTest {
 		objectService.searchByReferenceCategoryMetalPlaceActive(jewel);
 	}
 
-	/**
-	 * Search all test.
-	 */
-	@Test
-	public void searchAllTest() {
-		Iterable<JewelEntity> objects = objectService.searchAll();
-		print(objects);
-	}
-
 	@Test
 	public void searchWithImgTest() {
 		Page<JewelEntity> page = objectService.searchWithImg(1);
 		page.getTotalElements();
-	}
-
-	/**
-	 * Prints the.
-	 *
-	 * @param objects the objects
-	 */
-	private void print(Iterable<JewelEntity> objects) {
-		if (objects != null) {
-			for (JewelEntity thing : objects) {
-				System.out.println("nombre: " + thing.getName() + " id:" + thing.getIdjewel() + " active:"
-						+ thing.getActive() + "price: " + thing.getPrice() + " categoria:"
-						+ thing.getCategory().getNamecategory() + " lugar:" + thing.getPlace().getDescription());
-			}
-		}
 	}
 }

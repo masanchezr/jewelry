@@ -26,8 +26,8 @@ public class SearchMissingNumberServiceTest {
 		PlaceEntity place = new PlaceEntity();
 		place.setIdplace(13700L);
 		form.setNumfrom(1L);
-		form.setNumuntil(1713L);
-		form.setYear(2015);
+		form.setNumuntil(5595L);
+		form.setYear(2018);
 		form.setPlace(place);
 		List<Long> missings = searchMissingNumbers.searchMissingShoppings(form);
 		Iterator<Long> imissings = missings.iterator();

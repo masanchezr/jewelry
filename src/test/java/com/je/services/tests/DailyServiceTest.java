@@ -32,7 +32,7 @@ public class DailyServiceTest {
 	@Test
 	public void getDailyTest() {
 		PlaceEntity place = new PlaceEntity();
-		Calendar c = new GregorianCalendar(2018, 10, 28);
+		Calendar c = new GregorianCalendar(2018, 11, 28);
 		place.setIdplace(28017L);
 		Daily daily = dailyService.getDaily(c.getTime(), place, "prueba");
 		if (daily != null) {

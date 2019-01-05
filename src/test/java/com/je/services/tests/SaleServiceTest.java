@@ -47,26 +47,6 @@ public class SaleServiceTest {
 	}
 
 	/**
-	 * Find all test.
-	 */
-	@Test
-	public void findAllTest() {
-		List<Sale> sales = saleService.searchAllSales();
-		if (sales != null) {
-			Iterator<Sale> isales = sales.iterator();
-			while (isales.hasNext()) {
-				Sale sale = isales.next();
-				System.out.println("id de la operacion:" + sale.getIdsale() + " numero de joyas:"
-						+ sale.getJewels().size() + " total:" + sale.getTotal());
-				System.out.println("Joyas:");
-				for (JewelEntity jewels : sale.getJewels()) {
-					System.out.println("id: " + jewels.getIdjewel() + " descripcion: " + jewels.getDescription());
-				}
-			}
-		}
-	}
-
-	/**
 	 * Search address by client test.
 	 */
 	@Test

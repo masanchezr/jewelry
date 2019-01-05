@@ -65,23 +65,6 @@ public class PawnsRepositoryTest {
 	}
 
 	/**
-	 * Find all test.
-	 */
-	@Test
-	public void findAllTest() {
-		System.out.println("findAllTest");
-		Iterable<PawnEntity> ipawns = pawnsRepository.findAll();
-		if (ipawns != null) {
-			Iterator<PawnEntity> itpawns = ipawns.iterator();
-			if (itpawns != null) {
-				while (itpawns.hasNext()) {
-					System.out.println("fecha creacion:" + itpawns.next().getCreationdate());
-				}
-			}
-		}
-	}
-
-	/**
 	 * Find by numpawn and place and creationdate test.
 	 */
 	@Test

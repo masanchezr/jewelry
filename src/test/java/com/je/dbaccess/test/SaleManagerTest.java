@@ -67,29 +67,6 @@ public class SaleManagerTest {
 	}
 
 	/**
-	 * Find all test.
-	 */
-	@Test
-	public void findAllTest() {
-		Iterable<SaleEntity> sales = saleManager.searchAllSales();
-		if (sales != null) {
-			Iterator<SaleEntity> isales = sales.iterator();
-			while (isales != null && isales.hasNext()) {
-				SaleEntity sale = isales.next();
-				System.out.println("ID: " + sale.getIdsale());
-				List<SalesJewels> jewels = sale.getSjewels();
-				if (jewels != null) {
-					Iterator<SalesJewels> isj = jewels.iterator();
-					while (isj != null && isj.hasNext()) {
-						System.out.println("joya:" + isj.next().getJewelEntity().getName());
-					}
-				}
-			}
-		}
-		System.out.println("fin findAllTest");
-	}
-
-	/**
 	 * Search address by client.
 	 */
 	@Test

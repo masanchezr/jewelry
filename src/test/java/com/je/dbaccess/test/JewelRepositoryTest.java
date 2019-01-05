@@ -54,30 +54,6 @@ public class JewelRepositoryTest {
 	}
 
 	/**
-	 * Find all active test.
-	 */
-	@Test
-	public void findAllActiveTest() {
-		Iterable<JewelEntity> jewels = jewelRepository.searchAllActive();
-		if (jewels != null) {
-			Iterator<JewelEntity> ijewels = jewels.iterator();
-			print(ijewels);
-		}
-	}
-
-	/**
-	 * Find all test.
-	 */
-	@Test
-	public void findAllTest() {
-		Iterable<JewelEntity> jewels = jewelRepository.findAll();
-		if (jewels != null) {
-			Iterator<JewelEntity> ijewels = jewels.iterator();
-			print(ijewels);
-		}
-	}
-
-	/**
 	 * Count test.
 	 */
 	@Test

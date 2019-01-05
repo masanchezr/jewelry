@@ -58,25 +58,6 @@ public class SaleRepositoryTest {
 	}
 
 	/**
-	 * Find all test.
-	 */
-	@Test
-	public void findAllTest() {
-		Iterable<SaleEntity> sales = saleRepository.findAll();
-		if (sales != null) {
-			Iterator<SaleEntity> isales = sales.iterator();
-			if (isales != null) {
-				while (isales.hasNext()) {
-					SaleEntity sale = isales.next();
-					System.out.println(ConstantsJsp.IDSALE + sale.getIdsale());
-				}
-			}
-		} else {
-			System.out.println("es vacio");
-		}
-	}
-
-	/**
 	 * Find by client.
 	 */
 	@Test

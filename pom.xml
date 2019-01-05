@@ -43,6 +43,7 @@
 						<artifactId>maven-compiler-plugin</artifactId>
 						<version>3.8.0</version>
 						<configuration>
+							<encoding>${sourceEncoding}</encoding>
 							<source>1.8</source>
 							<target>1.8</target>
 						</configuration>
@@ -167,6 +168,18 @@
 			<version>1.2</version>
 		</dependency>
 		<dependency>
+			<groupId>org.apache.taglibs</groupId>
+			<artifactId>taglibs-standard-impl</artifactId>
+			<scope>provided</scope>
+			<version>1.2.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.taglibs</groupId>
+			<artifactId>taglibs-standard-spec</artifactId>
+			<scope>provided</scope>
+			<version>1.2.5</version>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.tiles</groupId>
 			<artifactId>tiles-servlet</artifactId>
 			<version>${tiles-version}</version>
@@ -246,7 +259,7 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.9.5</version>
+			<version>2.9.8</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-dbcp</groupId>
