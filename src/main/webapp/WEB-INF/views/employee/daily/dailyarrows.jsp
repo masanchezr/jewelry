@@ -27,7 +27,8 @@
 							<tr>
 								<td><spring:message code="sale" /></td>
 								<td><c:out value="${sale.numsale}" /></td>
-								<td><c:out value="${sale.total}" /><i class="fa fa-euro-sign"></i></td>
+								<td><c:out value="${sale.total}" /><i
+									class="fa fa-euro-sign"></i></td>
 								<td><c:out value="${sale.payments}" /></td>
 							</tr>
 						</c:forEach>
@@ -35,7 +36,8 @@
 							<tr>
 								<td><spring:message code="salepostponed" /></td>
 								<td><c:out value="${salepost.idsale}" /></td>
-								<td><c:out value="${salepost.total}" /><i class="fa fa-euro-sign"></i></td>
+								<td><c:out value="${salepost.total}" /><i
+									class="fa fa-euro-sign"></i></td>
 								<td><c:out value="${salepost.payments}" /></td>
 							</tr>
 						</c:forEach>
@@ -43,7 +45,8 @@
 							<tr>
 								<td><spring:message code="pawn" /></td>
 								<td><c:out value="${pawn.numpawn}" /></td>
-								<td><c:out value="${pawn.amount}" /><i class="fa fa-euro-sign"></i></td>
+								<td><c:out value="${pawn.amount}" /><i
+									class="fa fa-euro-sign"></i></td>
 								<td><spring:message code="retired" /></td>
 							</tr>
 						</c:forEach>
@@ -51,7 +54,8 @@
 							<tr>
 								<td><spring:message code="pawn" /></td>
 								<td><c:out value="${pawn.numpawn}" /></td>
-								<td><c:out value="${pawn.amount}" /><i class="fa fa-euro-sign"></i></td>
+								<td><c:out value="${pawn.amount}" /><i
+									class="fa fa-euro-sign"></i></td>
 								<td><spring:message code="newpawn" /></td>
 							</tr>
 						</c:forEach>
@@ -139,7 +143,8 @@
 							<tr>
 								<td><spring:message code="putstrap" /></td>
 								<td><c:out value="${strap.numsale}" /></td>
-								<td><c:out value="${strap.amount}" /><i class="fa fa-euro-sign"></i></td>
+								<td><c:out value="${strap.amount}" /><i
+									class="fa fa-euro-sign"></i></td>
 								<td><c:if test="${strap.payment.idpayment==3}">
 										<c:out value="${strap.payment.name}" />
 									</c:if></td>
@@ -175,7 +180,7 @@
 						<c:if test="${daily.payroll!=null}">
 							<tr>
 								<td><spring:message code="payroll" /></td>
-								<td></td>
+								<td><c:out value="${daily.payroll.payrolltype.name}" /></td>
 								<td><c:out value="${daily.payroll.amount}" /><i
 									class="fa fa-euro-sign"></i></td>
 								<td></td>

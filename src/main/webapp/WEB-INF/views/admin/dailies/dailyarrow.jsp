@@ -195,7 +195,7 @@
 						<c:if test="${daily.payroll!=null}">
 							<tr>
 								<td><spring:message code="payroll" /></td>
-								<td></td>
+								<td><c:out value="${daily.payroll.payrolltype.name}" /></td>
 								<td><c:out value="${daily.payroll.amount}" /><i
 									class="fa fa-euro-sign"></i></td>
 								<td></td>

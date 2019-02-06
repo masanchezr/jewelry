@@ -32,7 +32,8 @@
 								<td><spring:url value="/showsale" var="showsale" /><a
 									href="${showsale}<c:out value="${sale.idsale}" />"><c:out
 											value="${sale.numsale}" /></a></td>
-								<td><c:out value="${sale.total}" /><i class="fa fa-euro-sign"></i></td>
+								<td><c:out value="${sale.total}" /><i
+									class="fa fa-euro-sign"></i></td>
 								<td><c:out value="${sale.payments}" /></td>
 							</tr>
 						</c:forEach>
@@ -54,7 +55,8 @@
 									href="${searchpawn}<c:out value="${pawn.id}" />"> <c:out
 											value="${pawn.numpawn}" />
 								</a></td>
-								<td><c:out value="${pawn.amount}" /><i class="fa fa-euro-sign"></i></td>
+								<td><c:out value="${pawn.amount}" /><i
+									class="fa fa-euro-sign"></i></td>
 								<td><spring:message code="retired" /> <spring:url
 										value="/renovations" var="renovations" /> <a
 									href="${renovations}<c:out value="${pawn.id}" />"><spring:message
@@ -68,7 +70,8 @@
 									href="${searchpawn}<c:out value="${pawn.id}" />"> <c:out
 											value="${pawn.numpawn}" />
 								</a></td>
-								<td><c:out value="${pawn.amount}" /><i class="fa fa-euro-sign"></i></td>
+								<td><c:out value="${pawn.amount}" /><i
+									class="fa fa-euro-sign"></i></td>
 								<td><spring:message code="newpawn" /></td>
 							</tr>
 						</c:forEach>
@@ -159,7 +162,8 @@
 							<tr>
 								<td><spring:message code="putstrap" /></td>
 								<td><c:out value="${strap.numsale}" /></td>
-								<td><c:out value="${strap.amount}" /><i class="fa fa-euro-sign"></i></td>
+								<td><c:out value="${strap.amount}" /><i
+									class="fa fa-euro-sign"></i></td>
 								<td><c:if test="${strap.payment.idpayment==3}">
 										<c:out value="${strap.payment.name}" />
 									</c:if></td>
@@ -195,7 +199,7 @@
 						<c:if test="${daily.payroll!=null}">
 							<tr>
 								<td><spring:message code="payroll" /></td>
-								<td></td>
+								<td><c:out value="${daily.payroll.payrolltype.name}" /></td>
 								<td><c:out value="${daily.payroll.amount}" /><i
 									class="fa fa-euro-sign"></i></td>
 								<td></td>
