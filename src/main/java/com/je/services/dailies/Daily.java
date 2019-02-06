@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.je.dbaccess.entities.BatteryEntity;
 import com.je.dbaccess.entities.EntryMoneyEntity;
+import com.je.dbaccess.entities.PayrollEntity;
 import com.je.dbaccess.entities.RecordingEntity;
 import com.je.dbaccess.entities.StrapEntity;
 import com.je.forms.Sale;
@@ -14,7 +15,6 @@ import com.je.services.discounts.Discount;
 import com.je.services.otherconcepts.OtherConcept;
 import com.je.services.pawns.Pawn;
 import com.je.services.pawns.Renovation;
-import com.je.services.payroll.Payroll;
 import com.je.services.rentals.Rental;
 import com.je.services.sales.CancelSale;
 import com.je.services.shoppings.Shopping;
@@ -63,7 +63,7 @@ public class Daily {
 	private List<Discount> discounts;
 	private List<RecordingEntity> recordings;
 
-	private Payroll payroll;
+	private PayrollEntity payroll;
 
 	private int numoperations;
 
@@ -81,8 +81,7 @@ public class Daily {
 	/**
 	 * Sets the sales.
 	 *
-	 * @param sales
-	 *            the new sales
+	 * @param sales the new sales
 	 */
 	public void setSales(List<Sale> sales) {
 		this.sales = sales;
@@ -100,8 +99,7 @@ public class Daily {
 	/**
 	 * Sets the pawns.
 	 *
-	 * @param pawns
-	 *            the new pawns
+	 * @param pawns the new pawns
 	 */
 	public void setRetiredpawns(List<Pawn> retiredpawns) {
 		this.retiredpawns = retiredpawns;
@@ -119,8 +117,7 @@ public class Daily {
 	/**
 	 * Sets the adjustments.
 	 *
-	 * @param adjustments
-	 *            the new adjustments
+	 * @param adjustments the new adjustments
 	 */
 	public void setAdjustments(List<Adjustment> adjustments) {
 		this.adjustments = adjustments;
@@ -138,8 +135,7 @@ public class Daily {
 	/**
 	 * Sets the shoppings.
 	 *
-	 * @param shoppings
-	 *            the new shoppings
+	 * @param shoppings the new shoppings
 	 */
 	public void setShoppings(List<Shopping> shoppings) {
 		this.shoppings = shoppings;
@@ -157,8 +153,7 @@ public class Daily {
 	/**
 	 * Sets the othersconcepts.
 	 *
-	 * @param othersconcepts
-	 *            the new othersconcepts
+	 * @param othersconcepts the new othersconcepts
 	 */
 	public void setOthersconcepts(List<OtherConcept> othersconcepts) {
 		this.othersconcepts = othersconcepts;
@@ -176,41 +171,10 @@ public class Daily {
 	/**
 	 * Sets the renovations.
 	 *
-	 * @param renovations
-	 *            the new renovations
+	 * @param renovations the new renovations
 	 */
 	public void setRenovations(List<Renovation> renovations) {
 		this.renovations = renovations;
-	}
-
-	/**
-	 * Sets the cancel sales.
-	 *
-	 * @param lcancels
-	 *            the new cancel sales
-	 */
-	public void setCancelSales(List<CancelSale> lcancels) {
-		this.setCancelsales(lcancels);
-
-	}
-
-	/**
-	 * Gets the cancelsales.
-	 *
-	 * @return the cancelsales
-	 */
-	public List<CancelSale> getCancelsales() {
-		return cancelsales;
-	}
-
-	/**
-	 * Sets the cancelsales.
-	 *
-	 * @param cancelsales
-	 *            the new cancelsales
-	 */
-	public void setCancelsales(List<CancelSale> cancelsales) {
-		this.cancelsales = cancelsales;
 	}
 
 	public int getNumoperations() {
@@ -227,14 +191,6 @@ public class Daily {
 
 	public void setAdjustmentswork(List<Adjustment> adjustmentswork) {
 		this.adjustmentswork = adjustmentswork;
-	}
-
-	public Payroll getPayroll() {
-		return payroll;
-	}
-
-	public void setPayroll(Payroll payroll) {
-		this.payroll = payroll;
 	}
 
 	public List<EntryMoneyEntity> getEntriesmoney() {
@@ -307,5 +263,21 @@ public class Daily {
 
 	public void setLsalespost(List<SalePostPoned> lsalespost) {
 		this.lsalespost = lsalespost;
+	}
+
+	public PayrollEntity getPayroll() {
+		return payroll;
+	}
+
+	public void setPayroll(PayrollEntity payroll) {
+		this.payroll = payroll;
+	}
+
+	public List<CancelSale> getCancelsales() {
+		return cancelsales;
+	}
+
+	public void setCancelsales(List<CancelSale> cancelsales) {
+		this.cancelsales = cancelsales;
 	}
 }

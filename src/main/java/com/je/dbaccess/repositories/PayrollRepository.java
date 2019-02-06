@@ -9,11 +9,14 @@ import org.springframework.data.jpa.repository.Temporal;
 import org.springframework.data.repository.CrudRepository;
 
 import com.je.dbaccess.entities.PayrollEntity;
-import com.je.dbaccess.entities.PlaceEntity;
+import com.je.dbaccess.entities.PayrolltypeEntity;
+import com.je.dbaccess.entities.UserEntity;
 
 public interface PayrollRepository extends CrudRepository<PayrollEntity, Long> {
 
-	List<PayrollEntity> findByCreationdateAndPlace(
-			@Temporal(TemporalType.DATE) Date creationdate, PlaceEntity place);
+	public List<PayrollEntity> findByCreationdateAndUser(@Temporal(TemporalType.DATE) Date date, UserEntity user);
+
+	public PayrollEntity findByYearAndMonthAndUserAndPayrolltype(Integer year, Integer month, UserEntity user,
+			PayrolltypeEntity payrolltype);
 
 }

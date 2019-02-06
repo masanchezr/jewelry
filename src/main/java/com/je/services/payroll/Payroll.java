@@ -1,12 +1,16 @@
 package com.je.services.payroll;
 
+import java.math.BigDecimal;
+
+import com.je.dbaccess.entities.PayrolltypeEntity;
+
 public class Payroll {
 
 	private String payrolldate;
 
-	private String amount;
+	private BigDecimal amount;
 
-	private String user;
+	private PayrolltypeEntity payrolltype;
 
 	public String getPayrolldate() {
 		return payrolldate;
@@ -16,19 +20,19 @@ public class Payroll {
 		this.payrolldate = payrolldate;
 	}
 
-	public String getAmount() {
+	public BigDecimal getAmount() {
 		return amount;
 	}
 
-	public void setAmount(String amount) {
+	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
 	}
 
-	public String getUser() {
-		return user;
+	public PayrolltypeEntity getPayrolltype() {
+		return payrolltype;
 	}
 
-	public void setUser(String user) {
-		this.user = user;
+	public void setPayrolltype(PayrolltypeEntity payrolltype) {
+		this.payrolltype = payrolltype;
 	}
 }

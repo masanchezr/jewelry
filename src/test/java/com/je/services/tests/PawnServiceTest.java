@@ -17,7 +17,6 @@ import com.je.dbaccess.entities.PlaceEntity;
 import com.je.services.pawns.NewPawn;
 import com.je.services.pawns.Pawn;
 import com.je.services.pawns.PawnService;
-import com.je.services.pawns.Quarter;
 
 /**
  * The Class PawnServiceTest.
@@ -117,11 +116,5 @@ public class PawnServiceTest {
 						+ auxpawn.getCreationdate());
 			}
 		}
-	}
-
-	@Test
-	public void searchGramsByDates() {
-		Quarter quarter = pawnService.searchGramsByDates("01-01-2013", "05-07-2018");
-		System.out.println(quarter.toString());
 	}
 }

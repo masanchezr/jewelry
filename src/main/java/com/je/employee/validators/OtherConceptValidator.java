@@ -35,7 +35,9 @@ public class OtherConceptValidator implements Validator {
 			if (StringUtils.containsIgnoreCase(description, "saldo")
 					|| StringUtils.containsIgnoreCase(description, "entrante")
 					|| StringUtils.containsIgnoreCase(description, "correa")
-					|| StringUtils.containsIgnoreCase(description, "nomina")) {
+					|| StringUtils.containsIgnoreCase(description, "nomina")
+					|| StringUtils.containsIgnoreCase(description, "comisi")
+					|| StringUtils.containsIgnoreCase(description, "incentivo")) {
 				arg1.rejectValue(Constants.DESCRIPTION, "funcionalityexists");
 			}
 		}

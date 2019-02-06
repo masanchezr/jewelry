@@ -1,18 +1,18 @@
 package com.je.services.payroll;
 
-import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.je.dbaccess.entities.PayrollEntity;
-import com.je.dbaccess.entities.PlaceEntity;
+import com.je.dbaccess.entities.PayrolltypeEntity;
+import com.je.dbaccess.entities.PlaceUserEntity;
 import com.je.dbaccess.repositories.PayrollRepository;
+import com.je.dbaccess.repositories.PayrollTypesRepository;
 import com.je.dbaccess.repositories.PlaceUserRepository;
 import com.je.services.dailies.Daily;
 import com.je.services.dailies.DailyService;
-import com.je.utils.date.DateUtil;
-import com.je.utils.string.Util;
 
 public class PayrollServiceImpl implements PayrollService {
 
@@ -24,33 +24,28 @@ public class PayrollServiceImpl implements PayrollService {
 	private PayrollRepository payrollrepository;
 
 	@Autowired
+	private PayrollTypesRepository payrolltypesrepository;
+
+	@Autowired
 	private PlaceUserRepository placeUserRepository;
 
 	@Override
-	public Daily addPayroll(Payroll payroll) {
-		PayrollEntity payrollentity = new PayrollEntity();
-		PlaceEntity place = placeUserRepository.findByUsername(payroll.getUser()).get(0).getPlace();
-		Date date = DateUtil.getDate(payroll.getPayrolldate());
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
-		String id = String.valueOf(calendar.get(Calendar.YEAR)).concat(String.valueOf(calendar.get(Calendar.MONTH) + 1))
-				.concat(String.valueOf(place.getIdplace()));
-		payrollentity.setAmount(Util.getNumber(payroll.getAmount()));
-		payrollentity.setPlace(place);
-		payrollentity.setCreationdate(new Date());
-		payrollentity.setIdpayroll(Long.valueOf(id));
-		payrollrepository.save(payrollentity);
-		return dailyService.getDaily(new Date(), place, null);
+	public Daily addPayroll(PayrollEntity payroll) {
+		List<PlaceUserEntity> lplue = placeUserRepository.findByUsername(payroll.getUser().getUsername());
+		payroll.setCreationdate(new Date());
+		payrollrepository.save(payroll);
+		return dailyService.getDaily(new Date(), lplue.get(0).getPlace(), null);
 	}
 
 	@Override
-	public boolean existsPayroll(Payroll payroll) {
-		Date date = DateUtil.getDate(payroll.getPayrolldate());
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
-		String id = String.valueOf(calendar.get(Calendar.YEAR)).concat(String.valueOf(calendar.get(Calendar.MONTH) + 1))
-				.concat(String
-						.valueOf(placeUserRepository.findByUsername(payroll.getUser()).get(0).getPlace().getIdplace()));
-		return payrollrepository.findById(Long.valueOf(id)).isPresent();
+	public boolean existsPayroll(PayrollEntity payroll) {
+		payroll = payrollrepository.findByYearAndMonthAndUserAndPayrolltype(payroll.getYear(), payroll.getMonth(),
+				payroll.getUser(), payroll.getPayrolltype());
+		return payroll != null;
+	}
+
+	@Override
+	public Iterable<PayrolltypeEntity> getPayrollTypes() {
+		return payrolltypesrepository.findAll();
 	}
 }

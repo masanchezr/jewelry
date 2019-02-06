@@ -24,6 +24,7 @@ import com.je.dbaccess.entities.PaymentEntity;
 import com.je.dbaccess.entities.PaymentShopEntity;
 import com.je.dbaccess.entities.PayrollEntity;
 import com.je.dbaccess.entities.PlaceEntity;
+import com.je.dbaccess.entities.PlaceUserEntity;
 import com.je.dbaccess.entities.RecordingEntity;
 import com.je.dbaccess.entities.RenovationEntity;
 import com.je.dbaccess.entities.RentalEntity;
@@ -32,6 +33,7 @@ import com.je.dbaccess.entities.SalePostponedEntity;
 import com.je.dbaccess.entities.SalesPayments;
 import com.je.dbaccess.entities.ShoppingEntity;
 import com.je.dbaccess.entities.StrapEntity;
+import com.je.dbaccess.entities.UserEntity;
 import com.je.dbaccess.managers.HolidaysManager;
 import com.je.dbaccess.managers.SaleManager;
 import com.je.dbaccess.repositories.AdjustmentRepository;
@@ -43,6 +45,7 @@ import com.je.dbaccess.repositories.EntryMoneyRepository;
 import com.je.dbaccess.repositories.OtherConceptsRepository;
 import com.je.dbaccess.repositories.PawnsRepository;
 import com.je.dbaccess.repositories.PayrollRepository;
+import com.je.dbaccess.repositories.PlaceUserRepository;
 import com.je.dbaccess.repositories.RecordingRepository;
 import com.je.dbaccess.repositories.RenovationsRepository;
 import com.je.dbaccess.repositories.RentalsRepository;
@@ -56,7 +59,6 @@ import com.je.services.discounts.Discount;
 import com.je.services.otherconcepts.OtherConcept;
 import com.je.services.pawns.Pawn;
 import com.je.services.pawns.Renovation;
-import com.je.services.payroll.Payroll;
 import com.je.services.rentals.Rental;
 import com.je.services.sales.CancelSale;
 import com.je.services.shoppings.Shopping;
@@ -126,6 +128,9 @@ public class DailyServiceImpl implements DailyService {
 
 	@Autowired
 	private SalesPostponedRepository salespostponedrepository;
+
+	@Autowired
+	private PlaceUserRepository placeUserRepository;
 	/** The mapper. */
 	@Autowired
 	private Mapper mapper;
@@ -299,18 +304,24 @@ public class DailyServiceImpl implements DailyService {
 
 	private BigDecimal getPayrollAmount(Date date, PlaceEntity place, Daily daily) {
 		BigDecimal payrollamount = BigDecimal.ZERO;
-		List<PayrollEntity> payrolls = payrollRepository.findByCreationdateAndPlace(date, place);
-		if (payrolls != null && !payrolls.isEmpty()) {
-			Iterator<PayrollEntity> ipayroll = payrolls.iterator();
-			PayrollEntity pre;
-			Payroll pr;
-			while (ipayroll.hasNext()) {
-				pre = ipayroll.next();
-				pr = mapper.map(pre, Payroll.class);
-				payrollamount = payrollamount.subtract(pre.getAmount());
-				daily.setPayroll(pr);
+		List<PlaceUserEntity> placeUsers = placeUserRepository.findByPlace(place);
+		if (placeUsers != null) {
+			Iterator<PlaceUserEntity> iplaceUsers = placeUsers.iterator();
+			UserEntity user = new UserEntity();
+			while (iplaceUsers.hasNext()) {
+				user.setUsername(iplaceUsers.next().getUsername());
+				List<PayrollEntity> payrolls = payrollRepository.findByCreationdateAndUser(date, user);
+				if (payrolls != null && !payrolls.isEmpty()) {
+					Iterator<PayrollEntity> ipayroll = payrolls.iterator();
+					PayrollEntity pre;
+					while (ipayroll.hasNext()) {
+						pre = ipayroll.next();
+						payrollamount = payrollamount.subtract(pre.getAmount());
+						daily.setPayroll(pre);
+					}
+					daily.setNumoperations(daily.getNumoperations() + payrolls.size());
+				}
 			}
-			daily.setNumoperations(daily.getNumoperations() + payrolls.size());
 		}
 		return payrollamount;
 	}
@@ -339,7 +350,7 @@ public class DailyServiceImpl implements DailyService {
 				}
 				lcancels.add(cs);
 			}
-			daily.setCancelSales(lcancels);
+			daily.setCancelsales(lcancels);
 			daily.setNumoperations(daily.getNumoperations() + lcancels.size());
 		}
 		return cancelsamount;

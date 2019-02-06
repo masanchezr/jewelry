@@ -21,10 +21,17 @@
 							</p>
 						</div>
 						<div class="form-group">
-							<spring:message code="monthpayroll" var="monthpayroll" />
+							<form:select class="form-control"
+								path="payrolltype.idpayrolltype">
+								<form:options items="${payrolltypes}" itemValue="idpayrolltype"
+									itemLabel="name" />
+							</form:select>
+						</div>
+						<div class="form-group">
+							<spring:message code="month" var="month" />
 							<div id="sandbox-container">
 								<form:input class="form-control" type="text" path="payrolldate"
-									placeholder="${monthpayroll}" />
+									placeholder="${payrolldate}" />
 							</div>
 							<p class="text-danger">
 								<form:errors path="payrolldate" />

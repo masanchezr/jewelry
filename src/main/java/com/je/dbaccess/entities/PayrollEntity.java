@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,6 +21,7 @@ import com.je.utils.constants.Constants;
 public class PayrollEntity {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idpayroll")
 	private Long idpayroll;
 
@@ -29,10 +32,20 @@ public class PayrollEntity {
 	@Column(name = Constants.CREATIONDATE)
 	private Date creationdate;
 
+	@Column(name = "MONTH")
+	private Integer month;
+
+	@Column(name = "YEAR")
+	private Integer year;
+
 	/** The place. */
 	@ManyToOne
-	@JoinColumn(name = "IDPLACE", referencedColumnName = "IDPLACE")
-	private PlaceEntity place;
+	@JoinColumn(name = "USERNAME", referencedColumnName = "USERNAME")
+	private UserEntity user;
+
+	@ManyToOne
+	@JoinColumn(name = "IDPAYROLLTYPE", referencedColumnName = "IDPAYROLLTYPE")
+	private PayrolltypeEntity payrolltype;
 
 	public Long getIdpayroll() {
 		return idpayroll;
@@ -58,11 +71,35 @@ public class PayrollEntity {
 		this.creationdate = creationdate;
 	}
 
-	public PlaceEntity getPlace() {
-		return place;
+	public UserEntity getUser() {
+		return user;
 	}
 
-	public void setPlace(PlaceEntity place) {
-		this.place = place;
+	public void setUser(UserEntity user) {
+		this.user = user;
+	}
+
+	public PayrolltypeEntity getPayrolltype() {
+		return payrolltype;
+	}
+
+	public void setPayrolltype(PayrolltypeEntity payrolltype) {
+		this.payrolltype = payrolltype;
+	}
+
+	public Integer getYear() {
+		return year;
+	}
+
+	public void setYear(Integer year) {
+		this.year = year;
+	}
+
+	public void setMonth(Integer month) {
+		this.month = month;
+	}
+
+	public Integer getMonth() {
+		return month;
 	}
 }

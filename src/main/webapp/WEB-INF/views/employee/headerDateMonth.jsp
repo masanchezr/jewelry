@@ -52,7 +52,6 @@
 		$("#sandbox-container input").datepicker({
 			language : "es",
 			autoclose : true,
-			todayHighlight : true,
 			startView : 2,
 			minViewMode : 1,
 			format : "mm/yyyy"
