@@ -37,7 +37,7 @@
 <script src="<spring:url value="/resources/js/bootstrap.min.js"/>"></script>
 <!-- Custom Theme JavaScript -->
 <script src="<spring:url value="/resources/js/jquery.easing.min.js"/>"></script>
-<script src="<spring:url value="/resources/js/jquery.dataTables.js"/>"></script>
+<!-- script src="<spring:url value="/resources/js/jquery.dataTables.js"/>"></script-->
 <script
 	src="<spring:url value="/resources/js/dataTables.bootstrap4.js"/>"></script>
 <script src="<spring:url value="/resources/js/sb-admin.min.js"/>"></script>
