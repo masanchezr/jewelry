@@ -72,7 +72,7 @@
 		<intercept-url pattern="/employee/newdiscount"
 			access="hasAnyRole('ROLE_USER','ROLE_AR','ROLE_NA')" />
 		<intercept-url pattern="/employee/newpayroll"
-			access="hasAnyRole('ROLE_USER','ROLE_AR')" />
+			access="hasAnyRole('ROLE_USER','ROLE_AR','ROLE_NA')" />
 		<intercept-url pattern="/employee/newrecording"
 			access="hasAnyRole('ROLE_USER','ROLE_AR','ROLE_NA')" />
 		<intercept-url pattern="/employee/newsalepostponed"
