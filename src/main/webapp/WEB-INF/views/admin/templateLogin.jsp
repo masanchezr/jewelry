@@ -7,7 +7,7 @@
 	href="<spring:url value="/resources/styles/admin/bootstrap.min.css"/>"
 	rel="stylesheet">
 <!-- Custom CSS -->
-<link href="<spring:url value="/resources/styles/admin/sb-admin.css"/>"
+<link href="<spring:url value="/resources/styles/admin/sb-admin.min.css"/>"
 	rel="stylesheet">
 <!-- Custom Fonts -->
 <link

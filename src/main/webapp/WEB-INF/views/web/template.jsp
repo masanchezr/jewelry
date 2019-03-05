@@ -9,8 +9,6 @@
 <link
 	href="<spring:url value="/resources/styles/web/bootstrap.min.css"/>"
 	rel='stylesheet' type='text/css' />
-<link href="<spring:url value="/resources/styles/web/bootstrap.css"/>"
-	rel='stylesheet' type='text/css' />
 <link href="<spring:url value="/resources/styles/web/theme.css"/>"
 	rel='stylesheet' type='text/css' />
 <link href="<spring:url value="/resources/styles/web/etalage.css"/>"
@@ -29,8 +27,6 @@
 <!----//webfonts---->
 <script type="text/javascript"
 	src="<spring:url value="/resources/js/web/jquery.min.js"/>"></script>
-<script type="text/javascript"
-	src="<spring:url value="/resources/js/web/bootstrap.js"/>"></script>
 <script type="text/javascript"
 	src="<spring:url value="/resources/js/web/bootstrap.min.js"/>"></script>
 <script type="text/javascript"
