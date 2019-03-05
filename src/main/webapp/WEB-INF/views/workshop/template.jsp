@@ -132,8 +132,8 @@
 	<script src="<spring:url value="/resources/js/sb-admin.min.js"/>"></script>
 	<script
 		src="<spring:url value="/resources/js/sb-admin-datatables.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
+	<!-- script
+		src="<spring:url value="/resources/js/bootstrap-datepicker.min.js"/>"></script-->
 	<script
 		src="<spring:url value="/resources/js/bootstrap-datepicker.es.min.js"/>"></script>
 </body>
