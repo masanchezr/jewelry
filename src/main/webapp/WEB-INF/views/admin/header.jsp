@@ -5,9 +5,8 @@
 	href="<spring:url value="/resources/styles/admin/bootstrap.min.css"/>"
 	rel="stylesheet">
 <!-- Custom Fonts -->
-<link
-	href="<spring:url value="/resources/styles/admin/font-awesome-5.0.10/css/fontawesome-all.css"/>"
-	rel="stylesheet" type="text/css">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
 <link
 	href="<spring:url value="/resources/styles/admin/dataTables.bootstrap4.min.css"/>"
 	rel="stylesheet">
