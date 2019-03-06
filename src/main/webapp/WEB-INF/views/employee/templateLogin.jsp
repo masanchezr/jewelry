@@ -10,10 +10,6 @@
 <link
 	href="<spring:url value="/resources/styles/admin/sb-admin.min.css"/>"
 	rel="stylesheet">
-<!-- Custom Fonts -->
-<link
-	href="<spring:url value="/resources/styles/admin/font-awesome-5.0.10/css/fontawesome-all.css"/>"
-	rel="stylesheet" type="text/css">
 <title><spring:message code="titleAdmin" /></title>
 <!-- html5-->
 <meta charset="utf-8" />
