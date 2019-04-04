@@ -10,55 +10,55 @@
 </ol>
 <div class="row">
 	<div class="col-lg-12">
-		<div class="card-body">
-			<c:if test="${not empty jewels}">
+		<c:if test="${not empty jewels}">
+			<form:form action="updatejewel" modelAttribute="toUpdateForm">
 				<div class="table-responsive">
-					<form:form action="updatejewel" modelAttribute="toUpdateForm">
-						<table class="table table-striped table-bordered table-hover"
-							id="dataTables-example">
-							<thead>
+					<table class="table table-striped table-bordered table-hover"
+						id="dataTables-example">
+						<thead>
+							<tr>
+								<th></th>
+								<th><spring:message code="reference" /></th>
+								<th><spring:message code="nameclient" /></th>
+								<th><spring:message code="description" /></th>
+								<th><spring:message code="price" /></th>
+								<th><spring:message code="category" /></th>
+								<th><spring:message code="material" /></th>
+								<th><spring:message code="place" /></th>
+								<th><spring:message code="active" /></th>
+								<th><spring:message code="saledate" /></th>
+								<th><spring:message code="cost" /></th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${jewels}" var="jewel">
 								<tr>
-									<th></th>
-									<th><spring:message code="reference" /></th>
-									<th><spring:message code="nameclient" /></th>
-									<th><spring:message code="description" /></th>
-									<th><spring:message code="price" /></th>
-									<th><spring:message code="category" /></th>
-									<th><spring:message code="material" /></th>
-									<th><spring:message code="place" /></th>
-									<th><spring:message code="active" /></th>
-									<th><spring:message code="saledate" /></th>
-									<th><spring:message code="cost" /></th>
+									<td><form:radiobutton path="idjewel"
+											value="${jewel.idjewel}" /></td>
+									<td><c:out value="${jewel.reference}" /></td>
+									<td><c:out value="${jewel.name}" /></td>
+									<td><c:out value="${jewel.description}" /></td>
+									<td><c:out value="${jewel.price}" /></td>
+									<td><c:out value="${jewel.category.namecategory}" /></td>
+									<td><c:out value="${jewel.metal.description}" /></td>
+									<td><c:out value="${jewel.place.description}" /></td>
+									<td><c:out value="${jewel.active}" /></td>
+									<td><c:out value="${jewel.saledate}" /></td>
+									<td><c:out value="${jewel.cost}" /></td>
 								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${jewels}" var="jewel">
-									<tr>
-										<td><form:radiobutton path="idjewel"
-												value="${jewel.idjewel}" /></td>
-										<td><c:out value="${jewel.reference}" /></td>
-										<td><c:out value="${jewel.name}" /></td>
-										<td><c:out value="${jewel.description}" /></td>
-										<td><c:out value="${jewel.price}" /></td>
-										<td><c:out value="${jewel.category.namecategory}" /></td>
-										<td><c:out value="${jewel.metal.description}" /></td>
-										<td><c:out value="${jewel.place.description}" /></td>
-										<td><c:out value="${jewel.active}" /></td>
-										<td><c:out value="${jewel.saledate}" /></td>
-										<td><c:out value="${jewel.cost}" /></td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-						<form:button class="btn btn-primary" value="submit">
-							<spring:message code="update" />
-						</form:button>
-					</form:form>
+							</c:forEach>
+						</tbody>
+					</table>
 				</div>
-			</c:if>
-			<c:if test="${empty jewels}">
-				<spring:message code="noresults" />
-			</c:if>
-		</div>
+				<div class="form-group">
+					<form:button class="btn btn-primary" value="submit">
+						<spring:message code="update" />
+					</form:button>
+				</div>
+			</form:form>
+		</c:if>
+		<c:if test="${empty jewels}">
+			<spring:message code="noresults" />
+		</c:if>
 	</div>
 </div>
