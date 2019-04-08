@@ -8,7 +8,8 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="searchgramspawns" /></li>
 </ol>
-<form:form action="quarterpawns" modelAttribute="searchDateForm">
+<form:form action="quarterpawns" modelAttribute="searchDateForm"
+	autocomplete="off">
 	<div class="row">
 		<div class="col-lg-8">
 			<div class="card-body">

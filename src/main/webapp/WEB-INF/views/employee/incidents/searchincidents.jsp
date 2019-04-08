@@ -7,7 +7,8 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="searchincidents" /></li>
 </ol>
-<form:form action="resultIncidents" modelAttribute="searchDateForm">
+<form:form action="resultIncidents" modelAttribute="searchDateForm"
+	autocomplete="off">
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card-body">

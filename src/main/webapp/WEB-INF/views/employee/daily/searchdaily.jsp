@@ -8,7 +8,8 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="searchdaily" /></li>
 </ol>
-<form:form action="resultdaily" modelAttribute="searchDateForm">
+<form:form action="resultdaily" modelAttribute="searchDateForm"
+	autocomplete="off">
 	<div class="row">
 		<div class="col-lg-8">
 			<div class="card-body">

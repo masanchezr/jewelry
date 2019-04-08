@@ -8,7 +8,8 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="gramsformaterial" /></li>
 </ol>
-<form:form action="quartermaterial" modelAttribute="shoppingForm">
+<form:form action="quartermaterial" modelAttribute="shoppingForm"
+	autocomplete="off">
 	<div class="row">
 		<div class="col-lg-8">
 			<div class="card-body">
