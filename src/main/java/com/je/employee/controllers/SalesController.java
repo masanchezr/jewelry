@@ -207,8 +207,12 @@ public class SalesController {
 		ModelAndView model = new ModelAndView(VIEWREMOVESALE);
 		List<PaymentEntity> payments = paymentService.findAllActive();
 		PaymentEntity pve = new PaymentEntity();
+		PaymentEntity psame = new PaymentEntity();
+		psame.setIdpayment(ConstantsJsp.SAME);
+		psame.setName("El mismo que se realizó en la compra");
 		pve.setIdpayment(ConstantsJsp.DISCOUNTANDCASH);
 		pve.setName("Vale descuento y efectivo");
+		payments.add(psame);
 		payments.add(pve);
 		model.addObject(FORMREMOVESALE, new Sale());
 		model.addObject(ConstantsJsp.PAYMENTS, payments);

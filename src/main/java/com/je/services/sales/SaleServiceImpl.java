@@ -30,6 +30,7 @@ import com.je.forms.Sale;
 import com.je.services.mails.MailService;
 import com.je.services.users.Client;
 import com.je.utils.constants.Constants;
+import com.je.utils.constants.ConstantsJsp;
 import com.je.utils.date.DateUtil;
 import com.je.utils.string.Util;
 
@@ -230,7 +231,7 @@ public class SaleServiceImpl implements SaleService {
 		Long iddiscount = removeSaleForm.getIddiscount();
 		List<CancelSalePaymentEntity> payments = new ArrayList<>();
 		PaymentEntity payment = null;
-		CancelSalePaymentEntity csp = new CancelSalePaymentEntity();
+		CancelSalePaymentEntity csp;
 		DiscountEntity discount = null;
 		BigDecimal optionalpayment = removeSaleForm.getOptionalpayment();
 		SaleEntity sale = saleManager.searchByNumsaleAndPlace(removeSaleForm.getNumsale(),
@@ -253,11 +254,26 @@ public class SaleServiceImpl implements SaleService {
 			payments.add(cspv);
 		} else {
 			payment = removeSaleForm.getPayment();
+			if (payment.getIdpayment().equals(ConstantsJsp.SAME)) {
+				List<SalesPayments> spayments = sale.getSpayments();
+				Iterator<SalesPayments> ispayments = spayments.iterator();
+				SalesPayments spay;
+				while (ispayments.hasNext()) {
+					spay = ispayments.next();
+					csp = new CancelSalePaymentEntity();
+					csp.setPay(spay.getPay());
+					csp.setAmount(spay.getAmount());
+					csp.setCancelsale(cancel);
+					payments.add(csp);
+				}
+			} else {
+				csp = new CancelSalePaymentEntity();
+				csp.setPay(payment);
+				csp.setAmount(removeSaleForm.getTotal());
+				csp.setCancelsale(cancel);
+				payments.add(csp);
+			}
 		}
-		csp.setPay(payment);
-		csp.setAmount(removeSaleForm.getTotal());
-		csp.setCancelsale(cancel);
-		payments.add(csp);
 		cancel.setSpayments(payments);
 		if (iddiscount != null) {
 			discount = new DiscountEntity();

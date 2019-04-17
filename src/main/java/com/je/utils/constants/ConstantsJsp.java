@@ -74,5 +74,6 @@ public class ConstantsJsp {
 	public static final String FORMSALEPOSTPONED = "salepostponed";
 	public static final String ERRORNUMDISCOUNT = "selectnumdiscount";
 	public static final Long DISCOUNTANDCASH = 6L;
+	public static final Long SAME = 5L;
 
 }
