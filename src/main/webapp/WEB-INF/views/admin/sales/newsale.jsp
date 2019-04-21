@@ -49,7 +49,7 @@
 						<td><spring:message code="saledate" var="datemessage" />
 							<div id="sandbox-container">
 								<form:input class="form-control" type="text" path="saledate"
-									placeholder="${datemessage}" />
+									placeholder="${datemessage}" autocomplete="off" />
 							</div></td>
 						<td><spring:message code="discount" var="discountmessage" />
 							<form:input class="form-control" path="discount"
