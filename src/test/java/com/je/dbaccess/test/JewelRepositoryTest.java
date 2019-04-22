@@ -59,7 +59,7 @@ public class JewelRepositoryTest {
 	@Test
 	public void countTest() {
 		long num = jewelRepository.count();
-		System.out.print("Numero de joyas:" + num);
+		System.out.print("N&uacute;mero de joyas:" + num);
 	}
 
 	/**

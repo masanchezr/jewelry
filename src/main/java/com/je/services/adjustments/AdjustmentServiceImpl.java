@@ -57,7 +57,7 @@ public class AdjustmentServiceImpl implements AdjustmentService {
 						&& recommendedprice.compareTo(amount) != 0) {
 					// envio un mail u otro tipo de alerta
 					mailAdjustmentService = new MailService(
-							"Numero de arreglo: " + idadjustment + ", importe recomendado:" + recommendedprice
+							"N&uacute;mero de arreglo: " + idadjustment + ", importe recomendado:" + recommendedprice
 									+ " euros, importe cobrado al cliente:" + amount + " euros.",
 							null, "Arreglo no coincide con precio recomendado.");
 					mailAdjustmentService.start();
