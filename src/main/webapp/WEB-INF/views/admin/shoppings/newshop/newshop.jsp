@@ -14,7 +14,7 @@
 		<div class="row">
 			<div class="col-lg-6">
 				<div class="form-group">
-					<spring:message code="numshop" var="numpawnvar" />
+					<spring:message code="numshopph" var="numpawnvar" />
 					<form:input class="form-control" path="numshop"
 						placeholder="${numpawnvar}" />
 					<p class="text-danger">

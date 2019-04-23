@@ -15,8 +15,8 @@
 				<tbody>
 					<tr>
 						<td></td>
-						<td><spring:message code="numshop" var="numshopmessage" /> <form:input
-								class="form-control" path="numshop"
+						<td><spring:message code="numshopph" var="numshopmessage" />
+							<form:input class="form-control" path="numshop"
 								placeholder="${numshopmessage}" /></td>
 						<td class="form-group has-error"><label class="control-label"
 							for="inputSuccess"><form:errors path="numshop" /></label></td>

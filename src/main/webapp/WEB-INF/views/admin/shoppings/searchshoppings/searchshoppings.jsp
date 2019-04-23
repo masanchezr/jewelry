@@ -16,7 +16,7 @@
 				<div class="row">
 					<div class="col-lg-4">
 						<div class="form-group">
-							<spring:message code="numshop" var="numshopmessage" />
+							<spring:message code="numshopph" var="numshopmessage" />
 							<form:input class="form-control" path="numshop"
 								placeholder="${numshopmessage}" />
 							<p class="text-danger">
