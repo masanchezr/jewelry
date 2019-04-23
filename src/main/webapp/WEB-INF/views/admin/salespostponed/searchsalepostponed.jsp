@@ -15,7 +15,7 @@
 				<div class="row">
 					<div class="col-lg-6">
 						<div class="form-group">
-							<spring:message code="numberofsale" var="numsalemessage" />
+							<spring:message code="numberofsaleph" var="numsalemessage" />
 							<form:input class="form-control" path="idsale"
 								placeholder="${numsalemessage}" />
 						</div>
