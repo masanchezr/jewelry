@@ -18,7 +18,7 @@
 							<spring:message code="date" var="date" />
 							<div id="sandbox-container">
 								<form:input class="form-control" type="text" path="dateholiday"
-									placeholder="${date}" />
+									placeholder="${date}" autocomplete="off" />
 							</div>
 							<p class="text-danger">
 								<form:errors path="dateholiday" />
