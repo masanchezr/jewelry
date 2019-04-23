@@ -17,7 +17,7 @@
 			</div>
 		</div>
 		<div class="form-group col-3">
-			<spring:message code="description" var="descriptionmessage" />
+			<spring:message code="descriptionph" var="descriptionmessage" />
 			<form:input class="form-control" path="description"
 				placeholder="${descriptionmessage}" />
 			<div class="form-group col-3 has-error">

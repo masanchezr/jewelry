@@ -69,7 +69,7 @@
 							</p>
 						</div>
 						<div class="form-group">
-							<spring:message code="description" var="description" />
+							<spring:message code="descriptionph" var="description" />
 							<form:input class="form-control" path="description"
 								placeholder="${description}" />
 						</div>

@@ -107,7 +107,7 @@
 						<td><strong><form:hidden
 									path="objects[${status.index}].metal.idmetal" /> <c:out
 									value="${os.metal.description}" /></strong></td>
-						<td><spring:message code="description" var="description" />
+						<td><spring:message code="descriptionph" var="description" />
 							<form:input class="form-control"
 								path="objects[${status.index}].description"
 								placeholder="${description}" /></td>

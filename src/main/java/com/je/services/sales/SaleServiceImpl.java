@@ -120,7 +120,7 @@ public class SaleServiceImpl implements SaleService {
 		sale.setTotal(saleEntity.getTotal());
 		if (sale.getNumsale() > 0 && !saleManager.existSale(sale.getNumsale() - 1)) {
 			mailService = new MailService(
-					"N&uacute;mero de venta " + sale.getNumsale() + " lugar: " + saleEntity.getPlace().getIdplace(), null,
+					"Número de venta " + sale.getNumsale() + " lugar: " + saleEntity.getPlace().getIdplace(), null,
 					"REVISAR NUMERO VENTA.");
 			mailService.start();
 		}

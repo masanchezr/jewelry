@@ -23,7 +23,7 @@
 						<td><spring:message code="cashamount" var="cashamount" /> <form:input
 								class="form-control" path="cashamount"
 								placeholder="${cashamount}" /></td>
-						<td><spring:message code="description" var="description" />
+						<td><spring:message code="descriptionph" var="description" />
 							<form:input class="form-control" path="description"
 								placeholder="${description}" /></td>
 					</tr>
@@ -48,7 +48,7 @@
 							<td><spring:message code="amount" var="amount" /> <form:input
 									class="form-control" path="objects[${status.index}].amount"
 									placeholder="${amount}" /></td>
-							<td><spring:message code="description" var="description" />
+							<td><spring:message code="descriptionph" var="description" />
 								<form:input class="form-control"
 									path="objects[${status.index}].description"
 									placeholder="${description}" /></td>

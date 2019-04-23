@@ -120,7 +120,7 @@
 						<td><spring:message code="grossgrams" var="grossgrams" /> <form:input
 								class="form-control" path="objects[${status.index}].grossgrams"
 								placeholder="${grossgrams}" /></td>
-						<td><spring:message code="description" var="description" />
+						<td><spring:message code="descriptionph" var="description" />
 							<form:input class="form-control"
 								path="objects[${status.index}].description"
 								placeholder="${description}" /></td>

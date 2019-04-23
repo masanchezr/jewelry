@@ -15,8 +15,9 @@
 				<div class="row">
 					<div class="col-lg-6">
 						<div class="form-group">
-							<spring:message code="numpawn" />
-							<form:input class="form-control" path="numpawn" />
+							<spring:message code="numpawnph" var="numpawnplaceholder" />
+							<form:input class="form-control" path="numpawn"
+								placeholder="${numpawnplaceholder}" />
 							<p class="text-danger">
 								<form:errors path="numpawn" />
 							</p>
