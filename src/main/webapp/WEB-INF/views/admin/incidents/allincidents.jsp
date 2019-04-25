@@ -12,9 +12,9 @@
 <div class="row">
 	<div class="col-lg-12">
 		<div class="card-body">
-			<c:if test="${not empty incidents}">
-				<div class="table-responsive">
-					<form:form action="searchincident" modelAttribute="incident">
+			<form:form action="searchincident" modelAttribute="incident">
+				<c:if test="${not empty incidents}">
+					<div class="table-responsive">
 						<table class="table table-striped table-bordered table-hover"
 							id="dataTables-example">
 							<thead>
@@ -46,15 +46,15 @@
 								</c:forEach>
 							</tbody>
 						</table>
-						<form:button class="btn btn-primary" value="submit">
-							<spring:message code="solve" />
-						</form:button>
-					</form:form>
-				</div>
-			</c:if>
-			<c:if test="${empty incidents}">
-				<spring:message code="noresults" />
-			</c:if>
+					</div>
+				</c:if>
+				<c:if test="${empty incidents}">
+					<spring:message code="noresults" />
+				</c:if>
+				<form:button class="btn btn-primary" value="submit">
+					<spring:message code="solve" />
+				</form:button>
+			</form:form>
 		</div>
 	</div>
 </div>
