@@ -50,7 +50,7 @@
 	</div>
 </div>
 <div class="form-row">
-	<div class="card mb3">
+	<div class="card mb-3">
 		<div class="card-header">
 			<spring:message code="installments" />
 		</div>
