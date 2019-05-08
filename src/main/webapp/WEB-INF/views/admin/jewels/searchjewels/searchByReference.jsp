@@ -9,10 +9,10 @@
 			code="searchjewels" /></li>
 </ol>
 <form:form action="resultsearchbyreference" modelAttribute="jewelForm">
-	<div class="row">
-		<div class="col-lg-6">
+	<div class="form-row">
+		<div class="col-lg-12">
 			<div class="card-body">
-				<div class="row">
+				<div class="form-row">
 					<div class="col-lg-6">
 						<div class="form-group">
 							<spring:message code="category" />

@@ -10,11 +10,12 @@
 				code="putstrap" /></li>
 	</ol>
 	<div class="card-body">
-		<div class="row">
+		<div class="form-row">
 			<div class="col-lg-6">
 				<div class="form-group">
-					<spring:message code="amount" />
-					<form:input class="form-control" path="amount" />
+					<spring:message code="amount" var="stringamount" />
+					<form:input class="form-control" path="amount"
+						placeholder="${stringamount}" />
 					<p class="text-danger">
 						<form:errors path="amount" />
 					</p>
@@ -27,8 +28,9 @@
 					</form:select>
 				</div>
 				<div class="form-group">
-					<spring:message code="numsale" />
-					<form:input class="form-control" path="numsale" />
+					<spring:message code="numberofsaleph" var="numberofsale" />
+					<form:input class="form-control" path="numsale"
+						placeholder="${numberofsale}" />
 					<form:errors path="numsale" />
 				</div>
 				<div class="form-group">

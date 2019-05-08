@@ -10,11 +10,11 @@
 </ol>
 <form:form action="resultSalesCard" modelAttribute="searchSaleForm"
 	autocomplete="off">
-	<div class="row">
-		<div class="col-lg-8">
+	<div class="form-row">
+		<div class="col-lg-16">
 			<div class="card-body">
-				<div class="row">
-					<div class="col-lg-4">
+				<div class="form-row">
+					<div class="col-lg-8">
 						<div class="form-group">
 							<spring:message code="datefrom" var="from" />
 							<div id="sandbox-container">
@@ -31,7 +31,7 @@
 							</form:button>
 						</div>
 					</div>
-					<div class="col-lg-4">
+					<div class="col-lg-8">
 						<div class="form-group">
 							<spring:message code="dateuntil" var="until" />
 							<div id="sandbox-container">

@@ -222,6 +222,8 @@
 			access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/searchsumadjustments"
 			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/searchadjustment"
+			access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/tomelloso"
 			access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/exceltomelloso"
@@ -229,6 +231,8 @@
 		<intercept-url pattern="/newsale"
 			access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/searchsalepostponed"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/allcoins"
 			access="hasRole('ROLE_ADMIN')" />
 	</http>
 

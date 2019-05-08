@@ -59,7 +59,7 @@
 	<!----start-container----->
 	<div class="header-bg">
 		<div class="container">
-			<div class="row">
+			<div class="form-row">
 				<div class="col-md-4">
 					<div class="logo">
 						<a href="index.html"><img
@@ -125,7 +125,7 @@
 	<tiles:insertAttribute name="body" />
 	<div class="footer">
 		<div class="container">
-			<div class="row">
+			<div class="form-row">
 				<div class="col-md-12">
 					<ul class="list-inline pull-left">
 						<li><a href="<spring:url value="/terms"/>"><spring:message

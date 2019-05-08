@@ -12,7 +12,7 @@
 		<div class="card text-white bg-primary o-hidden">
 			<div class="card-body">
 				<div class="card-body-icon">
-					<i class="fa fa-fw fa-comments"></i>
+					<i class="fas fa-fw fa-comments"></i>
 				</div>
 				<div class="mr-5">
 					<c:out value="${saleForm.numsale}" />
@@ -25,7 +25,7 @@
 		<div class="card text-white bg-success o-hidden">
 			<div class="card-body">
 				<div class="card-body-icon">
-					<i class="fa fa-fw fa-shopping-cart"></i>
+					<i class="fas fa-fw fa-shopping-cart"></i>
 				</div>
 				<div class="mr-5">
 					<c:out value="${saleForm.total}" />
@@ -38,7 +38,7 @@
 		<div class="card text-white bg-warning o-hidden">
 			<div class="card-body">
 				<div class="card-body-icon">
-					<i class="fa fa-fw fa-gift"></i>
+					<i class="fas fa-fw fa-gift"></i>
 				</div>
 				<div class="mr-5">
 					<spring:message code="discount" />

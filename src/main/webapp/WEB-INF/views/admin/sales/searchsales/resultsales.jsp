@@ -27,11 +27,11 @@
 							<tr>
 								<td><c:out value="${sale.numsale}" /></td>
 								<td><c:out value="${sale.total}" /><i
-									class="fa fa-euro-sign"></i></td>
+									class="fas fa-euro-sign"></i></td>
 								<td><c:out value="${sale.place.description}" /></td>
 								<td><c:out value="${sale.saledate}" /></td>
 								<td><c:out value="${sale.discount}" /><i
-									class="fa fa-euro-sign"></i></td>
+									class="fas fa-euro-sign"></i></td>
 							</tr>
 						</c:forEach>
 						<c:forEach items="${salespostponed}" var="sale">
@@ -69,12 +69,12 @@
 					<div class="form-group">
 						<spring:message code="totalamount" />
 						<c:out value="${total}" />
-						<i class="fa fa-euro-sign"></i>
+						<i class="fas fa-euro-sign"></i>
 					</div>
 					<div class="form-group">
 						<spring:message code="cost" />
 						<c:out value="${cost}" />
-						<i class="fa fa-euro-sign"></i>
+						<i class="fas fa-euro-sign"></i>
 					</div>
 				</div>
 			</div>

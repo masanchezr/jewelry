@@ -11,10 +11,10 @@
 </ol>
 <form:form action="saveJewel" modelAttribute="jewelForm">
 	<form:hidden path="idjewel" />
-	<div class="row">
+	<div class="form-row">
 		<div class="col-lg-8">
 			<div class="card-body">
-				<div class="row">
+				<div class="form-row">
 					<div class="col-lg-4">
 						<div class="form-group">
 							<form:select class="form-control" path="place.idplace">

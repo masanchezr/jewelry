@@ -7,10 +7,10 @@
 	<li class="breadcrumb-item active"><spring:message code="incident" /></li>
 </ol>
 <form:form action="saveincident" modelAttribute="incident">
-	<div class="row">
+	<div class="form-row">
 		<div class="col-lg-12">
 			<div class="card-body">
-				<div class="row">
+				<div class="form-row">
 					<div class="col-lg-6">
 						<div class="form-group">
 							<p class="form-control-static">

@@ -8,7 +8,7 @@
 	rel="stylesheet">
 <!-- Custom CSS -->
 <link
-	href="<spring:url value="/resources/styles/admin/sb-admin.min.css"/>"
+	href="<spring:url value="/resources/styles/admin/sb-admin.css"/>"
 	rel="stylesheet">
 <title><spring:message code="titleAdmin" /></title>
 <!-- html5-->

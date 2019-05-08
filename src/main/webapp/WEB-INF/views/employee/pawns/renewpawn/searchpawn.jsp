@@ -10,14 +10,15 @@
 		<li class="breadcrumb-item active"><spring:message
 				code="renewpawn" /></li>
 	</ol>
-	<div class="row">
+	<div class="form-row">
 		<div class="col-lg-12">
 			<div class="card-body">
-				<div class="row">
+				<div class="form-row">
 					<div class="col-lg-6">
 						<div class="form-group">
-							<spring:message code="numpawn" />
-							<form:input class="form-control" path="numpawn" />
+							<spring:message code="numpawnph" var="newpawnholder" />
+							<form:input class="form-control" path="numpawn"
+								placeholder="${newpawnholder}" />
 							<div class="form-group has-error">
 								<label class="control-label" for="inputSuccess"><form:errors
 										path="numpawn" /></label>

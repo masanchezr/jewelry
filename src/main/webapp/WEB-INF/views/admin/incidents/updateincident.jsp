@@ -9,10 +9,10 @@
 		<li class="breadcrumb-item active"><form:label path="idincident" /></li>
 	</ol>
 	<form:hidden path="idincident" />
-	<div class="row">
+	<div class="form-row">
 		<div class="col-lg-12">
 			<div class="card-body">
-				<div class="row">
+				<div class="form-row">
 					<div class="col-lg-6">
 						<div class="form-group">
 							<form:label path="state" />

@@ -6,6 +6,8 @@
 	role="form">
 	<!-- Breadcrumbs-->
 	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#"><spring:message
+					code="salespostponed" /></a></li>
 		<li class="breadcrumb-item active"><spring:message
 				code="newsalepostponed" /></li>
 	</ol>
@@ -14,9 +16,9 @@
 			<table class="table">
 				<tbody>
 					<tr>
-						<td><spring:message code="numberofsale" var="numsalemessage" /> <form:input
-								class="form-control" path="idsale"
-								placeholder="${numsalemessage}" /></td>
+						<td><spring:message code="numberofsaleph"
+								var="numsalemessage" /> <form:input class="form-control"
+								path="idsale" placeholder="${numsalemessage}" /></td>
 						<td><p class="text-danger">
 								<form:errors path="idsale" />
 							</p></td>

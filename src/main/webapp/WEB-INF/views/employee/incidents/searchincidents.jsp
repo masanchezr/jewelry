@@ -9,10 +9,10 @@
 </ol>
 <form:form action="resultIncidents" modelAttribute="searchDateForm"
 	autocomplete="off">
-	<div class="row">
+	<div class="form-row">
 		<div class="col-lg-12">
 			<div class="card-body">
-				<div class="row">
+				<div class="form-row">
 					<div class="col-lg-6">
 						<div class="form-group">
 							<div id="sandbox-container">

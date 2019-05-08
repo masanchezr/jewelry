@@ -33,7 +33,7 @@
 									href="${showsale}<c:out value="${sale.idsale}" />"><c:out
 											value="${sale.numsale}" /></a></td>
 								<td><c:out value="${sale.total}" /><i
-									class="fa fa-euro-sign"></i></td>
+									class="fas fa-euro-sign"></i></td>
 								<td><c:out value="${sale.payments}" /></td>
 							</tr>
 						</c:forEach>
@@ -44,7 +44,7 @@
 									href="${showsalepost}<c:out value="${salepost.idsale}" />"><c:out
 											value="${salepost.idsale}" /></a></td>
 								<td><c:out value="${salepost.total}" /><i
-									class="fa fa-euro-sign"></i></td>
+									class="fas fa-euro-sign"></i></td>
 								<td><c:out value="${salepost.payments}" /></td>
 							</tr>
 						</c:forEach>
@@ -56,7 +56,7 @@
 											value="${pawn.numpawn}" />
 								</a></td>
 								<td><c:out value="${pawn.amount}" /><i
-									class="fa fa-euro-sign"></i></td>
+									class="fas fa-euro-sign"></i></td>
 								<td><spring:message code="retired" /> <spring:url
 										value="/renovations" var="renovations" /> <a
 									href="${renovations}<c:out value="${pawn.id}" />"><spring:message
@@ -71,7 +71,7 @@
 											value="${pawn.numpawn}" />
 								</a></td>
 								<td><c:out value="${pawn.amount}" /><i
-									class="fa fa-euro-sign"></i></td>
+									class="fas fa-euro-sign"></i></td>
 								<td><spring:message code="newpawn" /></td>
 							</tr>
 						</c:forEach>
@@ -81,7 +81,7 @@
 										value="${adjustment.description}" /></td>
 								<td><c:out value="${adjustment.idadjustment}" /></td>
 								<td><c:out value="${adjustment.amount}" /><i
-									class="fa fa-euro-sign"></i></td>
+									class="fas fa-euro-sign"></i></td>
 								<td><c:if test="${adjustment.payment.idpayment==3}">
 										<c:out value="${adjustment.payment.name}" />
 									</c:if></td>
@@ -93,7 +93,7 @@
 										value="${adjustmentwork.description}" /></td>
 								<td><c:out value="${adjustmentwork.idadjustment}" /></td>
 								<td><c:out value="${adjustmentwork.amountwork}" /><i
-									class="fa fa-euro-sign"></i></td>
+									class="fas fa-euro-sign"></i></td>
 								<td></td>
 							</tr>
 						</c:forEach>
@@ -106,7 +106,7 @@
 									href="${updateShopping}<c:out value="${shopping.id}" />"><c:out
 											value="${shopping.numshop}" /></a></td>
 								<td><c:out value="${shopping.amount}" /><i
-									class="fa fa-euro-sign"></i></td>
+									class="fas fa-euro-sign"></i></td>
 								<td><c:out value="${shopping.payments}" /></td>
 							</tr>
 						</c:forEach>
@@ -115,7 +115,7 @@
 								<td><c:out value="${concept.description}" /></td>
 								<td></td>
 								<td><c:out value="${concept.amount}" /><i
-									class="fa fa-euro-sign"></i></td>
+									class="fas fa-euro-sign"></i></td>
 								<td></td>
 							</tr>
 						</c:forEach>
@@ -124,7 +124,7 @@
 								<td><spring:message code="renovationpawn" /></td>
 								<td><c:out value="${renovation.numpawn}" /></td>
 								<td><c:out value="${renovation.renovationamount}" /><i
-									class="fa fa-euro-sign"></i></td>
+									class="fas fa-euro-sign"></i></td>
 								<td></td>
 							</tr>
 						</c:forEach>
@@ -133,7 +133,7 @@
 								<td><spring:message code="cancelsales" /></td>
 								<td><c:out value="${cancelsale.numsale}" /></td>
 								<td><c:out value="${cancelsale.amount}" /><i
-									class="fa fa-euro-sign"></i></td>
+									class="fas fa-euro-sign"></i></td>
 								<td><c:out value="${cancelsale.parcial}" /> <c:out
 										value="${cancelsale.payment.name}" /></td>
 							</tr>
@@ -143,7 +143,7 @@
 								<td><spring:message code="entrymoney" /></td>
 								<td></td>
 								<td><c:out value="${entrymoney.amount}" /><i
-									class="fa fa-euro-sign"></i></td>
+									class="fas fa-euro-sign"></i></td>
 								<td></td>
 							</tr>
 						</c:forEach>
@@ -152,7 +152,7 @@
 								<td><spring:message code="putbattery" /></td>
 								<td><c:out value="${battery.numsale}" /></td>
 								<td><c:out value="${battery.amount}" /><i
-									class="fa fa-euro-sign"></i></td>
+									class="fas fa-euro-sign"></i></td>
 								<td><c:if test="${battery.payment.idpayment==3}">
 										<c:out value="${battery.payment.name}" />
 									</c:if></td>
@@ -163,7 +163,7 @@
 								<td><spring:message code="putstrap" /></td>
 								<td><c:out value="${strap.numsale}" /></td>
 								<td><c:out value="${strap.amount}" /><i
-									class="fa fa-euro-sign"></i></td>
+									class="fas fa-euro-sign"></i></td>
 								<td><c:if test="${strap.payment.idpayment==3}">
 										<c:out value="${strap.payment.name}" />
 									</c:if></td>
@@ -174,7 +174,7 @@
 								<td><spring:message code="localrental" /></td>
 								<td><c:out value="${rental.rentaldate}" /></td>
 								<td><c:out value="${rental.amount}" /><i
-									class="fa fa-euro-sign"></i></td>
+									class="fas fa-euro-sign"></i></td>
 								<td></td>
 							</tr>
 						</c:forEach>
@@ -183,7 +183,7 @@
 								<td><spring:message code="iddiscount" /></td>
 								<td><c:out value="${discount.iddiscount}" /></td>
 								<td><c:out value="${discount.sdiscount}" /><i
-									class="fa fa-euro-sign"></i></td>
+									class="fas fa-euro-sign"></i></td>
 								<td></td>
 							</tr>
 						</c:forEach>
@@ -192,7 +192,7 @@
 								<td><spring:message code="recording" /></td>
 								<td><c:out value="${recording.numsale}" /></td>
 								<td><c:out value="${recording.amount}" /><i
-									class="fa fa-euro-sign"></i></td>
+									class="fas fa-euro-sign"></i></td>
 								<td><c:out value="${recording.pay.name}" /></td>
 							</tr>
 						</c:forEach>
@@ -201,7 +201,7 @@
 								<td><spring:message code="payroll" /></td>
 								<td><c:out value="${daily.payroll.payrolltype.name}" /></td>
 								<td><c:out value="${daily.payroll.amount}" /><i
-									class="fa fa-euro-sign"></i></td>
+									class="fas fa-euro-sign"></i></td>
 								<td></td>
 							</tr>
 						</c:if>
@@ -213,7 +213,7 @@
 					<div class="form-group col-3">
 						<spring:message code="totalamount" />
 						<c:out value="${daily.finalamount}" />
-						<i class="fa fa-euro-sign"></i>
+						<i class="fas fa-euro-sign"></i>
 					</div>
 				</div>
 			</div>
@@ -224,7 +224,7 @@
 						<a
 							href="${beforeday}<fmt:formatDate value="${datedaily}" pattern="yyyyMMdd" />/<c:out value="${place}" />"><button
 								class="btn btn-primary" type="button">
-								<i class="fa fa-arrow-circle-left"></i>
+								<i class="fas fa-arrow-circle-left"></i>
 								<spring:message code="beforeday" />
 							</button></a>
 					</div>
@@ -236,7 +236,7 @@
 							href="${againday}<fmt:formatDate value="${datedaily}" pattern="yyyyMMdd" />/<c:out value="${place}" />"><button
 								class="btn btn-primary" type="button">
 								<spring:message code="againday" />
-								<i class="fa fa-arrow-circle-right"></i>
+								<i class="fas fa-arrow-circle-right"></i>
 							</button></a>
 					</div>
 				</div>

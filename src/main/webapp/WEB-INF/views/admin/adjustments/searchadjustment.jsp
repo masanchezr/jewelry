@@ -9,13 +9,13 @@
 			code="searchadjustment" /></li>
 </ol>
 <form:form action="resultadjustment" modelAttribute="adjustment">
-	<div class="row">
+	<div class="form-row">
 		<div class="col-lg-12">
 			<div class="card-body">
-				<div class="row">
+				<div class="form-row">
 					<div class="col-lg-6">
 						<div class="form-group">
-							<spring:message code="number" var="number" />
+							<spring:message code="numph" var="number" />
 							<form:input class="form-control" path="idadjustment"
 								placeholder="${number}" />
 							<p class="text-danger">

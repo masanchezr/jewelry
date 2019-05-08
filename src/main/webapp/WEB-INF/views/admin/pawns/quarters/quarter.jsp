@@ -30,7 +30,7 @@
 							<td><c:out value="${quarter.gramsreal}" /></td>
 							<td><c:out value="${quarter.grossgrams}" /></td>
 							<td><c:out value="${quarter.amount}" /><i
-								class="fa fa-euro-sign"></i></td>
+								class="fas fa-euro-sign"></i></td>
 							<td><c:out value="${quarter.metal.description}" /></td>
 						</tr>
 					</tbody>

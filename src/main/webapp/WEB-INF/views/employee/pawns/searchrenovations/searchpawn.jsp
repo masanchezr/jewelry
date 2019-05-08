@@ -9,14 +9,15 @@
 			code="searchrenovations" /></li>
 </ol>
 <form:form action="resultRenovationsPawns" modelAttribute="pawnForm">
-	<div class="row">
+	<div class="form-row">
 		<div class="col-lg-6">
 			<div class="card-body">
-				<div class="row">
+				<div class="form-row">
 					<div class="col-lg-6">
 						<div class="form-group">
-							<spring:message code="numpawn" />
-							<form:input class="form-control" path="numpawn" />
+							<spring:message code="numpawnph" var="newpawnholder" />
+							<form:input class="form-control" path="numpawn"
+								placeholder="${newpawnholder}" />
 							<p class="text-danger">
 								<form:errors path="numpawn" />
 							</p>

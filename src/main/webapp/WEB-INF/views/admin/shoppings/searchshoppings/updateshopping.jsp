@@ -12,7 +12,7 @@
 <form:form action="saveShopping" modelAttribute="shoppingForm"
 	role="form">
 	<form:hidden path="id" />
-	<div class="row">
+	<div class="form-row">
 		<div class="col-lg-12">
 			<div class="card-body">
 				<div class="table-responsive">

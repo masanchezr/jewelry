@@ -2,14 +2,14 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <form:form action="addcoin" modelAttribute="coinForm">
-	<div class="row">
+	<div class="form-row">
 		<div class="col-lg-8">
 			<div class="panel card-default">
 				<div class="card-heading">
 					<spring:message code="newcoin" />
 				</div>
 				<div class="card-body">
-					<div class="row">
+					<div class="form-row">
 						<div class="col-lg-4">
 							<div class="form-group col-3">
 								<spring:message code="description" />

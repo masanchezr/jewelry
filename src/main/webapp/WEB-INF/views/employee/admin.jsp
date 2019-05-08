@@ -1,5 +1,5 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<div class="row">
+<div class="form-row">
 	<div class="col-12">
 		<h1>
 			<c:forEach items="${messages}" var="message">

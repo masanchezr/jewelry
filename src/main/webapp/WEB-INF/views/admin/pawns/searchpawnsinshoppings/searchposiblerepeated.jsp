@@ -9,14 +9,14 @@
 			code="searchshoppings" /></li>
 </ol>
 <form:form action="resultPosibleRepeated" modelAttribute="searchDateForm">
-	<div class="row">
+	<div class="form-row">
 		<div class="col-lg-12">
 			<div class="panel card-default">
 				<div class="card-heading">
 					<spring:message code="searchshoppings" />
 				</div>
 				<div class="card-body">
-					<div class="row">
+					<div class="form-row">
 						<div class="col-lg-6">
 							<div class="form-group">
 								<spring:message code="datefrom" />

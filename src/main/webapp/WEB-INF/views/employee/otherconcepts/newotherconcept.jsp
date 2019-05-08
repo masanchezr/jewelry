@@ -11,15 +11,17 @@
 	</ol>
 	<div class="card-body">
 		<div class="form-group">
-			<spring:message code="description" />
-			<form:input class="form-control" path="description" />
+			<spring:message code="descriptionph" var="descriptionplaceholder" />
+			<form:input class="form-control" path="description"
+				placeholder="${descriptionplaceholder}" />
 			<p class="text-danger">
 				<form:errors path="description" />
 			</p>
 		</div>
 		<div class="form-group">
-			<spring:message code="amountotherconcept" />
-			<form:input class="form-control" path="amount" />
+			<spring:message code="amountotherconcept" var="amountph" />
+			<form:input class="form-control" path="amount"
+				placeholder="${amountph}" />
 			<p class="text-danger">
 				<form:errors path="amount" />
 			</p>

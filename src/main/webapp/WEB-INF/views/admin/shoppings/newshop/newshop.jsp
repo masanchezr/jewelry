@@ -11,7 +11,7 @@
 </ol>
 <form:form action="saveshop" modelAttribute="shopform">
 	<div class="card-body">
-		<div class="row">
+		<div class="form-row">
 			<div class="col-lg-6">
 				<div class="form-group">
 					<spring:message code="numshopph" var="numpawnvar" />

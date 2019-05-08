@@ -9,14 +9,15 @@
 					code="othersconcepts" /></a></li>
 		<li class="breadcrumb-item active"><spring:message code="payroll" /></li>
 	</ol>
-	<div class="row">
+	<div class="form-row">
 		<div class="col-lg-12">
 			<div class="card-body">
-				<div class="row">
+				<div class="form-row">
 					<div class="col-lg-6">
 						<div class="form-group">
-							<spring:message code="amount" />
-							<form:input class="form-control" path="amount" />
+							<spring:message code="amount" var="amountph" />
+							<form:input class="form-control" path="amount"
+								placeholder="${amountph}" />
 							<p class="text-danger">
 								<form:errors path="amount" />
 							</p>
@@ -32,7 +33,7 @@
 							<spring:message code="month" var="month" />
 							<div id="sandbox-container">
 								<form:input class="form-control" type="text" path="payrolldate"
-									placeholder="${payrolldate}" />
+									placeholder="${month}" />
 							</div>
 							<p class="text-danger">
 								<form:errors path="payrolldate" />

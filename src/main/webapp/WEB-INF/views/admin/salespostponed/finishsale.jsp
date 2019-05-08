@@ -13,7 +13,7 @@
 		<div class="card text-white bg-primary o-hidden">
 			<div class="card-body">
 				<div class="card-body-icon">
-					<i class="fa fa-shopping-cart fa-fw"></i>
+					<i class="fas fa-shopping-cart fa-fw"></i>
 				</div>
 				<div class="mr-5">
 					<c:out value="${saleForm.idsale}" />
@@ -26,14 +26,14 @@
 		<div class="card text-white bg-success o-hidden">
 			<div class="card-body">
 				<div class="card-body-icon">
-					<i class="fa fa-euro-sign fa-fw"></i>
+					<i class="fas fa-euro-sign fa-fw"></i>
 				</div>
 				<div class="mr-5">
 					<c:out value="${saleForm.total}" />
 					<spring:message code="totalamount" />
 				</div>
 			</div>
-			<spring:url value="/dailyplace" var="daily"></spring:url>
+			<spring:url value="/dailyplace" var="daily"/>
 			<a class="card-footer text-white clearfix small z-1" href="${daily}">
 				<span class="float-left"><spring:message code="daily" /></span> <span
 				class="float-right"><i class="nav-link-text"></i></span>
@@ -44,7 +44,7 @@
 		<div class="card text-white bg-danger o-hidden">
 			<div class="card-body">
 				<div class="card-body-icon">
-					<i class="fa fa-fw fa-support"></i>
+					<i class="fas fa-fw fa-support"></i>
 				</div>
 				<div class="mr-5">
 					<c:out value="${saleForm.place.description}" />
@@ -58,7 +58,7 @@
 			<div class="card text-white bg-warning o-hidden">
 				<div class="card-body">
 					<div class="card-body-icon">
-						<i class="fa fa-fw fa-gift"></i>
+						<i class="fas fa-fw fa-gift"></i>
 					</div>
 					<div class="mr-5">
 						<spring:message code="timedout" />
@@ -66,7 +66,7 @@
 					</div>
 				</div>
 				<c:if test="${!saleForm.timeout}">
-					<spring:url value="/timeout" var="timeout"></spring:url>
+					<spring:url value="/timeout" var="timeout"/>
 					<a class="card-footer text-white clearfix small z-1"
 						href="${timeout}${saleForm.idsale}"> <span class="float-left"><spring:message
 								code="timeout" /></span> <span class="float-right"><i
@@ -105,7 +105,7 @@
 								<td><c:out value="${jewel.name}" /></td>
 								<td><c:out value="${jewel.description}" /></td>
 								<td><c:out value="${jewel.price}" /><i
-									class="fa fa-euro-sign"></i></td>
+									class="fas fa-euro-sign"></i></td>
 								<td><c:out value="${jewel.category.namecategory}" /></td>
 								<td><c:out value="${jewel.metal.description}" /></td>
 							</tr>
@@ -140,7 +140,7 @@
 								<td><fmt:formatDate value="${jewel.creationdate}"
 										type="date" /></td>
 								<td><c:out value="${jewel.amount}" /><i
-									class="fa fa-euro-sign"></i></td>
+									class="fas fa-euro-sign"></i></td>
 								<td><c:out value="${jewel.pay.name}" /></td>
 							</tr>
 						</c:forEach>

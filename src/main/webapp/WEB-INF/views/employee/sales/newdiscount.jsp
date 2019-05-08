@@ -10,22 +10,24 @@
 		<li class="breadcrumb-item active"><spring:message
 				code="newdiscount" /></li>
 	</ol>
-	<div class="row">
+	<div class="form-row">
 		<div class="col-lg-12">
 			<div class="card-body">
-				<div class="row">
+				<div class="form-row">
 					<div class="col-lg-6">
 						<div class="form-group">
-							<spring:message code="iddiscount" />
-							<form:input class="form-control" path="iddiscount" />
+							<spring:message code="iddiscountph" var="numdiscount" />
+							<form:input class="form-control" path="iddiscount"
+								placeholder="${numdiscount}" />
 							<div class="form-group">
 								<label class="control-label" for="inputSuccess"><form:errors
 										path="iddiscount" /></label>
 							</div>
 						</div>
 						<div class="form-group">
-							<spring:message code="amount" />
-							<form:input class="form-control" path="sdiscount" />
+							<spring:message code="amount" var="holderamount" />
+							<form:input class="form-control" path="sdiscount"
+								placeholder="${holderamount}" />
 							<div class="form-group">
 								<label class="control-label" for="inputSuccess"><form:errors
 										path="sdiscount" /></label>

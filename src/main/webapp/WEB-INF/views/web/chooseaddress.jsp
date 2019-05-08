@@ -3,7 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <section id="checkout">
 	<div class="container">
-		<div class="row">
+		<div class="form-row">
 			<form:form action="aceptarcompra" modelAttribute="buyForm">
 				<form:hidden path="nif" />
 				<c:forEach items="${addressesmailing}" var="address">
@@ -43,7 +43,7 @@
 				<a href="#" id="aotherdirection"><spring:message
 						code="otherdirection" /></a>
 				<div id="otherdirection">
-					<div class="row">
+					<div class="form-row">
 						<div class="col-lg-6">
 							<div class="form-group col-3">
 								<label class="control-label" for="shipping_address"><spring:message
@@ -74,7 +74,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="row">
+					<div class="form-row">
 						<div class="col-md-6">
 							<div class="form-group col-3">
 								<div id="billing-details-check" class="control-group">
@@ -130,7 +130,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="row">
+				<div class="form-row">
 					<div id="billing-details-payment" class="control-group">
 						<div class="col-md-6">
 							<label class="control-label"><spring:message

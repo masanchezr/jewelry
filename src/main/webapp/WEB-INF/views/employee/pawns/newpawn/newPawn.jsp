@@ -10,7 +10,7 @@
 </ol>
 <form:form action="savePawn" modelAttribute="pawnForm">
 	<div class="card-body">
-		<div class="row">
+		<div class="form-row">
 			<div class="col-lg-6">
 				<div class="form-group">
 					<spring:message code="nif" var="dni" />

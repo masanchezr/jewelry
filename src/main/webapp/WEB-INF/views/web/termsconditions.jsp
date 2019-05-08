@@ -3,7 +3,7 @@
 <section class="stockists legal">
 	<div class="container">
 		<div class="content">
-			<div class="row">
+			<div class="form-row">
 				<div class="col-md-4">
 					<h3>
 						<spring:message code="terms" />

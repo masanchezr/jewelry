@@ -10,11 +10,11 @@
 </ol>
 <form:form action="sumadjustments" modelAttribute="searchDateForm"
 	autocomplete="off">
-	<div class="row">
-		<div class="col-lg-9">
+	<div class="form-row">
+		<div class="col-lg-12">
 			<div class="card-body">
-				<div class="row">
-					<div class="col-lg-3">
+				<div class="form-row">
+					<div class="col-lg-4">
 						<div class="form-group">
 							<form:select class="form-control" path="place.idplace">
 								<form:options items="${places}" itemValue="idplace"
@@ -27,7 +27,7 @@
 							</form:button>
 						</div>
 					</div>
-					<div class="col-lg-3">
+					<div class="col-lg-4">
 						<div class="form-group">
 							<spring:message code="datefrom" var="datefrommessage" />
 							<div id="sandbox-container">
@@ -39,7 +39,7 @@
 							</p>
 						</div>
 					</div>
-					<div class="col-lg-3">
+					<div class="col-lg-4">
 						<div class="form-group">
 							<spring:message code="dateuntil" var="dateuntilmessage" />
 							<div id="sandbox-container">

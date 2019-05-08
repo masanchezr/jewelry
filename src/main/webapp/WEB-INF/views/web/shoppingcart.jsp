@@ -4,7 +4,7 @@
 <div class="container">
 	<form:form modelAttribute="dataForm" action="comprar">
 		<c:if test="${not empty cart}">
-			<div class="row">
+			<div class="form-row">
 				<div class="col-lg-12">
 					<div class="panel card-default">
 						<div class="card-heading">
@@ -38,7 +38,7 @@
 										</c:forEach>
 									</tbody>
 								</table>
-								<div class="row">
+								<div class="form-row">
 									<div class="col-lg-12">
 										<div class="col-lg-3">
 											<div class="form-group col-3">
@@ -78,7 +78,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="row">
+								<div class="form-row">
 									<div class="col-lg-12">
 										<div class="form-group col-3">
 											<form:button class="btn btn-default" value="submit">

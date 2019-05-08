@@ -10,13 +10,13 @@
 </ol>
 <form:form action="resultsalepostponed" modelAttribute="saleForm"
 	role="form">
-	<div class="row">
+	<div class="form-row">
 		<div class="col-lg-6">
 			<div class="card-body">
-				<div class="row">
+				<div class="form-row">
 					<div class="col-lg-6">
 						<div class="form-group">
-							<spring:message code="number" var="number" />
+							<spring:message code="numberofsaleph" var="number" />
 							<form:input class="form-control" path="idsalepostponed"
 								placeholder="${number}" />
 							<p class="text-danger">

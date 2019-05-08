@@ -8,10 +8,10 @@
 </ol>
 <form:form action="resultentries" modelAttribute="searchDateForm"
 	autocomplete="off">
-	<div class="row">
-		<div class="col-lg-8">
+	<div class="form-row">
+		<div class="col-lg-16">
 			<div class="card-body">
-				<div class="row">
+				<div class="form-row">
 					<div class="col-lg-4">
 						<div class="form-group">
 							<spring:message code="datefrom" var="from" />

@@ -1,16 +1,16 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<spring:url value="/productoSeleccionado" var="selectedJewel"></spring:url>
+<spring:url value="/productoSeleccionado" var="selectedJewel"/>
 <div class="container">
 	<div class="content">
-		<div class="row">
+		<div class="form-row">
 			<div class="col-md-12 text-center">
 				<h2>
 					<spring:message code="products" />
 				</h2>
 			</div>
 		</div>
-		<div class="row">
+		<div class="form-row">
 			<c:forEach items="${jewels}" var="jewel">
 				<div class="col-md-2">
 					<div class="grid">
@@ -31,7 +31,7 @@
 							&euro;
 						</h2>
 						<p class="text-center">
-							<a href="${selectedJewel}<c:out value="${jewel.idjewel}" />"><spring:message
+							<a class="dropdown-item" href="${selectedJewel}<c:out value="${jewel.idjewel}" />"><spring:message
 									code="buy" /></a>
 						</p>
 					</div>
@@ -62,7 +62,7 @@
 				</div>
 			</c:forEach>
 		</div>
-		<div class="row">
+		<div class="form-row">
 			<c:if test="${not empty jewels}">
 				<c:url var="firstUrl" value="/" />
 				<c:url var="lastUrl" value="/page/${deploymentLog.totalPages}" />
@@ -75,19 +75,19 @@
 							<li class="disabled"><a href="#">&lt;</a></li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="${firstUrl}">&lt;&lt;</a></li>
-							<li><a href="${prevUrl}">&lt;</a></li>
+							<li><a class="dropdown-item" href="${firstUrl}">&lt;&lt;</a></li>
+							<li><a class="dropdown-item" href="${prevUrl}">&lt;</a></li>
 						</c:otherwise>
 					</c:choose>
 					<c:forEach var="i" begin="${beginIndex}" end="${endIndex}">
 						<c:url var="pageUrl" value="/page/${i}" />
 						<c:choose>
 							<c:when test="${i == currentIndex}">
-								<li class="active"><a href="${pageUrl}"><c:out
+								<li class="active"><a class="dropdown-item" href="${pageUrl}"><c:out
 											value="${i}" /></a></li>
 							</c:when>
 							<c:otherwise>
-								<li><a href="${pageUrl}"><c:out value="${i}" /></a></li>
+								<li><a class="dropdown-item" href="${pageUrl}"><c:out value="${i}" /></a></li>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
@@ -97,8 +97,8 @@
 							<li class="disabled"><a href="#">&gt;&gt;</a></li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="${nextUrl}">&gt;</a></li>
-							<li><a href="${lastUrl}">&gt;&gt;</a></li>
+							<li><a class="dropdown-item" href="${nextUrl}">&gt;</a></li>
+							<li><a class="dropdown-item" href="${lastUrl}">&gt;&gt;</a></li>
 						</c:otherwise>
 					</c:choose>
 				</ul>

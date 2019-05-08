@@ -12,7 +12,7 @@
 		<li class="breadcrumb-item active"><spring:message
 				code="removeparcialsale" /></li>
 	</ol>
-	<div class="row">
+	<div class="form-row">
 		<div class="col-lg-3">
 			<div class="form-group">
 				<spring:message code="numsale" />
@@ -29,7 +29,7 @@
 				itemValue="idjewel" itemLabel="reference" />
 		</div>
 	</div>
-	<div class="row">
+	<div class="form-row">
 		<div class="col-lg-3">
 			<div class="form-group" id="payments">
 				<spring:message code="repayment" />

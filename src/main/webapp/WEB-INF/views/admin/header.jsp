@@ -1,18 +1,17 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Bootstrap Core CSS -->
-<link
-	href="<spring:url value="/resources/styles/admin/bootstrap.min.css"/>"
-	rel="stylesheet">
 <!-- Custom Fonts -->
 <link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <link
-	href="<spring:url value="/resources/styles/admin/dataTables.bootstrap4.min.css"/>"
+	href="<spring:url value="/resources/styles/admin/dataTables.bootstrap4.css"/>"
 	rel="stylesheet">
 <!-- Custom CSS -->
-<link
-	href="<spring:url value="/resources/styles/admin/sb-admin.min.css"/>"
+<link href="<spring:url value="/resources/styles/admin/sb-admin.css"/>"
 	rel="stylesheet">
 <link
 	href="<spring:url value="/resources/styles/admin/bootstrap-datepicker.min.css"/>"
@@ -32,15 +31,14 @@
 </script>
 <script type="text/javascript"
 	src="<spring:url value="/resources/js/jquery.min.js"/>"></script>
-<script src="<spring:url value="/resources/js/bootstrap.min.js"/>"></script>
+<script
+	src="<spring:url value="/resources/js/bootstrap.bundle.min.js"/>"></script>
 <script src="<spring:url value="/resources/js/jquery.easing.min.js"/>"></script>
 <script
 	src="<spring:url value="/resources/js/jquery.dataTables.min.js"/>"></script>
 <script
 	src="<spring:url value="/resources/js/dataTables.bootstrap4.min.js"/>"></script>
 <script src="<spring:url value="/resources/js/sb-admin.min.js"/>"></script>
-<script
-	src="<spring:url value="/resources/js/sb-admin-datatables.min.js"/>"></script>
 <script
 	src="<spring:url value="/resources/js/bootstrap-datepicker.min.js"/>"></script>
 <script

@@ -7,8 +7,8 @@
 </ol>
 <form:form action="saveAdjustment" modelAttribute="adjustment">
 	<div class="card-body">
-		<div class="form-group col-3">
-			<spring:message code="idadjustment" var="idadjustmentmessage" />
+		<div class="form-group">
+			<spring:message code="idadjustmentph" var="idadjustmentmessage" />
 			<form:input class="form-control" path="idadjustment"
 				placeholder="${idadjustmentmessage}" />
 			<div class="form-group col-3 has-error">
@@ -16,7 +16,7 @@
 						path="idadjustment" /></label>
 			</div>
 		</div>
-		<div class="form-group col-3">
+		<div class="form-group">
 			<spring:message code="descriptionph" var="descriptionmessage" />
 			<form:input class="form-control" path="description"
 				placeholder="${descriptionmessage}" />
@@ -25,7 +25,7 @@
 						path="description" /></label>
 			</div>
 		</div>
-		<div class="form-group col-3">
+		<div class="form-group">
 			<spring:message code="amount" var="amountmessage" />
 			<form:input class="form-control" path="amount"
 				placeholder="${amountmessage}" />
@@ -34,14 +34,14 @@
 						path="amount" /></label>
 			</div>
 		</div>
-		<div class="form-group col-3">
+		<div class="form-group">
 			<spring:message code="payment" />
 			<form:select class="form-control" path="payment.idpayment">
 				<form:options items="${payments}" itemValue="idpayment"
 					itemLabel="name" />
 			</form:select>
 		</div>
-		<div class="form-group col-3">
+		<div class="form-group">
 			<form:button class="btn btn-primary" value="submit">
 				<spring:message code="save" />
 			</form:button>

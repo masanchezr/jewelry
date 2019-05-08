@@ -5,18 +5,14 @@
 <html>
 <head>
 <!-- Bootstrap Core CSS -->
-<link
-	href="<spring:url value="/resources/styles/admin/bootstrap.min.css"/>"
-	rel="stylesheet">
 <!-- Custom Fonts -->
 <link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <link
-	href="<spring:url value="/resources/styles/admin/dataTables.bootstrap4.min.css"/>"
+	href="<spring:url value="/resources/styles/admin/dataTables.bootstrap4.css"/>"
 	rel="stylesheet">
 <!-- Custom CSS -->
-<link
-	href="<spring:url value="/resources/styles/admin/sb-admin.min.css"/>"
+<link href="<spring:url value="/resources/styles/admin/sb-admin.css"/>"
 	rel="stylesheet">
 <link rel="shortcut icon"
 	href="<spring:url value="/resources/img/favicon.png"/>"
@@ -28,7 +24,7 @@
 	}
 </script>
 </head>
-<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+<body id="page-top">
 	<c:url value="/workshop/j_spring_security_logout" var="logoutUrl" />
 	<!-- csrt support -->
 	<form action="${logoutUrl}" method="post" id="logoutForm">
@@ -36,61 +32,59 @@
 			value="${_csrf.token}" />
 	</form>
 	<!-- Navigation-->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
-		id="mainNav">
-		<a class="navbar-brand" href="index.html"><spring:message
+	<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+		<a class="navbar-brand mr-1" href="index.html"><spring:message
 				code="goldburgos" /></a>
-		<!-- Bot�n para dispositivos m�viles -->
-		<button class="navbar-toggler navbar-toggler-right" type="button"
-			data-toggle="collapse" data-target="#navbarResponsive"
-			aria-controls="navbarResponsive" aria-expanded="false"
-			aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
+		<button class="btn btn-link btn-sm text-white order-1 order-sm-0"
+			id="sidebarToggle">
+			<i class="fas fa-bars"></i>
 		</button>
-		<div class="collapse navbar-collapse" id="navbarResponsive">
-			<ul class="navbar-nav ml-auto">
-				<li class="nav-item"><a class="nav-link" data-toggle="modal"
-					data-target="#exampleModal"> <i
-						class="fa fa-fw fa-sign-out-alt"></i> <spring:message
-							code="logout" />
-				</a></li>
-			</ul>
-			<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-				<li class="nav-item" data-toggle="tooltip" data-placement="right"
-					title="<spring:message
-								code="adjustment" />"><spring:url
-						value="/workshop/newadjustment" var="adjustment"></spring:url> <a
-					class="nav-link" href="${adjustment}"><i
-						class="fa fa-archive fa-fw"></i> <span class="nav-link-text"><spring:message
-								code="adjustment" /></span></a></li>
-
-				<li class="nav-item" data-toggle="tooltip" data-placement="right"
-					title="<spring:message
-								code="workshop" />"><spring:url
-						value="/workshop/newWorkshop" var="workshop"></spring:url> <a
-					class="nav-link" href="${workshop}"><i class="fa fa-gem fa-fw"></i>
-						<span class="nav-link-text"><spring:message code="workshop" /></span></a></li>
-
-				<li class="nav-item" data-toggle="tooltip" data-placement="right"
-					title="<spring:message
-								code="currentmonthbill" />"><spring:url
-						value="/workshop/billing" var="billing"></spring:url> <a
-					class="nav-link" href="${billing}"><i
-						class="fa fa-bar-chart fa-fw"></i> <span class="nav-link-text"><spring:message
-								code="currentmonthbill" /></span></a></li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right"
-					title="<spring:message
-								code="monthpreviousbill" />"><spring:url
-						value="/workshop/billingprevious" var="billingprevious"></spring:url>
-					<a class="nav-link" href="${billingprevious}"><i
-						class="fa fa-bar-chart fa-fw"></i> <span class="nav-link-text"><spring:message
-								code="monthpreviousbill" /></span></a></li>
-			</ul>
-		</div>
+		<!-- Navbar -->
+		<ul class="navbar-nav ml-auto ml-md-0">
+			<li class="nav-item dropdown no-arrow"><a
+				class="nav-link dropdown-toggle" href="#" id="userDropdown"
+				role="button" data-toggle="dropdown" aria-haspopup="true"
+				aria-expanded="false"> <i class="fas fa-user-circle fa-fw"></i>
+			</a>
+				<div class="dropdown-menu dropdown-menu-right"
+					aria-labelledby="userDropdown">
+					<a class="dropdown-item" href="#" data-toggle="modal"
+						data-target="#logoutModal"><spring:message code="logout" /></a>
+				</div></li>
+		</ul>
+		<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+			<li class="nav-item"><spring:url value="/workshop/newadjustment"
+					var="adjustment"/> <a class="nav-link"
+				href="${adjustment}"><i class="fas fa-archive fa-fw"></i> <span><spring:message
+							code="adjustment" /></span></a></li>
+			<li class="nav-item"><spring:url value="/workshop/newWorkshop"
+					var="workshop"/> <a class="nav-link" href="${workshop}"><i
+					class="fas fa-gem fa-fw"></i> <span><spring:message
+							code="workshop" /></span></a></li>
+			<li class="nav-item"><spring:url value="/workshop/billing"
+					var="billing"/> <a class="nav-link" href="${billing}"><i
+					class="fas fa-bar-chart fa-fw"></i> <span><spring:message
+							code="currentmonthbill" /></span></a></li>
+			<li class="nav-item"><spring:url
+					value="/workshop/billingprevious" var="billingprevious"/>
+				<a class="nav-link" href="${billingprevious}"><i
+					class="fas fa-bar-chart fa-fw"></i> <span><spring:message
+							code="monthpreviousbill" /></span></a></li>
+		</ul>
 	</nav>
-	<div class="content-wrapper">
-		<div class="container-fluid">
-			<tiles:insertAttribute name="body" />
+	<div id="wrapper">
+		<div id="content-wrapper">
+			<div class="container-fluid">
+				<tiles:insertAttribute name="body" />
+			</div>
+			<!-- Sticky Footer -->
+			<footer class="sticky-footer">
+				<div class="container my-auto">
+					<div class="copyright text-center my-auto">
+						<span>Copyright © Your Website 2019</span>
+					</div>
+				</div>
+			</footer>
 		</div>
 	</div>
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -103,7 +97,7 @@
 					</h5>
 					<button class="close" type="button" data-dismiss="modal"
 						aria-label="Close">
-						<span aria-hidden="true">�</span>
+						<span aria-hidden="true">X</span>
 					</button>
 				</div>
 				<div class="modal-body">
@@ -123,7 +117,6 @@
 	<!-- jQuery -->
 	<script type="text/javascript"
 		src="<spring:url value="/resources/js/jquery.min.js"/>"></script>
-	<script src="<spring:url value="/resources/js/bootstrap.min.js"/>"></script>
 	<!-- Custom Theme JavaScript -->
 	<script src="<spring:url value="/resources/js/jquery.easing.min.js"/>"></script>
 	<script
@@ -131,8 +124,6 @@
 	<script
 		src="<spring:url value="/resources/js/dataTables.bootstrap4.min.js"/>"></script>
 	<script src="<spring:url value="/resources/js/sb-admin.min.js"/>"></script>
-	<script
-		src="<spring:url value="/resources/js/sb-admin-datatables.min.js"/>"></script>
 	<script
 		src="<spring:url value="/resources/js/bootstrap-datepicker.min.js"/>"></script>
 	<script

@@ -2,18 +2,15 @@
 
 <head>
 <!-- Bootstrap Core CSS -->
-<link
-	href="<spring:url value="/resources/styles/admin/bootstrap.min.css"/>"
-	rel="stylesheet">
 <!-- Custom Fonts -->
 <link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <link
-	href="<spring:url value="/resources/styles/admin/dataTables.bootstrap4.min.css"/>"
+	href="<spring:url value="/resources/styles/admin/dataTables.bootstrap4.css"/>"
 	rel="stylesheet">
 <!-- Custom CSS -->
 <link
-	href="<spring:url value="/resources/styles/admin/sb-admin.min.css"/>"
+	href="<spring:url value="/resources/styles/admin/sb-admin.css"/>"
 	rel="stylesheet">
 <link
 	href="<spring:url value="/resources/styles/admin/bootstrap-datepicker.min.css"/>"
@@ -34,7 +31,8 @@
 <!-- jQuery -->
 <script type="text/javascript"
 	src="<spring:url value="/resources/js/jquery.min.js"/>"></script>
-<script src="<spring:url value="/resources/js/bootstrap.min.js"/>"></script>
+<script
+	src="<spring:url value="/resources/js/bootstrap.bundle.min.js"/>"></script>
 <!-- Custom Theme JavaScript -->
 <script src="<spring:url value="/resources/js/jquery.easing.min.js"/>"></script>
 <script
@@ -43,11 +41,10 @@
 	src="<spring:url value="/resources/js/dataTables.bootstrap4.min.js"/>"></script>
 <script src="<spring:url value="/resources/js/sb-admin.min.js"/>"></script>
 <script
-	src="<spring:url value="/resources/js/sb-admin-datatables.min.js"/>"></script>
-<script
 	src="<spring:url value="/resources/js/bootstrap-datepicker.min.js"/>"></script>
 <script
 	src="<spring:url value="/resources/js/bootstrap-datepicker.es.min.js"/>"></script>
+<script src="<spring:url value="/resources/js/employee/discounts.js"/>"></script>
 <script>
 	$(function() {
 		$("#sandbox-container input").datepicker({

@@ -10,19 +10,19 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="amountadded" /></li>
 </ol>
-<div class="row">
+<div class="form-row">
 	<div class="col-xl-3 col-sm-6 mb-3">
 		<div class="card text-white bg-primary o-hidden">
 			<div class="card-body">
 				<div class="card-body-icon">
-					<i class="fa fa-shopping-cart fa-fw"></i>
+					<i class="fas fa-shopping-cart fa-fw"></i>
 				</div>
 				<div class="mr-5">
 					<c:out value="${saleForm.idsale}" />
 					<spring:message code="numsale" />
 				</div>
 			</div>
-			<spring:url value="/employee/newsalepostponed" var="newsale"></spring:url>
+			<spring:url value="/employee/newsalepostponed" var="newsale"/>
 			<a class="card-footer text-white clearfix small z-1"
 				href="${newsale}"> <span class="float-left"><spring:message
 						code="newsalepostponed" /></span> <span class="float-right"><i
@@ -34,14 +34,14 @@
 		<div class="card text-white bg-success o-hidden">
 			<div class="card-body">
 				<div class="card-body-icon">
-					<i class="fa fa-euro-sign fa-fw"></i>
+					<i class="fas fa-euro-sign fa-fw"></i>
 				</div>
 				<div class="mr-5">
 					<c:out value="${saleForm.total}" />
 					<spring:message code="totalamount" />
 				</div>
 			</div>
-			<spring:url value="/employee/daily" var="daily"></spring:url>
+			<spring:url value="/employee/daily" var="daily"/>
 			<a class="card-footer text-white clearfix small z-1" href="${daily}">
 				<span class="float-left"><spring:message code="daily" /></span> <span
 				class="float-right"><i class="nav-link-text"></i></span>
@@ -49,7 +49,7 @@
 		</div>
 	</div>
 </div>
-<div class="row">
+<div class="form-row">
 	<div class="card mb3">
 		<div class="card-header">
 			<spring:message code="installments" />
@@ -71,7 +71,7 @@
 								<td><fmt:formatDate value="${jewel.creationdate}"
 										type="date" /></td>
 								<td><c:out value="${jewel.amount}" /><i
-									class="fa fa-euro-sign"></i></td>
+									class="fas fa-euro-sign"></i></td>
 							</tr>
 						</c:forEach>
 					</tbody>

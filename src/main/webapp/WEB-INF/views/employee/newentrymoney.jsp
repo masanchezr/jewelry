@@ -8,10 +8,10 @@
 		<li class="breadcrumb-item active"><spring:message
 				code="entrymoney" /></li>
 	</ol>
-	<div class="row">
+	<div class="form-row">
 		<div class="col-lg-12">
 			<div class="card-body">
-				<div class="row">
+				<div class="form-row">
 					<div class="col-lg-6">
 						<div class="form-group col-3">
 							<spring:message code="amount" var="amountmessage" />

@@ -11,11 +11,12 @@
 				code="removesale" /></li>
 	</ol>
 	<div class="card-body">
-		<div class="row">
+		<div class="form-row">
 			<div class="col-lg-6">
 				<div class="form-group">
-					<spring:message code="numsale" />
-					<form:input class="form-control" path="numsale" />
+					<spring:message code="numberofsaleph" var="numberofsale" />
+					<form:input class="form-control" path="numsale"
+						placeholder="${numberofsale}" />
 					<p class="text-danger">
 						<form:errors path="numsale" />
 					</p>

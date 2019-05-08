@@ -9,13 +9,13 @@
 </ol>
 <form:form action="saveinstallment" modelAttribute="installment"
 	role="form">
-	<div class="row">
+	<div class="form-row">
 		<div class="col-lg-12">
 			<div class="card-body">
-				<div class="row">
+				<div class="form-row">
 					<div class="col-lg-6">
 						<div class="form-group">
-							<spring:message code="numberofsale" var="idsalemessage" />
+							<spring:message code="numberofsaleph" var="idsalemessage" />
 							<form:input class="form-control" path="idsalepostponed"
 								placeholder="${idsalemessage}" />
 							<p class="text-danger">

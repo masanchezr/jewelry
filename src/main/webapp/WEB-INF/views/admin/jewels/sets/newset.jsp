@@ -8,35 +8,39 @@
 	<li class="breadcrumb-item active"><spring:message code="newset" /></li>
 </ol>
 <form:form action="addset" modelAttribute="setForm">
-	<div class="row">
+	<div class="form-row">
 		<div class="col-lg-12">
 			<div class="card-body">
-				<div class="row">
+				<div class="form-row">
 					<div class="col-lg-6">
 						<div class="form-group">
-							<spring:message code="referencering" />
-							<form:input class="form-control" path="referencering" />
+							<spring:message code="referencering" var="referencering" />
+							<form:input class="form-control" path="referencering"
+								placeholder="${referencering}" />
 							<p class="text-danger">
 								<form:errors path="referencering" />
 							</p>
 						</div>
 						<div class="form-group">
-							<spring:message code="referenceearrings" />
-							<form:input class="form-control" path="referenceearrings" />
+							<spring:message code="referenceearrings" var="referenceearrings" />
+							<form:input class="form-control" path="referenceearrings"
+								placeholder="${referenceearrings}" />
 							<p class="text-danger">
 								<form:errors path="referenceearrings" />
 							</p>
 						</div>
 						<div class="form-group">
-							<spring:message code="referencependant" />
-							<form:input class="form-control" path="referencependant" />
+							<spring:message code="referencependant" var="referencependant" />
+							<form:input class="form-control" path="referencependant"
+								placeholder="${referencependant}" />
 							<p class="text-danger">
 								<form:errors path="referencependant" />
 							</p>
 						</div>
 						<div class="form-group">
-							<spring:message code="referencebrazalet" />
-							<form:input class="form-control" path="referencebrazalet" />
+							<spring:message code="referencebrazalet" var="referencebrazalet" />
+							<form:input class="form-control" path="referencebrazalet"
+								placeholder="${referencebrazalet}" />
 							<p class="text-danger">
 								<form:errors path="referencebrazalet" />
 							</p>
@@ -58,29 +62,35 @@
 					</div>
 					<div class="col-lg-6">
 						<div class="form-group">
-							<spring:message code="referencechoker" />
-							<form:input class="form-control" path="referencechoker" />
+							<spring:message code="referencechoker" var="referencechoker" />
+							<form:input class="form-control" path="referencechoker"
+								placeholder="referencechoker" />
 							<p class="text-danger">
 								<form:errors path="referencechoker" />
 							</p>
 						</div>
 						<div class="form-group">
-							<spring:message code="referencetiepin" />
-							<form:input class="form-control" path="referencetiepin" />
+							<spring:message code="referencetiepin" var="referencetiepin" />
+							<form:input class="form-control" path="referencetiepin"
+								placeholder="${referencetiepin}" />
 							<p class="text-danger">
 								<form:errors path="referencetiepin" />
 							</p>
 						</div>
 						<div class="form-group">
-							<spring:message code="referencecufflinks" />
-							<form:input class="form-control" path="referencecufflinks" />
+							<spring:message code="referencecufflinks"
+								var="referencecufflinks" />
+							<form:input class="form-control" path="referencecufflinks"
+								placeholder="${referencecufflinks}" />
 							<p class="text-danger">
 								<form:errors path="referencecufflinks" />
 							</p>
 						</div>
 						<div class="form-group">
-							<spring:message code="referencediamondring" />
-							<form:input class="form-control" path="referencediamondring" />
+							<spring:message code="referencediamondring"
+								var="referencediamondring" />
+							<form:input class="form-control" path="referencediamondring"
+								placeholder="${referencediamondring}" />
 							<p class="text-danger">
 								<form:errors path="referencediamondring" />
 							</p>

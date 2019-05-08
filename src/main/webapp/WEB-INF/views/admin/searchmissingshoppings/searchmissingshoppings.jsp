@@ -10,10 +10,10 @@
 </ol>
 <form:form action="resultmissingshoppings"
 	modelAttribute="searchmissingshoppings">
-	<div class="row">
+	<div class="form-row">
 		<div class="col-lg-12">
 			<div class="card-body">
-				<div class="row">
+				<div class="form-row">
 					<div class="col-lg-6">
 						<div class="form-group">
 							<spring:message code="numfrom" />

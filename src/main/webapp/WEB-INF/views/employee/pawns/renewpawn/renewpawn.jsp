@@ -8,7 +8,7 @@
 	<li class="breadcrumb-item active"><spring:message
 			code="resultsearch" /></li>
 </ol>
-<div class="row">
+<div class="form-row">
 	<div class="col-lg-12">
 		<div class="card-body">
 			<c:if test="${not empty pawns}">

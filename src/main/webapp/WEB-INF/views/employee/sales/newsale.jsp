@@ -12,9 +12,9 @@
 			<table class="table">
 				<tbody>
 					<tr>
-						<td><spring:message code="numberofsale" var="numsalemessage" /> <form:input
-								class="form-control" path="numsale"
-								placeholder="${numsalemessage}" /></td>
+						<td><spring:message code="numberofsaleph"
+								var="numsalemessage" /> <form:input class="form-control"
+								path="numsale" placeholder="${numsalemessage}" /></td>
 						<td><p class="text-danger">
 								<form:errors path="numsale" />
 							</p></td>
@@ -57,7 +57,7 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="row">
+		<div class="form-row">
 			<div class="col-sm-6">
 				<div class="form-group">
 					<spring:message code="clientdiscount" />
