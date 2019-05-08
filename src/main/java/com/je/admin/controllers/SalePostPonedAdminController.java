@@ -20,8 +20,8 @@ public class SalePostPonedAdminController {
 	private SalesPostPonedService salesPostPonedService;
 
 	@RequestMapping(value = "/showsalepost{id}")
-	public ModelAndView showsale(@PathVariable("id") long id, BindingResult result) {
-		return getModelSalePostponed(id, result);
+	public ModelAndView showsale(@PathVariable("id") long id) {
+		return getModelSalePostponed(id);
 	}
 
 	@RequestMapping(value = "/searchmissingsalepostponed")
@@ -43,10 +43,10 @@ public class SalePostPonedAdminController {
 	@RequestMapping(value = "/showsale")
 	public ModelAndView showsale(@ModelAttribute(ConstantsJsp.FORMSALEPOSTPONED) SalePostPoned salepostponed,
 			BindingResult result) {
-		return getModelSalePostponed(salepostponed.getIdsale(), result);
+		return getModelSalePostponed(salepostponed.getIdsale());
 	}
 
-	private ModelAndView getModelSalePostponed(long id, BindingResult result) {
+	private ModelAndView getModelSalePostponed(long id) {
 		ModelAndView model = new ModelAndView();
 		SalePostPoned spp = salesPostPonedService.searchByPK(id);
 		if (spp != null) {
@@ -55,16 +55,15 @@ public class SalePostPonedAdminController {
 		} else {
 			model.setViewName("searchsalepostponed");
 			model.addObject(ConstantsJsp.FORMSALEPOSTPONED, new SalePostPoned());
-			result.rejectValue("idsale", "salepostponednotexist");
 		}
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		return model;
 	}
 
 	@RequestMapping(value = "/timeout{id}")
-	public ModelAndView timeout(@PathVariable long id, BindingResult result) {
+	public ModelAndView timeout(@PathVariable long id) {
 		salesPostPonedService.timeout(id);
-		return getModelSalePostponed(id, result);
+		return getModelSalePostponed(id);
 	}
 
 	@RequestMapping(value = "/searchexpired")
