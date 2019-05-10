@@ -44,7 +44,7 @@
 		<div class="card text-white bg-danger o-hidden">
 			<div class="card-body">
 				<div class="card-body-icon">
-					<i class="fas fa-fw fa-support"></i>
+					<i class="fas fa-fw fa-map-marked-alt"></i>
 				</div>
 				<div class="mr-5">
 					<c:out value="${saleForm.place.description}" />
