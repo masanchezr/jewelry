@@ -8,32 +8,32 @@
 				code="newadjustment" /></li>
 	</ol>
 	<div class="card-body">
-		<div class="form-group col-3">
+		<div class="form-group">
 			<spring:message code="idadjustment" />
 			<form:input class="form-control" path="idadjustment" />
 			<form:errors path="idadjustment" />
 		</div>
-		<div class="form-group col-3">
+		<div class="form-group">
 			<spring:message code="description" />
 			<form:input class="form-control" path="description" />
 			<form:errors path="description" />
 		</div>
-		<div class="form-group col-3">
+		<div class="form-group">
 			<spring:message code="gramsused" />
 			<form:input class="form-control" path="grams" />
 			<form:errors path="grams" />
 		</div>
-		<div class="form-group col-3">
+		<div class="form-group">
 			<spring:message code="amountwork" />
 			<form:input class="form-control" path="amountwork" />
 			<form:errors path="amountwork" />
 		</div>
-		<div class="form-group col-3">
+		<div class="form-group">
 			<spring:message code="recommendedprice" />
 			<form:input class="form-control" path="recommendedprice" />
 			<form:errors path="recommendedprice" />
 		</div>
-		<div class="form-group col-3">
+		<div class="form-group">
 			<form:button class="btn btn-primary" value="submit">
 				<spring:message code="save" />
 			</form:button>

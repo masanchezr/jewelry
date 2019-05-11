@@ -9,7 +9,7 @@
 				<form:hidden path="nif" />
 				<div class="form-row">
 					<div class="col-lg-6">
-						<div class="form-group col-3">
+						<div class="form-group">
 							<label class="control-label" for="shipping_address"><spring:message
 									code="address" /><span>*</span></label>
 							<div class="controls">
@@ -20,7 +20,7 @@
 						</div>
 					</div>
 					<div class="col-md-6">
-						<div class="form-group col-3">
+						<div class="form-group">
 							<label class="control-label" for="shipping_postcode"><spring:message
 									code="postcode" /><span>*</span></label>
 							<form:input class="form-control" path="postalcode"
@@ -29,7 +29,7 @@
 						</div>
 					</div>
 					<div class="col-md-6">
-						<div class="form-group col-3">
+						<div class="form-group">
 							<label class="control-label" for="shipping_city"><spring:message
 									code="city" /><span>*</span></label>
 							<form:input class="form-control" path="city" id="shipping_city"
@@ -40,7 +40,7 @@
 				</div>
 				<div class="form-row">
 					<div class="col-md-6">
-						<div class="form-group col-3">
+						<div class="form-group">
 							<div id="billing-details-check" class="control-group">
 								<div class="controls">
 									<label class="checkbox" for="billing_same_as_shipping"><form:checkbox

@@ -137,7 +137,7 @@
 					</ul>
 					<form:form action='busqueda' modelAttribute="searchDateForm"
 						class="navbar-form pull-right" role="search">
-						<div class="form-group col-3">
+						<div class="form-group">
 							<spring:message code="find" var="find" />
 							<form:input path="searchname" class="form-control"
 								placeholder="${find}" />

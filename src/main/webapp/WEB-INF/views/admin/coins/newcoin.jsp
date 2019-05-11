@@ -11,31 +11,31 @@
 				<div class="card-body">
 					<div class="form-row">
 						<div class="col-lg-4">
-							<div class="form-group col-3">
+							<div class="form-group">
 								<spring:message code="description" />
 								<form:input class="form-control" path="description" />
 								<form:errors path="description" />
 							</div>
-							<div class="form-group col-3">
+							<div class="form-group">
 								<spring:message code="place" />
 								<form:select class="form-control" path="place.idplace">
 									<form:options items="${places}" itemValue="idplace"
 										itemLabel="description" />
 								</form:select>
 							</div>
-							<div class="form-group col-3">
+							<div class="form-group">
 								<spring:message code="price" />
 								<form:input class="form-control" path="price" />
 								<form:errors path="price" />
 							</div>
-							<div class="form-group col-3">
+							<div class="form-group">
 								<form:button class="btn btn-primary" value="submit">
 									<spring:message code="save" />
 								</form:button>
 							</div>
 						</div>
 						<div class="col-lg-4">
-							<div class="form-group col-3">
+							<div class="form-group">
 								<spring:message code="material" />
 								<form:select class="form-control" path="metal">
 									<form:options items="${materials}" itemValue="idmetal"

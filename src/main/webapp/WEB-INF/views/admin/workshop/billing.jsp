@@ -39,7 +39,7 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-12">
-						<div class="form-group col-3">
+						<div class="form-group">
 							<spring:message code="totalamount" />
 							<c:out value="${totalamount}" />
 							<i class="fas fa-euro-sign"></i>

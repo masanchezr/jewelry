@@ -13,7 +13,7 @@
 			<div class="card-body">
 				<div class="form-row">
 					<div class="col-lg-6">
-						<div class="form-group col-3">
+						<div class="form-group">
 							<spring:message code="amount" var="amountmessage" />
 							<form:input class="form-control" path="amount"
 								placeholder="${amountmessage}" />
@@ -22,7 +22,7 @@
 										path="amount" /></label>
 							</div>
 						</div>
-						<div class="form-group col-3">
+						<div class="form-group">
 							<form:button class="btn btn-primary" value="submit">
 								<spring:message code="save" />
 							</form:button>

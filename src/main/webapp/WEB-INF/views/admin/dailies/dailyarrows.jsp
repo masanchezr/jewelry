@@ -210,7 +210,7 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-12">
-					<div class="form-group col-3">
+					<div class="form-group">
 						<spring:message code="totalamount" />
 						<c:out value="${daily.finalamount}" />
 						<i class="fas fa-euro-sign"></i>
@@ -219,7 +219,7 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-6">
-					<div class="form-group col-3">
+					<div class="form-group">
 						<spring:url value="/beforeday" var="beforeday" />
 						<a
 							href="${beforeday}<fmt:formatDate value="${datedaily}" pattern="yyyyMMdd" />/<c:out value="${place}" />"><button

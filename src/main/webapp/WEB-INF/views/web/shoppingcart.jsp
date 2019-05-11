@@ -41,7 +41,7 @@
 								<div class="form-row">
 									<div class="col-lg-12">
 										<div class="col-lg-3">
-											<div class="form-group col-3">
+											<div class="form-group">
 												<label class="control-label" for="shipping_name"><spring:message
 														code="name" /><span>*</span></label>
 												<form:input class="form-control" id="shipping_name"
@@ -50,7 +50,7 @@
 											</div>
 										</div>
 										<div class="col-lg-3">
-											<div class="form-group col-3">
+											<div class="form-group">
 												<label class="control-label" for="shipping_nif"><spring:message
 														code="nif" /><span>*</span></label>
 												<form:input path="nif" class="form-control"
@@ -59,7 +59,7 @@
 											</div>
 										</div>
 										<div class="col-lg-3">
-											<div class="form-group col-3">
+											<div class="form-group">
 												<label class="control-label" for="shipping_email"><spring:message
 														code="email" /></label>
 												<form:input class="form-control" path="email"
@@ -68,7 +68,7 @@
 											</div>
 										</div>
 										<div class="col-lg-3">
-											<div class="form-group col-3">
+											<div class="form-group">
 												<label class="control-label" for="shipping_telephone"><spring:message
 														code="telephone" /></label>
 												<form:input class="form-control" path="telephone"
@@ -80,7 +80,7 @@
 								</div>
 								<div class="form-row">
 									<div class="col-lg-12">
-										<div class="form-group col-3">
+										<div class="form-group">
 											<form:button class="btn btn-default" value="submit">
 												<spring:message code="continue" />
 											</form:button>
