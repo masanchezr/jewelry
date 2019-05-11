@@ -2,21 +2,17 @@
 <%@taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <html>
 <head>
-<!-- Bootstrap Core CSS -->
-<link
-	href="<spring:url value="/resources/styles/admin/bootstrap.min.css"/>"
-	rel="stylesheet">
 <!-- Custom CSS -->
-<link
-	href="<spring:url value="/resources/styles/admin/sb-admin.css"/>"
+<link href="<spring:url value="/resources/styles/admin/sb-admin.css"/>"
 	rel="stylesheet">
 <title><spring:message code="titleAdmin" /></title>
-<!-- html5-->
-<meta charset="utf-8" />
-<!-- html4-->
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <body class="bg-dark">
 	<tiles:insertAttribute name="body" />
+	<!-- Bootstrap core JavaScript-->
+	<script src="/resources/js/jquery.min.js"></script>
+	<script src="/resources/js/js/bootstrap.bundle.min.js"></script>
+	<!-- Core plugin JavaScript-->
+	<script src="/resources/js/jquery.easing.min.js"></script>
 </body>
 </html>

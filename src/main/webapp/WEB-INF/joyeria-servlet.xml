@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
@@ -26,6 +27,7 @@
 		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<property name="definitions">
 			<list>
+				<value>/WEB-INF/config/tiles.xml</value>
 				<value>/WEB-INF/config/tiles-admin.xml</value>
 				<value>/WEB-INF/config/tiles-employee.xml</value>
 				<value>/WEB-INF/config/tiles-workshop.xml</value>
@@ -47,5 +49,6 @@
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 
 	<bean id="mapperWeb" class="org.dozer.DozerBeanMapper" />
-	<mvc:resources mapping="/resources/**" location="/resources/mytheme/" />
+	<mvc:resources mapping="/resources/**"
+		location="/resources/mytheme/" />
 </beans>

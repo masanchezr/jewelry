@@ -7,8 +7,6 @@
 	<!-- admin -->
 	<definition name="templateAdmin"
 		template="/WEB-INF/views/admin/templateAdmin.jsp" />
-	<definition name="templateLogin"
-		template="/WEB-INF/views/admin/templateLogin.jsp" />
 	<definition name="admin" extends="templateAdmin">
 		<put-attribute name="header"
 			value="/WEB-INF/views/admin/header.jsp" />

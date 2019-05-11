@@ -5,23 +5,29 @@
 
 <tiles-definitions>
 	<!-- workshop -->
-	<definition name="templateAdminWorkshop" template="/WEB-INF/views/workshop/template.jsp" />
-	<definition name="templateLoginWorkshop" template="/WEB-INF/views/workshop/templateLogin.jsp" />
-	<definition name="loginworkshop" extends="templateLoginWorkshop">
-		<put-attribute name="body" value="/WEB-INF/views/workshop/login.jsp" />
+	<definition name="templateAdminWorkshop"
+		template="/WEB-INF/views/workshop/template.jsp" />
+	<definition name="loginworkshop" extends="templateLogin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/workshop/login.jsp" />
 	</definition>
-	<definition name="adminworkshop" extends="templateAdminWorkshop">
-		<put-attribute name="body" value="/WEB-INF/views/workshop/admin.jsp" />
+	<definition name="adminworkshop"
+		extends="templateAdminWorkshop">
+		<put-attribute name="body"
+			value="/WEB-INF/views/workshop/admin.jsp" />
 	</definition>
-	<definition name="successworkshop" extends="templateAdminWorkshop">
+	<definition name="successworkshop"
+		extends="templateAdminWorkshop">
 		<put-attribute name="body"
 			value="/WEB-INF/views/workshop/success.jsp" />
 	</definition>
-	<definition name="newadjustmentworkshop" extends="templateAdminWorkshop">
+	<definition name="newadjustmentworkshop"
+		extends="templateAdminWorkshop">
 		<put-attribute name="body"
 			value="/WEB-INF/views/workshop/newadjustment.jsp" />
 	</definition>
-	<definition name="newWorkshop" extends="templateAdminWorkshop">
+	<definition name="newWorkshop"
+		extends="templateAdminWorkshop">
 		<put-attribute name="body"
 			value="/WEB-INF/views/workshop/newworkshop.jsp" />
 	</definition>
@@ -29,7 +35,8 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/workshop/billing.jsp" />
 	</definition>
-	<definition name="403wks" extends="templateLoginWorkshop">
-		<put-attribute name="body" value="/WEB-INF/views/workshop/403.jsp" />
+	<definition name="403wks" extends="templateLogin">
+		<put-attribute name="body"
+			value="/WEB-INF/views/workshop/403.jsp" />
 	</definition>
 </tiles-definitions>
