@@ -35,10 +35,6 @@
 	<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 		<a class="navbar-brand mr-1" href="index.html"><spring:message
 				code="goldburgos" /></a>
-		<button class="btn btn-link btn-sm text-white order-1 order-sm-0"
-			id="sidebarToggle">
-			<i class="fas fa-bars"></i>
-		</button>
 		<!-- Navbar -->
 		<ul class="navbar-nav ml-auto ml-md-0">
 			<li class="nav-item dropdown no-arrow"><a
@@ -54,20 +50,20 @@
 		</ul>
 		<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
 			<li class="nav-item"><spring:url value="/workshop/newadjustment"
-					var="adjustment"/> <a class="nav-link"
-				href="${adjustment}"><i class="fas fa-archive fa-fw"></i> <span><spring:message
+					var="adjustment" /> <a class="nav-link" href="${adjustment}"><i
+					class="fas fa-archive fa-fw"></i> <span><spring:message
 							code="adjustment" /></span></a></li>
 			<li class="nav-item"><spring:url value="/workshop/newWorkshop"
-					var="workshop"/> <a class="nav-link" href="${workshop}"><i
+					var="workshop" /> <a class="nav-link" href="${workshop}"><i
 					class="fas fa-gem fa-fw"></i> <span><spring:message
 							code="workshop" /></span></a></li>
 			<li class="nav-item"><spring:url value="/workshop/billing"
-					var="billing"/> <a class="nav-link" href="${billing}"><i
+					var="billing" /> <a class="nav-link" href="${billing}"><i
 					class="fas fa-bar-chart fa-fw"></i> <span><spring:message
 							code="currentmonthbill" /></span></a></li>
 			<li class="nav-item"><spring:url
-					value="/workshop/billingprevious" var="billingprevious"/>
-				<a class="nav-link" href="${billingprevious}"><i
+					value="/workshop/billingprevious" var="billingprevious" /> <a
+				class="nav-link" href="${billingprevious}"><i
 					class="fas fa-bar-chart fa-fw"></i> <span><spring:message
 							code="monthpreviousbill" /></span></a></li>
 		</ul>
