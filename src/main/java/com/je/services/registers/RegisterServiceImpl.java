@@ -67,7 +67,8 @@ public class RegisterServiceImpl implements RegisterService {
 			Optional<UserEntity> employee = employeesRepository.findById(user);
 			if (employee.isPresent()) {
 				UserEntity userEntity = employee.get();
-				RegisterEntity register = registerRepository.findByDateAndEmployee(new Date(), userEntity);
+				RegisterEntity register = registerRepository.findByDateAndEmployee(DateUtil.getDateFormated(new Date()),
+						userEntity);
 				if (register == null) {
 					register = new RegisterEntity();
 					register.setEmployee(userEntity);

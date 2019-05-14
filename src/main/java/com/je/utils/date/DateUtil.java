@@ -113,4 +113,8 @@ public class DateUtil {
 		Calendar c = Calendar.getInstance();
 		return c.getTime();
 	}
+
+	public static Date getDateFormated(Date date) {
+		return getDate(getStringDateFormatddMMyyyy(date));
+	}
 }
