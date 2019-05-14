@@ -237,6 +237,11 @@
 					var="searchclients" /> <a href="${searchclients}" class="nav-link"><i
 					class="fas fa-users fa-fw"></i> <span><spring:message
 							code="searchclients" /></span></a></li>
+			<li class="nav-item"><spring:url
+					value="/searchRegisterEmployees" var="searchRegisterEmployees" />
+				<a href="${searchRegisterEmployees}" class="nav-link"><i
+					class="fas fa-archive fa-fw"></i> <span><spring:message
+							code="registeremployees" /></span></a></li>
 			<li class="nav-item"><spring:url value="/newCategory"
 					var="newcategory" /> <a href="${newcategory}" class="nav-link"><i
 					class="fas fa-archive fa-fw"></i> <span><spring:message

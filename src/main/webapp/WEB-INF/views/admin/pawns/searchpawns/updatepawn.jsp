@@ -26,9 +26,9 @@
 							</p>
 						</div>
 						<div class="form-group">
-							<spring:message code="nameclient" var="nameclient" />
+							<spring:message code="name" var="name" />
 							<form:input class="form-control" path="name"
-								placeholder="${nameclient}" />
+								placeholder="${name}" />
 							<p class="text-danger">
 								<form:errors path="name" />
 							</p>

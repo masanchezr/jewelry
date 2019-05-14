@@ -60,7 +60,7 @@
 							</p>
 						</div>
 						<div class="form-group">
-							<spring:message code="jewelname" var="name" />
+							<spring:message code="name" var="name" />
 							<form:input class="form-control" path="name"
 								placeholder="${name}" />
 							<div class="form-group col-3 has-error">

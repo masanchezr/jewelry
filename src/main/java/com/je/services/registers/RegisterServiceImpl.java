@@ -68,12 +68,14 @@ public class RegisterServiceImpl implements RegisterService {
 			if (employee.isPresent()) {
 				UserEntity userEntity = employee.get();
 				RegisterEntity register = registerRepository.findByDateAndEmployee(new Date(), userEntity);
-				if (register == null || register.getTimeinmorning() == null || register.getTimeoutmorning() == null
-						|| register.getTimeinafternoon() == null || register.getTimeoutafternoon() == null) {
+				if (register == null) {
 					register = new RegisterEntity();
 					register.setEmployee(userEntity);
 					register.setDate(new Date());
 					register.setIpaddress(ipaddress);
+				}
+				if (register.getTimeinmorning() == null || register.getTimeoutmorning() == null
+						|| register.getTimeinafternoon() == null || register.getTimeoutafternoon() == null) {
 					if (register.getTimeinmorning() == null) {
 						calendar.set(Calendar.HOUR_OF_DAY, 10);
 						register.setTimeinmorning(calendar.getTime());

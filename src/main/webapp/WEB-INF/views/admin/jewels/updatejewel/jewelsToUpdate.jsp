@@ -19,7 +19,7 @@
 							<tr>
 								<th></th>
 								<th><spring:message code="reference" /></th>
-								<th><spring:message code="nameclient" /></th>
+								<th><spring:message code="name" /></th>
 								<th><spring:message code="description" /></th>
 								<th><spring:message code="price" /></th>
 								<th><spring:message code="place" /></th>

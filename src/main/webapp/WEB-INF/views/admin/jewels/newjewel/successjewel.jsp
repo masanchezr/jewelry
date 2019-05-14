@@ -62,7 +62,7 @@
 					<i class="fas fa-fw fa-list"></i>
 				</div>
 				<div class="mr-5">
-					<spring:message code="nameclient" />
+					<spring:message code="name" />
 					<c:out value="${jewel.name}" />
 				</div>
 			</div>

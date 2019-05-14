@@ -558,6 +558,19 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/shoppings/exceltomelloso.jsp" />
 	</definition>
+	<definition name="searchregisteremployees"
+		extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/admin/headerDateRange.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/register/search.jsp" />
+	</definition>
+	<definition name="registeremployees" extends="templateAdmin">
+		<put-attribute name="header"
+			value="/WEB-INF/views/admin/header.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/register/register.jsp" />
+	</definition>
 	<definition name="resultadjustment" extends="templateAdmin">
 		<put-attribute name="header"
 			value="/WEB-INF/views/admin/headerDateRange.jsp" />
