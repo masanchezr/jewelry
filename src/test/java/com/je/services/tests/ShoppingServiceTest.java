@@ -62,7 +62,7 @@ public class ShoppingServiceTest {
 
 	@Test
 	public void generateExcelTest() {
-		shoppingService.generateExcel("16-03-2017", "20-03-2018");
+		shoppingService.generateExcel("16-03-2018", "20-03-2018");
 	}
 
 	@Test

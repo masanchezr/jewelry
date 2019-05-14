@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd
-    http://www.springframework.org/schema/data/jpa
-    http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context.xsd
     http://www.springframework.org/schema/jdbc 
     http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
     http://www.springframework.org/schema/tx 
-    http://www.springframework.org/schema/tx/spring-tx.xsd">
+    http://www.springframework.org/schema/tx/spring-tx.xsd
+    http://www.springframework.org/schema/data/jpa
+    http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp.BasicDataSource">
@@ -33,7 +36,16 @@
 				<property name="showSql" value="true" />
 			</bean>
 		</property>
-		<property name="persistenceUnitName" value="joyeriaPU" />
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.query.factory_class">
+					org.hibernate.hql.internal.classic.ClassicQueryTranslatorFactory
+				</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+			</props>
+		</property>
+		<property name="packagesToScan"
+			value="com.je.dbaccess.entities" />
 	</bean>
 
 	<bean class="org.springframework.orm.jpa.JpaTransactionManager"
@@ -51,7 +63,6 @@
 		entity-manager-factory-ref="entityManagerFactory" />
 	<tx:annotation-driven
 		transaction-manager="transactionManager" />
-
 	<bean id="usersManager"
 		class="com.je.dbaccess.managers.UsersManagerImpl" />
 	<bean id="jewelsManager"
@@ -60,4 +71,9 @@
 		class="com.je.dbaccess.managers.SaleManagerImpl" />
 	<bean id="holidaysManager"
 		class="com.je.dbaccess.managers.HolidaysManagerImpl" />
+	<context:component-scan
+		base-package="com.je.dbaccess.repositories">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Repository" />
+	</context:component-scan>
 </beans>
