@@ -19,7 +19,7 @@ import com.je.utils.constants.Constants;
 public class RecordingEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "IDRECORDING")
 	private Long idrecording;
 

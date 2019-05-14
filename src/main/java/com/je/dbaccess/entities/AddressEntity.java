@@ -20,7 +20,7 @@ public class AddressEntity {
 
 	/** The idaddress. */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "IDADDRESS")
 	private Long idaddress;
 

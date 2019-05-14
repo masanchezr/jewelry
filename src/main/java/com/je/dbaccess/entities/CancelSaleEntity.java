@@ -30,7 +30,7 @@ public class CancelSaleEntity {
 	/** The idcancelsave. */
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "IDCANCELSALE")
 	private Long idcancelsale;
 

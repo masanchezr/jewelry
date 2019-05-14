@@ -22,7 +22,7 @@ public class RenovationEntity {
 
 	/** The idrenovation. */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "IDRENOVATION")
 	private Long idrenovation;
 

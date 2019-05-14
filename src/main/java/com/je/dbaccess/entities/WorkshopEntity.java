@@ -25,7 +25,7 @@ public class WorkshopEntity {
 
 	/** The idworkshop. */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "IDWORKSHOP")
 	private Long idworkshop;
 

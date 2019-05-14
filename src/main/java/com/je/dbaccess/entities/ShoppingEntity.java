@@ -30,7 +30,7 @@ public class ShoppingEntity {
 
 	/** The idshop. */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "IDSHOP")
 	private Long idshop;
 

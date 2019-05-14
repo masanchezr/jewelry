@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class PlaceUserEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "IDPLACEMEMBERS")
 	private Long idplacerole;
 

@@ -20,7 +20,7 @@ public class ObjectShopEntity {
 
 	/** The idobjectshop. */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "IDOBJECTSHOP")
 	private Long idobjectshop;
 

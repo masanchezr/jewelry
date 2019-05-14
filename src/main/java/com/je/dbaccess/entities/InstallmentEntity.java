@@ -19,7 +19,7 @@ import com.je.utils.constants.Constants;
 public class InstallmentEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "IDINSTALLMENT")
 	private Long idinstallment;
 

@@ -21,7 +21,7 @@ import com.je.utils.constants.Constants;
 public class BatteryEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idbattery")
 	private Long idbattery;
 

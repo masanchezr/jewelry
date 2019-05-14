@@ -18,7 +18,7 @@ import com.je.utils.constants.Constants;
 public class SalePostPonedJewel {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idsalepostponedjewel")
 	private Long idsalepostponedjewel;
 

@@ -19,7 +19,7 @@ public class SalesJewels {
 
 	/** The sale. */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "IDSALESJEWELS")
 	private Long idsalesjewels;
 

@@ -16,7 +16,7 @@ public class CategoryEntity {
 
 	/** The idcategory. */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "IDCATEGORY")
 	private Long idcategory;
 

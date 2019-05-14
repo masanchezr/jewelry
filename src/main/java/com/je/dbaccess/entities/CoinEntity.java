@@ -20,7 +20,7 @@ public class CoinEntity {
 
 	/** The idcoin. */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "IDCOIN")
 	private Long idcoin;
 

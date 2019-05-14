@@ -21,7 +21,7 @@ import com.je.utils.constants.Constants;
 public class StrapEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idstrap")
 	private Long idstrap;
 

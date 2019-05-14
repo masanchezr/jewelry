@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class IPEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "IDIP")
 	private Long idip;
 

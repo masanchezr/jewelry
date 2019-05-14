@@ -22,7 +22,7 @@ public class HolidayEntity {
 
 	/** The idholiday. */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "IDHOLIDAY")
 	private Long idholiday;
 

@@ -20,7 +20,7 @@ public class ObjectPawnEntity {
 
 	/** The idobjectpawn. */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "IDOBJECTPAWN")
 	private Long idobjectpawn;
 

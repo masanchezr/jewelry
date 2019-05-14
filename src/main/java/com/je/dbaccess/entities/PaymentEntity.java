@@ -16,7 +16,7 @@ public class PaymentEntity {
 
 	/** The idpayment. */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "IDPAYMENT")
 	private Long idpayment;
 

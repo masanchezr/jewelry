@@ -16,7 +16,7 @@ import javax.persistence.Table;
 public class CancelSalePaymentEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idcancelsalepayment")
 	private Long idcancelsalepayment;
 

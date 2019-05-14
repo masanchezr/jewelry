@@ -17,7 +17,7 @@ import javax.persistence.Table;
 public class SetEntity {
 	/** The idset. */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "IDSET")
 	private Long idset;
 

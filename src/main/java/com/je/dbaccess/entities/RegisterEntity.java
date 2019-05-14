@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
 public class RegisterEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idregister")
 	private Long idregister;
 

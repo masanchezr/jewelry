@@ -17,7 +17,7 @@ import javax.persistence.Table;
 public class MetalEntity {
 	/** The metal. */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "IDMETAL")
 	private Long idmetal;
 

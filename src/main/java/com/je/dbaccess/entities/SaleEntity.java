@@ -29,7 +29,7 @@ public class SaleEntity {
 
 	/** The idsale. */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "IDSALE")
 	private Long idsale;
 
