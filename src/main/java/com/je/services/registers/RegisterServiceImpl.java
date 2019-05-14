@@ -68,26 +68,27 @@ public class RegisterServiceImpl implements RegisterService {
 			if (employee.isPresent()) {
 				UserEntity userEntity = employee.get();
 				RegisterEntity register = registerRepository.findByDateAndEmployee(new Date(), userEntity);
-				if (register == null) {
+				if (register == null || register.getTimeinmorning() == null || register.getTimeoutmorning() == null
+						|| register.getTimeinafternoon() == null || register.getTimeoutafternoon() == null) {
 					register = new RegisterEntity();
 					register.setEmployee(userEntity);
 					register.setDate(new Date());
 					register.setIpaddress(ipaddress);
+					if (register.getTimeinmorning() == null) {
+						calendar.set(Calendar.HOUR_OF_DAY, 10);
+						register.setTimeinmorning(calendar.getTime());
+					} else if (register.getTimeoutmorning() == null) {
+						calendar.set(Calendar.HOUR_OF_DAY, 14);
+						register.setTimeoutmorning(calendar.getTime());
+					} else if (register.getTimeinafternoon() == null) {
+						calendar.set(Calendar.HOUR_OF_DAY, 16);
+						register.setTimeinafternoon(calendar.getTime());
+					} else if (register.getTimeoutafternoon() == null) {
+						calendar.set(Calendar.HOUR_OF_DAY, 20);
+						register.setTimeoutafternoon(calendar.getTime());
+					}
+					registerRepository.save(register);
 				}
-				if (register.getTimeinmorning() == null) {
-					calendar.set(Calendar.HOUR_OF_DAY, 10);
-					register.setTimeinmorning(calendar.getTime());
-				} else if (register.getTimeoutmorning() == null) {
-					calendar.set(Calendar.HOUR_OF_DAY, 14);
-					register.setTimeoutmorning(calendar.getTime());
-				} else if (register.getTimeinafternoon() == null) {
-					calendar.set(Calendar.HOUR_OF_DAY, 16);
-					register.setTimeinafternoon(calendar.getTime());
-				} else if (register.getTimeoutafternoon() == null) {
-					calendar.set(Calendar.HOUR_OF_DAY, 20);
-					register.setTimeoutafternoon(calendar.getTime());
-				}
-				registerRepository.save(register);
 			}
 		}
 	}
