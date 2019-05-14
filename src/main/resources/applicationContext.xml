@@ -85,4 +85,6 @@
 		class="com.je.services.messages.MessageServiceImpl" />
 	<bean id="connectionService"
 		class="com.je.services.connections.ConnectionServiceImpl" />
+	<bean id="registerService"
+		class="com.je.services.registers.RegisterServiceImpl" />
 </beans>

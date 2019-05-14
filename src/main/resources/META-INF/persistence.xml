@@ -50,6 +50,7 @@
 		<class>com.je.dbaccess.entities.IPEntity</class>
 		<class>com.je.dbaccess.entities.ConnectionEntity</class>
 		<class>com.je.dbaccess.entities.PayrolltypeEntity</class>
+		<class>com.je.dbaccess.entities.RegisterEntity</class>
 		<properties>
 			<property name="hibernate.query.factory_class"
 				value="org.hibernate.hql.internal.classic.ClassicQueryTranslatorFactory" />

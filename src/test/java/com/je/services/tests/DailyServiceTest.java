@@ -36,15 +36,15 @@ public class DailyServiceTest {
 		place.setIdplace(28017L);
 		Daily daily = dailyService.getDaily(c.getTime(), place, "prueba");
 		if (daily != null) {
-			System.out.println(
-					"N&uacute;mero de operaciones:" + daily.getNumoperations() + " importe final:" + daily.getFinalamount());
+			System.out.println("N&uacute;mero de operaciones:" + daily.getNumoperations() + " importe final:"
+					+ daily.getFinalamount());
 		}
 	}
 
 	@Test
 	public void calculateDailiesTest() {
 		PlaceEntity place = new PlaceEntity();
-		Calendar c = new GregorianCalendar(2018, 10, 28);
+		Calendar c = new GregorianCalendar(2019, 4, 10);
 		place.setIdplace(28017L);
 		dailyService.calculateDailies(c.getTime(), place);
 	}

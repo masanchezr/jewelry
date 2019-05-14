@@ -27,16 +27,14 @@ public class HolidaysManagerImpl implements HolidaysManager {
 			if (Calendar.SUNDAY == calendar.get(Calendar.DAY_OF_WEEK)) {
 				calendar.add(Calendar.DAY_OF_MONTH, -1);
 			}
-			HolidayEntity holiday = holidayRepository.findByHolidayAndPlace(
-					calendar.getTime(), place);
+			HolidayEntity holiday = holidayRepository.findByHolidayAndPlace(calendar.getTime(), place);
 			if (holiday != null) {
 				calendar.add(Calendar.DAY_OF_MONTH, -1);
 			} else {
 				isHoliday = false;
 			}
 		}
-		Date previousDay = calendar.getTime();
-		return previousDay;
+		return calendar.getTime();
 	}
 
 	public boolean isHoliday(Date date, PlaceEntity place) {
@@ -44,8 +42,7 @@ public class HolidaysManagerImpl implements HolidaysManager {
 		boolean isHoliday = true;
 		calendar.setTime(date);
 		if (Calendar.SUNDAY != calendar.get(Calendar.DAY_OF_WEEK)) {
-			HolidayEntity holiday = holidayRepository.findByHolidayAndPlace(
-					calendar.getTime(), place);
+			HolidayEntity holiday = holidayRepository.findByHolidayAndPlace(calendar.getTime(), place);
 			if (holiday == null) {
 				isHoliday = false;
 			}
