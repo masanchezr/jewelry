@@ -26,7 +26,7 @@ public class RegisterEmployeesController {
 	public ModelAndView searchRegisterEmployees() {
 		ModelAndView model = new ModelAndView("searchregisteremployees");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
-		model.addObject("searchForm", new SearchForm());
+		model.addObject("searchDateForm", new SearchForm());
 		return model;
 	}
 
