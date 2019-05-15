@@ -20,6 +20,8 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 /**
  * The Class ShoppingEntity.
@@ -45,9 +47,11 @@ public class ShoppingEntity {
 	/** The creationdate. */
 	@Temporal(TemporalType.DATE)
 	@Column(name = "CREATIONDATE")
+	@CreatedDate
 	private Date creationdate;
 
 	/** The creationdate. */
+	@LastModifiedDate
 	@Temporal(TemporalType.DATE)
 	@Column(name = "MELTDATE")
 	private Date meltdate;

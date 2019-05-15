@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.CreatedDate;
+
 /**
  * The Class PlaceEntity.
  */
@@ -21,6 +23,7 @@ public class PlaceEntity {
 
 	/** The creationdate. */
 	@Column(name = "CREATIONDATE")
+	@CreatedDate
 	private Date creationdate;
 
 	/** The description. */

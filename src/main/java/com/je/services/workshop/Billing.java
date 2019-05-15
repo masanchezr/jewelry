@@ -36,8 +36,7 @@ public class Billing {
 	/**
 	 * Sets the amount.
 	 *
-	 * @param amount
-	 *            the new amount
+	 * @param amount the new amount
 	 */
 	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
@@ -55,8 +54,7 @@ public class Billing {
 	/**
 	 * Sets the description.
 	 *
-	 * @param description
-	 *            the new description
+	 * @param description the new description
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -74,8 +72,7 @@ public class Billing {
 	/**
 	 * Sets the idadjustment.
 	 *
-	 * @param idadjustment
-	 *            the new idadjustment
+	 * @param idadjustment the new idadjustment
 	 */
 	public void setIdadjustment(long idadjustment) {
 		this.idadjustment = idadjustment;

@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.CreatedDate;
+
 /**
  * The Class JewelEntity.
  */
@@ -70,6 +72,7 @@ public class JewelEntity {
 	private MetalEntity metal;
 
 	/** The creationdate. */
+	@CreatedDate
 	@Column(name = "CREATIONDATE")
 	private Date creationdate;
 

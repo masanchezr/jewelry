@@ -15,6 +15,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.springframework.data.annotation.CreatedDate;
 
 import com.je.utils.constants.Constants;
 
@@ -33,6 +34,7 @@ public class SalePostponedEntity {
 	private Date dateretired;
 
 	@Column(name = Constants.CREATIONDATE)
+	@CreatedDate
 	private Date creationdate;
 
 	@Column(name = "deadline")

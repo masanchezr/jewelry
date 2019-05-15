@@ -10,6 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import com.je.utils.constants.Constants;
 
 @Entity
@@ -26,9 +29,11 @@ public class DiscountEntity {
 	private PlaceEntity place;
 
 	/** The creationdate. */
+	@CreatedDate
 	@Column(name = "CREATIONDATE")
 	private Date creationdate;
 
+	@LastModifiedDate
 	@Column(name = "modificationdate")
 	private Date modificationdate;
 

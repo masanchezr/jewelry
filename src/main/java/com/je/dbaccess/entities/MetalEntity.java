@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.CreatedDate;
+
 /**
  * The Class MetalEntity.
  */
@@ -26,6 +28,7 @@ public class MetalEntity {
 	private String description;
 
 	/** The creationdate. */
+	@CreatedDate
 	@Column(name = "CREATIONDATE")
 	private Date creationdate;
 

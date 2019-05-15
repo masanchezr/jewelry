@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.CreatedDate;
+
 import com.je.utils.constants.Constants;
 
 @Entity
@@ -35,6 +37,7 @@ public class InstallmentEntity {
 	@Column(name = Constants.AMOUNT)
 	private BigDecimal amount;
 
+	@CreatedDate
 	@Column(name = Constants.CREATIONDATE)
 	private Date creationdate;
 

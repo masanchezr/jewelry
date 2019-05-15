@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.data.annotation.CreatedDate;
+
 /**
  * The Class OtherConceptEntity.
  */
@@ -36,6 +38,7 @@ public class OtherConceptEntity {
 	private BigDecimal amount;
 
 	/** The creationdate. */
+	@CreatedDate
 	@Temporal(TemporalType.DATE)
 	@Column(name = "CREATIONDATE")
 	private Date creationdate;

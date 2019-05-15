@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.CreatedDate;
+
 @Entity
 @Table(name = "incidents")
 public class IncidentEntity {
@@ -23,6 +25,7 @@ public class IncidentEntity {
 	@Column(name = "DESCRIPTION")
 	private String description;
 
+	@CreatedDate
 	@Column(name = "CREATIONDATE")
 	private Date creationdate;
 

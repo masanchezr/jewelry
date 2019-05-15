@@ -9,6 +9,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.data.annotation.CreatedDate;
+
 /**
  * The Class ClientEntity.
  */
@@ -37,6 +39,8 @@ public class ClientEntity {
 	private String name;
 
 	/** The creationdate. */
+
+	@CreatedDate
 	@Temporal(TemporalType.DATE)
 	@Column(name = "DATECREATION")
 	private Date creationdate;

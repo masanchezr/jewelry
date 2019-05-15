@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.CreatedDate;
+
 import com.je.utils.constants.Constants;
 
 @Entity
@@ -27,6 +29,7 @@ public class RecordingEntity {
 	private BigDecimal amount;
 
 	@Column(name = "CREATIONDATE")
+	@CreatedDate
 	private Date creationdate;
 
 	/** The idsale. */

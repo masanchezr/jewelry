@@ -11,6 +11,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.data.annotation.CreatedDate;
+
 /**
  * The Class AddressEntity.
  */
@@ -49,6 +51,7 @@ public class AddressEntity {
 	private String cif;
 
 	/** The datecreation. */
+	@CreatedDate
 	@Temporal(TemporalType.DATE)
 	@Column(name = "DATECREATION")
 	private Date datecreation;

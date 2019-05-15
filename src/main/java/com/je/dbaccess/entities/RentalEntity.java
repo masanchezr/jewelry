@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.data.annotation.CreatedDate;
+
 import com.je.utils.constants.Constants;
 
 @Entity
@@ -27,6 +29,7 @@ public class RentalEntity {
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = Constants.CREATIONDATE)
+	@CreatedDate
 	private Date creationdate;
 
 	/** The place. */

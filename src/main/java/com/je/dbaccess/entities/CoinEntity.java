@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.CreatedDate;
+
 /**
  * The Class CoinEntity.
  */
@@ -42,6 +44,8 @@ public class CoinEntity {
 	private Double price;
 
 	/** The creationdate. */
+
+	@CreatedDate
 	@Column(name = "CREATIONDATE")
 	private Date creationdate;
 

@@ -17,6 +17,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.springframework.data.annotation.CreatedDate;
 
 import com.je.utils.constants.Constants;
 
@@ -38,6 +39,7 @@ public class SaleEntity {
 
 	/** The creationdate. */
 	@Column(name = "DATECREATION")
+	@CreatedDate
 	private Date creationdate;
 
 	/**

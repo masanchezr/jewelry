@@ -11,6 +11,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.data.annotation.CreatedDate;
+
 /**
  * The Class ClientPawnEntity.
  */
@@ -36,6 +38,7 @@ public class ClientPawnEntity {
 	private String address;
 
 	/** The creationclient. */
+	@CreatedDate
 	@Temporal(TemporalType.DATE)
 	@Column(name = "CREATIONCLIENT")
 	private Date creationclient;

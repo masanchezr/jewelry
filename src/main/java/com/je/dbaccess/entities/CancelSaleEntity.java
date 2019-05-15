@@ -19,6 +19,7 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.springframework.data.annotation.CreatedDate;
 
 /**
  * The Class CancelSaleEntity.
@@ -43,6 +44,8 @@ public class CancelSaleEntity {
 	private Long numsale;
 
 	/** The creationdate. */
+
+	@CreatedDate
 	@Temporal(TemporalType.DATE)
 	@Column(name = "CREATIONDATE")
 	private Date creationdate;
