@@ -1,6 +1,7 @@
 package com.je.dbaccess.test;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.je.dbaccess.entities.HolidayEntity;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.dbaccess.repositories.HolidayRepository;
+import com.je.utils.date.DateUtil;
 
 /**
  * The Class HolidaysRepositoryTest.
@@ -41,5 +43,13 @@ public class HolidaysRepositoryTest {
 	@Test
 	public void allHolidaysTest() {
 		holidayRepository.findAll();
+	}
+
+	@Test
+	public void findByHolidayAndPlaceTest() {
+		PlaceEntity place = new PlaceEntity();
+		place.setIdplace(28017L);
+		HolidayEntity holiday = holidayRepository.findByHolidayAndPlace(DateUtil.getDateFormated(new Date()), place);
+		System.out.println(holiday);
 	}
 }

@@ -40,7 +40,7 @@ public class RegisterEmployeesController {
 			model.setViewName("searchregisteremployees");
 		} else {
 			model.addObject("register", registerService.findByDates(form.getDatefrom(), form.getDateuntil()));
-			model.setViewName("register");
+			model.setViewName("registeremployees");
 		}
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		return model;
