@@ -18,16 +18,12 @@ public interface HolidayRepository extends CrudRepository<HolidayEntity, Long> {
 	/**
 	 * Find by holiday and place.
 	 *
-	 * @param holiday
-	 *            the holiday
-	 * @param place
-	 *            the place
+	 * @param holiday the holiday
+	 * @param place   the place
 	 * @return the holiday entity
 	 */
-	public HolidayEntity findByHolidayAndPlace(
-			@Temporal(TemporalType.DATE) Date holiday, PlaceEntity place);
+	public HolidayEntity findByHolidayAndPlace(@Temporal(TemporalType.DATE) Date holiday, PlaceEntity place);
 
-	public Iterable<HolidayEntity> findByHolidayBetween(
-			@Temporal(TemporalType.DATE) Date from,
+	public Iterable<HolidayEntity> findByHolidayBetween(@Temporal(TemporalType.DATE) Date from,
 			@Temporal(TemporalType.DATE) Date until);
 }

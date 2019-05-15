@@ -3,6 +3,7 @@ package com.je.dbaccess.test;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,7 +14,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.je.dbaccess.entities.HolidayEntity;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.dbaccess.repositories.HolidayRepository;
-import com.je.utils.date.DateUtil;
 
 /**
  * The Class HolidaysRepositoryTest.
@@ -49,7 +49,18 @@ public class HolidaysRepositoryTest {
 	public void findByHolidayAndPlaceTest() {
 		PlaceEntity place = new PlaceEntity();
 		place.setIdplace(28017L);
-		HolidayEntity holiday = holidayRepository.findByHolidayAndPlace(DateUtil.getDateFormated(new Date()), place);
+		HolidayEntity holiday = holidayRepository.findByHolidayAndPlace(new Date(), place);
 		System.out.println(holiday);
+	}
+
+	@Test
+	public void findByHolidayBetweenTest() {
+		Iterable<HolidayEntity> holidays = holidayRepository.findByHolidayBetween(new Date(), new Date());
+		if (holidays != null) {
+			Iterator<HolidayEntity> iholidays = holidays.iterator();
+			while (iholidays.hasNext()) {
+				System.out.println(iholidays.next());
+			}
+		}
 	}
 }
