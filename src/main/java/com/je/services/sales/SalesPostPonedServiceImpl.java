@@ -19,6 +19,7 @@ import com.je.dbaccess.entities.SalePostponedEntity;
 import com.je.dbaccess.repositories.InstallmentsRepository;
 import com.je.dbaccess.repositories.SalesPostponedRepository;
 import com.je.forms.SalePostPoned;
+import com.je.utils.date.DateUtil;
 import com.je.utils.string.Util;
 
 public class SalesPostPonedServiceImpl implements SalesPostPonedService {
@@ -163,8 +164,8 @@ public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 	}
 
 	public List<SalePostponedEntity> getListTimeout(PlaceEntity place) {
-		return salespostponedrepository.findByDeadlineBeforeAndPlaceAndTimeoutFalseAndDateretiredIsNull(new Date(),
-				place);
+		return salespostponedrepository.findByDeadlineBeforeAndPlaceAndTimeoutFalseAndDateretiredIsNull(
+				DateUtil.getDateFormated(new Date()), place);
 	}
 
 	@Override

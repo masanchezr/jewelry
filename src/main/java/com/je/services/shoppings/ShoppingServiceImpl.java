@@ -124,7 +124,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 		shoppingEntity.setYear(calendar.get(Calendar.YEAR));
 		shoppingEntity.setTotalamount(totalamount);
 		shoppingsRepository.save(shoppingEntity);
-		return dailyService.getDaily(new Date(), place, null);
+		return dailyService.getDaily(DateUtil.getDateFormated(new Date()), place, null);
 	}
 
 	/**
@@ -174,7 +174,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 			shoppings = mapper(shoppingsRepository.findByCreationdateBetweenAndPlace(datefrom, dateuntil, place));
 		} else {
 			Date datefrom = DateUtil.getDate(sDateFrom);
-			shoppings = mapper(shoppingsRepository.findByCreationdateBetweenAndPlace(datefrom, new Date(), place));
+			shoppings = mapper(shoppingsRepository.findByCreationdateBetweenAndPlace(datefrom, DateUtil.getDateFormated(new Date()), place));
 		}
 		return shoppings;
 	}

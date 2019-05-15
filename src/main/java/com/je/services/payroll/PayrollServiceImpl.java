@@ -13,6 +13,7 @@ import com.je.dbaccess.repositories.PayrollTypesRepository;
 import com.je.dbaccess.repositories.PlaceUserRepository;
 import com.je.services.dailies.Daily;
 import com.je.services.dailies.DailyService;
+import com.je.utils.date.DateUtil;
 
 public class PayrollServiceImpl implements PayrollService {
 
@@ -34,7 +35,7 @@ public class PayrollServiceImpl implements PayrollService {
 		List<PlaceUserEntity> lplue = placeUserRepository.findByUsername(payroll.getUser().getUsername());
 		payroll.setCreationdate(new Date());
 		payrollrepository.save(payroll);
-		return dailyService.getDaily(new Date(), lplue.get(0).getPlace(), null);
+		return dailyService.getDaily(DateUtil.getDateFormated(new Date()), lplue.get(0).getPlace(), null);
 	}
 
 	@Override

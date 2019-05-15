@@ -52,7 +52,8 @@ public class DailyController {
 		if (ipAddress == null) {
 			ipAddress = request.getRemoteAddr();
 		}
-		Daily daily = dailyService.getDaily(new Date(), placeService.getPlaceUser(user), ipAddress);
+		Daily daily = dailyService.getDaily(DateUtil.getDateFormated(new Date()), placeService.getPlaceUser(user),
+				ipAddress);
 		if (daily.getFinalamount() == null) {
 			model.setViewName(ConstantsJsp.VIEWNOTDAILY);
 		} else {

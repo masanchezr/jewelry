@@ -234,6 +234,8 @@
 			access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/allcoins"
 			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/searchRegisterEmployees"
+			access="hasRole('ROLE_ADMIN')" />
 	</http>
 
 	<authentication-manager id="authenticationMgr">

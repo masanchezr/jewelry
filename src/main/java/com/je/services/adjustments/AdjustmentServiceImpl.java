@@ -19,6 +19,7 @@ import com.je.services.dailies.Daily;
 import com.je.services.dailies.DailyService;
 import com.je.services.mails.MailService;
 import com.je.utils.constants.Constants;
+import com.je.utils.date.DateUtil;
 import com.je.utils.string.Util;
 
 /**
@@ -80,7 +81,7 @@ public class AdjustmentServiceImpl implements AdjustmentService {
 			}
 			adjustmentRepository.save(adjustmentEntity);
 		}
-		return dailyService.getDaily(new Date(), place, null);
+		return dailyService.getDaily(DateUtil.getDateFormated(new Date()), place, null);
 	}
 
 	@Override

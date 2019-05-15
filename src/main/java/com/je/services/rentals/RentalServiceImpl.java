@@ -43,7 +43,7 @@ public class RentalServiceImpl implements RentalService {
 		entity.setPlace(place);
 		mapper.map(rental, entity);
 		rentalsRepository.save(entity);
-		return dailyService.getDaily(new Date(), place, null);
+		return dailyService.getDaily(DateUtil.getDateFormated(new Date()), place, null);
 	}
 
 	@Override

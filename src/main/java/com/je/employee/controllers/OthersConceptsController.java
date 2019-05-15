@@ -46,10 +46,8 @@ public class OthersConceptsController {
 	/**
 	 * Saveconcept.
 	 *
-	 * @param otherconcept
-	 *            the otherconcept
-	 * @param result
-	 *            the result
+	 * @param otherconcept the otherconcept
+	 * @param result       the result
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/employee/saveConcept")

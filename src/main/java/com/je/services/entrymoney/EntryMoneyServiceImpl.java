@@ -12,6 +12,7 @@ import com.je.dbaccess.repositories.EntryMoneyRepository;
 import com.je.dbaccess.repositories.PlaceUserRepository;
 import com.je.services.dailies.Daily;
 import com.je.services.dailies.DailyService;
+import com.je.utils.date.DateUtil;
 
 public class EntryMoneyServiceImpl implements EntryMoneyService {
 
@@ -31,7 +32,7 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 		entrymoney.setCreationdate(new Date());
 		entrymoney.setPlace(place);
 		entryMoneyRepository.save(entrymoney);
-		return dailyService.getDaily(new Date(), place, null);
+		return dailyService.getDaily(DateUtil.getDateFormated(new Date()), place, null);
 	}
 
 	public List<EntryMoneyEntity> findByDates(Date from, Date until) {

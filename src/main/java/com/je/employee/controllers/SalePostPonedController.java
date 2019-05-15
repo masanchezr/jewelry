@@ -33,6 +33,7 @@ import com.je.services.sales.Installment;
 import com.je.services.sales.SalesPostPonedService;
 import com.je.utils.constants.Constants;
 import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.date.DateUtil;
 
 @Controller
 public class SalePostPonedController {
@@ -175,7 +176,8 @@ public class SalePostPonedController {
 		if (ipAddress == null) {
 			ipAddress = request.getRemoteAddr();
 		}
-		Daily daily = dailyService.getDaily(new Date(), placeService.getPlaceUser(user), ipAddress);
+		Daily daily = dailyService.getDaily(DateUtil.getDateFormated(new Date()), placeService.getPlaceUser(user),
+				ipAddress);
 		if (daily.getFinalamount() == null) {
 			model.setViewName(ConstantsJsp.VIEWNOTDAILY);
 		} else {

@@ -13,6 +13,7 @@ import com.je.dbaccess.repositories.OtherConceptsRepository;
 import com.je.dbaccess.repositories.PlaceUserRepository;
 import com.je.services.dailies.Daily;
 import com.je.services.dailies.DailyService;
+import com.je.utils.date.DateUtil;
 
 /**
  * The Class OtherConceptServiceImpl.
@@ -45,6 +46,6 @@ public class OtherConceptServiceImpl implements OtherConceptService {
 		if (othersconcepts == null || othersconcepts.isEmpty()) {
 			othersConceptsRepository.save(otherConceptEntity);
 		}
-		return dailyService.getDaily(new Date(), place, null);
+		return dailyService.getDaily(DateUtil.getDateFormated(new Date()), place, null);
 	}
 }

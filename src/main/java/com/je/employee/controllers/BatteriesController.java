@@ -22,6 +22,7 @@ import com.je.services.payment.PaymentService;
 import com.je.services.places.PlaceService;
 import com.je.services.sales.SaleService;
 import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.date.DateUtil;
 
 @Controller
 public class BatteriesController {
@@ -81,7 +82,8 @@ public class BatteriesController {
 				model.setViewName(ConstantsJsp.VIEWDAILYARROW);
 				battery.setPlace(place);
 				batteriesService.saveSaleBattery(battery);
-				model.addObject(ConstantsJsp.DAILY, dailyService.getDaily(today, place, ipAddress));
+				model.addObject(ConstantsJsp.DAILY,
+						dailyService.getDaily(DateUtil.getDateFormated(new Date()), place, ipAddress));
 				model.addObject(ConstantsJsp.DATEDAILY, today);
 			}
 		}
