@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -49,39 +48,30 @@ public class RegisterEmployeesController {
 
 	@RequestMapping(value = "/registeremployees")
 	public ModelAndView registeremployees(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm form,
-			BindingResult result) {
+			BindingResult result, HttpServletResponse response) {
 		ModelAndView model = new ModelAndView();
 		adminSearchValidator.validate(form, result);
 		if (result.hasErrors()) {
 			model.addObject(ConstantsJsp.FORMSEARCH, new SearchForm());
 			model.setViewName("searchregisteremployees");
 		} else {
-			model.addObject("register", registerService.findByDates(form.getDatefrom(), form.getDateuntil()));
+			List<RegisterEntity> register = registerService.findByDates(form.getDatefrom(), form.getDateuntil());
+			String path = System.getenv(Constants.OPENSHIFT_DATA_DIR);
+			File file = new File(path.concat("register.pdf"));
+			model.addObject("register", register);
 			model.setViewName("registeremployees");
 			model.addObject("searchDateForm", form);
+			registerService.generatePdf(register, file);
+			response.setContentType("application/force-download");
+			response.setHeader("Content-Disposition", "attachment; filename=register.pdf");
+			try (InputStream inputStream = new FileInputStream(file)) {
+				IOUtils.copy(inputStream, response.getOutputStream());
+				response.flushBuffer();
+			} catch (IOException e) {
+				logger.error(java.util.logging.Level.SEVERE.getName());
+			}
 		}
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
-		return model;
-	}
-
-	@RequestMapping(value = "/downloadpdf{datefrom}and{dateuntil}")
-	public ModelAndView downloadpdf(@PathVariable("datefrom") String from, @PathVariable("dateuntil") String until,
-			HttpServletResponse response) {
-		ModelAndView model = new ModelAndView("registeremployees");
-		String path = System.getenv(Constants.OPENSHIFT_DATA_DIR);
-		File file = new File(path.concat("register.pdf"));
-		List<RegisterEntity> register = registerService.findByDates(from, until);
-		registerService.generatePdf(register, file);
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
-		model.addObject("register", register);
-		response.setContentType("application/force-download");
-		response.setHeader("Content-Disposition", "attachment; filename=register.pdf");
-		try (InputStream inputStream = new FileInputStream(file)) {
-			IOUtils.copy(inputStream, response.getOutputStream());
-			response.flushBuffer();
-		} catch (IOException e) {
-			logger.error(java.util.logging.Level.SEVERE.getName());
-		}
 		return model;
 	}
 }
