@@ -61,14 +61,14 @@ public class RegisterEmployeesController {
 		} else {
 			model.addObject("register", registerService.findByDates(sfrom, suntil));
 			model.setViewName("registeremployees");
-			model.addObject("datefrom", DateUtil.getStringDateFormatddMMyyyy(DateUtil.getDate(sfrom)));
-			model.addObject("dateuntil", DateUtil.getStringDateFormatddMMyyyy(DateUtil.getDate(suntil)));
+			model.addObject("datefrom", DateUtil.getDate(sfrom));
+			model.addObject("dateuntil", DateUtil.getDate(suntil));
 		}
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		return model;
 	}
 
-	@RequestMapping(value = "/downloadpdf{datefrom}and{dateuntil}")
+	@RequestMapping(value = "/downloadpdf{datefrom}/{dateuntil}")
 	public ModelAndView downloadpdf(@PathVariable("datefrom") String from, @PathVariable("dateuntil") String until,
 			HttpServletResponse response) {
 		ModelAndView model = new ModelAndView("registeremployees");

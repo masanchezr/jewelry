@@ -45,7 +45,7 @@
 						<div class="form-group">
 							<spring:url value="/downloadpdf" var="downloadpdf" />
 							<a
-								href="${downloadpdf}<c:out value="${datefrom}" />and<c:out value="${dateuntil}" />"><button
+								href="${downloadpdf}<fmt:formatDate value="${datefrom}" pattern="yyyyMMdd" />/<fmt:formatDate value="${dateuntil}" pattern="yyyyMMdd" />"><button
 									class="btn btn-primary" type="button">
 									<spring:message code="downloadpdf" />
 								</button></a>

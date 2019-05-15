@@ -26,6 +26,7 @@
 								<th><spring:message code="category" /></th>
 								<th><spring:message code="material" /></th>
 								<th><spring:message code="saledate" /></th>
+								<th><spring:message code="creationdate" /></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -41,6 +42,7 @@
 									<td><c:out value="${jewel.category.namecategory}" /></td>
 									<td><c:out value="${jewel.metal.description}" /></td>
 									<td><c:out value="${jewel.saledate}" /></td>
+									<td><c:out value="${jewel.creationdate}" /></td>
 								</tr>
 							</c:forEach>
 						</tbody>
