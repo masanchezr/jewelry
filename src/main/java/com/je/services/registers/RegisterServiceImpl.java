@@ -106,6 +106,6 @@ public class RegisterServiceImpl implements RegisterService {
 			until = DateUtil.getDate(dateuntil);
 		}
 		from = DateUtil.getDate(datefrom);
-		return registerRepository.findByDateBetween(from, until);
+		return registerRepository.findByDateBetweenOrderByDate(from, until);
 	}
 }
