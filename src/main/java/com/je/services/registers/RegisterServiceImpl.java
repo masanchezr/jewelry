@@ -1,12 +1,22 @@
 package com.je.services.registers;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.element.Table;
 import com.je.dbaccess.entities.PlaceUserEntity;
 import com.je.dbaccess.entities.RegisterEntity;
 import com.je.dbaccess.entities.UserEntity;
@@ -31,33 +41,9 @@ public class RegisterServiceImpl implements RegisterService {
 	@Autowired
 	private PlaceUserRepository placeUserRepository;
 
-	/**
-	 * @Autowired private Mapper mapper;
-	 * 
-	 * 
-	 *            public void in() {
-	 * 
-	 * 
-	 *            SCardConexion cardConexion = new SCardConexion();
-	 *            cardConexion.connect(0, "T=1"); CommandAPDU cpadu= new
-	 *            CommandAPDU(); ResponseAPDU rapdu=cardConexion.(capdu);
-	 *            List<InOut> inout = new ArrayList<InOut>();
-	 *            Iterator<EmployeeEntity> ilin = lin.iterator(); InEntity in; Long
-	 *            id; while (ilin.hasNext()) { id = ilin.next().getIdemployee(); if
-	 *            (id != null) { in = new InEntity(); in.setDate(new Date());
-	 *            in.setEmployee(employeesRepository.findById(id));
-	 *            inRepository.save(in); inout.add(mapper.map(in, InOut.class)); } }
-	 * 
-	 *            }
-	 * 
-	 *            public List<Register> out(List<EmployeeEntity> lout) {
-	 *            List<Register> inout = new ArrayList<Register>();
-	 *            Iterator<EmployeeEntity> ilin = lout.iterator(); OutEntity in;
-	 *            while (ilin.hasNext()) { in = new OutEntity(); in.setOutdate(new
-	 *            Date()); in.setEmployee(mapper.map(ilin.next(),
-	 *            EmployeeEntity.class)); outRepository.save(in);
-	 *            inout.add(mapper.map(in, Register.class)); } return inout; }
-	 **/
+	/** The log. */
+	private static Logger log = LoggerFactory.getLogger(RegisterServiceImpl.class);
+
 	public void register(String user, String ipaddress) {
 		Calendar calendar = Calendar.getInstance();
 		List<PlaceUserEntity> placeuser = placeUserRepository.findByUsername(user);
@@ -107,5 +93,39 @@ public class RegisterServiceImpl implements RegisterService {
 		}
 		from = DateUtil.getDate(datefrom);
 		return registerRepository.findByDateBetweenOrderByDate(from, until);
+	}
+
+	@Override
+	public void generatePdf(List<RegisterEntity> register, File file) {
+		try (PdfWriter writer = new PdfWriter(file)) {
+			PdfDocument pdf = new PdfDocument(writer);
+			Document document = new Document(pdf);
+			float[] columns = { 30f, 30f, 30f, 30f, 30f, 30f, 30f };
+			Table table = new Table(columns);
+			Iterator<RegisterEntity> iregister = register.iterator();
+			RegisterEntity r;
+			table.addCell(new Cell().add("DNI"));
+			table.addCell(new Cell().add("Nombre"));
+			table.addCell(new Cell().add("Fecha"));
+			table.addCell(new Cell().add("Hora entrada por la mañana"));
+			table.addCell(new Cell().add("Hora salida por la mañana"));
+			table.addCell(new Cell().add("Hora entrada por la tarde"));
+			table.addCell(new Cell().add("Hora salida por la tarde"));
+			while (iregister.hasNext()) {
+				r = iregister.next();
+				table.addCell(new Cell().add(r.getEmployee().getDni()));
+				table.addCell(new Cell().add(r.getEmployee().getName()));
+				table.addCell(new Cell().add(r.getDate().toString()));
+				table.addCell(new Cell().add(r.getTimeinmorning().toString()));
+				table.addCell(new Cell().add(String.valueOf((r.getTimeoutmorning()))));
+				table.addCell(new Cell().add(String.valueOf((r.getTimeinafternoon()))));
+				table.addCell(new Cell().add(String.valueOf((r.getTimeoutafternoon()))));
+			}
+			document.add(table);
+			document.close();
+		} catch (IOException e) {
+			log.error("No se ha podido generar el ticket.");
+		}
+
 	}
 }
