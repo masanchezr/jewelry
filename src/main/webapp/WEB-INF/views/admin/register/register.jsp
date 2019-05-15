@@ -40,6 +40,18 @@
 						</tbody>
 					</table>
 				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="form-group">
+							<spring:url value="/downloadpdf" var="downloadpdf" />
+							<a
+								href="${downloadpdf}<c:out value="${datefrom}" />and<c:out value="${dateuntil}" />"><button
+									class="btn btn-primary" type="button">
+									<spring:message code="downloadpdf" />
+								</button></a>
+						</div>
+					</div>
+				</div>
 			</c:if>
 			<c:if test="${empty register}">
 				<spring:message code="noresults" />

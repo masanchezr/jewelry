@@ -16,6 +16,7 @@ import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.je.dbaccess.entities.PlaceUserEntity;
 import com.je.dbaccess.entities.RegisterEntity;
@@ -104,6 +105,7 @@ public class RegisterServiceImpl implements RegisterService {
 			Table table = new Table(columns);
 			Iterator<RegisterEntity> iregister = register.iterator();
 			RegisterEntity r;
+			document.add(new Paragraph("NUMISGOLD S.L. Registro de empleados").setItalic());
 			table.addCell(new Cell().add("DNI"));
 			table.addCell(new Cell().add("Nombre"));
 			table.addCell(new Cell().add("Fecha"));

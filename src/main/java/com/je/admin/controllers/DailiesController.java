@@ -201,8 +201,8 @@ public class DailiesController {
 					model.setViewName(ConstantsJsp.VIEWNOTDAILYADMIN);
 				} else {
 					String view;
-					String stoday = DateUtil.getStringDateFormatddMMyyyy(new Date());
-					sdate = DateUtil.getStringDateFormatddMMyyyy(date);
+					String stoday = DateUtil.getStringDateddMMyyyy(new Date());
+					sdate = DateUtil.getStringDateddMMyyyy(date);
 					if (stoday.compareTo(sdate) == 0) {
 						view = ConstantsJsp.VIEWDAILYADMINARROW;
 					} else {

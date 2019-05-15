@@ -104,8 +104,13 @@ public class DateUtil {
 	 * @param date
 	 * @return date in format string
 	 */
-	public static String getStringDateFormatddMMyyyy(Date date) {
+	public static String getStringDateddMMyyyy(Date date) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		return sdf.format(date);
+	}
+
+	public static String getStringDateFormatddMMyyyy(Date date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
 		return sdf.format(date);
 	}
 
@@ -115,6 +120,6 @@ public class DateUtil {
 	}
 
 	public static Date getDateFormated(Date date) {
-		return getDate(getStringDateFormatddMMyyyy(date));
+		return getDate(getStringDateddMMyyyy(date));
 	}
 }
