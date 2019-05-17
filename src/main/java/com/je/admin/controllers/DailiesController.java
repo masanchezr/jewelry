@@ -84,8 +84,7 @@ public class DailiesController {
 			ipAddress = request.getRemoteAddr();
 		}
 		if (date == null) {
-			date = new Date();
-			return getDailyModel(ipAddress, date, place, "dailyadminarrow");
+			return getDailyModel(ipAddress, DateUtil.getDateFormated(new Date()), place, "dailyadminarrow");
 		} else {
 			searchDailyFormValidator.validate(sdf, arg1);
 			if (arg1.hasErrors()) {
