@@ -137,6 +137,7 @@ public class PawnsAdminController {
 		model.addObject(ConstantsJsp.PAWNFORM, p);
 		model.addObject(Constants.NATIONS, nationservice.getNations());
 		model.addObject(Constants.TRACKS, trackservice.getTracks());
+		model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
 		return model;
 	}
 
