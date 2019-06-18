@@ -307,7 +307,7 @@
 		<put-attribute name="header"
 			value="/WEB-INF/views/admin/header.jsp" />
 		<put-attribute name="body"
-			value="/WEB-INF/views/admin/sales/salesmissing/resultnummissing.jsp" />
+			value="/WEB-INF/views/admin/salepostponed/resultnummissing.jsp" />
 	</definition>
 	<definition name="searchnummissing" extends="templateAdmin">
 		<put-attribute name="header"
@@ -321,13 +321,6 @@
 			value="/WEB-INF/views/admin/header.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/salespostponed/searchsalepostponed.jsp" />
-	</definition>
-	<definition name="salepostponedadmin"
-		extends="templateAdmin">
-		<put-attribute name="header"
-			value="/WEB-INF/views/admin/header.jsp" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/admin/sales/salesmissing/salepostponed.jsp" />
 	</definition>
 	<definition name="notdailyadmin" extends="templateAdmin">
 		<put-attribute name="header"
