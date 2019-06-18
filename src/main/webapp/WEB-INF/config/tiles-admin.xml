@@ -307,7 +307,7 @@
 		<put-attribute name="header"
 			value="/WEB-INF/views/admin/header.jsp" />
 		<put-attribute name="body"
-			value="/WEB-INF/views/admin/salepostponed/resultnummissing.jsp" />
+			value="/WEB-INF/views/admin/salespostponed/resultnummissing.jsp" />
 	</definition>
 	<definition name="searchnummissing" extends="templateAdmin">
 		<put-attribute name="header"
