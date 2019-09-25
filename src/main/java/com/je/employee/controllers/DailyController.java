@@ -49,17 +49,17 @@ public class DailyController {
 		ModelAndView model = new ModelAndView();
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		String ipAddress = request.getHeader(ConstantsJsp.XFORWARDEDFOR);
+		Date now = DateUtil.getDateFormated(new Date());
 		if (ipAddress == null) {
 			ipAddress = request.getRemoteAddr();
 		}
-		Daily daily = dailyService.getDaily(DateUtil.getDateFormated(new Date()), placeService.getPlaceUser(user),
-				ipAddress);
+		Daily daily = dailyService.getDaily(now, placeService.getPlaceUser(user), ipAddress);
 		if (daily.getFinalamount() == null) {
 			model.setViewName(ConstantsJsp.VIEWNOTDAILY);
 		} else {
 			model.addObject(ConstantsJsp.DAILY, daily);
 			model.setViewName(ConstantsJsp.VIEWDAILYARROW);
-			model.addObject(ConstantsJsp.DATEDAILY, new Date());
+			model.addObject(ConstantsJsp.DATEDAILY, now);
 		}
 		return model;
 	}

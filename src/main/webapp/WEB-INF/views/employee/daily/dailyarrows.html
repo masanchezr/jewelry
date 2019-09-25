@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:include="employee/template :: page">
- 
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="employee/template :: page">
+
 <div th:fragment="content">
 	<div th:fragment="content">
-	 
+
 		<!-- Breadcrumbs-->
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="#"> <span
@@ -30,7 +31,8 @@
 								<tr th:each="sale:${daily.sales}">
 									<td th:text="#{sale}"></td>
 									<td th:text="${sale.numsale}"></td>
-									<td><span th:text="${sale.total}"><i class="fas fa-euro-sign"></i></span></td>
+									<td><span th:text="${sale.total}"><i
+											class="fas fa-euro-sign"></i></span></td>
 									<td th:text="${sale.payments}"></td>
 								</tr>
 								<tr th:each="salepost:${daily.lsalespost}">
@@ -43,13 +45,15 @@
 								<tr th:each="pawn:${daily.retiredpawns}">
 									<td th:text="#{pawn}"></td>
 									<td th:text="${pawn.numpawn}"></td>
-									<td><span th:text="${pawn.amount}"><i class="fas fa-euro-sign"></i></span></td>
+									<td><span th:text="${pawn.amount}"><i
+											class="fas fa-euro-sign"></i></span></td>
 									<td th:text="#{retired}"></td>
 								</tr>
 								<tr th:each="pawn:${daily.newpawns}">
 									<td th:text="#{pawn}"></td>
 									<td th:text="${pawn.numpawn}"></td>
-									<td><span th:text="${pawn.amount}"><i class="fas fa-euro-sign"></i></span></td>
+									<td><span th:text="${pawn.amount}"><i
+											class="fas fa-euro-sign"></i></span></td>
 									<td th:text="#{newpawn}"></td>
 								</tr>
 								<tr th:each="adjustment:${daily.adjustments}">
@@ -115,13 +119,15 @@
 								<tr th:each="strap:${daily.straps}">
 									<td th:text="#{putstrap}"></td>
 									<td th:text="${strap.numsale}"></td>
-									<td><span th:text="${strap.amount}"><i class="fas fa-euro-sign"></i></span></td>
+									<td><span th:text="${strap.amount}"><i
+											class="fas fa-euro-sign"></i></span></td>
 									<td th:text="${strap.payment.name}"></td>
 								</tr>
 								<tr th:each="rental:${daily.rentals}">
 									<td th:text="#{localrental}"></td>
 									<td th:text="${rental.rentaldate}"></td>
-									<td><span th:text="${rental.amount}"><i class="fas fa-euro-sign"></i></span></td>
+									<td><span th:text="${rental.amount}"><i
+											class="fas fa-euro-sign"></i></span></td>
 									<td></td>
 								</tr>
 								<tr th:each="discount:${daily.discounts}">
@@ -160,8 +166,7 @@
 					<div class="row">
 						<div class="col-lg-6">
 							<div class="form-group">
-								<a href="/employee/beforeday(
-										${datedaily})"><button
+								<a th:href="@{'/employee/beforeday' + ${datedaily}}"><button
 										class="btn btn-primary" type="button">
 										<i class="fas fa-arrow-circle-left"></i> <span
 											th:text="#{beforeday}"></span>
@@ -170,8 +175,7 @@
 						</div>
 						<div class="col-lg-6">
 							<div class="pull-right">
-								<a href="/employee/againday(
-										${datedaily})">
+								<a th:href="@{'/employee/againday' + ${datedaily}}">
 									<button class="btn btn-primary" type="button">
 										<span th:text="#{againday}"></span> <i
 											class="fas fa-arrow-circle-right"></i>
@@ -184,6 +188,5 @@
 			</div>
 		</div>
 	</div>
-	 
 </div>
 </html>

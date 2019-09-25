@@ -31,10 +31,10 @@ public class ConstantsJsp {
 	public static final String FORMSEARCH = "searchDateForm";
 	public static final String CATEGORY = "category";
 	public static final String FORMPAYMENT = "payment";
-	public static final String VIEWNOTDAILYADMIN = "notdailyadmin";
-	public static final String VIEWDAILYADMINARROWS = "dailyadminarrows";
+	public static final String VIEWNOTDAILYADMIN = "admin/dailies/notdaily";
+	public static final String VIEWDAILYADMINARROWS = "admin/dailies/dailyarrows";
 	public static final String FORMSEARCHDAILY = "searchDailyForm";
-	public static final String VIEWDAILYADMINARROW = "dailyadminarrow";
+	public static final String VIEWDAILYADMINARROW = "admin/dailies/dailyarrow";
 	public static final String FORMHOLIDAY = "holiday";
 	public static final String FORMINCIDENT = "incident";
 	public static final String SUCCESS = "success";

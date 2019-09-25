@@ -94,7 +94,7 @@ public class PawnServiceImpl implements PawnService {
 		}
 		pawnEntity.setObjects(newobjects);
 		pawnsRepository.save(pawnEntity);
-		return dailyService.getDaily(pawnEntity.getCreationdate(), place, null);
+		return dailyService.getDaily(DateUtil.getDateFormated(pawnEntity.getCreationdate()), place, null);
 	}
 
 	@Override

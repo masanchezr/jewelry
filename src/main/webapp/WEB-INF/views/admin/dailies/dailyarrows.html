@@ -31,15 +31,16 @@
 								<td th:text="#{sale}"></td>
 								<td><a href="showsale(${sale.idsale})"><span
 										th:text="${sale.numsale}"></span></a></td>
-								<td><span th:text="${sale.total}"><i class="fas fa-euro-sign"></i></span>
-								</td>
+								<td><span th:text="${sale.total}"><i
+										class="fas fa-euro-sign"></i></span></td>
 								<td th:text="${sale.payments}"></td>
 							</tr>
 							<tr th:each="salepost:${daily.lsalespost}">
 								<td th:text="#{salepostponed}"></td>
 								<td><a href="showsalepost(${salepost.idsale})"><span
 										th:text="${salepost.idsale}"></span></a></td>
-								<td><span th:text="${salepost.total}"><i class="fas fa-euro-sign"></i></span></td>
+								<td><span th:text="${salepost.total}"><i
+										class="fas fa-euro-sign"></i></span></td>
 								<td th:text="${salepost.payments}"></td>
 							</tr>
 							<tr th:each="pawn:${daily.retiredpawns}">
@@ -47,8 +48,8 @@
 								<td><a href="searchpawn(${pawn.id})"> <span
 										th:text="${pawn.numpawn}"></span>
 								</a></td>
-								<td><span th:text="${pawn.amount}"><i class="fas fa-euro-sign"></i></span>
-								</td>
+								<td><span th:text="${pawn.amount}"><i
+										class="fas fa-euro-sign"></i></span></td>
 								<td th:text="#{retired}"><a href="renovations(${pawn.id})"><span
 										th:text="#{renovations}"></span></a></td>
 							</tr>
@@ -57,7 +58,8 @@
 								<td><a href="searchpawn(${pawn.id})"> <span
 										th:text="${pawn.numpawn}"></span>
 								</a></td>
-								<td><span th:text="${pawn.amount}"><i class="fas fa-euro-sign"></i></span></td>
+								<td><span th:text="${pawn.amount}"><i
+										class="fas fa-euro-sign"></i></span></td>
 								<td th:text="#{newpawn}"></td>
 							</tr>
 							<tr th:each="adjustment:${daily.adjustments}">
@@ -88,7 +90,8 @@
 							<tr th:each="concept:${daily.othersconcepts}">
 								<td th:text="${concept.description}"></td>
 								<td></td>
-								<td><span th:text="${concept.amount}"><i class="fas fa-euro-sign"></i></span></td>
+								<td><span th:text="${concept.amount}"><i
+										class="fas fa-euro-sign"></i></span></td>
 								<td></td>
 							</tr>
 							<tr th:each="renovation:${daily.renovations}">
@@ -116,19 +119,22 @@
 							<tr th:each="battery:${daily.batteries}">
 								<td th:text="#{putbattery}"></td>
 								<td th:text="${battery.numsale}"></td>
-								<td><span th:text="${battery.amount}"><i class="fas fa-euro-sign"></i></span></td>
+								<td><span th:text="${battery.amount}"><i
+										class="fas fa-euro-sign"></i></span></td>
 								<td th:text="${battery.payment.name}"></td>
 							</tr>
 							<tr th:each="strap:${daily.straps}">
 								<td th:text="#{putstrap}"></td>
 								<td th:text="${strap.numsale}"></td>
-								<td><span th:text="${strap.amount}"><i class="fas fa-euro-sign"></i></span></td>
+								<td><span th:text="${strap.amount}"><i
+										class="fas fa-euro-sign"></i></span></td>
 								<td th:text="${strap.payment.name}"></td>
 							</tr>
 							<tr th:each="rental:${daily.rentals}">
 								<td th:text="#{localrental}"></td>
 								<td th:text="${rental.rentaldate}"></td>
-								<td><span th:text="${rental.amount}"><i class="fas fa-euro-sign"></i></span></td>
+								<td><span th:text="${rental.amount}"><i
+										class="fas fa-euro-sign"></i></span></td>
 								<td></td>
 							</tr>
 							<tr th:each="discount:${daily.discounts}">
@@ -167,7 +173,7 @@
 				<div class="row">
 					<div class="col-lg-6">
 						<div class="form-group">
-							<a href="beforeday(${datedaily})/(${place})"><button
+							<a th:href="@{'/beforeday' + ${datedaily}+'/'+${place}}"><button
 									class="btn btn-primary" type="button">
 									<i class="fas fa-arrow-circle-left"></i> <span
 										th:text="#{beforeday}"></span>
@@ -176,7 +182,7 @@
 					</div>
 					<div class="col-lg-6">
 						<div class="pull-right">
-							<a href="againday(${datedaily})/(${place})"><button
+							<a th:href="@{'/againday' + ${datedaily}+'/'+${place}}"><button
 									class="btn btn-primary" type="button">
 									<span th:text="#{againday}"></span> <i
 										class="fas fa-arrow-circle-right"></i>

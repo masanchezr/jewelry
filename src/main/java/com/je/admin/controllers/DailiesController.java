@@ -134,7 +134,7 @@ public class DailiesController {
 				if (date.after(c.getTime())) {
 					DailyThread dailythread = new DailyThread(dailyService, date, sdf.getPlace());
 					dailythread.start();
-					model.setViewName(ConstantsJsp.SUCCESS);
+					model.setViewName("admin/success");
 				} else {
 					model.setViewName(VIEWSEARCHCALCULATEDAILIES);
 					model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
