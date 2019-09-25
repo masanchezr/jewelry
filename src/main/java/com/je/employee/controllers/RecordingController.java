@@ -40,7 +40,7 @@ public class RecordingController {
 	private RecordingValidator recordingValidator;
 
 	private static final String FORMRECORDING = "recording";
-	private static final String VIEWNEWRECORDING = "newrecording";
+	private static final String VIEWNEWRECORDING = "employee/sales/newrecording";
 
 	@RequestMapping("/employee/newrecording")
 	public ModelAndView newrecording() {

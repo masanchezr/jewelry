@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="admin/templateAdmin :: page">
+<div th:fragment="content">
+	<!-- Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#"><span
+				th:text="#{pawns}"></span></a></li>
+		<li class="breadcrumb-item active" th:text="#{searchgramspawns}"></li>
+	</ol>
+	<form method="post" th:action="@{/quarterpawns}" th:object="${searchDateForm}"
+		autocomplete="off">
+		<div class="form-row">
+			<div class="col-lg-16">
+				<div class="card-body">
+					<div class="form-row">
+						<div class="col-lg-8">
+							<div class="form-group">
+								<div id="sandbox-container">
+									<input class="form-control" type="text" id="datefrom"
+										th:placeholder="#{datefrom}" />
+								</div>
+							</div>
+							<div class="form-group">
+								<button class="btn btn-primary" value="submit">
+									<span th:text="#{search}"></span>
+								</button>
+							</div>
+						</div>
+						<div class="col-lg-8">
+							<div class="form-group">
+								<div id="sandbox-container">
+									<input class="form-control" type="text" id="dateuntil"
+										th:placeholder="#{dateuntil}" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+</html>

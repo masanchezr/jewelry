@@ -31,7 +31,7 @@ public class EmployeeController {
 	 */
 	@RequestMapping("/employee/login")
 	public String login() {
-		return "loginemployee";
+		return "employee/login";
 	}
 
 	/**
@@ -41,7 +41,7 @@ public class EmployeeController {
 	 */
 	@RequestMapping("/employee/admin")
 	public ModelAndView admin(HttpServletRequest request) {
-		ModelAndView model = new ModelAndView("adminemployee");
+		ModelAndView model = new ModelAndView("employee/admin");
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		String ipAddress = request.getHeader(ConstantsJsp.XFORWARDEDFOR);
 		if (ipAddress == null) {
@@ -59,6 +59,6 @@ public class EmployeeController {
 	 */
 	@RequestMapping("/403")
 	public String accessDeniedPage() {
-		return "403";
+		return "employee/403";
 	}
 }

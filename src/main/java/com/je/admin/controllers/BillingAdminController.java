@@ -27,8 +27,8 @@ public class BillingAdminController {
 	private BillingFormValidator billingFormValidator;
 
 	private static final String FORMBILLING = "billingForm";
-	private static final String VIEWBILLINGADMIN = "billingadmin";
-	private static final String VIEWSEARCHBILL = "searchbill";
+	private static final String VIEWBILLINGADMIN = "admin/workshop/billing";
+	private static final String VIEWSEARCHBILL = "admin/workshop/searchbill";
 
 	@RequestMapping(value = "/searchbill")
 	public ModelAndView searchBill() {

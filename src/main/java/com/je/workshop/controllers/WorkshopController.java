@@ -37,7 +37,7 @@ public class WorkshopController {
 	 */
 	@RequestMapping("/workshop/login")
 	public String login() {
-		return "loginworkshop";
+		return "workshop/login";
 	}
 
 	/**
@@ -47,7 +47,7 @@ public class WorkshopController {
 	 */
 	@RequestMapping("/workshop/admin")
 	public String admin() {
-		return "adminworkshop";
+		return "workshop/admin";
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class WorkshopController {
 	 */
 	@RequestMapping("/workshop/newWorkshop")
 	public ModelAndView newWorkshop() {
-		ModelAndView model = new ModelAndView("newWorkshop");
+		ModelAndView model = new ModelAndView("workshop/newworkshop");
 		model.addObject("workshop", new Workshop());
 		model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
 		return model;
@@ -70,16 +70,14 @@ public class WorkshopController {
 	 */
 	@RequestMapping("/403wks")
 	public String accessDeniedPage() {
-		return "403wks";
+		return "workshop/403";
 	}
 
 	/**
 	 * Saveworkshop.
 	 *
-	 * @param workshop
-	 *            the workshop
-	 * @param result
-	 *            the result
+	 * @param workshop the workshop
+	 * @param result   the result
 	 * @return the model and view
 	 */
 	@RequestMapping("/workshop/saveworkshop")
@@ -87,11 +85,11 @@ public class WorkshopController {
 		ModelAndView model = new ModelAndView();
 		workShopValidator.validate(workshop, result);
 		if (result.hasErrors()) {
-			model.setViewName("newWorkshop");
+			model.setViewName("workshop/newworkshop");
 			model.addObject("worshop", workshop);
 		} else {
 			workshopService.save(workshop);
-			model.setViewName("successworkshop");
+			model.setViewName("workshop/success");
 		}
 		return model;
 	}

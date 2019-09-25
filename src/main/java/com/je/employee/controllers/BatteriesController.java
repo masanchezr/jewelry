@@ -46,7 +46,7 @@ public class BatteriesController {
 	private PaymentService paymentService;
 
 	private static final String BATTERYFORM = "batteryForm";
-	private static final String VIEWNEWSALEBATTERY = "newsalebattery";
+	private static final String VIEWNEWSALEBATTERY = "employee/sales/newsalebattery";
 
 	@RequestMapping(value = "/employee/newsalebattery")
 	public ModelAndView newsalebattery() {

@@ -50,7 +50,7 @@ public class SearchMissingShoppingsPawnsController {
 			model.setViewName(SEARCHMISSINGSHOPPINGS);
 		} else {
 			model.addObject("nummissing", searchMissingNumberService.searchMissingShoppings(searchmissingshoppings));
-			model.setViewName("resultmissingshoppings");
+			model.setViewName("admin/searchmissingshoppings/resultmissingshoppings");
 		}
 		return model;
 	}

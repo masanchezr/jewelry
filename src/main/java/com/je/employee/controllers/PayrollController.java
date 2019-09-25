@@ -33,7 +33,7 @@ public class PayrollController {
 	@Autowired
 	private Mapper mapper;
 
-	private static final String VIEWNEWPAYROLL = "newpayroll";
+	private static final String VIEWNEWPAYROLL = "employee/otherconcepts/payroll";
 	private static final String FORMPAYROLL = "payrollForm";
 
 	@RequestMapping(value = "/employee/newpayroll")

@@ -31,7 +31,7 @@ public class IncidentsController {
 
 	@RequestMapping(value = "/employee/newincident")
 	public ModelAndView newIncident() {
-		ModelAndView model = new ModelAndView("newincident");
+		ModelAndView model = new ModelAndView("employee/incidents/newincident");
 		model.addObject(ConstantsJsp.FORMINCIDENT, new Incident());
 		return model;
 	}
@@ -42,10 +42,10 @@ public class IncidentsController {
 		ModelAndView model = new ModelAndView();
 		incidentValidator.validate(incident, result);
 		if (result.hasErrors()) {
-			model.setViewName("newincident");
+			model.setViewName("employee/incidents/newincident");
 		} else {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
-			model.setViewName("saveincident");
+			model.setViewName("employee/incidents/resultsaveincident");
 			incident.setUser(user);
 			incidentService.save(incident);
 		}
@@ -55,7 +55,7 @@ public class IncidentsController {
 
 	@RequestMapping(value = "/employee/myincidents")
 	public ModelAndView myincidents() {
-		ModelAndView model = new ModelAndView("searchincidents");
+		ModelAndView model = new ModelAndView("employee/incidents/searchincidents");
 		model.addObject(ConstantsJsp.FORMSEARCH, new SearchForm());
 		return model;
 	}
@@ -67,19 +67,19 @@ public class IncidentsController {
 		searchFormValidator.validate(form, result);
 		if (result.hasErrors()) {
 			model.addObject(ConstantsJsp.FORMSEARCH, form);
-			model.setViewName("searchincidents");
+			model.setViewName("employee/incidents/searchincidents");
 		} else {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			List<Incident> incidents = incidentService.searchByUserAndDates(user, form);
 			model.addObject("incidents", incidents);
-			model.setViewName("myincidents");
+			model.setViewName("employee/incidents/myincidents");
 		}
 		return model;
 	}
 
 	@RequestMapping("/employee/pendingissues")
 	public ModelAndView pendingissues() {
-		ModelAndView model = new ModelAndView("myincidents");
+		ModelAndView model = new ModelAndView("employee/incidents/myincidents");
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		List<Incident> incidents = incidentService.searchPendingByUser(user);
 		model.addObject("incidents", incidents);

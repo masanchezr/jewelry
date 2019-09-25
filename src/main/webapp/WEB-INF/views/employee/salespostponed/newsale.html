@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="employee/template :: page">
+<div th:fragment="content">
+	<form method="post" th:action="@{/employee/savesalepostponed}"
+		th:object="${saleForm}" role="form">
+		<!-- Breadcrumbs-->
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="#"><span
+					th:text="#{salespostponed}"></span></a></li>
+			<li class="breadcrumb-item active" th:text="#{newsalepostponed}"></li>
+		</ol>
+		<div class="card-body">
+			<div class="table-responsive">
+				<table class="table">
+					<tbody>
+						<tr>
+							<td><input class="form-control" th:field="*{idsale}"
+								th:placeholder="#{numberofsale}"></td>
+							<td class="text-danger" th:if="${#fields.hasErrors('idsale')}"
+								th:errors="*{idsale}"></td>
+							<td></td>
+						</tr>
+						<tr th:each="jewel:${saleForm.jewels}">
+							<td><input class="form-control"
+								th:field="*{jewels[__${jewelStat.index}__].reference}"
+								th:placeholder="#{reference}"></td>
+							<td><select class="form-control"
+								th:field="*{jewels[__${jewelStat.index}__].category.idcategory}">
+									<option th:each="category:${categories}"
+										th:value="${category.idcategory}"
+										th:text="${category.namecategory}" />
+							</select></td>
+							<td><select class="form-control"
+								th:field="*{jewels[__${jewelStat.index}__].metal.idmetal}">
+									<option th:each="material:${materials}"
+										th:value="${material.idmetal}"
+										th:text="${material.description}" />
+							</select></td>
+						</tr>
+						<tr>
+							<td><input class="form-control"
+								th:field="*{optionalpayment}"
+								th:placeholder="#{firstinstallment}"></td>
+							<td><select th:field="*{payment.idpayment}"
+								class="form-control"><option
+										th:each="payment:${payments}" th:value="${payment.idpayment}"
+										th:text="${payment.name}" />
+							</select></td>
+							<td><button class="btn btn-primary" value="submit">
+									<span th:text="#{save}"></span>
+								</button></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</form>
+</div>
+</html>

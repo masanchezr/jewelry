@@ -18,13 +18,12 @@ public class ConstantsJsp {
 	public static final String PLACES = "places";
 	public static final String SHOPPINGFORM = "shoppingForm";
 	public static final String DAILY = "daily";
-	public static final String VIEWDAILYARROW = "dailyarrow";
+	public static final String VIEWDAILYARROW = "employee/daily/dailyarrow";
 	public static final String DATEDAILY = "datedaily";
 	public static final String XFORWARDEDFOR = "X-FORWARDED-FOR";
-	public static final String VIEWNOTDAILY = "notdaily";
-	public static final String VIEWDAILYARROWS = "dailyarrows";
+	public static final String VIEWNOTDAILY = "employee/daily/notdaily";
+	public static final String VIEWDAILYARROWS = "employee/daily/dailyarrows";
 	public static final String FORMENTRYMONEY = "entrymoney";
-	public static final String VIEWNEWENTRYMONEY = "newentrymoney";
 	public static final String FORMSALE = "saleForm";
 	public static final String NUMSALE = "numsale";
 	public static final String NUMSHOP = "numshop";

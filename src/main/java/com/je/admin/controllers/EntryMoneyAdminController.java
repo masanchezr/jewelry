@@ -26,7 +26,7 @@ public class EntryMoneyAdminController {
 	@Autowired
 	private SearchFormValidator adminSearchValidator;
 
-	private static final String VIEWSEARCHENTRIES = "searchentries";
+	private static final String VIEWSEARCHENTRIES = "admin/entriesmoney/searchentries";
 
 	@RequestMapping(value = "/searchEntries")
 	public ModelAndView searchEntries() {
@@ -45,7 +45,7 @@ public class EntryMoneyAdminController {
 			model.setViewName("VIEWSEARCHENTRIES");
 			model.addObject(ConstantsJsp.FORMSEARCH, asf);
 		} else {
-			model.setViewName("resultentriesmoney");
+			model.setViewName("admin/entriesmoney/resultentriesmoney");
 			Date dfrom = DateUtil.getDate(asf.getDatefrom());
 			String suntil = asf.getDateuntil();
 			Date duntil;

@@ -43,7 +43,7 @@ public class ShoppingsController {
 	@Autowired
 	private ShoppingsValidator shoppingsValidator;
 
-	private static final String VIEWNEWSHOPPING = "newshopping";
+	private static final String VIEWNEWSHOPPING = "employee/newshopping";
 
 	/**
 	 * New shopping.
@@ -63,7 +63,6 @@ public class ShoppingsController {
 			los.add(os);
 		}
 		shopping.setObjects(los);
-		model.addObject(ConstantsJsp.MATERIALS, materials);
 		model.addObject(ConstantsJsp.SHOPPINGFORM, shopping);
 		return model;
 	}
@@ -71,10 +70,8 @@ public class ShoppingsController {
 	/**
 	 * Save shopping.
 	 *
-	 * @param shoppingForm
-	 *            the shopping form
-	 * @param result
-	 *            the result
+	 * @param shoppingForm the shopping form
+	 * @param result       the result
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/employee/saveShopping")

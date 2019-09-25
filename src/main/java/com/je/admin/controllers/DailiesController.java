@@ -42,7 +42,7 @@ public class DailiesController {
 	@Autowired
 	private SearchDailyFormValidator searchDailyFormValidator;
 
-	private static final String VIEWSEARCHCALCULATEDAILIES = "searchcalculatedailies";
+	private static final String VIEWSEARCHCALCULATEDAILIES = "admin/dailies/searchcalculatedailies";
 
 	/**
 	 * Daily place.
@@ -51,7 +51,7 @@ public class DailiesController {
 	 */
 	@RequestMapping(value = "/dailyplace")
 	public ModelAndView dailyPlace() {
-		ModelAndView model = new ModelAndView("searchdaily");
+		ModelAndView model = new ModelAndView("admin/dailies/searchdaily");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		model.addObject(ConstantsJsp.FORMSEARCHDAILY, new SearchDailyForm());
@@ -91,7 +91,7 @@ public class DailiesController {
 				model = new ModelAndView();
 				model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 				model.addObject(ConstantsJsp.FORMSEARCHDAILY, sdf);
-				model.setViewName("searchdaily");
+				model.setViewName("admin/dailies/searchdaily");
 				model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 				return model;
 			} else {
@@ -166,7 +166,7 @@ public class DailiesController {
 					model.setViewName(ConstantsJsp.VIEWNOTDAILYADMIN);
 				} else {
 					model.addObject(ConstantsJsp.DAILY, daily);
-					model.setViewName("dailyadminarrows");
+					model.setViewName("admin/dailies/dailyarrows");
 					model.addObject(ConstantsJsp.DATEDAILY, date);
 					model.addObject(Constants.PLACE, idplace);
 					existdaily = true;

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="admin/templateAdmin :: page">
+<div th:fragment="content">
+	<!-- Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#"><span
+				th:text="#{pawns}"></span></a></li>
+		<li class="breadcrumb-item active" th:text="#{updatepawn}"></li>
+	</ol>
+	<form method="post" th:action="@{/savePawn}" th:object="${pawnForm}">
+		<input type="hidden" th:attr="name='id'" th:value="${pawnForm}" />
+		<div class="form-row">
+			<div class="col-lg-12">
+				<div class="card-body">
+					<div class="form-row">
+						<div class="col-lg-6">
+							<div class="form-group">
+								<input class="form-control" th:field="*{nif"
+									th:placeholder="#{nif}" />
+							</div>
+							<div class="form-group">
+								<input class="form-control" th:field="*{name"
+									th:placeholder="#{name}" />
+							</div>
+							<div class="form-group">
+								<input class="form-control" th:field="*{surname"
+									th:placeholder="#{surname}" />
+							</div>
+							<div id="sandbox-container" class="form-group">
+								<input class="form-control" th:field="*{datebirth"
+									th:placeholder="#{datebirth}" />
+							</div>
+							<div class="form-group">
+								<select th:field="*{track.idtrack}" class="form-control">
+									<option th:each="track : ${tracks}" th:value="${track.idtrack}"
+										th:text="${track.track}" />
+								</select>
+							</div>
+							<div class="form-group">
+								<input class="form-control" th:field="*{address"
+									th:placeholder="#{addressnif}" />
+							</div>
+							<div class="form-group ">
+								<input class="form-control" th:field="*{town"
+									th:placeholder="#{town}" />
+							</div>
+							<div class="form-group">
+								<select th:field="*{nation.idnation}" class="form-control">
+									<option th:each="nation : ${nations}"
+										th:value="${nation.idnation}" th:text="${nation.nation}" />
+								</select>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-group">
+								<span th:text="#{idpawn}"></span> <input class="form-control"
+									th:field="*{numpawn}" />
+							</div>
+							<div class="form-group">
+								<span th:text="#{amountpawn}"></span> <input
+									class="form-control" th:field="*{amount}" />
+							</div>
+							<div class="form-group">
+								<span th:text="#{percent}"></span> <input class="form-control"
+									id="percent" />
+							</div>
+							<div id="sandbox-container" class="form-group">
+								<span th:text="#{pawndate}"></span> <input class="form-control"
+									id="creationdate" />
+							</div>
+						</div>
+						<button class="btn btn-primary" value="submit">
+							<span th:text="#{save}"></span>
+						</button>
+					</div>
+				</div>
+			</div>
+			<!-- fin div row -->
+			<div class="table-responsive">
+				<table class="table">
+					<tbody>
+						<tr th:each="os:${pawnForm.objects}">
+							<td><strong><input type="hidden"
+									th:attr="name='{objects['+${osStat.index}+].metal.idmetal}'"
+									th:text="${os.metal.description}" /> <select
+									class="form-control"
+									th:field="*{objects[__${osStat.index}__].metal.idmetal}">
+										<option th:value="${os.metal.idmetal}"
+											th:text="${os.metal.description}" />
+										<option th:each="material:${materials}"
+											th:value="${material.idmetal}"
+											th:text="${material.description}" />
+								</select></strong></td>
+							<td th:text="#{grossgrams}"><input class="form-control"
+								th:field="*{objects[__${osStat.index}__].grossgrams}" disabled /></td>
+							<td th:text="#{realgrams}"><input class="form-control"
+								th:field="*{objects[__${osStat.index}__].realgrams}" /></td>
+							<td th:text="#{description}"><input class="form-control"
+								th:field="*{objects[__${osStat.index}__].description}" /></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="table-responsive"
+				th:if="${not #lists.isEmpty(pawnForm.renovations)}">
+				<table class="table table-striped table-bordered table-hover"
+					id="dataTables-example">
+					<thead>
+						<tr>
+							<th th:text="#{daterenew}"></th>
+							<th th:text="#{daterenovation}"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="renovation:${pawnForm.renovations}">
+							<td><span
+								th:text="${#dates.format(renovation.nextrenovationdate,'yyyy-MM-dd')}"></span></td>
+							<td><span
+								th:text="${#dates.format(renovation.creationdate,'yyyy-MM-dd')}"></span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div th:if="${#lists.isEmpty(pawnForm.renovations)}">
+				<span th:text="#{noresults}"></span> <span
+					th:text="${pawnForm.months}"></span>
+			</div>
+			<div th:if="${not #lists.isEmpty(pawnForm.renovations)}">
+				<span th:text="${#lists.size(pawnForm.renovations)}"></span>
+			</div>
+		</div>
+	</form>
+</div>
+</html>

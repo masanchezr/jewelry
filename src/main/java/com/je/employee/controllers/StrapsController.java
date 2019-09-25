@@ -44,7 +44,7 @@ public class StrapsController {
 	@Autowired
 	private StrapFormValidator strapFormValidator;
 
-	private static final String VIEWSALESTRAP = "newsalestrap";
+	private static final String VIEWSALESTRAP = "employee/sales/newsalestrap";
 	private static final String FORMSTRAP = "strapForm";
 
 	@RequestMapping(value = "/employee/newsalestrap")

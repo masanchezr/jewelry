@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="admin/templateAdmin :: page">
+<div th:fragment="content">
+	<!-- Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#"><span
+				th:text="#{shoppings}"></span></a></li>
+		<li class="breadcrumb-item active" th:text="#{newshopping}"></li>
+	</ol>
+	<form method="post" th:action="@{/saveshop}" th:object="${shopform}">
+		<div class="card-body">
+			<div class="form-row">
+				<div class="col-lg-6">
+					<div class="form-group">
+						<input class="form-control" th:field="*{numshop}"
+							th:placeholder="#{numshop}" />
+					</div>
+					<div class="form-group">
+						<input class="form-control" th:field="*{nif}"
+							th:placeholder="#{nif}" />
+					</div>
+					<div class="form-group">
+						<input class="form-control" th:field="*{name}"
+							th:placeholder="#{name}" />
+					</div>
+					<div class="form-group">
+						<input class="form-control" th:field="*{surname}"
+							th:placeholder="#{surname}" />
+					</div>
+					<div class="form-group">
+						<select th:field="*{track.idtrack}" class="form-control">
+							<option th:each="track : ${tracks}" th:value="${track.idtrack}"
+								th:text="${track.track}" />
+						</select>
+					</div>
+					<div class="form-group">
+						<input class="form-control" th:field="*{address}"
+							th:placeholder="#{addressnif}" />
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="form-group">
+						<input class="form-control" th:field="*{town}"
+							th:placeholder="#{town}" />
+					</div>
+					<div class="form-group">
+						<select th:field="*{nation.idnation}" class="form-control">
+							<option th:each="nation : ${nations}"
+								th:value="${nation.idnation}" th:text="${nation.nation}" />
+						</select>
+					</div>
+					<div class="form-group">
+						<input class="form-control" th:field="*{cashamount}"
+							th:placeholder="#{cashamount}" />
+					</div>
+					<div id="sandbox-container" class="form-group">
+						<input class="form-control" type="text" id="creationdate"
+							th:placeholder="#{date}" />
+					</div>
+				</div>
+				<button class="btn btn-primary" value="submit">
+					<span th:text="#{save}"></span>
+				</button>
+			</div>
+		</div>
+		<!-- fin div row -->
+		<div class="table-responsive">
+			<table class="table">
+				<tbody>
+					<tr th:each="os:${shopform.objects}">
+						<td><strong><input type="hidden"
+								th:attr="name='{objects['+${osStat.index}+].metal.idmetal}'"
+								th:text="${os.metal.description}" /></strong></td>
+						<td><input class="form-control"
+							th:field="*{objects[__${osStat.index}__].description}"
+							th:placeholder="#{description}"></td>
+						<td><input class="form-control"
+							th:field="*{objects[__${osStat.index}__].grossgrams}"
+							th:placeholder="#{grossgrams}"></td>
+						<td><input class="form-control"
+							th:field="*{objects[__${osStat.index}__].netgrams}"
+							th:placeholder="#{netgrams}"></td>
+						<td><input class="form-control"
+							th:field="*{objects[__${osStat.index}__].amount}"
+							th:placeholder="#{amount}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</form>
+</div>
+</html>

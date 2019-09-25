@@ -26,7 +26,7 @@ public class SalePostPonedAdminController {
 
 	@RequestMapping(value = "/searchmissingsalepostponed")
 	public ModelAndView salepostponed() {
-		ModelAndView model = new ModelAndView("resultnummissing");
+		ModelAndView model = new ModelAndView("admin/salespostponed/resultnummissing");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject(ConstantsJsp.NUMSALE, salesPostPonedService.getMissing());
 		return model;
@@ -34,7 +34,7 @@ public class SalePostPonedAdminController {
 
 	@RequestMapping(value = "/searchsalepostponed")
 	public ModelAndView searchsalepostponed() {
-		ModelAndView model = new ModelAndView("searchsalepostponed");
+		ModelAndView model = new ModelAndView("admin/salespostponed/searchsalepostponed");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject(ConstantsJsp.FORMSALEPOSTPONED, new SalePostPoned());
 		return model;
@@ -50,10 +50,10 @@ public class SalePostPonedAdminController {
 		ModelAndView model = new ModelAndView();
 		SalePostPoned spp = salesPostPonedService.searchByPK(id);
 		if (spp != null) {
-			model.setViewName("showsalepost");
+			model.setViewName("admin/salespostponed/finishsale");
 			model.addObject(ConstantsJsp.FORMSALE, spp);
 		} else {
-			model.setViewName("searchsalepostponed");
+			model.setViewName("admin/salespostponed/searchsalepostponed");
 			model.addObject(ConstantsJsp.FORMSALEPOSTPONED, new SalePostPoned());
 		}
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -68,7 +68,7 @@ public class SalePostPonedAdminController {
 
 	@RequestMapping(value = "/searchexpired")
 	public ModelAndView searchExpired() {
-		ModelAndView model = new ModelAndView("expired");
+		ModelAndView model = new ModelAndView("admin/salespostponed/expired");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject("resultexpired", salesPostPonedService.getListTimeout());
 		return model;

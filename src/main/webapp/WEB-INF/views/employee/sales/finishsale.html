@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="employee/template :: page">
+<div th:fragment="content">
+	<!-- Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#"><span
+				th:text="#{sales}"></span></a></li>
+		<li class="breadcrumb-item active" th:text="#{newsale}"></li>
+		<li class="breadcrumb-item active" th:text="#{savedsale}"></li>
+	</ol>
+	<div class="row">
+		<div class="col-xl-3 col-md-6 mb-4">
+			<div class="card border-left-primary shadow h-100 py-2">
+				<div class="card-body">
+					<div class="row no-gutters align-items-center">
+						<div class="col mr-2">
+							<div
+								class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+								<span th:text="#{numberofsale}"></span>
+							</div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800">
+								<span th:text="${saleForm.numsale}"></span>
+
+							</div>
+						</div>
+					</div>
+					<div class="col-auto">
+						<i class="fas fa-shopping-cart fa-2x text-gray-300"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xl-3 col-md-6 mb-4">
+			<div class="card border-left-success shadow h-100 py-2">
+				<div class="card-body">
+					<div class="row no-gutters align-items-center">
+						<div class="col mr-2">
+							<div
+								class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+								<span th:text="#{totalamount}"></span>
+							</div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800">
+								<span th:text="${saleForm.total}"></span>
+							</div>
+						</div>
+					</div>
+					<div class="col-auto">
+						<i class="fas fa-euro-sign fa-2x text-gray-300"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xl-3 col-md-6 mb-4">
+			<div class="card border-left-warning shadow h-100 py-2">
+				<div class="card-body">
+					<div class="row no-gutters align-items-center">
+						<div class="col mr-2">
+							<div
+								class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+								<span th:text="${saleForm.discount}"></span>
+							</div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800">
+								<span th:text="#{discount}"></span>
+							</div>
+						</div>
+						<div class="col-auto">
+							<i class="fas fa-gift fa-2x text-gray-300"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<a class="btn btn-primary" href="./newsale"> <span
+			class="float-left" th:text="#{newsale}"></span> <span
+			class="float-right"> <i class="nav-link-text"></i>
+		</span>
+		</a> <a class="btn btn-success" href="./daily"> <span
+			class="float-left" th:text="#{daily}"></span> <span
+			class="float-right"> <i class="nav-link-text"></i>
+		</span>
+		</a>
+	</div>
+	<!-- /.row -->
+	<div class="row">
+		<div class="card mb-3">
+			<div class="card-header">
+				<span th:text="#{jewelrysold}"></span>
+			</div>
+			<!-- /.card-heading -->
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered table-hover"
+						id="dataTables-example">
+						<thead>
+							<tr>
+								<th th:text="#{reference}"></th>
+								<th th:text="#{name}"></th>
+								<th th:text="#{description}"></th>
+								<th th:text="#{price}"></th>
+								<th th:text="#{category}"></th>
+								<th th:text="#{material}"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="jewel:${saleForm.jewels}">
+								<td th:text="${jewel.reference}"></td>
+								<td th:text="${jewel.name}"></td>
+								<td th:text="${jewel.description}"></td>
+								<td th:text="${jewel.price}"></td>
+								<td th:text="${jewel.category.namecategory}"></td>
+								<td th:text="${jewel.metal.description}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</html>

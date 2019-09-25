@@ -68,8 +68,8 @@ public class SalePostPonedController {
 	@Autowired
 	private InstallmentValidator installmentvalidator;
 
-	private static final String VIEWNEWSALEPOSTPONED = "newsalepostponed";
-	private static final String ADDINSTALLMENT = "addinstallment";
+	private static final String VIEWNEWSALEPOSTPONED = "employee/salespostponed/newsale";
+	private static final String ADDINSTALLMENT = "employee/salespostponed/addinstallment";
 	private static final String INSTALLMENT = "installment";
 
 	@RequestMapping(value = "/employee/newsalepostponed")
@@ -105,7 +105,7 @@ public class SalePostPonedController {
 				SalePostponedEntity entitySale = saleservicepostponed.searchByNumsale(sale.getIdsale());
 				if (entitySale == null) {
 					saleservicepostponed.buy(sale);
-					model.setViewName("finishsalepostponed");
+					model.setViewName("employee/salespostponed/finishsale");
 					model.addObject(ConstantsJsp.FORMSALE, sale);
 				} else {
 					model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
@@ -156,7 +156,7 @@ public class SalePostPonedController {
 				if (sale.getDateretired() != null) {
 					model = getModelDaily(request);
 				} else {
-					model.setViewName("finishaddinstallment");
+					model.setViewName("employee/salespostponed/finishaddinstallment");
 					model.addObject(ConstantsJsp.FORMSALE, sale);
 				}
 			} else {
@@ -214,7 +214,7 @@ public class SalePostPonedController {
 
 	@RequestMapping(value = "/employee/searchsalepostponed")
 	public ModelAndView searchsalepostponed() {
-		ModelAndView model = new ModelAndView("searchsalepostponedemployee");
+		ModelAndView model = new ModelAndView("employee/salespostponed/searchsalepostponed");
 		model.addObject(ConstantsJsp.FORMSALE, new SalePostponedEntity());
 		return model;
 	}
@@ -230,7 +230,7 @@ public class SalePostPonedController {
 			model.setViewName(ConstantsJsp.FORMSALEPOSTPONED);
 			model.addObject(ConstantsJsp.FORMSALE, salep);
 		} else {
-			model.setViewName("searchsalepostponedemployee");
+			model.setViewName("employee/salespostponed/searchsalepostponed");
 			model.addObject(ConstantsJsp.FORMSALE, sale);
 			arg1.rejectValue(Constants.IDSALEPOSTPONED, ConstantsJsp.ERRORSALENOTEXIST);
 		}

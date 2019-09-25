@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="admin/templateAdmin :: page">
+<div th:fragment="content">
+	<!-- Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#"><span
+				th:text="#{jewels}"></span></a></li>
+		<li class="breadcrumb-item active" th:text="#{updatejewels}"></li>
+	</ol>
+	<form method="post" th:action="@{/resultSearchUpdateJewels}"
+		th:object="${jewelForm}">
+		<div class="form-row">
+			<div class="col-lg-8">
+				<div class="card-body">
+					<div class="form-group">
+						<span th:text="#{reference}"></span> <input class="form-control"
+							th:field="*{reference}" />
+					</div>
+					<div class="form-group">
+						<span th:text="#{category}"></span> <select
+							th:field="*{category.idcategory}" class="form-control">
+							<option th:each="category : ${categories}"
+								th:value="${category.idcategory}"
+								th:text="${category.namecategory}" />
+						</select>
+					</div>
+					<button class="btn btn-primary" value="submit">
+						<span th:text="#{search}"></span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+</html>

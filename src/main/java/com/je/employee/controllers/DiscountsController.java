@@ -38,7 +38,7 @@ public class DiscountsController {
 
 	@RequestMapping("/employee/newdiscount")
 	public ModelAndView newDiscount() {
-		ModelAndView model = new ModelAndView("newdiscount");
+		ModelAndView model = new ModelAndView("employee/sales/newdiscount");
 		model.addObject("discountForm", new Discount());
 		return model;
 	}
@@ -49,7 +49,7 @@ public class DiscountsController {
 		ModelAndView model = new ModelAndView();
 		discountsValidator.validate(discount, errors);
 		if (errors.hasErrors()) {
-			model.setViewName("newdiscount");
+			model.setViewName("employee/sales/newdiscount");
 			model.addObject("discountForm", discount);
 		} else {
 			Date today = new Date();

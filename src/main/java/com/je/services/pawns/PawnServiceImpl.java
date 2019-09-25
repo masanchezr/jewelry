@@ -194,8 +194,8 @@ public class PawnServiceImpl implements PawnService {
 				createRenovation(pawnEntity);
 			}
 		}
-		daily = dailyService.getDaily(DateUtil.getDateFormated(new Date()), placeUserRepository.findByUsername(pawn.getUser()).get(0).getPlace(),
-				null);
+		daily = dailyService.getDaily(DateUtil.getDateFormated(new Date()),
+				placeUserRepository.findByUsername(pawn.getUser()).get(0).getPlace(), null);
 		return daily;
 	}
 
@@ -382,7 +382,8 @@ public class PawnServiceImpl implements PawnService {
 
 	private Collection<? extends Pawn> searchRenovations(PawnEntity entity, Calendar calendar) {
 		List<Pawn> pawns = new ArrayList<>();
-		List<RenovationEntity> renovations = renovationsRepository.searchPawnsExpired(DateUtil.getDateFormated(new Date()), entity);
+		List<RenovationEntity> renovations = renovationsRepository
+				.searchPawnsExpired(DateUtil.getDateFormated(new Date()), entity);
 		calendar.add(Calendar.MONTH, -1);
 		if ((renovations == null || renovations.isEmpty()) && entity.getCreationdate().before(calendar.getTime())) {
 			pawns.add(mapper.map(entity, Pawn.class));
@@ -403,8 +404,8 @@ public class PawnServiceImpl implements PawnService {
 		if (Util.isNumeric(num)) {
 			searchShopping = shoppingsRepository.findByNumshopAndPlaceAndYear(Long.valueOf(num), placeEntity, year);
 		}
-		// miramos también si existe ya como empeño
-		PawnEntity pawn = pawnsRepository.findByNumpawnAndPlaceAndYear(num, placeEntity, year);
+		// miramos también si existe como empeño no retirado
+		PawnEntity pawn = pawnsRepository.findByNumpawnAndPlaceAndDateretiredIsNull(num, placeEntity);
 		if (searchShopping == null && pawn == null) {
 			repeat = false;
 		}

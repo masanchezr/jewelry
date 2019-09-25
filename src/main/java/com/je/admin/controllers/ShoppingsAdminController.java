@@ -78,9 +78,9 @@ public class ShoppingsAdminController {
 	/** The logger. */
 	private static Logger logger = LoggerFactory.getLogger(ShoppingsAdminController.class);
 
-	private static final String VIEWSEARCHSHOPPINGS = "searchshoppings";
-	private static final String VIEWSEARCHCLIENTADMIN = "searchclientadmin";
-	private static final String VIEWNEWSHOP = "newshop";
+	private static final String VIEWSEARCHSHOPPINGS = "admin/shoppings/searchshoppings/searchshoppings";
+	private static final String VIEWSEARCHCLIENTADMIN = "admin/shoppings/newshop/searchclient";
+	private static final String VIEWNEWSHOP = "admin/shoppings/newshop/newshop";
 	private static final String FORMSHOP = "shopform";
 
 	/**
@@ -118,7 +118,7 @@ public class ShoppingsAdminController {
 					shopping.getPlace(), shopping.getNumshop());
 			model.addObject("shoppings", shoppings);
 			model.addObject(ConstantsJsp.SHOPPINGFORM, new Shopping());
-			model.setViewName("resultshoppings");
+			model.setViewName("admin/shoppings/searchshoppings/resultshoppings");
 		}
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		return model;
@@ -141,7 +141,7 @@ public class ShoppingsAdminController {
 		} else {
 			shopping = shoppingService.findShopByPK(idshop);
 			model.addObject(ConstantsJsp.SHOPPINGFORM, shopping);
-			model.setViewName("updateshopping");
+			model.setViewName("admin/shoppings/searchshoppings/updateshopping");
 			model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
 		}
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -150,7 +150,7 @@ public class ShoppingsAdminController {
 
 	@RequestMapping(value = "/updateShopping{id}")
 	public ModelAndView updateShopping(@PathVariable("id") long id) {
-		ModelAndView model = new ModelAndView("updateshopping");
+		ModelAndView model = new ModelAndView("admin/shoppings/searchshoppings/updateshopping");
 		Shopping shopping = shoppingService.findShopByPK(id);
 		model.addObject(ConstantsJsp.SHOPPINGFORM, shopping);
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -211,7 +211,7 @@ public class ShoppingsAdminController {
 
 	@RequestMapping(value = "/searchquarter")
 	public ModelAndView searchquarter() {
-		ModelAndView model = new ModelAndView("searchquarter");
+		ModelAndView model = new ModelAndView("admin/shoppings/quartersmetal/searchquarter");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject(ConstantsJsp.SHOPPINGFORM, new SearchForm());
 		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
@@ -220,7 +220,7 @@ public class ShoppingsAdminController {
 
 	@RequestMapping(value = "/searchquartermaterial")
 	public ModelAndView searchQuarterMetal() {
-		ModelAndView model = new ModelAndView("searchquartermaterial");
+		ModelAndView model = new ModelAndView("admin/shoppings/quartersmetal/searchquarter");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject(ConstantsJsp.SHOPPINGFORM, new SearchForm());
 		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
@@ -233,7 +233,7 @@ public class ShoppingsAdminController {
 		ModelAndView model = new ModelAndView();
 		adminSearchValidator.validate(shopping, result);
 		if (result.hasErrors()) {
-			model.setViewName("searchquartermaterial");
+			model.setViewName("admin/shoppings/quartersmetal/searchquarter");
 			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		} else {
 			List<QuarterMetal> quarters = shoppingService.searchGramsByMetal(shopping.getDatefrom(),
@@ -249,7 +249,7 @@ public class ShoppingsAdminController {
 
 	@RequestMapping(value = "/searchgramsnull")
 	public ModelAndView searchGramsNull() {
-		ModelAndView model = new ModelAndView("searchgramsnull");
+		ModelAndView model = new ModelAndView("admin/shoppings/searchshoppings/searchgramsnull");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject(ConstantsJsp.FORMSEARCH, new SearchForm());
 		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
@@ -263,14 +263,14 @@ public class ShoppingsAdminController {
 		adminSearchValidator.validate(form, result);
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		if (result.hasErrors()) {
-			model.setViewName("searchgramsnull");
+			model.setViewName("admin/shoppings/searchshoppings/searchgramsnull");
 			model.addObject(ConstantsJsp.FORMSEARCH, form);
 			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		} else {
 			List<Long> numshops = shoppingService.searchGramsNull(form.getDatefrom(), form.getDateuntil(),
 					form.getPlace());
 			model.addObject("nummissing", numshops);
-			model.setViewName("resultmissingshoppings");
+			model.setViewName("admin/searchmissingshoppings/resultmissingshoppings");
 		}
 		return model;
 	}
@@ -331,7 +331,7 @@ public class ShoppingsAdminController {
 
 	@RequestMapping(value = "/exceltomelloso")
 	public ModelAndView excelTomelloso() {
-		ModelAndView model = new ModelAndView("exceltomelloso");
+		ModelAndView model = new ModelAndView("admin/shoppings/exceltomelloso");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject(ConstantsJsp.FORMSEARCH, new SearchForm());
 		return model;
@@ -340,7 +340,7 @@ public class ShoppingsAdminController {
 	@RequestMapping(value = "/downloadexcel")
 	public ModelAndView downloadexcel(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm form, BindingResult result,
 			HttpServletResponse response) {
-		ModelAndView model = new ModelAndView("exceltomelloso");
+		ModelAndView model = new ModelAndView("admin/shoppings/exceltomelloso");
 		adminSearchValidator.validate(form, result);
 		if (result.hasErrors()) {
 			model.addObject(ConstantsJsp.FORMSEARCH, new SearchForm());

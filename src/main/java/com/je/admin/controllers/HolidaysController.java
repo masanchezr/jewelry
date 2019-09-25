@@ -34,7 +34,7 @@ public class HolidaysController {
 	@Autowired
 	private HolidayValidator holidayValidator;
 
-	private static final String VIEWNEWHOLIDAY = "newholiday";
+	private static final String VIEWNEWHOLIDAY = "admin/holidays/newholiday";
 
 	/**
 	 * New holiday.
@@ -53,8 +53,7 @@ public class HolidaysController {
 	/**
 	 * Adds the holiday.
 	 *
-	 * @param holiday
-	 *            the holiday
+	 * @param holiday the holiday
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/addHoliday")
@@ -84,7 +83,7 @@ public class HolidaysController {
 
 	@RequestMapping(value = "/searchHolidays")
 	public ModelAndView searchHolidays() {
-		ModelAndView model = new ModelAndView("searchholidays");
+		ModelAndView model = new ModelAndView("admin/holidays/searchholidays");
 		model.addObject(ConstantsJsp.FORMHOLIDAY, new Holiday());
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		return model;
@@ -92,7 +91,7 @@ public class HolidaysController {
 
 	@RequestMapping(value = "/resultHolidays")
 	public ModelAndView resultHolidays(@ModelAttribute(ConstantsJsp.FORMHOLIDAY) Holiday holiday) {
-		ModelAndView model = new ModelAndView("allholidays");
+		ModelAndView model = new ModelAndView("admin/holidays/allholidays");
 		model.addObject("holidays", holidayService.findByBetweenDates(holiday));
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		return model;
@@ -105,7 +104,7 @@ public class HolidaysController {
 	 */
 	@RequestMapping(value = "/allHolidays")
 	public ModelAndView allHolidays() {
-		ModelAndView model = new ModelAndView("allholidays");
+		ModelAndView model = new ModelAndView("admin/holidays/allholidays");
 		List<Holiday> holidays = holidayService.findAll();
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject("holidays", holidays);

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="admin/templateAdmin :: page">
+<div th:fragment="content">
+	<!-- Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#"><span
+				th:text="#{shoppings}"></span></a></li>
+		<li class="breadcrumb-item active" th:text="#{updateshopping}"></li>
+	</ol>
+	<form method="post" th:action="@{/saveShopping}"
+		th:object="${shoppingForm}" role="form">
+		<input type="hidden" th:attr="name='id'" th:value="${shoppingForm.id}" />
+		<div class="form-row">
+			<div class="col-lg-12">
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table">
+							<tbody>
+								<tr>
+									<td th:text="#{numshop}"><input class="form-control"
+										th:field="*{numshop}" disabled /></td>
+									<td class="form-group has-error"
+										th:if="${#fields.hasErrors('numshop')}" th:errors="*{numshop}"></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr th:each="os:${shoppingForm.objects}">
+									<td th:text="#{metal}"><input type="hidden"
+										th:attr="name='{objects['+${osStat.index}+'].idobjectshop'" />
+										<select class="form-control"
+										th:field="*{objects[__${osStat.index}__].metal.idmetal}">
+											<option th:value="${os.metal.idmetal}"
+												th:text="${os.metal.description}" />
+											<option th:each="material:${materials}"
+												th:value="${material.idmetal}"
+												th:text="${material.description}" />
+									</select></td>
+									<td th:text="#{grossgrams}"><input class="form-control"
+										th:field="*{objects[__${osStat.index}__].grossgrams}" /></td>
+									<td th:text="#{netgrams}"><input class="form-control"
+										th:field="*{objects[__${osStat.index}__].netgrams}" disabled /></td>
+									<td th:text="#{realgrams}"><input class="form-control"
+										th:field="*{objects[__${osStat.index}__].realgrams}" /></td>
+									<td th:text="#{amount}"><input class="form-control"
+										th:field="*{objects[__${osStat.index}__].amount}" /></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td th:text="#{amount}"><input class="form-control"
+										disabled th:field="*{amount}" /></td>
+									<td class="form-group has-error"
+										th:if="${#fields.hasErrors('amount')}" th:erros="*{amount}"></td>
+									<td><button class="btn btn-primary" value="submit">
+											<span th:text="#{save}"></span>
+										</button></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+</html>

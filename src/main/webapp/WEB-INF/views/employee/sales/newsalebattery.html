@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="employee/template :: page">
+<div th:fragment="content">
+	<form method="post" th:action="@{/employee/savesalebattery}"
+		th:object="${batteryForm}" role="form">
+		<!-- Breadcrumbs-->
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="#"><span
+					th:text="#{sales}"></span></a></li>
+			<li class="breadcrumb-item active" th:text="#{putbattery}"></li>
+		</ol>
+		<div class="card-body">
+			<div class="form-row">
+				<div class="col-lg-6">
+					<div class="form-group">
+						<input class="form-control" th:field="*{amount}"
+							th:placeholder="#{amount}" />
+						<p th:if="${#fields.hasErrors('amount')}" th:erros="*{amount}">
+						</p>
+					</div>
+					<div class="form-group">
+						<span th:text="#{payment}"></span> <select
+							th:field="*{payment.idpayment}" class="form-control"><option
+								th:each="payment:${payments}" th:value="${payment.idpayment}"
+								th:text="${payment.name}" />
+						</select>
+					</div>
+					<div class="form-group">
+						<input class="form-control" th:field="*{numsale}"
+							th:placeholder="#{numberofsale}" /> <small
+							class="form-text text-danger"
+							th:if="${#fields.hasErrors('numsale')}" th:errors="*{numsale}"></small>
+					</div>
+					<div class="form-group">
+						<button class="btn btn-primary" value="submit">
+							<span th:text="#{save}"></span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+</html>

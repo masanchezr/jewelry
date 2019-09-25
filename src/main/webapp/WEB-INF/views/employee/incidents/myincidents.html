@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="employee/template :: page">
+<div th:fragment="content">
+	<!-- Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#"><span
+				th:text="#{incidents}"></span></a></li>
+		<li class="breadcrumb-item active" th:text="#{myincidents}"></li>
+	</ol>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card-body" th:if="${not #lists.isEmpty(incidents)}">
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered table-hover"
+						id="dataTables-example">
+						<thead>
+							<tr>
+								<th th:text="#{number}"></th>
+								<th th:text="#{description}"></th>
+								<th th:text="#{date}"></th>
+								<th th:text="#{state}"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="incident:${incidents}">
+								<td th:text="${incident.idincident}"></td>
+								<td th:text="${incident.description}"></td>
+								<td th:text="${#dates.format(incident.date,'yyyy-MM-dd')}"></td>
+								<td th:if="${incident.state}"><span th:text="#{resolved}"></span></td>
+								<td th:if="${!incident.state}"><span th:text="#{pending}"></span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div th:if="${#lists.isEmpty(incidents)}">
+					<span th:text="#{noresults}"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</html>

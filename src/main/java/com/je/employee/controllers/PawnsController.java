@@ -65,10 +65,10 @@ public class PawnsController {
 	@Autowired
 	private PlaceService placeService;
 
-	private static final String VIEWNEWPAWN = "newPawn";
-	private static final String VIEWSEARCHCLIENT = "searchclient";
+	private static final String VIEWNEWPAWN = "employee/pawns/newpawn/newPawn";
+	private static final String VIEWSEARCHCLIENT = "employee/pawns/newpawn/searchclient";
 	private static final String FORMSEARCHPAWN = "searchPawnForm";
-	private static final String VIEWSEARCHREMOVEPAWN = "searchremovepawn";
+	private static final String VIEWSEARCHREMOVEPAWN = "employee/pawns/removepawn/searchpawn";
 
 	/**
 	 * Save pawn.
@@ -139,13 +139,13 @@ public class PawnsController {
 	@RequestMapping(value = "/employee/resultSearchPawn")
 	public ModelAndView resultSearchPawn(@RequestParam(Constants.IDPAWN) Long idpawn) {
 		Pawn pawn = pawnService.searchByIdpawn(idpawn);
-		ModelAndView model = new ModelAndView("resultsearchpawn");
+		ModelAndView model = new ModelAndView("employee/pawns/searchpawns/resultpawns");
 		model.addObject("pawn", pawn);
 		return model;
 	}
 
 	/**
-	 * New pawn.
+	 * Segunda pantalla
 	 *
 	 * @return the model and view
 	 */
@@ -180,6 +180,11 @@ public class PawnsController {
 		return model;
 	}
 
+	/**
+	 * Primera Pantalla
+	 * 
+	 * @return ModelAndView
+	 */
 	@RequestMapping(value = "/employee/searchclientpawn")
 	public ModelAndView searchClientPawn() {
 		ModelAndView model = new ModelAndView(VIEWSEARCHCLIENT);
@@ -207,7 +212,7 @@ public class PawnsController {
 	 */
 	@RequestMapping(value = "/employee/renewPawn")
 	public ModelAndView renewPawn() {
-		ModelAndView model = new ModelAndView("searchrenewpawn");
+		ModelAndView model = new ModelAndView("employee/pawns/renewpawn/searchpawn");
 		model.addObject(FORMSEARCHPAWN, new Pawn());
 		return model;
 	}
@@ -225,16 +230,14 @@ public class PawnsController {
 		pawnFormValidator.validate(pawn, result);
 		if (result.hasErrors()) {
 			model.addObject(FORMSEARCHPAWN, new Pawn());
-			model.setViewName("searchrenewpawn");
+			model.setViewName("employee/pawns/renewpawn/searchpawn");
 		} else {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			pawn.setUser(user);
 			List<Pawn> pawns = pawnService.searchRenewByNumpawn(pawn);
-			Integer[] numrenovations = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
 			model.addObject(ConstantsJsp.PAWNFORM, new Pawn());
 			model.addObject(ConstantsJsp.PAWNS, pawns);
-			model.addObject("times", numrenovations);
-			model.setViewName("renewpawn");
+			model.setViewName("employee/pawns/renewpawn/renewpawn");
 		}
 		return model;
 	}
@@ -273,7 +276,7 @@ public class PawnsController {
 			role = itcollection.next().getAuthority();
 		}
 		if ((Constants.ROLE_AR.equals(role) && pawn.getMonths() <= 0) || pawn.getId() == null) {
-			model.setViewName("noselected");
+			model.setViewName("employee/noselected");
 		} else {
 			model.addObject(ConstantsJsp.DAILY, pawnService.remove(pawn));
 			model.setViewName(ConstantsJsp.VIEWDAILYARROW);
@@ -309,9 +312,9 @@ public class PawnsController {
 			List<Pawn> pawns = pawnService.searchRenewByNumpawn(pawn);
 			model.addObject(ConstantsJsp.PAWNS, pawns);
 			if (Constants.ROLE_AR.equals(role)) {
-				model.setViewName("removepawnfive");
+				model.setViewName("employee/pawns/removepawn/removepawnfive");
 			} else {
-				model.setViewName("removepawn");
+				model.setViewName("employee/pawns/removepawn/removepawn");
 			}
 		}
 		return model;
@@ -319,7 +322,7 @@ public class PawnsController {
 
 	@RequestMapping(value = "/employee/searchrenovations")
 	public ModelAndView searchrenovations() {
-		ModelAndView model = new ModelAndView("searchrenovationsemployee");
+		ModelAndView model = new ModelAndView("employee/pawns/searchrenovations/searchpawn");
 		model.addObject(ConstantsJsp.PAWNFORM, new Pawn());
 		return model;
 	}
@@ -329,13 +332,13 @@ public class PawnsController {
 		ModelAndView model = new ModelAndView();
 		pawnFormValidator.validate(pawn, result);
 		if (result.hasErrors()) {
-			model.setViewName("searchrenovationsemployee");
+			model.setViewName("employee/pawns/searchrenovations/searchpawn");
 			model.addObject(ConstantsJsp.PAWNFORM, pawn);
 		} else {
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			String user = authentication.getName();
 			pawn.setPlace(placeService.getPlaceUser(user));
-			model.setViewName("resultpawnsrenovationsemployee");
+			model.setViewName("employee/pawns/searchrenovations/resultpawn");
 			model.addObject(ConstantsJsp.PAWNS, pawnService.searchByNumpawn(pawn));
 		}
 		return model;
@@ -349,7 +352,7 @@ public class PawnsController {
 			model.setViewName("errorupdatepawn");
 		} else {
 			List<RenovationDates> renovations = pawnService.searchRenovations(idpawn);
-			model.setViewName("resultrenovationsemployee");
+			model.setViewName("employee/pawns/searchrenovations/renovations");
 			model.addObject("renovations", renovations);
 		}
 		return model;

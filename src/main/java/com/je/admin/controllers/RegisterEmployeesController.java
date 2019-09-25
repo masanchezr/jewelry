@@ -42,7 +42,7 @@ public class RegisterEmployeesController {
 
 	@RequestMapping(value = "/searchRegisterEmployees")
 	public ModelAndView searchRegisterEmployees() {
-		ModelAndView model = new ModelAndView("searchregisteremployees");
+		ModelAndView model = new ModelAndView("admin/register/search");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject("searchDateForm", new SearchForm());
 		return model;
@@ -57,10 +57,10 @@ public class RegisterEmployeesController {
 		adminSearchValidator.validate(form, result);
 		if (result.hasErrors()) {
 			model.addObject(ConstantsJsp.FORMSEARCH, new SearchForm());
-			model.setViewName("searchregisteremployees");
+			model.setViewName("admin/register/search");
 		} else {
 			model.addObject("register", registerService.findByDates(sfrom, suntil));
-			model.setViewName("registeremployees");
+			model.setViewName("admin/register/register");
 			model.addObject("datefrom", DateUtil.getDate(sfrom));
 			model.addObject("dateuntil", DateUtil.getDate(suntil));
 		}
@@ -71,7 +71,7 @@ public class RegisterEmployeesController {
 	@RequestMapping(value = "/downloadpdf{datefrom}/{dateuntil}")
 	public ModelAndView downloadpdf(@PathVariable("datefrom") String from, @PathVariable("dateuntil") String until,
 			HttpServletResponse response) {
-		ModelAndView model = new ModelAndView("registeremployees");
+		ModelAndView model = new ModelAndView("admin/register/register");
 		String path = System.getenv(Constants.OPENSHIFT_DATA_DIR);
 		File file = new File(path.concat("register.pdf"));
 		List<RegisterEntity> register = registerService.findByDates(from, until);

@@ -38,7 +38,7 @@ public class OthersConceptsController {
 	 */
 	@RequestMapping(value = "/employee/newconcept")
 	public ModelAndView newconcept() {
-		ModelAndView model = new ModelAndView("newconcept");
+		ModelAndView model = new ModelAndView("employee/otherconcepts/newotherconcept");
 		model.addObject(FORMOTHERCONCEPT, new OtherConcept());
 		return model;
 	}
@@ -56,7 +56,7 @@ public class OthersConceptsController {
 		otherConceptValidator.validate(otherconcept, result);
 		if (result.hasErrors()) {
 			model.addObject(FORMOTHERCONCEPT, otherconcept);
-			model.setViewName("newconcept");
+			model.setViewName("employee/otherconcepts/newotherconcept");
 		} else {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			otherconcept.setUser(user);

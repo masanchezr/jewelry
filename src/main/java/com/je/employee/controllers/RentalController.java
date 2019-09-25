@@ -25,7 +25,7 @@ public class RentalController {
 	@Autowired
 	private RentalValidator rentalValidator;
 
-	private static final String VIEWLOCALRENTAL = "localrental";
+	private static final String VIEWLOCALRENTAL = "employee/otherconcepts/localrental";
 	private static final String FORMRENTAL = "rentalForm";
 
 	@RequestMapping(value = "/employee/localrental")

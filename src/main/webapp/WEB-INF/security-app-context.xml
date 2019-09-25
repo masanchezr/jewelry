@@ -9,6 +9,9 @@
 	<beans:import resource="classpath*:applicationContext.xml" />
 	<beans:bean name="pbkdf2Encoder"
 		class="org.springframework.security.crypto.password.Pbkdf2PasswordEncoder" />
+
+	<http pattern="/resources/**" security="none" />
+
 	<http pattern="/employee/**"
 		authentication-manager-ref="authenticationMgr">
 		<access-denied-handler error-page="/403" />
@@ -166,8 +169,6 @@
 			access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/dailyplace"
 			access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/searchquarter"
-			access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/searchquarterpawns"
 			access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/quarter"
@@ -235,6 +236,8 @@
 		<intercept-url pattern="/allcoins"
 			access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/searchRegisterEmployees"
+			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/newcoin"
 			access="hasRole('ROLE_ADMIN')" />
 	</http>
 

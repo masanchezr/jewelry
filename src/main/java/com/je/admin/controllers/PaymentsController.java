@@ -24,8 +24,7 @@ public class PaymentsController {
 	/**
 	 * Save payment.
 	 *
-	 * @param payment
-	 *            the payment
+	 * @param payment the payment
 	 * @return the string
 	 */
 	@RequestMapping(value = "/savePayment")
@@ -43,7 +42,7 @@ public class PaymentsController {
 	 */
 	@RequestMapping(value = "/allpayments")
 	public ModelAndView allpayments() {
-		ModelAndView model = new ModelAndView("allpayments");
+		ModelAndView model = new ModelAndView("admin/payments/allpayments");
 		Iterable<PaymentEntity> payments = paymentService.findAll();
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject(ConstantsJsp.PAYMENTS, payments);

@@ -27,7 +27,7 @@ public class BillingController {
 	 */
 	@RequestMapping(value = "/workshop/billing")
 	public ModelAndView billing() {
-		ModelAndView model = new ModelAndView("billing");
+		ModelAndView model = new ModelAndView("workshop/billing");
 		Calendar current = Calendar.getInstance();
 		current.setTime(new Date());
 		model.addAllObjects(billingService.getBill(current));
@@ -36,7 +36,7 @@ public class BillingController {
 
 	@RequestMapping(value = "/workshop/billingprevious")
 	public ModelAndView billingprevious() {
-		ModelAndView model = new ModelAndView("billing");
+		ModelAndView model = new ModelAndView("workshop/billing");
 		Calendar current = Calendar.getInstance();
 		current.setTime(new Date());
 		current.add(Calendar.MONTH, -1);

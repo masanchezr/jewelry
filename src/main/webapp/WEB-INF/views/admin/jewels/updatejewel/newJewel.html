@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="admin/templateAdmin :: page">
+<div th:fragment="content">
+	 
+		<!-- Breadcrumbs-->
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="#"><span
+					th:text="#{jewels}"></span></a></li>
+			<li class="breadcrumb-item active" th:text="#{newjewel}"></li>
+		</ol>
+		<form method="post" th:action="@{/saveJewel}" th:object="${jewelForm}">
+			<input type="hidden" th:attr="name='idjewel'"
+				th:value="${jewelForm.idjewel}" />
+			<div class="form-row">
+				<div class="col-lg-16">
+					<div class="card-body">
+						<div class="form-row">
+							<div class="col-lg-4">
+								<div class="form-group">
+									<select th:field="*{place.idplace}">
+										<th:block th:if="${placeselected==null}">
+											<option selected="true" th:value="" th:text="#{place}"></option>
+										</th:block>
+										<th:block th:if="${placeselected!=null}">
+											<option selected="true" th:value="${placeselected.idplace}"
+												th:text="${placeselected.description}" />
+										</th:block>
+										<option th:each="place : ${places}"
+											th:value="${place.idplace}" th:text="${place.description}" />
+									</select>
+								</div>
+								<div class="form-group">
+									<select th:field="\*{material.idmetal}">
+										<option th:each="material : ${materials}"
+											th:value="${material.idmetal}"
+											th:text="${material.description}" />
+									</select>
+								</div>
+								<div class="form-group">
+									<select th:field="*{category.idcategory}">
+										<option th:each="category : ${categories}"
+											th:value="${category.idcategory}"
+											th:text="${category.namecategory}" />
+									</select>
+								</div>
+								<div class="form-group">
+									<input class="form-control" th:field="*{reference"
+										th:placeholder="#{reference}" />
+								</div>
+								<div class="form-group">
+									<input class="form-control" th:field="*{price"
+										th:placeholder="#{price}" />
+								</div>
+								<div class="form-group">
+									<input class="form-control" th:field="*{name" th:placeholder="#{name}" />
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="form-group">
+									<input class="form-control" th:field="*{description}"
+										th:placeholder="#{description}" />
+								</div>
+								<div class="form-group">
+									<input class="form-control" th:field="*{grams"
+										th:placeholder="#{grams}" />
+								</div>
+								<div class="form-group">
+									<input class="form-control" th:field="*{cost" th:placeholder="#{cost}" />
+								</div>
+								<div class="form-group">
+									<input class="form-control" th:field="*{work.idworkshop"
+										th:placeholder="#{idwork}" />
+								</div>
+								<!--<button value="Examinar">
+				<span th:text="#{inspect" />
+			</button>-->
+								<div class="form-group">
+									<span th:text="#{active}"></span> <input type="checkbox"
+										th:field="*{active}" />
+								</div>
+								<div class="form-group">
+									<button class="btn btn-primary" value="submit">
+										<span th:text="#{save}"></span>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+</html>

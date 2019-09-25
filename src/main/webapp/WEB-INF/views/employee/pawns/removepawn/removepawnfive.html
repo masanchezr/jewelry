@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="employee/template :: page">
+<div th:fragment="content">
+	<!-- Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#"><span
+				th:text="#{newpawn}"></span></a></li>
+		<li class="breadcrumb-item active" th:text="#{removepawn}"></li>
+	</ol>
+	<div class="form-row">
+		<div class="col-lg-12">
+			<div class="card-body" th:if="${not #lists.isEmpty(pawns}">
+				<div class="table-responsive">
+					<form method="post" th:action="@{/employee/removepawn}" th:object="${pawnForm}">
+						<table class="table table-striped table-bordered table-hover"
+							id="dataTables-example">
+							<thead>
+								<tr>
+									<th></th>
+									<th th:text="#{numpawn}"></th>
+									<th th:text="#{datepawn}"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="pawn">
+									<td><input type="radio" th:field="${pawnForm.id}"
+										th:value="${pawn.id}" /></td>
+									<td th:text="${pawn.numpawn}"></td>
+									<td th:text="${pawn.creationdate}"></td>
+								</tr>
+							</tbody>
+						</table>
+						<span th:text="#{monthspawn}"></span> <input class="form-control"
+							id="months" /> <small class="form-text text-danger"
+							th:if="${#fields.hasErrors('months')}" th:errors="months"></small>
+						<button class="btn btn-primary" value="submit">
+							<span th:text="#{removepawn}"></span>
+						</button>
+					</form>
+				</div>
+				<div th:if="${#lists.isEmpty(pawns}">
+					<span th:text="#{noresults}"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</html>

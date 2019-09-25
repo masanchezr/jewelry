@@ -45,7 +45,7 @@ public class AdminController {
 	@RequestMapping(value = "/login")
 	public String login() {
 		log.warn("probando login");
-		return "login";
+		return "admin/login";
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class AdminController {
 			ipAddress = request.getRemoteAddr();
 		}
 		connectionService.saveConnection(ipAddress);
-		return new ModelAndView("admin", ConstantsJsp.ADMINFORM, new AdminForm());
+		return new ModelAndView("admin/admin", ConstantsJsp.ADMINFORM, new AdminForm());
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class AdminController {
 	@RequestMapping(value = "/newCategory")
 	public ModelAndView newCategory() {
 		ModelAndView model = new ModelAndView();
-		model.setViewName("newCategory");
+		model.setViewName("admin/newCategory");
 		model.addObject(ConstantsJsp.CATEGORY, new CategoryEntity());
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		return model;
@@ -84,7 +84,7 @@ public class AdminController {
 	 */
 	@RequestMapping(value = "/newPayment")
 	public ModelAndView newPayment() {
-		ModelAndView model = new ModelAndView("newPayment");
+		ModelAndView model = new ModelAndView("admin/payments/newPayment");
 		model.addObject(ConstantsJsp.FORMPAYMENT, new PaymentEntity());
 		model.addObject(ConstantsJsp.FORMSEARCH, new SearchJewelForm());
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -99,7 +99,7 @@ public class AdminController {
 	 */
 	@RequestMapping(value = "/searchJewels")
 	public ModelAndView searchJewels(@RequestParam String search) {
-		ModelAndView model = new ModelAndView("resultsearchbyreference");
+		ModelAndView model = new ModelAndView("admin/jewels/searchjewels/resultsearchbyreference");
 		List<JewelEntity> jewels = searchService.search(search);
 		model.addObject(ConstantsJsp.JEWELS, jewels);
 		model.addObject("toUpdate", new JewelEntity());
@@ -124,7 +124,7 @@ public class AdminController {
 	 */
 	@RequestMapping("/403admin")
 	public ModelAndView accessDeniedPage() {
-		ModelAndView model = new ModelAndView("403admin");
+		ModelAndView model = new ModelAndView("admin/403");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		return model;
 	}

@@ -32,8 +32,8 @@ public class AdjustmentsAdminController {
 	@Autowired
 	private SearchFormValidator adminSearchFormValidator;
 
-	private static final String VIEWSEARCHADJUSTMENT = "searchadjustment";
-	private static final String VIEWSEARCHSUMADJUSTMENTS = "searchsumadjustments";
+	private static final String VIEWSEARCHADJUSTMENT = "admin/adjustments/searchadjustment";
+	private static final String VIEWSEARCHSUMADJUSTMENTS = "admin/adjustments/searchsumadjustments";
 
 	@RequestMapping(value = "/searchsumadjustments")
 	public ModelAndView searchSumAdjustments() {
@@ -45,7 +45,8 @@ public class AdjustmentsAdminController {
 	}
 
 	@RequestMapping(value = "/sumadjustments")
-	public ModelAndView sumAdjustments(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm searchForm, BindingResult result) {
+	public ModelAndView sumAdjustments(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm searchForm,
+			BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		adminSearchFormValidator.validate(searchForm, result);
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -57,7 +58,7 @@ public class AdjustmentsAdminController {
 			Date from = DateUtil.getDate(searchForm.getDatefrom());
 			Date until = DateUtil.getDate(searchForm.getDateuntil());
 			model.addAllObjects(adjustmentService.sumAdjustmentByDates(from, until, searchForm.getPlace()));
-			model.setViewName("sumadjustments");
+			model.setViewName("admin/adjustments/sumadjustments");
 		}
 		return model;
 	}
@@ -80,7 +81,7 @@ public class AdjustmentsAdminController {
 		} else {
 			adjustment = adjustmentService.findById(idadjustment);
 			model.addObject(ConstantsJsp.FORMADJUSTMENT, adjustment);
-			model.setViewName("resultadjustment");
+			model.setViewName("admin/adjustments/resultadjustment");
 		}
 		model.addObject(ConstantsJsp.FORMADJUSTMENT, adjustment);
 		return model;

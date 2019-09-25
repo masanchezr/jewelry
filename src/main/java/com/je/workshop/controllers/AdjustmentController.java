@@ -33,7 +33,7 @@ public class AdjustmentController {
 	 */
 	@RequestMapping(value = "/workshop/newadjustment")
 	public ModelAndView newadjustment() {
-		ModelAndView model = new ModelAndView("newadjustmentworkshop");
+		ModelAndView model = new ModelAndView("workshop/newadjustment");
 		model.addObject(ConstantsJsp.FORMADJUSTMENT, new Adjustment());
 		return model;
 	}
@@ -41,10 +41,8 @@ public class AdjustmentController {
 	/**
 	 * Save adjustment.
 	 *
-	 * @param adjustment
-	 *            the adjustment
-	 * @param result
-	 *            the result
+	 * @param adjustment the adjustment
+	 * @param result     the result
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/workshop/saveAdjustment")
@@ -53,11 +51,11 @@ public class AdjustmentController {
 		ModelAndView model = new ModelAndView();
 		adjustmentFormValidator.validate(adjustment, result);
 		if (result.hasErrors()) {
-			model.setViewName("newadjustmentworkshop");
+			model.setViewName("workshop/newadjustment");
 			model.addObject(ConstantsJsp.FORMADJUSTMENT, adjustment);
 		} else {
 			adjustmentService.saveWorkshop(adjustment);
-			model.setViewName("successworkshop");
+			model.setViewName("workshop/success");
 		}
 		return model;
 	}

@@ -106,9 +106,7 @@ public class RegisterServiceImpl implements RegisterService {
 			Iterator<RegisterEntity> iregister = register.iterator();
 			RegisterEntity r;
 			Paragraph para = new Paragraph(
-					"Estos datos solo podrán cederse a terceros con la finalidad de dar cumplimiento\n"
-							+ "a las obligaciones de carácter legal o contractual\n"
-							+ "relacionadas con el desarrollo de la actividad laboral.");
+					"Estos datos solo podrán cederse a terceros con la finalidad de dar cumplimiento a las obligaciones de carácter legal o contractual relacionadas con el desarrollo de la actividad laboral.");
 			document.add(new Paragraph("NUMISGOLD S.L. Registro de empleados").setItalic());
 			table.addCell(new Cell().add("DNI"));
 			table.addCell(new Cell().add("Nombre"));

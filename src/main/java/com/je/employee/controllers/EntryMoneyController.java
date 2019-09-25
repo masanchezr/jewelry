@@ -26,7 +26,7 @@ public class EntryMoneyController {
 
 	@RequestMapping(value = "/employee/newentrymoney")
 	public ModelAndView newentrymoney() {
-		ModelAndView model = new ModelAndView(ConstantsJsp.VIEWNEWENTRYMONEY);
+		ModelAndView model = new ModelAndView("employee/newentrymoney");
 		model.addObject(ConstantsJsp.FORMENTRYMONEY, new EntryMoneyEntity());
 		return model;
 	}
@@ -38,7 +38,7 @@ public class EntryMoneyController {
 		entryMoneyValidator.validate(entryMoney, result);
 		if (result.hasErrors()) {
 			model.addObject(ConstantsJsp.FORMENTRYMONEY, entryMoney);
-			model.setViewName(ConstantsJsp.VIEWNEWENTRYMONEY);
+			model.setViewName("employee/newentrymoney");
 		} else {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			model.addObject(ConstantsJsp.DAILY, entryMoneyService.saveEntryMoney(user, entryMoney.getAmount()));

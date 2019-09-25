@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="employee/template :: page">
+
+<div th:fragment="content">
+	<div th:fragment="content">
+
+		<!-- Breadcrumbs-->
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="#"> <span
+					th:text="${datedaily}"></span></a></li>
+			<li class="breadcrumb-item active"><span
+				th:text="${daily.numoperations}"></span> <span
+				th:text="#{operations}"></span></li>
+		</ol>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered table-hover"
+							id="dataTables-example">
+							<thead>
+								<tr>
+									<th th:text="#{concept}"></th>
+									<th th:text="#{number}"></th>
+									<th th:text="#{amount}"></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="sale:${daily.sales}">
+									<td th:text="#{sale}"></td>
+									<td th:text="${sale.numsale}"></td>
+									<td><span th:text="${sale.total}"><i
+											class="fas fa-euro-sign"></i></span></td>
+									<td th:text="${sale.payments}"></td>
+								</tr>
+								<tr th:each="salepost:${daily.lsalespost}">
+									<td th:text="#{salepostponed}"></td>
+									<td th:text="${salepost.idsale}"></td>
+									<td th:text="${salepost.total}"><i
+										class="fas fa-euro-sign"></i></td>
+									<td th:text="${salepost.payments}"></td>
+								</tr>
+								<tr th:each="pawn:${daily.retiredpawns}">
+									<td th:text="#{pawn}"></td>
+									<td th:text="${pawn.numpawn}"></td>
+									<td><span th:text="${pawn.amount}"><i
+											class="fas fa-euro-sign"></i></span></td>
+									<td th:text="#{retired}"></td>
+								</tr>
+								<tr th:each="pawn:${daily.newpawns}">
+									<td th:text="#{pawn}"></td>
+									<td th:text="${pawn.numpawn}"></td>
+									<td><span th:text="${pawn.amount}"><i
+											class="fas fa-euro-sign"></i></span></td>
+									<td th:text="#{newpawn}"></td>
+								</tr>
+								<tr th:each="adjustment:${daily.adjustments}">
+									<td th:text="#{adjustment}"><span
+										th:text="${adjustment.description}"></span></td>
+									<td th:text="${adjustment.idadjustment}"></td>
+									<td th:text="${adjustment.amount}"><i
+										class="fas fa-euro-sign"></i></td>
+									<td th:text="${adjustment.payment.name}"></td>
+								</tr>
+								<tr th:each="adjustment:${daily.adjustmentswork}">
+									<td th:text="#{adjustmentwork}"><span
+										th:text="${adjustment.description}"></span></td>
+									<td th:text="${adjustment.idadjustment}"></td>
+									<td th:text="${adjustment.amountwork}"><i
+										class="fas fa-euro-sign"></i></td>
+									<td></td>
+								</tr>
+								<tr th:each="shopping:${daily.shoppings}">
+									<td th:text="#{shopping}"><span
+										th:text="${shopping.description}"></span></td>
+									<td th:text="${shopping.numshop}"></td>
+									<td th:text="${shopping.amount}"><i
+										class="fas fa-euro-sign"></i></td>
+									<td th:text="${shopping.payments}"></td>
+								</tr>
+								<tr th:each="concept:${daily.othersconcepts}">
+									<td th:text="${concept.description}"></td>
+									<td></td>
+									<td th:text="${concept.amount}"><i
+										class="fas fa-euro-sign"></i></td>
+									<td></td>
+								</tr>
+								<tr th:each="renovation:${daily.renovations}">
+									<td th:text="#{renovationpawn}"></td>
+									<td th:text="${renovation.numpawn}"></td>
+									<td th:text="${renovation.renovationamount}"><i
+										class="fas fa-euro-sign"></i></td>
+									<td></td>
+								</tr>
+								<tr th:each="cancelsale:${daily.cancelsales}">
+									<td th:text="#{cancelsales}"></td>
+									<td th:text="${cancelsale.numsale}"></td>
+									<td th:text="${cancelsale.amount}"><i
+										class="fas fa-euro-sign"></i></td>
+									<td th:text="${cancelsale.parcial}"><span
+										th:text="${cancelsale.payment.name}"></span></td>
+								</tr>
+								<tr th:each="entrymoney:${daily.entriesmoney}">
+									<td th:text="#{entrymoney}"></td>
+									<td></td>
+									<td th:text="${entrymoney.amount}"><i
+										class="fas fa-euro-sign"></i></td>
+									<td></td>
+								</tr>
+								<tr th:each="battery:${daily.batteries}">
+									<td th:text="#{putbattery}"></td>
+									<td th:text="${battery.numsale}"></td>
+									<td th:text="${battery.amount}"><i
+										class="fas fa-euro-sign"></i></td>
+									<td th:text="${battery.payment.name}"></td>
+								</tr>
+								<tr th:each="strap:${daily.straps}">
+									<td th:text="#{putstrap}"></td>
+									<td th:text="${strap.numsale}"></td>
+									<td><span th:text="${strap.amount}"><i
+											class="fas fa-euro-sign"></i></span></td>
+									<td th:text="${strap.payment.name}"></td>
+								</tr>
+								<tr th:each="rental:${daily.rentals}">
+									<td th:text="#{localrental}"></td>
+									<td th:text="${rental.rentaldate}"></td>
+									<td><span th:text="${rental.amount}"><i
+											class="fas fa-euro-sign"></i></span></td>
+									<td></td>
+								</tr>
+								<tr th:each="discount:${daily.discounts}">
+									<td th:text="#{iddiscount}"></td>
+									<td th:text="${discount.iddiscount}"></td>
+									<td th:text="${discount.sdiscount}"><i
+										class="fas fa-euro-sign"></i></td>
+									<td></td>
+								</tr>
+								<tr th:each="recording:${daily.recordings}">
+									<td th:text="#{recording}"></td>
+									<td th:text="${recording.numsale}"></td>
+									<td th:text="${recording.amount}"><i
+										class="fas fa-euro-sign"></i></td>
+									<td th:text="${recording.pay.name}"></td>
+								</tr>
+								<tr th:if="${daily.payroll!=null}">
+									<td th:text="#{payroll}"></td>
+									<td th:text="${daily.payroll.payrolltype.name}"></td>
+									<td th:text="${daily.payroll.amount}"><i
+										class="fas fa-euro-sign"></i></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="form-group">
+								<span th:text="#{totalamount}"></span> <span
+									th:text="${daily.finalamount}"></span> <i
+									class="fas fa-euro-sign"></i>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="form-group">
+								<a href="/employee/beforeday(
+										${datedaily})"><button
+										class="btn btn-primary" type="button">
+										<i class="fas fa-arrow-circle-left"></i> <span
+											th:text="#{beforeday}"></span>
+									</button></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</html>

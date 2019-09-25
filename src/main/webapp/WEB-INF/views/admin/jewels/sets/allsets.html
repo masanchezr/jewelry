@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="admin/templateAdmin :: page">
+<div th:fragment="content">
+	<!-- Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#"><span
+				th:text="#{stocksets}"></span></a></li>
+		<li class="breadcrumb-item active" th:text="#{resultsearch}"></li>
+	</ol>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover" id="dataTables-example">
+						<thead>
+							<tr>
+								<th th:text="#{reference}"></th>
+								<th th:text="#{description}"></th>
+								<th th:text="#{price}"></th>
+								<th th:text="#{category}"></th>
+								<th th:text="#{material}"></th>
+								<th th:text="#{place}"></th>
+								<th th:text="#{active}"></th>
+								<th th:text="#{saledate}"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="success" th:each="set:${sets}">
+								<td th:text="#{set}"></td>
+								<td th:text="#{num}"></td>
+								<td th:text="${set.idset}"></td>
+							</tr>
+							<tr th:each="jewel:${set.jewels}">
+								<td th:text="${jewel.reference}"></td>
+								<td th:text="${jewel.description}"></td>
+								<td th:text="${jewel.price}"></td>
+								<td th:text="${jewel.category.namecategory}"></td>
+								<td th:text="${jewel.metal.description}"></td>
+								<td th:text="${jewel.place.description}"></td>
+								<td th:text="${jewel.active}"></td>
+								<td th:text="${jewel.saledate}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</html>

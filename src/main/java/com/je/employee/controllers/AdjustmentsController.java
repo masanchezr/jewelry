@@ -40,7 +40,7 @@ public class AdjustmentsController {
 	 */
 	@RequestMapping(value = "/employee/newadjustment")
 	public ModelAndView newadjustment() {
-		ModelAndView model = new ModelAndView("newadjustment");
+		ModelAndView model = new ModelAndView("employee/newadjustment");
 		model.addObject(ConstantsJsp.FORMADJUSTMENT, new Adjustment());
 		model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
 		return model;
@@ -49,18 +49,17 @@ public class AdjustmentsController {
 	/**
 	 * Save adjustment.
 	 *
-	 * @param adjustment
-	 *            the adjustment
-	 * @param result
-	 *            the result
+	 * @param adjustment the adjustment
+	 * @param result     the result
 	 * @return the model and view
 	 */
 	@RequestMapping(value = "/employee/saveAdjustment")
-	public ModelAndView saveAdjustment(@ModelAttribute(ConstantsJsp.FORMADJUSTMENT) Adjustment adjustment, BindingResult result) {
+	public ModelAndView saveAdjustment(@ModelAttribute(ConstantsJsp.FORMADJUSTMENT) Adjustment adjustment,
+			BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		adjustmentValidator.validate(adjustment, result);
 		if (result.hasErrors()) {
-			model.setViewName("newadjustment");
+			model.setViewName("employee/newadjustment");
 			model.addObject(ConstantsJsp.FORMADJUSTMENT, adjustment);
 			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
 		} else {

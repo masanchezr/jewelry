@@ -66,7 +66,7 @@ public class DailyController {
 
 	@RequestMapping(value = "/employee/searchdaily")
 	public ModelAndView searchdaily() {
-		ModelAndView model = new ModelAndView("searchdailyem");
+		ModelAndView model = new ModelAndView("employee/daily/searchdaily");
 		model.addObject(ConstantsJsp.FORMSEARCH, new SearchForm());
 		return model;
 	}

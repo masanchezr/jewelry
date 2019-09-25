@@ -19,7 +19,7 @@ public class IncidentsAdminController {
 
 	@RequestMapping(value = "/allincidents")
 	public ModelAndView allincidents() {
-		ModelAndView model = new ModelAndView("allincidents");
+		ModelAndView model = new ModelAndView("admin/incidents/allincidents");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject("incidents", incidentService.searchAllIncidents());
 		model.addObject(ConstantsJsp.FORMINCIDENT, new Incident());
@@ -28,7 +28,7 @@ public class IncidentsAdminController {
 
 	@RequestMapping(value = "/pendingissues")
 	public ModelAndView pendingissues() {
-		ModelAndView model = new ModelAndView("allincidents");
+		ModelAndView model = new ModelAndView("admin/incidents/allincidents");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject("incidents", incidentService.searchPending());
 		model.addObject(ConstantsJsp.FORMINCIDENT, new Incident());
@@ -37,7 +37,7 @@ public class IncidentsAdminController {
 
 	@RequestMapping(value = "/searchincident")
 	public ModelAndView searchIncident(@ModelAttribute(ConstantsJsp.FORMINCIDENT) Incident incident) {
-		ModelAndView model = new ModelAndView("updateincident");
+		ModelAndView model = new ModelAndView("admin/incidents/updateincident");
 		model.addObject(ConstantsJsp.FORMINCIDENT, incidentService.searchIncident(incident));
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		return model;

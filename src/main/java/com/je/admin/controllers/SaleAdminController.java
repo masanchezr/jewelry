@@ -77,7 +77,7 @@ public class SaleAdminController {
 	@Autowired
 	private SaleFormValidator saleValidator;
 
-	private static final String VIEWNEWSALEADMIN = "newsaleadmin";
+	private static final String VIEWNEWSALEADMIN = "admin/sales/newsale";
 
 	@RequestMapping(value = "/resultSalesCard")
 	public ModelAndView resultSalesCard(@ModelAttribute("searchSaleForm") SearchSale searchSaleForm,
@@ -86,21 +86,21 @@ public class SaleAdminController {
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		searchSalesValidator.validate(searchSaleForm, bindingResult);
 		if (bindingResult.hasErrors()) {
-			model.setViewName("searchsalescard");
+			model.setViewName("admin/salescard/searchsalescard");
 			model.addObject("searchSaleForm", searchSaleForm);
 		} else {
 			PaymentEntity pay = new PaymentEntity();
 			pay.setIdpayment(Constants.CARD);
 			searchSaleForm.setPay(pay);
 			model.addAllObjects(salesCardService.searchByDates(searchSaleForm));
-			model.setViewName("resultsalescard");
+			model.setViewName("admin/salescard/resultsalescard");
 		}
 		return model;
 	}
 
 	@RequestMapping(value = "/searchSalesCard")
 	public ModelAndView searchSalesCard() {
-		ModelAndView model = new ModelAndView("searchsalescard");
+		ModelAndView model = new ModelAndView("admin/salescard/searchsalescard");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject("searchSaleForm", new SearchSale());
 		return model;
@@ -108,7 +108,7 @@ public class SaleAdminController {
 
 	@RequestMapping(value = "/searchSales")
 	public ModelAndView searchsales() {
-		ModelAndView model = new ModelAndView("searchsales");
+		ModelAndView model = new ModelAndView("admin/sales/searchsales/searchsales");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject(ConstantsJsp.FORMSEARCH, new SearchForm());
 		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
@@ -148,20 +148,20 @@ public class SaleAdminController {
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		adminsearchformvalidator.validate(searchSaleForm, bindingResult);
 		if (bindingResult.hasErrors()) {
-			model.setViewName("searchsales");
+			model.setViewName("admin/sales/searchsales/searchsales");
 			model.addObject(ConstantsJsp.FORMSEARCH, searchSaleForm);
 			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		} else {
 			model.addAllObjects(saleService.searchByDatesAndPlace(searchSaleForm.getDatefrom(),
 					searchSaleForm.getDateuntil(), searchSaleForm.getPlace()));
-			model.setViewName("resultsales");
+			model.setViewName("admin/sales/searchsales/resultsales");
 		}
 		return model;
 	}
 
 	@RequestMapping(value = "/showsale{id}")
 	public ModelAndView showsale(@PathVariable("id") long id) {
-		ModelAndView model = new ModelAndView("showsale");
+		ModelAndView model = new ModelAndView("admin/sales/searchsales/finishsale");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		Sale sale = saleService.searchByPK(id);
 		model.addObject(ConstantsJsp.FORMSALE, sale);
@@ -190,7 +190,7 @@ public class SaleAdminController {
 				Sale entitySale = saleService.searchByNumsaleAndPlace(sale.getNumsale(), place.getIdplace());
 				if (entitySale == null) {
 					saleService.buy(sale);
-					model.setViewName("showsale");
+					model.setViewName("admin/sales/searchsales/finishsale");
 					model.addObject(ConstantsJsp.FORMSALE, sale);
 				} else {
 					model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
@@ -261,5 +261,4 @@ public class SaleAdminController {
 		model.addObject(ConstantsJsp.FORMSALE, sale);
 		return model;
 	}
-
 }

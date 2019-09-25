@@ -29,7 +29,7 @@ public class UsersController {
 
 	@RequestMapping(value = "/newuser")
 	public ModelAndView newUser() {
-		ModelAndView model = new ModelAndView("newuser");
+		ModelAndView model = new ModelAndView("admin/users/saveuser/newuser");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject(ConstantsJsp.USER, new User());
 		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
@@ -42,11 +42,11 @@ public class UsersController {
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		userValidator.validate(user, result);
 		if (result.hasErrors()) {
-			model.setViewName("newuser");
+			model.setViewName("admin/users/saveuser/newuser");
 			model.addObject(ConstantsJsp.USER, new User());
 			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		} else {
-			model.setViewName("resultuser");
+			model.setViewName("admin/users/saveuser/resultuser");
 			model.addObject(ConstantsJsp.USER, user);
 			userService.newUser(user);
 		}

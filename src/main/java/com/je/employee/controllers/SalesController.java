@@ -73,11 +73,11 @@ public class SalesController {
 	@Autowired
 	private PartialCancelSaleValidator partialCancelSaleValidator;
 
-	private static final String VIEWNEWSALE = "newsale";
-	private static final String VIEWREMOVEPARCIALSALE = "removeparcialsale";
-	private static final String VIEWREMOVESALE = "removesale";
+	private static final String VIEWNEWSALE = "employee/sales/newsale";
+	private static final String VIEWREMOVEPARCIALSALE = "employee/sales/removeparcialsale";
+	private static final String VIEWREMOVESALE = "employee/sales/removesale";
 	private static final String FORMREMOVESALE = "removeSaleForm";
-	private static final String VIEWCANCELPARCIALSALE = "cancelparcialsale";
+	private static final String VIEWCANCELPARCIALSALE = "employee/sales/cancelparcialsale";
 
 	/**
 	 * Sale.
@@ -102,7 +102,7 @@ public class SalesController {
 				boolean exists = saleService.exists(sale.getNumsale());
 				if (!exists) {
 					saleService.buy(sale);
-					model.setViewName("finishsale");
+					model.setViewName("employee/sales/finishsale");
 					model.addObject(ConstantsJsp.FORMSALE, sale);
 				} else {
 					model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());

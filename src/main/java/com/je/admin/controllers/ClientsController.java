@@ -38,7 +38,7 @@ public class ClientsController {
 	 */
 	@RequestMapping(value = "/searchclients")
 	public ModelAndView searchClients() {
-		ModelAndView model = new ModelAndView("searchclients");
+		ModelAndView model = new ModelAndView("admin/clients/searchclients");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject("client", new Client());
 		return model;
@@ -51,13 +51,13 @@ public class ClientsController {
 		model.addObject("clientModel", new Client());
 		model.addObject("clients", clients);
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
-		model.setViewName("resultClients");
+		model.setViewName("admin/clients/resultClients");
 		return model;
 	}
 
 	@RequestMapping(value = "/showoperations")
 	public ModelAndView showoperations(@ModelAttribute("clientModel") Client client) {
-		ModelAndView model = new ModelAndView("operations");
+		ModelAndView model = new ModelAndView("admin/clients/resultoperations");
 		model.addObject("shoppings", shoppingService.getByNIF(client.getNif()));
 		model.addObject("pawns", pawnService.getByNIF(client.getNif()));
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
