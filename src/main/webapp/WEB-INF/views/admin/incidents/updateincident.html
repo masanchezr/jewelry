@@ -10,8 +10,8 @@
 					th:text="#{incident}"></span></a></li>
 			<li class="breadcrumb-item active" th:text="${incident.idincident}"></li>
 		</ol>
-		<input type="hidden" th:attr="name='idincident'"
-			th:field="*{incident.idincident}" />
+		<input type="hidden" th:field="*{idincident}"
+			th:text="${incident.idincident}" />
 		<div class="form-row">
 			<div class="col-lg-12">
 				<div class="card-body">
