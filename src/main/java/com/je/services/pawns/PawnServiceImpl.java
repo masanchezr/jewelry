@@ -405,7 +405,7 @@ public class PawnServiceImpl implements PawnService {
 			searchShopping = shoppingsRepository.findByNumshopAndPlaceAndYear(Long.valueOf(num), placeEntity, year);
 		}
 		// miramos también si existe como empeño no retirado
-		PawnEntity pawn = pawnsRepository.findByNumpawnAndPlaceAndDateretiredIsNull(num, placeEntity);
+		PawnEntity pawn = pawnsRepository.findByNumpawnAndPlaceAndYearAndDateretiredIsNull(num, placeEntity, year);
 		if (searchShopping == null && pawn == null) {
 			repeat = false;
 		}
