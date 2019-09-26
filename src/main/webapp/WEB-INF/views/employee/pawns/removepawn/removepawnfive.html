@@ -24,7 +24,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="pawn">
+								<tr th:each="pawn:${pawns}">
 									<td><input type="radio" th:field="*{id}"
 										th:value="${pawn.id}" /></td>
 									<td th:text="${pawn.numpawn}"></td>
@@ -33,7 +33,8 @@
 							</tbody>
 						</table>
 						<span th:text="#{monthspawn}"></span> <input class="form-control"
-							id="months" /> <small class="form-text text-danger"
+							th:field="*{months}" class="form-control" /> <small
+							class="form-text text-danger"
 							th:if="${#fields.hasErrors('months')}" th:errors="*{months}"></small>
 						<button class="btn btn-primary" value="submit">
 							<span th:text="#{removepawn}"></span>
