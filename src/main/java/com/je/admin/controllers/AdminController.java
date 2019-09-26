@@ -108,16 +108,6 @@ public class AdminController {
 	}
 
 	/**
-	 * Error.
-	 * 
-	 * @return the string
-	 */
-	@RequestMapping(value = "/error")
-	public String error() {
-		return "error";
-	}
-
-	/**
 	 * Access denied page.
 	 *
 	 * @return the string

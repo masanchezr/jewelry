@@ -84,7 +84,8 @@ public class DailiesController {
 			ipAddress = request.getRemoteAddr();
 		}
 		if (date == null) {
-			return getDailyModel(ipAddress, DateUtil.getDateFormated(new Date()), place, "dailyadminarrow");
+			return getDailyModel(ipAddress, DateUtil.getDateFormated(new Date()), place,
+					ConstantsJsp.VIEWDAILYADMINARROW);
 		} else {
 			searchDailyFormValidator.validate(sdf, arg1);
 			if (arg1.hasErrors()) {

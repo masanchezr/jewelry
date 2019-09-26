@@ -10,9 +10,10 @@
 	</ol>
 	<div class="form-row">
 		<div class="col-lg-12">
-			<div class="card-body" th:if="${not #lists.isEmpty(pawns}">
+			<div class="card-body" th:if="${not #lists.isEmpty(pawns)}">
 				<div class="table-responsive">
-					<form method="post" th:action="@{/employee/removepawn}" th:object="${pawnForm}">
+					<form method="post" th:action="@{/employee/removepawn}"
+						th:object="${pawnForm}">
 						<table class="table table-striped table-bordered table-hover"
 							id="dataTables-example">
 							<thead>
@@ -24,7 +25,7 @@
 							</thead>
 							<tbody>
 								<tr th:each="pawn:${pawns}">
-									<td><input type="radio" th:field="${pawnForm.id}"
+									<td><input type="radio" th:field="*{id}"
 										th:value="${pawn.id}"></td>
 									<td th:text="${pawn.numpawn}"></td>
 									<td th:text="${pawn.creationdate}"></td>
@@ -36,7 +37,7 @@
 						</button>
 					</form>
 				</div>
-				<div th:if="${#lists.isEmpty(pawns}">
+				<div th:if="${#lists.isEmpty(pawns)}">
 					<span th:text="#{noresults}"></span>
 				</div>
 			</div>
