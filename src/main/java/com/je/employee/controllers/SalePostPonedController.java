@@ -183,7 +183,7 @@ public class SalePostPonedController {
 		} else {
 			model.addObject(ConstantsJsp.DAILY, daily);
 			model.setViewName(ConstantsJsp.VIEWDAILYARROW);
-			model.addObject(ConstantsJsp.DATEDAILY, new Date());
+			model.addObject(ConstantsJsp.DATEDAILY,DateUtil.getStringDateddMMyyyy(new Date()));
 		}
 		return model;
 	}

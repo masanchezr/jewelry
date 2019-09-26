@@ -15,6 +15,7 @@ import com.je.services.rentals.Rental;
 import com.je.services.rentals.RentalService;
 import com.je.utils.constants.Constants;
 import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.date.DateUtil;
 
 @Controller
 public class RentalController {
@@ -49,7 +50,7 @@ public class RentalController {
 			if (!rentalService.existsLocalRental(rental)) {
 				model.addObject(ConstantsJsp.DAILY, rentalService.saveRental(rental));
 				model.setViewName(ConstantsJsp.VIEWDAILYARROW);
-				model.addObject(ConstantsJsp.DATEDAILY, new Date());
+				model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 			} else {
 				model.setViewName(VIEWLOCALRENTAL);
 				model.addObject(FORMRENTAL, rental);

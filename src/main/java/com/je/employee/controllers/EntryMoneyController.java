@@ -14,6 +14,7 @@ import com.je.dbaccess.entities.EntryMoneyEntity;
 import com.je.employee.validators.EntryMoneyValidator;
 import com.je.services.entrymoney.EntryMoneyService;
 import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.date.DateUtil;
 
 @Controller
 public class EntryMoneyController {
@@ -43,7 +44,7 @@ public class EntryMoneyController {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			model.addObject(ConstantsJsp.DAILY, entryMoneyService.saveEntryMoney(user, entryMoney.getAmount()));
 			model.setViewName(ConstantsJsp.VIEWDAILYARROW);
-			model.addObject(ConstantsJsp.DATEDAILY, new Date());
+			model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 		}
 		return model;
 	}

@@ -22,6 +22,7 @@ import com.je.services.pawns.PawnService;
 import com.je.services.shoppings.Shopping;
 import com.je.services.shoppings.ShoppingService;
 import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.date.DateUtil;
 
 /**
  * The Class ShoppingsController.
@@ -114,7 +115,7 @@ public class ShoppingsController {
 			} else {
 				model.addObject(ConstantsJsp.DAILY, shoppingService.save(shoppingForm));
 				model.setViewName(ConstantsJsp.VIEWDAILYARROW);
-				model.addObject(ConstantsJsp.DATEDAILY, new Date());
+				model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 			}
 		}
 		return model;

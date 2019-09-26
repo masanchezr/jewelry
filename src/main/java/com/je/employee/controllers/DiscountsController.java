@@ -61,9 +61,8 @@ public class DiscountsController {
 			}
 			discount.setPlace(place);
 			discountService.save(discount);
-			model.addObject(ConstantsJsp.DAILY,
-					dailyService.getDaily(DateUtil.getDateFormated(new Date()), place, ipAddress));
-			model.addObject(ConstantsJsp.DATEDAILY, today);
+			model.addObject(ConstantsJsp.DAILY, dailyService.getDaily(today, place, ipAddress));
+			model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateddMMyyyy(today));
 			model.setViewName(ConstantsJsp.VIEWDAILYARROW);
 		}
 		return model;

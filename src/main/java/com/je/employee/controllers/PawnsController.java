@@ -255,7 +255,7 @@ public class PawnsController {
 		pawn.setUser(user);
 		model.addObject(ConstantsJsp.DAILY, pawnService.renew(pawn));
 		model.setViewName(ConstantsJsp.VIEWDAILYARROW);
-		model.addObject(ConstantsJsp.DATEDAILY, new Date());
+		model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getDateFormated(new Date()));
 		return model;
 	}
 
@@ -280,7 +280,7 @@ public class PawnsController {
 		} else {
 			model.addObject(ConstantsJsp.DAILY, pawnService.remove(pawn));
 			model.setViewName(ConstantsJsp.VIEWDAILYARROW);
-			model.addObject(ConstantsJsp.DATEDAILY, new Date());
+			model.addObject(ConstantsJsp.DATEDAILY,DateUtil.getStringDateddMMyyyy(new Date()));
 		}
 		return model;
 	}

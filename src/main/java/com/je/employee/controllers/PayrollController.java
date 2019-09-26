@@ -66,7 +66,7 @@ public class PayrollController {
 			if (!payrollservice.existsPayroll(payrollEntity)) {
 				model.addObject(ConstantsJsp.DAILY, payrollservice.addPayroll(payrollEntity));
 				model.setViewName(ConstantsJsp.VIEWDAILYARROW);
-				model.addObject(ConstantsJsp.DATEDAILY, new Date());
+				model.addObject(ConstantsJsp.DATEDAILY,DateUtil.getStringDateddMMyyyy(new Date()));
 			} else {
 				model.setViewName(VIEWNEWPAYROLL);
 				model.addObject(FORMPAYROLL, payroll);

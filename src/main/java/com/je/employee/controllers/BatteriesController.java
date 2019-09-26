@@ -78,13 +78,11 @@ public class BatteriesController {
 				model.setViewName(VIEWNEWSALEBATTERY);
 				model.addObject(BATTERYFORM, battery);
 			} else {
-				Date today = new Date();
 				model.setViewName(ConstantsJsp.VIEWDAILYARROW);
 				battery.setPlace(place);
 				batteriesService.saveSaleBattery(battery);
-				model.addObject(ConstantsJsp.DAILY,
-						dailyService.getDaily(DateUtil.getDateFormated(new Date()), place, ipAddress));
-				model.addObject(ConstantsJsp.DATEDAILY, today);
+				model.addObject(ConstantsJsp.DAILY, dailyService.getDaily(new Date(), place, ipAddress));
+				model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 			}
 		}
 		return model;

@@ -6,8 +6,8 @@
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item active" th:text="#{searchentries}"></li>
 	</ol>
-	<form method="post" th:action="@{/resultentries}" th:object="${searchDateForm}"
-		autocomplete="off">
+	<form method="post" th:action="@{/resultentries}"
+		th:object="${searchDateForm}" autocomplete="off">
 		<div class="form-row">
 			<div class="col-lg-16">
 				<div class="card-body">
@@ -15,7 +15,7 @@
 						<div class="col-lg-4">
 							<div class="form-group">
 								<div id="sandbox-container">
-									<input class="form-control" th:field="*{datefrom"
+									<input class="form-control" th:field="*{datefrom}"
 										th:placeholder="#{datefrom}" />
 								</div>
 							</div>
@@ -28,7 +28,7 @@
 						<div class="col-lg-4">
 							<div class="form-group">
 								<div id="sandbox-container">
-									<input class="form-control" th:field="*{dateuntil"
+									<input class="form-control" th:field="*{dateuntil}"
 										th:placeholder="#{dateuntil}" />
 								</div>
 							</div>

@@ -59,7 +59,7 @@ public class DailyController {
 		} else {
 			model.addObject(ConstantsJsp.DAILY, daily);
 			model.setViewName(ConstantsJsp.VIEWDAILYARROW);
-			model.addObject(ConstantsJsp.DATEDAILY, now);
+			model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 		}
 		return model;
 	}
@@ -126,7 +126,7 @@ public class DailyController {
 					}
 					model.addObject(ConstantsJsp.DAILY, daily);
 					model.setViewName(view);
-					model.addObject(ConstantsJsp.DATEDAILY, date);
+					model.addObject(ConstantsJsp.DATEDAILY, sdate);
 					existdaily = true;
 				}
 			} else {

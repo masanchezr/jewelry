@@ -15,6 +15,7 @@ import com.je.services.adjustments.Adjustment;
 import com.je.services.adjustments.AdjustmentService;
 import com.je.services.payment.PaymentService;
 import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.date.DateUtil;
 
 /**
  * The Class AdjustmentsController.
@@ -67,7 +68,7 @@ public class AdjustmentsController {
 			adjustment.setUser(user);
 			model.addObject(ConstantsJsp.DAILY, adjustmentService.save(adjustment));
 			model.setViewName(ConstantsJsp.VIEWDAILYARROW);
-			model.addObject(ConstantsJsp.DATEDAILY, new Date());
+			model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 		}
 		return model;
 	}

@@ -14,6 +14,7 @@ import com.je.employee.validators.OtherConceptValidator;
 import com.je.services.otherconcepts.OtherConcept;
 import com.je.services.otherconcepts.OtherConceptService;
 import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.date.DateUtil;
 
 /**
  * The Class OthersConceptsController.
@@ -62,7 +63,7 @@ public class OthersConceptsController {
 			otherconcept.setUser(user);
 			model.addObject(ConstantsJsp.DAILY, otherConceptService.save(otherconcept));
 			model.setViewName(ConstantsJsp.VIEWDAILYARROW);
-			model.addObject(ConstantsJsp.DATEDAILY, new Date());
+			model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 		}
 		return model;
 	}
