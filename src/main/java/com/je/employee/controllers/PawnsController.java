@@ -118,13 +118,13 @@ public class PawnsController {
 				model.setViewName(VIEWNEWPAWN);
 				result.rejectValue(Constants.NUMPAWN, "numrepited");
 			} else {
-				Date date = DateUtil.getDate(pawn.getCreationdate());
-				if (date == null) {
-					date = new Date();
+				String sdate = pawn.getCreationdate();
+				if (Util.isEmpty(sdate)) {
+					sdate = DateUtil.getStringDateddMMyyyy(new Date());
 				}
 				model.addObject(ConstantsJsp.DAILY, pawnService.save(pawn));
 				model.setViewName(ConstantsJsp.VIEWDAILYARROW);
-				model.addObject(ConstantsJsp.DATEDAILY, date);
+				model.addObject(ConstantsJsp.DATEDAILY, sdate);
 			}
 		}
 		return model;
@@ -280,7 +280,7 @@ public class PawnsController {
 		} else {
 			model.addObject(ConstantsJsp.DAILY, pawnService.remove(pawn));
 			model.setViewName(ConstantsJsp.VIEWDAILYARROW);
-			model.addObject(ConstantsJsp.DATEDAILY,DateUtil.getStringDateddMMyyyy(new Date()));
+			model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 		}
 		return model;
 	}
