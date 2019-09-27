@@ -38,7 +38,7 @@
 							</div>
 							<div class="form-group">
 								<span th:text="#{material}"></span> <select
-									th:field="*{material.idmetal}" class="form-control">
+									th:field="*{metal.idmetal}" class="form-control">
 									<option th:each="material : ${materials}"
 										th:value="${material.idmetal}"
 										th:text="${material.description}" />
