@@ -109,7 +109,7 @@ public class DailiesController {
 		} else {
 			model.addObject(ConstantsJsp.DAILY, daily);
 			model.setViewName(view);
-			model.addObject(ConstantsJsp.DATEDAILY, date);
+			model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateddMMyyyy(date));
 			model.addObject(Constants.PLACE, place.getIdplace());
 		}
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
