@@ -63,30 +63,32 @@
 					<span th:text="#{save}"></span>
 				</button>
 			</div>
-		</div>
-		<!-- fin div row -->
-		<div class="table-responsive">
-			<table class="table">
-				<tbody>
-					<tr th:each="os:${shopform.objects}">
-						<td><strong><input type="hidden"
-								th:attr="name='{objects['+${osStat.index}+].metal.idmetal}'"
-								th:text="${os.metal.description}" /></strong></td>
-						<td><input class="form-control"
-							th:field="*{objects[__${osStat.index}__].description}"
-							th:placeholder="#{description}"></td>
-						<td><input class="form-control"
-							th:field="*{objects[__${osStat.index}__].grossgrams}"
-							th:placeholder="#{grossgrams}"></td>
-						<td><input class="form-control"
-							th:field="*{objects[__${osStat.index}__].netgrams}"
-							th:placeholder="#{netgrams}"></td>
-						<td><input class="form-control"
-							th:field="*{objects[__${osStat.index}__].amount}"
-							th:placeholder="#{amount}"></td>
-					</tr>
-				</tbody>
-			</table>
+			<!-- fin div row -->
+			<div class="row">
+				<div class="table-responsive">
+					<table class="table">
+						<tbody>
+							<tr th:each="os:${shopform.objects}">
+								<td><strong><input type="hidden"
+										th:attr="name='{objects['+${osStat.index}+].metal.idmetal}'"
+										th:text="${os.metal.description}" /></strong></td>
+								<td><input class="form-control"
+									th:field="*{objects[__${osStat.index}__].description}"
+									th:placeholder="#{description}"></td>
+								<td><input class="form-control"
+									th:field="*{objects[__${osStat.index}__].grossgrams}"
+									th:placeholder="#{grossgrams}"></td>
+								<td><input class="form-control"
+									th:field="*{objects[__${osStat.index}__].netgrams}"
+									th:placeholder="#{netgrams}"></td>
+								<td><input class="form-control"
+									th:field="*{objects[__${osStat.index}__].amount}"
+									th:placeholder="#{amount}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 	</form>
 </div>

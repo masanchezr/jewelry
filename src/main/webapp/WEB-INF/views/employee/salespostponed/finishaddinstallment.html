@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	th:include="workshop/templateWorkshop :: page">
+	th:include="employee/template :: page">
 <div th:fragment="content">
 	<!-- Breadcrumbs-->
 	<ol class="breadcrumb">
@@ -21,7 +21,7 @@
 							th:text="#{numsale}"></span>
 					</div>
 				</div>
-				<a class="card-footer text-white clearfix small z-1"
+				<a class="card-footer clearfix small z-1"
 					href="/employee/newsalepostponed"> <span class="float-left"
 					th:text="#{newsalepostponed}"></span> <span class="float-right"><i
 						class="nav-link-text"></i></span>
@@ -39,10 +39,9 @@
 							th:text="#{totalamount}"></span>
 					</div>
 				</div>
-				<a class="card-footer text-white clearfix small z-1"
-					href="/employee/daily"> <span class="float-left"
-					th:text="#{daily}"></span> <span class="float-right"><i
-						class="nav-link-text"></i></span>
+				<a class="card-footer clearfix small z-1" href="/employee/daily">
+					<span class="float-left" th:text="#{daily}"></span> <span
+					class="float-right"><i class="nav-link-text"></i></span>
 				</a>
 			</div>
 		</div>
