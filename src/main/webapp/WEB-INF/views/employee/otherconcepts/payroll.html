@@ -22,7 +22,8 @@
 									th:erros="*{amount}"></p>
 							</div>
 							<div class="form-group">
-								<select th:field="*{idpayrolltype}" class="form-control">
+								<select th:field="*{payrolltype.idpayrolltype}"
+									class="form-control">
 									<option th:each="prt:${payrolltypes}"
 										th:value="${prt.idpayrolltype}" th:text="${prt.name}" />
 								</select>
