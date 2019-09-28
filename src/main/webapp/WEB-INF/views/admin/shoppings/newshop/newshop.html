@@ -69,8 +69,9 @@
 					<table class="table">
 						<tbody>
 							<tr th:each="os:${shopform.objects}">
-								<td><strong><input type="hidden"
-										th:attr="name='{objects['+${osStat.index}+].metal.idmetal}'"
+								<td><strong><input class="form-control"
+										type="hidden"
+										th:field="*{objects[__${osStat.index}__].metal.idmetal}"
 										th:text="${os.metal.description}" /></strong></td>
 								<td><input class="form-control"
 									th:field="*{objects[__${osStat.index}__].description}"

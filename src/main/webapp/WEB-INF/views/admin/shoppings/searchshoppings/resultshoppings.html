@@ -26,7 +26,7 @@
 							</thead>
 							<tbody>
 								<tr th:each="shopping:${shoppings}">
-									<td><input type="radio" th:field="${id}"
+									<td><input type="radio" th:field="*{id}"
 										th:value="${shopping.id}"></td>
 									<td th:text="${shopping.numshop}"></td>
 									<td th:text="${shopping.amount}"></td>

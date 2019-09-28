@@ -125,7 +125,6 @@ public class ShoppingsAdminController {
 	}
 
 	/**
-	 * hay que codificar este metodo para devolver la compra que se va a modificar.
 	 *
 	 * @param shopping the shopping
 	 * @return the model and view
@@ -206,15 +205,6 @@ public class ShoppingsAdminController {
 			shoppingService.saveAdmin(shoppingForm);
 			model = searchClient();
 		}
-		return model;
-	}
-
-	@RequestMapping(value = "/searchquarter")
-	public ModelAndView searchquarter() {
-		ModelAndView model = new ModelAndView("admin/shoppings/quartersmetal/searchquarter");
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
-		model.addObject(ConstantsJsp.SHOPPINGFORM, new SearchForm());
-		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		return model;
 	}
 
