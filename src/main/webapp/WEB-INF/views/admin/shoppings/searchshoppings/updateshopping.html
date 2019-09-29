@@ -18,13 +18,13 @@
 						<table class="table">
 							<tbody>
 								<tr>
-									<td th:text="#{numshop}"><input class="form-control"
-										th:field="*{numshop}" disabled /></td>
+									<td><input class="form-control" th:field="*{numshop}"
+										disabled /></td>
 									<td class="form-group has-error"
 										th:if="${#fields.hasErrors('numshop')}" th:errors="*{numshop}"></td>
-									<td></td>
-									<td></td>
-									<td></td>
+									<td th:text="#{netgrams}"></td>
+									<td th:text="#{realgrams}"></td>
+									<td th:text="#{amount}"></td>
 								</tr>
 								<tr th:each="os:${shoppingForm.objects}">
 									<td><select class="form-control"
@@ -35,24 +35,24 @@
 												th:value="${material.idmetal}"
 												th:text="${material.description}" />
 									</select></td>
-									<td th:text="#{grossgrams}"><input class="form-control"
+									<td><input class="form-control"
 										th:field="*{objects[__${osStat.index}__].grossgrams}" /></td>
-									<td th:text="#{netgrams}"><input class="form-control"
+									<td><input class="form-control"
 										th:field="*{objects[__${osStat.index}__].netgrams}" disabled /></td>
-									<td th:text="#{realgrams}"><input class="form-control"
+									<td><input class="form-control"
 										th:field="*{objects[__${osStat.index}__].realgrams}" /></td>
-									<td th:text="#{amount}"><input class="form-control"
+									<td><input class="form-control"
 										th:field="*{objects[__${osStat.index}__].amount}" /></td>
 								</tr>
 								<tr>
 									<td></td>
-									<td th:text="#{amount}"><input class="form-control"
-										disabled th:field="*{amount}" /></td>
 									<td class="form-group has-error"
 										th:if="${#fields.hasErrors('amount')}" th:erros="*{amount}"></td>
 									<td><button class="btn btn-primary" value="submit">
 											<span th:text="#{save}"></span>
 										</button></td>
+									<td><input class="form-control" disabled
+										th:field="*{amount}" /></td>
 								</tr>
 							</tbody>
 						</table>
