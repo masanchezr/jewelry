@@ -23,6 +23,7 @@ public class ConstantsJsp {
 	public static final String XFORWARDEDFOR = "X-FORWARDED-FOR";
 	public static final String VIEWNOTDAILY = "employee/daily/notdaily";
 	public static final String VIEWDAILYARROWS = "employee/daily/dailyarrows";
+	public static final String VIEWSEARCHMISSINGSHOPPINGS = "admin/searchmissingshoppings/resultmissingshoppings";
 	public static final String FORMENTRYMONEY = "entrymoney";
 	public static final String FORMSALE = "saleForm";
 	public static final String NUMSALE = "numsale";

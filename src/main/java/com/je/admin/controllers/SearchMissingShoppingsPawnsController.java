@@ -31,7 +31,7 @@ public class SearchMissingShoppingsPawnsController {
 
 	@RequestMapping(value = "/searchPosibleRepeated")
 	public ModelAndView searchMissingShoppings() {
-		ModelAndView model = new ModelAndView(SEARCHMISSINGSHOPPINGS);
+		ModelAndView model = new ModelAndView(ConstantsJsp.VIEWSEARCHMISSINGSHOPPINGS);
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		model.addObject(SEARCHMISSINGSHOPPINGS, new SearchMissingNumbers());
@@ -47,10 +47,10 @@ public class SearchMissingShoppingsPawnsController {
 		if (result.hasErrors()) {
 			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 			model.addObject(SEARCHMISSINGSHOPPINGS, new SearchMissingNumbers());
-			model.setViewName(SEARCHMISSINGSHOPPINGS);
+			model.setViewName(ConstantsJsp.VIEWSEARCHMISSINGSHOPPINGS);
 		} else {
 			model.addObject("nummissing", searchMissingNumberService.searchMissingShoppings(searchmissingshoppings));
-			model.setViewName("admin/searchmissingshoppings/resultmissingshoppings");
+			model.setViewName(ConstantsJsp.VIEWSEARCHMISSINGSHOPPINGS);
 		}
 		return model;
 	}

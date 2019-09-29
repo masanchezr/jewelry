@@ -260,7 +260,7 @@ public class ShoppingsAdminController {
 			List<Long> numshops = shoppingService.searchGramsNull(form.getDatefrom(), form.getDateuntil(),
 					form.getPlace());
 			model.addObject("nummissing", numshops);
-			model.setViewName("admin/searchmissingshoppings/resultmissingshoppings");
+			model.setViewName(ConstantsJsp.VIEWSEARCHMISSINGSHOPPINGS);
 		}
 		return model;
 	}
