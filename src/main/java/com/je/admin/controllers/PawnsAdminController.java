@@ -65,6 +65,7 @@ public class PawnsAdminController {
 
 	private static final String VIEWSEARCHPAWN = "admin/pawns/searchpawns/searchpawn";
 	private static final String VIEWUPDATEPAWN = "admin/pawns/searchpawns/updatepawn";
+	private static final String VIEWRENOVATIONS = "admin/pawns/searchrenovations/renovations";
 
 	/**
 	 * Search pawns.
@@ -150,7 +151,7 @@ public class PawnsAdminController {
 			model.setViewName("admin/pawns/searchpawns/errorupdatepawn");
 		} else {
 			List<RenovationDates> renovations = pawnService.searchRenovations(idpawn);
-			model.setViewName("admin/pawns/searchrenovations/renovations");
+			model.setViewName(VIEWRENOVATIONS);
 			model.addObject("renovations", renovations);
 		}
 		return model;
@@ -161,7 +162,7 @@ public class PawnsAdminController {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		List<RenovationDates> renovations = pawnService.searchRenovations(id);
-		model.setViewName("admin/pawns/searchrenovations/renovations");
+		model.setViewName(VIEWRENOVATIONS);
 		model.addObject("renovations", renovations);
 		return model;
 	}
@@ -195,7 +196,7 @@ public class PawnsAdminController {
 
 	@RequestMapping(value = "/searchrenovations")
 	public ModelAndView searchrenovations() {
-		ModelAndView model = new ModelAndView("admin/pawns/searchrenovations/renovations");
+		ModelAndView model = new ModelAndView(VIEWRENOVATIONS);
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		model.addObject(ConstantsJsp.PAWNFORM, new Pawn());
