@@ -10,7 +10,7 @@
 	</ol>
 	<form method="post" th:action="@{/saveShopping}"
 		th:object="${shoppingForm}" role="form">
-		<input type="hidden" th:attr="name='id'" th:value="${shoppingForm.id}" />
+		<input type="hidden" th:field="*{id}" th:value="${shoppingForm.id}" />
 		<div class="form-row">
 			<div class="col-lg-12">
 				<div class="card-body">
