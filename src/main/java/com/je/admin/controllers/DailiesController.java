@@ -145,7 +145,7 @@ public class DailiesController {
 		return model;
 	}
 
-	@RequestMapping(value = "/beforeday{date}/{place}")
+	@RequestMapping(value = "/beforeday{date}-{place}")
 	public ModelAndView beforeday(@PathVariable(ConstantsJsp.DATE) String sdate,
 			@PathVariable(Constants.PLACE) long idplace, HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
@@ -181,7 +181,7 @@ public class DailiesController {
 		return model;
 	}
 
-	@RequestMapping(value = "/againday{date}/{place}")
+	@RequestMapping(value = "/againday{date}-{place}")
 	public ModelAndView againday(@PathVariable(ConstantsJsp.DATE) String sdate,
 			@PathVariable(Constants.PLACE) long idplace, HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
