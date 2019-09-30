@@ -49,11 +49,11 @@
 									<td></td>
 									<td class="form-group has-error"
 										th:if="${#fields.hasErrors('amount')}" th:erros="*{amount}"></td>
+									<td><input class="form-control" disabled
+										th:field="*{amount}" /></td>
 									<td><button class="btn btn-primary" value="submit">
 											<span th:text="#{save}"></span>
 										</button></td>
-									<td><input class="form-control" disabled
-										th:field="*{amount}" /></td>
 								</tr>
 							</tbody>
 						</table>
