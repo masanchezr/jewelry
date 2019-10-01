@@ -5,8 +5,6 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -35,9 +33,6 @@ public class DailyController {
 
 	@Autowired
 	private PlaceService placeService;
-
-	/** The log. */
-	private static Logger log = LoggerFactory.getLogger(DailyController.class);
 
 	/**
 	 * Daily.
@@ -92,7 +87,7 @@ public class DailyController {
 				} else {
 					model.addObject(ConstantsJsp.DAILY, daily);
 					model.setViewName(ConstantsJsp.VIEWDAILYARROWS);
-					model.addObject(ConstantsJsp.DATEDAILY, date);
+					model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateddMMyyyy(date));
 					existdaily = true;
 				}
 			} else {
@@ -118,7 +113,6 @@ public class DailyController {
 				} else {
 					String view;
 					String stoday = DateUtil.getStringDateddMMyyyy(new Date());
-					sdate = DateUtil.getStringDateddMMyyyy(date);
 					if (stoday.compareTo(sdate) == 0) {
 						view = ConstantsJsp.VIEWDAILYARROW;
 					} else {
@@ -126,7 +120,7 @@ public class DailyController {
 					}
 					model.addObject(ConstantsJsp.DAILY, daily);
 					model.setViewName(view);
-					model.addObject(ConstantsJsp.DATEDAILY, sdate);
+					model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateddMMyyyy(date));
 					existdaily = true;
 				}
 			} else {
@@ -146,7 +140,6 @@ public class DailyController {
 		if (ipAddress == null) {
 			ipAddress = request.getRemoteAddr();
 		}
-		log.info("ip remote address:", ipAddress);
 		String sdate = searchForm.getDatefrom();
 		Date date;
 		String view;
