@@ -210,7 +210,7 @@ public class DailiesController {
 					}
 					model.addObject(ConstantsJsp.DAILY, daily);
 					model.setViewName(view);
-					model.addObject(ConstantsJsp.DATEDAILY, date);
+					model.addObject(ConstantsJsp.DATEDAILY, sdate);
 					model.addObject(Constants.PLACE, idplace);
 					existdaily = true;
 				}
