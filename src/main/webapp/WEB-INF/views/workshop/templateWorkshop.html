@@ -27,15 +27,17 @@
 			</a>
 			<!-- Divider -->
 			<hr class="sidebar-divider my-0">
-			<li class="nav-item"><a class="nav-link" href="./newadjustment"><i
-					class="fas fa-archive fa-fw"></i> <span th:text="#{adjustment}"></span></a></li>
-			<li class="nav-item"><a class="nav-link" href="./newWorkshop"><i
-					class="fas fa-gem fa-fw"></i> <span th:text="#{workshop}"></span></a></li>
-			<li class="nav-item"><a class="nav-link" href="./billing"><i
+			<li class="nav-item"><a class="nav-link"
+				th:href="@{newadjustment}"><i class="fas fa-archive fa-fw"></i>
+					<span th:text="#{adjustment}"></span></a></li>
+			<li class="nav-item"><a class="nav-link"
+				th:href="@{newWorkshop}"><i class="fas fa-gem fa-fw"></i> <span
+					th:text="#{workshop}"></span></a></li>
+			<li class="nav-item"><a class="nav-link" th:href="@{billing}"><i
 					class="fas fa-chart-bar fa-fw"></i> <span
 					th:text="#{currentmonthbill}"></span></a></li>
 			<li class="nav-item"><a class="nav-link"
-				href="./billingprevious"><i class="fas fa-chart-bar fa-fw"></i>
+				th:href="@{billingprevious}"><i class="fas fa-chart-bar fa-fw"></i>
 					<span th:text="#{monthpreviousbill}"></span></a></li>
 			<!-- Divider -->
 			<hr class="sidebar-divider d-none d-md-block">
