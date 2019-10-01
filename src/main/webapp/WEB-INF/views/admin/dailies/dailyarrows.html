@@ -45,7 +45,7 @@
 							</tr>
 							<tr th:each="pawn:${daily.retiredpawns}">
 								<td th:text="#{pawn}"></td>
-								<td><a href="searchpawn(${pawn.id})"> <span
+								<td><a th:href="@{'/searchpawn'+${pawn.id}}"> <span
 										th:text="${pawn.numpawn}"></span>
 								</a></td>
 								<td><span th:text="${pawn.amount}"><i
