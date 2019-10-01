@@ -1,42 +1,38 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:include="employee/template :: page">
- 
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="employee/template :: page">
 <div th:fragment="content">
-	<div th:fragment="content">
-	 
-		<!-- Breadcrumbs-->
-		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="#"><span
-					th:text="#{dailies}"></span></a></li>
-			<li class="breadcrumb-item active" th:text="#{searchdaily}"></li>
-		</ol>
-		<form method="post" th:action="@{/employee/resultdaily}" th:object="${searchDateForm}"
-			autocomplete="off">
-			<div class="form-row">
-				<div class="col-lg-8">
-					<div class="card-body">
-						<div class="form-row">
-							<div class="col-lg-4">
-								<div class="form-group">
-									<div id="sandbox-container">
-										<input class="form-control" type="text" id="datefrom"
-											th:placeholder="#{date}" />
-									</div>
-									<p class="text-danger" th:if="${#fields.hasErrors('datefrom')}"
-										th:errors="datefrom"></p>
+	<!-- Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#"><span
+				th:text="#{dailies}"></span></a></li>
+		<li class="breadcrumb-item active" th:text="#{searchdaily}"></li>
+	</ol>
+	<form method="post" th:action="@{/employee/resultdaily}"
+		th:object="${searchDateForm}" autocomplete="off">
+		<div class="form-row">
+			<div class="col-lg-8">
+				<div class="card-body">
+					<div class="form-row">
+						<div class="col-lg-4">
+							<div class="form-group">
+								<div id="sandbox-container">
+									<input class="form-control" type="text" th:field="*{datefrom}"
+										th:placeholder="#{date}" />
 								</div>
-								<div class="form-group">
-									<button class="btn btn-primary" value="submit">
-										<span th:text="#{search}"></span>
-									</button>
-								</div>
+								<p class="text-danger" th:if="${#fields.hasErrors('datefrom')}"
+									th:errors="datefrom"></p>
+							</div>
+							<div class="form-group">
+								<button class="btn btn-primary" value="submit">
+									<span th:text="#{search}"></span>
+								</button>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</form>
-	</div>
-	 
+		</div>
+	</form>
 </div>
 </html>
