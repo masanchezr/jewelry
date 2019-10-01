@@ -168,7 +168,7 @@ public class DailiesController {
 				} else {
 					model.addObject(ConstantsJsp.DAILY, daily);
 					model.setViewName("admin/dailies/dailyarrows");
-					model.addObject(ConstantsJsp.DATEDAILY, date);
+					model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateddMMyyyy(date));
 					model.addObject(Constants.PLACE, idplace);
 					existdaily = true;
 				}
