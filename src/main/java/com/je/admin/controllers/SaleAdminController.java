@@ -161,7 +161,7 @@ public class SaleAdminController {
 
 	@RequestMapping(value = "/showsale{id}")
 	public ModelAndView showsale(@PathVariable("id") long id) {
-		ModelAndView model = new ModelAndView("admin/sales/searchsales/finishsale");
+		ModelAndView model = new ModelAndView("admin/sales/finishsale");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		Sale sale = saleService.searchByPK(id);
 		model.addObject(ConstantsJsp.FORMSALE, sale);
