@@ -125,7 +125,8 @@ public class ShoppingsAdminController {
 	}
 
 	/**
-	 *
+	 * Muestra la compra seleccionada
+	 * 
 	 * @param shopping the shopping
 	 * @return the model and view
 	 */

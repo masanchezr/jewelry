@@ -27,7 +27,9 @@
 									<td></td>
 								</tr>
 								<tr th:each="os:${shoppingForm.objects}">
-									<td><select class="form-control"
+									<td><input type="hidden"
+										th:field="*{objects[__${osStat.index}__].idobjectshop}" /><select
+										class="form-control"
 										th:field="*{objects[__${osStat.index}__].metal.idmetal}">
 											<option th:value="${os.metal.idmetal}"
 												th:text="${os.metal.description}" />
