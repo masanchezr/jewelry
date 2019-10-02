@@ -91,11 +91,11 @@
 										th:value="${material.idmetal}"
 										th:text="${material.description}" />
 							</select></td>
-							<td th:text="#{grossgrams}"><input class="form-control"
+							<td><input class="form-control"
 								th:field="*{objects[__${osStat.index}__].grossgrams}" disabled /></td>
-							<td th:text="#{realgrams}"><input class="form-control"
+							<td><input class="form-control"
 								th:field="*{objects[__${osStat.index}__].realgrams}" /></td>
-							<td th:text="#{description}"><input class="form-control"
+							<td><input class="form-control"
 								th:field="*{objects[__${osStat.index}__].description}" /></td>
 						</tr>
 					</tbody>
