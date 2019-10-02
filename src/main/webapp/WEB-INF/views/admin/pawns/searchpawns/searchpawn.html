@@ -18,7 +18,7 @@
 					</div>
 					<div class="form-group">
 						<span th:text="#{place}"></span> <select
-							th:field="*{place.idplace}">
+							th:field="*{place.idplace}" class="form-control">
 							<option th:each="place : ${places}" th:value="${place.idplace}"
 								th:text="${place.description}" />
 						</select>
