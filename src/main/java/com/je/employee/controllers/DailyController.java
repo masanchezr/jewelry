@@ -112,8 +112,7 @@ public class DailyController {
 					model.setViewName(ConstantsJsp.VIEWNOTDAILY);
 				} else {
 					String view;
-					String stoday = DateUtil.getStringDateddMMyyyy(new Date());
-					if (stoday.compareTo(sdate) == 0) {
+					if (new Date().compareTo(date) == 0) {
 						view = ConstantsJsp.VIEWDAILYARROW;
 					} else {
 						view = ConstantsJsp.VIEWDAILYARROWS;
