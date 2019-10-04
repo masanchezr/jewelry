@@ -112,14 +112,16 @@ public class DailyController {
 					model.setViewName(ConstantsJsp.VIEWNOTDAILY);
 				} else {
 					String view;
-					if (new Date().compareTo(date) == 0) {
+					String stoday = DateUtil.getStringDateddMMyyyy(new Date());
+					sdate = DateUtil.getStringDateddMMyyyy(date);
+					if (stoday.compareTo(sdate) == 0) {
 						view = ConstantsJsp.VIEWDAILYARROW;
 					} else {
 						view = ConstantsJsp.VIEWDAILYARROWS;
 					}
 					model.addObject(ConstantsJsp.DAILY, daily);
 					model.setViewName(view);
-					model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateddMMyyyy(date));
+					model.addObject(ConstantsJsp.DATEDAILY, sdate);
 					existdaily = true;
 				}
 			} else {
