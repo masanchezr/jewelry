@@ -81,7 +81,8 @@ public class BatteriesController {
 				model.setViewName(ConstantsJsp.VIEWDAILYARROW);
 				battery.setPlace(place);
 				batteriesService.saveSaleBattery(battery);
-				model.addObject(ConstantsJsp.DAILY, dailyService.getDaily(new Date(), place, ipAddress));
+				model.addObject(ConstantsJsp.DAILY,
+						dailyService.getDaily(DateUtil.getDateFormated(new Date()), place, ipAddress));
 				model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 			}
 		}

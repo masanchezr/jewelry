@@ -22,6 +22,7 @@ import com.je.services.places.PlaceService;
 import com.je.services.sales.SaleService;
 import com.je.services.straps.StrapsService;
 import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.date.DateUtil;
 
 @Controller
 public class StrapsController {
@@ -77,7 +78,7 @@ public class StrapsController {
 				if (ipAddress == null) {
 					ipAddress = request.getRemoteAddr();
 				}
-				Date today = new Date();
+				Date today = DateUtil.getDateFormated(new Date());
 				model.setViewName(ConstantsJsp.VIEWDAILYARROW);
 				strap.setPlace(place);
 				strapsService.saveSaleStrap(strap);

@@ -20,6 +20,7 @@ import com.je.services.payment.PaymentService;
 import com.je.services.places.PlaceService;
 import com.je.services.recordings.RecordingService;
 import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.date.DateUtil;
 
 @Controller
 public class RecordingController {
@@ -65,7 +66,7 @@ public class RecordingController {
 			if (ipAddress == null) {
 				ipAddress = request.getRemoteAddr();
 			}
-			Date today = new Date();
+			Date today = DateUtil.getDateFormated(new Date());
 			PlaceEntity place = placeService.getPlaceUser(user);
 			recording.setPlace(place);
 			recordingService.save(recording);

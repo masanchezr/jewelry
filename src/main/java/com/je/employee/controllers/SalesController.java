@@ -29,6 +29,7 @@ import com.je.services.places.PlaceService;
 import com.je.services.sales.SaleService;
 import com.je.utils.constants.Constants;
 import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.date.DateUtil;
 import com.je.validators.SaleFormValidator;
 
 /**
@@ -246,7 +247,7 @@ public class SalesController {
 				result.rejectValue(ConstantsJsp.IDSALE, "notfoundsale");
 			} else {
 				String ipAddress = request.getHeader(ConstantsJsp.XFORWARDEDFOR);
-				Date today = new Date();
+				Date today = DateUtil.getDateFormated(new Date());
 				if (ipAddress == null) {
 					ipAddress = request.getRemoteAddr();
 				}
