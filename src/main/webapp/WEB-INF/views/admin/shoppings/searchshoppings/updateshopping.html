@@ -19,7 +19,7 @@
 							<tbody>
 								<tr>
 									<td><input class="form-control" th:field="*{numshop}"
-										disabled /></td>
+										disabled ></td>
 									<td class="form-group has-error"
 										th:if="${#fields.hasErrors('numshop')}" th:errors="*{numshop}"></td>
 									<td></td>
@@ -38,21 +38,21 @@
 												th:text="${material.description}" />
 									</select></td>
 									<td><input class="form-control"
-										th:field="*{objects[__${osStat.index}__].grossgrams}" /></td>
+										th:field="*{objects[__${osStat.index}__].grossgrams}" ></td>
 									<td><input class="form-control"
-										th:field="*{objects[__${osStat.index}__].netgrams}" disabled /></td>
+										th:field="*{objects[__${osStat.index}__].netgrams}" disabled ></td>
 									<td><input class="form-control"
 										th:field="*{objects[__${osStat.index}__].realgrams}"
-										th:placeholder="#{realgrams}" /></td>
+										th:placeholder="#{realgrams}" ></td>
 									<td><input class="form-control"
-										th:field="*{objects[__${osStat.index}__].amount}" /></td>
+										th:field="*{objects[__${osStat.index}__].amount}" ></td>
 								</tr>
 								<tr>
 									<td></td>
 									<td class="form-group has-error"
 										th:if="${#fields.hasErrors('amount')}" th:erros="*{amount}"></td>
 									<td><input class="form-control" disabled
-										th:field="*{amount}" /></td>
+										th:field="*{amount}" ></td>
 									<td><button class="btn btn-primary" value="submit">
 											<span th:text="#{save}"></span>
 										</button></td>

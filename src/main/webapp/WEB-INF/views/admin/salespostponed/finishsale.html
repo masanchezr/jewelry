@@ -128,7 +128,7 @@
 					</thead>
 					<tbody>
 						<tr th:each="jewel:${saleForm.spayments}">
-							<td th:text="${#dates.format(jewel.creationdate,'yyyy-MM-dd')}" /></td>
+							<td th:text="${#dates.format(jewel.creationdate,'yyyy-MM-dd')}" ></td>
 							<td th:text="${jewel.amount}"><i class="fas fa-euro-sign"></i></td>
 							<td th:text="${jewel.pay.name}"></td>
 						</tr>

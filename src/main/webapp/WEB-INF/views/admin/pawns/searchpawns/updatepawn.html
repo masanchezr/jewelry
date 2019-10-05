@@ -92,15 +92,16 @@
 										th:text="${material.description}" />
 							</select></td>
 							<td><input class="form-control"
-								th:field="*{objects[__${osStat.index}__].grossgrams}" disabled /></td>
+								th:field="*{objects[__${osStat.index}__].grossgrams}" disabled></td>
 							<td><input class="form-control"
-								th:field="*{objects[__${osStat.index}__].realgrams}" /></td>
+								th:field="*{objects[__${osStat.index}__].realgrams}"></td>
 							<td><input class="form-control"
-								th:field="*{objects[__${osStat.index}__].description}" /></td>
+								th:field="*{objects[__${osStat.index}__].description}"></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
+		</div>
 	</form>
 	<div class="table-responsive"
 		th:if="${not #lists.isEmpty(pawnForm.renovations)}">

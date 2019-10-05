@@ -29,7 +29,7 @@
 							<tbody>
 								<tr th:each="pawn:${pawns}">
 									<td><input type="radio" th:field="${pawnForm.id}"
-										th:value="${pawn.id}" /></td>
+										th:value="${pawn.id}" ></td>
 									<td th:text="${pawn.numpawn}"></td>
 									<td th:text="${pawn.percent}"></td>
 									<td th:text="${pawn.amount}"></td>
