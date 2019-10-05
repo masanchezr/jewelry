@@ -92,7 +92,7 @@ public class JewelsController {
 	@RequestMapping(value = "/saveCategory")
 	public ModelAndView addCategory(@ModelAttribute(ConstantsJsp.CATEGORY) CategoryEntity category) {
 		categoriesService.save(category);
-		return new ModelAndView(ConstantsJsp.SUCCESS, ConstantsJsp.ADMINFORM, new AdminForm());
+		return new ModelAndView("admin/success", ConstantsJsp.ADMINFORM, new AdminForm());
 	}
 
 	/**
@@ -309,7 +309,7 @@ public class JewelsController {
 			model.setViewName("admin/coins/newcoin");
 		} else {
 			coinService.save(coin);
-			model.setViewName(ConstantsJsp.SUCCESS);
+			model.setViewName("admin/success");
 			model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		}
 		return model;

@@ -29,7 +29,7 @@ public class PaymentsController {
 	 */
 	@RequestMapping(value = "/savePayment")
 	public ModelAndView savePayment(@ModelAttribute(ConstantsJsp.FORMPAYMENT) PaymentEntity payment) {
-		ModelAndView model = new ModelAndView(ConstantsJsp.SUCCESS);
+		ModelAndView model = new ModelAndView("admin/success");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		paymentService.save(payment);
 		return model;

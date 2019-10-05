@@ -186,7 +186,7 @@ public class SalesController {
 			model.addObject(ConstantsJsp.FORMSALE, entitysale);
 		} else {
 			if (saleService.removeSaleParcial(sale)) {
-				model.setViewName("successemployee");
+				model.setViewName("employee/success");
 			} else {
 				Sale entitysale = saleService.searchByPK(sale.getIdsale());
 				model.setViewName(VIEWCANCELPARCIALSALE);

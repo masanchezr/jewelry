@@ -70,7 +70,7 @@ public class HolidaysController {
 			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 			model.setViewName(VIEWNEWHOLIDAY);
 		} else {
-			model.setViewName(ConstantsJsp.SUCCESS);
+			model.setViewName("admin/success");
 			if (holiday.getPlace().getIdplace().equals(Constants.ALLPLACES)) {
 				holidayService.addHolidayAllPlaces(holiday);
 			} else {

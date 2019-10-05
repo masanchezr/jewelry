@@ -38,7 +38,6 @@ public class ConstantsJsp {
 	public static final String VIEWDAILYADMINARROW = "admin/dailies/dailyarrow";
 	public static final String FORMHOLIDAY = "holiday";
 	public static final String FORMINCIDENT = "incident";
-	public static final String SUCCESS = "success";
 	public static final String JEWELS = "jewels";
 	public static final String PAWNS = "pawns";
 	public static final String USER = "user";
