@@ -227,7 +227,7 @@ public class SalePostPonedController {
 		SalePostPoned salep = saleservicepostponed.searchByIdAndPlace(sale.getIdsalepostponed(),
 				placeService.getPlaceUser(user));
 		if (salep != null) {
-			model.setViewName(ConstantsJsp.FORMSALEPOSTPONED);
+			model.setViewName("employee/salespostponed/sale");
 			model.addObject(ConstantsJsp.FORMSALE, salep);
 		} else {
 			model.setViewName("employee/salespostponed/searchsalepostponed");
