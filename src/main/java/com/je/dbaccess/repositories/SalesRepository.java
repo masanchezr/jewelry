@@ -18,7 +18,7 @@ import com.je.dbaccess.entities.SaleEntity;
 /**
  * The Interface SaleRepository.
  */
-public interface SaleRepository extends CrudRepository<SaleEntity, Long> {
+public interface SalesRepository extends CrudRepository<SaleEntity, Long> {
 
 	/**
 	 * Find by date.

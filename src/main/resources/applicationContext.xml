@@ -87,4 +87,6 @@
 		class="com.je.services.connections.ConnectionServiceImpl" />
 	<bean id="registerService"
 		class="com.je.services.registers.RegisterServiceImpl" />
+	<bean id="searchSaleRepeatedService"
+		class="com.je.services.salesrepeated.SearchSaleRepeatedServiceImpl" />
 </beans>

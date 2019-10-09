@@ -17,7 +17,7 @@ import com.je.dbaccess.entities.ClientEntity;
 import com.je.dbaccess.entities.PaymentEntity;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.dbaccess.entities.SaleEntity;
-import com.je.dbaccess.repositories.SaleRepository;
+import com.je.dbaccess.repositories.SalesRepository;
 import com.je.utils.constants.ConstantsJsp;
 
 /**
@@ -29,7 +29,7 @@ public class SaleRepositoryTest {
 
 	/** The sale repository. */
 	@Autowired
-	private SaleRepository saleRepository;
+	private SalesRepository saleRepository;
 
 	/**
 	 * Save test.

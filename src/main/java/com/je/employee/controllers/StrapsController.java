@@ -15,11 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.dbaccess.entities.StrapEntity;
 import com.je.employee.validators.StrapFormValidator;
-import com.je.forms.Sale;
 import com.je.services.dailies.DailyService;
 import com.je.services.payment.PaymentService;
 import com.je.services.places.PlaceService;
-import com.je.services.sales.SaleService;
+import com.je.services.salesrepeated.SearchSaleRepeatedService;
 import com.je.services.straps.StrapsService;
 import com.je.utils.constants.ConstantsJsp;
 import com.je.utils.date.DateUtil;
@@ -28,19 +27,19 @@ import com.je.utils.date.DateUtil;
 public class StrapsController {
 
 	@Autowired
-	private StrapsService strapsService;
+	private DailyService dailyService;
 
 	@Autowired
-	private SaleService saleService;
+	private PaymentService paymentService;
 
 	@Autowired
 	private PlaceService placeService;
 
 	@Autowired
-	private DailyService dailyService;
+	private SearchSaleRepeatedService searchSaleRepeatedService;
 
 	@Autowired
-	private PaymentService paymentService;
+	private StrapsService strapsService;
 
 	@Autowired
 	private StrapFormValidator strapFormValidator;
@@ -68,11 +67,10 @@ public class StrapsController {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			PlaceEntity place = placeService.getPlaceUser(user);
 			// comprobamos primero que no exista este número de venta
-			Sale sale = saleService.searchByNumsaleAndPlace(strap.getNumsale(), place.getIdplace());
-			if (sale != null) {
+			if (searchSaleRepeatedService.isSaleRepeated(strap.getNumsale())) {
 				model.setViewName(VIEWSALESTRAP);
 				model.addObject(FORMSTRAP, strap);
-				arg1.rejectValue(ConstantsJsp.NUMSALE, "numrepited");
+				arg1.rejectValue(ConstantsJsp.NUMSALE, "numrepeated");
 			} else {
 				String ipAddress = request.getHeader(ConstantsJsp.XFORWARDEDFOR);
 				if (ipAddress == null) {

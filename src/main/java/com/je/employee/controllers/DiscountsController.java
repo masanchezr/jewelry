@@ -18,11 +18,15 @@ import com.je.services.dailies.DailyService;
 import com.je.services.discounts.Discount;
 import com.je.services.discounts.DiscountService;
 import com.je.services.places.PlaceService;
+import com.je.services.salesrepeated.SearchSaleRepeatedService;
 import com.je.utils.constants.ConstantsJsp;
 import com.je.utils.date.DateUtil;
 
 @Controller
 public class DiscountsController {
+
+	@Autowired
+	private DailyService dailyService;
 
 	@Autowired
 	private DiscountService discountService;
@@ -31,7 +35,7 @@ public class DiscountsController {
 	private PlaceService placeService;
 
 	@Autowired
-	private DailyService dailyService;
+	private SearchSaleRepeatedService searchSaleRepeatedService;
 
 	@Autowired
 	private DiscountsValidator discountsValidator;
@@ -51,6 +55,10 @@ public class DiscountsController {
 		if (errors.hasErrors()) {
 			model.setViewName("employee/sales/newdiscount");
 			model.addObject("discountForm", discount);
+		} else if (searchSaleRepeatedService.isSaleRepeated(discount.getIddiscount())) {
+			model.setViewName("employee/sales/newdiscount");
+			model.addObject("discountForm", discount);
+			errors.rejectValue("iddiscount", "numrepeated");
 		} else {
 			Date today = new Date();
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();

@@ -19,6 +19,7 @@ import com.je.services.dailies.DailyService;
 import com.je.services.payment.PaymentService;
 import com.je.services.places.PlaceService;
 import com.je.services.recordings.RecordingService;
+import com.je.services.salesrepeated.SearchSaleRepeatedService;
 import com.je.utils.constants.ConstantsJsp;
 import com.je.utils.date.DateUtil;
 
@@ -26,16 +27,19 @@ import com.je.utils.date.DateUtil;
 public class RecordingController {
 
 	@Autowired
-	private RecordingService recordingService;
-
-	@Autowired
-	private PlaceService placeService;
+	private DailyService dailyService;
 
 	@Autowired
 	private PaymentService paymentService;
 
 	@Autowired
-	private DailyService dailyService;
+	private PlaceService placeService;
+
+	@Autowired
+	private RecordingService recordingService;
+
+	@Autowired
+	private SearchSaleRepeatedService searchSaleRepeatedService;
 
 	@Autowired
 	private RecordingValidator recordingValidator;
@@ -61,6 +65,11 @@ public class RecordingController {
 			model.setViewName(VIEWNEWRECORDING);
 			model.addObject(FORMRECORDING, recording);
 			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
+		} else if (searchSaleRepeatedService.isSaleRepeated(recording.getNumsale())) {
+			model.setViewName(VIEWNEWRECORDING);
+			model.addObject(FORMRECORDING, recording);
+			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
+			errors.rejectValue("numsale", "numrepeated");
 		} else {
 			String ipAddress = request.getHeader(ConstantsJsp.XFORWARDEDFOR);
 			if (ipAddress == null) {

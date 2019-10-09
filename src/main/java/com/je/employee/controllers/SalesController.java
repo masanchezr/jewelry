@@ -27,6 +27,7 @@ import com.je.services.metal.MetalService;
 import com.je.services.payment.PaymentService;
 import com.je.services.places.PlaceService;
 import com.je.services.sales.SaleService;
+import com.je.services.salesrepeated.SearchSaleRepeatedService;
 import com.je.utils.constants.Constants;
 import com.je.utils.constants.ConstantsJsp;
 import com.je.utils.date.DateUtil;
@@ -38,9 +39,12 @@ import com.je.validators.SaleFormValidator;
 @Controller
 public class SalesController {
 
-	/** The sale service. */
+	/** The categories service. */
 	@Autowired
-	private SaleService saleService;
+	private CategoriesService categoriesService;
+
+	@Autowired
+	private DailyService dailyService;
 
 	/** The jewel service. */
 	@Autowired
@@ -50,29 +54,29 @@ public class SalesController {
 	@Autowired
 	private MetalService materialService;
 
-	/** The categories service. */
-	@Autowired
-	private CategoriesService categoriesService;
-
 	@Autowired
 	private PaymentService paymentService;
 
 	@Autowired
 	private PlaceService placeService;
 
+	/** The sale service. */
 	@Autowired
-	private DailyService dailyService;
+	private SaleService saleService;
 
-	/** The sale form validator. */
 	@Autowired
-	private SaleFormValidator saleValidator;
+	private SearchSaleRepeatedService searchSaleRepeatedService;
+
+	@Autowired
+	private PartialCancelSaleValidator partialCancelSaleValidator;
 
 	/** The remove sale validator. */
 	@Autowired
 	private RemoveSaleFormValidator removeSaleValidator;
 
+	/** The sale form validator. */
 	@Autowired
-	private PartialCancelSaleValidator partialCancelSaleValidator;
+	private SaleFormValidator saleValidator;
 
 	private static final String VIEWNEWSALE = "employee/sales/newsale";
 	private static final String VIEWREMOVEPARCIALSALE = "employee/sales/removeparcialsale";
@@ -100,8 +104,7 @@ public class SalesController {
 				sale.setJewels(newjewels);
 				sale.setPlace(place);
 				// comprobamos si ya existe la venta
-				boolean exists = saleService.exists(sale.getNumsale());
-				if (!exists) {
+				if (searchSaleRepeatedService.isSaleRepeated(sale.getNumsale())) {
 					saleService.buy(sale);
 					model.setViewName("employee/sales/finishsale");
 					model.addObject(ConstantsJsp.FORMSALE, sale);

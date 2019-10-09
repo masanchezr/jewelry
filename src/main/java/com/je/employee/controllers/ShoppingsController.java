@@ -111,7 +111,7 @@ public class ShoppingsController {
 				}
 				shoppingForm.setObjects(newlos);
 				model.addObject(ConstantsJsp.SHOPPINGFORM, shoppingForm);
-				result.rejectValue(ConstantsJsp.NUMSHOP, "numrepited");
+				result.rejectValue(ConstantsJsp.NUMSHOP, "numrepeated");
 			} else {
 				model.addObject(ConstantsJsp.DAILY, shoppingService.save(shoppingForm));
 				model.setViewName(ConstantsJsp.VIEWDAILYARROW);

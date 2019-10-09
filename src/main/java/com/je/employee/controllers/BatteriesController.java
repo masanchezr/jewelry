@@ -15,12 +15,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.je.dbaccess.entities.BatteryEntity;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.employee.validators.BatteryFormValidator;
-import com.je.forms.Sale;
 import com.je.services.batteries.BatteriesService;
 import com.je.services.dailies.DailyService;
 import com.je.services.payment.PaymentService;
 import com.je.services.places.PlaceService;
-import com.je.services.sales.SaleService;
+import com.je.services.salesrepeated.SearchSaleRepeatedService;
 import com.je.utils.constants.ConstantsJsp;
 import com.je.utils.date.DateUtil;
 
@@ -34,7 +33,7 @@ public class BatteriesController {
 	private BatteriesService batteriesService;
 
 	@Autowired
-	private SaleService saleService;
+	private SearchSaleRepeatedService searchSaleRepeatedService;
 
 	@Autowired
 	private PlaceService placeService;
@@ -71,10 +70,9 @@ public class BatteriesController {
 				ipAddress = request.getRemoteAddr();
 			}
 			PlaceEntity place = placeService.getPlaceUser(user);
-			// comprobamos primero que no exista este número de venta
-			Sale sale = saleService.searchByNumsaleAndPlace(battery.getNumsale(), place.getIdplace());
-			if (sale != null) {
-				arg1.rejectValue(ConstantsJsp.NUMSALE, "numrepited");
+			// comprobamos primero que no exista este número de venta en otra venta
+			if (searchSaleRepeatedService.isSaleRepeated(battery.getNumsale())) {
+				arg1.rejectValue(ConstantsJsp.NUMSALE, "numrepeated");
 				model.setViewName(VIEWNEWSALEBATTERY);
 				model.addObject(BATTERYFORM, battery);
 			} else {

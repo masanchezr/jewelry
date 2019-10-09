@@ -116,7 +116,7 @@ public class PawnsController {
 				model.addObject(Constants.TRACKS, trackservice.getTracks());
 				model.addObject(Constants.NATIONS, nationservice.getNations());
 				model.setViewName(VIEWNEWPAWN);
-				result.rejectValue(Constants.NUMPAWN, "numrepited");
+				result.rejectValue(Constants.NUMPAWN, "numrepeated");
 			} else {
 				String sdate = pawn.getCreationdate();
 				if (Util.isEmpty(sdate)) {

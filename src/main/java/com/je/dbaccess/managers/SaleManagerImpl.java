@@ -30,7 +30,7 @@ import com.je.dbaccess.repositories.CancelSaleRepository;
 import com.je.dbaccess.repositories.DiscountsRepository;
 import com.je.dbaccess.repositories.JewelRepository;
 import com.je.dbaccess.repositories.RecordingRepository;
-import com.je.dbaccess.repositories.SaleRepository;
+import com.je.dbaccess.repositories.SalesRepository;
 import com.je.dbaccess.repositories.SalesPostponedRepository;
 import com.je.dbaccess.repositories.StrapsRepository;
 import com.je.utils.constants.Constants;
@@ -46,7 +46,7 @@ public class SaleManagerImpl implements SaleManager {
 
 	/** The sale repository. */
 	@Autowired
-	private SaleRepository saleRepository;
+	private SalesRepository saleRepository;
 
 	/** The jewel repository. */
 	@Autowired

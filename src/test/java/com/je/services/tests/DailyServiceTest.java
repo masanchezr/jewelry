@@ -44,7 +44,7 @@ public class DailyServiceTest {
 	@Test
 	public void calculateDailiesTest() {
 		PlaceEntity place = new PlaceEntity();
-		Calendar c = new GregorianCalendar(2019, 4, 10);
+		Calendar c = new GregorianCalendar(2019, 9, 10);
 		place.setIdplace(28017L);
 		dailyService.calculateDailies(c.getTime(), place);
 	}
