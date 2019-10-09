@@ -53,7 +53,7 @@ public interface PawnsRepository extends CrudRepository<PawnEntity, Long> {
 	public List<PawnEntity> findByNumpawnAndPlaceAndCreationdate(String numpawn, PlaceEntity placeEntity,
 			Date creationdate);
 
-	@Query("select sum(p.amount) from PawnEntity p join p.objects o where p.place=:place and p.dateretired=null and o.realgrams is null")
+	@Query("select sum(p.amount) from PawnEntity p join p.objects o where p.place=:place and p.dateretired is null and o.realgrams is null")
 	public Double sumPawnsActive(@Param(Constants.PLACE) PlaceEntity placeEntity);
 
 	/**

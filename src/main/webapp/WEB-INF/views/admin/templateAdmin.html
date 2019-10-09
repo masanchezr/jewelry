@@ -16,7 +16,7 @@
 			<!-- Sidebar - Brand -->
 			<a
 				class="sidebar-brand d-flex align-items-center justify-content-center"
-				th:href="@{admin}">
+				th:href="@{/admin}">
 				<div class="sidebar-brand-icon rotate-n-15">
 					<i class="fas fa-laugh-wink"></i>
 				</div>
@@ -27,7 +27,7 @@
 			<!-- Divider -->
 			<hr class="sidebar-divider my-0">
 			<!-- Nav Item - Dashboard -->
-			<li class="nav-item"><a th:href="@{searchEntries}"
+			<li class="nav-item"><a th:href="@{/searchEntries}"
 				class="nav-link"><i class="fas fa-euro-sign fa-fw"></i> <span
 					th:text="#{searchentries}"></span></a></li>
 			<li class="nav-item"><a class="nav-link collapsed"
@@ -37,9 +37,9 @@
 				<div class="collapse" data-parent="#accordionSidebar"
 					aria-labelledby="headingAdjustments" id="collapseAdjustments">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" th:href="@{searchadjustment}"><span
+						<a class="collapse-item" th:href="@{/searchadjustment}"><span
 							th:text="#{searchadjustment}"></span></a> <a class="collapse-item"
-							th:href="@{searchsumadjustments}"><span
+							th:href="@{/searchsumadjustments}"><span
 							th:text="#{searchsumadjustments}"></span></a>
 					</div>
 				</div></li>
@@ -50,19 +50,19 @@
 				<div class="collapse" data-parent="#accordionSidebar"
 					aria-labelledby="headingJewels" id="collapseJewels">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" th:href="@{newJewel}"><span
+						<a class="collapse-item" th:href="@{/newJewel}"><span
 							th:text="#{newjewels}"></span></a> <a class="collapse-item"
-							th:href="@{newSet}"><span th:text="#{newset}"></span></a> <a
-							class="collapse-item" th:href="@{searchUpdateJewels}"><span
+							th:href="@{/newSet}"><span th:text="#{newset}"></span></a> <a
+							class="collapse-item" th:href="@{/searchUpdateJewels}"><span
 							th:text="#{updatejewels}"></span></a> <a class="collapse-item"
-							th:href="@{allSets}"><span th:text="#{allsets}"></span></a> <a
-							class="collapse-item" th:href="@{searchByReference}"><span
+							th:href="@{/allSets}"><span th:text="#{allsets}"></span></a> <a
+							class="collapse-item" th:href="@{/searchByReference}"><span
 							th:text="#{searchbyreference}"></span></a> <a class="collapse-item"
-							th:href="@{searchjewelsactive}"><span
+							th:href="@{/searchjewelsactive}"><span
 							th:text="#{jewelsactive}"></span></a> <a class="collapse-item"
-							th:href="@{checkinventory}"><span th:text="#{checkinventory}"></span></a>
-						<a class="collapse-item" th:href="@{upload}"><span
-							th:text="#{uploadfile}"></span></a>
+							th:href="@{/checkinventory}"><span
+							th:text="#{checkinventory}"></span></a> <a class="collapse-item"
+							th:href="@{/upload}"><span th:text="#{uploadfile}"></span></a>
 					</div>
 				</div></li>
 			<li class="nav-item"><a class="nav-link collapsed"
@@ -73,14 +73,14 @@
 				<div class="collapse" data-parent="#accordionSidebar"
 					aria-labelledby="headingShop" id="collapseShop">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" th:href="@{searchShoppings}"> <span
+						<a class="collapse-item" th:href="@{/searchShoppings}"> <span
 							th:text="#{searchshoppings}"></span></a> <a class="collapse-item"
-							th:href="@{searchquartermaterial}"> <span
+							th:href="@{/searchquartermaterial}"> <span
 							th:text="#{gramsformaterial}"></span>
-						</a> <a class="collapse-item" th:href="@{searchgramsnull}"> <span
+						</a> <a class="collapse-item" th:href="@{/searchgramsnull}"> <span
 							th:text="#{searchgramsnull}"></span>
-						</a> <a class="collapse-item" th:href="@{tomelloso}">Tomelloso </a> <a
-							class="collapse-item" th:href="@{exceltomelloso}">Generar
+						</a> <a class="collapse-item" th:href="@{/tomelloso}">Tomelloso </a> <a
+							class="collapse-item" th:href="@{/exceltomelloso}">Generar
 							Excel Tomelloso </a>
 					</div>
 				</div></li>
@@ -92,18 +92,18 @@
 				<div class="collapse" data-parent="#accordionSidebar"
 					aria-labelledby="headingPawns" id="collapsePawns">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" th:href="@{searchPawns}"><span
+						<a class="collapse-item" th:href="@{/searchPawns}"><span
 							th:text="#{searchpawns}"></span></a> <a class="collapse-item"
-							th:href="@{searchrenovations}"><span
+							th:href="@{/searchrenovations}"><span
 							th:text="#{searchrenovations}"></span></a> <a class="collapse-item"
-							th:href="@{searchquarterpawns}"> <span th:text="#{quarters}"></span>
-						</a> <a class="collapse-item" th:href="@{outofdate}"> <span
+							th:href="@{/searchquarterpawns}"> <span th:text="#{quarters}"></span>
+						</a> <a class="collapse-item" th:href="@{/outofdate}"> <span
 							th:text="#{outofdate}"></span>
-						</a> <a class="collapse-item" th:href="@{searchcommissions}"> <span
+						</a> <a class="collapse-item" th:href="@{/searchcommissions}"> <span
 							th:text="#{commissions}"></span>
-						</a> <a class="collapse-item" th:href="@{investedmoney}"> <span
+						</a> <a class="collapse-item" th:href="@{/investedmoney}"> <span
 							th:text="#{investedmoney}"></span>
-						</a> <a class="collapse-item" th:href="@{searchPosibleRepeated}"><span
+						</a> <a class="collapse-item" th:href="@{/searchPosibleRepeated}"><span
 							th:text="#{searchposiblerepeated}"></span></a>
 					</div>
 				</div></li>
@@ -116,12 +116,13 @@
 					<div class="bg-white py-2 collapse-inner rounded">
 						<a class="collapse-item" th:href="@{/dailyplace}"><span
 							th:text="#{dailies}"></span></a> <a class="collapse-item"
-							th:href="@{searchcalculatedailies}"><span
+							th:href="@{/searchcalculatedailies}"><span
 							th:text="#{calculatedailies}"></span></a>
 					</div>
 				</div></li>
-			<li class="nav-item"><a th:href="@{searchbill}" class="nav-link"><i
-					class="fas fa-bug fa-fw"></i> <span th:text="#{searchbill}"></span></a></li>
+			<li class="nav-item"><a th:href="@{/searchbill}"
+				class="nav-link"><i class="fas fa-bug fa-fw"></i> <span
+					th:text="#{searchbill}"></span></a></li>
 			<li class="nav-item"><a class="nav-link collapsed"
 				data-toggle="collapse" href="#" data-target="#collapseHolidays"
 				aria-controls="collapseHolidays" aria-expanded="true"><i
@@ -130,14 +131,14 @@
 				<div class="collapse" data-parent="#accordionSidebar"
 					aria-labelledby="headingHolidays" id="collapseHolidays">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" th:href="@{newHoliday}"><span
+						<a class="collapse-item" th:href="@{/newHoliday}"><span
 							th:text="#{newholiday}"></span></a> <a class="collapse-item"
-							th:href="@{allHolidays}"><span th:text="#{allholidays}"></span></a>
-						<a class="collapse-item" th:href="@{searchHolidays}"><span
+							th:href="@{/allHolidays}"><span th:text="#{allholidays}"></span></a>
+						<a class="collapse-item" th:href="@{/searchHolidays}"><span
 							th:text="#{searchholidays}"></span></a>
 					</div>
 				</div></li>
-			<li class="nav-item"><a th:href="@{searchSalesCard}"
+			<li class="nav-item"><a th:href="@{/searchSalesCard}"
 				class="nav-link"><i class="fas fa-credit-card fa-fw"></i> <span
 					th:text="#{salescard}"> </span></a></li>
 			<li class="nav-item"><a class="nav-link collapsed"
@@ -147,9 +148,9 @@
 				<div class="collapse" data-parent="#accordionSidebar"
 					aria-labelledby="headingSales" id="collapseSales">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" th:href="@{searchSales}"> <span
+						<a class="collapse-item" th:href="@{/searchSales}"> <span
 							th:text="#{sales}"></span></a> <a class="collapse-item"
-							th:href="@{newsale}"> <span th:text="#{newsale}"></span>
+							th:href="@{/newsale}"> <span th:text="#{newsale}"></span>
 						</a>
 					</div>
 				</div></li>
@@ -162,25 +163,25 @@
 				<div class="collapse" data-parent="#accordionSidebar"
 					aria-labelledby="headingSalesPostPoned" id="collapseSalesPostPoned">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" th:href="@{searchsalepostponed}"><span
+						<a class="collapse-item" th:href="@{/searchsalepostponed}"><span
 							th:text="#{searchsalepostponed}"></span></a> <a class="collapse-item"
-							th:href="@{searchmissingsalepostponed}"> <span
+							th:href="@{/searchmissingsalepostponed}"> <span
 							th:text="#{searchnummissing}"></span></a> <a class="collapse-item"
-							th:href="@{searchexpired}"> <span th:text="#{searchexpired}"></span></a>
+							th:href="@{/searchexpired}"> <span th:text="#{searchexpired}"></span></a>
 					</div>
 				</div></li>
-			<li class="nav-item"><a class="nav-link" th:href="@{newuser}"><i
+			<li class="nav-item"><a class="nav-link" th:href="@{/newuser}"><i
 					class="fas fa-users fa-fw"></i><span th:text="#{newuser}"> </span></a></li>
-			<li class="nav-item"><a th:href="@{pendingissues}"
+			<li class="nav-item"><a th:href="@{/pendingissues}"
 				class="nav-link"><i class="fas fa-exclamation-triangle fa-fw"></i>
 					<span th:text="#{pendingissues}"></span></a></li>
-			<li class="nav-item"><a th:href="@{searchclients}"
+			<li class="nav-item"><a th:href="@{/searchclients}"
 				class="nav-link"><i class="fas fa-users fa-fw"></i> <span
 					th:text="#{searchclients}"></span></a></li>
-			<li class="nav-item"><a th:href="@{searchRegisterEmployees}"
+			<li class="nav-item"><a th:href="@{/searchRegisterEmployees}"
 				class="nav-link"><i class="fas fa-user-clock"></i><span
 					th:text="#{registeremployees}"></span></a></li>
-			<li class="nav-item"><a th:href="@{newCategory}"
+			<li class="nav-item"><a th:href="@{/newCategory}"
 				class="nav-link"><i class="fas fa-archive fa-fw"></i> <span
 					th:text="#{newcategory}"></span></a></li>
 			<li class="nav-item"><a class="nav-link collapsed"
@@ -191,9 +192,9 @@
 				<div class="collapse" data-parent="#accordionSidebar"
 					aria-labelledby="headingPayments" id="collapsePayments">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" th:href="@{newPayment}"> <span
+						<a class="collapse-item" th:href="@{/newPayment}"> <span
 							th:text="#{newpayment}"></span></a> <a class="collapse-item"
-							th:href="@{allpayments}"> <span th:text="#{allpayments}"></span>
+							th:href="@{/allpayments}"> <span th:text="#{allpayments}"></span>
 						</a>
 					</div>
 				</div></li>
@@ -204,9 +205,9 @@
 				<div class="collapse" data-parent="#accordionSidebar"
 					aria-labelledby="headingCoins" id="collapseCoins">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" th:href="@{newcoin}"><span
+						<a class="collapse-item" th:href="@{/newcoin}"><span
 							th:text="#{addcoin}"></span></a> <a class="collapse-item"
-							th:href="@{allcoins}"><span th:text="#{allcoins}"></span></a>
+							th:href="@{/allcoins}"><span th:text="#{allcoins}"></span></a>
 					</div>
 				</div></li>
 			<!-- Divider -->
