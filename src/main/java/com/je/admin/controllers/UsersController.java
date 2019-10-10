@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.admin.forms.AdminForm;
@@ -27,7 +27,7 @@ public class UsersController {
 	@Autowired
 	private UserValidator userValidator;
 
-	@PostMapping(value = "/newuser")
+	@GetMapping(value = "/newuser")
 	public ModelAndView newUser() {
 		ModelAndView model = new ModelAndView("admin/users/saveuser/newuser");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -36,7 +36,7 @@ public class UsersController {
 		return model;
 	}
 
-	@PostMapping(value = "/saveuser")
+	@GetMapping(value = "/saveuser")
 	public ModelAndView saveUser(@ModelAttribute(ConstantsJsp.USER) User user, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.admin.forms.AdminForm;
@@ -28,7 +28,7 @@ public class EntryMoneyAdminController {
 
 	private static final String VIEWSEARCHENTRIES = "admin/entriesmoney/searchentries";
 
-	@PostMapping(value = "/searchEntries")
+	@GetMapping(value = "/searchEntries")
 	public ModelAndView searchEntries() {
 		ModelAndView model = new ModelAndView(VIEWSEARCHENTRIES);
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -36,7 +36,7 @@ public class EntryMoneyAdminController {
 		return model;
 	}
 
-	@PostMapping(value = "/resultentries")
+	@GetMapping(value = "/resultentries")
 	public ModelAndView resultEntries(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm asf, BindingResult arg1) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());

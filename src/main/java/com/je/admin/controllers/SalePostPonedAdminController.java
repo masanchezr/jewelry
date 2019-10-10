@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.admin.forms.AdminForm;
@@ -19,12 +19,12 @@ public class SalePostPonedAdminController {
 	@Autowired
 	private SalesPostPonedService salesPostPonedService;
 
-	@PostMapping(value = "/showsalepost{id}")
+	@GetMapping(value = "/showsalepost{id}")
 	public ModelAndView showsale(@PathVariable("id") long id) {
 		return getModelSalePostponed(id);
 	}
 
-	@PostMapping(value = "/searchmissingsalepostponed")
+	@GetMapping(value = "/searchmissingsalepostponed")
 	public ModelAndView salepostponed() {
 		ModelAndView model = new ModelAndView("admin/salespostponed/resultnummissing");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -32,7 +32,7 @@ public class SalePostPonedAdminController {
 		return model;
 	}
 
-	@PostMapping(value = "/searchsalepostponed")
+	@GetMapping(value = "/searchsalepostponed")
 	public ModelAndView searchsalepostponed() {
 		ModelAndView model = new ModelAndView("admin/salespostponed/searchsalepostponed");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -40,7 +40,7 @@ public class SalePostPonedAdminController {
 		return model;
 	}
 
-	@PostMapping(value = "/showsale")
+	@GetMapping(value = "/showsale")
 	public ModelAndView showsale(@ModelAttribute(ConstantsJsp.FORMSALEPOSTPONED) SalePostPoned salepostponed,
 			BindingResult result) {
 		return getModelSalePostponed(salepostponed.getIdsale());
@@ -60,13 +60,13 @@ public class SalePostPonedAdminController {
 		return model;
 	}
 
-	@PostMapping(value = "/timeout{id}")
+	@GetMapping(value = "/timeout{id}")
 	public ModelAndView timeout(@PathVariable long id) {
 		salesPostPonedService.timeout(id);
 		return getModelSalePostponed(id);
 	}
 
-	@PostMapping(value = "/searchexpired")
+	@GetMapping(value = "/searchexpired")
 	public ModelAndView searchExpired() {
 		ModelAndView model = new ModelAndView("admin/salespostponed/expired");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.admin.forms.AdminForm;
@@ -41,7 +41,7 @@ public class HolidaysController {
 	 *
 	 * @return the model and view
 	 */
-	@PostMapping(value = "/newHoliday")
+	@GetMapping(value = "/newHoliday")
 	public ModelAndView newHoliday() {
 		ModelAndView model = new ModelAndView(VIEWNEWHOLIDAY);
 		model.addObject(ConstantsJsp.FORMHOLIDAY, new Holiday());
@@ -56,7 +56,7 @@ public class HolidaysController {
 	 * @param holiday the holiday
 	 * @return the model and view
 	 */
-	@PostMapping(value = "/addHoliday")
+	@GetMapping(value = "/addHoliday")
 	public ModelAndView addHoliday(@ModelAttribute(ConstantsJsp.FORMHOLIDAY) Holiday holiday, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		holidayValidator.validate(holiday, result);
@@ -81,7 +81,7 @@ public class HolidaysController {
 		return model;
 	}
 
-	@PostMapping(value = "/searchHolidays")
+	@GetMapping(value = "/searchHolidays")
 	public ModelAndView searchHolidays() {
 		ModelAndView model = new ModelAndView("admin/holidays/searchholidays");
 		model.addObject(ConstantsJsp.FORMHOLIDAY, new Holiday());
@@ -89,7 +89,7 @@ public class HolidaysController {
 		return model;
 	}
 
-	@PostMapping(value = "/resultHolidays")
+	@GetMapping(value = "/resultHolidays")
 	public ModelAndView resultHolidays(@ModelAttribute(ConstantsJsp.FORMHOLIDAY) Holiday holiday) {
 		ModelAndView model = new ModelAndView("admin/holidays/allholidays");
 		model.addObject("holidays", holidayService.findByBetweenDates(holiday));
@@ -102,7 +102,7 @@ public class HolidaysController {
 	 *
 	 * @return the model and view
 	 */
-	@PostMapping(value = "/allHolidays")
+	@GetMapping(value = "/allHolidays")
 	public ModelAndView allHolidays() {
 		ModelAndView model = new ModelAndView("admin/holidays/allholidays");
 		List<Holiday> holidays = holidayService.findAll();

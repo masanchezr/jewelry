@@ -3,7 +3,7 @@ package com.je.admin.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.admin.forms.AdminForm;
@@ -27,7 +27,7 @@ public class PaymentsController {
 	 * @param payment the payment
 	 * @return the string
 	 */
-	@PostMapping(value = "/savePayment")
+	@GetMapping(value = "/savePayment")
 	public ModelAndView savePayment(@ModelAttribute(ConstantsJsp.FORMPAYMENT) PaymentEntity payment) {
 		ModelAndView model = new ModelAndView("admin/success");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -40,7 +40,7 @@ public class PaymentsController {
 	 *
 	 * @return the model and view
 	 */
-	@PostMapping(value = "/allpayments")
+	@GetMapping(value = "/allpayments")
 	public ModelAndView allpayments() {
 		ModelAndView model = new ModelAndView("admin/payments/allpayments");
 		Iterable<PaymentEntity> payments = paymentService.findAll();

@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -69,7 +68,7 @@ public class AdminController {
 	 *
 	 * @return the model and view
 	 */
-	@PostMapping(value = "/newCategory")
+	@GetMapping(value = "/newCategory")
 	public ModelAndView newCategory() {
 		ModelAndView model = new ModelAndView();
 		model.setViewName("admin/newCategory");
@@ -83,7 +82,7 @@ public class AdminController {
 	 *
 	 * @return the model and view
 	 */
-	@PostMapping(value = "/newPayment")
+	@GetMapping(value = "/newPayment")
 	public ModelAndView newPayment() {
 		ModelAndView model = new ModelAndView("admin/payments/newPayment");
 		model.addObject(ConstantsJsp.FORMPAYMENT, new PaymentEntity());
@@ -98,7 +97,7 @@ public class AdminController {
 	 * @param search the search
 	 * @return the model and view
 	 */
-	@PostMapping(value = "/searchJewels")
+	@GetMapping(value = "/searchJewels")
 	public ModelAndView searchJewels(@RequestParam String search) {
 		ModelAndView model = new ModelAndView("admin/jewels/searchjewels/resultsearchbyreference");
 		List<JewelEntity> jewels = searchService.search(search);
@@ -113,7 +112,7 @@ public class AdminController {
 	 *
 	 * @return the string
 	 */
-	@PostMapping("/403admin")
+	@GetMapping("/403admin")
 	public ModelAndView accessDeniedPage() {
 		ModelAndView model = new ModelAndView("admin/403");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());

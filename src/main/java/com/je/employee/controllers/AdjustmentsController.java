@@ -7,7 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.employee.validators.AdjustmentValidator;
@@ -39,7 +39,7 @@ public class AdjustmentsController {
 	 *
 	 * @return the model and view
 	 */
-	@PostMapping(value = "/employee/newadjustment")
+	@GetMapping(value = "/employee/newadjustment")
 	public ModelAndView newadjustment() {
 		ModelAndView model = new ModelAndView("employee/newadjustment");
 		model.addObject(ConstantsJsp.FORMADJUSTMENT, new Adjustment());
@@ -54,7 +54,7 @@ public class AdjustmentsController {
 	 * @param result     the result
 	 * @return the model and view
 	 */
-	@PostMapping(value = "/employee/saveAdjustment")
+	@GetMapping(value = "/employee/saveAdjustment")
 	public ModelAndView saveAdjustment(@ModelAttribute(ConstantsJsp.FORMADJUSTMENT) Adjustment adjustment,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();

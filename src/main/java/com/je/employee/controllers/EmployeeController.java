@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.services.messages.MessageService;
@@ -58,7 +57,7 @@ public class EmployeeController {
 	 *
 	 * @return the string
 	 */
-	@PostMapping("/403")
+	@GetMapping("/403")
 	public String accessDeniedPage() {
 		return "employee/403";
 	}

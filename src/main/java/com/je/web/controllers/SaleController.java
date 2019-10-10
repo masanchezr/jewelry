@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
@@ -64,7 +64,7 @@ public class SaleController {
 	 * @param result   the result
 	 * @return the model and view
 	 */
-	@PostMapping(value = "/comprar")
+	@GetMapping(value = "/comprar")
 	public ModelAndView buy(@ModelAttribute("dataForm") DataClientForm dataForm, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		Iterable<CategoryEntity> categories = searchCategoriesService.getAllCategoriesOrderByName();
@@ -111,7 +111,7 @@ public class SaleController {
 		return model;
 	}
 
-	@PostMapping(value = "/checkout")
+	@GetMapping(value = "/checkout")
 	public ModelAndView checkout() {
 		ModelAndView model = new ModelAndView(VIEWSHOPPINGCART);
 		model.addObject("dataForm", new DataClientForm());
@@ -120,7 +120,7 @@ public class SaleController {
 		return model;
 	}
 
-	@PostMapping(value = "/eliminar{idjewel}")
+	@GetMapping(value = "/eliminar{idjewel}")
 	public ModelAndView deleteJewelEntity(@PathVariable("idjewel") long idjewel,
 			@ModelAttribute("cart") List<JewelEntity> cart) {
 		ModelAndView model = new ModelAndView(VIEWSHOPPINGCART);
@@ -137,7 +137,7 @@ public class SaleController {
 		return model;
 	}
 
-	@PostMapping("/endsale")
+	@GetMapping("/endsale")
 	public String goodbye(SessionStatus status) {
 		status.setComplete();
 		return "goodbye";

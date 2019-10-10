@@ -16,7 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.admin.forms.AdminForm;
@@ -40,7 +40,7 @@ public class RegisterEmployeesController {
 	/** The logger. */
 	private static Logger logger = LoggerFactory.getLogger(ShoppingsAdminController.class);
 
-	@PostMapping(value = "/searchRegisterEmployees")
+	@GetMapping(value = "/searchRegisterEmployees")
 	public ModelAndView searchRegisterEmployees() {
 		ModelAndView model = new ModelAndView("admin/register/search");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -48,7 +48,7 @@ public class RegisterEmployeesController {
 		return model;
 	}
 
-	@PostMapping(value = "/registeremployees")
+	@GetMapping(value = "/registeremployees")
 	public ModelAndView registeremployees(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm form,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
@@ -68,7 +68,7 @@ public class RegisterEmployeesController {
 		return model;
 	}
 
-	@PostMapping(value = "/downloadpdf{datefrom}/{dateuntil}")
+	@GetMapping(value = "/downloadpdf{datefrom}/{dateuntil}")
 	public ModelAndView downloadpdf(@PathVariable("datefrom") String from, @PathVariable("dateuntil") String until,
 			HttpServletResponse response) {
 		ModelAndView model = new ModelAndView("admin/register/register");

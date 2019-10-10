@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -53,7 +53,7 @@ public class BuyController {
 	 * @param result  the result
 	 * @return the model and view
 	 */
-	@PostMapping
+	@GetMapping
 	public ModelAndView add(@ModelAttribute("buyForm") BuyForm buyform, @ModelAttribute("cart") List<JewelEntity> cart,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
@@ -121,7 +121,7 @@ public class BuyController {
 		return model;
 	}
 
-	@PostMapping("/endbuy")
+	@GetMapping("/endbuy")
 	public String goodbye(SessionStatus status) {
 		status.setComplete();
 		return "goodbye";
