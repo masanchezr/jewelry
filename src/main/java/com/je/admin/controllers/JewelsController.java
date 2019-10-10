@@ -407,7 +407,7 @@ public class JewelsController {
 		ostream.close();
 	}
 
-	@PostMapping("/goodbye")
+	@PostMapping("/endnewjewel")
 	public String goodbye(SessionStatus status) {
 		status.setComplete();
 		return "goodbye";
