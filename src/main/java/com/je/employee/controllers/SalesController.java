@@ -13,7 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.dbaccess.entities.JewelEntity;
@@ -141,7 +140,7 @@ public class SalesController {
 	 *
 	 * @return the model and view
 	 */
-	@RequestMapping("/employee/removeparcialsale")
+	@GetMapping("/employee//removeparcialsale")
 	public ModelAndView removeParcialSale() {
 		ModelAndView model = new ModelAndView(VIEWREMOVEPARCIALSALE);
 		model.addObject(ConstantsJsp.FORMSALE, new Sale());
@@ -155,7 +154,7 @@ public class SalesController {
 	 * @param result the result
 	 * @return the model and view
 	 */
-	@RequestMapping("/employee/cancelparcialsale")
+	@GetMapping("/employee//cancelparcialsale")
 	public ModelAndView cancelParcialSale(@ModelAttribute(ConstantsJsp.FORMSALE) Sale sale, HttpServletRequest request,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
@@ -208,7 +207,7 @@ public class SalesController {
 	 *
 	 * @return the model and view
 	 */
-	@RequestMapping("/employee/removesale")
+	@GetMapping("/employee//removesale")
 	public ModelAndView removeSale() {
 		ModelAndView model = new ModelAndView(VIEWREMOVESALE);
 		List<PaymentEntity> payments = paymentService.findAllActive();
@@ -232,7 +231,7 @@ public class SalesController {
 	 * @param result         the result
 	 * @return the model and view
 	 */
-	@RequestMapping("/employee/deletesale")
+	@GetMapping("/employee//deletesale")
 	public ModelAndView deleteSale(Sale removeSaleForm, HttpServletRequest request, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		removeSaleValidator.validate(removeSaleForm, result);

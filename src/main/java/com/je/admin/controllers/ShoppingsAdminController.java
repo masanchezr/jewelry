@@ -231,7 +231,7 @@ public class ShoppingsAdminController {
 			List<QuarterMetal> quarters = shoppingService.searchGramsByMetal(shopping.getDatefrom(),
 					shopping.getDateuntil(), shopping.getPlace());
 			model.addObject("quarters", quarters);
-			model.setViewName("quartermaterial");
+			model.setViewName("admin/shoppings/quartersmetal/quarter");
 			shopping.setPlace(placeService.getPlace(shopping.getPlace().getIdplace()));
 		}
 		model.addObject(ConstantsJsp.SHOPPINGFORM, shopping);

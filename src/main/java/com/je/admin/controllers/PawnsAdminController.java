@@ -237,7 +237,7 @@ public class PawnsAdminController {
 			model.setViewName("admin/pawns/quarters/searchquarter");
 		} else {
 			Quarter quarter = pawnService.searchGramsByDates(search.getDatefrom(), search.getDateuntil());
-			model.setViewName("admin/pawns/quarter/quarter");
+			model.setViewName("admin/pawns/quarters/quarter");
 			model.addObject("quarter", quarter);
 		}
 		model.addObject(ConstantsJsp.FORMSEARCH, search);

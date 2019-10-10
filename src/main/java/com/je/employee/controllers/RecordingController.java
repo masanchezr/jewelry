@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.dbaccess.entities.RecordingEntity;
 import com.je.employee.validators.RecordingValidator;
+import com.je.forms.Recording;
 import com.je.services.dailies.DailyService;
 import com.je.services.payment.PaymentService;
 import com.je.services.places.PlaceService;
@@ -45,6 +47,9 @@ public class RecordingController {
 	@Autowired
 	private RecordingValidator recordingValidator;
 
+	@Autowired
+	private Mapper mapper;
+
 	private static final String FORMRECORDING = "recording";
 	private static final String VIEWNEWRECORDING = "employee/sales/newrecording";
 
@@ -57,8 +62,8 @@ public class RecordingController {
 	}
 
 	@PostMapping("/employee/saverecording")
-	public ModelAndView saveRecording(@ModelAttribute(FORMRECORDING) RecordingEntity recording,
-			HttpServletRequest request, BindingResult errors) {
+	public ModelAndView saveRecording(@ModelAttribute(FORMRECORDING) Recording recording, HttpServletRequest request,
+			BindingResult errors) {
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		ModelAndView model = new ModelAndView();
 		recordingValidator.validate(recording, errors);
@@ -79,7 +84,7 @@ public class RecordingController {
 			Date today = DateUtil.getDateFormated(new Date());
 			PlaceEntity place = placeService.getPlaceUser(user);
 			recording.setPlace(place);
-			recordingService.save(recording);
+			recordingService.save(mapper.map(recording, RecordingEntity.class));
 			model.setViewName(ConstantsJsp.VIEWDAILYARROW);
 			model.addObject(ConstantsJsp.DAILY, dailyService.getDaily(today, place, ipAddress));
 			model.addObject(ConstantsJsp.DATEDAILY, today);

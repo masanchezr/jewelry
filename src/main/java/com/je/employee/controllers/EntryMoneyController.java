@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.je.dbaccess.entities.EntryMoneyEntity;
 import com.je.employee.validators.EntryMoneyValidator;
+import com.je.forms.EntryMoney;
 import com.je.services.entrymoney.EntryMoneyService;
 import com.je.utils.constants.ConstantsJsp;
 import com.je.utils.date.DateUtil;
@@ -34,7 +35,7 @@ public class EntryMoneyController {
 	}
 
 	@PostMapping("/employee/saveentrymoney")
-	public ModelAndView saveEntryMoney(@ModelAttribute(ConstantsJsp.FORMENTRYMONEY) EntryMoneyEntity entryMoney,
+	public ModelAndView saveEntryMoney(@ModelAttribute(ConstantsJsp.FORMENTRYMONEY) EntryMoney entryMoney,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		entryMoneyValidator.validate(entryMoney, result);

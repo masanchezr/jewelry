@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.dbaccess.entities.StrapEntity;
 import com.je.employee.validators.StrapFormValidator;
+import com.je.forms.Strap;
 import com.je.services.dailies.DailyService;
 import com.je.services.payment.PaymentService;
 import com.je.services.places.PlaceService;
@@ -45,6 +47,9 @@ public class StrapsController {
 	@Autowired
 	private StrapFormValidator strapFormValidator;
 
+	@Autowired
+	private Mapper mapper;
+
 	private static final String FORMSTRAP = "strapForm";
 	private static final String VIEWSALESTRAP = "employee/sales/newsalestrap";
 
@@ -57,7 +62,7 @@ public class StrapsController {
 	}
 
 	@PostMapping("/employee/savesalestrap")
-	public ModelAndView savesalestrap(@ModelAttribute("strapForm") StrapEntity strap, HttpServletRequest request,
+	public ModelAndView savesalestrap(@ModelAttribute("strapForm") Strap strap, HttpServletRequest request,
 			BindingResult arg1) {
 		ModelAndView model = new ModelAndView();
 		strapFormValidator.validate(strap, arg1);
@@ -80,7 +85,7 @@ public class StrapsController {
 				Date today = DateUtil.getDateFormated(new Date());
 				model.setViewName(ConstantsJsp.VIEWDAILYARROW);
 				strap.setPlace(place);
-				strapsService.saveSaleStrap(strap);
+				strapsService.saveSaleStrap(mapper.map(strap, StrapEntity.class));
 				model.addObject(ConstantsJsp.DAILY, dailyService.getDaily(today, place, ipAddress));
 				model.addObject(ConstantsJsp.DATEDAILY, today);
 			}
