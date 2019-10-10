@@ -9,7 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.dbaccess.entities.PayrollEntity;
@@ -36,7 +36,7 @@ public class PayrollController {
 	private static final String VIEWNEWPAYROLL = "employee/otherconcepts/payroll";
 	private static final String FORMPAYROLL = "payrollForm";
 
-	@RequestMapping(value = "/employee/newpayroll")
+	@PostMapping(value = "/employee/newpayroll")
 	public ModelAndView newPayroll() {
 		ModelAndView model = new ModelAndView(VIEWNEWPAYROLL);
 		model.addObject(FORMPAYROLL, new Payroll());
@@ -44,7 +44,7 @@ public class PayrollController {
 		return model;
 	}
 
-	@RequestMapping(value = "/employee/savepayroll")
+	@PostMapping(value = "/employee/savepayroll")
 	public ModelAndView savePayroll(@ModelAttribute(FORMPAYROLL) Payroll payroll, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		PayrollEntity payrollEntity = mapper.map(payroll, PayrollEntity.class);

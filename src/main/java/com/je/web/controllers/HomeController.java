@@ -8,7 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -42,7 +42,7 @@ public class HomeController {
 	 * @return the string
 	 */
 
-	@RequestMapping(value = "/index.html")
+	@PostMapping(value = "/index.html")
 	public ModelAndView home() {
 		// Recuperar toda la lista de categorias
 		Iterable<CategoryEntity> categories = searchCategoriesService.getAllCategoriesOrderByName();
@@ -67,7 +67,7 @@ public class HomeController {
 		return model;
 	}
 
-	@RequestMapping(value = "/page/{pageNumber}")
+	@PostMapping(value = "/page/{pageNumber}")
 	public ModelAndView page(@PathVariable Integer pageNumber) {
 		// Recuperar toda la lista de categorias
 		Iterable<CategoryEntity> categories = searchCategoriesService.getAllCategoriesOrderByName();
@@ -99,7 +99,7 @@ public class HomeController {
 	 * 
 	 * @return the string
 	 */
-	@RequestMapping(value = "/contacto")
+	@PostMapping(value = "/contacto")
 	public ModelAndView contact() {
 		ModelAndView model = new ModelAndView("contact");
 		model.addObject(ConstantsJsp.FORMSEARCH, new SearchJewelForm());
@@ -112,7 +112,7 @@ public class HomeController {
 	 * 
 	 * @return the string
 	 */
-	@RequestMapping(value = "/faqs")
+	@PostMapping(value = "/faqs")
 	public ModelAndView faqs() {
 		ModelAndView model = new ModelAndView("faqs");
 		model.addObject(ConstantsJsp.FORMSEARCH, new SearchJewelForm());
@@ -125,14 +125,14 @@ public class HomeController {
 	 * 
 	 * @return the string
 	 */
-	@RequestMapping(value = "/terms")
+	@PostMapping(value = "/terms")
 	public ModelAndView terms() {
 		ModelAndView model = new ModelAndView("termsconditions");
 		model.addObject(ConstantsJsp.FORMSEARCH, new SearchJewelForm());
 		return model;
 	}
 
-	@RequestMapping(value = "/{keyword}")
+	@PostMapping(value = "/{keyword}")
 	public ModelAndView searchByKeyWord(@PathVariable String keyword) {
 		Iterable<CategoryEntity> categories = searchCategoriesService.getAllCategoriesOrderByName();
 		List<JewelEntity> jewels = jewelService.searchJewelsByKeyWordCategory(keyword);
@@ -155,7 +155,7 @@ public class HomeController {
 	 *            the id
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/productoSeleccionado{id}")
+	@PostMapping(value = "/productoSeleccionado{id}")
 	public ModelAndView selectedJewelEntity(@PathVariable("id") long id, Model m) {
 		JewelEntity jewel = jewelService.selectProduct(id);
 		ModelAndView model = new ModelAndView();

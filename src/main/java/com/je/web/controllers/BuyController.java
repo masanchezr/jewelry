@@ -6,9 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.dbaccess.entities.AddressEntity;
@@ -48,13 +49,11 @@ public class BuyController {
 	/**
 	 * este caso es para cuando el cliente es nuevo.
 	 * 
-	 * @param buyform
-	 *            the buyform
-	 * @param result
-	 *            the result
+	 * @param buyform the buyform
+	 * @param result  the result
 	 * @return the model and view
 	 */
-	@RequestMapping(method = RequestMethod.POST)
+	@PostMapping
 	public ModelAndView add(@ModelAttribute("buyForm") BuyForm buyform, @ModelAttribute("cart") List<JewelEntity> cart,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
@@ -120,5 +119,11 @@ public class BuyController {
 		}
 		model.setViewName("finishbuy");
 		return model;
+	}
+
+	@PostMapping("/goodbye")
+	public String goodbye(SessionStatus status) {
+		status.setComplete();
+		return "goodbye";
 	}
 }

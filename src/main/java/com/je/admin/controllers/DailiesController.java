@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.admin.forms.AdminForm;
@@ -49,7 +49,7 @@ public class DailiesController {
 	 *
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/dailyplace")
+	@PostMapping(value = "/dailyplace")
 	public ModelAndView dailyPlace() {
 		ModelAndView model = new ModelAndView("admin/dailies/searchdaily");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -58,7 +58,7 @@ public class DailiesController {
 		return model;
 	}
 
-	@RequestMapping(value = "/searchcalculatedailies")
+	@PostMapping(value = "/searchcalculatedailies")
 	public ModelAndView searchCalculateDailies() {
 		ModelAndView model = new ModelAndView(VIEWSEARCHCALCULATEDAILIES);
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -73,7 +73,7 @@ public class DailiesController {
 	 * @param sdf the sdf
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/searchDaily")
+	@PostMapping(value = "/searchDaily")
 	public ModelAndView searchDaily(@ModelAttribute(ConstantsJsp.FORMSEARCHDAILY) SearchDailyForm sdf,
 			HttpServletRequest request, BindingResult arg1) {
 		ModelAndView model;
@@ -116,7 +116,7 @@ public class DailiesController {
 		return model;
 	}
 
-	@RequestMapping(value = "/calculatedailies")
+	@PostMapping(value = "/calculatedailies")
 	public ModelAndView calculateDailies(@ModelAttribute(ConstantsJsp.FORMSEARCHDAILY) SearchDailyForm sdf,
 			BindingResult arg1) {
 		ModelAndView model = new ModelAndView();
@@ -145,7 +145,7 @@ public class DailiesController {
 		return model;
 	}
 
-	@RequestMapping(value = "/beforeday{date}/{place}")
+	@PostMapping(value = "/beforeday{date}/{place}")
 	public ModelAndView beforeday(@PathVariable(ConstantsJsp.DATE) String sdate,
 			@PathVariable(Constants.PLACE) long idplace, HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
@@ -181,7 +181,7 @@ public class DailiesController {
 		return model;
 	}
 
-	@RequestMapping(value = "/againday{date}/{place}")
+	@PostMapping(value = "/againday{date}/{place}")
 	public ModelAndView againday(@PathVariable(ConstantsJsp.DATE) String sdate,
 			@PathVariable(Constants.PLACE) long idplace, HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();

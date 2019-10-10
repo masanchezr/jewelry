@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.services.messages.MessageService;
@@ -29,7 +29,7 @@ public class EmployeeController {
 	 *
 	 * @return the string
 	 */
-	@RequestMapping("/employee/login")
+	@PostMapping("/employee/login")
 	public String login() {
 		return "employee/login";
 	}
@@ -39,7 +39,7 @@ public class EmployeeController {
 	 *
 	 * @return the string
 	 */
-	@RequestMapping("/employee/admin")
+	@PostMapping("/employee/admin")
 	public ModelAndView admin(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView("employee/admin");
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -57,7 +57,7 @@ public class EmployeeController {
 	 *
 	 * @return the string
 	 */
-	@RequestMapping("/403")
+	@PostMapping("/403")
 	public String accessDeniedPage() {
 		return "employee/403";
 	}

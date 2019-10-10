@@ -10,7 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.forms.SearchForm;
@@ -39,7 +39,7 @@ public class DailyController {
 	 *
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/employee/daily")
+	@PostMapping(value = "/employee/daily")
 	public ModelAndView daily(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -59,14 +59,14 @@ public class DailyController {
 		return model;
 	}
 
-	@RequestMapping(value = "/employee/searchdaily")
+	@PostMapping(value = "/employee/searchdaily")
 	public ModelAndView searchdaily() {
 		ModelAndView model = new ModelAndView("employee/daily/searchdaily");
 		model.addObject(ConstantsJsp.FORMSEARCH, new SearchForm());
 		return model;
 	}
 
-	@RequestMapping(value = "/employee/beforeday{date}")
+	@PostMapping(value = "/employee/beforeday{date}")
 	public ModelAndView beforeday(@PathVariable(ConstantsJsp.DATE) String sdate, HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -98,7 +98,7 @@ public class DailyController {
 		return model;
 	}
 
-	@RequestMapping(value = "/employee/againday{date}")
+	@PostMapping(value = "/employee/againday{date}")
 	public ModelAndView againday(@PathVariable(ConstantsJsp.DATE) String sdate, HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -132,7 +132,7 @@ public class DailyController {
 		return model;
 	}
 
-	@RequestMapping(value = "/employee/resultdaily")
+	@PostMapping(value = "/employee/resultdaily")
 	public ModelAndView resultdaily(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm searchForm,
 			HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();

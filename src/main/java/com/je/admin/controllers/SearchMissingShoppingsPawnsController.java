@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.admin.forms.AdminForm;
@@ -29,7 +29,7 @@ public class SearchMissingShoppingsPawnsController {
 
 	private static final String SEARCHMISSINGSHOPPINGS = "searchmissingshoppings";
 
-	@RequestMapping(value = "/searchPosibleRepeated")
+	@PostMapping(value = "/searchPosibleRepeated")
 	public ModelAndView searchMissingShoppings() {
 		ModelAndView model = new ModelAndView(ConstantsJsp.VIEWSEARCHMISSINGSHOPPINGS);
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -38,7 +38,7 @@ public class SearchMissingShoppingsPawnsController {
 		return model;
 	}
 
-	@RequestMapping(value = "/resultmissingshoppings")
+	@PostMapping(value = "/resultmissingshoppings")
 	public ModelAndView resultMissingShoppings(
 			@ModelAttribute(SEARCHMISSINGSHOPPINGS) SearchMissingNumbers searchmissingshoppings, BindingResult result) {
 		ModelAndView model = new ModelAndView();

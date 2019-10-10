@@ -7,7 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.employee.validators.IncidentValidator;
@@ -29,14 +29,14 @@ public class IncidentsController {
 	@Autowired
 	private SearchFormValidator searchFormValidator;
 
-	@RequestMapping(value = "/employee/newincident")
+	@PostMapping(value = "/employee/newincident")
 	public ModelAndView newIncident() {
 		ModelAndView model = new ModelAndView("employee/incidents/newincident");
 		model.addObject(ConstantsJsp.FORMINCIDENT, new Incident());
 		return model;
 	}
 
-	@RequestMapping(value = "/employee/saveincident")
+	@PostMapping(value = "/employee/saveincident")
 	public ModelAndView saveIncident(@ModelAttribute(ConstantsJsp.FORMINCIDENT) Incident incident,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
@@ -53,14 +53,14 @@ public class IncidentsController {
 		return model;
 	}
 
-	@RequestMapping(value = "/employee/myincidents")
+	@PostMapping(value = "/employee/myincidents")
 	public ModelAndView myincidents() {
 		ModelAndView model = new ModelAndView("employee/incidents/searchincidents");
 		model.addObject(ConstantsJsp.FORMSEARCH, new SearchForm());
 		return model;
 	}
 
-	@RequestMapping(value = "/employee/resultIncidents")
+	@PostMapping(value = "/employee/resultIncidents")
 	public ModelAndView resultSearchIncidents(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm form,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
@@ -77,7 +77,7 @@ public class IncidentsController {
 		return model;
 	}
 
-	@RequestMapping("/employee/pendingissues")
+	@PostMapping("/employee/pendingissues")
 	public ModelAndView pendingissues() {
 		ModelAndView model = new ModelAndView("employee/incidents/myincidents");
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();

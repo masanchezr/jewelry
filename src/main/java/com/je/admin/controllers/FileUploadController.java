@@ -9,9 +9,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,7 +36,7 @@ public class FileUploadController {
 
 	private static final String MESSAGE = "message";
 
-	@RequestMapping(value = "/upload", method = RequestMethod.GET)
+	@GetMapping(value = "/upload")
 	public ModelAndView provideUploadInfo() {
 		ModelAndView model = new ModelAndView("uploadimg");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -43,18 +44,16 @@ public class FileUploadController {
 		return model;
 	}
 
-	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public ModelAndView handleFileUpload(@RequestParam(Constants.NAME) String name, @RequestParam("file") MultipartFile file) {
+	@PostMapping(value = "/upload")
+	public ModelAndView handleFileUpload(@RequestParam(Constants.NAME) String name,
+			@RequestParam("file") MultipartFile file) {
 		ModelAndView model = provideUploadInfo();
 		log.warn("Inicio handleFileUpload");
 		if (!file.isEmpty()) {
 			JewelEntity jewel = jewelService.selectProduct(Long.valueOf(name));
-			BufferedOutputStream stream = null;
-			try {
+			try (BufferedOutputStream stream = new BufferedOutputStream(getFile(name, model))) {
 				byte[] bytes = file.getBytes();
-				stream = new BufferedOutputStream(getFile(name, model));
 				stream.write(bytes);
-				stream.close();
 			} catch (IOException io) {
 				model.addObject(MESSAGE, "You successfully uploaded ");
 			} finally {
@@ -77,5 +76,11 @@ public class FileUploadController {
 			model.addObject(MESSAGE, "The file can not be opened ");
 		}
 		return file;
+	}
+
+	@PostMapping("/goodbye")
+	public String goodbye(SessionStatus status) {
+		status.setComplete();
+		return "goodbye";
 	}
 }

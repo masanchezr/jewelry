@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -42,7 +42,7 @@ public class AdminController {
 	 * 
 	 * @return the string
 	 */
-	@RequestMapping(value = "/login")
+	@PostMapping(value = "/login")
 	public String login() {
 		log.warn("probando login");
 		return "admin/login";
@@ -53,7 +53,7 @@ public class AdminController {
 	 *
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/admin")
+	@PostMapping(value = "/admin")
 	public ModelAndView admin(HttpServletRequest request) {
 		String ipAddress = request.getHeader(ConstantsJsp.XFORWARDEDFOR);
 		if (ipAddress == null) {
@@ -68,7 +68,7 @@ public class AdminController {
 	 *
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/newCategory")
+	@PostMapping(value = "/newCategory")
 	public ModelAndView newCategory() {
 		ModelAndView model = new ModelAndView();
 		model.setViewName("admin/newCategory");
@@ -82,7 +82,7 @@ public class AdminController {
 	 *
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/newPayment")
+	@PostMapping(value = "/newPayment")
 	public ModelAndView newPayment() {
 		ModelAndView model = new ModelAndView("admin/payments/newPayment");
 		model.addObject(ConstantsJsp.FORMPAYMENT, new PaymentEntity());
@@ -97,7 +97,7 @@ public class AdminController {
 	 * @param search the search
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/searchJewels")
+	@PostMapping(value = "/searchJewels")
 	public ModelAndView searchJewels(@RequestParam String search) {
 		ModelAndView model = new ModelAndView("admin/jewels/searchjewels/resultsearchbyreference");
 		List<JewelEntity> jewels = searchService.search(search);
@@ -112,7 +112,7 @@ public class AdminController {
 	 *
 	 * @return the string
 	 */
-	@RequestMapping("/403admin")
+	@PostMapping("/403admin")
 	public ModelAndView accessDeniedPage() {
 		ModelAndView model = new ModelAndView("admin/403");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());

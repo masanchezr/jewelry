@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.services.metal.MetalService;
@@ -35,7 +35,7 @@ public class WorkshopController {
 	 *
 	 * @return the string
 	 */
-	@RequestMapping("/workshop/login")
+	@PostMapping("/workshop/login")
 	public String login() {
 		return "workshop/login";
 	}
@@ -45,7 +45,7 @@ public class WorkshopController {
 	 *
 	 * @return the string
 	 */
-	@RequestMapping("/workshop/admin")
+	@PostMapping("/workshop/admin")
 	public String admin() {
 		return "workshop/admin";
 	}
@@ -55,7 +55,7 @@ public class WorkshopController {
 	 *
 	 * @return the model and view
 	 */
-	@RequestMapping("/workshop/newWorkshop")
+	@PostMapping("/workshop/newWorkshop")
 	public ModelAndView newWorkshop() {
 		ModelAndView model = new ModelAndView("workshop/newworkshop");
 		model.addObject("workshop", new Workshop());
@@ -68,7 +68,7 @@ public class WorkshopController {
 	 *
 	 * @return the string
 	 */
-	@RequestMapping("/403wks")
+	@PostMapping("/403wks")
 	public String accessDeniedPage() {
 		return "workshop/403";
 	}
@@ -80,7 +80,7 @@ public class WorkshopController {
 	 * @param result   the result
 	 * @return the model and view
 	 */
-	@RequestMapping("/workshop/saveworkshop")
+	@PostMapping("/workshop/saveworkshop")
 	public ModelAndView saveworkshop(@ModelAttribute("workshop") Workshop workshop, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		workShopValidator.validate(workshop, result);

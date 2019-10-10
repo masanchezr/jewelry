@@ -3,7 +3,7 @@ package com.je.admin.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.admin.forms.AdminForm;
@@ -17,7 +17,7 @@ public class IncidentsAdminController {
 	@Autowired
 	private IncidentService incidentService;
 
-	@RequestMapping(value = "/allincidents")
+	@PostMapping(value = "/allincidents")
 	public ModelAndView allincidents() {
 		ModelAndView model = new ModelAndView("admin/incidents/allincidents");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -26,7 +26,7 @@ public class IncidentsAdminController {
 		return model;
 	}
 
-	@RequestMapping(value = "/pendingissues")
+	@PostMapping(value = "/pendingissues")
 	public ModelAndView pendingissues() {
 		ModelAndView model = new ModelAndView("admin/incidents/allincidents");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -35,7 +35,7 @@ public class IncidentsAdminController {
 		return model;
 	}
 
-	@RequestMapping(value = "/searchincident")
+	@PostMapping(value = "/searchincident")
 	public ModelAndView searchIncident(@ModelAttribute(ConstantsJsp.FORMINCIDENT) Incident incident) {
 		ModelAndView model = new ModelAndView("admin/incidents/updateincident");
 		model.addObject(ConstantsJsp.FORMINCIDENT, incidentService.searchIncident(incident));
@@ -43,7 +43,7 @@ public class IncidentsAdminController {
 		return model;
 	}
 
-	@RequestMapping(value = "/resolvedincident")
+	@PostMapping(value = "/resolvedincident")
 	public ModelAndView resolvedIncident(@ModelAttribute(ConstantsJsp.FORMINCIDENT) Incident incident) {
 		if (incident != null && incident.getIdincident() != null) {
 			incidentService.resolve(incident);

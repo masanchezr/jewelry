@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.admin.forms.AdminForm;
@@ -30,7 +30,7 @@ public class BillingAdminController {
 	private static final String VIEWBILLINGADMIN = "admin/workshop/billing";
 	private static final String VIEWSEARCHBILL = "admin/workshop/searchbill";
 
-	@RequestMapping(value = "/searchbill")
+	@PostMapping(value = "/searchbill")
 	public ModelAndView searchBill() {
 		ModelAndView model = new ModelAndView(VIEWSEARCHBILL);
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -38,7 +38,7 @@ public class BillingAdminController {
 		return model;
 	}
 
-	@RequestMapping(value = "/bill")
+	@PostMapping(value = "/bill")
 	public ModelAndView bill(@ModelAttribute(FORMBILLING) BillingForm billingForm, BindingResult result) {
 		ModelAndView model = new ModelAndView(VIEWBILLINGADMIN);
 		String sdate = billingForm.getDate();

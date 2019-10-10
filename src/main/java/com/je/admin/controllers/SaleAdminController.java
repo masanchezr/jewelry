@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.admin.forms.AdminForm;
@@ -79,7 +79,7 @@ public class SaleAdminController {
 
 	private static final String VIEWNEWSALEADMIN = "admin/sales/newsale";
 
-	@RequestMapping(value = "/resultSalesCard")
+	@PostMapping(value = "/resultSalesCard")
 	public ModelAndView resultSalesCard(@ModelAttribute("searchSaleForm") SearchSale searchSaleForm,
 			BindingResult bindingResult) {
 		ModelAndView model = new ModelAndView();
@@ -98,7 +98,7 @@ public class SaleAdminController {
 		return model;
 	}
 
-	@RequestMapping(value = "/searchSalesCard")
+	@PostMapping(value = "/searchSalesCard")
 	public ModelAndView searchSalesCard() {
 		ModelAndView model = new ModelAndView("admin/salescard/searchsalescard");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -106,7 +106,7 @@ public class SaleAdminController {
 		return model;
 	}
 
-	@RequestMapping(value = "/searchSales")
+	@PostMapping(value = "/searchSales")
 	public ModelAndView searchsales() {
 		ModelAndView model = new ModelAndView("admin/sales/searchsales/searchsales");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -115,7 +115,7 @@ public class SaleAdminController {
 		return model;
 	}
 
-	@RequestMapping(value = "/searchNumMissing")
+	@PostMapping(value = "/searchNumMissing")
 	public ModelAndView searchNumMissing() {
 		ModelAndView model = new ModelAndView("searchnummissing");
 		SearchMissingNumbers smn = new SearchMissingNumbers();
@@ -125,7 +125,7 @@ public class SaleAdminController {
 		return model;
 	}
 
-	@RequestMapping(value = "/resultNumMissing")
+	@PostMapping(value = "/resultNumMissing")
 	public ModelAndView resultNumMissing(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchMissingNumbers searchForm,
 			BindingResult bindingResult) {
 		ModelAndView model = new ModelAndView();
@@ -141,7 +141,7 @@ public class SaleAdminController {
 		return model;
 	}
 
-	@RequestMapping(value = "/resultSales")
+	@PostMapping(value = "/resultSales")
 	public ModelAndView resultsales(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm searchSaleForm,
 			BindingResult bindingResult) {
 		ModelAndView model = new ModelAndView();
@@ -159,7 +159,7 @@ public class SaleAdminController {
 		return model;
 	}
 
-	@RequestMapping(value = "/showsale{id}")
+	@PostMapping(value = "/showsale{id}")
 	public ModelAndView showsale(@PathVariable("id") long id) {
 		ModelAndView model = new ModelAndView("admin/sales/finishsale");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -175,7 +175,7 @@ public class SaleAdminController {
 	 * @param result the result
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/resultsale")
+	@PostMapping(value = "/resultsale")
 	public ModelAndView sale(@ModelAttribute(ConstantsJsp.FORMSALE) Sale sale, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -244,7 +244,7 @@ public class SaleAdminController {
 	 *
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/newsale")
+	@PostMapping(value = "/newsale")
 	public ModelAndView newSale() {
 		ModelAndView model = new ModelAndView(VIEWNEWSALEADMIN);
 		Sale sale = new Sale();

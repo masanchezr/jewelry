@@ -8,8 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.dbaccess.entities.CategoryEntity;
@@ -59,13 +60,11 @@ public class SaleController {
 	/**
 	 * Buy.
 	 * 
-	 * @param dataForm
-	 *            the data form
-	 * @param result
-	 *            the result
+	 * @param dataForm the data form
+	 * @param result   the result
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/comprar")
+	@PostMapping(value = "/comprar")
 	public ModelAndView buy(@ModelAttribute("dataForm") DataClientForm dataForm, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		Iterable<CategoryEntity> categories = searchCategoriesService.getAllCategoriesOrderByName();
@@ -112,7 +111,7 @@ public class SaleController {
 		return model;
 	}
 
-	@RequestMapping(value = "/checkout")
+	@PostMapping(value = "/checkout")
 	public ModelAndView checkout() {
 		ModelAndView model = new ModelAndView(VIEWSHOPPINGCART);
 		model.addObject("dataForm", new DataClientForm());
@@ -121,7 +120,7 @@ public class SaleController {
 		return model;
 	}
 
-	@RequestMapping(value = "/eliminar{idjewel}")
+	@PostMapping(value = "/eliminar{idjewel}")
 	public ModelAndView deleteJewelEntity(@PathVariable("idjewel") long idjewel,
 			@ModelAttribute("cart") List<JewelEntity> cart) {
 		ModelAndView model = new ModelAndView(VIEWSHOPPINGCART);
@@ -136,5 +135,11 @@ public class SaleController {
 			}
 		}
 		return model;
+	}
+
+	@PostMapping("/goodbye")
+	public String goodbye(SessionStatus status) {
+		status.setComplete();
+		return "goodbye";
 	}
 }

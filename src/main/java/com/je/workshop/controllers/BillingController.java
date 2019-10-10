@@ -5,7 +5,7 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.services.workshop.BillingService;
@@ -25,7 +25,7 @@ public class BillingController {
 	 *
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/workshop/billing")
+	@PostMapping(value = "/workshop/billing")
 	public ModelAndView billing() {
 		ModelAndView model = new ModelAndView("workshop/billing");
 		Calendar current = Calendar.getInstance();
@@ -34,7 +34,7 @@ public class BillingController {
 		return model;
 	}
 
-	@RequestMapping(value = "/workshop/billingprevious")
+	@PostMapping(value = "/workshop/billingprevious")
 	public ModelAndView billingprevious() {
 		ModelAndView model = new ModelAndView("workshop/billing");
 		Calendar current = Calendar.getInstance();
