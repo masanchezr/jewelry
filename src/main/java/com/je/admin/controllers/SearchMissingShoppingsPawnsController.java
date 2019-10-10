@@ -3,8 +3,8 @@ package com.je.admin.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.admin.forms.AdminForm;
@@ -31,7 +31,7 @@ public class SearchMissingShoppingsPawnsController {
 
 	@GetMapping(value = "/searchPosibleRepeated")
 	public ModelAndView searchMissingShoppings() {
-		ModelAndView model = new ModelAndView(ConstantsJsp.VIEWSEARCHMISSINGSHOPPINGS);
+		ModelAndView model = new ModelAndView(SEARCHMISSINGSHOPPINGS);
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		model.addObject(SEARCHMISSINGSHOPPINGS, new SearchMissingNumbers());
@@ -47,7 +47,7 @@ public class SearchMissingShoppingsPawnsController {
 		if (result.hasErrors()) {
 			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 			model.addObject(SEARCHMISSINGSHOPPINGS, new SearchMissingNumbers());
-			model.setViewName(ConstantsJsp.VIEWSEARCHMISSINGSHOPPINGS);
+			model.setViewName(SEARCHMISSINGSHOPPINGS);
 		} else {
 			model.addObject("nummissing", searchMissingNumberService.searchMissingShoppings(searchmissingshoppings));
 			model.setViewName(ConstantsJsp.VIEWSEARCHMISSINGSHOPPINGS);
