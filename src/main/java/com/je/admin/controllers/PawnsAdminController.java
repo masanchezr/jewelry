@@ -175,7 +175,7 @@ public class PawnsAdminController {
 	 * @param result the result
 	 * @return the model and view
 	 */
-	@PostMapping("/employee/savePawn")
+	@PostMapping("/savePawn")
 	public ModelAndView savePawn(@ModelAttribute(ConstantsJsp.PAWNFORM) NewPawn pawn, BindingResult result) {
 		ModelAndView model;
 		updatePawnFormValidator.validate(pawn, result);

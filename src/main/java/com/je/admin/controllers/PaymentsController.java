@@ -1,5 +1,6 @@
 package com.je.admin.controllers;
 
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.je.admin.forms.AdminForm;
 import com.je.dbaccess.entities.PaymentEntity;
+import com.je.forms.Payment;
 import com.je.services.payment.PaymentService;
 import com.je.utils.constants.ConstantsJsp;
 
@@ -22,6 +24,9 @@ public class PaymentsController {
 	@Autowired
 	private PaymentService paymentService;
 
+	@Autowired
+	private Mapper mapper;
+
 	/**
 	 * Save payment.
 	 *
@@ -29,10 +34,10 @@ public class PaymentsController {
 	 * @return the string
 	 */
 	@PostMapping("/employee/savePayment")
-	public ModelAndView savePayment(@ModelAttribute(ConstantsJsp.FORMPAYMENT) PaymentEntity payment) {
+	public ModelAndView savePayment(@ModelAttribute(ConstantsJsp.FORMPAYMENT) Payment payment) {
 		ModelAndView model = new ModelAndView("admin/success");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
-		paymentService.save(payment);
+		paymentService.save(mapper.map(payment, PaymentEntity.class));
 		return model;
 	}
 

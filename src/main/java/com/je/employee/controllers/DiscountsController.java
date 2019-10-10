@@ -40,10 +40,13 @@ public class DiscountsController {
 	@Autowired
 	private DiscountsValidator discountsValidator;
 
+	public static final String FORMDISCOUNT = "discountForm";
+	public static final String VIEWNEWDISCOUNT = "employee/sales/newdiscount";
+
 	@GetMapping("/employee/newdiscount")
 	public ModelAndView newDiscount() {
-		ModelAndView model = new ModelAndView("employee/sales/newdiscount");
-		model.addObject("discountForm", new Discount());
+		ModelAndView model = new ModelAndView(VIEWNEWDISCOUNT);
+		model.addObject(FORMDISCOUNT, new Discount());
 		return model;
 	}
 
@@ -53,11 +56,11 @@ public class DiscountsController {
 		ModelAndView model = new ModelAndView();
 		discountsValidator.validate(discount, errors);
 		if (errors.hasErrors()) {
-			model.setViewName("employee/sales/newdiscount");
-			model.addObject("discountForm", discount);
+			model.setViewName(VIEWNEWDISCOUNT);
+			model.addObject(FORMDISCOUNT, discount);
 		} else if (searchSaleRepeatedService.isSaleRepeated(discount.getIddiscount())) {
-			model.setViewName("employee/sales/newdiscount");
-			model.addObject("discountForm", discount);
+			model.setViewName(VIEWNEWDISCOUNT);
+			model.addObject(FORMDISCOUNT, discount);
 			errors.rejectValue("iddiscount", "numrepeated");
 		} else {
 			Date today = new Date();
