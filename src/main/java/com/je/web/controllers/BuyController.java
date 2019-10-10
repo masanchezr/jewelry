@@ -32,7 +32,7 @@ import com.je.web.validators.BuyFormValidator;
  */
 @Controller
 @SessionAttributes({ "cart" })
-@RequestMapping(value = "/aceptarcompra")
+@RequestMapping("/aceptarcompra")
 public class BuyController {
 
 	/** The sale service. */

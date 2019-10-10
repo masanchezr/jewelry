@@ -13,8 +13,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -41,12 +42,18 @@ import com.je.utils.string.Util;
 @Controller
 public class PawnsController {
 
+	@Autowired
+	private MetalService materialService;
+
+	@Autowired
+	private NationService nationservice;
+
 	/** The pawn service. */
 	@Autowired
 	private PawnService pawnService;
 
 	@Autowired
-	private NationService nationservice;
+	private PlaceService placeService;
 
 	@Autowired
 	private TrackService trackservice;
@@ -58,12 +65,6 @@ public class PawnsController {
 	/** The pawn form validator. */
 	@Autowired
 	private PawnFormValidator pawnFormValidator;
-
-	@Autowired
-	private MetalService materialService;
-
-	@Autowired
-	private PlaceService placeService;
 
 	private static final String VIEWNEWPAWN = "employee/pawns/newpawn/newPawn";
 	private static final String VIEWSEARCHCLIENT = "employee/pawns/newpawn/searchclient";
@@ -77,7 +78,7 @@ public class PawnsController {
 	 * @param result the result
 	 * @return the string
 	 */
-	@RequestMapping(value = "/employee/savePawn")
+	@PostMapping("/employee/savePawn")
 	public ModelAndView savePawn(@ModelAttribute(ConstantsJsp.PAWNFORM) NewPawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		newPawnFormValidator.validate(pawn, result);
@@ -136,7 +137,7 @@ public class PawnsController {
 	 * @param idpawn the idpawn
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/employee/resultSearchPawn")
+	@PostMapping("/employee/resultSearchPawn")
 	public ModelAndView resultSearchPawn(@RequestParam(Constants.IDPAWN) Long idpawn) {
 		Pawn pawn = pawnService.searchByIdpawn(idpawn);
 		ModelAndView model = new ModelAndView("employee/pawns/searchpawns/resultpawns");
@@ -149,7 +150,7 @@ public class PawnsController {
 	 *
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/employee/newPawn")
+	@GetMapping("/employee/newPawn")
 	public ModelAndView newPawn(@ModelAttribute(ConstantsJsp.PAWNFORM) NewPawn pawn, BindingResult errors) {
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		String dni = Util.refactorNIF(pawn.getNif());
@@ -185,7 +186,7 @@ public class PawnsController {
 	 * 
 	 * @return ModelAndView
 	 */
-	@RequestMapping(value = "/employee/searchclientpawn")
+	@GetMapping("/employee/searchclientpawn")
 	public ModelAndView searchClientPawn() {
 		ModelAndView model = new ModelAndView(VIEWSEARCHCLIENT);
 		NewPawn pawn = new NewPawn();
@@ -198,7 +199,7 @@ public class PawnsController {
 	 *
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/employee/removePawn")
+	@GetMapping("/employee/removePawn")
 	public ModelAndView removePawn() {
 		ModelAndView model = new ModelAndView(VIEWSEARCHREMOVEPAWN);
 		model.addObject(FORMSEARCHPAWN, new Pawn());
@@ -210,7 +211,7 @@ public class PawnsController {
 	 *
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/employee/renewPawn")
+	@GetMapping("/employee/renewPawn")
 	public ModelAndView renewPawn() {
 		ModelAndView model = new ModelAndView("employee/pawns/renewpawn/searchpawn");
 		model.addObject(FORMSEARCHPAWN, new Pawn());
@@ -224,7 +225,7 @@ public class PawnsController {
 	 * @param result the result
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/employee/searchRenewPawn")
+	@GetMapping("/employee/searchRenewPawn")
 	public ModelAndView searchRenewPawn(@ModelAttribute("searchPawnForm") Pawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		pawnFormValidator.validate(pawn, result);
@@ -248,7 +249,7 @@ public class PawnsController {
 	 * @param pawn the pawn
 	 * @return the string
 	 */
-	@RequestMapping(value = "/employee/renewpawn")
+	@GetMapping("/employee/renewpawn")
 	public ModelAndView renew(@ModelAttribute(ConstantsJsp.PAWNFORM) Pawn pawn) {
 		ModelAndView model = new ModelAndView();
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -265,7 +266,7 @@ public class PawnsController {
 	 * @param pawn the pawn
 	 * @return the string
 	 */
-	@RequestMapping(value = "/employee/removepawn")
+	@PostMapping("/employee/removepawn")
 	public ModelAndView remove(@ModelAttribute(ConstantsJsp.PAWNFORM) Pawn pawn) {
 		ModelAndView model = new ModelAndView();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -292,7 +293,7 @@ public class PawnsController {
 	 * @param result the result
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/employee/searchRemovePawn")
+	@GetMapping("/employee/searchRemovePawn")
 	public ModelAndView searchRemovePawn(@ModelAttribute(ConstantsJsp.PAWNFORM) Pawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		pawnFormValidator.validate(pawn, result);
@@ -320,14 +321,14 @@ public class PawnsController {
 		return model;
 	}
 
-	@RequestMapping(value = "/employee/searchrenovations")
+	@GetMapping("/employee/searchrenovations")
 	public ModelAndView searchrenovations() {
 		ModelAndView model = new ModelAndView("employee/pawns/searchrenovations/searchpawn");
 		model.addObject(ConstantsJsp.PAWNFORM, new Pawn());
 		return model;
 	}
 
-	@RequestMapping(value = "/employee/resultRenovationsPawns")
+	@PostMapping("/employee/resultRenovationsPawns")
 	public ModelAndView resultRenovationsPawns(@ModelAttribute(ConstantsJsp.PAWNFORM) Pawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		pawnFormValidator.validate(pawn, result);
@@ -344,7 +345,7 @@ public class PawnsController {
 		return model;
 	}
 
-	@RequestMapping(value = "/employee/resultrenovations")
+	@PostMapping("/employee/resultrenovations")
 	public ModelAndView resultrenovations(@ModelAttribute(ConstantsJsp.PAWNFORM) Pawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		Long idpawn = pawn.getId();

@@ -4,8 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.admin.forms.AdminForm;
@@ -36,7 +37,7 @@ public class ClientsController {
 	 *
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/searchclients")
+	@GetMapping("/searchclients")
 	public ModelAndView searchClients() {
 		ModelAndView model = new ModelAndView("admin/clients/searchclients");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -44,7 +45,7 @@ public class ClientsController {
 		return model;
 	}
 
-	@GetMapping(value = "/resultclients")
+	@PostMapping("/resultclients")
 	public ModelAndView resultclients(@ModelAttribute("client") Client client) {
 		ModelAndView model = new ModelAndView();
 		List<Client> clients = searchClientsService.searchClients(client);
@@ -55,7 +56,7 @@ public class ClientsController {
 		return model;
 	}
 
-	@GetMapping(value = "/showoperations")
+	@GetMapping("/showoperations")
 	public ModelAndView showoperations(@ModelAttribute("clientModel") Client client) {
 		ModelAndView model = new ModelAndView("admin/clients/resultoperations");
 		model.addObject("shoppings", shoppingService.getByNIF(client.getNif()));

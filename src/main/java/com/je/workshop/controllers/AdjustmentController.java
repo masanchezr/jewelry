@@ -31,7 +31,7 @@ public class AdjustmentController {
 	 *
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/workshop/newadjustment")
+	@GetMapping("/workshop/newadjustment")
 	public ModelAndView newadjustment() {
 		ModelAndView model = new ModelAndView("workshop/newadjustment");
 		model.addObject(ConstantsJsp.FORMADJUSTMENT, new Adjustment());
@@ -45,7 +45,7 @@ public class AdjustmentController {
 	 * @param result     the result
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/workshop/saveAdjustment")
+	@GetMapping("/workshop/saveAdjustment")
 	public ModelAndView saveAdjustment(@ModelAttribute(ConstantsJsp.FORMADJUSTMENT) Adjustment adjustment,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();

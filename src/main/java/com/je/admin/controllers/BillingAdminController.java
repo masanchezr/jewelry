@@ -30,7 +30,7 @@ public class BillingAdminController {
 	private static final String VIEWBILLINGADMIN = "admin/workshop/billing";
 	private static final String VIEWSEARCHBILL = "admin/workshop/searchbill";
 
-	@GetMapping(value = "/searchbill")
+	@GetMapping("/searchbill")
 	public ModelAndView searchBill() {
 		ModelAndView model = new ModelAndView(VIEWSEARCHBILL);
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -38,7 +38,7 @@ public class BillingAdminController {
 		return model;
 	}
 
-	@GetMapping(value = "/bill")
+	@GetMapping("/bill")
 	public ModelAndView bill(@ModelAttribute(FORMBILLING) BillingForm billingForm, BindingResult result) {
 		ModelAndView model = new ModelAndView(VIEWBILLINGADMIN);
 		String sdate = billingForm.getDate();

@@ -17,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
@@ -96,7 +97,7 @@ public class JewelsController {
 	 * @param category the category
 	 * @return the string
 	 */
-	@GetMapping(value = "/saveCategory")
+	@GetMapping("/saveCategory")
 	public ModelAndView addCategory(@ModelAttribute(ConstantsJsp.CATEGORY) Category category) {
 		categoriesService.save(mapper.map(category, CategoryEntity.class));
 		return new ModelAndView("admin/success", ConstantsJsp.ADMINFORM, new AdminForm());
@@ -107,7 +108,7 @@ public class JewelsController {
 	 *
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/searchByReference")
+	@GetMapping("/searchByReference")
 	public ModelAndView searchByReference() {
 		ModelAndView model = new ModelAndView("admin/jewels/searchjewels/searchByReference");
 		model.addObject(ConstantsJsp.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
@@ -124,7 +125,7 @@ public class JewelsController {
 	 * @param jewelForm the jewel form
 	 * @return the model and view
 	 */
-	@GetMapping(value = "resultsearchbyreference")
+	@GetMapping("resultsearchbyreference")
 	public ModelAndView resultSearchByReference(@ModelAttribute(FORMJEWEL) Jewel jewelForm) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsJsp.JEWELS, jewelService.search(mapper.map(jewelForm, JewelEntity.class)));
@@ -138,7 +139,7 @@ public class JewelsController {
 	 *
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/searchUpdateJewels")
+	@GetMapping("/searchUpdateJewels")
 	public ModelAndView searchUpdateJewels() {
 		ModelAndView model = new ModelAndView("admin/jewels/updatejewel/searchtoupdatejewel");
 		model.addObject(FORMJEWEL, new JewelEntity());
@@ -153,7 +154,7 @@ public class JewelsController {
 	 * @param jewelForm the jewel form
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/resultSearchUpdateJewels")
+	@PostMapping("/resultSearchUpdateJewels")
 	public ModelAndView resultSearchUpdateJewels(@ModelAttribute(FORMJEWEL) Jewel jewelForm) {
 		ModelAndView model = new ModelAndView("admin/jewels/updatejewel/jewelsToUpdate");
 		model.addObject(ConstantsJsp.JEWELS,
@@ -169,7 +170,7 @@ public class JewelsController {
 	 * @param toUpdate the to update
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/updatejewel")
+	@GetMapping("/updatejewel")
 	public ModelAndView updateJewels(@ModelAttribute("toUpdate") Jewel toUpdate) {
 		ModelAndView model = new ModelAndView("admin/jewels/updatejewel/newjewel");
 		Long idj = toUpdate.getIdjewel();
@@ -192,7 +193,7 @@ public class JewelsController {
 	 *
 	 * @return the model and view para crear nuevas joyas
 	 */
-	@GetMapping(value = "/newJewel")
+	@GetMapping("/newJewel")
 	public ModelAndView newJewelEntity() {
 		ModelAndView model = new ModelAndView(VIEWNEWJEWEL);
 		JewelEntity jewel = new JewelEntity();
@@ -212,7 +213,7 @@ public class JewelsController {
 	 * @param result    the result
 	 * @return the string
 	 */
-	@GetMapping(value = "/saveJewel")
+	@GetMapping("/saveJewel")
 	public ModelAndView addJewelEntity(@ModelAttribute(FORMJEWEL) Jewel jewelForm, BindingResult result, Model m) {
 		selectCategoryValidator.validate(jewelForm, result);
 		ModelAndView model = new ModelAndView();
@@ -248,7 +249,7 @@ public class JewelsController {
 	 *
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/newSet")
+	@GetMapping("/newSet")
 	public ModelAndView newSet() {
 		ModelAndView model = new ModelAndView();
 		model.setViewName("admin/jewels/sets/newset");
@@ -265,7 +266,7 @@ public class JewelsController {
 	 * @param set the set
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/addset")
+	@GetMapping("/addset")
 	public ModelAndView addSet(@ModelAttribute("setForm") NewSet set) {
 		setService.saveSet(set);
 		return allsets();
@@ -276,7 +277,7 @@ public class JewelsController {
 	 *
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/allSets")
+	@GetMapping("/allSets")
 	public ModelAndView allsets() {
 		ModelAndView model = new ModelAndView("admin/jewels/sets/allsets");
 		model.addObject("sets", setService.allSets());
@@ -289,7 +290,7 @@ public class JewelsController {
 	 *
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/newcoin")
+	@GetMapping("/newcoin")
 	public ModelAndView newcoin() {
 		ModelAndView model = new ModelAndView("admin/coins/newcoin");
 		model.addObject("coinForm", new CoinEntity());
@@ -306,7 +307,7 @@ public class JewelsController {
 	 * @param result the result
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/addcoin")
+	@GetMapping("/addcoin")
 	public ModelAndView addCoin(@ModelAttribute("coinForm") Coin coin, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		coinValidator.validate(coin, result);
@@ -328,7 +329,7 @@ public class JewelsController {
 	 *
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/allcoins")
+	@GetMapping("/allcoins")
 	public ModelAndView allcoins() {
 		ModelAndView model = new ModelAndView("admin/coins/allcoins");
 		model.addObject("coins", coinService.allCoins());
@@ -336,7 +337,7 @@ public class JewelsController {
 		return model;
 	}
 
-	@GetMapping(value = "/searchjewelsactive")
+	@GetMapping("/searchjewelsactive")
 	public ModelAndView searchjewelsactive() {
 		ModelAndView model = new ModelAndView("admin/jewels/searchjewelsactive");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -345,7 +346,7 @@ public class JewelsController {
 		return model;
 	}
 
-	@GetMapping(value = "/resultjewelsactive")
+	@PostMapping("/resultjewelsactive")
 	public ModelAndView resultjewelsactive(@ModelAttribute(FORMJEWEL) Jewel jewelForm) {
 		ModelAndView model = new ModelAndView("admin/jewels/searchjewels/resultsearchbyreference");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -355,7 +356,7 @@ public class JewelsController {
 		return model;
 	}
 
-	@GetMapping(value = "/checkinventory")
+	@GetMapping("/checkinventory")
 	public ModelAndView checkInventory() {
 		ModelAndView model = new ModelAndView(VIEWSEARCHINVENTORY);
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -363,7 +364,7 @@ public class JewelsController {
 		return model;
 	}
 
-	@GetMapping(value = "/resultSearchRevise")
+	@PostMapping("/resultSearchRevise")
 	public ModelAndView resultSearchRevise(@ModelAttribute(FORMJEWEL) Jewel jewel, BindingResult e) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -379,7 +380,7 @@ public class JewelsController {
 		return model;
 	}
 
-	@GetMapping(value = "/revised")
+	@GetMapping("/revised")
 	public ModelAndView revise(@ModelAttribute("toUpdateForm") Jewel jewel) {
 		if (jewel.getIdjewel() == null) {
 			ModelAndView model = new ModelAndView();
@@ -392,7 +393,7 @@ public class JewelsController {
 		return checkInventory();
 	}
 
-	@GetMapping(value = "/image/{fileName}")
+	@GetMapping("/image/{fileName}")
 	public void getImage(@PathVariable String fileName, HttpServletRequest req, HttpServletResponse res)
 			throws IOException {
 		File file = new File(System.getenv(Constants.OPENSHIFT_DATA_DIR).concat(fileName).concat(Constants.JPG));

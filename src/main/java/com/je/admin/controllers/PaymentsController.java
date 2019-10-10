@@ -27,7 +27,7 @@ public class PaymentsController {
 	 * @param payment the payment
 	 * @return the string
 	 */
-	@GetMapping(value = "/savePayment")
+	@GetMapping("/savePayment")
 	public ModelAndView savePayment(@ModelAttribute(ConstantsJsp.FORMPAYMENT) PaymentEntity payment) {
 		ModelAndView model = new ModelAndView("admin/success");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -40,7 +40,7 @@ public class PaymentsController {
 	 *
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/allpayments")
+	@GetMapping("/allpayments")
 	public ModelAndView allpayments() {
 		ModelAndView model = new ModelAndView("admin/payments/allpayments");
 		Iterable<PaymentEntity> payments = paymentService.findAll();

@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.dbaccess.entities.EntryMoneyEntity;
@@ -25,14 +26,14 @@ public class EntryMoneyController {
 	@Autowired
 	private EntryMoneyService entryMoneyService;
 
-	@GetMapping(value = "/employee/newentrymoney")
+	@GetMapping("/employee/newentrymoney")
 	public ModelAndView newentrymoney() {
 		ModelAndView model = new ModelAndView("employee/newentrymoney");
 		model.addObject(ConstantsJsp.FORMENTRYMONEY, new EntryMoneyEntity());
 		return model;
 	}
 
-	@GetMapping(value = "/employee/saveentrymoney")
+	@PostMapping("/employee/saveentrymoney")
 	public ModelAndView saveEntryMoney(@ModelAttribute(ConstantsJsp.FORMENTRYMONEY) EntryMoneyEntity entryMoney,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();

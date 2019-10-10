@@ -21,7 +21,7 @@ import com.je.web.forms.SearchJewelForm;
  * The Class SearchController.
  */
 @Controller
-@RequestMapping(value = "/busqueda")
+@RequestMapping("/busqueda")
 public class SearchController {
 
 	/** The search service. */

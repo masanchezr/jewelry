@@ -39,7 +39,7 @@ public class DailyController {
 	 *
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/employee/daily")
+	@GetMapping("/employee/daily")
 	public ModelAndView daily(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -59,14 +59,14 @@ public class DailyController {
 		return model;
 	}
 
-	@GetMapping(value = "/employee/searchdaily")
+	@GetMapping("/employee/searchdaily")
 	public ModelAndView searchdaily() {
 		ModelAndView model = new ModelAndView("employee/daily/searchdaily");
 		model.addObject(ConstantsJsp.FORMSEARCH, new SearchForm());
 		return model;
 	}
 
-	@GetMapping(value = "/employee/beforeday{date}")
+	@GetMapping("/employee/beforeday{date}")
 	public ModelAndView beforeday(@PathVariable(ConstantsJsp.DATE) String sdate, HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -98,7 +98,7 @@ public class DailyController {
 		return model;
 	}
 
-	@GetMapping(value = "/employee/againday{date}")
+	@GetMapping("/employee/againday{date}")
 	public ModelAndView againday(@PathVariable(ConstantsJsp.DATE) String sdate, HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -132,7 +132,7 @@ public class DailyController {
 		return model;
 	}
 
-	@GetMapping(value = "/employee/resultdaily")
+	@GetMapping("/employee/resultdaily")
 	public ModelAndView resultdaily(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm searchForm,
 			HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();

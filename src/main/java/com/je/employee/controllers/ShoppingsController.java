@@ -10,8 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.dbaccess.entities.MetalEntity;
@@ -30,15 +31,15 @@ import com.je.utils.date.DateUtil;
 @Controller
 public class ShoppingsController {
 
-	/** The shopping service. */
 	@Autowired
-	private ShoppingService shoppingService;
+	private MetalService materialService;
 
 	@Autowired
 	private PawnService pawnService;
 
+	/** The shopping service. */
 	@Autowired
-	private MetalService materialService;
+	private ShoppingService shoppingService;
 
 	/** The shoppings validator. */
 	@Autowired
@@ -51,7 +52,7 @@ public class ShoppingsController {
 	 *
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/employee/newshopping")
+	@GetMapping("/employee/newshopping")
 	public ModelAndView newShopping() {
 		ModelAndView model = new ModelAndView(VIEWNEWSHOPPING);
 		Shopping shopping = new Shopping();
@@ -75,7 +76,7 @@ public class ShoppingsController {
 	 * @param result       the result
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/employee/saveShopping")
+	@PostMapping("/employee/saveShopping")
 	public ModelAndView saveShopping(@ModelAttribute(ConstantsJsp.SHOPPINGFORM) Shopping shoppingForm,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();

@@ -36,7 +36,7 @@ public class FileUploadController {
 
 	private static final String MESSAGE = "message";
 
-	@GetMapping(value = "/upload")
+	@GetMapping("/upload")
 	public ModelAndView provideUploadInfo() {
 		ModelAndView model = new ModelAndView("uploadimg");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -44,7 +44,7 @@ public class FileUploadController {
 		return model;
 	}
 
-	@PostMapping(value = "/upload")
+	@PostMapping("/upload")
 	public ModelAndView handleFileUpload(@RequestParam(Constants.NAME) String name,
 			@RequestParam("file") MultipartFile file) {
 		ModelAndView model = provideUploadInfo();

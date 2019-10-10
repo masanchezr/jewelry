@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.employee.validators.RentalValidator;
@@ -29,14 +30,14 @@ public class RentalController {
 	private static final String VIEWLOCALRENTAL = "employee/otherconcepts/localrental";
 	private static final String FORMRENTAL = "rentalForm";
 
-	@GetMapping(value = "/employee/localrental")
+	@GetMapping("/employee/localrental")
 	public ModelAndView localrental() {
 		ModelAndView model = new ModelAndView(VIEWLOCALRENTAL);
 		model.addObject(FORMRENTAL, new Rental());
 		return model;
 	}
 
-	@GetMapping(value = "/employee/savelocalrental")
+	@PostMapping("/employee/savelocalrental")
 	public ModelAndView saveLocalRental(@ModelAttribute(FORMRENTAL) Rental rental, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		rentalValidator.validate(rental, result);

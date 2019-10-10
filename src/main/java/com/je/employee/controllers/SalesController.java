@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -91,7 +93,7 @@ public class SalesController {
 	 * @param result the result
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/employee/resultsale")
+	@PostMapping("/employee/resultsale")
 	public ModelAndView sale(@ModelAttribute(ConstantsJsp.FORMSALE) Sale sale, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		saleValidator.validate(sale, result);
@@ -139,7 +141,7 @@ public class SalesController {
 	 *
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/employee/removeparcialsale")
+	@RequestMapping("/employee/removeparcialsale")
 	public ModelAndView removeParcialSale() {
 		ModelAndView model = new ModelAndView(VIEWREMOVEPARCIALSALE);
 		model.addObject(ConstantsJsp.FORMSALE, new Sale());
@@ -153,7 +155,7 @@ public class SalesController {
 	 * @param result the result
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/employee/cancelparcialsale")
+	@RequestMapping("/employee/cancelparcialsale")
 	public ModelAndView cancelParcialSale(@ModelAttribute(ConstantsJsp.FORMSALE) Sale sale, HttpServletRequest request,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
@@ -178,7 +180,7 @@ public class SalesController {
 		return model;
 	}
 
-	@RequestMapping(value = "/employee/savecancelparcial")
+	@PostMapping("/employee/savecancelparcial")
 	public ModelAndView savecancelparcial(@ModelAttribute(ConstantsJsp.FORMSALE) Sale sale, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		partialCancelSaleValidator.validate(sale, result);
@@ -206,7 +208,7 @@ public class SalesController {
 	 *
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/employee/removesale")
+	@RequestMapping("/employee/removesale")
 	public ModelAndView removeSale() {
 		ModelAndView model = new ModelAndView(VIEWREMOVESALE);
 		List<PaymentEntity> payments = paymentService.findAllActive();
@@ -230,7 +232,7 @@ public class SalesController {
 	 * @param result         the result
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/employee/deletesale")
+	@RequestMapping("/employee/deletesale")
 	public ModelAndView deleteSale(Sale removeSaleForm, HttpServletRequest request, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		removeSaleValidator.validate(removeSaleForm, result);
@@ -271,7 +273,7 @@ public class SalesController {
 	 *
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/employee/newsale")
+	@GetMapping("/employee/newsale")
 	public ModelAndView newSale() {
 		ModelAndView model = new ModelAndView(VIEWNEWSALE);
 		Sale sale = new Sale();

@@ -42,7 +42,7 @@ public class HomeController {
 	 * @return the string
 	 */
 
-	@GetMapping(value = "/index.html")
+	@GetMapping("/index.html")
 	public ModelAndView home() {
 		// Recuperar toda la lista de categorias
 		Iterable<CategoryEntity> categories = searchCategoriesService.getAllCategoriesOrderByName();
@@ -67,7 +67,7 @@ public class HomeController {
 		return model;
 	}
 
-	@GetMapping(value = "/page/{pageNumber}")
+	@GetMapping("/page/{pageNumber}")
 	public ModelAndView page(@PathVariable Integer pageNumber) {
 		// Recuperar toda la lista de categorias
 		Iterable<CategoryEntity> categories = searchCategoriesService.getAllCategoriesOrderByName();
@@ -99,7 +99,7 @@ public class HomeController {
 	 * 
 	 * @return the string
 	 */
-	@GetMapping(value = "/contacto")
+	@GetMapping("/contacto")
 	public ModelAndView contact() {
 		ModelAndView model = new ModelAndView("contact");
 		model.addObject(ConstantsJsp.FORMSEARCH, new SearchJewelForm());
@@ -112,7 +112,7 @@ public class HomeController {
 	 * 
 	 * @return the string
 	 */
-	@GetMapping(value = "/faqs")
+	@GetMapping("/faqs")
 	public ModelAndView faqs() {
 		ModelAndView model = new ModelAndView("faqs");
 		model.addObject(ConstantsJsp.FORMSEARCH, new SearchJewelForm());
@@ -125,14 +125,14 @@ public class HomeController {
 	 * 
 	 * @return the string
 	 */
-	@GetMapping(value = "/terms")
+	@GetMapping("/terms")
 	public ModelAndView terms() {
 		ModelAndView model = new ModelAndView("termsconditions");
 		model.addObject(ConstantsJsp.FORMSEARCH, new SearchJewelForm());
 		return model;
 	}
 
-	@GetMapping(value = "/{keyword}")
+	@GetMapping("/{keyword}")
 	public ModelAndView searchByKeyWord(@PathVariable String keyword) {
 		Iterable<CategoryEntity> categories = searchCategoriesService.getAllCategoriesOrderByName();
 		List<JewelEntity> jewels = jewelService.searchJewelsByKeyWordCategory(keyword);
@@ -155,7 +155,7 @@ public class HomeController {
 	 *            the id
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/productoSeleccionado{id}")
+	@GetMapping("/productoSeleccionado{id}")
 	public ModelAndView selectedJewelEntity(@PathVariable("id") long id, Model m) {
 		JewelEntity jewel = jewelService.selectProduct(id);
 		ModelAndView model = new ModelAndView();

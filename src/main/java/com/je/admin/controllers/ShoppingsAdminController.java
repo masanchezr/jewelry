@@ -17,9 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.admin.forms.AdminForm;
@@ -47,14 +48,6 @@ import com.je.validators.SearchFormValidator;
 @Controller
 public class ShoppingsAdminController {
 
-	/** The shopping service. */
-	@Autowired
-	private ShoppingService shoppingService;
-
-	/** The place service. */
-	@Autowired
-	private PlaceService placeService;
-
 	/** The place service. */
 	@Autowired
 	private MetalService materialService;
@@ -62,18 +55,26 @@ public class ShoppingsAdminController {
 	@Autowired
 	private NationService nationservice;
 
+	/** The place service. */
+	@Autowired
+	private PlaceService placeService;
+
+	/** The shopping service. */
+	@Autowired
+	private ShoppingService shoppingService;
+
 	@Autowired
 	private TrackService trackservice;
-
-	/** The shopping form validator. */
-	@Autowired
-	private ShoppingFormValidator shoppingFormValidator;
 
 	@Autowired
 	private NewShoppingFormValidator newshoppingFormValidator;
 
 	@Autowired
 	private SearchFormValidator adminSearchValidator;
+
+	/** The shopping form validator. */
+	@Autowired
+	private ShoppingFormValidator shoppingFormValidator;
 
 	/** The logger. */
 	private static Logger logger = LoggerFactory.getLogger(ShoppingsAdminController.class);
@@ -88,7 +89,7 @@ public class ShoppingsAdminController {
 	 *
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/searchShoppings")
+	@GetMapping("/searchShoppings")
 	public ModelAndView searchShoppings() {
 		ModelAndView model = new ModelAndView(VIEWSEARCHSHOPPINGS);
 		model.addObject(ConstantsJsp.SHOPPINGFORM, new ShoppingSearch());
@@ -104,7 +105,7 @@ public class ShoppingsAdminController {
 	 * @param result   the result
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/resultShoppings")
+	@PostMapping("/resultShoppings")
 	public ModelAndView resultShoppings(@ModelAttribute(ConstantsJsp.SHOPPINGFORM) ShoppingSearch shopping,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
@@ -130,7 +131,7 @@ public class ShoppingsAdminController {
 	 * @param shopping the shopping
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/updateShoppings")
+	@PostMapping("/updateShoppings")
 	public ModelAndView updateShoppings(@ModelAttribute(ConstantsJsp.SHOPPINGFORM) Shopping shopping) {
 		ModelAndView model = new ModelAndView();
 		Long idshop = shopping.getId();
@@ -148,7 +149,7 @@ public class ShoppingsAdminController {
 		return model;
 	}
 
-	@GetMapping(value = "/updateShopping{id}")
+	@PostMapping("/updateShopping{id}")
 	public ModelAndView updateShopping(@PathVariable("id") long id) {
 		ModelAndView model = new ModelAndView("admin/shoppings/searchshoppings/updateshopping");
 		Shopping shopping = shoppingService.findShopByPK(id);
@@ -165,7 +166,7 @@ public class ShoppingsAdminController {
 	 * @param result       the result
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/saveShopping")
+	@PostMapping("/saveShopping")
 	public ModelAndView saveShopping(@ModelAttribute(ConstantsJsp.SHOPPINGFORM) Shopping shoppingForm) {
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		shoppingForm.setUser(user);
@@ -180,7 +181,7 @@ public class ShoppingsAdminController {
 	 * @param result       the result
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/saveshop")
+	@PostMapping("/saveshop")
 	public ModelAndView saveShop(@ModelAttribute(FORMSHOP) Shopping shoppingForm, BindingResult result) {
 		ModelAndView model;
 		newshoppingFormValidator.validate(shoppingForm, result);
@@ -209,7 +210,7 @@ public class ShoppingsAdminController {
 		return model;
 	}
 
-	@GetMapping(value = "/searchquartermaterial")
+	@GetMapping("/searchquartermaterial")
 	public ModelAndView searchQuarterMetal() {
 		ModelAndView model = new ModelAndView("admin/shoppings/quartersmetal/searchquarter");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -218,7 +219,7 @@ public class ShoppingsAdminController {
 		return model;
 	}
 
-	@GetMapping(value = "/quartermaterial")
+	@PostMapping("/quartermaterial")
 	public ModelAndView quarterMetal(@ModelAttribute(ConstantsJsp.SHOPPINGFORM) SearchForm shopping,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
@@ -238,7 +239,7 @@ public class ShoppingsAdminController {
 		return model;
 	}
 
-	@GetMapping(value = "/searchgramsnull")
+	@GetMapping("/searchgramsnull")
 	public ModelAndView searchGramsNull() {
 		ModelAndView model = new ModelAndView("admin/shoppings/searchshoppings/searchgramsnull");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -247,7 +248,7 @@ public class ShoppingsAdminController {
 		return model;
 	}
 
-	@GetMapping(value = "/resultgramsnull")
+	@PostMapping("/resultgramsnull")
 	public ModelAndView resultGramsNull(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm form,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
@@ -266,7 +267,7 @@ public class ShoppingsAdminController {
 		return model;
 	}
 
-	@GetMapping(value = "/tomelloso")
+	@GetMapping("/tomelloso")
 	public ModelAndView searchClient() {
 		ModelAndView model = new ModelAndView(VIEWSEARCHCLIENTADMIN);
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -283,7 +284,7 @@ public class ShoppingsAdminController {
 	 *
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/newshop")
+	@PostMapping("/newshop")
 	public ModelAndView newshop(@ModelAttribute(FORMSHOP) Shopping pawn, BindingResult errors) {
 		String dni = pawn.getNif();
 		ModelAndView model = new ModelAndView();
@@ -320,7 +321,7 @@ public class ShoppingsAdminController {
 		return model;
 	}
 
-	@GetMapping(value = "/exceltomelloso")
+	@GetMapping("/exceltomelloso")
 	public ModelAndView excelTomelloso() {
 		ModelAndView model = new ModelAndView("admin/shoppings/exceltomelloso");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -328,7 +329,7 @@ public class ShoppingsAdminController {
 		return model;
 	}
 
-	@GetMapping(value = "/downloadexcel")
+	@PostMapping("/downloadexcel")
 	public ModelAndView downloadexcel(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm form, BindingResult result,
 			HttpServletResponse response) {
 		ModelAndView model = new ModelAndView("admin/shoppings/exceltomelloso");

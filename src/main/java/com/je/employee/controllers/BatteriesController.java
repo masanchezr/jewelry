@@ -8,8 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.dbaccess.entities.BatteryEntity;
@@ -47,7 +48,7 @@ public class BatteriesController {
 	private static final String BATTERYFORM = "batteryForm";
 	private static final String VIEWNEWSALEBATTERY = "employee/sales/newsalebattery";
 
-	@RequestMapping(value = "/employee/newsalebattery")
+	@GetMapping("/employee/newsalebattery")
 	public ModelAndView newsalebattery() {
 		ModelAndView model = new ModelAndView(VIEWNEWSALEBATTERY);
 		model.addObject(BATTERYFORM, new BatteryEntity());
@@ -55,7 +56,7 @@ public class BatteriesController {
 		return model;
 	}
 
-	@RequestMapping(value = "/employee/savesalebattery")
+	@PostMapping("/employee/savesalebattery")
 	public ModelAndView savesalebattery(@ModelAttribute("batteryForm") BatteryEntity battery,
 			HttpServletRequest request, BindingResult arg1) {
 		ModelAndView model = new ModelAndView();

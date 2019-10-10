@@ -49,7 +49,7 @@ public class DailiesController {
 	 *
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/dailyplace")
+	@GetMapping("/dailyplace")
 	public ModelAndView dailyPlace() {
 		ModelAndView model = new ModelAndView("admin/dailies/searchdaily");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -58,7 +58,7 @@ public class DailiesController {
 		return model;
 	}
 
-	@GetMapping(value = "/searchcalculatedailies")
+	@GetMapping("/searchcalculatedailies")
 	public ModelAndView searchCalculateDailies() {
 		ModelAndView model = new ModelAndView(VIEWSEARCHCALCULATEDAILIES);
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -73,7 +73,7 @@ public class DailiesController {
 	 * @param sdf the sdf
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/searchDaily")
+	@GetMapping("/searchDaily")
 	public ModelAndView searchDaily(@ModelAttribute(ConstantsJsp.FORMSEARCHDAILY) SearchDailyForm sdf,
 			HttpServletRequest request, BindingResult arg1) {
 		ModelAndView model;
@@ -116,7 +116,7 @@ public class DailiesController {
 		return model;
 	}
 
-	@GetMapping(value = "/calculatedailies")
+	@GetMapping("/calculatedailies")
 	public ModelAndView calculateDailies(@ModelAttribute(ConstantsJsp.FORMSEARCHDAILY) SearchDailyForm sdf,
 			BindingResult arg1) {
 		ModelAndView model = new ModelAndView();
@@ -145,7 +145,7 @@ public class DailiesController {
 		return model;
 	}
 
-	@GetMapping(value = "/beforeday{date}/{place}")
+	@GetMapping("/beforeday{date}/{place}")
 	public ModelAndView beforeday(@PathVariable(ConstantsJsp.DATE) String sdate,
 			@PathVariable(Constants.PLACE) long idplace, HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
@@ -181,7 +181,7 @@ public class DailiesController {
 		return model;
 	}
 
-	@GetMapping(value = "/againday{date}/{place}")
+	@GetMapping("/againday{date}/{place}")
 	public ModelAndView againday(@PathVariable(ConstantsJsp.DATE) String sdate,
 			@PathVariable(Constants.PLACE) long idplace, HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();

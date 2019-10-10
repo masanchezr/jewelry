@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.employee.validators.OtherConceptValidator;
@@ -37,7 +38,7 @@ public class OthersConceptsController {
 	 *
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/employee/newconcept")
+	@GetMapping("/employee/newconcept")
 	public ModelAndView newconcept() {
 		ModelAndView model = new ModelAndView("employee/otherconcepts/newotherconcept");
 		model.addObject(FORMOTHERCONCEPT, new OtherConcept());
@@ -51,7 +52,7 @@ public class OthersConceptsController {
 	 * @param result       the result
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/employee/saveConcept")
+	@PostMapping("/employee/saveConcept")
 	public ModelAndView saveconcept(@ModelAttribute("otherconcept") OtherConcept otherconcept, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		otherConceptValidator.validate(otherconcept, result);

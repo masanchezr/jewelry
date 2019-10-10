@@ -40,7 +40,7 @@ public class RegisterEmployeesController {
 	/** The logger. */
 	private static Logger logger = LoggerFactory.getLogger(ShoppingsAdminController.class);
 
-	@GetMapping(value = "/searchRegisterEmployees")
+	@GetMapping("/searchRegisterEmployees")
 	public ModelAndView searchRegisterEmployees() {
 		ModelAndView model = new ModelAndView("admin/register/search");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -48,7 +48,7 @@ public class RegisterEmployeesController {
 		return model;
 	}
 
-	@GetMapping(value = "/registeremployees")
+	@GetMapping("/registeremployees")
 	public ModelAndView registeremployees(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm form,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
@@ -68,7 +68,7 @@ public class RegisterEmployeesController {
 		return model;
 	}
 
-	@GetMapping(value = "/downloadpdf{datefrom}/{dateuntil}")
+	@GetMapping("/downloadpdf{datefrom}/{dateuntil}")
 	public ModelAndView downloadpdf(@PathVariable("datefrom") String from, @PathVariable("dateuntil") String until,
 			HttpServletResponse response) {
 		ModelAndView model = new ModelAndView("admin/register/register");

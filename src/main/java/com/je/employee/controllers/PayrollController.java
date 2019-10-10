@@ -8,8 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.dbaccess.entities.PayrollEntity;
@@ -33,10 +34,10 @@ public class PayrollController {
 	@Autowired
 	private Mapper mapper;
 
-	private static final String VIEWNEWPAYROLL = "employee/otherconcepts/payroll";
 	private static final String FORMPAYROLL = "payrollForm";
+	private static final String VIEWNEWPAYROLL = "employee/otherconcepts/payroll";
 
-	@GetMapping(value = "/employee/newpayroll")
+	@GetMapping("/employee/newpayroll")
 	public ModelAndView newPayroll() {
 		ModelAndView model = new ModelAndView(VIEWNEWPAYROLL);
 		model.addObject(FORMPAYROLL, new Payroll());
@@ -44,7 +45,7 @@ public class PayrollController {
 		return model;
 	}
 
-	@GetMapping(value = "/employee/savepayroll")
+	@PostMapping("/employee/savepayroll")
 	public ModelAndView savePayroll(@ModelAttribute(FORMPAYROLL) Payroll payroll, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		PayrollEntity payrollEntity = mapper.map(payroll, PayrollEntity.class);
@@ -66,7 +67,7 @@ public class PayrollController {
 			if (!payrollservice.existsPayroll(payrollEntity)) {
 				model.addObject(ConstantsJsp.DAILY, payrollservice.addPayroll(payrollEntity));
 				model.setViewName(ConstantsJsp.VIEWDAILYARROW);
-				model.addObject(ConstantsJsp.DATEDAILY,DateUtil.getStringDateddMMyyyy(new Date()));
+				model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 			} else {
 				model.setViewName(VIEWNEWPAYROLL);
 				model.addObject(FORMPAYROLL, payroll);

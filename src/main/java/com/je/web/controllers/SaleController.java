@@ -64,7 +64,7 @@ public class SaleController {
 	 * @param result   the result
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/comprar")
+	@GetMapping("/comprar")
 	public ModelAndView buy(@ModelAttribute("dataForm") DataClientForm dataForm, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		Iterable<CategoryEntity> categories = searchCategoriesService.getAllCategoriesOrderByName();
@@ -111,7 +111,7 @@ public class SaleController {
 		return model;
 	}
 
-	@GetMapping(value = "/checkout")
+	@GetMapping("/checkout")
 	public ModelAndView checkout() {
 		ModelAndView model = new ModelAndView(VIEWSHOPPINGCART);
 		model.addObject("dataForm", new DataClientForm());
@@ -120,7 +120,7 @@ public class SaleController {
 		return model;
 	}
 
-	@GetMapping(value = "/eliminar{idjewel}")
+	@GetMapping("/eliminar{idjewel}")
 	public ModelAndView deleteJewelEntity(@PathVariable("idjewel") long idjewel,
 			@ModelAttribute("cart") List<JewelEntity> cart) {
 		ModelAndView model = new ModelAndView(VIEWSHOPPINGCART);

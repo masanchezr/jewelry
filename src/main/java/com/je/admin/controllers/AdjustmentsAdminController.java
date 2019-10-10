@@ -5,8 +5,9 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.admin.forms.AdminForm;
@@ -35,7 +36,7 @@ public class AdjustmentsAdminController {
 	private static final String VIEWSEARCHADJUSTMENT = "admin/adjustments/searchadjustment";
 	private static final String VIEWSEARCHSUMADJUSTMENTS = "admin/adjustments/searchsumadjustments";
 
-	@GetMapping(value = "/searchsumadjustments")
+	@GetMapping("/searchsumadjustments")
 	public ModelAndView searchSumAdjustments() {
 		ModelAndView model = new ModelAndView(VIEWSEARCHSUMADJUSTMENTS);
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -44,7 +45,7 @@ public class AdjustmentsAdminController {
 		return model;
 	}
 
-	@GetMapping(value = "/sumadjustments")
+	@GetMapping("/sumadjustments")
 	public ModelAndView sumAdjustments(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm searchForm,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
@@ -63,7 +64,7 @@ public class AdjustmentsAdminController {
 		return model;
 	}
 
-	@GetMapping(value = "/searchadjustment")
+	@GetMapping("/searchadjustment")
 	public ModelAndView searchAdjustment() {
 		ModelAndView model = new ModelAndView(VIEWSEARCHADJUSTMENT);
 		model.addObject(ConstantsJsp.FORMADJUSTMENT, new Adjustment());
@@ -71,7 +72,7 @@ public class AdjustmentsAdminController {
 		return model;
 	}
 
-	@GetMapping(value = "/resultadjustment")
+	@PostMapping("/resultadjustment")
 	public ModelAndView resultadjustment(@ModelAttribute(ConstantsJsp.FORMADJUSTMENT) Adjustment adjustment) {
 		ModelAndView model = new ModelAndView();
 		Long idadjustment = adjustment.getIdadjustment();

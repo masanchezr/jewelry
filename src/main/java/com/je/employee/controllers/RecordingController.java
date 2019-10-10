@@ -8,8 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.dbaccess.entities.PlaceEntity;
@@ -47,7 +48,7 @@ public class RecordingController {
 	private static final String FORMRECORDING = "recording";
 	private static final String VIEWNEWRECORDING = "employee/sales/newrecording";
 
-	@RequestMapping("/employee/newrecording")
+	@GetMapping("/employee/newrecording")
 	public ModelAndView newrecording() {
 		ModelAndView model = new ModelAndView(VIEWNEWRECORDING);
 		model.addObject(FORMRECORDING, new RecordingEntity());
@@ -55,7 +56,7 @@ public class RecordingController {
 		return model;
 	}
 
-	@RequestMapping(value = "/employee/saverecording")
+	@PostMapping("/employee/saverecording")
 	public ModelAndView saveRecording(@ModelAttribute(FORMRECORDING) RecordingEntity recording,
 			HttpServletRequest request, BindingResult errors) {
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();

@@ -25,7 +25,7 @@ public class BillingController {
 	 *
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/workshop/billing")
+	@GetMapping("/workshop/billing")
 	public ModelAndView billing() {
 		ModelAndView model = new ModelAndView("workshop/billing");
 		Calendar current = Calendar.getInstance();
@@ -34,7 +34,7 @@ public class BillingController {
 		return model;
 	}
 
-	@GetMapping(value = "/workshop/billingprevious")
+	@GetMapping("/workshop/billingprevious")
 	public ModelAndView billingprevious() {
 		ModelAndView model = new ModelAndView("workshop/billing");
 		Calendar current = Calendar.getInstance();

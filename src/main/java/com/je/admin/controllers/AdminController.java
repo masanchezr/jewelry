@@ -42,7 +42,7 @@ public class AdminController {
 	 * 
 	 * @return the string
 	 */
-	@GetMapping(value = "/login")
+	@GetMapping("/login")
 	public String login() {
 		log.warn("probando login");
 		return "admin/login";
@@ -53,7 +53,7 @@ public class AdminController {
 	 *
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/admin")
+	@GetMapping("/admin")
 	public ModelAndView admin(HttpServletRequest request) {
 		String ipAddress = request.getHeader(ConstantsJsp.XFORWARDEDFOR);
 		if (ipAddress == null) {
@@ -68,7 +68,7 @@ public class AdminController {
 	 *
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/newCategory")
+	@GetMapping("/newCategory")
 	public ModelAndView newCategory() {
 		ModelAndView model = new ModelAndView();
 		model.setViewName("admin/newCategory");
@@ -82,7 +82,7 @@ public class AdminController {
 	 *
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/newPayment")
+	@GetMapping("/newPayment")
 	public ModelAndView newPayment() {
 		ModelAndView model = new ModelAndView("admin/payments/newPayment");
 		model.addObject(ConstantsJsp.FORMPAYMENT, new PaymentEntity());
@@ -97,7 +97,7 @@ public class AdminController {
 	 * @param search the search
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/searchJewels")
+	@GetMapping("/searchJewels")
 	public ModelAndView searchJewels(@RequestParam String search) {
 		ModelAndView model = new ModelAndView("admin/jewels/searchjewels/resultsearchbyreference");
 		List<JewelEntity> jewels = searchService.search(search);

@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.employee.validators.IncidentValidator;
@@ -29,14 +30,14 @@ public class IncidentsController {
 	@Autowired
 	private SearchFormValidator searchFormValidator;
 
-	@GetMapping(value = "/employee/newincident")
+	@GetMapping("/employee/newincident")
 	public ModelAndView newIncident() {
 		ModelAndView model = new ModelAndView("employee/incidents/newincident");
 		model.addObject(ConstantsJsp.FORMINCIDENT, new Incident());
 		return model;
 	}
 
-	@GetMapping(value = "/employee/saveincident")
+	@PostMapping("/employee/saveincident")
 	public ModelAndView saveIncident(@ModelAttribute(ConstantsJsp.FORMINCIDENT) Incident incident,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
@@ -53,14 +54,14 @@ public class IncidentsController {
 		return model;
 	}
 
-	@GetMapping(value = "/employee/myincidents")
+	@GetMapping("/employee/myincidents")
 	public ModelAndView myincidents() {
 		ModelAndView model = new ModelAndView("employee/incidents/searchincidents");
 		model.addObject(ConstantsJsp.FORMSEARCH, new SearchForm());
 		return model;
 	}
 
-	@GetMapping(value = "/employee/resultIncidents")
+	@GetMapping("/employee/resultIncidents")
 	public ModelAndView resultSearchIncidents(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm form,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();

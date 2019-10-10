@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.services.metal.MetalService;
@@ -80,7 +81,7 @@ public class WorkshopController {
 	 * @param result   the result
 	 * @return the model and view
 	 */
-	@GetMapping("/workshop/saveworkshop")
+	@PostMapping("/workshop/saveworkshop")
 	public ModelAndView saveworkshop(@ModelAttribute("workshop") Workshop workshop, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		workShopValidator.validate(workshop, result);

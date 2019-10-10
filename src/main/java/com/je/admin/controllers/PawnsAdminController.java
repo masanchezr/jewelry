@@ -5,9 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.admin.forms.AdminForm;
@@ -72,7 +73,7 @@ public class PawnsAdminController {
 	 *
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/searchPawns")
+	@GetMapping("/searchPawns")
 	public ModelAndView searchPawns() {
 		ModelAndView model = new ModelAndView(VIEWSEARCHPAWN);
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -88,7 +89,7 @@ public class PawnsAdminController {
 	 * @param result the result
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/resultPawns")
+	@PostMapping("/resultPawns")
 	public ModelAndView resultPawns(@ModelAttribute(ConstantsJsp.PAWNFORM) Pawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -111,7 +112,7 @@ public class PawnsAdminController {
 	 * @param result the result
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/updatepawn")
+	@GetMapping("/updatepawn")
 	public ModelAndView updatePawn(@ModelAttribute(ConstantsJsp.PAWNFORM) Pawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		Long idpawn = pawn.getId();
@@ -129,7 +130,7 @@ public class PawnsAdminController {
 		return model;
 	}
 
-	@GetMapping(value = "/searchpawn{id}")
+	@GetMapping("/searchpawn{id}")
 	public ModelAndView searchPawn(@PathVariable long id) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -142,7 +143,7 @@ public class PawnsAdminController {
 		return model;
 	}
 
-	@GetMapping(value = "/resultrenovations")
+	@PostMapping("/resultrenovations")
 	public ModelAndView resultrenovations(@ModelAttribute(ConstantsJsp.PAWNFORM) Pawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		Long idpawn = pawn.getId();
@@ -157,7 +158,7 @@ public class PawnsAdminController {
 		return model;
 	}
 
-	@GetMapping(value = "/renovations{id}")
+	@GetMapping("/renovations{id}")
 	public ModelAndView renovations(@PathVariable("id") long id) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -174,7 +175,7 @@ public class PawnsAdminController {
 	 * @param result the result
 	 * @return the model and view
 	 */
-	@GetMapping(value = "/savePawn")
+	@GetMapping("/savePawn")
 	public ModelAndView savePawn(@ModelAttribute(ConstantsJsp.PAWNFORM) NewPawn pawn, BindingResult result) {
 		ModelAndView model;
 		updatePawnFormValidator.validate(pawn, result);
@@ -194,7 +195,7 @@ public class PawnsAdminController {
 		return model;
 	}
 
-	@GetMapping(value = "/searchrenovations")
+	@GetMapping("/searchrenovations")
 	public ModelAndView searchrenovations() {
 		ModelAndView model = new ModelAndView(VIEWRENOVATIONS);
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -203,7 +204,7 @@ public class PawnsAdminController {
 		return model;
 	}
 
-	@GetMapping(value = "/resultRenovationsPawns")
+	@PostMapping("/resultRenovationsPawns")
 	public ModelAndView resultRenovationsPawns(@ModelAttribute(ConstantsJsp.PAWNFORM) Pawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -219,7 +220,7 @@ public class PawnsAdminController {
 		return model;
 	}
 
-	@GetMapping(value = "/searchquarterpawns")
+	@GetMapping("/searchquarterpawns")
 	public ModelAndView searchquarterpawns() {
 		ModelAndView model = new ModelAndView("admin/pawns/quarters/searchquarter");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -227,7 +228,7 @@ public class PawnsAdminController {
 		return model;
 	}
 
-	@GetMapping(value = "/quarterpawns")
+	@GetMapping("/quarterpawns")
 	public ModelAndView quarterpawns(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm search, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		adminSearchFormValidator.validate(search, result);
@@ -243,14 +244,14 @@ public class PawnsAdminController {
 		return model;
 	}
 
-	@GetMapping(value = "/searchcommissions")
+	@GetMapping("/searchcommissions")
 	public ModelAndView searchCommissions() {
 		ModelAndView model = new ModelAndView("admin/pawns/commissions/searchcommissions");
 		modelComun(model);
 		return model;
 	}
 
-	@GetMapping(value = "/commissions")
+	@GetMapping("/commissions")
 	public ModelAndView commisions(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm search, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		adminSearchFormValidator.validate(search, result);
@@ -266,14 +267,14 @@ public class PawnsAdminController {
 		return model;
 	}
 
-	@GetMapping(value = "/outofdate")
+	@GetMapping("/outofdate")
 	public ModelAndView outofdate() {
 		ModelAndView model = new ModelAndView("admin/pawns/outofdate/search");
 		modelComun(model);
 		return model;
 	}
 
-	@GetMapping(value = "/searchpawnsoutofdate")
+	@GetMapping("/searchpawnsoutofdate")
 	public ModelAndView searchPawnsoutofdate(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm search) {
 		ModelAndView model = new ModelAndView("admin/pawns/outofdate/resultpawn");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -282,7 +283,7 @@ public class PawnsAdminController {
 		return model;
 	}
 
-	@GetMapping(value = "/investedmoney")
+	@GetMapping("/investedmoney")
 	public ModelAndView searchInvestedMoney() {
 		ModelAndView model = new ModelAndView("admin/pawns/investedmoney/searchinvestedmoney");
 		model.addObject(ConstantsJsp.PAWNFORM, new Pawn());
@@ -291,7 +292,7 @@ public class PawnsAdminController {
 		return model;
 	}
 
-	@GetMapping(value = "/resultinvestedmoney")
+	@PostMapping("/resultinvestedmoney")
 	public ModelAndView resultInvestedMoney(@ModelAttribute(ConstantsJsp.PAWNFORM) Pawn pawn) {
 		ModelAndView model = new ModelAndView("admin/pawns/investedmoney/investedmoney");
 		pawnService.sumPawnsActiveByPlace(pawn.getPlace());

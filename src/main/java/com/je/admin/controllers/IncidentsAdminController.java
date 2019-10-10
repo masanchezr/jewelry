@@ -17,7 +17,7 @@ public class IncidentsAdminController {
 	@Autowired
 	private IncidentService incidentService;
 
-	@GetMapping(value = "/allincidents")
+	@GetMapping("/allincidents")
 	public ModelAndView allincidents() {
 		ModelAndView model = new ModelAndView("admin/incidents/allincidents");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -26,7 +26,7 @@ public class IncidentsAdminController {
 		return model;
 	}
 
-	@GetMapping(value = "/pendingissues")
+	@GetMapping("/pendingissues")
 	public ModelAndView pendingissues() {
 		ModelAndView model = new ModelAndView("admin/incidents/allincidents");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
@@ -35,7 +35,7 @@ public class IncidentsAdminController {
 		return model;
 	}
 
-	@GetMapping(value = "/searchincident")
+	@GetMapping("/searchincident")
 	public ModelAndView searchIncident(@ModelAttribute(ConstantsJsp.FORMINCIDENT) Incident incident) {
 		ModelAndView model = new ModelAndView("admin/incidents/updateincident");
 		model.addObject(ConstantsJsp.FORMINCIDENT, incidentService.searchIncident(incident));
@@ -43,7 +43,7 @@ public class IncidentsAdminController {
 		return model;
 	}
 
-	@GetMapping(value = "/resolvedincident")
+	@GetMapping("/resolvedincident")
 	public ModelAndView resolvedIncident(@ModelAttribute(ConstantsJsp.FORMINCIDENT) Incident incident) {
 		if (incident != null && incident.getIdincident() != null) {
 			incidentService.resolve(incident);

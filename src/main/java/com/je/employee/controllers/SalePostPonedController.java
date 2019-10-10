@@ -12,7 +12,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ValidationUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -38,8 +40,12 @@ import com.je.utils.date.DateUtil;
 @Controller
 public class SalePostPonedController {
 
+	/** The categories service. */
 	@Autowired
-	private SalesPostPonedService saleservicepostponed;
+	private CategoriesService categoriesService;
+
+	@Autowired
+	private DailyService dailyService;
 
 	/** The jewel service. */
 	@Autowired
@@ -49,10 +55,6 @@ public class SalePostPonedController {
 	@Autowired
 	private MetalService materialService;
 
-	/** The categories service. */
-	@Autowired
-	private CategoriesService categoriesService;
-
 	@Autowired
 	private PaymentService paymentService;
 
@@ -60,19 +62,19 @@ public class SalePostPonedController {
 	private PlaceService placeService;
 
 	@Autowired
-	private DailyService dailyService;
-
-	@Autowired
-	private SalePostPonedValidator salepostponedvalidator;
+	private SalesPostPonedService saleservicepostponed;
 
 	@Autowired
 	private InstallmentValidator installmentvalidator;
+
+	@Autowired
+	private SalePostPonedValidator salepostponedvalidator;
 
 	private static final String VIEWNEWSALEPOSTPONED = "employee/salespostponed/newsale";
 	private static final String ADDINSTALLMENT = "employee/salespostponed/addinstallment";
 	private static final String INSTALLMENT = "installment";
 
-	@RequestMapping(value = "/employee/newsalepostponed")
+	@GetMapping("/employee/newsalepostponed")
 	public ModelAndView newSalepostponed() {
 		ModelAndView model = new ModelAndView(VIEWNEWSALEPOSTPONED);
 		SalePostPoned sale = new SalePostPoned();
@@ -88,7 +90,7 @@ public class SalePostPonedController {
 		return model;
 	}
 
-	@RequestMapping(value = "/employee/savesalepostponed")
+	@PostMapping("/employee/savesalepostponed")
 	public ModelAndView savesalepostponed(@ModelAttribute(ConstantsJsp.FORMSALE) SalePostPoned sale,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
@@ -133,7 +135,7 @@ public class SalePostPonedController {
 		return model;
 	}
 
-	@RequestMapping(value = "/employee/addinstallment")
+	@RequestMapping("/employee/addinstallment")
 	public ModelAndView addinstallment() {
 		ModelAndView model = new ModelAndView(ADDINSTALLMENT);
 		model.addObject(INSTALLMENT, new Installment());
@@ -141,7 +143,7 @@ public class SalePostPonedController {
 		return model;
 	}
 
-	@RequestMapping(value = "/employee/saveinstallment")
+	@PostMapping("/employee/saveinstallment")
 	public ModelAndView saveinstallment(@ModelAttribute(INSTALLMENT) Installment installment, BindingResult result,
 			HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
@@ -183,12 +185,12 @@ public class SalePostPonedController {
 		} else {
 			model.addObject(ConstantsJsp.DAILY, daily);
 			model.setViewName(ConstantsJsp.VIEWDAILYARROW);
-			model.addObject(ConstantsJsp.DATEDAILY,DateUtil.getStringDateddMMyyyy(new Date()));
+			model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 		}
 		return model;
 	}
 
-	@RequestMapping(value = "/employee/howmanyamount")
+	@RequestMapping("/employee/howmanyamount")
 	public ModelAndView howmanyamount(@ModelAttribute(ConstantsJsp.FORMSALE) SalePostPoned sale, BindingResult arg1) {
 		ModelAndView model = new ModelAndView(ADDINSTALLMENT);
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsJsp.IDSALE, ConstantsJsp.ERRORSELECTIDSALE);
@@ -204,7 +206,7 @@ public class SalePostPonedController {
 		return model;
 	}
 
-	@RequestMapping(value = "/employee/getsptimeout")
+	@RequestMapping("/employee/getsptimeout")
 	public ModelAndView getsptimeout() {
 		ModelAndView model = new ModelAndView("resultsalespostponed");
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -212,14 +214,14 @@ public class SalePostPonedController {
 		return model;
 	}
 
-	@RequestMapping(value = "/employee/searchsalepostponed")
+	@GetMapping("/employee/searchsalepostponed")
 	public ModelAndView searchsalepostponed() {
 		ModelAndView model = new ModelAndView("employee/salespostponed/searchsalepostponed");
 		model.addObject(ConstantsJsp.FORMSALE, new SalePostponedEntity());
 		return model;
 	}
 
-	@RequestMapping(value = "/employee/resultsalepostponed")
+	@PostMapping("/employee/resultsalepostponed")
 	public ModelAndView resultsalepostponed(@ModelAttribute(ConstantsJsp.FORMSALEPOSTPONED) SalePostponedEntity sale,
 			BindingResult arg1) {
 		ModelAndView model = new ModelAndView();

@@ -26,7 +26,7 @@ public class CartController {
 	 * The shopping cart (list of products) is stored in session. Simply inject it
 	 * using method argument
 	 */
-	@GetMapping(value = "/addProduct")
+	@GetMapping("/addProduct")
 	public String addProduct(@ModelAttribute Jewel product, @ModelAttribute("cart") List<JewelEntity> cart) {
 		if (cart == null) {
 			cart = new ArrayList<>();

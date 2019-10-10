@@ -8,8 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.dbaccess.entities.PlaceEntity;
@@ -44,10 +45,10 @@ public class StrapsController {
 	@Autowired
 	private StrapFormValidator strapFormValidator;
 
-	private static final String VIEWSALESTRAP = "employee/sales/newsalestrap";
 	private static final String FORMSTRAP = "strapForm";
+	private static final String VIEWSALESTRAP = "employee/sales/newsalestrap";
 
-	@RequestMapping(value = "/employee/newsalestrap")
+	@GetMapping("/employee/newsalestrap")
 	public ModelAndView newsalestrap() {
 		ModelAndView model = new ModelAndView(VIEWSALESTRAP);
 		model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
@@ -55,7 +56,7 @@ public class StrapsController {
 		return model;
 	}
 
-	@RequestMapping(value = "/employee/savesalestrap")
+	@PostMapping("/employee/savesalestrap")
 	public ModelAndView savesalestrap(@ModelAttribute("strapForm") StrapEntity strap, HttpServletRequest request,
 			BindingResult arg1) {
 		ModelAndView model = new ModelAndView();

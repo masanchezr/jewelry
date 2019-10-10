@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.dbaccess.entities.PlaceEntity;
@@ -40,14 +40,14 @@ public class DiscountsController {
 	@Autowired
 	private DiscountsValidator discountsValidator;
 
-	@RequestMapping("/employee/newdiscount")
+	@GetMapping("/employee/newdiscount")
 	public ModelAndView newDiscount() {
 		ModelAndView model = new ModelAndView("employee/sales/newdiscount");
 		model.addObject("discountForm", new Discount());
 		return model;
 	}
 
-	@RequestMapping("/employee/savediscount")
+	@GetMapping("/employee/savediscount")
 	public ModelAndView savediscount(@ModelAttribute("discountForm") Discount discount, HttpServletRequest request,
 			BindingResult errors) {
 		ModelAndView model = new ModelAndView();
