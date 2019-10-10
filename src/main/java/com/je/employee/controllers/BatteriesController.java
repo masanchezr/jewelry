@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.je.dbaccess.entities.BatteryEntity;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.employee.validators.BatteryFormValidator;
+import com.je.forms.Battery;
 import com.je.services.batteries.BatteriesService;
 import com.je.services.dailies.DailyService;
 import com.je.services.payment.PaymentService;
@@ -26,24 +28,26 @@ import com.je.utils.date.DateUtil;
 
 @Controller
 public class BatteriesController {
-
-	@Autowired
-	private BatteryFormValidator batteryFormValidator;
-
 	@Autowired
 	private BatteriesService batteriesService;
-
-	@Autowired
-	private SearchSaleRepeatedService searchSaleRepeatedService;
-
-	@Autowired
-	private PlaceService placeService;
 
 	@Autowired
 	private DailyService dailyService;
 
 	@Autowired
 	private PaymentService paymentService;
+
+	@Autowired
+	private PlaceService placeService;
+
+	@Autowired
+	private SearchSaleRepeatedService searchSaleRepeatedService;
+
+	@Autowired
+	private BatteryFormValidator batteryFormValidator;
+
+	@Autowired
+	private Mapper mapper;
 
 	private static final String BATTERYFORM = "batteryForm";
 	private static final String VIEWNEWSALEBATTERY = "employee/sales/newsalebattery";
@@ -57,8 +61,8 @@ public class BatteriesController {
 	}
 
 	@PostMapping("/employee/savesalebattery")
-	public ModelAndView savesalebattery(@ModelAttribute("batteryForm") BatteryEntity battery,
-			HttpServletRequest request, BindingResult arg1) {
+	public ModelAndView savesalebattery(@ModelAttribute("batteryForm") Battery battery, HttpServletRequest request,
+			BindingResult arg1) {
 		ModelAndView model = new ModelAndView();
 		batteryFormValidator.validate(battery, arg1);
 		if (arg1.hasErrors()) {
@@ -79,7 +83,7 @@ public class BatteriesController {
 			} else {
 				model.setViewName(ConstantsJsp.VIEWDAILYARROW);
 				battery.setPlace(place);
-				batteriesService.saveSaleBattery(battery);
+				batteriesService.saveSaleBattery(mapper.map(battery, BatteryEntity.class));
 				model.addObject(ConstantsJsp.DAILY,
 						dailyService.getDaily(DateUtil.getDateFormated(new Date()), place, ipAddress));
 				model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));

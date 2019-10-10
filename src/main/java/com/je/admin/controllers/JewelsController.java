@@ -97,7 +97,7 @@ public class JewelsController {
 	 * @param category the category
 	 * @return the string
 	 */
-	@GetMapping("/saveCategory")
+	@PostMapping("/saveCategory")
 	public ModelAndView addCategory(@ModelAttribute(ConstantsJsp.CATEGORY) Category category) {
 		categoriesService.save(mapper.map(category, CategoryEntity.class));
 		return new ModelAndView("admin/success", ConstantsJsp.ADMINFORM, new AdminForm());
@@ -213,7 +213,7 @@ public class JewelsController {
 	 * @param result    the result
 	 * @return the string
 	 */
-	@GetMapping("/saveJewel")
+	@PostMapping("/employee/saveJewel")
 	public ModelAndView addJewelEntity(@ModelAttribute(FORMJEWEL) Jewel jewelForm, BindingResult result, Model m) {
 		selectCategoryValidator.validate(jewelForm, result);
 		ModelAndView model = new ModelAndView();
