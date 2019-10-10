@@ -150,7 +150,7 @@ public class PawnsController {
 	 *
 	 * @return the model and view
 	 */
-	@GetMapping("/employee/newPawn")
+	@PostMapping("/employee/newPawn")
 	public ModelAndView newPawn(@ModelAttribute(ConstantsJsp.PAWNFORM) NewPawn pawn, BindingResult errors) {
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		String dni = Util.refactorNIF(pawn.getNif());
