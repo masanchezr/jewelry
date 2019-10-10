@@ -54,7 +54,7 @@ public class AdminController {
 	 *
 	 * @return the model and view
 	 */
-	@PostMapping(value = "/admin")
+	@GetMapping(value = "/admin")
 	public ModelAndView admin(HttpServletRequest request) {
 		String ipAddress = request.getHeader(ConstantsJsp.XFORWARDEDFOR);
 		if (ipAddress == null) {

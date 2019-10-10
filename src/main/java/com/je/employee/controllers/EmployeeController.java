@@ -40,7 +40,7 @@ public class EmployeeController {
 	 *
 	 * @return the string
 	 */
-	@PostMapping("/employee/admin")
+	@GetMapping("/employee/admin")
 	public ModelAndView admin(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView("employee/admin");
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();

@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <!-- Custom CSS -->
-<link th:href="@{/resources/styles/admin/sb-admin-2.css}" rel="stylesheet">
+<link th:href="@{/resources/styles/admin/sb-admin-2.css}"
+	rel="stylesheet">
 <!-- Bootstrap core JavaScript-->
 <script th:src="@{/resources/js/jquery.min.js}"></script>
 <script th:src="@{/resources/js/bootstrap.bundle.min.js}"></script>
@@ -25,7 +26,7 @@
 									<div class="text-center">
 										<h1 class="h4 text-gray-900 mb-4" th:text="#{login}"></h1>
 									</div>
-									<form role="form" name='f' th:action="@{/login}" method="post">
+									<form role="form" name='f' th:action="@{/login}">
 										<div class="form-group">
 											<label for="exampleInputEmail1"><span
 												th:text="#{user}"></span></label><input id="exampleInputEmail1"

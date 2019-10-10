@@ -46,7 +46,7 @@ public class WorkshopController {
 	 *
 	 * @return the string
 	 */
-	@PostMapping("/workshop/admin")
+	@GetMapping("/workshop/admin")
 	public String admin() {
 		return "workshop/admin";
 	}
