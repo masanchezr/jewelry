@@ -4,7 +4,7 @@
 <title>ERROR</title>
 </head>
 <body>
-	<h1>${errorMsg}</h1>
+	<h1 th:text="${errorMsg}"></h1>
 	<img th:src="@{/resources/img/web/404.jpg}" alt="Page Not Found (404)."
 		style="position: absolute; left: 50%; top: 50%; margin-left: -285px; margin-top: -190px;">
 </body>
