@@ -7,27 +7,23 @@ import org.springframework.data.annotation.CreatedDate;
 
 import com.je.dbaccess.entities.PlaceEntity;
 
-public class Battery {
+public class EntryMoney {
 
-	private Long idbattery;
+	private Long identrymoney;
 
 	private BigDecimal amount;
 
 	@CreatedDate
 	private Date creationdate;
 
-	private Long numsale;
-
-	private Payment payment;
-
 	private PlaceEntity place;
 
-	public Long getIdbattery() {
-		return idbattery;
+	public Long getIdentrymoney() {
+		return identrymoney;
 	}
 
-	public void setIdbattery(Long idbattery) {
-		this.idbattery = idbattery;
+	public void setIdentrymoney(Long identrymoney) {
+		this.identrymoney = identrymoney;
 	}
 
 	public BigDecimal getAmount() {
@@ -54,19 +50,4 @@ public class Battery {
 		this.place = place;
 	}
 
-	public Long getNumsale() {
-		return numsale;
-	}
-
-	public void setNumsale(Long numsale) {
-		this.numsale = numsale;
-	}
-
-	public Payment getPayment() {
-		return payment;
-	}
-
-	public void setPayment(Payment payment) {
-		this.payment = payment;
-	}
 }

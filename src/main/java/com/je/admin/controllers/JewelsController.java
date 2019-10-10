@@ -213,7 +213,7 @@ public class JewelsController {
 	 * @param result    the result
 	 * @return the string
 	 */
-	@PostMapping("/employee/saveJewel")
+	@PostMapping("/saveJewel")
 	public ModelAndView addJewelEntity(@ModelAttribute(FORMJEWEL) Jewel jewelForm, BindingResult result, Model m) {
 		selectCategoryValidator.validate(jewelForm, result);
 		ModelAndView model = new ModelAndView();

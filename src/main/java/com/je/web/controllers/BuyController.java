@@ -2,11 +2,12 @@ package com.je.web.controllers;
 
 import java.util.List;
 
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -16,6 +17,7 @@ import com.je.dbaccess.entities.AddressEntity;
 import com.je.dbaccess.entities.JewelEntity;
 import com.je.dbaccess.entities.PaymentEntity;
 import com.je.dbaccess.entities.PlaceEntity;
+import com.je.forms.Payment;
 import com.je.forms.Sale;
 import com.je.services.payment.PaymentService;
 import com.je.services.sales.Addresses;
@@ -35,16 +37,19 @@ import com.je.web.validators.BuyFormValidator;
 @RequestMapping("/aceptarcompra")
 public class BuyController {
 
-	/** The sale service. */
-	@Autowired
-	private SaleService saleService;
-
 	/** The payment service. */
 	@Autowired
 	private PaymentService paymentService;
 
+	/** The sale service. */
+	@Autowired
+	private SaleService saleService;
+
 	@Autowired
 	private BuyFormValidator buyFormValidator;
+
+	@Autowired
+	private Mapper mapper;
 
 	/**
 	 * este caso es para cuando el cliente es nuevo.
@@ -90,7 +95,7 @@ public class BuyController {
 			sale.setPlace(place);
 			payment.setIdpayment(buyform.getPayment());
 			// añado tipo de pago
-			sale.setPayment(payment);
+			sale.setPayment(mapper.map(payment, Payment.class));
 			addressmailing.setAddress(buyform.getAddress());
 			addressmailing.setCity(buyform.getCity());
 			addressmailing.setCountry(buyform.getCountry());

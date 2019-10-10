@@ -26,6 +26,7 @@ import com.je.dbaccess.entities.SalesPayments;
 import com.je.dbaccess.managers.SaleManager;
 import com.je.dbaccess.managers.UsersManager;
 import com.je.dbaccess.repositories.DiscountsRepository;
+import com.je.forms.Payment;
 import com.je.forms.Sale;
 import com.je.services.mails.MailService;
 import com.je.services.users.Client;
@@ -253,7 +254,7 @@ public class SaleServiceImpl implements SaleService {
 			cspv.setCancelsale(cancel);
 			payments.add(cspv);
 		} else {
-			payment = removeSaleForm.getPayment();
+			payment = mapper.map(removeSaleForm.getPayment(), PaymentEntity.class);
 			if (payment.getIdpayment().equals(ConstantsJsp.SAME)) {
 				List<SalesPayments> spayments = sale.getSpayments();
 				Iterator<SalesPayments> ispayments = spayments.iterator();
@@ -306,7 +307,7 @@ public class SaleServiceImpl implements SaleService {
 			discount.setNumsalechange(removeSaleForm.getNumsalechange());
 			discount.setPlace(sale.getPlace());
 		}
-		csp.setPay(removeSaleForm.getPayment());
+		csp.setPay(mapper.map(removeSaleForm.getPayment(), PaymentEntity.class));
 		csp.setCancelsale(cancel);
 		payments.add(csp);
 		cancel.setSpayments(payments);
@@ -345,7 +346,7 @@ public class SaleServiceImpl implements SaleService {
 		Sale sale = mapper.map(entity, Sale.class);
 		sale.setJewels(mapperListJewels(entity.getSjewels()));
 		List<SalesPayments> payments = entity.getSpayments();
-		sale.setPayment(payments.get(0).getPay());
+		sale.setPayment(mapper.map(payments.get(0).getPay(), Payment.class));
 		if (payments.size() > 1) {
 			sale.setOptionalpayment(payments.get(1).getAmount());
 		}

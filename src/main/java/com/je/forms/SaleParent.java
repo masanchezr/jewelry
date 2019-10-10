@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import com.je.dbaccess.entities.JewelEntity;
-import com.je.dbaccess.entities.PaymentEntity;
 import com.je.dbaccess.entities.PlaceEntity;
 
 public class SaleParent {
@@ -15,7 +14,7 @@ public class SaleParent {
 	private List<JewelEntity> jewels;
 
 	/** The payment. */
-	private PaymentEntity payment;
+	private Payment payment;
 
 	/** The place. */
 	private PlaceEntity place;
@@ -44,8 +43,7 @@ public class SaleParent {
 	/**
 	 * Sets the place.
 	 *
-	 * @param place
-	 *            the new place
+	 * @param place the new place
 	 */
 	public void setPlace(PlaceEntity place) {
 		this.place = place;
@@ -66,8 +64,7 @@ public class SaleParent {
 	/**
 	 * Sets the jewels.
 	 *
-	 * @param jewels
-	 *            the new jewels
+	 * @param jewels the new jewels
 	 */
 	public void setJewels(List<JewelEntity> jewels) {
 		this.jewels = jewels;
@@ -76,8 +73,7 @@ public class SaleParent {
 	/**
 	 * Sets the idsale.
 	 *
-	 * @param id
-	 *            the new idsale
+	 * @param id the new idsale
 	 */
 	public void setIdsale(Long id) {
 		this.idsale = id;
@@ -95,8 +91,7 @@ public class SaleParent {
 	/**
 	 * Sets the total.
 	 *
-	 * @param total
-	 *            the total to set
+	 * @param total the total to set
 	 */
 	public void setTotal(BigDecimal total) {
 		this.total = total;
@@ -111,11 +106,11 @@ public class SaleParent {
 		return jewels;
 	}
 
-	public PaymentEntity getPayment() {
+	public Payment getPayment() {
 		return payment;
 	}
 
-	public void setPayment(PaymentEntity payment) {
+	public void setPayment(Payment payment) {
 		this.payment = payment;
 	}
 
