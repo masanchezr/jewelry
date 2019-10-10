@@ -78,7 +78,7 @@ public class FileUploadController {
 		return file;
 	}
 
-	@PostMapping("/goodbye")
+	@PostMapping("/endfileupload")
 	public String goodbye(SessionStatus status) {
 		status.setComplete();
 		return "goodbye";

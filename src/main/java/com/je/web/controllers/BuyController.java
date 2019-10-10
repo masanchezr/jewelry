@@ -121,7 +121,7 @@ public class BuyController {
 		return model;
 	}
 
-	@PostMapping("/goodbye")
+	@PostMapping("/endbuy")
 	public String goodbye(SessionStatus status) {
 		status.setComplete();
 		return "goodbye";
