@@ -225,7 +225,7 @@ public class PawnsController {
 	 * @param result the result
 	 * @return the model and view
 	 */
-	@GetMapping("/employee/searchRenewPawn")
+	@PostMapping("/employee/searchRenewPawn")
 	public ModelAndView searchRenewPawn(@ModelAttribute("searchPawnForm") Pawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		pawnFormValidator.validate(pawn, result);
@@ -249,7 +249,7 @@ public class PawnsController {
 	 * @param pawn the pawn
 	 * @return the string
 	 */
-	@GetMapping("/employee/renewpawn")
+	@PostMapping("/employee/renewpawn")
 	public ModelAndView renew(@ModelAttribute(ConstantsJsp.PAWNFORM) Pawn pawn) {
 		ModelAndView model = new ModelAndView();
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
