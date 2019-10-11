@@ -32,7 +32,7 @@ public class SearchMissingShoppingsPawnsController {
 
 	@GetMapping("/searchPosibleRepeated")
 	public ModelAndView searchMissingShoppings() {
-		ModelAndView model = new ModelAndView("admin/searchmissingshoppings");
+		ModelAndView model = new ModelAndView("admin/searchmissingshoppings/searchmissingshoppings");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
 		model.addObject(SEARCHMISSINGSHOPPINGS, new SearchMissingNumbers());
