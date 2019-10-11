@@ -293,7 +293,7 @@ public class PawnsController {
 	 * @param result the result
 	 * @return the model and view
 	 */
-	@GetMapping("/employee/searchRemovePawn")
+	@PostMapping("/employee/searchRemovePawn")
 	public ModelAndView searchRemovePawn(@ModelAttribute(ConstantsJsp.PAWNFORM) Pawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		pawnFormValidator.validate(pawn, result);
