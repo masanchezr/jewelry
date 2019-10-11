@@ -112,7 +112,7 @@ public class PawnsAdminController {
 	 * @param result the result
 	 * @return the model and view
 	 */
-	@GetMapping("/updatepawn")
+	@PostMapping("/updatepawn")
 	public ModelAndView updatePawn(@ModelAttribute(ConstantsJsp.PAWNFORM) Pawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		Long idpawn = pawn.getId();
@@ -228,7 +228,7 @@ public class PawnsAdminController {
 		return model;
 	}
 
-	@GetMapping("/quarterpawns")
+	@PostMapping("/quarterpawns")
 	public ModelAndView quarterpawns(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm search, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		adminSearchFormValidator.validate(search, result);
@@ -251,7 +251,7 @@ public class PawnsAdminController {
 		return model;
 	}
 
-	@GetMapping("/commissions")
+	@PostMapping("/commissions")
 	public ModelAndView commisions(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm search, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		adminSearchFormValidator.validate(search, result);
@@ -274,7 +274,7 @@ public class PawnsAdminController {
 		return model;
 	}
 
-	@GetMapping("/searchpawnsoutofdate")
+	@PostMapping("/searchpawnsoutofdate")
 	public ModelAndView searchPawnsoutofdate(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm search) {
 		ModelAndView model = new ModelAndView("admin/pawns/outofdate/resultpawn");
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
