@@ -2,8 +2,9 @@ package com.je.admin.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.admin.forms.AdminForm;
@@ -35,7 +36,7 @@ public class IncidentsAdminController {
 		return model;
 	}
 
-	@GetMapping("/searchincident")
+	@PostMapping("/searchincident")
 	public ModelAndView searchIncident(@ModelAttribute(ConstantsJsp.FORMINCIDENT) Incident incident) {
 		ModelAndView model = new ModelAndView("admin/incidents/updateincident");
 		model.addObject(ConstantsJsp.FORMINCIDENT, incidentService.searchIncident(incident));
@@ -43,7 +44,7 @@ public class IncidentsAdminController {
 		return model;
 	}
 
-	@GetMapping("/resolvedincident")
+	@PostMapping("/resolvedincident")
 	public ModelAndView resolvedIncident(@ModelAttribute(ConstantsJsp.FORMINCIDENT) Incident incident) {
 		if (incident != null && incident.getIdincident() != null) {
 			incidentService.resolve(incident);
