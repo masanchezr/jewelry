@@ -8,9 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.admin.forms.AdminForm;
@@ -73,7 +74,7 @@ public class DailiesController {
 	 * @param sdf the sdf
 	 * @return the model and view
 	 */
-	@GetMapping("/searchDaily")
+	@PostMapping("/searchDaily")
 	public ModelAndView searchDaily(@ModelAttribute(ConstantsJsp.FORMSEARCHDAILY) SearchDailyForm sdf,
 			HttpServletRequest request, BindingResult arg1) {
 		ModelAndView model;
@@ -116,7 +117,7 @@ public class DailiesController {
 		return model;
 	}
 
-	@GetMapping("/calculatedailies")
+	@PostMapping("/calculatedailies")
 	public ModelAndView calculateDailies(@ModelAttribute(ConstantsJsp.FORMSEARCHDAILY) SearchDailyForm sdf,
 			BindingResult arg1) {
 		ModelAndView model = new ModelAndView();
