@@ -17,7 +17,7 @@
 							<div class="form-group">
 								<div id="sandbox-container">
 									<span th:text="#{datefrom}"></span> <input class="form-control"
-										id="datefrom" type="text" />
+										th:field="*{datefrom}" type="text" />
 									<div class="form-group has-error">
 										<label class="control-label"
 											th:if="${#fields.hasErrors('datefrom')}" th:errors="datefrom"></label>
@@ -27,7 +27,7 @@
 							<div class="form-group">
 								<div id="sandbox-container">
 									<span th:text="#{dateuntil}"></span> <input
-										class="form-control" id="dateuntil" type="text" />
+										class="form-control" th:field="*{dateuntil} type="text" />
 									<div class="form-group has-error">
 										<label class="control-label"
 											th:if="${#fields.hasErrors('dateuntil')}"

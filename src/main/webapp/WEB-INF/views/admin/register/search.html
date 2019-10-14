@@ -16,10 +16,10 @@
 					<div class="form-group">
 						<div id="sandbox-container">
 							<div class="input-daterange input-group" id="datepicker">
-								<input type="text" class="input-sm form-control" id="datefrom"
+								<input type="text" class="input-sm form-control" th:field="*{datefrom}"
 									th:placeholder="#{datefrom}" name="start" /> <span
 									class="input-group-addon" th:text="#{until}" ></span> <input
-									type="text" class="input-sm form-control" id="dateuntil"
+									type="text" class="input-sm form-control" th:field="*{dateuntil}
 									name="end" />
 							</div>
 						</div>
