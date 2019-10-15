@@ -10,7 +10,7 @@
 	</ol>
 	<form method="post" th:action="@{/savePayment}" th:object="${payment}">
 		<div class="form-group">
-			<span th:text="#{name}"></span> <input class="form-control" th:field="*{name" />
+			<span th:text="#{name}"></span> <input class="form-control" th:field="*{name}" />
 		</div>
 		<div class="form-group">
 			<span th:text="#{active}"></span> <input type="checkbox"
