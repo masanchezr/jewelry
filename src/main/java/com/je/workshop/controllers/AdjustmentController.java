@@ -3,8 +3,9 @@ package com.je.workshop.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.services.adjustments.Adjustment;
@@ -45,7 +46,7 @@ public class AdjustmentController {
 	 * @param result     the result
 	 * @return the model and view
 	 */
-	@GetMapping("/workshop/saveAdjustment")
+	@PostMapping("/workshop/saveAdjustment")
 	public ModelAndView saveAdjustment(@ModelAttribute(ConstantsJsp.FORMADJUSTMENT) Adjustment adjustment,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
