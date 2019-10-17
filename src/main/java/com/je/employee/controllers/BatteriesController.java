@@ -76,7 +76,8 @@ public class BatteriesController {
 			}
 			PlaceEntity place = placeService.getPlaceUser(user);
 			// comprobamos primero que no exista este número de venta en otra venta
-			if (searchSaleRepeatedService.isSaleRepeated(battery.getNumsale())) {
+			Long numsale = battery.getNumsale();
+			if (numsale != null && searchSaleRepeatedService.isSaleRepeated(numsale)) {
 				arg1.rejectValue(ConstantsJsp.NUMSALE, "numrepeated");
 				model.setViewName(VIEWNEWSALEBATTERY);
 				model.addObject(BATTERYFORM, battery);

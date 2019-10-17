@@ -73,7 +73,8 @@ public class StrapsController {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			PlaceEntity place = placeService.getPlaceUser(user);
 			// comprobamos primero que no exista este número de venta
-			if (searchSaleRepeatedService.isSaleRepeated(strap.getNumsale())) {
+			Long numsale = strap.getNumsale();
+			if (numsale != null && searchSaleRepeatedService.isSaleRepeated(numsale)) {
 				model.setViewName(VIEWSALESTRAP);
 				model.addObject(FORMSTRAP, strap);
 				arg1.rejectValue(ConstantsJsp.NUMSALE, "numrepeated");
@@ -87,7 +88,7 @@ public class StrapsController {
 				strap.setPlace(place);
 				strapsService.saveSaleStrap(mapper.map(strap, StrapEntity.class));
 				model.addObject(ConstantsJsp.DAILY, dailyService.getDaily(today, place, ipAddress));
-				model.addObject(ConstantsJsp.DATEDAILY, today);
+				model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 			}
 		}
 		return model;

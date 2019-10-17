@@ -125,7 +125,7 @@ public class JewelsController {
 	 * @param jewelForm the jewel form
 	 * @return the model and view
 	 */
-	@GetMapping("resultsearchbyreference")
+	@PostMapping("resultsearchbyreference")
 	public ModelAndView resultSearchByReference(@ModelAttribute(FORMJEWEL) Jewel jewelForm) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsJsp.JEWELS, jewelService.search(mapper.map(jewelForm, JewelEntity.class)));
