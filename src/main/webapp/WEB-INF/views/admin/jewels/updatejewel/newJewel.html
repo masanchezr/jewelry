@@ -27,7 +27,7 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<select th:field="*{material.idmetal}">
+								<select th:field="*{metal.idmetal}">
 									<option th:each="material : ${materials}"
 										th:value="${material.idmetal}"
 										th:text="${material.description}" />
