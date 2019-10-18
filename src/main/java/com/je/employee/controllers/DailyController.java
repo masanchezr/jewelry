@@ -8,9 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.forms.SearchForm;
@@ -132,7 +133,7 @@ public class DailyController {
 		return model;
 	}
 
-	@GetMapping("/employee/resultdaily")
+	@PostMapping("/employee/resultdaily")
 	public ModelAndView resultdaily(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm searchForm,
 			HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
