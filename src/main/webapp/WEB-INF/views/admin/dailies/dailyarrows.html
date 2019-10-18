@@ -56,7 +56,7 @@
 							</tr>
 							<tr th:each="pawn:${daily.newpawns}">
 								<td th:text="#{pawn}"></td>
-								<td><a href="searchpawn(${pawn.id})"> <span
+								<td><a th:href="@{'searchpawn'+${pawn.id}}"> <span
 										th:text="${pawn.numpawn}"></span>
 								</a></td>
 								<td><span th:text="${pawn.amount}"><i
@@ -82,7 +82,7 @@
 							<tr th:each="shopping:${daily.shoppings}">
 								<td th:text="#{shopping}"><span
 									th:text="${shopping.description}"></span></td>
-								<td><a href="@{'updateShopping'+${shopping.id}"><span
+								<td><a href="@{'/updateShopping'+${shopping.id}}"><span
 										th:text="${shopping.numshop}"></span></a></td>
 								<td th:text="${shopping.amount}"><i
 									class="fas fa-euro-sign"></i></td>
