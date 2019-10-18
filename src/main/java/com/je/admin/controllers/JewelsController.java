@@ -172,7 +172,7 @@ public class JewelsController {
 	 */
 	@PostMapping("/updatejewel")
 	public ModelAndView updateJewels(@ModelAttribute("toUpdate") Jewel toUpdate) {
-		ModelAndView model = new ModelAndView("admin/jewels/updatejewel/newjewel");
+		ModelAndView model = new ModelAndView("admin/jewels/updatejewel/newJewel");
 		Long idj = toUpdate.getIdjewel();
 		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
 		if (idj != null) {
