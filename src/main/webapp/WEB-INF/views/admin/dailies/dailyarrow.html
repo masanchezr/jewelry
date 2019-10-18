@@ -83,7 +83,7 @@
 							<tr th:each="shopping:${daily.shoppings}">
 								<td th:text="#{shopping}"><span
 									th:text="${shopping.description}"></span></td>
-								<td><a th:href="@{'/updateShopping'+${shopping.id}}"><span
+								<td><a th:href="@{'updateShopping'+${shopping.id}}"><span
 										th:text="${shopping.numshop}"></span></a></td>
 								<td th:text="${shopping.amount}"><i
 									class="fas fa-euro-sign"></i></td>
