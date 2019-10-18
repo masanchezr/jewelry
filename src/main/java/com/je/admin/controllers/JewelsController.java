@@ -170,7 +170,7 @@ public class JewelsController {
 	 * @param toUpdate the to update
 	 * @return the model and view
 	 */
-	@GetMapping("/updatejewel")
+	@PostMapping("/updatejewel")
 	public ModelAndView updateJewels(@ModelAttribute("toUpdate") Jewel toUpdate) {
 		ModelAndView model = new ModelAndView("admin/jewels/updatejewel/newjewel");
 		Long idj = toUpdate.getIdjewel();
