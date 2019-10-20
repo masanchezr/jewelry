@@ -19,7 +19,9 @@
 							</div>
 							<div class="form-group">
 								<input class="form-control" th:field="*{nif}"
-									th:placeholder="#{nif}" />
+									th:placeholder="#{nif}" /> <label class="control-label"
+									for="inputSuccess" th:if="${#fields.hasErrors('nif')}"
+									th:errors="*{nif}"></label>
 							</div>
 							<div class="form-group">
 								<span th:text="#{numshop}"></span> <input class="form-control"
