@@ -37,7 +37,7 @@
 							</tr>
 							<tr th:each="salepost:${daily.lsalespost}">
 								<td th:text="#{salepostponed}"></td>
-								<td><a href="showsalepost(${salepost.idsale})"><span
+								<td><a th:href="@{'/showsalepost'+${salepost.idsale}}"><span
 										th:text="${salepost.idsale}"></span></a></td>
 								<td><span th:text="${salepost.total}"><i
 										class="fas fa-euro-sign"></i></span></td>
@@ -82,7 +82,7 @@
 							<tr th:each="shopping:${daily.shoppings}">
 								<td th:text="#{shopping}"><span
 									th:text="${shopping.description}"></span></td>
-								<td><a href="@{'/updateShopping'+${shopping.id}}"><span
+								<td><a th:href="@{'/updateShopping'+${shopping.id}}"><span
 										th:text="${shopping.numshop}"></span></a></td>
 								<td th:text="${shopping.amount}"><i
 									class="fas fa-euro-sign"></i></td>
