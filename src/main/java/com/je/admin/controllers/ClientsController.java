@@ -56,7 +56,7 @@ public class ClientsController {
 		return model;
 	}
 
-	@GetMapping("/showoperations")
+	@PostMapping("/showoperations")
 	public ModelAndView showoperations(@ModelAttribute("clientModel") Client client) {
 		ModelAndView model = new ModelAndView("admin/clients/resultoperations");
 		model.addObject("shoppings", shoppingService.getByNIF(client.getNif()));
