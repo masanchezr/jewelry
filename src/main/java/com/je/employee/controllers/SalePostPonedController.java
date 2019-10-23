@@ -205,9 +205,9 @@ public class SalePostPonedController {
 		return model;
 	}
 
-	@GetMapping("/employee//getsptimeout")
+	@GetMapping("/employee/getsptimeout")
 	public ModelAndView getsptimeout() {
-		ModelAndView model = new ModelAndView("resultsalespostponed");
+		ModelAndView model = new ModelAndView("employee/salespostponed/resultsalespostponed");
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		model.addObject(Constants.SALESPOSTPONED, saleservicepostponed.getListTimeout(placeService.getPlaceUser(user)));
 		return model;
@@ -216,12 +216,12 @@ public class SalePostPonedController {
 	@GetMapping("/employee/searchsalepostponed")
 	public ModelAndView searchsalepostponed() {
 		ModelAndView model = new ModelAndView("employee/salespostponed/searchsalepostponed");
-		model.addObject(ConstantsJsp.FORMSALE, new SalePostponedEntity());
+		model.addObject(ConstantsJsp.FORMSALE, new SalePostPoned());
 		return model;
 	}
 
 	@PostMapping("/employee/resultsalepostponed")
-	public ModelAndView resultsalepostponed(@ModelAttribute(ConstantsJsp.FORMSALEPOSTPONED) SalePostPoned sale,
+	public ModelAndView resultsalepostponed(@ModelAttribute(ConstantsJsp.FORMSALE) SalePostPoned sale,
 			BindingResult arg1) {
 		ModelAndView model = new ModelAndView();
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -233,7 +233,7 @@ public class SalePostPonedController {
 		} else {
 			model.setViewName("employee/salespostponed/searchsalepostponed");
 			model.addObject(ConstantsJsp.FORMSALE, sale);
-			arg1.rejectValue(Constants.IDSALEPOSTPONED, ConstantsJsp.ERRORSALENOTEXIST);
+			arg1.rejectValue("idsale", ConstantsJsp.ERRORSALENOTEXIST);
 		}
 		return model;
 	}
