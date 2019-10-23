@@ -10,7 +10,7 @@
 	</ol>
 	<div class="row">
 		<div class="col-lg-12">
-			<div class="card-body" th:if="${not #lists.isEmpty(register}">
+			<div class="card-body" th:if="${not #lists.isEmpty(register)}">
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered table-hover"
 						id="dataTables-example">
@@ -50,7 +50,7 @@
 						</div>
 					</div>
 				</div>
-				<div th:if="${#lists.isEmpty(register}">
+				<div th:if="${#lists.isEmpty(register)}">
 					<span th:text="#{noresults}"></span>
 				</div>
 			</div>
