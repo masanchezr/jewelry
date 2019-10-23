@@ -149,7 +149,7 @@ public class ShoppingsAdminController {
 		return model;
 	}
 
-	@PostMapping("/updateShopping{id}")
+	@GetMapping("/updateShopping{id}")
 	public ModelAndView updateShopping(@PathVariable("id") long id) {
 		ModelAndView model = new ModelAndView("admin/shoppings/searchshoppings/updateshopping");
 		Shopping shopping = shoppingService.findShopByPK(id);
