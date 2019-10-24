@@ -22,7 +22,7 @@ import com.je.services.metal.MetalService;
 import com.je.services.pawns.PawnService;
 import com.je.services.shoppings.Shopping;
 import com.je.services.shoppings.ShoppingService;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.utils.date.DateUtil;
 
 /**
@@ -65,7 +65,7 @@ public class ShoppingsController {
 			los.add(os);
 		}
 		shopping.setObjects(los);
-		model.addObject(ConstantsJsp.SHOPPINGFORM, shopping);
+		model.addObject(ConstantsViews.SHOPPINGFORM, shopping);
 		return model;
 	}
 
@@ -77,7 +77,7 @@ public class ShoppingsController {
 	 * @return the model and view
 	 */
 	@PostMapping("/employee/saveShopping")
-	public ModelAndView saveShopping(@ModelAttribute(ConstantsJsp.SHOPPINGFORM) Shopping shoppingForm,
+	public ModelAndView saveShopping(@ModelAttribute(ConstantsViews.SHOPPINGFORM) Shopping shoppingForm,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		shoppingsValidator.validate(shoppingForm, result);
@@ -92,7 +92,7 @@ public class ShoppingsController {
 				nlos.add(os);
 			}
 			shoppingForm.setObjects(nlos);
-			model.addObject(ConstantsJsp.SHOPPINGFORM, shoppingForm);
+			model.addObject(ConstantsViews.SHOPPINGFORM, shoppingForm);
 		} else {
 			Calendar c = Calendar.getInstance();
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -111,12 +111,12 @@ public class ShoppingsController {
 					newlos.add(os);
 				}
 				shoppingForm.setObjects(newlos);
-				model.addObject(ConstantsJsp.SHOPPINGFORM, shoppingForm);
-				result.rejectValue(ConstantsJsp.NUMSHOP, "numrepeated");
+				model.addObject(ConstantsViews.SHOPPINGFORM, shoppingForm);
+				result.rejectValue(ConstantsViews.NUMSHOP, "numrepeated");
 			} else {
-				model.addObject(ConstantsJsp.DAILY, shoppingService.save(shoppingForm));
-				model.setViewName(ConstantsJsp.VIEWDAILYARROW);
-				model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
+				model.addObject(ConstantsViews.DAILY, shoppingService.save(shoppingForm));
+				model.setViewName(ConstantsViews.VIEWDAILYARROW);
+				model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 			}
 		}
 		return model;

@@ -34,7 +34,7 @@ import com.je.dbaccess.repositories.SalesRepository;
 import com.je.dbaccess.repositories.SalesPostponedRepository;
 import com.je.dbaccess.repositories.StrapsRepository;
 import com.je.utils.constants.Constants;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 
 /**
  * The Class SaleManagerImpl.
@@ -256,7 +256,7 @@ public class SaleManagerImpl implements SaleManager {
 		map.put(Constants.SALESPOSTPONED, salespostponed);
 		map.put(Constants.STRAPS, straps);
 		map.put(Constants.BATTERIES, batteries);
-		map.put(ConstantsJsp.TOTAL, total);
+		map.put(ConstantsViews.TOTAL, total);
 		map.put("cost", cost);
 		return map;
 	}

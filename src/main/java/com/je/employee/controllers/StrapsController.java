@@ -23,7 +23,7 @@ import com.je.services.payment.PaymentService;
 import com.je.services.places.PlaceService;
 import com.je.services.salesrepeated.SearchSaleRepeatedService;
 import com.je.services.straps.StrapsService;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.utils.date.DateUtil;
 
 @Controller
@@ -56,7 +56,7 @@ public class StrapsController {
 	@GetMapping("/employee/newsalestrap")
 	public ModelAndView newsalestrap() {
 		ModelAndView model = new ModelAndView(VIEWSALESTRAP);
-		model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
+		model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
 		model.addObject(FORMSTRAP, new StrapEntity());
 		return model;
 	}
@@ -77,18 +77,18 @@ public class StrapsController {
 			if (numsale != null && searchSaleRepeatedService.isSaleRepeated(numsale)) {
 				model.setViewName(VIEWSALESTRAP);
 				model.addObject(FORMSTRAP, strap);
-				arg1.rejectValue(ConstantsJsp.NUMSALE, "numrepeated");
+				arg1.rejectValue(ConstantsViews.NUMSALE, "numrepeated");
 			} else {
-				String ipAddress = request.getHeader(ConstantsJsp.XFORWARDEDFOR);
+				String ipAddress = request.getHeader(ConstantsViews.XFORWARDEDFOR);
 				if (ipAddress == null) {
 					ipAddress = request.getRemoteAddr();
 				}
 				Date today = DateUtil.getDateFormated(new Date());
-				model.setViewName(ConstantsJsp.VIEWDAILYARROW);
+				model.setViewName(ConstantsViews.VIEWDAILYARROW);
 				strap.setPlace(place);
 				strapsService.saveSaleStrap(mapper.map(strap, StrapEntity.class));
-				model.addObject(ConstantsJsp.DAILY, dailyService.getDaily(today, place, ipAddress));
-				model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
+				model.addObject(ConstantsViews.DAILY, dailyService.getDaily(today, place, ipAddress));
+				model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 			}
 		}
 		return model;

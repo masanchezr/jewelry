@@ -15,7 +15,7 @@ import org.springframework.validation.Validator;
 import com.je.dbaccess.entities.ObjectPawnEntity;
 import com.je.services.pawns.NewPawn;
 import com.je.utils.constants.Constants;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.utils.date.DateUtil;
 import com.je.utils.string.Util;
 
@@ -35,11 +35,11 @@ public class NewPawnFormValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		NewPawn pawn = (NewPawn) target;
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, Constants.NUMPAWN, Constants.IDPAWN);
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, Constants.NAME, ConstantsJsp.ERRORSELECTNAME);
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, ConstantsJsp.SURNAME, ConstantsJsp.ERRORSURNAME);
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, ConstantsJsp.NIF, ConstantsJsp.ERRORSELECTNIF);
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, ConstantsJsp.ADDRESS, ConstantsJsp.ERRORSELECTADDRESS);
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, ConstantsJsp.PERCENT, ConstantsJsp.ERRORSELECTPERCENT);
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, Constants.NAME, ConstantsViews.ERRORSELECTNAME);
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, ConstantsViews.SURNAME, ConstantsViews.ERRORSURNAME);
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, ConstantsViews.NIF, ConstantsViews.ERRORSELECTNIF);
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, ConstantsViews.ADDRESS, ConstantsViews.ERRORSELECTADDRESS);
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, ConstantsViews.PERCENT, ConstantsViews.ERRORSELECTPERCENT);
 		String sdate = pawn.getCreationdate();
 		String birthday = pawn.getDatebirth();
 		String dni = pawn.getNif();
@@ -47,11 +47,11 @@ public class NewPawnFormValidator implements Validator {
 		BigDecimal percent = Util.getNumber(pawn.getPercent());
 		BigDecimal amount = Util.getNumber(pawn.getAmount());
 		if (amount.compareTo(BigDecimal.ZERO) <= 0) {
-			errors.rejectValue(Constants.AMOUNT, ConstantsJsp.ERRORSELECTAMOUNT);
+			errors.rejectValue(Constants.AMOUNT, ConstantsViews.ERRORSELECTAMOUNT);
 		}
 		validateDates(sdate, birthday, errors);
 		if (percent.compareTo(BigDecimal.ZERO) <= 0) {
-			errors.rejectValue(ConstantsJsp.PERCENT, ConstantsJsp.ERRORSELECTPERCENT);
+			errors.rejectValue(ConstantsViews.PERCENT, ConstantsViews.ERRORSELECTPERCENT);
 		}
 		List<ObjectPawnEntity> lop = pawn.getObjects();
 		Iterator<ObjectPawnEntity> ilop = lop.iterator();
@@ -60,21 +60,21 @@ public class NewPawnFormValidator implements Validator {
 		while (ilop.hasNext()) {
 			op = ilop.next();
 			if (op.getGrossgrams() != null && Util.isEmpty(op.getDescription())) {
-				errors.rejectValue(Constants.NUMPAWN, ConstantsJsp.ERRORSELECTDESCRIPTION);
+				errors.rejectValue(Constants.NUMPAWN, ConstantsViews.ERRORSELECTDESCRIPTION);
 			} else if (op.getGrossgrams() == null && !Util.isEmpty(op.getDescription())) {
-				errors.rejectValue(Constants.NUMPAWN, ConstantsJsp.ERRORSELECTGRAMS);
+				errors.rejectValue(Constants.NUMPAWN, ConstantsViews.ERRORSELECTGRAMS);
 			} else if (op.getGrossgrams() != null && !Util.isEmpty(op.getDescription())) {
 				isEmpty = false;
 			}
 		}
 		if (isEmpty) {
-			errors.rejectValue(Constants.NUMPAWN, ConstantsJsp.ERRORSELECTDESCRIPTION);
-			errors.rejectValue(Constants.NUMPAWN, ConstantsJsp.ERRORSELECTGRAMS);
+			errors.rejectValue(Constants.NUMPAWN, ConstantsViews.ERRORSELECTDESCRIPTION);
+			errors.rejectValue(Constants.NUMPAWN, ConstantsViews.ERRORSELECTGRAMS);
 		}
 		if (dni != null && dni.length() > 13) {
-			errors.rejectValue(ConstantsJsp.NIF, "niftoolong");
+			errors.rejectValue(ConstantsViews.NIF, "niftoolong");
 		} else if (!Util.isNifNie(dni)) {
-			errors.rejectValue(ConstantsJsp.NIF, "nifnotvalid");
+			errors.rejectValue(ConstantsViews.NIF, "nifnotvalid");
 		}
 		validateNumpawn(numpawn, errors);
 	}
@@ -92,11 +92,11 @@ public class NewPawnFormValidator implements Validator {
 
 	private void validateDates(String sdate, String birthday, Errors errors) {
 		if (!Util.isEmpty(sdate) && !DateUtil.isDate(sdate)) {
-			errors.rejectValue(Constants.CREATIONDATE, ConstantsJsp.SELECTDATE);
+			errors.rejectValue(Constants.CREATIONDATE, ConstantsViews.SELECTDATE);
 		}
 		if (!Util.isEmpty(birthday)) {
 			if (!DateUtil.isDate(birthday)) {
-				errors.rejectValue(ERRORDATEBIRTH, ConstantsJsp.SELECTDATE);
+				errors.rejectValue(ERRORDATEBIRTH, ConstantsViews.SELECTDATE);
 			} else {
 				Date dbirthday = DateUtil.getDate(birthday);
 				Calendar c = Calendar.getInstance();

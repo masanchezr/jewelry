@@ -6,7 +6,7 @@ import org.springframework.validation.Validator;
 
 import com.je.dbaccess.entities.RecordingEntity;
 import com.je.utils.constants.Constants;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 
 public class RecordingValidator implements Validator {
 
@@ -17,7 +17,7 @@ public class RecordingValidator implements Validator {
 
 	@Override
 	public void validate(Object arg0, Errors arg1) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.AMOUNT, ConstantsJsp.ERRORSELECTAMOUNT);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.AMOUNT, ConstantsViews.ERRORSELECTAMOUNT);
 	}
 
 }

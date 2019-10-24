@@ -6,7 +6,7 @@ import org.springframework.validation.Validator;
 
 import com.je.services.pawns.Pawn;
 import com.je.utils.constants.Constants;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 
 /**
  * The Class PawnFormValidator.
@@ -24,7 +24,7 @@ public class PawnFormValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.NUMPAWN, Constants.IDPAWN);
 		double percent = pawn.getPercent();
 		if (percent > 100 || percent < 0) {
-			arg1.rejectValue(ConstantsJsp.ERRORSELECTADDRESS, "errorpercent");
+			arg1.rejectValue(ConstantsViews.ERRORSELECTADDRESS, "errorpercent");
 		}
 	}
 

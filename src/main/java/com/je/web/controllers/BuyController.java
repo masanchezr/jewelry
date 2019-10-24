@@ -24,7 +24,7 @@ import com.je.services.sales.Addresses;
 import com.je.services.sales.SaleService;
 import com.je.services.users.Client;
 import com.je.utils.constants.Constants;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.web.forms.BuyForm;
 import com.je.web.forms.SearchJewelForm;
 import com.je.web.validators.BuyFormValidator;
@@ -62,7 +62,7 @@ public class BuyController {
 	public ModelAndView add(@ModelAttribute("buyForm") BuyForm buyform, @ModelAttribute("cart") List<JewelEntity> cart,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
-		model.addObject(ConstantsJsp.FORMSEARCH, new SearchJewelForm());
+		model.addObject(ConstantsViews.FORMSEARCH, new SearchJewelForm());
 		buyFormValidator.validate(buyform, result);
 		if (result.hasErrors()) {
 			Addresses addresses = saleService.searchAddressByClient(buyform.getNif());
@@ -71,10 +71,10 @@ public class BuyController {
 				model.addObject("addressesmailing", addresses.getAddressesMailing());
 				model.setViewName("chooseAddress");
 			} else {
-				model.setViewName(ConstantsJsp.FORMSALE);
+				model.setViewName(ConstantsViews.FORMSALE);
 			}
 			model.addObject("buyForm", buyform);
-			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActiveFalse());
+			model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActiveFalse());
 			return model;
 		} else {
 			Sale sale = new Sale();
@@ -120,7 +120,7 @@ public class BuyController {
 			// añado dirección de facturación
 			sale.setInvoice(addressbilling);
 			model.addObject("orderNumber", saleService.buy(sale));
-			model.addObject(ConstantsJsp.JEWELS, cart);
+			model.addObject(ConstantsViews.JEWELS, cart);
 		}
 		model.setViewName("finishbuy");
 		return model;

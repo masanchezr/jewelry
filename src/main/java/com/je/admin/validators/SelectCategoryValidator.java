@@ -8,7 +8,7 @@ import org.springframework.validation.Validator;
 
 import com.je.dbaccess.entities.JewelEntity;
 import com.je.forms.Jewel;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 
 /**
  * The Class SelectCategoryValidator.
@@ -23,7 +23,7 @@ public class SelectCategoryValidator implements Validator {
 	@Override
 	public void validate(Object arg0, Errors arg1) {
 		Jewel jewel = (Jewel) arg0;
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsJsp.REFERENCE, ConstantsJsp.ERRORSELECTREFERENCE);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsViews.REFERENCE, ConstantsViews.ERRORSELECTREFERENCE);
 		BigDecimal price = jewel.getPrice();
 		if (price == null || price.compareTo(BigDecimal.ZERO) == 0) {
 			arg1.rejectValue("price", "selectprice");

@@ -19,7 +19,7 @@ import com.je.services.discounts.Discount;
 import com.je.services.discounts.DiscountService;
 import com.je.services.places.PlaceService;
 import com.je.services.salesrepeated.SearchSaleRepeatedService;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.utils.date.DateUtil;
 
 @Controller
@@ -66,16 +66,16 @@ public class DiscountsController {
 			Date today = new Date();
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			PlaceEntity place = placeService.getPlaceUser(user);
-			String ipAddress = request.getHeader(ConstantsJsp.XFORWARDEDFOR);
+			String ipAddress = request.getHeader(ConstantsViews.XFORWARDEDFOR);
 			if (ipAddress == null) {
 				ipAddress = request.getRemoteAddr();
 			}
 			discount.setPlace(place);
 			discountService.save(discount);
-			model.addObject(ConstantsJsp.DAILY,
+			model.addObject(ConstantsViews.DAILY,
 					dailyService.getDaily(DateUtil.getDateFormated(today), place, ipAddress));
-			model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateddMMyyyy(today));
-			model.setViewName(ConstantsJsp.VIEWDAILYARROW);
+			model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(today));
+			model.setViewName(ConstantsViews.VIEWDAILYARROW);
 		}
 		return model;
 	}

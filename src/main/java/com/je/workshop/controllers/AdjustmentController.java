@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.je.services.adjustments.Adjustment;
 import com.je.services.adjustments.AdjustmentService;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.workshop.validators.AdjustmentValidator;
 
 /**
@@ -35,7 +35,7 @@ public class AdjustmentController {
 	@GetMapping("/workshop/newadjustment")
 	public ModelAndView newadjustment() {
 		ModelAndView model = new ModelAndView("workshop/newadjustment");
-		model.addObject(ConstantsJsp.FORMADJUSTMENT, new Adjustment());
+		model.addObject(ConstantsViews.FORMADJUSTMENT, new Adjustment());
 		return model;
 	}
 
@@ -47,13 +47,13 @@ public class AdjustmentController {
 	 * @return the model and view
 	 */
 	@PostMapping("/workshop/saveAdjustment")
-	public ModelAndView saveAdjustment(@ModelAttribute(ConstantsJsp.FORMADJUSTMENT) Adjustment adjustment,
+	public ModelAndView saveAdjustment(@ModelAttribute(ConstantsViews.FORMADJUSTMENT) Adjustment adjustment,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		adjustmentFormValidator.validate(adjustment, result);
 		if (result.hasErrors()) {
 			model.setViewName("workshop/newadjustment");
-			model.addObject(ConstantsJsp.FORMADJUSTMENT, adjustment);
+			model.addObject(ConstantsViews.FORMADJUSTMENT, adjustment);
 		} else {
 			adjustmentService.saveWorkshop(adjustment);
 			model.setViewName("workshop/success");

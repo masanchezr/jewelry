@@ -8,7 +8,7 @@ import org.springframework.validation.Validator;
 
 import com.je.services.workshop.Workshop;
 import com.je.utils.constants.Constants;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 
 /**
  * The Class WorkshopValidator.
@@ -22,10 +22,10 @@ public class WorkshopValidator implements Validator {
 
 	@Override
 	public void validate(Object arg0, Errors arg1) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.DESCRIPTION, ConstantsJsp.ERRORSELECTDESCRIPTION);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.DESCRIPTION, ConstantsViews.ERRORSELECTDESCRIPTION);
 		Workshop work = (Workshop) arg0;
 		if (work.getAmount().compareTo(BigDecimal.ZERO) <= 0) {
-			arg1.rejectValue(Constants.AMOUNT, ConstantsJsp.ERRORSELECTAMOUNT);
+			arg1.rejectValue(Constants.AMOUNT, ConstantsViews.ERRORSELECTAMOUNT);
 		}
 	}
 

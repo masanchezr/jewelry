@@ -13,7 +13,7 @@ import com.je.admin.forms.SearchMissingNumbers;
 import com.je.admin.validators.SearchMissingNumbersValidator;
 import com.je.services.places.PlaceService;
 import com.je.services.searchmissingnumbers.SearchMissingNumberService;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 
 @Controller
 public class SearchMissingShoppingsPawnsController {
@@ -33,8 +33,8 @@ public class SearchMissingShoppingsPawnsController {
 	@GetMapping("/searchPosibleRepeated")
 	public ModelAndView searchMissingShoppings() {
 		ModelAndView model = new ModelAndView("admin/searchmissingshoppings/searchmissingshoppings");
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
-		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.PLACES, placeService.getAllPlacesActive());
 		model.addObject(SEARCHMISSINGSHOPPINGS, new SearchMissingNumbers());
 		return model;
 	}
@@ -43,15 +43,15 @@ public class SearchMissingShoppingsPawnsController {
 	public ModelAndView resultMissingShoppings(
 			@ModelAttribute(SEARCHMISSINGSHOPPINGS) SearchMissingNumbers searchmissingshoppings, BindingResult result) {
 		ModelAndView model = new ModelAndView();
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		searchMissingNumbersValidator.validate(searchmissingshoppings, result);
 		if (result.hasErrors()) {
-			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
+			model.addObject(ConstantsViews.PLACES, placeService.getAllPlacesActive());
 			model.addObject(SEARCHMISSINGSHOPPINGS, new SearchMissingNumbers());
 			model.setViewName(SEARCHMISSINGSHOPPINGS);
 		} else {
 			model.addObject("nummissing", searchMissingNumberService.searchMissingShoppings(searchmissingshoppings));
-			model.setViewName(ConstantsJsp.VIEWSEARCHMISSINGSHOPPINGS);
+			model.setViewName(ConstantsViews.VIEWSEARCHMISSINGSHOPPINGS);
 		}
 		return model;
 	}

@@ -18,7 +18,7 @@ import com.je.dbaccess.entities.JewelEntity;
 import com.je.dbaccess.entities.PaymentEntity;
 import com.je.services.connections.ConnectionService;
 import com.je.services.search.SearchService;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.web.forms.SearchJewelForm;
 
 /**
@@ -55,12 +55,12 @@ public class AdminController {
 	 */
 	@GetMapping("/admin")
 	public ModelAndView admin(HttpServletRequest request) {
-		String ipAddress = request.getHeader(ConstantsJsp.XFORWARDEDFOR);
+		String ipAddress = request.getHeader(ConstantsViews.XFORWARDEDFOR);
 		if (ipAddress == null) {
 			ipAddress = request.getRemoteAddr();
 		}
 		connectionService.saveConnection(ipAddress);
-		return new ModelAndView("admin/admin", ConstantsJsp.ADMINFORM, new AdminForm());
+		return new ModelAndView("admin/admin", ConstantsViews.ADMINFORM, new AdminForm());
 	}
 
 	/**
@@ -72,8 +72,8 @@ public class AdminController {
 	public ModelAndView newCategory() {
 		ModelAndView model = new ModelAndView();
 		model.setViewName("admin/newCategory");
-		model.addObject(ConstantsJsp.CATEGORY, new CategoryEntity());
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.CATEGORY, new CategoryEntity());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		return model;
 	}
 
@@ -85,9 +85,9 @@ public class AdminController {
 	@GetMapping("/newPayment")
 	public ModelAndView newPayment() {
 		ModelAndView model = new ModelAndView("admin/payments/newPayment");
-		model.addObject(ConstantsJsp.FORMPAYMENT, new PaymentEntity());
-		model.addObject(ConstantsJsp.FORMSEARCH, new SearchJewelForm());
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.FORMPAYMENT, new PaymentEntity());
+		model.addObject(ConstantsViews.FORMSEARCH, new SearchJewelForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		return model;
 	}
 
@@ -101,9 +101,9 @@ public class AdminController {
 	public ModelAndView searchJewels(@RequestParam String search) {
 		ModelAndView model = new ModelAndView("admin/jewels/searchjewels/resultsearchbyreference");
 		List<JewelEntity> jewels = searchService.search(search);
-		model.addObject(ConstantsJsp.JEWELS, jewels);
+		model.addObject(ConstantsViews.JEWELS, jewels);
 		model.addObject("toUpdate", new JewelEntity());
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		return model;
 	}
 
@@ -115,7 +115,7 @@ public class AdminController {
 	@GetMapping("/403admin")
 	public ModelAndView accessDeniedPage() {
 		ModelAndView model = new ModelAndView("admin/403");
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		return model;
 	}
 }

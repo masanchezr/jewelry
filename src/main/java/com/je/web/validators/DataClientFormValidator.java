@@ -8,7 +8,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.je.utils.constants.Constants;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.utils.string.Util;
 import com.je.web.forms.DataClientForm;
 
@@ -32,8 +32,8 @@ public class DataClientFormValidator implements Validator {
 	@Override
 	public void validate(Object arg0, Errors arg1) {
 		DataClientForm data = (DataClientForm) arg0;
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.NAME, ConstantsJsp.ERRORSELECTNAME);
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsJsp.NIF, ConstantsJsp.ERRORSELECTNIF);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.NAME, ConstantsViews.ERRORSELECTNAME);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsViews.NIF, ConstantsViews.ERRORSELECTNIF);
 		String email = data.getEmail();
 		String nif = data.getNif();
 		if (!Util.isEmpty(email)) {
@@ -48,7 +48,7 @@ public class DataClientFormValidator implements Validator {
 			arg1.rejectValue("telephone", "selecttelephone");
 		}
 		if (Util.isEmpty(nif) || !Util.isNifNie(nif)) {
-			arg1.rejectValue(ConstantsJsp.NIF, ConstantsJsp.ERRORSELECTNIF);
+			arg1.rejectValue(ConstantsViews.NIF, ConstantsViews.ERRORSELECTNIF);
 		}
 	}
 }

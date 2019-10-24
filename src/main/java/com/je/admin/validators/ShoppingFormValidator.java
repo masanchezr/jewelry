@@ -4,7 +4,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import com.je.admin.forms.ShoppingSearch;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.utils.string.Util;
 
 /**
@@ -21,10 +21,10 @@ public class ShoppingFormValidator implements Validator {
 	public void validate(Object arg0, Errors arg1) {
 		ShoppingSearch ssf = (ShoppingSearch) arg0;
 		if (Util.isEmpty(ssf.getDatefrom()) && Util.isEmpty(ssf.getDateuntil()) && ssf.getNumshop() == null) {
-			arg1.rejectValue(ConstantsJsp.NUMSHOP, ConstantsJsp.ERRORSELECTNUMSHOP);
-			arg1.rejectValue(ConstantsJsp.DATEFROM, ConstantsJsp.SELECTDATE);
+			arg1.rejectValue(ConstantsViews.NUMSHOP, ConstantsViews.ERRORSELECTNUMSHOP);
+			arg1.rejectValue(ConstantsViews.DATEFROM, ConstantsViews.SELECTDATE);
 		} else if (Util.isEmpty(ssf.getDatefrom()) && !Util.isEmpty(ssf.getDateuntil())) {
-			arg1.rejectValue(ConstantsJsp.DATEFROM, ConstantsJsp.SELECTDATE);
+			arg1.rejectValue(ConstantsViews.DATEFROM, ConstantsViews.SELECTDATE);
 		}
 	}
 

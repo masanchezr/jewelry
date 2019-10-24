@@ -25,7 +25,7 @@ import com.je.dbaccess.entities.RegisterEntity;
 import com.je.forms.SearchForm;
 import com.je.services.registers.RegisterService;
 import com.je.utils.constants.Constants;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.utils.date.DateUtil;
 import com.je.validators.SearchFormValidator;
 
@@ -44,20 +44,20 @@ public class RegisterEmployeesController {
 	@GetMapping("/searchRegisterEmployees")
 	public ModelAndView searchRegisterEmployees() {
 		ModelAndView model = new ModelAndView("admin/register/search");
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		model.addObject("searchDateForm", new SearchForm());
 		return model;
 	}
 
 	@PostMapping("/registeremployees")
-	public ModelAndView registeremployees(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm form,
+	public ModelAndView registeremployees(@ModelAttribute(ConstantsViews.FORMSEARCH) SearchForm form,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		String sfrom = form.getDatefrom();
 		String suntil = form.getDateuntil();
 		adminSearchValidator.validate(form, result);
 		if (result.hasErrors()) {
-			model.addObject(ConstantsJsp.FORMSEARCH, new SearchForm());
+			model.addObject(ConstantsViews.FORMSEARCH, new SearchForm());
 			model.setViewName("admin/register/search");
 		} else {
 			model.addObject("register", registerService.findByDates(sfrom, suntil));
@@ -65,7 +65,7 @@ public class RegisterEmployeesController {
 			model.addObject("datefrom", DateUtil.getDate(sfrom));
 			model.addObject("dateuntil", DateUtil.getDate(suntil));
 		}
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		return model;
 	}
 
@@ -77,7 +77,7 @@ public class RegisterEmployeesController {
 		File file = new File(path.concat("register.pdf"));
 		List<RegisterEntity> register = registerService.findByDates(from, until);
 		registerService.generatePdf(register, file);
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		model.addObject("register", register);
 		response.setContentType("application/force-download");
 		response.setHeader("Content-Disposition", "attachment; filename=register.pdf");

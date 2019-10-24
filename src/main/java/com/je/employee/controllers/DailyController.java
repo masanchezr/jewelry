@@ -18,7 +18,7 @@ import com.je.forms.SearchForm;
 import com.je.services.dailies.Daily;
 import com.je.services.dailies.DailyService;
 import com.je.services.places.PlaceService;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.utils.date.DateUtil;
 import com.je.utils.string.Util;
 
@@ -44,18 +44,18 @@ public class DailyController {
 	public ModelAndView daily(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
-		String ipAddress = request.getHeader(ConstantsJsp.XFORWARDEDFOR);
+		String ipAddress = request.getHeader(ConstantsViews.XFORWARDEDFOR);
 		Date now = DateUtil.getDateFormated(new Date());
 		if (ipAddress == null) {
 			ipAddress = request.getRemoteAddr();
 		}
 		Daily daily = dailyService.getDaily(now, placeService.getPlaceUser(user), ipAddress);
 		if (daily.getFinalamount() == null) {
-			model.setViewName(ConstantsJsp.VIEWNOTDAILY);
+			model.setViewName(ConstantsViews.VIEWNOTDAILY);
 		} else {
-			model.addObject(ConstantsJsp.DAILY, daily);
-			model.setViewName(ConstantsJsp.VIEWDAILYARROW);
-			model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
+			model.addObject(ConstantsViews.DAILY, daily);
+			model.setViewName(ConstantsViews.VIEWDAILYARROW);
+			model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 		}
 		return model;
 	}
@@ -63,15 +63,15 @@ public class DailyController {
 	@GetMapping("/employee/searchdaily")
 	public ModelAndView searchdaily() {
 		ModelAndView model = new ModelAndView("employee/daily/searchdaily");
-		model.addObject(ConstantsJsp.FORMSEARCH, new SearchForm());
+		model.addObject(ConstantsViews.FORMSEARCH, new SearchForm());
 		return model;
 	}
 
 	@GetMapping("/employee/beforeday{date}")
-	public ModelAndView beforeday(@PathVariable(ConstantsJsp.DATE) String sdate, HttpServletRequest request) {
+	public ModelAndView beforeday(@PathVariable(ConstantsViews.DATE) String sdate, HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
-		String ipAddress = request.getHeader(ConstantsJsp.XFORWARDEDFOR);
+		String ipAddress = request.getHeader(ConstantsViews.XFORWARDEDFOR);
 		if (ipAddress == null) {
 			ipAddress = request.getRemoteAddr();
 		}
@@ -84,15 +84,15 @@ public class DailyController {
 				date = DateUtil.addDays(date, -1);
 				Daily daily = dailyService.getDaily(date, placeService.getPlaceUser(user), ipAddress);
 				if (daily.getFinalamount() == null) {
-					model.setViewName(ConstantsJsp.VIEWNOTDAILY);
+					model.setViewName(ConstantsViews.VIEWNOTDAILY);
 				} else {
-					model.addObject(ConstantsJsp.DAILY, daily);
-					model.setViewName(ConstantsJsp.VIEWDAILYARROWS);
-					model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateddMMyyyy(date));
+					model.addObject(ConstantsViews.DAILY, daily);
+					model.setViewName(ConstantsViews.VIEWDAILYARROWS);
+					model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(date));
 					existdaily = true;
 				}
 			} else {
-				model.setViewName(ConstantsJsp.VIEWNOTDAILY);
+				model.setViewName(ConstantsViews.VIEWNOTDAILY);
 				existdaily = true;
 			}
 		}
@@ -100,7 +100,7 @@ public class DailyController {
 	}
 
 	@GetMapping("/employee/againday{date}")
-	public ModelAndView againday(@PathVariable(ConstantsJsp.DATE) String sdate, HttpServletRequest request) {
+	public ModelAndView againday(@PathVariable(ConstantsViews.DATE) String sdate, HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		Date date = DateUtil.getDate(sdate);
@@ -110,23 +110,23 @@ public class DailyController {
 			if (date.compareTo(new Date()) < 0) {
 				Daily daily = dailyService.getDaily(date, placeService.getPlaceUser(user), null);
 				if (daily.getFinalamount() == null) {
-					model.setViewName(ConstantsJsp.VIEWNOTDAILY);
+					model.setViewName(ConstantsViews.VIEWNOTDAILY);
 				} else {
 					String view;
 					String stoday = DateUtil.getStringDateddMMyyyy(new Date());
 					sdate = DateUtil.getStringDateddMMyyyy(date);
 					if (stoday.compareTo(sdate) == 0) {
-						view = ConstantsJsp.VIEWDAILYARROW;
+						view = ConstantsViews.VIEWDAILYARROW;
 					} else {
-						view = ConstantsJsp.VIEWDAILYARROWS;
+						view = ConstantsViews.VIEWDAILYARROWS;
 					}
-					model.addObject(ConstantsJsp.DAILY, daily);
+					model.addObject(ConstantsViews.DAILY, daily);
 					model.setViewName(view);
-					model.addObject(ConstantsJsp.DATEDAILY, sdate);
+					model.addObject(ConstantsViews.DATEDAILY, sdate);
 					existdaily = true;
 				}
 			} else {
-				model.setViewName(ConstantsJsp.VIEWNOTDAILY);
+				model.setViewName(ConstantsViews.VIEWNOTDAILY);
 				existdaily = true;
 			}
 		}
@@ -134,11 +134,11 @@ public class DailyController {
 	}
 
 	@PostMapping("/employee/resultdaily")
-	public ModelAndView resultdaily(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm searchForm,
+	public ModelAndView resultdaily(@ModelAttribute(ConstantsViews.FORMSEARCH) SearchForm searchForm,
 			HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
-		String ipAddress = request.getHeader(ConstantsJsp.XFORWARDEDFOR);
+		String ipAddress = request.getHeader(ConstantsViews.XFORWARDEDFOR);
 		if (ipAddress == null) {
 			ipAddress = request.getRemoteAddr();
 		}
@@ -148,7 +148,7 @@ public class DailyController {
 		Calendar c = Calendar.getInstance();
 		if (Util.isEmpty(sdate)) {
 			date = new Date();
-			view = ConstantsJsp.VIEWDAILYARROW;
+			view = ConstantsViews.VIEWDAILYARROW;
 		} else {
 			view = "dailyarrows";
 			date = DateUtil.getDate(sdate);
@@ -156,14 +156,14 @@ public class DailyController {
 		if (date.before(c.getTime())) {
 			Daily daily = dailyService.getDaily(date, placeService.getPlaceUser(user), ipAddress);
 			if (daily.getFinalamount() == null) {
-				model.setViewName(ConstantsJsp.VIEWNOTDAILY);
+				model.setViewName(ConstantsViews.VIEWNOTDAILY);
 			} else {
-				model.addObject(ConstantsJsp.DAILY, daily);
+				model.addObject(ConstantsViews.DAILY, daily);
 				model.setViewName(view);
-				model.addObject(ConstantsJsp.DATEDAILY, date);
+				model.addObject(ConstantsViews.DATEDAILY, date);
 			}
 		} else {
-			model.setViewName(ConstantsJsp.VIEWNOTDAILY);
+			model.setViewName(ConstantsViews.VIEWNOTDAILY);
 		}
 		return model;
 	}

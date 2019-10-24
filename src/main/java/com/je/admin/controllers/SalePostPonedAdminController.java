@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.je.admin.forms.AdminForm;
 import com.je.forms.SalePostPoned;
 import com.je.services.sales.SalesPostPonedService;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 
 @Controller
 public class SalePostPonedAdminController {
@@ -28,21 +28,21 @@ public class SalePostPonedAdminController {
 	@GetMapping("/searchmissingsalepostponed")
 	public ModelAndView salepostponed() {
 		ModelAndView model = new ModelAndView("admin/salespostponed/resultnummissing");
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
-		model.addObject(ConstantsJsp.NUMSALE, salesPostPonedService.getMissing());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.NUMSALE, salesPostPonedService.getMissing());
 		return model;
 	}
 
 	@GetMapping("/searchsalepostponed")
 	public ModelAndView searchsalepostponed() {
 		ModelAndView model = new ModelAndView("admin/salespostponed/searchsalepostponed");
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
-		model.addObject(ConstantsJsp.FORMSALEPOSTPONED, new SalePostPoned());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.FORMSALEPOSTPONED, new SalePostPoned());
 		return model;
 	}
 
 	@PostMapping("/showsale")
-	public ModelAndView showsale(@ModelAttribute(ConstantsJsp.FORMSALEPOSTPONED) SalePostPoned salepostponed,
+	public ModelAndView showsale(@ModelAttribute(ConstantsViews.FORMSALEPOSTPONED) SalePostPoned salepostponed,
 			BindingResult result) {
 		return getModelSalePostponed(salepostponed.getIdsale());
 	}
@@ -52,12 +52,12 @@ public class SalePostPonedAdminController {
 		SalePostPoned spp = salesPostPonedService.searchByPK(id);
 		if (spp != null) {
 			model.setViewName("admin/salespostponed/finishsale");
-			model.addObject(ConstantsJsp.FORMSALE, spp);
+			model.addObject(ConstantsViews.FORMSALE, spp);
 		} else {
 			model.setViewName("admin/salespostponed/searchsalepostponed");
-			model.addObject(ConstantsJsp.FORMSALEPOSTPONED, new SalePostPoned());
+			model.addObject(ConstantsViews.FORMSALEPOSTPONED, new SalePostPoned());
 		}
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		return model;
 	}
 
@@ -70,7 +70,7 @@ public class SalePostPonedAdminController {
 	@GetMapping("/searchexpired")
 	public ModelAndView searchExpired() {
 		ModelAndView model = new ModelAndView("admin/salespostponed/expired");
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		model.addObject("resultexpired", salesPostPonedService.getListTimeout());
 		return model;
 	}

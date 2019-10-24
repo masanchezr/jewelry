@@ -23,7 +23,7 @@ import com.je.services.payment.PaymentService;
 import com.je.services.places.PlaceService;
 import com.je.services.recordings.RecordingService;
 import com.je.services.salesrepeated.SearchSaleRepeatedService;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.utils.date.DateUtil;
 
 @Controller
@@ -57,7 +57,7 @@ public class RecordingController {
 	public ModelAndView newrecording() {
 		ModelAndView model = new ModelAndView(VIEWNEWRECORDING);
 		model.addObject(FORMRECORDING, new RecordingEntity());
-		model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
+		model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
 		return model;
 	}
 
@@ -70,14 +70,14 @@ public class RecordingController {
 		if (errors.hasErrors()) {
 			model.setViewName(VIEWNEWRECORDING);
 			model.addObject(FORMRECORDING, recording);
-			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
+			model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
 		} else if (searchSaleRepeatedService.isSaleRepeated(recording.getNumsale())) {
 			model.setViewName(VIEWNEWRECORDING);
 			model.addObject(FORMRECORDING, recording);
-			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
+			model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
 			errors.rejectValue("numsale", "numrepeated");
 		} else {
-			String ipAddress = request.getHeader(ConstantsJsp.XFORWARDEDFOR);
+			String ipAddress = request.getHeader(ConstantsViews.XFORWARDEDFOR);
 			if (ipAddress == null) {
 				ipAddress = request.getRemoteAddr();
 			}
@@ -85,9 +85,9 @@ public class RecordingController {
 			PlaceEntity place = placeService.getPlaceUser(user);
 			recording.setPlace(place);
 			recordingService.save(mapper.map(recording, RecordingEntity.class));
-			model.setViewName(ConstantsJsp.VIEWDAILYARROW);
-			model.addObject(ConstantsJsp.DAILY, dailyService.getDaily(today, place, ipAddress));
-			model.addObject(ConstantsJsp.DATEDAILY, today);
+			model.setViewName(ConstantsViews.VIEWDAILYARROW);
+			model.addObject(ConstantsViews.DAILY, dailyService.getDaily(today, place, ipAddress));
+			model.addObject(ConstantsViews.DATEDAILY, today);
 		}
 		return model;
 	}

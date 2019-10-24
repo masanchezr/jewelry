@@ -4,7 +4,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import com.je.admin.forms.BillingForm;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.utils.date.DateUtil;
 import com.je.utils.string.Util;
 
@@ -20,7 +20,7 @@ public class BillingFormValidator implements Validator {
 		BillingForm billingSearch = (BillingForm) arg0;
 		String sdate = billingSearch.getDate();
 		if (!Util.isEmpty(sdate) && !DateUtil.isDate(sdate)) {
-			arg1.rejectValue(ConstantsJsp.DATE, ConstantsJsp.SELECTDATE);
+			arg1.rejectValue(ConstantsViews.DATE, ConstantsViews.SELECTDATE);
 		}
 
 	}

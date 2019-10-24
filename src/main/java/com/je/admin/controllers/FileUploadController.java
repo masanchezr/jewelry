@@ -20,7 +20,7 @@ import com.je.admin.forms.AdminForm;
 import com.je.dbaccess.entities.JewelEntity;
 import com.je.services.jewels.JewelService;
 import com.je.utils.constants.Constants;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 
 /**
  * The Class FileUploadController.
@@ -39,7 +39,7 @@ public class FileUploadController {
 	@GetMapping("/upload")
 	public ModelAndView provideUploadInfo() {
 		ModelAndView model = new ModelAndView("uploadimg");
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		log.warn("provideUploadInfo()");
 		return model;
 	}

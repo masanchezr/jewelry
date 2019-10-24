@@ -5,7 +5,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.je.dbaccess.entities.JewelEntity;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 
 public class JewelFormValidator implements Validator {
 
@@ -16,6 +16,6 @@ public class JewelFormValidator implements Validator {
 
 	@Override
 	public void validate(Object arg0, Errors arg1) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsJsp.REFERENCE, ConstantsJsp.ERRORSELECTREFERENCE);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsViews.REFERENCE, ConstantsViews.ERRORSELECTREFERENCE);
 	}
 }

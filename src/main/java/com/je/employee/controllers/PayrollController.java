@@ -19,7 +19,7 @@ import com.je.employee.validators.PayrollFormValidator;
 import com.je.services.payroll.Payroll;
 import com.je.services.payroll.PayrollService;
 import com.je.utils.constants.Constants;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.utils.date.DateUtil;
 
 @Controller
@@ -65,9 +65,9 @@ public class PayrollController {
 			payrollEntity.setYear(c.get(Calendar.YEAR));
 			payrollEntity.setUser(userEntity);
 			if (!payrollservice.existsPayroll(payrollEntity)) {
-				model.addObject(ConstantsJsp.DAILY, payrollservice.addPayroll(payrollEntity));
-				model.setViewName(ConstantsJsp.VIEWDAILYARROW);
-				model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
+				model.addObject(ConstantsViews.DAILY, payrollservice.addPayroll(payrollEntity));
+				model.setViewName(ConstantsViews.VIEWDAILYARROW);
+				model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 			} else {
 				model.setViewName(VIEWNEWPAYROLL);
 				model.addObject(FORMPAYROLL, payroll);

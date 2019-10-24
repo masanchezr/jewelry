@@ -14,7 +14,7 @@ import com.je.dbaccess.entities.PlaceEntity;
 import com.je.services.categories.CategoriesService;
 import com.je.services.search.SearchService;
 import com.je.utils.constants.Constants;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.web.forms.SearchJewelForm;
 
 /**
@@ -40,7 +40,7 @@ public class SearchController {
 	 * @return the string
 	 */
 	@GetMapping
-	public ModelAndView search(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchJewelForm search) {
+	public ModelAndView search(@ModelAttribute(ConstantsViews.FORMSEARCH) SearchJewelForm search) {
 		Page<JewelEntity> page = searchService.searchActivesWithImg(search.getSearchname(), null, 1);
 		Iterable<CategoryEntity> categories = searchCategoriesService.getAllCategoriesOrderByName();
 		PlaceEntity place = new PlaceEntity();
@@ -49,17 +49,17 @@ public class SearchController {
 		int current = page.getNumber() + 1;
 		int begin = Math.max(1, current - 5);
 		int end = Math.min(begin + 10, page.getTotalPages());
-		model.addObject(ConstantsJsp.CATEGORIES, categories);
-		model.addObject(ConstantsJsp.JEWELS, page.getContent());
-		model.addObject(ConstantsJsp.BREADCRUMBS, "Home");
-		model.addObject(ConstantsJsp.FORMSEARCH, new SearchJewelForm());
+		model.addObject(ConstantsViews.CATEGORIES, categories);
+		model.addObject(ConstantsViews.JEWELS, page.getContent());
+		model.addObject(ConstantsViews.BREADCRUMBS, "Home");
+		model.addObject(ConstantsViews.FORMSEARCH, new SearchJewelForm());
 		model.addObject("deploymentLog", page);
 		model.addObject("beginIndex", begin);
 		model.addObject("endIndex", end);
 		model.addObject("currentIndex", current);
 		model.addObject("url", System.getenv("OPENSHIFT_DATA_DIR"));
 		model.addObject("totalprice", 0);
-		model.addObject(ConstantsJsp.FORMSEARCH, new SearchJewelForm());
+		model.addObject(ConstantsViews.FORMSEARCH, new SearchJewelForm());
 		return model;
 	}
 }

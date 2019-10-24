@@ -9,7 +9,7 @@ import org.springframework.validation.Validator;
 
 import com.je.services.otherconcepts.OtherConcept;
 import com.je.utils.constants.Constants;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.utils.string.Util;
 
 /**
@@ -24,11 +24,11 @@ public class OtherConceptValidator implements Validator {
 
 	@Override
 	public void validate(Object arg0, Errors arg1) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.DESCRIPTION, ConstantsJsp.ERRORSELECTDESCRIPTION);
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "amount", ConstantsJsp.ERRORSELECTAMOUNT);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.DESCRIPTION, ConstantsViews.ERRORSELECTDESCRIPTION);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "amount", ConstantsViews.ERRORSELECTAMOUNT);
 		OtherConcept concept = (OtherConcept) arg0;
 		if (concept == null || Util.getNumber(concept.getAmount()).compareTo(BigDecimal.ZERO) == 0) {
-			arg1.rejectValue(Constants.AMOUNT, ConstantsJsp.ERRORSELECTAMOUNT);
+			arg1.rejectValue(Constants.AMOUNT, ConstantsViews.ERRORSELECTAMOUNT);
 		} else {
 			String description = concept.getDescription();
 			// no pongo pila porque puede ser la de la caja fuerte

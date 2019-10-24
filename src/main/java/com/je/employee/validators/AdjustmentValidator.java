@@ -6,7 +6,7 @@ import org.springframework.validation.Validator;
 
 import com.je.services.adjustments.Adjustment;
 import com.je.utils.constants.Constants;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 
 /**
  * The Class AdjustmentValidator.
@@ -20,9 +20,9 @@ public class AdjustmentValidator implements Validator {
 
 	@Override
 	public void validate(Object arg0, Errors arg1) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsJsp.IDADJUSTMENT, ConstantsJsp.ERRORSELECTIDADJUSTMENT);
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.DESCRIPTION, ConstantsJsp.ERRORSELECTDESCRIPTION);
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.AMOUNT, ConstantsJsp.ERRORSELECTAMOUNT);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsViews.IDADJUSTMENT, ConstantsViews.ERRORSELECTIDADJUSTMENT);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.DESCRIPTION, ConstantsViews.ERRORSELECTDESCRIPTION);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.AMOUNT, ConstantsViews.ERRORSELECTAMOUNT);
 	}
 
 }

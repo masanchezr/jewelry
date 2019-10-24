@@ -8,7 +8,7 @@ import org.springframework.validation.Validator;
 
 import com.je.services.pawns.NewPawn;
 import com.je.utils.constants.Constants;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.utils.date.DateUtil;
 import com.je.utils.string.Util;
 
@@ -26,18 +26,18 @@ public class UpdatePawnFormValidator implements Validator {
 	public void validate(Object arg0, Errors arg1) {
 		NewPawn pawn = (NewPawn) arg0;
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.NUMPAWN, Constants.IDPAWN);
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.NAME, ConstantsJsp.ERRORSELECTNAME);
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsJsp.SURNAME, ConstantsJsp.ERRORSURNAME);
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsJsp.NIF, ConstantsJsp.ERRORSELECTNIF);
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsJsp.ADDRESS, ConstantsJsp.ERRORSELECTADDRESS);
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsJsp.PERCENT, ConstantsJsp.ERRORSELECTPERCENT);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.NAME, ConstantsViews.ERRORSELECTNAME);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsViews.SURNAME, ConstantsViews.ERRORSURNAME);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsViews.NIF, ConstantsViews.ERRORSELECTNIF);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsViews.ADDRESS, ConstantsViews.ERRORSELECTADDRESS);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsViews.PERCENT, ConstantsViews.ERRORSELECTPERCENT);
 		String sdate = pawn.getCreationdate();
 		BigDecimal percent = Util.getNumber(pawn.getPercent());
 		if (!Util.isEmpty(sdate) && !DateUtil.isDate(sdate)) {
-			arg1.rejectValue(Constants.CREATIONDATE, ConstantsJsp.SELECTDATE);
+			arg1.rejectValue(Constants.CREATIONDATE, ConstantsViews.SELECTDATE);
 		}
 		if (percent.compareTo(BigDecimal.ZERO) <= 0) {
-			arg1.rejectValue(ConstantsJsp.ERRORSELECTADDRESS, ConstantsJsp.ERRORSELECTPERCENT);
+			arg1.rejectValue(ConstantsViews.ERRORSELECTADDRESS, ConstantsViews.ERRORSELECTPERCENT);
 		}
 	}
 }

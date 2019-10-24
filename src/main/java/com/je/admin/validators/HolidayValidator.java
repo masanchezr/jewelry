@@ -6,7 +6,7 @@ import org.springframework.validation.Validator;
 
 import com.je.services.holidays.Holiday;
 import com.je.utils.constants.Constants;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.utils.date.DateUtil;
 
 public class HolidayValidator implements Validator {
@@ -20,11 +20,11 @@ public class HolidayValidator implements Validator {
 
 	@Override
 	public void validate(Object arg0, Errors arg1) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, DATEHOLIDAY, ConstantsJsp.SELECTDATE);
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.DESCRIPTION, ConstantsJsp.ERRORSELECTDESCRIPTION);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, DATEHOLIDAY, ConstantsViews.SELECTDATE);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.DESCRIPTION, ConstantsViews.ERRORSELECTDESCRIPTION);
 		Holiday holiday = (Holiday) arg0;
 		if (!DateUtil.isDate(holiday.getDateholiday())) {
-			arg1.rejectValue(DATEHOLIDAY, ConstantsJsp.SELECTDATE);
+			arg1.rejectValue(DATEHOLIDAY, ConstantsViews.SELECTDATE);
 		}
 	}
 

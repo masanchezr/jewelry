@@ -6,7 +6,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import com.je.forms.Sale;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 
 public class PartialCancelSaleValidator implements Validator {
 
@@ -20,7 +20,7 @@ public class PartialCancelSaleValidator implements Validator {
 		Sale sale = (Sale) arg0;
 		List<Long> jewelscancel = sale.getJewelstocancel();
 		if (jewelscancel == null || jewelscancel.isEmpty()) {
-			arg1.rejectValue(ConstantsJsp.IDSALE, "selectjeweltocancel");
+			arg1.rejectValue(ConstantsViews.IDSALE, "selectjeweltocancel");
 		}
 	}
 

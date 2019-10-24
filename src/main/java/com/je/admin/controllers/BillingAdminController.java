@@ -14,7 +14,7 @@ import com.je.admin.forms.AdminForm;
 import com.je.admin.forms.BillingForm;
 import com.je.admin.validators.BillingFormValidator;
 import com.je.services.workshop.BillingService;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.utils.date.DateUtil;
 import com.je.utils.string.Util;
 
@@ -33,7 +33,7 @@ public class BillingAdminController {
 	@GetMapping("/searchbill")
 	public ModelAndView searchBill() {
 		ModelAndView model = new ModelAndView(VIEWSEARCHBILL);
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		model.addObject(FORMBILLING, new BillingForm());
 		return model;
 	}
@@ -58,7 +58,7 @@ public class BillingAdminController {
 			model.addAllObjects(billingService.getBill(cdate));
 			jsp = VIEWBILLINGADMIN;
 		}
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		model.setViewName(jsp);
 		return model;
 	}

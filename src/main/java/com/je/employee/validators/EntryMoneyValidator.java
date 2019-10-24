@@ -9,7 +9,7 @@ import org.springframework.validation.Validator;
 import com.je.dbaccess.entities.EntryMoneyEntity;
 import com.je.forms.EntryMoney;
 import com.je.utils.constants.Constants;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 
 public class EntryMoneyValidator implements Validator {
 
@@ -20,10 +20,10 @@ public class EntryMoneyValidator implements Validator {
 
 	@Override
 	public void validate(Object arg0, Errors arg1) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "amount", ConstantsJsp.ERRORSELECTAMOUNT);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "amount", ConstantsViews.ERRORSELECTAMOUNT);
 		EntryMoney money = (EntryMoney) arg0;
 		if (money.getAmount().compareTo(BigDecimal.ZERO) <= 0) {
-			arg1.rejectValue(Constants.AMOUNT, ConstantsJsp.ERRORSELECTAMOUNT);
+			arg1.rejectValue(Constants.AMOUNT, ConstantsViews.ERRORSELECTAMOUNT);
 		}
 	}
 

@@ -6,7 +6,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import com.je.admin.forms.SearchDailyForm;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.utils.date.DateUtil;
 
 public class SearchDailyFormValidator implements Validator {
@@ -21,7 +21,7 @@ public class SearchDailyFormValidator implements Validator {
 		SearchDailyForm dailyForm = (SearchDailyForm) arg0;
 		Date date = DateUtil.getDate(dailyForm.getDate());
 		if (new Date().before(date)) {
-			arg1.rejectValue(ConstantsJsp.DATE, "datecannotbegreater");
+			arg1.rejectValue(ConstantsViews.DATE, "datecannotbegreater");
 		}
 	}
 

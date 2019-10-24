@@ -4,7 +4,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import com.je.services.sales.SearchSale;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.utils.date.DateUtil;
 import com.je.utils.string.Util;
 
@@ -21,10 +21,10 @@ public class SearchSalesValidator implements Validator {
 		String sfrom = searchSale.getSfrom();
 		String suntil = searchSale.getSuntil();
 		if (Util.isEmpty(sfrom) || !DateUtil.isDate(sfrom)) {
-			arg1.rejectValue(ConstantsJsp.SFROM, ConstantsJsp.SELECTDATE);
+			arg1.rejectValue(ConstantsViews.SFROM, ConstantsViews.SELECTDATE);
 		}
 		if (!Util.isEmpty(suntil) && !DateUtil.isDate(suntil)) {
-			arg1.rejectValue(ConstantsJsp.SUNTIL, ConstantsJsp.SELECTDATE);
+			arg1.rejectValue(ConstantsViews.SUNTIL, ConstantsViews.SELECTDATE);
 		}
 	}
 

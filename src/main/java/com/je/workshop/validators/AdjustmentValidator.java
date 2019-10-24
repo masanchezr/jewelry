@@ -8,7 +8,7 @@ import org.springframework.validation.Validator;
 
 import com.je.services.adjustments.Adjustment;
 import com.je.utils.constants.Constants;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.utils.string.Util;
 
 /**
@@ -23,12 +23,12 @@ public class AdjustmentValidator implements Validator {
 
 	@Override
 	public void validate(Object arg0, Errors arg1) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsJsp.IDADJUSTMENT,
-				ConstantsJsp.ERRORSELECTIDADJUSTMENT);
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.DESCRIPTION, ConstantsJsp.ERRORSELECTDESCRIPTION);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsViews.IDADJUSTMENT,
+				ConstantsViews.ERRORSELECTIDADJUSTMENT);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.DESCRIPTION, ConstantsViews.ERRORSELECTDESCRIPTION);
 		Adjustment adjustment = (Adjustment) arg0;
 		if (Util.getNumber(adjustment.getAmountwork()).compareTo(BigDecimal.ZERO) <= 0) {
-			arg1.rejectValue("amountwork", ConstantsJsp.ERRORSELECTAMOUNT);
+			arg1.rejectValue("amountwork", ConstantsViews.ERRORSELECTAMOUNT);
 		}
 	}
 

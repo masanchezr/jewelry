@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.je.admin.forms.AdminForm;
 import com.je.forms.SearchForm;
 import com.je.services.entrymoney.EntryMoneyService;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.utils.date.DateUtil;
 import com.je.utils.string.Util;
 import com.je.validators.SearchFormValidator;
@@ -32,19 +32,19 @@ public class EntryMoneyAdminController {
 	@GetMapping("/searchEntries")
 	public ModelAndView searchEntries() {
 		ModelAndView model = new ModelAndView(VIEWSEARCHENTRIES);
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
-		model.addObject(ConstantsJsp.FORMSEARCH, new SearchForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.FORMSEARCH, new SearchForm());
 		return model;
 	}
 
 	@PostMapping("/resultentries")
-	public ModelAndView resultEntries(@ModelAttribute(ConstantsJsp.FORMSEARCH) SearchForm asf, BindingResult arg1) {
+	public ModelAndView resultEntries(@ModelAttribute(ConstantsViews.FORMSEARCH) SearchForm asf, BindingResult arg1) {
 		ModelAndView model = new ModelAndView();
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		adminSearchValidator.validate(asf, arg1);
 		if (arg1.hasErrors()) {
 			model.setViewName("VIEWSEARCHENTRIES");
-			model.addObject(ConstantsJsp.FORMSEARCH, asf);
+			model.addObject(ConstantsViews.FORMSEARCH, asf);
 		} else {
 			model.setViewName("admin/entriesmoney/resultentriesmoney");
 			Date dfrom = DateUtil.getDate(asf.getDatefrom());

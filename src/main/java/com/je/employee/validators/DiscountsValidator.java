@@ -6,7 +6,7 @@ import org.springframework.validation.Validator;
 
 import com.je.services.discounts.Discount;
 import com.je.utils.constants.Constants;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 
 public class DiscountsValidator implements Validator {
 
@@ -17,7 +17,7 @@ public class DiscountsValidator implements Validator {
 
 	@Override
 	public void validate(Object arg0, Errors arg1) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.IDDISCOUNT, ConstantsJsp.ERRORNUMDISCOUNT);
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.SDISCOUNT, ConstantsJsp.ERRORSELECTAMOUNT);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.IDDISCOUNT, ConstantsViews.ERRORNUMDISCOUNT);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.SDISCOUNT, ConstantsViews.ERRORSELECTAMOUNT);
 	}
 }

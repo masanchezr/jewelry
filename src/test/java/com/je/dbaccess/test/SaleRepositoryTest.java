@@ -18,7 +18,7 @@ import com.je.dbaccess.entities.PaymentEntity;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.dbaccess.entities.SaleEntity;
 import com.je.dbaccess.repositories.SalesRepository;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 
 /**
  * The Class SaleRepositoryTest.
@@ -71,7 +71,7 @@ public class SaleRepositoryTest {
 				while (isales.hasNext()) {
 					SaleEntity sale = isales.next();
 					System.out.println(
-							ConstantsJsp.IDSALE + sale.getIdsale() + "client:" + sale.getClient().getNifclient());
+							ConstantsViews.IDSALE + sale.getIdsale() + "client:" + sale.getClient().getNifclient());
 				}
 			}
 		} else {

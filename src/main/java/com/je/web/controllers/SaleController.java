@@ -21,7 +21,7 @@ import com.je.services.sales.Addresses;
 import com.je.services.sales.SaleService;
 import com.je.services.users.Client;
 import com.je.services.users.RegistrationService;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.utils.string.Util;
 import com.je.web.forms.BuyForm;
 import com.je.web.forms.DataClientForm;
@@ -100,14 +100,14 @@ public class SaleController {
 			buyForm.setJewels(dataForm.getJewels());
 			buyForm.setNif(dataForm.getNif());
 			model.addObject("buyForm", buyForm);
-			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActiveFalse());
+			model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActiveFalse());
 			model.setViewName(jsp);
-			model.addObject(ConstantsJsp.BREADCRUMBS, "Home >> Producto seleccionado >> Comprar");
+			model.addObject(ConstantsViews.BREADCRUMBS, "Home >> Producto seleccionado >> Comprar");
 		} else {
 			model.setViewName(VIEWSHOPPINGCART);
 		}
-		model.addObject(ConstantsJsp.FORMSEARCH, new SearchJewelForm());
-		model.addObject(ConstantsJsp.CATEGORIES, categories);
+		model.addObject(ConstantsViews.FORMSEARCH, new SearchJewelForm());
+		model.addObject(ConstantsViews.CATEGORIES, categories);
 		return model;
 	}
 
@@ -115,8 +115,8 @@ public class SaleController {
 	public ModelAndView checkout() {
 		ModelAndView model = new ModelAndView(VIEWSHOPPINGCART);
 		model.addObject("dataForm", new DataClientForm());
-		model.addObject(ConstantsJsp.FORMSEARCH, new SearchJewelForm());
-		model.addObject(ConstantsJsp.CATEGORIES, searchCategoriesService.getAllCategoriesOrderByName());
+		model.addObject(ConstantsViews.FORMSEARCH, new SearchJewelForm());
+		model.addObject(ConstantsViews.CATEGORIES, searchCategoriesService.getAllCategoriesOrderByName());
 		return model;
 	}
 

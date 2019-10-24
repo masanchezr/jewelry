@@ -33,7 +33,7 @@ import com.je.services.places.PlaceService;
 import com.je.services.sales.Installment;
 import com.je.services.sales.SalesPostPonedService;
 import com.je.utils.constants.Constants;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.utils.date.DateUtil;
 
 @Controller
@@ -82,15 +82,15 @@ public class SalePostPonedController {
 			jewels.add(new JewelEntity());
 		}
 		sale.setJewels(jewels);
-		model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
-		model.addObject(ConstantsJsp.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
-		model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
-		model.addObject(ConstantsJsp.FORMSALE, sale);
+		model.addObject(ConstantsViews.MATERIALS, materialService.getAllMetals());
+		model.addObject(ConstantsViews.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
+		model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
+		model.addObject(ConstantsViews.FORMSALE, sale);
 		return model;
 	}
 
 	@PostMapping("/employee/savesalepostponed")
-	public ModelAndView savesalepostponed(@ModelAttribute(ConstantsJsp.FORMSALE) SalePostPoned sale,
+	public ModelAndView savesalepostponed(@ModelAttribute(ConstantsViews.FORMSALE) SalePostPoned sale,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		salepostponedvalidator.validate(sale, result);
@@ -107,28 +107,28 @@ public class SalePostPonedController {
 				if (entitySale == null) {
 					saleservicepostponed.buy(sale);
 					model.setViewName("employee/salespostponed/finishsale");
-					model.addObject(ConstantsJsp.FORMSALE, sale);
+					model.addObject(ConstantsViews.FORMSALE, sale);
 				} else {
-					model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
-					model.addObject(ConstantsJsp.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
-					model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
-					result.rejectValue(ConstantsJsp.IDSALE, ConstantsJsp.ERRORNUMSALEREPEATED);
-					model.addObject(ConstantsJsp.FORMSALE, sale);
+					model.addObject(ConstantsViews.MATERIALS, materialService.getAllMetals());
+					model.addObject(ConstantsViews.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
+					model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
+					result.rejectValue(ConstantsViews.IDSALE, ConstantsViews.ERRORNUMSALEREPEATED);
+					model.addObject(ConstantsViews.FORMSALE, sale);
 					model.setViewName(VIEWNEWSALEPOSTPONED);
 				}
 			} else {
-				model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
-				model.addObject(ConstantsJsp.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
-				model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
-				result.rejectValue(ConstantsJsp.IDSALE, "jewelnoexist");
-				model.addObject(ConstantsJsp.FORMSALE, sale);
+				model.addObject(ConstantsViews.MATERIALS, materialService.getAllMetals());
+				model.addObject(ConstantsViews.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
+				model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
+				result.rejectValue(ConstantsViews.IDSALE, "jewelnoexist");
+				model.addObject(ConstantsViews.FORMSALE, sale);
 				model.setViewName(VIEWNEWSALEPOSTPONED);
 			}
 		} else {
-			model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
-			model.addObject(ConstantsJsp.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
-			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
-			model.addObject(ConstantsJsp.FORMSALE, sale);
+			model.addObject(ConstantsViews.MATERIALS, materialService.getAllMetals());
+			model.addObject(ConstantsViews.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
+			model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
+			model.addObject(ConstantsViews.FORMSALE, sale);
 			model.setViewName(VIEWNEWSALEPOSTPONED);
 		}
 		return model;
@@ -138,7 +138,7 @@ public class SalePostPonedController {
 	public ModelAndView addinstallment() {
 		ModelAndView model = new ModelAndView(ADDINSTALLMENT);
 		model.addObject(INSTALLMENT, new Installment());
-		model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
+		model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
 		return model;
 	}
 
@@ -150,7 +150,7 @@ public class SalePostPonedController {
 		if (result.hasErrors()) {
 			model.setViewName(ADDINSTALLMENT);
 			model.addObject(INSTALLMENT, installment);
-			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
+			model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
 		} else {
 			SalePostPoned sale = saleservicepostponed.addInstallment(installment);
 			if (sale != null) {
@@ -158,13 +158,13 @@ public class SalePostPonedController {
 					model = getModelDaily(request);
 				} else {
 					model.setViewName("employee/salespostponed/finishaddinstallment");
-					model.addObject(ConstantsJsp.FORMSALE, sale);
+					model.addObject(ConstantsViews.FORMSALE, sale);
 				}
 			} else {
 				model.setViewName(ADDINSTALLMENT);
 				model.addObject(INSTALLMENT, installment);
-				model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
-				result.rejectValue(Constants.IDSALEPOSTPONED, ConstantsJsp.ERRORSALENOTEXIST);
+				model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
+				result.rejectValue(Constants.IDSALEPOSTPONED, ConstantsViews.ERRORSALENOTEXIST);
 			}
 		}
 		return model;
@@ -173,26 +173,26 @@ public class SalePostPonedController {
 	private ModelAndView getModelDaily(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
-		String ipAddress = request.getHeader(ConstantsJsp.XFORWARDEDFOR);
+		String ipAddress = request.getHeader(ConstantsViews.XFORWARDEDFOR);
 		if (ipAddress == null) {
 			ipAddress = request.getRemoteAddr();
 		}
 		Daily daily = dailyService.getDaily(DateUtil.getDateFormated(new Date()), placeService.getPlaceUser(user),
 				ipAddress);
 		if (daily.getFinalamount() == null) {
-			model.setViewName(ConstantsJsp.VIEWNOTDAILY);
+			model.setViewName(ConstantsViews.VIEWNOTDAILY);
 		} else {
-			model.addObject(ConstantsJsp.DAILY, daily);
-			model.setViewName(ConstantsJsp.VIEWDAILYARROW);
-			model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
+			model.addObject(ConstantsViews.DAILY, daily);
+			model.setViewName(ConstantsViews.VIEWDAILYARROW);
+			model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 		}
 		return model;
 	}
 
 	@GetMapping("/employee//howmanyamount")
-	public ModelAndView howmanyamount(@ModelAttribute(ConstantsJsp.FORMSALE) SalePostPoned sale, BindingResult arg1) {
+	public ModelAndView howmanyamount(@ModelAttribute(ConstantsViews.FORMSALE) SalePostPoned sale, BindingResult arg1) {
 		ModelAndView model = new ModelAndView(ADDINSTALLMENT);
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsJsp.IDSALE, ConstantsJsp.ERRORSELECTIDSALE);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsViews.IDSALE, ConstantsViews.ERRORSELECTIDSALE);
 		// comprobamos si existe la venta
 		SalePostponedEntity entitySale = saleservicepostponed.searchByNumsale(sale.getIdsale());
 		if (entitySale != null) {
@@ -200,7 +200,7 @@ public class SalePostPonedController {
 			model.addObject("howmany", howmany);
 			model.addObject("installments", sale.getSpayments());
 		} else {
-			arg1.rejectValue(ConstantsJsp.IDSALE, ConstantsJsp.ERRORSALENOTEXIST);
+			arg1.rejectValue(ConstantsViews.IDSALE, ConstantsViews.ERRORSALENOTEXIST);
 		}
 		return model;
 	}
@@ -216,12 +216,12 @@ public class SalePostPonedController {
 	@GetMapping("/employee/searchsalepostponed")
 	public ModelAndView searchsalepostponed() {
 		ModelAndView model = new ModelAndView("employee/salespostponed/searchsalepostponed");
-		model.addObject(ConstantsJsp.FORMSALE, new SalePostPoned());
+		model.addObject(ConstantsViews.FORMSALE, new SalePostPoned());
 		return model;
 	}
 
 	@PostMapping("/employee/resultsalepostponed")
-	public ModelAndView resultsalepostponed(@ModelAttribute(ConstantsJsp.FORMSALE) SalePostPoned sale,
+	public ModelAndView resultsalepostponed(@ModelAttribute(ConstantsViews.FORMSALE) SalePostPoned sale,
 			BindingResult arg1) {
 		ModelAndView model = new ModelAndView();
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -229,11 +229,11 @@ public class SalePostPonedController {
 				placeService.getPlaceUser(user));
 		if (salep != null) {
 			model.setViewName("employee/salespostponed/sale");
-			model.addObject(ConstantsJsp.FORMSALE, salep);
+			model.addObject(ConstantsViews.FORMSALE, salep);
 		} else {
 			model.setViewName("employee/salespostponed/searchsalepostponed");
-			model.addObject(ConstantsJsp.FORMSALE, sale);
-			arg1.rejectValue("idsale", ConstantsJsp.ERRORSALENOTEXIST);
+			model.addObject(ConstantsViews.FORMSALE, sale);
+			arg1.rejectValue("idsale", ConstantsViews.ERRORSALENOTEXIST);
 		}
 		return model;
 	}

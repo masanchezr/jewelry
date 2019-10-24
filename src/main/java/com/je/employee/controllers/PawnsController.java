@@ -32,7 +32,7 @@ import com.je.services.pawns.RenovationDates;
 import com.je.services.places.PlaceService;
 import com.je.services.tracks.TrackService;
 import com.je.utils.constants.Constants;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.utils.date.DateUtil;
 import com.je.utils.string.Util;
 
@@ -79,7 +79,7 @@ public class PawnsController {
 	 * @return the string
 	 */
 	@PostMapping("/employee/savePawn")
-	public ModelAndView savePawn(@ModelAttribute(ConstantsJsp.PAWNFORM) NewPawn pawn, BindingResult result) {
+	public ModelAndView savePawn(@ModelAttribute(ConstantsViews.PAWNFORM) NewPawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		newPawnFormValidator.validate(pawn, result);
 		if (result.hasErrors()) {
@@ -92,7 +92,7 @@ public class PawnsController {
 				lop.add(op);
 			}
 			pawn.setObjects(lop);
-			model.addObject(ConstantsJsp.PAWNFORM, pawn);
+			model.addObject(ConstantsViews.PAWNFORM, pawn);
 			model.addObject(Constants.TRACKS, trackservice.getTracks());
 			model.addObject(Constants.NATIONS, nationservice.getNations());
 			model.setViewName(VIEWNEWPAWN);
@@ -113,7 +113,7 @@ public class PawnsController {
 					lop.add(op);
 				}
 				pawn.setObjects(lop);
-				model.addObject(ConstantsJsp.PAWNFORM, pawn);
+				model.addObject(ConstantsViews.PAWNFORM, pawn);
 				model.addObject(Constants.TRACKS, trackservice.getTracks());
 				model.addObject(Constants.NATIONS, nationservice.getNations());
 				model.setViewName(VIEWNEWPAWN);
@@ -123,9 +123,9 @@ public class PawnsController {
 				if (Util.isEmpty(sdate)) {
 					sdate = DateUtil.getStringDateddMMyyyy(new Date());
 				}
-				model.addObject(ConstantsJsp.DAILY, pawnService.save(pawn));
-				model.setViewName(ConstantsJsp.VIEWDAILYARROW);
-				model.addObject(ConstantsJsp.DATEDAILY, sdate);
+				model.addObject(ConstantsViews.DAILY, pawnService.save(pawn));
+				model.setViewName(ConstantsViews.VIEWDAILYARROW);
+				model.addObject(ConstantsViews.DATEDAILY, sdate);
 			}
 		}
 		return model;
@@ -151,15 +151,15 @@ public class PawnsController {
 	 * @return the model and view
 	 */
 	@PostMapping("/employee/newPawn")
-	public ModelAndView newPawn(@ModelAttribute(ConstantsJsp.PAWNFORM) NewPawn pawn, BindingResult errors) {
+	public ModelAndView newPawn(@ModelAttribute(ConstantsViews.PAWNFORM) NewPawn pawn, BindingResult errors) {
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		String dni = Util.refactorNIF(pawn.getNif());
 		ModelAndView model = new ModelAndView();
 		if (dni != null && dni.length() > 13) {
-			errors.rejectValue(ConstantsJsp.NIF, "niftoolong");
+			errors.rejectValue(ConstantsViews.NIF, "niftoolong");
 			model.setViewName(VIEWSEARCHCLIENT);
 		} else if (!Util.isNifNie(dni)) {
-			errors.rejectValue(ConstantsJsp.NIF, "nifnotvalid");
+			errors.rejectValue(ConstantsViews.NIF, "nifnotvalid");
 			model.setViewName(VIEWSEARCHCLIENT);
 		} else {
 			pawn = pawnService.searchClient(dni);
@@ -177,7 +177,7 @@ public class PawnsController {
 			model.addObject(Constants.NATIONS, nationservice.getNations());
 			model.setViewName(VIEWNEWPAWN);
 		}
-		model.addObject(ConstantsJsp.PAWNFORM, pawn);
+		model.addObject(ConstantsViews.PAWNFORM, pawn);
 		return model;
 	}
 
@@ -190,7 +190,7 @@ public class PawnsController {
 	public ModelAndView searchClientPawn() {
 		ModelAndView model = new ModelAndView(VIEWSEARCHCLIENT);
 		NewPawn pawn = new NewPawn();
-		model.addObject(ConstantsJsp.PAWNFORM, pawn);
+		model.addObject(ConstantsViews.PAWNFORM, pawn);
 		return model;
 	}
 
@@ -236,8 +236,8 @@ public class PawnsController {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			pawn.setUser(user);
 			List<Pawn> pawns = pawnService.searchRenewByNumpawn(pawn);
-			model.addObject(ConstantsJsp.PAWNFORM, new Pawn());
-			model.addObject(ConstantsJsp.PAWNS, pawns);
+			model.addObject(ConstantsViews.PAWNFORM, new Pawn());
+			model.addObject(ConstantsViews.PAWNS, pawns);
 			model.setViewName("employee/pawns/renewpawn/renewpawn");
 		}
 		return model;
@@ -250,13 +250,13 @@ public class PawnsController {
 	 * @return the string
 	 */
 	@PostMapping("/employee/renewpawn")
-	public ModelAndView renew(@ModelAttribute(ConstantsJsp.PAWNFORM) Pawn pawn) {
+	public ModelAndView renew(@ModelAttribute(ConstantsViews.PAWNFORM) Pawn pawn) {
 		ModelAndView model = new ModelAndView();
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		pawn.setUser(user);
-		model.addObject(ConstantsJsp.DAILY, pawnService.renew(pawn));
-		model.setViewName(ConstantsJsp.VIEWDAILYARROW);
-		model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
+		model.addObject(ConstantsViews.DAILY, pawnService.renew(pawn));
+		model.setViewName(ConstantsViews.VIEWDAILYARROW);
+		model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 		return model;
 	}
 
@@ -267,7 +267,7 @@ public class PawnsController {
 	 * @return the string
 	 */
 	@PostMapping("/employee/removepawn")
-	public ModelAndView remove(@ModelAttribute(ConstantsJsp.PAWNFORM) Pawn pawn) {
+	public ModelAndView remove(@ModelAttribute(ConstantsViews.PAWNFORM) Pawn pawn) {
 		ModelAndView model = new ModelAndView();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Collection<? extends GrantedAuthority> collection = authentication.getAuthorities();
@@ -279,9 +279,9 @@ public class PawnsController {
 		if ((Constants.ROLE_AR.equals(role) && pawn.getMonths() <= 0) || pawn.getId() == null) {
 			model.setViewName("employee/noselected");
 		} else {
-			model.addObject(ConstantsJsp.DAILY, pawnService.remove(pawn));
-			model.setViewName(ConstantsJsp.VIEWDAILYARROW);
-			model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
+			model.addObject(ConstantsViews.DAILY, pawnService.remove(pawn));
+			model.setViewName(ConstantsViews.VIEWDAILYARROW);
+			model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 		}
 		return model;
 	}
@@ -294,11 +294,11 @@ public class PawnsController {
 	 * @return the model and view
 	 */
 	@PostMapping("/employee/searchRemovePawn")
-	public ModelAndView searchRemovePawn(@ModelAttribute(ConstantsJsp.PAWNFORM) Pawn pawn, BindingResult result) {
+	public ModelAndView searchRemovePawn(@ModelAttribute(ConstantsViews.PAWNFORM) Pawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		pawnFormValidator.validate(pawn, result);
 		if (result.hasErrors()) {
-			model.addObject(ConstantsJsp.PAWNFORM, new Pawn());
+			model.addObject(ConstantsViews.PAWNFORM, new Pawn());
 			model.setViewName(VIEWSEARCHREMOVEPAWN);
 		} else {
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -311,7 +311,7 @@ public class PawnsController {
 			}
 			pawn.setUser(user);
 			List<Pawn> pawns = pawnService.searchRenewByNumpawn(pawn);
-			model.addObject(ConstantsJsp.PAWNS, pawns);
+			model.addObject(ConstantsViews.PAWNS, pawns);
 			if (Constants.ROLE_AR.equals(role)) {
 				model.setViewName("employee/pawns/removepawn/removepawnfive");
 			} else {
@@ -324,29 +324,29 @@ public class PawnsController {
 	@GetMapping("/employee/searchrenovations")
 	public ModelAndView searchrenovations() {
 		ModelAndView model = new ModelAndView("employee/pawns/searchrenovations/searchpawn");
-		model.addObject(ConstantsJsp.PAWNFORM, new Pawn());
+		model.addObject(ConstantsViews.PAWNFORM, new Pawn());
 		return model;
 	}
 
 	@PostMapping("/employee/resultRenovationsPawns")
-	public ModelAndView resultRenovationsPawns(@ModelAttribute(ConstantsJsp.PAWNFORM) Pawn pawn, BindingResult result) {
+	public ModelAndView resultRenovationsPawns(@ModelAttribute(ConstantsViews.PAWNFORM) Pawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		pawnFormValidator.validate(pawn, result);
 		if (result.hasErrors()) {
 			model.setViewName("employee/pawns/searchrenovations/searchpawn");
-			model.addObject(ConstantsJsp.PAWNFORM, pawn);
+			model.addObject(ConstantsViews.PAWNFORM, pawn);
 		} else {
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			String user = authentication.getName();
 			pawn.setPlace(placeService.getPlaceUser(user));
 			model.setViewName("employee/pawns/searchrenovations/resultpawn");
-			model.addObject(ConstantsJsp.PAWNS, pawnService.searchByNumpawn(pawn));
+			model.addObject(ConstantsViews.PAWNS, pawnService.searchByNumpawn(pawn));
 		}
 		return model;
 	}
 
 	@PostMapping("/employee/resultrenovations")
-	public ModelAndView resultrenovations(@ModelAttribute(ConstantsJsp.PAWNFORM) Pawn pawn, BindingResult result) {
+	public ModelAndView resultrenovations(@ModelAttribute(ConstantsViews.PAWNFORM) Pawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		Long idpawn = pawn.getId();
 		if (idpawn == null) {

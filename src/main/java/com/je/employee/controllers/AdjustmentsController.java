@@ -15,7 +15,7 @@ import com.je.employee.validators.AdjustmentValidator;
 import com.je.services.adjustments.Adjustment;
 import com.je.services.adjustments.AdjustmentService;
 import com.je.services.payment.PaymentService;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.utils.date.DateUtil;
 
 /**
@@ -43,8 +43,8 @@ public class AdjustmentsController {
 	@GetMapping("/employee/newadjustment")
 	public ModelAndView newadjustment() {
 		ModelAndView model = new ModelAndView("employee/newadjustment");
-		model.addObject(ConstantsJsp.FORMADJUSTMENT, new Adjustment());
-		model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
+		model.addObject(ConstantsViews.FORMADJUSTMENT, new Adjustment());
+		model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
 		return model;
 	}
 
@@ -56,20 +56,20 @@ public class AdjustmentsController {
 	 * @return the model and view
 	 */
 	@PostMapping("/employee/saveAdjustment")
-	public ModelAndView saveAdjustment(@ModelAttribute(ConstantsJsp.FORMADJUSTMENT) Adjustment adjustment,
+	public ModelAndView saveAdjustment(@ModelAttribute(ConstantsViews.FORMADJUSTMENT) Adjustment adjustment,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		adjustmentValidator.validate(adjustment, result);
 		if (result.hasErrors()) {
 			model.setViewName("employee/newadjustment");
-			model.addObject(ConstantsJsp.FORMADJUSTMENT, adjustment);
-			model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
+			model.addObject(ConstantsViews.FORMADJUSTMENT, adjustment);
+			model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
 		} else {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			adjustment.setUser(user);
-			model.addObject(ConstantsJsp.DAILY, adjustmentService.save(adjustment));
-			model.setViewName(ConstantsJsp.VIEWDAILYARROW);
-			model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
+			model.addObject(ConstantsViews.DAILY, adjustmentService.save(adjustment));
+			model.setViewName(ConstantsViews.VIEWDAILYARROW);
+			model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 		}
 		return model;
 	}

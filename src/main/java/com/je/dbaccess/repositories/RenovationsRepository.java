@@ -14,7 +14,7 @@ import com.je.dbaccess.entities.PawnEntity;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.dbaccess.entities.RenovationEntity;
 import com.je.utils.constants.Constants;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 
 /**
  * The Interface RenovationsRepository.
@@ -45,7 +45,7 @@ public interface RenovationsRepository extends CrudRepository<RenovationEntity, 
 	 * @return the list
 	 */
 	@Query("select o from RenovationEntity o where o.pawn=:pawn and o.nextrenovationdate>:date")
-	List<RenovationEntity> searchPawnsExpired(@Param(ConstantsJsp.DATE) Date date, @Param("pawn") PawnEntity pawn);
+	List<RenovationEntity> searchPawnsExpired(@Param(ConstantsViews.DATE) Date date, @Param("pawn") PawnEntity pawn);
 
 	@Query("select o from RenovationEntity o where o.pawn.place = :place and o.creationdate>=:dfrom and o.creationdate<=:duntil")
 	List<RenovationEntity> findByCreationdateBetweenAndPlace(@Param("dfrom") Date dfrom, @Param("duntil") Date duntil,

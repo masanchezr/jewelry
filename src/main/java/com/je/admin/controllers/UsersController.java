@@ -13,7 +13,7 @@ import com.je.admin.validators.UserValidator;
 import com.je.services.places.PlaceService;
 import com.je.services.users.User;
 import com.je.services.users.UserService;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 
 @Controller
 public class UsersController {
@@ -31,24 +31,24 @@ public class UsersController {
 	@GetMapping("/newuser")
 	public ModelAndView newUser() {
 		ModelAndView model = new ModelAndView("admin/users/saveuser/newuser");
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
-		model.addObject(ConstantsJsp.USER, new User());
-		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.USER, new User());
+		model.addObject(ConstantsViews.PLACES, placeService.getAllPlacesActive());
 		return model;
 	}
 
 	@PostMapping("/saveuser")
-	public ModelAndView saveUser(@ModelAttribute(ConstantsJsp.USER) User user, BindingResult result) {
+	public ModelAndView saveUser(@ModelAttribute(ConstantsViews.USER) User user, BindingResult result) {
 		ModelAndView model = new ModelAndView();
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		userValidator.validate(user, result);
 		if (result.hasErrors()) {
 			model.setViewName("admin/users/saveuser/newuser");
-			model.addObject(ConstantsJsp.USER, new User());
-			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
+			model.addObject(ConstantsViews.USER, new User());
+			model.addObject(ConstantsViews.PLACES, placeService.getAllPlacesActive());
 		} else {
 			model.setViewName("admin/users/saveuser/resultuser");
-			model.addObject(ConstantsJsp.USER, user);
+			model.addObject(ConstantsViews.USER, user);
 			userService.newUser(user);
 		}
 		return model;

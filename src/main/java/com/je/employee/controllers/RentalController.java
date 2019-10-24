@@ -15,7 +15,7 @@ import com.je.employee.validators.RentalValidator;
 import com.je.services.rentals.Rental;
 import com.je.services.rentals.RentalService;
 import com.je.utils.constants.Constants;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.utils.date.DateUtil;
 
 @Controller
@@ -49,9 +49,9 @@ public class RentalController {
 			// compruebo si ya existe
 			rental.setUser(user);
 			if (!rentalService.existsLocalRental(rental)) {
-				model.addObject(ConstantsJsp.DAILY, rentalService.saveRental(rental));
-				model.setViewName(ConstantsJsp.VIEWDAILYARROW);
-				model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
+				model.addObject(ConstantsViews.DAILY, rentalService.saveRental(rental));
+				model.setViewName(ConstantsViews.VIEWDAILYARROW);
+				model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 			} else {
 				model.setViewName(VIEWLOCALRENTAL);
 				model.addObject(FORMRENTAL, rental);

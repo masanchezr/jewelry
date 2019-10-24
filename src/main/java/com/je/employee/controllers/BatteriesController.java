@@ -23,7 +23,7 @@ import com.je.services.dailies.DailyService;
 import com.je.services.payment.PaymentService;
 import com.je.services.places.PlaceService;
 import com.je.services.salesrepeated.SearchSaleRepeatedService;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.utils.date.DateUtil;
 
 @Controller
@@ -56,7 +56,7 @@ public class BatteriesController {
 	public ModelAndView newsalebattery() {
 		ModelAndView model = new ModelAndView(VIEWNEWSALEBATTERY);
 		model.addObject(BATTERYFORM, new BatteryEntity());
-		model.addObject(ConstantsJsp.PAYMENTS, paymentService.findAllActive());
+		model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
 		return model;
 	}
 
@@ -70,7 +70,7 @@ public class BatteriesController {
 			model.addObject(BATTERYFORM, battery);
 		} else {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
-			String ipAddress = request.getHeader(ConstantsJsp.XFORWARDEDFOR);
+			String ipAddress = request.getHeader(ConstantsViews.XFORWARDEDFOR);
 			if (ipAddress == null) {
 				ipAddress = request.getRemoteAddr();
 			}
@@ -78,16 +78,16 @@ public class BatteriesController {
 			// comprobamos primero que no exista este número de venta en otra venta
 			Long numsale = battery.getNumsale();
 			if (numsale != null && searchSaleRepeatedService.isSaleRepeated(numsale)) {
-				arg1.rejectValue(ConstantsJsp.NUMSALE, "numrepeated");
+				arg1.rejectValue(ConstantsViews.NUMSALE, "numrepeated");
 				model.setViewName(VIEWNEWSALEBATTERY);
 				model.addObject(BATTERYFORM, battery);
 			} else {
-				model.setViewName(ConstantsJsp.VIEWDAILYARROW);
+				model.setViewName(ConstantsViews.VIEWDAILYARROW);
 				battery.setPlace(place);
 				batteriesService.saveSaleBattery(mapper.map(battery, BatteryEntity.class));
-				model.addObject(ConstantsJsp.DAILY,
+				model.addObject(ConstantsViews.DAILY,
 						dailyService.getDaily(DateUtil.getDateFormated(new Date()), place, ipAddress));
-				model.addObject(ConstantsJsp.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
+				model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 			}
 		}
 		return model;

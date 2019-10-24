@@ -9,7 +9,7 @@ import org.springframework.validation.Validator;
 
 import com.je.dbaccess.entities.ObjectShopEntity;
 import com.je.services.shoppings.Shopping;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.utils.string.Util;
 
 /**
@@ -24,7 +24,7 @@ public class NewShoppingFormValidator implements Validator {
 
 	@Override
 	public void validate(Object arg0, Errors arg1) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsJsp.NUMSHOP, ConstantsJsp.ERRORSELECTNUMSHOP);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsViews.NUMSHOP, ConstantsViews.ERRORSELECTNUMSHOP);
 		Shopping shopping = (Shopping) arg0;
 		Long numshop = shopping.getNumshop();
 		String description;
@@ -35,10 +35,10 @@ public class NewShoppingFormValidator implements Validator {
 		BigDecimal amount = BigDecimal.ZERO;
 		// comprobamos que es positivo el numero
 		if (numshop != null && numshop.compareTo(0L) <= 0) {
-			arg1.rejectValue(ConstantsJsp.NUMSHOP, "numpositive");
+			arg1.rejectValue(ConstantsViews.NUMSHOP, "numpositive");
 		}
 		if (cashamount == null) {
-			arg1.rejectValue(ConstantsJsp.CASHAMOUNT, ConstantsJsp.ERRORSELECTAMOUNT);
+			arg1.rejectValue(ConstantsViews.CASHAMOUNT, ConstantsViews.ERRORSELECTAMOUNT);
 		}
 		while (ios.hasNext()) {
 			os = ios.next();
@@ -47,15 +47,15 @@ public class NewShoppingFormValidator implements Validator {
 				grossgrams = os.getGrossgrams();
 				description = os.getDescription();
 				if (description == null) {
-					arg1.rejectValue(ConstantsJsp.NUMSHOP, ConstantsJsp.ERRORSELECTDESCRIPTION);
+					arg1.rejectValue(ConstantsViews.NUMSHOP, ConstantsViews.ERRORSELECTDESCRIPTION);
 				}
 				if (grossgrams == null || (grossgrams != null && grossgrams.compareTo(BigDecimal.ZERO) <= 0)) {
-					arg1.rejectValue(ConstantsJsp.NUMSHOP, ConstantsJsp.ERRORSELECTGRAMS);
+					arg1.rejectValue(ConstantsViews.NUMSHOP, ConstantsViews.ERRORSELECTGRAMS);
 				}
 			}
 		}
 		if (amount.compareTo(cashamount) != 0) {
-			arg1.rejectValue(ConstantsJsp.CASHAMOUNT, ConstantsJsp.ERRORSUMAMOUNTS);
+			arg1.rejectValue(ConstantsViews.CASHAMOUNT, ConstantsViews.ERRORSUMAMOUNTS);
 		}
 	}
 }

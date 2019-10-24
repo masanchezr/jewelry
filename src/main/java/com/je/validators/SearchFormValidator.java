@@ -6,7 +6,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import com.je.forms.SearchForm;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.utils.date.DateUtil;
 import com.je.utils.string.Util;
 
@@ -23,16 +23,16 @@ public class SearchFormValidator implements Validator {
 		String sfrom = search.getDatefrom();
 		String suntil = search.getDateuntil();
 		if (Util.isEmpty(sfrom) || !DateUtil.isDate(sfrom)) {
-			arg1.rejectValue(ConstantsJsp.SFROM, ConstantsJsp.SELECTDATE);
+			arg1.rejectValue(ConstantsViews.SFROM, ConstantsViews.SELECTDATE);
 		}
 		if (!Util.isEmpty(suntil) && !DateUtil.isDate(suntil)) {
-			arg1.rejectValue(ConstantsJsp.SUNTIL, ConstantsJsp.SELECTDATE);
+			arg1.rejectValue(ConstantsViews.SUNTIL, ConstantsViews.SELECTDATE);
 		}
 		if (!Util.isEmpty(suntil) && DateUtil.isDate(suntil) && !Util.isEmpty(sfrom) && DateUtil.isDate(sfrom)) {
 			Date dfrom = DateUtil.getDate(sfrom);
 			Date duntil = DateUtil.getDate(suntil);
 			if (dfrom.after(duntil)) {
-				arg1.rejectValue(ConstantsJsp.SFROM, "datecannotbegreater");
+				arg1.rejectValue(ConstantsViews.SFROM, "datecannotbegreater");
 			}
 		}
 	}

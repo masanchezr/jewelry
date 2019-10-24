@@ -14,7 +14,7 @@ import com.je.services.clients.Client;
 import com.je.services.clients.ClientService;
 import com.je.services.pawns.PawnService;
 import com.je.services.shoppings.ShoppingService;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 
 /**
  * The Class ClientsController.
@@ -40,7 +40,7 @@ public class ClientsController {
 	@GetMapping("/searchclients")
 	public ModelAndView searchClients() {
 		ModelAndView model = new ModelAndView("admin/clients/searchclients");
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		model.addObject("client", new Client());
 		return model;
 	}
@@ -51,7 +51,7 @@ public class ClientsController {
 		List<Client> clients = searchClientsService.searchClients(client);
 		model.addObject("clientModel", new Client());
 		model.addObject("clients", clients);
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		model.setViewName("admin/clients/resultClients");
 		return model;
 	}
@@ -61,7 +61,7 @@ public class ClientsController {
 		ModelAndView model = new ModelAndView("admin/clients/resultoperations");
 		model.addObject("shoppings", shoppingService.getByNIF(client.getNif()));
 		model.addObject("pawns", pawnService.getByNIF(client.getNif()));
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		return model;
 	}
 }

@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.je.services.metal.MetalService;
 import com.je.services.workshop.Workshop;
 import com.je.services.workshop.WorkshopService;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.workshop.validators.WorkshopValidator;
 
 /**
@@ -60,7 +60,7 @@ public class WorkshopController {
 	public ModelAndView newWorkshop() {
 		ModelAndView model = new ModelAndView("workshop/newworkshop");
 		model.addObject("workshop", new Workshop());
-		model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
+		model.addObject(ConstantsViews.MATERIALS, materialService.getAllMetals());
 		return model;
 	}
 

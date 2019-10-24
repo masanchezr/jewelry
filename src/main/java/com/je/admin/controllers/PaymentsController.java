@@ -12,7 +12,7 @@ import com.je.admin.forms.AdminForm;
 import com.je.dbaccess.entities.PaymentEntity;
 import com.je.forms.Payment;
 import com.je.services.payment.PaymentService;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 
 /**
  * The Class PaymentsController.
@@ -34,9 +34,9 @@ public class PaymentsController {
 	 * @return the string
 	 */
 	@PostMapping("/employee/savePayment")
-	public ModelAndView savePayment(@ModelAttribute(ConstantsJsp.FORMPAYMENT) Payment payment) {
+	public ModelAndView savePayment(@ModelAttribute(ConstantsViews.FORMPAYMENT) Payment payment) {
 		ModelAndView model = new ModelAndView("admin/success");
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		paymentService.save(mapper.map(payment, PaymentEntity.class));
 		return model;
 	}
@@ -50,8 +50,8 @@ public class PaymentsController {
 	public ModelAndView allpayments() {
 		ModelAndView model = new ModelAndView("admin/payments/allpayments");
 		Iterable<PaymentEntity> payments = paymentService.findAll();
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
-		model.addObject(ConstantsJsp.PAYMENTS, payments);
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.PAYMENTS, payments);
 		return model;
 	}
 }

@@ -31,7 +31,7 @@ import com.je.forms.Sale;
 import com.je.services.mails.MailService;
 import com.je.services.users.Client;
 import com.je.utils.constants.Constants;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.utils.date.DateUtil;
 import com.je.utils.string.Util;
 
@@ -255,7 +255,7 @@ public class SaleServiceImpl implements SaleService {
 			payments.add(cspv);
 		} else {
 			payment = mapper.map(removeSaleForm.getPayment(), PaymentEntity.class);
-			if (payment.getIdpayment().equals(ConstantsJsp.SAME)) {
+			if (payment.getIdpayment().equals(ConstantsViews.SAME)) {
 				List<SalesPayments> spayments = sale.getSpayments();
 				Iterator<SalesPayments> ispayments = spayments.iterator();
 				SalesPayments spay;

@@ -10,7 +10,7 @@ import org.springframework.validation.Validator;
 
 import com.je.dbaccess.entities.JewelEntity;
 import com.je.forms.SalePostPoned;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.utils.string.Util;
 
 public class SalePostPonedValidator implements Validator {
@@ -22,7 +22,7 @@ public class SalePostPonedValidator implements Validator {
 
 	@Override
 	public void validate(Object arg0, Errors arg1) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsJsp.IDSALE, ConstantsJsp.ERRORSELECTIDSALE);
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsViews.IDSALE, ConstantsViews.ERRORSELECTIDSALE);
 		SalePostPoned sale = (SalePostPoned) arg0;
 		List<JewelEntity> jewels = sale.getJewels();
 		if (jewels != null) {
@@ -34,14 +34,14 @@ public class SalePostPonedValidator implements Validator {
 				}
 			}
 			if (noreference) {
-				arg1.rejectValue(ConstantsJsp.IDSALE, ConstantsJsp.ERRORSELECTREFERENCE);
+				arg1.rejectValue(ConstantsViews.IDSALE, ConstantsViews.ERRORSELECTREFERENCE);
 			}
 			BigDecimal optionalpay = sale.getOptionalpayment();
 			if (optionalpay != null && BigDecimal.ZERO.compareTo(optionalpay) == 0) {
-				arg1.rejectValue(ConstantsJsp.IDSALE, "twopaycard");
+				arg1.rejectValue(ConstantsViews.IDSALE, "twopaycard");
 			}
 		} else {
-			arg1.rejectValue(ConstantsJsp.IDSALE, ConstantsJsp.ERRORSELECTREFERENCE);
+			arg1.rejectValue(ConstantsViews.IDSALE, ConstantsViews.ERRORSELECTREFERENCE);
 		}
 	}
 }

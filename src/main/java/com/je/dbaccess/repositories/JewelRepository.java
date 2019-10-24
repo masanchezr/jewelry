@@ -12,7 +12,7 @@ import com.je.dbaccess.entities.CategoryEntity;
 import com.je.dbaccess.entities.JewelEntity;
 import com.je.dbaccess.entities.MetalEntity;
 import com.je.dbaccess.entities.PlaceEntity;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 
 /**
  * The Interface JewelRepository.
@@ -37,7 +37,7 @@ public interface JewelRepository extends PagingAndSortingRepository<JewelEntity,
 	 * @return the iterable
 	 */
 	@Query("select o from JewelEntity o where o.category = :category and o.img is not null")
-	public Page<JewelEntity> findByCategoryActivesWithImg(@Param(ConstantsJsp.CATEGORY) CategoryEntity category,
+	public Page<JewelEntity> findByCategoryActivesWithImg(@Param(ConstantsViews.CATEGORY) CategoryEntity category,
 			Pageable page);
 
 	/**
@@ -51,7 +51,7 @@ public interface JewelRepository extends PagingAndSortingRepository<JewelEntity,
 	 */
 	@Query("select o from JewelEntity o where (o.category = :category or o.name = :searchName or o.description = :searchName) and o.active=true and o.img is not null")
 	public Page<JewelEntity> findByNameAndCategoryActivesWithImg(@Param("searchName") String searchName,
-			@Param(ConstantsJsp.CATEGORY) CategoryEntity category, Pageable page);
+			@Param(ConstantsViews.CATEGORY) CategoryEntity category, Pageable page);
 
 	/**
 	 * Find by name and category.

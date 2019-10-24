@@ -40,7 +40,7 @@ import com.je.services.places.PlaceService;
 import com.je.services.sets.NewSet;
 import com.je.services.sets.SetService;
 import com.je.utils.constants.Constants;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 
 /**
  * The Class JewelsController.
@@ -98,9 +98,9 @@ public class JewelsController {
 	 * @return the string
 	 */
 	@PostMapping("/saveCategory")
-	public ModelAndView addCategory(@ModelAttribute(ConstantsJsp.CATEGORY) Category category) {
+	public ModelAndView addCategory(@ModelAttribute(ConstantsViews.CATEGORY) Category category) {
 		categoriesService.save(mapper.map(category, CategoryEntity.class));
-		return new ModelAndView("admin/success", ConstantsJsp.ADMINFORM, new AdminForm());
+		return new ModelAndView("admin/success", ConstantsViews.ADMINFORM, new AdminForm());
 	}
 
 	/**
@@ -111,11 +111,11 @@ public class JewelsController {
 	@GetMapping("/searchByReference")
 	public ModelAndView searchByReference() {
 		ModelAndView model = new ModelAndView("admin/jewels/searchjewels/searchByReference");
-		model.addObject(ConstantsJsp.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
-		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
-		model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
+		model.addObject(ConstantsViews.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
+		model.addObject(ConstantsViews.PLACES, placeService.getAllPlacesActive());
+		model.addObject(ConstantsViews.MATERIALS, materialService.getAllMetals());
 		model.addObject(FORMJEWEL, new JewelEntity());
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		return model;
 	}
 
@@ -128,9 +128,9 @@ public class JewelsController {
 	@PostMapping("resultsearchbyreference")
 	public ModelAndView resultSearchByReference(@ModelAttribute(FORMJEWEL) Jewel jewelForm) {
 		ModelAndView model = new ModelAndView();
-		model.addObject(ConstantsJsp.JEWELS, jewelService.search(mapper.map(jewelForm, JewelEntity.class)));
+		model.addObject(ConstantsViews.JEWELS, jewelService.search(mapper.map(jewelForm, JewelEntity.class)));
 		model.setViewName("admin/jewels/searchjewels/resultsearchbyreference");
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		return model;
 	}
 
@@ -143,8 +143,8 @@ public class JewelsController {
 	public ModelAndView searchUpdateJewels() {
 		ModelAndView model = new ModelAndView("admin/jewels/updatejewel/searchtoupdatejewel");
 		model.addObject(FORMJEWEL, new JewelEntity());
-		model.addObject(ConstantsJsp.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		return model;
 	}
 
@@ -157,9 +157,9 @@ public class JewelsController {
 	@PostMapping("/resultSearchUpdateJewels")
 	public ModelAndView resultSearchUpdateJewels(@ModelAttribute(FORMJEWEL) Jewel jewelForm) {
 		ModelAndView model = new ModelAndView("admin/jewels/updatejewel/jewelsToUpdate");
-		model.addObject(ConstantsJsp.JEWELS,
+		model.addObject(ConstantsViews.JEWELS,
 				jewelService.searchByReferenceAndCategory(mapper.map(jewelForm, JewelEntity.class)));
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		model.addObject("toUpdateForm", new JewelEntity());
 		return model;
 	}
@@ -174,13 +174,13 @@ public class JewelsController {
 	public ModelAndView updateJewels(@ModelAttribute("toUpdate") Jewel toUpdate) {
 		ModelAndView model = new ModelAndView("admin/jewels/updatejewel/newJewel");
 		Long idj = toUpdate.getIdjewel();
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		if (idj != null) {
 			JewelEntity jewel = jewelService.selectProduct(idj);
 			Iterable<CategoryEntity> categories = categoriesService.getAllCategoriesOrderByName();
-			model.addObject(ConstantsJsp.CATEGORIES, categories);
-			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
-			model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
+			model.addObject(ConstantsViews.CATEGORIES, categories);
+			model.addObject(ConstantsViews.PLACES, placeService.getAllPlacesActive());
+			model.addObject(ConstantsViews.MATERIALS, materialService.getAllMetals());
 			model.addObject(FORMJEWEL, jewel);
 		} else {
 			model.setViewName("admin/jewels/updatejewel/errorupdatejewel");
@@ -199,10 +199,10 @@ public class JewelsController {
 		JewelEntity jewel = new JewelEntity();
 		jewel.setActive(true);
 		model.addObject(FORMJEWEL, jewel);
-		model.addObject(ConstantsJsp.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
-		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
-		model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
+		model.addObject(ConstantsViews.PLACES, placeService.getAllPlacesActive());
+		model.addObject(ConstantsViews.MATERIALS, materialService.getAllMetals());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		return model;
 	}
 
@@ -217,22 +217,22 @@ public class JewelsController {
 	public ModelAndView addJewelEntity(@ModelAttribute(FORMJEWEL) Jewel jewelForm, BindingResult result, Model m) {
 		selectCategoryValidator.validate(jewelForm, result);
 		ModelAndView model = new ModelAndView();
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		if (result.hasErrors()) {
-			model.addObject(ConstantsJsp.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
-			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
-			model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
+			model.addObject(ConstantsViews.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
+			model.addObject(ConstantsViews.PLACES, placeService.getAllPlacesActive());
+			model.addObject(ConstantsViews.MATERIALS, materialService.getAllMetals());
 			model.setViewName(VIEWNEWJEWEL);
 		} else {
 			// primero miro a ver si existe ya esa joya,
 			JewelEntity jewelf = mapper.map(jewelForm, JewelEntity.class);
 			JewelEntity jewel = jewelService.searchByReferenceCategoryMetalPlace(jewelf);
 			if (jewel != null && !jewel.getIdjewel().equals(jewelForm.getIdjewel())) {
-				model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
-				model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
-				model.addObject(ConstantsJsp.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
+				model.addObject(ConstantsViews.PLACES, placeService.getAllPlacesActive());
+				model.addObject(ConstantsViews.MATERIALS, materialService.getAllMetals());
+				model.addObject(ConstantsViews.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
 				model.setViewName(VIEWNEWJEWEL);
-				result.rejectValue(ConstantsJsp.REFERENCE, "selectotherreference");
+				result.rejectValue(ConstantsViews.REFERENCE, "selectotherreference");
 			} else {
 				jewelf.setPlace(placeService.getPlace(jewelForm.getPlace().getIdplace()));
 				jewelf = jewelService.addObject(jewelf);
@@ -253,10 +253,10 @@ public class JewelsController {
 	public ModelAndView newSet() {
 		ModelAndView model = new ModelAndView();
 		model.setViewName("admin/jewels/sets/newset");
-		model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
-		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
+		model.addObject(ConstantsViews.MATERIALS, materialService.getAllMetals());
+		model.addObject(ConstantsViews.PLACES, placeService.getAllPlacesActive());
 		model.addObject("setForm", new NewSet());
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		return model;
 	}
 
@@ -281,7 +281,7 @@ public class JewelsController {
 	public ModelAndView allsets() {
 		ModelAndView model = new ModelAndView("admin/jewels/sets/allsets");
 		model.addObject("sets", setService.allSets());
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		return model;
 	}
 
@@ -294,9 +294,9 @@ public class JewelsController {
 	public ModelAndView newcoin() {
 		ModelAndView model = new ModelAndView("admin/coins/newcoin");
 		model.addObject("coinForm", new CoinEntity());
-		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
-		model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.PLACES, placeService.getAllPlacesActive());
+		model.addObject(ConstantsViews.MATERIALS, materialService.getAllMetals());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		return model;
 	}
 
@@ -312,14 +312,14 @@ public class JewelsController {
 		ModelAndView model = new ModelAndView();
 		coinValidator.validate(coin, result);
 		if (result.hasErrors()) {
-			model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
-			model.addObject(ConstantsJsp.MATERIALS, materialService.getAllMetals());
-			model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+			model.addObject(ConstantsViews.PLACES, placeService.getAllPlacesActive());
+			model.addObject(ConstantsViews.MATERIALS, materialService.getAllMetals());
+			model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 			model.setViewName("admin/coins/newcoin");
 		} else {
 			coinService.save(mapper.map(coin, CoinEntity.class));
 			model.setViewName("admin/success");
-			model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+			model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		}
 		return model;
 	}
@@ -333,15 +333,15 @@ public class JewelsController {
 	public ModelAndView allcoins() {
 		ModelAndView model = new ModelAndView("admin/coins/allcoins");
 		model.addObject("coins", coinService.allCoins());
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		return model;
 	}
 
 	@GetMapping("/searchjewelsactive")
 	public ModelAndView searchjewelsactive() {
 		ModelAndView model = new ModelAndView("admin/jewels/searchjewelsactive");
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
-		model.addObject(ConstantsJsp.PLACES, placeService.getAllPlacesActive());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.PLACES, placeService.getAllPlacesActive());
 		model.addObject(FORMJEWEL, new JewelEntity());
 		return model;
 	}
@@ -349,9 +349,9 @@ public class JewelsController {
 	@PostMapping("/resultjewelsactive")
 	public ModelAndView resultjewelsactive(@ModelAttribute(FORMJEWEL) Jewel jewelForm) {
 		ModelAndView model = new ModelAndView("admin/jewels/searchjewels/resultsearchbyreference");
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		jewelForm.setActive(true);
-		model.addObject(ConstantsJsp.JEWELS,
+		model.addObject(ConstantsViews.JEWELS,
 				jewelService.searchAllActiveByPlace(mapper.map(jewelForm, JewelEntity.class)));
 		return model;
 	}
@@ -359,7 +359,7 @@ public class JewelsController {
 	@GetMapping("/checkinventory")
 	public ModelAndView checkInventory() {
 		ModelAndView model = new ModelAndView(VIEWSEARCHINVENTORY);
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		model.addObject(FORMJEWEL, new Jewel());
 		return model;
 	}
@@ -367,14 +367,14 @@ public class JewelsController {
 	@PostMapping("/resultSearchRevise")
 	public ModelAndView resultSearchRevise(@ModelAttribute(FORMJEWEL) Jewel jewel, BindingResult e) {
 		ModelAndView model = new ModelAndView();
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		jewelFormValidator.validate(jewel, e);
 		if (e.hasErrors()) {
 			model.addObject(FORMJEWEL, new Jewel());
 			model.setViewName(VIEWSEARCHINVENTORY);
 		} else {
 			model.addObject("toUpdateForm", new Jewel());
-			model.addObject(ConstantsJsp.JEWELS, jewelService.searchByReference(mapper.map(jewel, JewelEntity.class)));
+			model.addObject(ConstantsViews.JEWELS, jewelService.searchByReference(mapper.map(jewel, JewelEntity.class)));
 			model.setViewName("admin/jewels/revise/resultsearch");
 		}
 		return model;
@@ -384,7 +384,7 @@ public class JewelsController {
 	public ModelAndView revise(@ModelAttribute("toUpdateForm") Jewel jewel) {
 		if (jewel.getIdjewel() == null) {
 			ModelAndView model = new ModelAndView();
-			model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+			model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 			model.addObject(FORMJEWEL, new Jewel());
 			model.setViewName(VIEWSEARCHINVENTORY);
 		} else {

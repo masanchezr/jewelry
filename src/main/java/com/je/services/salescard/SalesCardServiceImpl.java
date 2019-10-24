@@ -30,7 +30,7 @@ import com.je.forms.Sale;
 import com.je.services.adjustments.Adjustment;
 import com.je.services.sales.SearchSale;
 import com.je.utils.constants.Constants;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 import com.je.utils.date.DateUtil;
 import com.je.utils.string.Util;
 
@@ -80,7 +80,7 @@ public class SalesCardServiceImpl implements SalesCardService {
 	}
 
 	private int putSales(Map<String, Object> map, Date from, Date until, PaymentEntity payment) {
-		BigDecimal total = (BigDecimal) map.get(ConstantsJsp.TOTAL);
+		BigDecimal total = (BigDecimal) map.get(ConstantsViews.TOTAL);
 		int size = 0;
 		Iterable<SaleEntity> salesEntity = saleManager.searchByDatesAndPayment(from, until, payment);
 		if (total == null) {
@@ -97,14 +97,14 @@ public class SalesCardServiceImpl implements SalesCardService {
 				total = total.add(sale.getTotal());
 			}
 			size = sales.size();
-			map.put(ConstantsJsp.TOTAL, total);
+			map.put(ConstantsViews.TOTAL, total);
 			map.put(Constants.SALES, sales);
 		}
 		return size;
 	}
 
 	private int putAdjustments(Map<String, Object> map, Date from, Date until, PaymentEntity payment) {
-		BigDecimal total = (BigDecimal) map.get(ConstantsJsp.TOTAL);
+		BigDecimal total = (BigDecimal) map.get(ConstantsViews.TOTAL);
 		int size = 0;
 		List<AdjustmentEntity> adjustments = adjustmentRepository.findByCarrydateBetweenAndPayment(from, until,
 				payment);
@@ -123,14 +123,14 @@ public class SalesCardServiceImpl implements SalesCardService {
 				total = total.add(entity.getAmount());
 			}
 			size = ladjustments.size();
-			map.put(ConstantsJsp.TOTAL, total);
+			map.put(ConstantsViews.TOTAL, total);
 			map.put(Constants.ADJUSTMENTS, ladjustments);
 		}
 		return size;
 	}
 
 	private int putRecordings(Map<String, Object> map, Date from, Date until, PaymentEntity payment) {
-		BigDecimal total = (BigDecimal) map.get(ConstantsJsp.TOTAL);
+		BigDecimal total = (BigDecimal) map.get(ConstantsViews.TOTAL);
 		List<RecordingEntity> recordings = recordingRepository.findByCreationdateBetweenAndPay(from, until, payment);
 		int size = 0;
 		if (total == null) {
@@ -142,14 +142,14 @@ public class SalesCardServiceImpl implements SalesCardService {
 				total = total.add(irecordings.next().getAmount());
 			}
 			size = recordings.size();
-			map.put(ConstantsJsp.TOTAL, total);
+			map.put(ConstantsViews.TOTAL, total);
 			map.put(Constants.RECORDINGS, recordings);
 		}
 		return size;
 	}
 
 	private int putBatteries(Map<String, Object> map, Date from, Date until, PaymentEntity payment) {
-		BigDecimal total = (BigDecimal) map.get(ConstantsJsp.TOTAL);
+		BigDecimal total = (BigDecimal) map.get(ConstantsViews.TOTAL);
 		List<BatteryEntity> batteries = batteriesRepository.findByCreationdateBetweenAndPayment(from, until, payment);
 		int size = 0;
 		if (total == null) {
@@ -161,7 +161,7 @@ public class SalesCardServiceImpl implements SalesCardService {
 				total = total.add(ibatteries.next().getAmount());
 			}
 			size = batteries.size();
-			map.put(ConstantsJsp.TOTAL, total);
+			map.put(ConstantsViews.TOTAL, total);
 			map.put(Constants.BATTERIES, batteries);
 		}
 		return size;
@@ -169,7 +169,7 @@ public class SalesCardServiceImpl implements SalesCardService {
 
 	private int putStraps(Map<String, Object> map, Date from, Date until, PaymentEntity payment) {
 		List<StrapEntity> straps = strapsRepository.findByCreationdateBetweenAndPayment(from, until, payment);
-		BigDecimal total = (BigDecimal) map.get(ConstantsJsp.TOTAL);
+		BigDecimal total = (BigDecimal) map.get(ConstantsViews.TOTAL);
 		int size = 0;
 		if (total == null) {
 			total = BigDecimal.ZERO;
@@ -180,7 +180,7 @@ public class SalesCardServiceImpl implements SalesCardService {
 				total = total.add(istraps.next().getAmount());
 			}
 			size = straps.size();
-			map.put(ConstantsJsp.TOTAL, total);
+			map.put(ConstantsViews.TOTAL, total);
 			map.put(Constants.STRAPS, straps);
 		}
 		return size;
@@ -189,7 +189,7 @@ public class SalesCardServiceImpl implements SalesCardService {
 	private int putSalesPost(Map<String, Object> map, Date from, Date until, PaymentEntity payment) {
 		List<SalePostponedEntity> salespost = salespostponedrepository.findByCreationdateBetweenPay(from, until,
 				payment);
-		BigDecimal total = (BigDecimal) map.get(ConstantsJsp.TOTAL);
+		BigDecimal total = (BigDecimal) map.get(ConstantsViews.TOTAL);
 		int size = 0;
 		if (total == null) {
 			total = BigDecimal.ZERO;
@@ -201,7 +201,7 @@ public class SalesCardServiceImpl implements SalesCardService {
 			}
 			size = salespost.size();
 		}
-		map.put(ConstantsJsp.TOTAL, total);
+		map.put(ConstantsViews.TOTAL, total);
 		map.put("salespost", salespost);
 		return size;
 	}

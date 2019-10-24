@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.je.admin.forms.AdminForm;
 import com.je.services.incidents.Incident;
 import com.je.services.incidents.IncidentService;
-import com.je.utils.constants.ConstantsJsp;
+import com.je.utils.constants.ConstantsViews;
 
 @Controller
 public class IncidentsAdminController {
@@ -21,31 +21,31 @@ public class IncidentsAdminController {
 	@GetMapping("/allincidents")
 	public ModelAndView allincidents() {
 		ModelAndView model = new ModelAndView("admin/incidents/allincidents");
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		model.addObject("incidents", incidentService.searchAllIncidents());
-		model.addObject(ConstantsJsp.FORMINCIDENT, new Incident());
+		model.addObject(ConstantsViews.FORMINCIDENT, new Incident());
 		return model;
 	}
 
 	@GetMapping("/pendingissues")
 	public ModelAndView pendingissues() {
 		ModelAndView model = new ModelAndView("admin/incidents/allincidents");
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		model.addObject("incidents", incidentService.searchPending());
-		model.addObject(ConstantsJsp.FORMINCIDENT, new Incident());
+		model.addObject(ConstantsViews.FORMINCIDENT, new Incident());
 		return model;
 	}
 
 	@PostMapping("/searchincident")
-	public ModelAndView searchIncident(@ModelAttribute(ConstantsJsp.FORMINCIDENT) Incident incident) {
+	public ModelAndView searchIncident(@ModelAttribute(ConstantsViews.FORMINCIDENT) Incident incident) {
 		ModelAndView model = new ModelAndView("admin/incidents/updateincident");
-		model.addObject(ConstantsJsp.FORMINCIDENT, incidentService.searchIncident(incident));
-		model.addObject(ConstantsJsp.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.FORMINCIDENT, incidentService.searchIncident(incident));
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		return model;
 	}
 
 	@PostMapping("/resolvedincident")
-	public ModelAndView resolvedIncident(@ModelAttribute(ConstantsJsp.FORMINCIDENT) Incident incident) {
+	public ModelAndView resolvedIncident(@ModelAttribute(ConstantsViews.FORMINCIDENT) Incident incident) {
 		if (incident != null && incident.getIdincident() != null) {
 			incidentService.resolve(incident);
 		}
