@@ -3,12 +3,9 @@ package com.je.services.dailies;
 import java.math.BigDecimal;
 import java.util.List;
 
-import com.je.dbaccess.entities.BatteryEntity;
 import com.je.dbaccess.entities.EntryMoneyEntity;
 import com.je.dbaccess.entities.OtherSaleEntity;
 import com.je.dbaccess.entities.PayrollEntity;
-import com.je.dbaccess.entities.RecordingEntity;
-import com.je.dbaccess.entities.StrapEntity;
 import com.je.forms.Sale;
 import com.je.forms.SalePostPoned;
 import com.je.services.adjustments.Adjustment;
@@ -55,15 +52,9 @@ public class Daily {
 
 	private List<EntryMoneyEntity> entriesmoney;
 
-	private List<BatteryEntity> batteries;
-
-	private List<StrapEntity> straps;
-
 	private List<Rental> rentals;
 
 	private List<Discount> discounts;
-	private List<RecordingEntity> recordings;
-
 	private PayrollEntity payroll;
 
 	private int numoperations;
@@ -204,22 +195,6 @@ public class Daily {
 		this.entriesmoney = entriesMoney;
 	}
 
-	public List<BatteryEntity> getBatteries() {
-		return batteries;
-	}
-
-	public void setBatteries(List<BatteryEntity> batteries) {
-		this.batteries = batteries;
-	}
-
-	public List<StrapEntity> getStraps() {
-		return straps;
-	}
-
-	public void setStraps(List<StrapEntity> straps) {
-		this.straps = straps;
-	}
-
 	public List<Rental> getRentals() {
 		return rentals;
 	}
@@ -242,14 +217,6 @@ public class Daily {
 
 	public void setDiscounts(List<Discount> discounts) {
 		this.discounts = discounts;
-	}
-
-	public List<RecordingEntity> getRecordings() {
-		return recordings;
-	}
-
-	public void setRecordings(List<RecordingEntity> recordings) {
-		this.recordings = recordings;
 	}
 
 	public List<Pawn> getNewpawns() {

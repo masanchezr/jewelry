@@ -155,7 +155,8 @@
 							</tr>
 							<tr th:each="othersale:${daily.othersales}">
 								<td><span th:text="#{sale}"></span><span
-									th:text="${othersale.type.name}"></span></td>
+									th:text="${othersale.type.name}"></span>
+									<p class="text-xs" th:text="${othersale.description}"></p></td>
 								<td th:text="${othersale.numsale}"></td>
 								<td th:text="${othersale.amount}"><i
 									class="fas fa-euro-sign"></i></td>

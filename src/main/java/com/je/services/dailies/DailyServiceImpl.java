@@ -11,7 +11,6 @@ import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.je.dbaccess.entities.AdjustmentEntity;
-import com.je.dbaccess.entities.BatteryEntity;
 import com.je.dbaccess.entities.CancelSaleEntity;
 import com.je.dbaccess.entities.CancelSalePaymentEntity;
 import com.je.dbaccess.entities.DailyEntity;
@@ -26,19 +25,16 @@ import com.je.dbaccess.entities.PaymentShopEntity;
 import com.je.dbaccess.entities.PayrollEntity;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.dbaccess.entities.PlaceUserEntity;
-import com.je.dbaccess.entities.RecordingEntity;
 import com.je.dbaccess.entities.RenovationEntity;
 import com.je.dbaccess.entities.RentalEntity;
 import com.je.dbaccess.entities.SaleEntity;
 import com.je.dbaccess.entities.SalePostponedEntity;
 import com.je.dbaccess.entities.SalesPayments;
 import com.je.dbaccess.entities.ShoppingEntity;
-import com.je.dbaccess.entities.StrapEntity;
 import com.je.dbaccess.entities.UserEntity;
 import com.je.dbaccess.managers.HolidaysManager;
 import com.je.dbaccess.managers.SaleManager;
 import com.je.dbaccess.repositories.AdjustmentRepository;
-import com.je.dbaccess.repositories.BatteriesRepository;
 import com.je.dbaccess.repositories.CancelSaleRepository;
 import com.je.dbaccess.repositories.DailyRepository;
 import com.je.dbaccess.repositories.DiscountsRepository;
@@ -48,12 +44,10 @@ import com.je.dbaccess.repositories.OtherSaleRepository;
 import com.je.dbaccess.repositories.PawnsRepository;
 import com.je.dbaccess.repositories.PayrollRepository;
 import com.je.dbaccess.repositories.PlaceUserRepository;
-import com.je.dbaccess.repositories.RecordingRepository;
 import com.je.dbaccess.repositories.RenovationsRepository;
 import com.je.dbaccess.repositories.RentalsRepository;
 import com.je.dbaccess.repositories.SalesPostponedRepository;
 import com.je.dbaccess.repositories.ShoppingsRepository;
-import com.je.dbaccess.repositories.StrapsRepository;
 import com.je.forms.Sale;
 import com.je.forms.SalePostPoned;
 import com.je.services.adjustments.Adjustment;
@@ -110,13 +104,7 @@ public class DailyServiceImpl implements DailyService {
 	private EntryMoneyRepository entryMoneyRepository;
 
 	@Autowired
-	private BatteriesRepository batteriesRepository;
-
-	@Autowired
 	private OtherSaleRepository otherSaleRepository;
-
-	@Autowired
-	private StrapsRepository strapsRepository;
 
 	@Autowired
 	private RentalsRepository rentalsRepository;
@@ -127,9 +115,6 @@ public class DailyServiceImpl implements DailyService {
 
 	@Autowired
 	private DiscountsRepository discountsRepository;
-
-	@Autowired
-	private RecordingRepository recordingRepository;
 
 	@Autowired
 	private SalesPostponedRepository salespostponedrepository;
@@ -157,12 +142,9 @@ public class DailyServiceImpl implements DailyService {
 			BigDecimal newpawnsamount = getNewPawnsAmount(date, place, daily);
 			BigDecimal retiredpawnsamount = getRetiredPawnsAmount(date, place, daily);
 			BigDecimal shoppingsamount = getShoppingsAmount(date, place, daily);
-			BigDecimal recordingsAmount = getRecordingsAmount(date, place, daily);
 			BigDecimal adjusmentsamount = getAdjustmentsAmount(date, place, daily);
 			BigDecimal rentalsamount = getRentalsAmount(date, place, daily);
 			BigDecimal cancelsamount = getCancelsAmount(date, place, daily);
-			BigDecimal batteriesamount = getBatteriesAmount(date, place, daily);
-			BigDecimal strapsamount = getStrapsAmount(date, place, daily);
 			BigDecimal entriesmoneyamount = getEntriesMoneyAmount(date, place, daily);
 			BigDecimal othersalesamount = getOtherSalesAmount(date, place, daily);
 			double salesamount = getSalesAmount(date, place, daily);
@@ -187,8 +169,7 @@ public class DailyServiceImpl implements DailyService {
 			finalamount = previousamount.add(adjusmentsamount).add(adjustmentsworkamount).add(renovationsamount)
 					.add(BigDecimal.valueOf(salesamount)).add(shoppingsamount).add(retiredpawnsamount)
 					.add(otherconceptsamount).add(newpawnsamount).add(cancelsamount).add(payrollamount)
-					.add(entriesmoneyamount).add(batteriesamount).add(strapsamount).add(rentalsamount)
-					.add(discountsamount).add(recordingsAmount)
+					.add(entriesmoneyamount).add(rentalsamount).add(discountsamount)
 					.add(BigDecimal.valueOf(salespostamount).add(othersalesamount));
 			dEntity.setFinalamount(finalamount);
 			dEntity.setIpaddress(ipaddress);
@@ -214,24 +195,6 @@ public class DailyServiceImpl implements DailyService {
 			daily.setNumoperations(daily.getNumoperations() + othersales.size());
 		}
 		return othersalesamount;
-	}
-
-	private BigDecimal getRecordingsAmount(Date date, PlaceEntity place, Daily daily) {
-		BigDecimal recordingsAmount = BigDecimal.ZERO;
-		List<RecordingEntity> recordings = recordingRepository.findByCreationdateAndPlace(date, place);
-		if (recordings != null && !recordings.isEmpty()) {
-			Iterator<RecordingEntity> irecordings = recordings.iterator();
-			RecordingEntity recording;
-			while (irecordings.hasNext()) {
-				recording = irecordings.next();
-				if (recording.getPay().getIdpayment().equals(Constants.EFECTIVO)) {
-					recordingsAmount = recordingsAmount.add(recording.getAmount());
-				}
-			}
-			daily.setRecordings(recordings);
-			daily.setNumoperations(daily.getNumoperations() + recordings.size());
-		}
-		return recordingsAmount;
 	}
 
 	private BigDecimal getDiscountsAmount(Date date, PlaceEntity place, Daily daily) {
@@ -273,44 +236,6 @@ public class DailyServiceImpl implements DailyService {
 			daily.setNumoperations(daily.getNumoperations() + rentalsEntity.size());
 		}
 		return rentalsamount;
-	}
-
-	private BigDecimal getStrapsAmount(Date date, PlaceEntity place, Daily daily) {
-		BigDecimal strapsamount = BigDecimal.ZERO;
-		List<StrapEntity> strapsEntity = strapsRepository.findByCreationdateAndPlace(date, place);
-		if (strapsEntity != null && !strapsEntity.isEmpty()) {
-			Iterator<StrapEntity> ibatteries = strapsEntity.iterator();
-			StrapEntity se;
-			while (ibatteries.hasNext()) {
-				se = ibatteries.next();
-				if (se.getPayment().getIdpayment().equals(Constants.EFECTIVO)) {
-					strapsamount = strapsamount.add(se.getAmount());
-				}
-			}
-			daily.setStraps(strapsEntity);
-			daily.setNumoperations(daily.getNumoperations() + strapsEntity.size());
-		}
-		return strapsamount;
-	}
-
-	private BigDecimal getBatteriesAmount(Date date, PlaceEntity place, Daily daily) {
-		BigDecimal batteriesamount = BigDecimal.ZERO;
-		List<BatteryEntity> batteriesEntity = batteriesRepository.findByCreationdateAndPlace(date, place);
-		if (batteriesEntity != null && !batteriesEntity.isEmpty()) {
-			Iterator<BatteryEntity> ibatteries = batteriesEntity.iterator();
-			BatteryEntity be;
-			List<BatteryEntity> batteries = new ArrayList<>();
-			while (ibatteries.hasNext()) {
-				be = ibatteries.next();
-				if (be.getPayment().getIdpayment().equals(Constants.EFECTIVO)) {
-					batteriesamount = batteriesamount.add(be.getAmount());
-				}
-				batteries.add(be);
-			}
-			daily.setBatteries(batteries);
-			daily.setNumoperations(daily.getNumoperations() + batteries.size());
-		}
-		return batteriesamount;
 	}
 
 	private BigDecimal getEntriesMoneyAmount(Date date, PlaceEntity place, Daily daily) {

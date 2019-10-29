@@ -4,47 +4,27 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.je.dbaccess.entities.BatteryEntity;
 import com.je.dbaccess.entities.OtherSaleEntity;
-import com.je.dbaccess.entities.RecordingEntity;
 import com.je.dbaccess.entities.SaleEntity;
-import com.je.dbaccess.entities.StrapEntity;
-import com.je.dbaccess.repositories.BatteriesRepository;
 import com.je.dbaccess.repositories.DiscountsRepository;
 import com.je.dbaccess.repositories.OtherSaleRepository;
-import com.je.dbaccess.repositories.RecordingRepository;
 import com.je.dbaccess.repositories.SalesRepository;
-import com.je.dbaccess.repositories.StrapsRepository;
 
 public class SearchSaleRepeatedServiceImpl implements SearchSaleRepeatedService {
-
-	@Autowired
-	private BatteriesRepository batteriesRepository;
 
 	@Autowired
 	private DiscountsRepository discountsRepository;
 
 	@Autowired
-	private RecordingRepository recordingRepository;
-
-	@Autowired
 	private SalesRepository saleRepository;
-
-	@Autowired
-	private StrapsRepository strapsRepository;
 
 	@Autowired
 	private OtherSaleRepository othersaleRepository;
 
 	public boolean isSaleRepeated(Long num) {
-		List<BatteryEntity> batteries = batteriesRepository.findByNumsale(num);
-		List<RecordingEntity> recordings = recordingRepository.findByNumsale(num);
 		List<SaleEntity> sales = saleRepository.findByNumsale(num);
-		List<StrapEntity> straps = strapsRepository.findByNumsale(num);
 		List<OtherSaleEntity> othersales = othersaleRepository.findByNumsale(num);
-		if ((batteries == null || batteries.isEmpty()) && (recordings == null || recordings.isEmpty())
-				&& (sales == null || sales.isEmpty()) && (straps == null || straps.isEmpty())
-				&& (othersales == null || othersales.isEmpty())) {
+		if ((sales == null || sales.isEmpty()) && (othersales == null || othersales.isEmpty())) {
 			return discountsRepository.existsById(num);
 		} else {
 			return true;

@@ -12,20 +12,16 @@ import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.je.dbaccess.entities.AdjustmentEntity;
-import com.je.dbaccess.entities.BatteryEntity;
 import com.je.dbaccess.entities.JewelEntity;
+import com.je.dbaccess.entities.OtherSaleEntity;
 import com.je.dbaccess.entities.PaymentEntity;
-import com.je.dbaccess.entities.RecordingEntity;
 import com.je.dbaccess.entities.SaleEntity;
 import com.je.dbaccess.entities.SalePostponedEntity;
 import com.je.dbaccess.entities.SalesJewels;
-import com.je.dbaccess.entities.StrapEntity;
 import com.je.dbaccess.managers.SaleManager;
 import com.je.dbaccess.repositories.AdjustmentRepository;
-import com.je.dbaccess.repositories.BatteriesRepository;
-import com.je.dbaccess.repositories.RecordingRepository;
+import com.je.dbaccess.repositories.OtherSaleRepository;
 import com.je.dbaccess.repositories.SalesPostponedRepository;
-import com.je.dbaccess.repositories.StrapsRepository;
 import com.je.forms.Sale;
 import com.je.services.adjustments.Adjustment;
 import com.je.services.sales.SearchSale;
@@ -48,13 +44,7 @@ public class SalesCardServiceImpl implements SalesCardService {
 	private AdjustmentRepository adjustmentRepository;
 
 	@Autowired
-	private RecordingRepository recordingRepository;
-
-	@Autowired
-	private BatteriesRepository batteriesRepository;
-
-	@Autowired
-	private StrapsRepository strapsRepository;
+	private OtherSaleRepository othersalerepository;
 
 	@Autowired
 	private SalesPostponedRepository salespostponedrepository;
@@ -71,9 +61,7 @@ public class SalesCardServiceImpl implements SalesCardService {
 		int size = 0;
 		size += putSales(map, from, until, payment);
 		size += putAdjustments(map, from, until, payment);
-		size += putRecordings(map, from, until, payment);
-		size += putBatteries(map, from, until, payment);
-		size += putStraps(map, from, until, payment);
+		size += putOthersales(map, from, until, payment);
 		size += putSalesPost(map, from, until, payment);
 		map.put("numsales", size);
 		return map;
@@ -129,59 +117,21 @@ public class SalesCardServiceImpl implements SalesCardService {
 		return size;
 	}
 
-	private int putRecordings(Map<String, Object> map, Date from, Date until, PaymentEntity payment) {
+	private int putOthersales(Map<String, Object> map, Date from, Date until, PaymentEntity payment) {
 		BigDecimal total = (BigDecimal) map.get(ConstantsViews.TOTAL);
-		List<RecordingEntity> recordings = recordingRepository.findByCreationdateBetweenAndPay(from, until, payment);
+		List<OtherSaleEntity> recordings = othersalerepository.findByCreationdateBetweenAndPay(from, until, payment);
 		int size = 0;
 		if (total == null) {
 			total = BigDecimal.ZERO;
 		}
 		if (recordings != null && !recordings.isEmpty()) {
-			Iterator<RecordingEntity> irecordings = recordings.iterator();
+			Iterator<OtherSaleEntity> irecordings = recordings.iterator();
 			while (irecordings.hasNext()) {
 				total = total.add(irecordings.next().getAmount());
 			}
 			size = recordings.size();
 			map.put(ConstantsViews.TOTAL, total);
 			map.put(Constants.RECORDINGS, recordings);
-		}
-		return size;
-	}
-
-	private int putBatteries(Map<String, Object> map, Date from, Date until, PaymentEntity payment) {
-		BigDecimal total = (BigDecimal) map.get(ConstantsViews.TOTAL);
-		List<BatteryEntity> batteries = batteriesRepository.findByCreationdateBetweenAndPayment(from, until, payment);
-		int size = 0;
-		if (total == null) {
-			total = BigDecimal.ZERO;
-		}
-		if (batteries != null && !batteries.isEmpty()) {
-			Iterator<BatteryEntity> ibatteries = batteries.iterator();
-			while (ibatteries.hasNext()) {
-				total = total.add(ibatteries.next().getAmount());
-			}
-			size = batteries.size();
-			map.put(ConstantsViews.TOTAL, total);
-			map.put(Constants.BATTERIES, batteries);
-		}
-		return size;
-	}
-
-	private int putStraps(Map<String, Object> map, Date from, Date until, PaymentEntity payment) {
-		List<StrapEntity> straps = strapsRepository.findByCreationdateBetweenAndPayment(from, until, payment);
-		BigDecimal total = (BigDecimal) map.get(ConstantsViews.TOTAL);
-		int size = 0;
-		if (total == null) {
-			total = BigDecimal.ZERO;
-		}
-		if (straps != null && !straps.isEmpty()) {
-			Iterator<StrapEntity> istraps = straps.iterator();
-			while (istraps.hasNext()) {
-				total = total.add(istraps.next().getAmount());
-			}
-			size = straps.size();
-			map.put(ConstantsViews.TOTAL, total);
-			map.put(Constants.STRAPS, straps);
 		}
 		return size;
 	}

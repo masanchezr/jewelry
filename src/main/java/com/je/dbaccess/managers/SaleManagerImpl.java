@@ -13,26 +13,22 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.je.dbaccess.entities.AddressEntity;
 import com.je.dbaccess.entities.Addresses;
-import com.je.dbaccess.entities.BatteryEntity;
 import com.je.dbaccess.entities.CancelSaleEntity;
 import com.je.dbaccess.entities.ClientEntity;
 import com.je.dbaccess.entities.DiscountEntity;
 import com.je.dbaccess.entities.JewelEntity;
+import com.je.dbaccess.entities.OtherSaleEntity;
 import com.je.dbaccess.entities.PaymentEntity;
 import com.je.dbaccess.entities.PlaceEntity;
-import com.je.dbaccess.entities.RecordingEntity;
 import com.je.dbaccess.entities.SaleEntity;
 import com.je.dbaccess.entities.SalePostponedEntity;
 import com.je.dbaccess.entities.SalesJewels;
-import com.je.dbaccess.entities.StrapEntity;
-import com.je.dbaccess.repositories.BatteriesRepository;
 import com.je.dbaccess.repositories.CancelSaleRepository;
 import com.je.dbaccess.repositories.DiscountsRepository;
 import com.je.dbaccess.repositories.JewelRepository;
-import com.je.dbaccess.repositories.RecordingRepository;
-import com.je.dbaccess.repositories.SalesRepository;
+import com.je.dbaccess.repositories.OtherSaleRepository;
 import com.je.dbaccess.repositories.SalesPostponedRepository;
-import com.je.dbaccess.repositories.StrapsRepository;
+import com.je.dbaccess.repositories.SalesRepository;
 import com.je.utils.constants.Constants;
 import com.je.utils.constants.ConstantsViews;
 
@@ -41,29 +37,23 @@ import com.je.utils.constants.ConstantsViews;
  */
 public class SaleManagerImpl implements SaleManager {
 
-	@Autowired
-	private DiscountsRepository discountsRepository;
-
-	/** The sale repository. */
-	@Autowired
-	private SalesRepository saleRepository;
-
-	/** The jewel repository. */
-	@Autowired
-	private JewelRepository jewelRepository;
-
 	/** The cancel sale repository. */
 	@Autowired
 	private CancelSaleRepository cancelSaleRepository;
 
 	@Autowired
-	private BatteriesRepository batteriesRepository;
+	private DiscountsRepository discountsRepository;
+
+	/** The jewel repository. */
+	@Autowired
+	private JewelRepository jewelRepository;
 
 	@Autowired
-	private StrapsRepository strapsRepository;
+	private OtherSaleRepository othersalerepository;
 
+	/** The sale repository. */
 	@Autowired
-	private RecordingRepository recordingRepository;
+	private SalesRepository saleRepository;
 
 	@Autowired
 	private SalesPostponedRepository salespostponedrepository;
@@ -73,7 +63,6 @@ public class SaleManagerImpl implements SaleManager {
 	public Long buy(SaleEntity sale) {
 		List<SalesJewels> lsj = new ArrayList<>();
 		Iterator<SalesJewels> isj = sale.getSjewels().iterator();
-		Long orderNumber = null;
 		while (isj.hasNext()) {
 			SalesJewels sj = isj.next();
 			JewelEntity je = jewelRepository.findById(sj.getJewelEntity().getIdjewel()).orElse(null);
@@ -88,10 +77,7 @@ public class SaleManagerImpl implements SaleManager {
 		// podría devolver la compra entera, de momento no me hace falta, solo
 		// voy a mandar el numero de pedido
 		sale = saleRepository.save(sale);
-		if (sale != null) {
-			orderNumber = sale.getIdsale();
-		}
-		return orderNumber;
+		return sale.getIdsale();
 	}
 
 	@Override
@@ -222,11 +208,9 @@ public class SaleManagerImpl implements SaleManager {
 				place);
 		List<SalePostponedEntity> salespostponed = salespostponedrepository.findByDateretiredBetweenAndPlace(from,
 				until, place);
-		List<StrapEntity> straps = strapsRepository.findByCreationdateBetweenAndPlace(from, until, place);
-		List<BatteryEntity> batteries = batteriesRepository.findByCreationdateBetweenAndPlace(from, until, place);
+		List<OtherSaleEntity> othersales = othersalerepository.findByCreationdateBetweenAndPlace(from, until, place);
 		BigDecimal sumsalespostponed = salespostponedrepository.sumDateretiredBetweenAndPlace(from, until, place);
-		BigDecimal sumstraps = strapsRepository.sumCreationdateBetweenAndPlace(from, until, place);
-		BigDecimal sumbatteries = batteriesRepository.sumCreationdateBetweenAndPlace(from, until, place);
+		BigDecimal sumothersales = othersalerepository.sumCreationdateBetweenAndPlace(from, until, place);
 		Iterator<SaleEntity> itsales = isales.iterator();
 		Map<String, Object> map = new HashMap<>();
 		SaleEntity sale;
@@ -246,16 +230,12 @@ public class SaleManagerImpl implements SaleManager {
 		if (sumsalespostponed != null) {
 			total = total.add(sumsalespostponed);
 		}
-		if (sumstraps != null) {
-			total = total.add(sumstraps);
-		}
-		if (sumbatteries != null) {
-			total = total.add(sumbatteries);
+		if (sumothersales != null) {
+			total = total.add(sumothersales);
 		}
 		map.put(Constants.SALES, sales);
 		map.put(Constants.SALESPOSTPONED, salespostponed);
-		map.put(Constants.STRAPS, straps);
-		map.put(Constants.BATTERIES, batteries);
+		map.put("othersales", othersales);
 		map.put(ConstantsViews.TOTAL, total);
 		map.put("cost", cost);
 		return map;
@@ -288,17 +268,11 @@ public class SaleManagerImpl implements SaleManager {
 
 	private long checkAllSales(long i) {
 		long num = 0;
-		List<BatteryEntity> batteries = batteriesRepository.findByNumsale(i);
-		if (batteries == null || batteries.isEmpty()) {
-			List<StrapEntity> straps = strapsRepository.findByNumsale(i);
-			if (straps == null || straps.isEmpty()) {
-				List<RecordingEntity> recording = recordingRepository.findByNumsale(i);
-				if (recording == null || recording.isEmpty()) {
-					DiscountEntity discount = discountsRepository.findById(i).orElse(null);
-					if (discount == null) {
-						num = i;
-					}
-				}
+		List<OtherSaleEntity> othersales = othersalerepository.findByNumsale(i);
+		if (othersales == null || othersales.isEmpty()) {
+			DiscountEntity discount = discountsRepository.findById(i).orElse(null);
+			if (discount == null) {
+				num = i;
 			}
 		}
 		return num;
