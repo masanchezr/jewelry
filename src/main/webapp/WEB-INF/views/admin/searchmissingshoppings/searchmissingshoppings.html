@@ -17,18 +17,18 @@
 						<div class="col-lg-6">
 							<div class="form-group">
 								<span th:text="#{numfrom}"></span> <input class="form-control"
-									id="numfrom" />
+									th:field="*{numfrom}" />
 							</div>
 							<div class="form-group">
 								<span th:text="#{numuntil}"></span> <input class="form-control"
-									id="numuntil" />
+									th:field="*{numuntil}" />
 							</div>
 							<div class="form-group">
 								<span th:text="#{year}"></span> <input class="form-control"
-									id="year" />
+									th:field="*{year}" />
 							</div>
 							<div class="form-group">
-								<span th:text="#{place}"></span> <select
+								<span th:text="#{place}"></span> <select class="form-control"
 									th:field="*{place.idplace}">
 									<option th:each="place : ${places}" th:value="${place.idplace}"
 										th:text="${place.description}" />
