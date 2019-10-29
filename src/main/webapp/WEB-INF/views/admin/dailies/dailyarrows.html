@@ -117,20 +117,6 @@
 									class="fas fa-euro-sign"></i></td>
 								<td></td>
 							</tr>
-							<tr th:each="battery:${daily.batteries}">
-								<td th:text="#{putbattery}"></td>
-								<td th:text="${battery.numsale}"></td>
-								<td><span th:text="${battery.amount}"><i
-										class="fas fa-euro-sign"></i></span></td>
-								<td th:text="${battery.payment.name}"></td>
-							</tr>
-							<tr th:each="strap:${daily.straps}">
-								<td th:text="#{putstrap}"></td>
-								<td th:text="${strap.numsale}"></td>
-								<td><span th:text="${strap.amount}"><i
-										class="fas fa-euro-sign"></i></span></td>
-								<td th:text="${strap.payment.name}"></td>
-							</tr>
 							<tr th:each="rental:${daily.rentals}">
 								<td th:text="#{localrental}"></td>
 								<td th:text="${rental.rentaldate}"></td>
@@ -144,13 +130,6 @@
 								<td th:text="${discount.sdiscount}"><i
 									class="fas fa-euro-sign"></i></td>
 								<td></td>
-							</tr>
-							<tr th:each="recording:${daily.recordings}">
-								<td th:text="#{recording}"></td>
-								<td th:text="${recording.numsale}"></td>
-								<td th:text="${recording.amount}"><i
-									class="fas fa-euro-sign"></i></td>
-								<td th:text="${recording.pay.name}"></td>
 							</tr>
 							<tr th:each="othersale:${daily.othersales}">
 								<td><span th:text="#{sale}"></span><span
