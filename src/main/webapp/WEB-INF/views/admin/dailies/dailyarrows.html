@@ -152,6 +152,14 @@
 									class="fas fa-euro-sign"></i></td>
 								<td th:text="${recording.pay.name}"></td>
 							</tr>
+							<tr th:each="othersale:${daily.othersales}">
+								<td><span th:text="#{sale}"></span><span
+									th:text="${othersale.type.name}"></span></td>
+								<td th:text="${othersale.numsale}"></td>
+								<td th:text="${othersale.amount}"><i
+									class="fas fa-euro-sign"></i></td>
+								<td th:text="${othersale.pay.name}"></td>
+							</tr>
 							<tr th:if="${daily.payroll!=null}">
 								<td th:text="#{payroll}"></td>
 								<td th:text="${daily.payroll.payrolltype.name}"></td>

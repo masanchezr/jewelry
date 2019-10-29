@@ -1,4 +1,4 @@
-package com.je.forms;
+package com.je.employee.forms;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -6,10 +6,12 @@ import java.util.Date;
 import org.springframework.data.annotation.CreatedDate;
 
 import com.je.dbaccess.entities.PlaceEntity;
+import com.je.dbaccess.entities.TypeOfSaleEntity;
+import com.je.forms.Payment;
 
-public class Recording {
+public class OtherSale {
 
-	private Long idrecording;
+	private Long idothersale;
 
 	private BigDecimal amount;
 
@@ -24,12 +26,14 @@ public class Recording {
 
 	private String description;
 
-	public Long getIdrecording() {
-		return idrecording;
+	private TypeOfSaleEntity type;
+
+	public Long getIdothersale() {
+		return idothersale;
 	}
 
-	public void setIdrecording(Long idrecording) {
-		this.idrecording = idrecording;
+	public void setIdothersale(Long idrecording) {
+		this.idothersale = idrecording;
 	}
 
 	public BigDecimal getAmount() {
@@ -78,6 +82,14 @@ public class Recording {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public TypeOfSaleEntity getType() {
+		return type;
+	}
+
+	public void setType(TypeOfSaleEntity type) {
+		this.type = type;
 	}
 
 }

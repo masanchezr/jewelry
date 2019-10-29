@@ -4,15 +4,15 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.je.dbaccess.entities.RecordingEntity;
+import com.je.dbaccess.entities.OtherSaleEntity;
 import com.je.utils.constants.Constants;
 import com.je.utils.constants.ConstantsViews;
 
-public class RecordingValidator implements Validator {
+public class OtherSaleValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> arg0) {
-		return RecordingEntity.class.isAssignableFrom(arg0);
+		return OtherSaleEntity.class.isAssignableFrom(arg0);
 	}
 
 	@Override

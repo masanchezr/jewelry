@@ -155,8 +155,8 @@ public class SalesController {
 	 * @return the model and view
 	 */
 	@GetMapping("/employee//cancelparcialsale")
-	public ModelAndView cancelParcialSale(@ModelAttribute(ConstantsViews.FORMSALE) Sale sale, HttpServletRequest request,
-			BindingResult result) {
+	public ModelAndView cancelParcialSale(@ModelAttribute(ConstantsViews.FORMSALE) Sale sale,
+			HttpServletRequest request, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		Long numsale = sale.getNumsale();
 		if (numsale == null || numsale.equals(0L)) {
@@ -231,7 +231,7 @@ public class SalesController {
 	 * @param result         the result
 	 * @return the model and view
 	 */
-	@GetMapping("/employee//deletesale")
+	@PostMapping("/employee/deletesale")
 	public ModelAndView deleteSale(Sale removeSaleForm, HttpServletRequest request, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		removeSaleValidator.validate(removeSaleForm, result);

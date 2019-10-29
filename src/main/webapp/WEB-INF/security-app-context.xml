@@ -54,10 +54,6 @@
 			access="hasAnyRole('ROLE_USER','ROLE_AR','ROLE_NA')" />
 		<intercept-url pattern="/employee/newentrymoney"
 			access="hasAnyRole('ROLE_USER','ROLE_AR','ROLE_NA')" />
-		<intercept-url pattern="/employee/newsalebattery"
-			access="hasAnyRole('ROLE_USER','ROLE_AR','ROLE_NA')" />
-		<intercept-url pattern="/employee/newsalestrap"
-			access="hasAnyRole('ROLE_USER','ROLE_AR','ROLE_NA')" />
 		<intercept-url pattern="/employee/localrental"
 			access="hasRole('ROLE_USER')" />
 		<intercept-url pattern="/employee/searchdaily"
@@ -76,7 +72,7 @@
 			access="hasAnyRole('ROLE_USER','ROLE_AR','ROLE_NA')" />
 		<intercept-url pattern="/employee/newpayroll"
 			access="hasAnyRole('ROLE_USER','ROLE_AR','ROLE_NA')" />
-		<intercept-url pattern="/employee/newrecording"
+		<intercept-url pattern="/employee/othersales"
 			access="hasAnyRole('ROLE_USER','ROLE_AR','ROLE_NA')" />
 		<intercept-url pattern="/employee/newsalepostponed"
 			access="hasAnyRole('ROLE_USER','ROLE_AR','ROLE_NA')" />

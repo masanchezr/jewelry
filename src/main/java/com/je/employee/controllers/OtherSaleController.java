@@ -14,20 +14,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.je.dbaccess.entities.OtherSaleEntity;
 import com.je.dbaccess.entities.PlaceEntity;
-import com.je.dbaccess.entities.RecordingEntity;
-import com.je.employee.validators.RecordingValidator;
-import com.je.forms.Recording;
+import com.je.employee.forms.OtherSale;
+import com.je.employee.validators.OtherSaleValidator;
 import com.je.services.dailies.DailyService;
+import com.je.services.othersale.OtherSaleService;
 import com.je.services.payment.PaymentService;
 import com.je.services.places.PlaceService;
-import com.je.services.recordings.RecordingService;
 import com.je.services.salesrepeated.SearchSaleRepeatedService;
 import com.je.utils.constants.ConstantsViews;
 import com.je.utils.date.DateUtil;
 
 @Controller
-public class RecordingController {
+public class OtherSaleController {
 
 	@Autowired
 	private DailyService dailyService;
@@ -39,42 +39,47 @@ public class RecordingController {
 	private PlaceService placeService;
 
 	@Autowired
-	private RecordingService recordingService;
+	private OtherSaleService otherSaleService;
 
 	@Autowired
 	private SearchSaleRepeatedService searchSaleRepeatedService;
 
 	@Autowired
-	private RecordingValidator recordingValidator;
+	private OtherSaleValidator recordingValidator;
 
 	@Autowired
 	private Mapper mapper;
 
 	private static final String FORMRECORDING = "recording";
-	private static final String VIEWNEWRECORDING = "employee/sales/newrecording";
+	private static final String TYPES = "types";
+	private static final String VIEWNEWRECORDING = "employee/sales/newothersale";
 
-	@GetMapping("/employee/newrecording")
+	@GetMapping("/employee/othersales")
 	public ModelAndView newrecording() {
 		ModelAndView model = new ModelAndView(VIEWNEWRECORDING);
-		model.addObject(FORMRECORDING, new RecordingEntity());
+		model.addObject(FORMRECORDING, new OtherSaleEntity());
 		model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
+		model.addObject(TYPES, otherSaleService.findAllTypes());
 		return model;
 	}
 
 	@PostMapping("/employee/saverecording")
-	public ModelAndView saveRecording(@ModelAttribute(FORMRECORDING) Recording recording, HttpServletRequest request,
+	public ModelAndView saveRecording(@ModelAttribute(FORMRECORDING) OtherSale recording, HttpServletRequest request,
 			BindingResult errors) {
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		ModelAndView model = new ModelAndView();
+		Long numsale = recording.getNumsale();
 		recordingValidator.validate(recording, errors);
 		if (errors.hasErrors()) {
 			model.setViewName(VIEWNEWRECORDING);
 			model.addObject(FORMRECORDING, recording);
 			model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
-		} else if (searchSaleRepeatedService.isSaleRepeated(recording.getNumsale())) {
+			model.addObject(TYPES, otherSaleService.findAllTypes());
+		} else if (numsale != null && searchSaleRepeatedService.isSaleRepeated(numsale)) {
 			model.setViewName(VIEWNEWRECORDING);
 			model.addObject(FORMRECORDING, recording);
 			model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
+			model.addObject(TYPES, otherSaleService.findAllTypes());
 			errors.rejectValue("numsale", "numrepeated");
 		} else {
 			String ipAddress = request.getHeader(ConstantsViews.XFORWARDEDFOR);
@@ -84,10 +89,10 @@ public class RecordingController {
 			Date today = DateUtil.getDateFormated(new Date());
 			PlaceEntity place = placeService.getPlaceUser(user);
 			recording.setPlace(place);
-			recordingService.save(mapper.map(recording, RecordingEntity.class));
+			otherSaleService.save(mapper.map(recording, OtherSaleEntity.class));
 			model.setViewName(ConstantsViews.VIEWDAILYARROW);
 			model.addObject(ConstantsViews.DAILY, dailyService.getDaily(today, place, ipAddress));
-			model.addObject(ConstantsViews.DATEDAILY, today);
+			model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(today));
 		}
 		return model;
 	}

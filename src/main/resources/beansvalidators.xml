@@ -28,15 +28,13 @@
 	<bean id="userValidator" class="com.je.admin.validators.UserValidator" />
 	<bean id="payrollFormValidator" class="com.je.employee.validators.PayrollFormValidator" />
 	<bean id="entrymoneyFormValidator" class="com.je.employee.validators.EntryMoneyValidator" />
-	<bean id="batteryFormValidator" class="com.je.employee.validators.BatteryFormValidator" />
-	<bean id="strapFormValidator" class="com.je.employee.validators.StrapFormValidator" />
+	<bean id="otherSaleValidator" class="com.je.employee.validators.OtherSaleValidator" />
 	<bean id="rentalValidator" class="com.je.employee.validators.RentalValidator" />
 	<bean id="incidentValidator" class="com.je.employee.validators.IncidentValidator" />
 	<bean id="searchMissingNumbersValidator" class="com.je.admin.validators.SearchMissingNumbersValidator" />
 	<bean id="discountsValidator" class="com.je.employee.validators.DiscountsValidator" />
 	<bean id="jewelFormValidator" class="com.je.admin.validators.JewelFormValidator" />
 	<bean id="buyFormValidator" class="com.je.web.validators.BuyFormValidator" />
-	<bean id="recordingValidator" class="com.je.employee.validators.RecordingValidator" />
 	<bean id="searchDailyFormValidator" class="com.je.admin.validators.SearchDailyFormValidator" />
 	<bean id="partialCancelSaleValidator" class="com.je.employee.validators.PartialCancelSaleValidator" />
 	<bean id="salepostponedvalidator" class="com.je.employee.validators.SalePostPonedValidator" />

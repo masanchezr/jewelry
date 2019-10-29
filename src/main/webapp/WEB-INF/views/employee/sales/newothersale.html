@@ -8,7 +8,7 @@
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="#"><span
 					th:text="#{sales}"></span></a></li>
-			<li class="breadcrumb-item active" th:text="#{recording}"></li>
+			<li class="breadcrumb-item active" th:text="#{othersales}"></li>
 		</ol>
 		<div class="card-body">
 			<div class="form-row">
@@ -23,6 +23,12 @@
 							th:field="*{pay.idpayment}" class="form-control"><option
 								th:each="payment:${payments}" th:value="${payment.idpayment}"
 								th:text="${payment.name}" />
+						</select>
+					</div>
+					<div class="form-group">
+						<select th:field="*{type.idtypeofsale}" class="form-control"><option
+								th:each="t:${types}" th:value="${t.idtypeofsale}"
+								th:text="${t.name}" />
 						</select>
 					</div>
 					<div class="form-group">

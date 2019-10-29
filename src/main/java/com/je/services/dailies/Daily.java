@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.je.dbaccess.entities.BatteryEntity;
 import com.je.dbaccess.entities.EntryMoneyEntity;
+import com.je.dbaccess.entities.OtherSaleEntity;
 import com.je.dbaccess.entities.PayrollEntity;
 import com.je.dbaccess.entities.RecordingEntity;
 import com.je.dbaccess.entities.StrapEntity;
@@ -68,6 +69,8 @@ public class Daily {
 	private int numoperations;
 
 	private List<SalePostPoned> lsalespost;
+
+	private List<OtherSaleEntity> othersales;
 
 	/**
 	 * Gets the sales.
@@ -279,5 +282,13 @@ public class Daily {
 
 	public void setCancelsales(List<CancelSale> cancelsales) {
 		this.cancelsales = cancelsales;
+	}
+
+	public List<OtherSaleEntity> getOthersales() {
+		return othersales;
+	}
+
+	public void setOthersales(List<OtherSaleEntity> othersales) {
+		this.othersales = othersales;
 	}
 }

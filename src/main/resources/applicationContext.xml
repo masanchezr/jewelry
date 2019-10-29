@@ -57,10 +57,6 @@
 		class="com.je.services.payroll.PayrollServiceImpl" />
 	<bean id="entryMoneyService"
 		class="com.je.services.entrymoney.EntryMoneyServiceImpl" />
-	<bean id="batteriesService"
-		class="com.je.services.batteries.BatteriesServiceImpl" />
-	<bean id="strapsService"
-		class="com.je.services.straps.StrapsServiceImpl" />
 	<bean id="rentalService"
 		class="com.je.services.rentals.RentalServiceImpl" />
 	<bean id="userService"
@@ -70,7 +66,7 @@
 	<bean id="searchMissingNumbers"
 		class="com.je.services.searchmissingnumbers.SearchMissingNumberServiceImpl" />
 	<bean id="recordingService"
-		class="com.je.services.recordings.RecordingServiceImpl" />
+		class="com.je.services.othersale.OtherSaleServiceImpl" />
 	<bean id="discountService"
 		class="com.je.services.discounts.DiscountServiceImpl" />
 	<bean id="nationservice"

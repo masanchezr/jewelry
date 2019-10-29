@@ -19,6 +19,7 @@ import com.je.dbaccess.entities.DiscountEntity;
 import com.je.dbaccess.entities.EntryMoneyEntity;
 import com.je.dbaccess.entities.InstallmentEntity;
 import com.je.dbaccess.entities.OtherConceptEntity;
+import com.je.dbaccess.entities.OtherSaleEntity;
 import com.je.dbaccess.entities.PawnEntity;
 import com.je.dbaccess.entities.PaymentEntity;
 import com.je.dbaccess.entities.PaymentShopEntity;
@@ -43,6 +44,7 @@ import com.je.dbaccess.repositories.DailyRepository;
 import com.je.dbaccess.repositories.DiscountsRepository;
 import com.je.dbaccess.repositories.EntryMoneyRepository;
 import com.je.dbaccess.repositories.OtherConceptsRepository;
+import com.je.dbaccess.repositories.OtherSaleRepository;
 import com.je.dbaccess.repositories.PawnsRepository;
 import com.je.dbaccess.repositories.PayrollRepository;
 import com.je.dbaccess.repositories.PlaceUserRepository;
@@ -111,6 +113,9 @@ public class DailyServiceImpl implements DailyService {
 	private BatteriesRepository batteriesRepository;
 
 	@Autowired
+	private OtherSaleRepository otherSaleRepository;
+
+	@Autowired
 	private StrapsRepository strapsRepository;
 
 	@Autowired
@@ -159,6 +164,7 @@ public class DailyServiceImpl implements DailyService {
 			BigDecimal batteriesamount = getBatteriesAmount(date, place, daily);
 			BigDecimal strapsamount = getStrapsAmount(date, place, daily);
 			BigDecimal entriesmoneyamount = getEntriesMoneyAmount(date, place, daily);
+			BigDecimal othersalesamount = getOtherSalesAmount(date, place, daily);
 			double salesamount = getSalesAmount(date, place, daily);
 			BigDecimal payrollamount = getPayrollAmount(date, place, daily);
 			double salespostamount = getSalesPostAmount(date, place, daily);
@@ -182,13 +188,32 @@ public class DailyServiceImpl implements DailyService {
 					.add(BigDecimal.valueOf(salesamount)).add(shoppingsamount).add(retiredpawnsamount)
 					.add(otherconceptsamount).add(newpawnsamount).add(cancelsamount).add(payrollamount)
 					.add(entriesmoneyamount).add(batteriesamount).add(strapsamount).add(rentalsamount)
-					.add(discountsamount).add(recordingsAmount).add(BigDecimal.valueOf(salespostamount));
+					.add(discountsamount).add(recordingsAmount)
+					.add(BigDecimal.valueOf(salespostamount).add(othersalesamount));
 			dEntity.setFinalamount(finalamount);
 			dEntity.setIpaddress(ipaddress);
 			daily.setFinalamount(finalamount);
 			dailyRepository.save(dEntity);
 		}
 		return daily;
+	}
+
+	private BigDecimal getOtherSalesAmount(Date date, PlaceEntity place, Daily daily) {
+		BigDecimal othersalesamount = BigDecimal.ZERO;
+		List<OtherSaleEntity> othersales = otherSaleRepository.findByCreationdateAndPlace(date, place);
+		if (othersales != null && !othersales.isEmpty()) {
+			Iterator<OtherSaleEntity> iothersales = othersales.iterator();
+			OtherSaleEntity othersale;
+			while (iothersales.hasNext()) {
+				othersale = iothersales.next();
+				if (othersale.getPay().getIdpayment().equals(Constants.EFECTIVO)) {
+					othersalesamount = othersalesamount.add(othersale.getAmount());
+				}
+			}
+			daily.setOthersales(othersales);
+			daily.setNumoperations(daily.getNumoperations() + othersales.size());
+		}
+		return othersalesamount;
 	}
 
 	private BigDecimal getRecordingsAmount(Date date, PlaceEntity place, Daily daily) {
