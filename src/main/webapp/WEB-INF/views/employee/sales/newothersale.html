@@ -16,7 +16,7 @@
 					<div class="form-group">
 						<span th:text="#{numberofsale}"></span> <span
 							th:text="#{optional}"></span> <input class="form-control"
-							id="numsale" />
+							th:field="*{numsale}" />
 					</div>
 					<div class="form-group">
 						<span th:text="#{payment}"></span> <select
