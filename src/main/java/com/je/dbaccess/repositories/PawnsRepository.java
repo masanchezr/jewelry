@@ -70,7 +70,7 @@ public interface PawnsRepository extends CrudRepository<PawnEntity, Long> {
 
 	public List<PawnEntity> findByDateretiredAndPlace(@Temporal(TemporalType.DATE) Date date, PlaceEntity placeEntity);
 
-	public PawnEntity findByNumpawnAndPlaceAndYear(String string, PlaceEntity place, int year);
+	public List<PawnEntity> findByNumpawnAndPlaceAndYear(String string, PlaceEntity place, int year);
 
 	public PawnEntity findByNumpawnAndPlaceAndYearAndDateretiredIsNull(String num, PlaceEntity placeEntity, int year);
 

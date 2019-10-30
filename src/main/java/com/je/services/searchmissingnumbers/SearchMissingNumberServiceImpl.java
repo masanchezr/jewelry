@@ -31,17 +31,12 @@ public class SearchMissingNumberServiceImpl implements SearchMissingNumberServic
 		PlaceEntity place = mapper.map(form.getPlace(), PlaceEntity.class);
 		int year = form.getYear();
 		ShoppingEntity entity;
-		PawnEntity pawn;
+		List<PawnEntity> pawns;
 		for (long i = form.getNumfrom(); i <= form.getNumuntil(); i++) {
 			entity = shoppingsRepository.findByNumshopAndPlaceAndYear(i, place, year);
 			if (entity == null) {
-				pawn = pawnsRepository.findByNumpawnAndPlaceAndYear(String.valueOf(i), place, year);
-				if (pawn == null) {
-					nummissings.add(i);
-				}
-			} else {
-				pawn = pawnsRepository.findByNumpawnAndPlaceAndYear(String.valueOf(i), place, year);
-				if (pawn != null && entity.getTotalamount().equals(pawn.getAmount())) {
+				pawns = pawnsRepository.findByNumpawnAndPlaceAndYear(String.valueOf(i), place, year);
+				if (pawns == null || pawns.isEmpty()) {
 					nummissings.add(i);
 				}
 			}
