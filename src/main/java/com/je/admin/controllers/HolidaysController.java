@@ -57,7 +57,7 @@ public class HolidaysController {
 	 * @param holiday the holiday
 	 * @return the model and view
 	 */
-	@GetMapping("/addHoliday")
+	@PostMapping("/addHoliday")
 	public ModelAndView addHoliday(@ModelAttribute(ConstantsViews.FORMHOLIDAY) Holiday holiday, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		holidayValidator.validate(holiday, result);
