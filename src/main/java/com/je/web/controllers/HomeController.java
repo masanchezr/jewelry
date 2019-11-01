@@ -7,9 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.dbaccess.entities.CategoryEntity;
@@ -151,8 +152,7 @@ public class HomeController {
 	/**
 	 * Selected jewel.
 	 * 
-	 * @param id
-	 *            the id
+	 * @param id the id
 	 * @return the model and view
 	 */
 	@GetMapping("/productoSeleccionado{id}")
@@ -170,5 +170,11 @@ public class HomeController {
 			m.addAttribute("cart", new ArrayList<JewelEntity>());
 		}
 		return model;
+	}
+
+	@GetMapping("/endcart")
+	public String goodbye(SessionStatus status) {
+		status.setComplete();
+		return "goodbye";
 	}
 }
