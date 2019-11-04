@@ -191,7 +191,7 @@ public class SaleAdminController {
 				Sale entitySale = saleService.searchByNumsaleAndPlace(sale.getNumsale(), place.getIdplace());
 				if (entitySale == null) {
 					saleService.buy(sale);
-					model.setViewName("admin/sales/searchsales/finishsale");
+					model.setViewName("admin/sales/finishsale");
 					model.addObject(ConstantsViews.FORMSALE, sale);
 				} else {
 					model.addObject(ConstantsViews.MATERIALS, materialService.getAllMetals());
