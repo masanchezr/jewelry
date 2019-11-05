@@ -61,7 +61,7 @@ public class SalePostPonedAdminController {
 		return model;
 	}
 
-	@PostMapping("/timeout{id}")
+	@GetMapping("/timeout{id}")
 	public ModelAndView timeout(@PathVariable long id) {
 		salesPostPonedService.timeout(id);
 		return getModelSalePostponed(id);
