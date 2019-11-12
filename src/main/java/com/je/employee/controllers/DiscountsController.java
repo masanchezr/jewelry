@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.dbaccess.entities.PlaceEntity;
@@ -50,7 +51,7 @@ public class DiscountsController {
 		return model;
 	}
 
-	@GetMapping("/employee/savediscount")
+	@PostMapping("/employee/savediscount")
 	public ModelAndView savediscount(@ModelAttribute("discountForm") Discount discount, HttpServletRequest request,
 			BindingResult errors) {
 		ModelAndView model = new ModelAndView();
