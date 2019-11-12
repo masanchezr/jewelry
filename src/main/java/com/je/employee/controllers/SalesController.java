@@ -154,7 +154,7 @@ public class SalesController {
 	 * @param result the result
 	 * @return the model and view
 	 */
-	@GetMapping("/employee/cancelparcialsale")
+	@PostMapping("/employee/cancelparcialsale")
 	public ModelAndView cancelParcialSale(@ModelAttribute(ConstantsViews.FORMSALE) Sale sale,
 			HttpServletRequest request, BindingResult result) {
 		ModelAndView model = new ModelAndView();
