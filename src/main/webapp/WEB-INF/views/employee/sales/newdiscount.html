@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	th:include="employee/template :: page">
 <div th:fragment="content">
-	<form method="post" th:action="@{/employee/savediscount}" th:object="${discountForm}"
-		role="form">
+	<form method="post" th:action="@{/employee/savediscount}"
+		th:object="${discountForm}" role="form">
 		<!-- Breadcrumbs-->
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="#"><span
@@ -16,20 +16,21 @@
 					<div class="form-row">
 						<div class="col-lg-6">
 							<div class="form-group">
-								<input class="form-control" th:field="*{iddiscount"
+								<input class="form-control" th:field="*{iddiscount}"
 									th:placeholder="#{iddiscountph}" />
 								<div class="form-group">
 									<label class="control-label" for="inputSuccess"
 										th:if="${#fields.hasErrors('iddiscount')}"
-										th:errors="iddiscount" /></label>
+										th:errors="*{iddiscount}" /></label>
 								</div>
 							</div>
 							<div class="form-group">
-								<input class="form-control" th:field="*{sdiscount"
+								<input class="form-control" th:field="*{sdiscount}"
 									th:placeholder="#{amount}" />
 								<div class="form-group">
 									<label class="control-label" for="inputSuccess"
-										th:if="${#fields.hasErrors('sdiscount')" th:errors="sdiscount" /></label>
+										th:if="${#fields.hasErrors('sdiscount')"
+										th:errors="*{sdiscount}" /></label>
 								</div>
 							</div>
 							<div class="form-group">
