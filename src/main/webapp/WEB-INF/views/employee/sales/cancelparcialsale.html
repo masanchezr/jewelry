@@ -1,64 +1,67 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	th:include="employee/template :: page">
-<form method="post" th:action="@{/employee/savecancelparcial}" th:object="${saleForm}"
-	role="form">
-	<input type="hidden" th:attr="name='idsale'" />
-	<!-- Breadcrumbs-->
-	<ol class="breadcrumb">
-		<li class="breadcrumb-item"><a href="#"><span
-				th:text="#{sales}"></span></a></li>
-		<li class="breadcrumb-item active" th:text="#{removeparcialsale}"></li>
-	</ol>
-	<div class="form-row">
-		<div class="col-lg-3">
-			<div class="form-group">
-				<span th:text="#{numsale}"></span> <input class="form-control"
-					id="numsale" disabled />
-			</div>
-			<div class="form-group has-error">
-				<label class="control-label" for="inputSuccess"
-					th:if="${#fields.hasErrors('idsale')}" th:errors="*{idsale}"></label>
-			</div>
-			<div class="form-group">
-				<span th:text="#{selectjeweltocancel}"></span>
-			</div>
-			<div class="form-group" th:each="jeweltocancel:${saleForm.jewels}">
-				<input type="checkbox" th:field="*{jeweltocancel.reference}"
-					th:value="${jeweltocancel.idjewel}" />
+<div th:fragment="content">
+	<form method="post" th:action="@{/employee/savecancelparcial}"
+		th:object="${saleForm}" role="form">
+		<input type="hidden" th:attr="name='idsale'" />
+		<!-- Breadcrumbs-->
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="#"><span
+					th:text="#{sales}"></span></a></li>
+			<li class="breadcrumb-item active" th:text="#{removeparcialsale}"></li>
+		</ol>
+		<div class="form-row">
+			<div class="col-lg-3">
+				<div class="form-group">
+					<span th:text="#{numsale}"></span> <input class="form-control"
+						id="numsale" disabled />
+				</div>
+				<div class="form-group has-error">
+					<label class="control-label" for="inputSuccess"
+						th:if="${#fields.hasErrors('idsale')}" th:errors="*{idsale}"></label>
+				</div>
+				<div class="form-group">
+					<span th:text="#{selectjeweltocancel}"></span>
+				</div>
+				<div class="form-group" th:each="jeweltocancel:${saleForm.jewels}">
+					<input type="checkbox" th:field="*{jeweltocancel.reference}"
+						th:value="${jeweltocancel.idjewel}" />
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="form-row">
-		<div class="col-lg-3">
-			<div class="form-group" id="payments">
-				<span th:text="#{repayment}"></span> <select th:field="*{payment.idpayment}" class="form-control"><option
-						th:each="payment:${payments}" th:value="${payment.idpayment}"
-						th:text="${payment.name}" /></select>
-			</div>
-			<div id="discount" class="d-none">
-				<div class="form-group">
-					<span th:text="#{iddiscount}"></span> <input class="form-control"
-						id="iddiscount" />
+		<div class="form-row">
+			<div class="col-lg-3">
+				<div class="form-group" id="payments">
+					<span th:text="#{repayment}"></span> <select
+						th:field="*{payment.idpayment}" class="form-control"><option
+							th:each="payment:${payments}" th:value="${payment.idpayment}"
+							th:text="${payment.name}" /></select>
+				</div>
+				<div id="discount" class="d-none">
+					<div class="form-group">
+						<span th:text="#{iddiscount}"></span> <input class="form-control"
+							id="*{iddiscount}" />
+					</div>
+					<div class="form-group">
+						<span th:text="#{numsalechange}"></span> <input
+							class="form-control" id="*{numsalechange}" />
+					</div>
+					<div class="form-group">
+						<span th:text="#{cancelpayments}"></span> <input
+							class="form-control" id="*{optionalpayment}" />
+						<p class="text-danger"
+							th:if="${#fields.hasErrors('optionalpayment')}"
+							th:errors="*{optionalpayment}"></p>
+					</div>
 				</div>
 				<div class="form-group">
-					<span th:text="#{numsalechange}"></span> <input
-						class="form-control" id="numsalechange" />
+					<button class="btn btn-primary" value="submit">
+						<span th:text="#{cancelsale}"></span>
+					</button>
 				</div>
-				<div class="form-group">
-					<span th:text="#{cancelpayments}"></span> <input
-						class="form-control" id="optionalpayment" />
-					<p class="text-danger"
-						th:if="${#fields.hasErrors('optionalpayment')}"
-						th:errors="optionalpayment"></p>
-				</div>
-			</div>
-			<div class="form-group">
-				<button class="btn btn-primary" value="submit">
-					<span th:text="#{cancelsale}"></span>
-				</button>
 			</div>
 		</div>
-	</div>
-</form>
+	</form>
+</div>
 </html>

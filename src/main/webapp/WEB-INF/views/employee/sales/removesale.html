@@ -34,7 +34,7 @@
 						</div>
 						<div class="form-group">
 							<span th:text="#{numsalechange}"></span> <input
-								class="form-control" id="numsalechange" />
+								class="form-control" id="*{numsalechange}" />
 						</div>
 					</div>
 					<div class="d-none" id="accordion">
@@ -43,7 +43,7 @@
 								class="form-control" id="optionalpayment" />
 							<p class="text-danger"
 								th:if="${#fields.hasErrors('optionalpayment')}"
-								th:errors="optionalpayment"></p>
+								th:errors="*{optionalpayment}"></p>
 						</div>
 					</div>
 				</div>
