@@ -28,9 +28,9 @@
 					<div id="discount" class="d-none">
 						<div class="form-group">
 							<span th:text="#{iddiscount}"></span> <input class="form-control"
-								id="iddiscount" />
-							<p class="text-danger" th:if="${#fields.hasErrors('numsale')}"
-								th:errors="*{numsale}"></p>
+								th:field="*{iddiscount}" />
+							<p class="text-danger" th:if="${#fields.hasErrors('iddiscount')}"
+								th:errors="*{iddiscount}"></p>
 						</div>
 						<div class="form-group">
 							<span th:text="#{numsalechange}"></span> <input

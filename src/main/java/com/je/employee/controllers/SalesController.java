@@ -208,7 +208,7 @@ public class SalesController {
 	 *
 	 * @return the model and view
 	 */
-	@GetMapping("/employee//removesale")
+	@GetMapping("/employee/removesale")
 	public ModelAndView removeSale() {
 		ModelAndView model = new ModelAndView(VIEWREMOVESALE);
 		List<PaymentEntity> payments = paymentService.findAllActive();
