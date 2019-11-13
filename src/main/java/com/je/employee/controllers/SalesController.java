@@ -140,7 +140,7 @@ public class SalesController {
 	 *
 	 * @return the model and view
 	 */
-	@GetMapping("/employee//removeparcialsale")
+	@GetMapping("/employee/removeparcialsale")
 	public ModelAndView removeParcialSale() {
 		ModelAndView model = new ModelAndView(VIEWREMOVEPARCIALSALE);
 		model.addObject(ConstantsViews.FORMSALE, new Sale());
