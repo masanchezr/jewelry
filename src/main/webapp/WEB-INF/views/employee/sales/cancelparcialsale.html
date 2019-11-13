@@ -26,7 +26,7 @@
 				</div>
 				<div class="form-group" th:each="jeweltocancel:${saleForm.jewels}">
 					<input type="checkbox"
-						th:field="*{jewelstocancel[__${jeweltocancelStat.index}__].idjewel}"
+						th:field="*{jewelstocancel[__${jeweltocancelStat.index}__]}"
 						th:value="${jeweltocancel.idjewel}" /><span
 						th:text="${jeweltocancel.reference}"></span>
 				</div>
