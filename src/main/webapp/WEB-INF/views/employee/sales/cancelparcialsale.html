@@ -4,7 +4,8 @@
 <div th:fragment="content">
 	<form method="post" th:action="@{/employee/savecancelparcial}"
 		th:object="${saleForm}" role="form">
-		<input type="hidden" th:attr="name='idsale'" />
+		<input type="hidden" th:attr="name='idsale'"
+			th:value="${saleForm.idsale}" />
 		<!-- Breadcrumbs-->
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="#"><span
@@ -15,7 +16,7 @@
 			<div class="col-lg-3">
 				<div class="form-group">
 					<span th:text="#{numsale}"></span> <input class="form-control"
-						id="numsale" disabled />
+						th:field="*{numsale}" disabled />
 				</div>
 				<div class="form-group has-error">
 					<label class="control-label" for="inputSuccess"
@@ -25,10 +26,10 @@
 					<span th:text="#{selectjeweltocancel}"></span>
 				</div>
 				<div class="form-group" th:each="jeweltocancel:${saleForm.jewels}">
-					<input type="checkbox"
-						th:field="*{jewelstocancel[__${jeweltocancelStat.index}__]}"
+					<input type="checkbox" th:field="*{jewelstocancel}"
 						th:value="${jeweltocancel.idjewel}" /><span
-						th:text="${jeweltocancel.reference}"></span>
+						th:text="${jeweltocancel.reference}"></span> <span
+						th:text="${jeweltocancel.category.namecategory}"></span>
 				</div>
 			</div>
 		</div>
