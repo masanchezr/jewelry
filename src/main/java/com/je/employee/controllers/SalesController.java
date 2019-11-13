@@ -167,6 +167,7 @@ public class SalesController {
 			PlaceEntity place = placeService.getPlaceUser(user);
 			Sale entitysale = saleService.searchByNumsaleAndPlace(sale.getNumsale(), place.getIdplace());
 			if (entitysale != null) {
+				entitysale.setJewelstocancel(new ArrayList<Long>());
 				model.setViewName(VIEWCANCELPARCIALSALE);
 				model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
 				model.addObject(ConstantsViews.FORMSALE, entitysale);
