@@ -262,7 +262,7 @@ public class SalesController {
 				searchSale.setPayment(removeSaleForm.getPayment());
 				saleService.removeSale(searchSale);
 				model.addObject(ConstantsViews.DAILY, dailyService.getDaily(today, place, ipAddress));
-				model.addObject(ConstantsViews.DATEDAILY, today);
+				model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateFormatddMMyyyy(today));
 			}
 		}
 		return model;
