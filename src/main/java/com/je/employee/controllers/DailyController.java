@@ -160,7 +160,7 @@ public class DailyController {
 			} else {
 				model.addObject(ConstantsViews.DAILY, daily);
 				model.setViewName(view);
-				model.addObject(ConstantsViews.DATEDAILY, date);
+				model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(date));
 			}
 		} else {
 			model.setViewName(ConstantsViews.VIEWNOTDAILY);
