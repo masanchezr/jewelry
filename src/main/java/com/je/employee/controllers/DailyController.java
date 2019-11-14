@@ -150,7 +150,7 @@ public class DailyController {
 			date = new Date();
 			view = ConstantsViews.VIEWDAILYARROW;
 		} else {
-			view = "dailyarrows";
+			view = ConstantsViews.VIEWDAILYARROWS;
 			date = DateUtil.getDate(sdate);
 		}
 		if (date.before(c.getTime())) {
