@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -38,7 +39,7 @@ public class BillingAdminController {
 		return model;
 	}
 
-	@GetMapping("/bill")
+	@PostMapping("/bill")
 	public ModelAndView bill(@ModelAttribute(FORMBILLING) BillingForm billingForm, BindingResult result) {
 		ModelAndView model = new ModelAndView(VIEWBILLINGADMIN);
 		String sdate = billingForm.getDate();
