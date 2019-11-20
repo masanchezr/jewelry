@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="page">
+<head th:replace="admin/headerDateMonth"></head>
+<body id="page-top">
+	<!-- csrt support -->
+	<form th:action="@{/j_spring_security_logout}" method="post"
+		id="logoutForm">
+		<input type="hidden" name="${_csrf.parameterName}"
+			value="${_csrf.token}" />
+	</form>
+	<div id="wrapper">
+		<!-- Sidebar -->
+		<ul
+			class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+			id="accordionSidebar">
+			<!-- Sidebar - Brand -->
+			<a
+				class="sidebar-brand d-flex align-items-center justify-content-center"
+				th:href="@{/admin}">
+				<div class="sidebar-brand-icon rotate-n-15">
+					<i class="fas fa-gem"></i>
+				</div>
+				<div class="sidebar-brand-text mx-3">
+					<span th:text="#{goldburgos}"></span>
+				</div>
+			</a>
+			<!-- Divider -->
+			<hr class="sidebar-divider my-0">
+			<!-- Nav Item - Dashboard -->
+			<li class="nav-item"><a th:href="@{/searchEntries}"
+				class="nav-link"><i class="fas fa-euro-sign fa-fw"></i> <span
+					th:text="#{searchentries}"></span></a></li>
+			<li class="nav-item"><a class="nav-link collapsed"
+				data-toggle="collapse" href="#" data-target="#collapseAdjustments"
+				aria-controls="collapseAdjustments" aria-expanded="true"><i
+					class="fas fa-wrench fa-fw"></i> <span th:text="#{adjustments}"></span></a>
+				<div class="collapse" data-parent="#accordionSidebar"
+					aria-labelledby="headingAdjustments" id="collapseAdjustments">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/searchadjustment}"><span
+							th:text="#{searchadjustment}"></span></a> <a class="collapse-item"
+							th:href="@{/searchsumadjustments}"><span
+							th:text="#{searchsumadjustments}"></span></a>
+					</div>
+				</div></li>
+			<li class="nav-item"><a class="nav-link collapsed"
+				data-toggle="collapse" href="#" data-target="#collapseJewels"
+				aria-controls="collapseJewels" aria-expanded="true"><i
+					class="fas fa-gem fa-fw"></i> <span th:text="#{jewels}"></span></a>
+				<div class="collapse" data-parent="#accordionSidebar"
+					aria-labelledby="headingJewels" id="collapseJewels">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/newJewel}"><span
+							th:text="#{newjewels}"></span></a> <a class="collapse-item"
+							th:href="@{/newSet}"><span th:text="#{newset}"></span></a> <a
+							class="collapse-item" th:href="@{/searchUpdateJewels}"><span
+							th:text="#{updatejewels}"></span></a> <a class="collapse-item"
+							th:href="@{/allSets}"><span th:text="#{allsets}"></span></a> <a
+							class="collapse-item" th:href="@{/searchByReference}"><span
+							th:text="#{searchbyreference}"></span></a> <a class="collapse-item"
+							th:href="@{/searchjewelsactive}"><span
+							th:text="#{jewelsactive}"></span></a> <a class="collapse-item"
+							th:href="@{/checkinventory}"><span
+							th:text="#{checkinventory}"></span></a> <a class="collapse-item"
+							th:href="@{/upload}"><span th:text="#{uploadfile}"></span></a>
+					</div>
+				</div></li>
+			<li class="nav-item"><a class="nav-link collapsed"
+				data-toggle="collapse" href="#" data-target="#collapseShop"
+				aria-controls="collapseShop" aria-expanded="true"><i
+					class="fas fa-shopping-cart fa-fw"></i> <span
+					th:text="#{shoppings}"></span> </a>
+				<div class="collapse" data-parent="#accordionSidebar"
+					aria-labelledby="headingShop" id="collapseShop">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/searchShoppings}"> <span
+							th:text="#{searchshoppings}"></span></a> <a class="collapse-item"
+							th:href="@{/searchquartermaterial}"> <span
+							th:text="#{gramsformaterial}"></span>
+						</a> <a class="collapse-item" th:href="@{/searchgramsnull}"> <span
+							th:text="#{searchgramsnull}"></span>
+						</a> <a class="collapse-item" th:href="@{/tomelloso}">Tomelloso </a> <a
+							class="collapse-item" th:href="@{/exceltomelloso}">Generar
+							Excel Tomelloso </a>
+					</div>
+				</div></li>
+			<li class="nav-item"><a class="nav-link collapsed"
+				data-toggle="collapse" href="#" data-target="#collapsePawns"
+				aria-controls="collapsePawns" aria-expanded="true"><i
+					class="fas fa-money-bill-alt fa-fw"></i> <span th:text="#{pawns}"></span>
+			</a>
+				<div class="collapse" data-parent="#accordionSidebar"
+					aria-labelledby="headingPawns" id="collapsePawns">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/searchPawns}"><span
+							th:text="#{searchpawns}"></span></a> <a class="collapse-item"
+							th:href="@{/searchrenovations}"><span
+							th:text="#{searchrenovations}"></span></a> <a class="collapse-item"
+							th:href="@{/searchquarterpawns}"> <span th:text="#{quarters}"></span>
+						</a> <a class="collapse-item" th:href="@{/outofdate}"> <span
+							th:text="#{outofdate}"></span>
+						</a> <a class="collapse-item" th:href="@{/searchcommissions}"> <span
+							th:text="#{commissions}"></span>
+						</a> <a class="collapse-item" th:href="@{/investedmoney}"> <span
+							th:text="#{investedmoney}"></span>
+						</a> <a class="collapse-item" th:href="@{/searchPosibleRepeated}"><span
+							th:text="#{searchposiblerepeated}"></span></a>
+					</div>
+				</div></li>
+			<li class="nav-item"><a class="nav-link collapsed"
+				data-toggle="collapse" href="#" data-target="#collapseDailies"
+				aria-controls="collapseDailies" aria-expanded="true"><i
+					class="fas fa-calendar fa-fw"></i> <span th:text="#{dailies}"></span></a>
+				<div class="collapse" data-parent="#accordionSidebar"
+					aria-labelledby="headingDailies" id="collapseDailies">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/dailyplace}"><span
+							th:text="#{dailies}"></span></a> <a class="collapse-item"
+							th:href="@{/searchcalculatedailies}"><span
+							th:text="#{calculatedailies}"></span></a>
+					</div>
+				</div></li>
+			<li class="nav-item"><a th:href="@{/searchbill}"
+				class="nav-link"><i class="fas fa-bug fa-fw"></i> <span
+					th:text="#{searchbill}"></span></a></li>
+			<li class="nav-item"><a class="nav-link collapsed"
+				data-toggle="collapse" href="#" data-target="#collapseHolidays"
+				aria-controls="collapseHolidays" aria-expanded="true"><i
+					class="fas fa-calendar fa-fw"></i> <span th:text="#{holidays}"></span>
+			</a>
+				<div class="collapse" data-parent="#accordionSidebar"
+					aria-labelledby="headingHolidays" id="collapseHolidays">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/newHoliday}"><span
+							th:text="#{newholiday}"></span></a> <a class="collapse-item"
+							th:href="@{/allHolidays}"><span th:text="#{allholidays}"></span></a>
+						<a class="collapse-item" th:href="@{/searchHolidays}"><span
+							th:text="#{searchholidays}"></span></a>
+					</div>
+				</div></li>
+			<li class="nav-item"><a th:href="@{/searchSalesCard}"
+				class="nav-link"><i class="fas fa-credit-card fa-fw"></i> <span
+					th:text="#{salescard}"> </span></a></li>
+			<li class="nav-item"><a class="nav-link collapsed"
+				data-toggle="collapse" href="#" data-target="#collapseSales"
+				aria-controls="collapseSales" aria-expanded="true"><i
+					class="fas fa-tags fa-fw"></i> <span th:text="#{sales}"></span> </a>
+				<div class="collapse" data-parent="#accordionSidebar"
+					aria-labelledby="headingSales" id="collapseSales">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/searchSales}"> <span
+							th:text="#{sales}"></span></a> <a class="collapse-item"
+							th:href="@{/newsale}"> <span th:text="#{newsale}"></span>
+						</a>
+					</div>
+				</div></li>
+			<li class="nav-item"><a class="nav-link collapsed"
+				data-toggle="collapse" href="#"
+				data-target="#collapseSalesPostPoned"
+				aria-controls="collapseSalesPostPoned" aria-expanded="true"> <i
+					class="fas fa-fw fa-tasks"></i> <span th:text="#{salespostponed}"></span>
+			</a>
+				<div class="collapse" data-parent="#accordionSidebar"
+					aria-labelledby="headingSalesPostPoned" id="collapseSalesPostPoned">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/searchsalepostponed}"><span
+							th:text="#{searchsalepostponed}"></span></a> <a class="collapse-item"
+							th:href="@{/searchmissingsalepostponed}"> <span
+							th:text="#{searchnummissing}"></span></a> <a class="collapse-item"
+							th:href="@{/searchexpired}"> <span th:text="#{searchexpired}"></span></a>
+					</div>
+				</div></li>
+			<li class="nav-item"><a class="nav-link" th:href="@{/newuser}"><i
+					class="fas fa-users fa-fw"></i><span th:text="#{newuser}"> </span></a></li>
+			<li class="nav-item"><a th:href="@{/pendingissues}"
+				class="nav-link"><i class="fas fa-exclamation-triangle fa-fw"></i>
+					<span th:text="#{pendingissues}"></span></a></li>
+			<li class="nav-item"><a th:href="@{/searchclients}"
+				class="nav-link"><i class="fas fa-users fa-fw"></i> <span
+					th:text="#{searchclients}"></span></a></li>
+			<li class="nav-item"><a th:href="@{/searchRegisterEmployees}"
+				class="nav-link"><i class="fas fa-user-clock"></i><span
+					th:text="#{registeremployees}"></span></a></li>
+			<li class="nav-item"><a th:href="@{/newCategory}"
+				class="nav-link"><i class="fas fa-archive fa-fw"></i> <span
+					th:text="#{newcategory}"></span></a></li>
+			<li class="nav-item"><a class="nav-link collapsed"
+				data-toggle="collapse" href="#" data-target="#collapsePayments"
+				aria-controls="collapsePayments" aria-expanded="true"><i
+					class="fas fa-credit-card fa-fw"></i> <span th:text="#{payments}"></span>
+			</a>
+				<div class="collapse" data-parent="#accordionSidebar"
+					aria-labelledby="headingPayments" id="collapsePayments">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/newPayment}"> <span
+							th:text="#{newpayment}"></span></a> <a class="collapse-item"
+							th:href="@{/allpayments}"> <span th:text="#{allpayments}"></span>
+						</a>
+					</div>
+				</div></li>
+			<li class="nav-item"><a class="nav-link collapsed"
+				data-toggle="collapse" href="#" data-target="#collapseCoins"
+				aria-controls="collapseCoins" aria-expanded="true"><i
+					class="fas fa-database fa-fw"></i> <span th:text="#{newcoin}"></span></a>
+				<div class="collapse" data-parent="#accordionSidebar"
+					aria-labelledby="headingCoins" id="collapseCoins">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/newcoin}"><span
+							th:text="#{addcoin}"></span></a> <a class="collapse-item"
+							th:href="@{/allcoins}"><span th:text="#{allcoins}"></span></a>
+					</div>
+				</div></li>
+			<!-- Divider -->
+			<hr class="sidebar-divider d-none d-md-block">
+			<!-- Sidebar Toggler (Sidebar) -->
+			<div class="text-center d-none d-md-inline">
+				<button class="rounded-circle border-0" id="sidebarToggle"></button>
+			</div>
+		</ul>
+		<!-- End of Sidebar -->
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+			<!-- Main Content -->
+			<div id="content">
+				<!-- Topbar -->
+				<nav
+					class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+					<!-- Sidebar Toggle (Topbar) -->
+					<button id="sidebarToggleTop"
+						class="btn btn-link d-md-none rounded-circle mr-3">
+						<i class="fa fa-bars"></i>
+					</button>
+					<!-- Topbar Search -->
+					<form th:action="@{/searchJewels}" th:object="${adminForm}"
+						class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+						<div class="input-group">
+							<input class="form-control bg-light border-0 small" type="text"
+								th:field="*{search}" aria-describedby="basic-addon2"
+								aria-label="Search" th:placeholder="#{find}" />
+							<div class="input-group-append">
+								<button class="btn btn-primary" type="submit" value="submit">
+									<i class="fas fa-search"></i>
+								</button>
+							</div>
+						</div>
+					</form>
+					<!-- Topbar Navbar -->
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item dropdown no-arrow"><a
+							class="nav-link dropdown-toggle" href="#" id="userDropdown"
+							role="button" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false"> <span
+								class="mr-2 d-none d-lg-inline text-gray-600 small"
+								th:text="#{close}"></span>
+						</a> <!-- Dropdown - User Information -->
+							<div
+								class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+								aria-labelledby="userDropdown">
+								<a class="dropdown-item" href="#" data-toggle="modal"
+									data-target="#logoutModal"> <i
+									class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+									Salir
+								</a>
+							</div></li>
+					</ul>
+				</nav>
+				<!-- End of Topbar -->
+				<!-- Begin Page Content -->
+				<div class="container-fluid" th:include="this :: content"></div>
+			</div>
+		</div>
+		<!-- End of content-wrapper -->
+	</div>
+	<!-- Scroll to Top Button-->
+	<a class="scroll-to-top rounded" href="#page-top"> <i
+		class="fas fa-angle-up"></i>
+	</a>
+	<!-- Logout Modal-->
+	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">
+						<span th:text="#{readyToLeave}"></span>
+					</h5>
+					<button class="close" type="button" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true" th:text="#{close}"></span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<span th:text="#{selectlogout}"></span>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" type="button"
+						data-dismiss="modal">
+						<span th:text="#{cancel}"></span>
+					</button>
+					<a class="btn btn-primary" href="javascript:formSubmit()"><span
+						th:text="#{logout}"></span></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+	function formSubmit() {
+		document.getElementById("logoutForm").submit();
+	}
+</script>
+	<script th:src="@{/resources/js/jquery.min.js}"></script>
+	<script th:src="@{/resources/js/bootstrap.bundle.min.js}"></script>
+	<script th:src="@{/resources/js/jquery.easing.min.js}"></script>
+	<script th:src="@{/resources/js/sb-admin-2.min.js}"></script>
+	<script th:src="@{/resources/js/jquery.dataTables.min.js}"></script>
+	<script th:src="@{/resources/js/dataTables.bootstrap4.min.js}"></script>
+	<script th:src="@{/resources/js/bootstrap-datepicker.min.js}"></script>
+	<script th:src="@{/resources/js/bootstrap-datepicker.es.min.js}"></script>
+	<script>
+	$(function() {
+		$("#sandbox-container input").datepicker({
+			language : "es",
+			autoclose : true,
+			startView : 2,
+			minViewMode : 1,
+			format : "mm/yyyy"
+		});
+	});
+</script>
+</body>
+</html>
