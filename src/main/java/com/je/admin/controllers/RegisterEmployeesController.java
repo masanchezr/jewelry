@@ -39,7 +39,7 @@ public class RegisterEmployeesController {
 	private SearchFormValidator adminSearchValidator;
 
 	/** The logger. */
-	private static Logger logger = LoggerFactory.getLogger(ShoppingsAdminController.class);
+	private static Logger logger = LoggerFactory.getLogger(RegisterEmployeesController.class);
 
 	@GetMapping("/searchRegisterEmployees")
 	public ModelAndView searchRegisterEmployees() {
