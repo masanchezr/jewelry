@@ -26,7 +26,6 @@ import com.je.forms.SearchForm;
 import com.je.services.registers.RegisterService;
 import com.je.utils.constants.Constants;
 import com.je.utils.constants.ConstantsViews;
-import com.je.utils.date.DateUtil;
 import com.je.validators.SearchFormValidator;
 
 @Controller
@@ -62,8 +61,8 @@ public class RegisterEmployeesController {
 		} else {
 			model.addObject("register", registerService.findByDates(sfrom, suntil));
 			model.setViewName("admin/register/register");
-			model.addObject("datefrom", DateUtil.getDate(sfrom));
-			model.addObject("dateuntil", DateUtil.getDate(suntil));
+			model.addObject("datefrom", sfrom);
+			model.addObject("dateuntil", suntil);
 		}
 		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		return model;
