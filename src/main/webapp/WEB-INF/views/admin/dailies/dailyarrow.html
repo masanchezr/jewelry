@@ -30,8 +30,8 @@
 						<tbody>
 							<tr th:each="sale:${daily.sales}">
 								<td th:text="#{sale}"></td>
-								<td th:text="${sale.numsale}"><a
-									th:href="@{'/showsale'+${sale.idsale}}" /></a></td>
+								<td><a th:href="@{'/showsale'+${sale.idsale}}"><span
+									th:text="${sale.numsale}"></span></a></td>
 								<td><span th:text="${sale.total}"><i
 										class="fas fa-euro-sign"></i></span></td>
 								<td th:text="${sale.payments}"></td>
