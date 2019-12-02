@@ -20,7 +20,7 @@ public class SalePostPonedAdminController {
 	@Autowired
 	private SalesPostPonedService salesPostPonedService;
 
-	@PostMapping("/showsalepost{id}")
+	@GetMapping("/showsalepost{id}")
 	public ModelAndView showsale(@PathVariable("id") long id) {
 		return getModelSalePostponed(id);
 	}
