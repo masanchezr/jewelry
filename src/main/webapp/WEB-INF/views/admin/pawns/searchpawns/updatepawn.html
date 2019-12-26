@@ -9,7 +9,7 @@
 		<li class="breadcrumb-item active" th:text="#{updatepawn}"></li>
 	</ol>
 	<form method="post" th:action="@{/savePawn}" th:object="${pawnForm}">
-		<input type="hidden" th:attr="name='id'" th:value="${pawnForm}" />
+		<input type="hidden" th:field="*{id}" th:value="${pawnForm.id}" />
 		<div class="form-row">
 			<div class="col-lg-12">
 				<div class="card-body">
