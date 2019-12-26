@@ -37,7 +37,7 @@ public class UpdatePawnFormValidator implements Validator {
 			arg1.rejectValue(Constants.CREATIONDATE, ConstantsViews.SELECTDATE);
 		}
 		if (percent.compareTo(BigDecimal.ZERO) <= 0) {
-			arg1.rejectValue(ConstantsViews.ERRORSELECTADDRESS, ConstantsViews.ERRORSELECTPERCENT);
+			arg1.rejectValue(ConstantsViews.PERCENT, ConstantsViews.ERRORSELECTPERCENT);
 		}
 	}
 }

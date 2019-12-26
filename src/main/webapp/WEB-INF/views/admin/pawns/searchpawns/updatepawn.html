@@ -69,10 +69,23 @@
 								<span th:text="#{pawndate}"></span> <input class="form-control"
 									th:field="*{creationdate}" />
 							</div>
+							<div class="form-group">
+								<button class="btn btn-primary" value="submit">
+									<span th:text="#{save}"></span>
+								</button>
+							</div>
+							<div class="form-group has-error">
+								<label class="control-label" for="inputSuccess"><small
+									class="form-text text-danger"
+									th:if="${#fields.hasErrors('percent')}" th:errors="*{percent}"></small></label>
+							</div>
+							<div class="form-group has-error">
+								<label class="control-label" for="inputSuccess"><small
+									class="form-text text-danger"
+									th:if="${#fields.hasErrors('creationdate')}"
+									th:errors="*{creationdate}"></small></label>
+							</div>
 						</div>
-						<button class="btn btn-primary" value="submit">
-							<span th:text="#{save}"></span>
-						</button>
 					</div>
 				</div>
 			</div>
