@@ -61,7 +61,10 @@
 								</a></td>
 								<td><span th:text="${pawn.amount}"><i
 										class="fas fa-euro-sign"></i></span></td>
-								<td th:text="#{newpawn}"></td>
+								<td th:if="${pawn.idreturnpawn==null}"><span
+									th:text="#{newpawn}"></span></td>
+								<td th:if="${pawn.idreturnpawn!=null}"><span
+									th:text="#{returnpawn}"></span></td>
 							</tr>
 							<tr th:each="adjustment:${daily.adjustments}">
 								<td th:text="#{adjustment}"><span

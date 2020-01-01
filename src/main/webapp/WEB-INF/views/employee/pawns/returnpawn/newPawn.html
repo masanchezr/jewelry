@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="employee/template :: page">
+<div th:fragment="content">
+	<!-- Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#"><span
+				th:text="#{pawns}"></span></a></li>
+		<li class="breadcrumb-item active" th:text="#{returnpawn}"></li>
+	</ol>
+	<form method="post" th:action="@{/employee/savereturnpawn}"
+		th:object="${pawnForm}">
+		<input type="hidden" th:field="*{id}" th:value="${pawnForm.id}" />
+		<div class="card-body">
+			<div class="form-row">
+				<div class="col-lg-6">
+					<div class="form-group">
+						<input class="form-control" th:field="*{nif}"
+							th:placeholder="#{nif}" disabled />
+					</div>
+					<div class="form-group">
+						<input class="form-control" th:field="*{name}"
+							th:placeholder="#{name}" disabled />
+					</div>
+					<div class="form-group">
+						<input class="form-control" th:field="*{surname}"
+							th:placeholder="#{surname}" disabled />
+					</div>
+					<div id="sandbox-container" class="form-group">
+						<input class="form-control" th:field="*{datebirth}"
+							th:placeholder="#{datebirth}" disabled />
+					</div>
+					<div class="form-group">
+						<select th:field="*{track.idtrack}" class="form-control">
+							<option th:each="track : ${tracks}" th:value="${track.idtrack}"
+								th:text="${track.track}" />
+						</select>
+					</div>
+					<div class="form-group">
+						<input class="form-control" th:field="*{address}"
+							th:placeholder="#{addressnif}" disabled />
+					</div>
+					<div class="form-group ">
+						<input class="form-control" th:field="*{town}"
+							th:placeholder="#{town}" disabled />
+					</div>
+					<div class="form-group">
+						<select th:field="*{nation.idnation}" class="form-control">
+							<option th:each="nation : ${nations}"
+								th:value="${nation.idnation}" th:text="${nation.nation}" />
+						</select>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="form-group">
+						<span th:text="#{idpawn}"></span> <input class="form-control"
+							th:field="*{numpawn}" disabled />
+					</div>
+					<div class="form-group">
+						<span th:text="#{amountpawn}"></span> <input class="form-control"
+							th:field="*{amount}" />
+						<p class="text-danger" th:if="${#fields.hasErrors('amount')}"
+							th:erros="*{amount}"></p>
+					</div>
+					<div class="form-group">
+						<span th:text="#{percent}"></span> <input class="form-control"
+							th:field="*{percent}" />
+						<p class="text-danger" th:if="${#fields.hasErrors('percent')}"
+							th:field="*{percent}"></p>
+					</div>
+					<div>
+						<button class="btn btn-primary" value="submit">
+							<span th:text="#{save}"></span>
+						</button>
+					</div>
+				</div>
+			</div>
+			<!-- fin div row -->
+		</div>
+		<div class="table-responsive">
+			<table class="table">
+				<tbody>
+					<tr th:each="os:${pawnForm.objects}">
+						<td><select class="form-control"
+							th:field="*{objects[__${osStat.index}__].metal.idmetal}">
+								<option th:value="${os.metal.idmetal}"
+									th:text="${os.metal.description}" />
+								<option th:each="material:${materials}"
+									th:value="${material.idmetal}"
+									th:text="${material.description}" />
+						</select></td>
+						<td><input class="form-control"
+							th:field="*{objects[__${osStat.index}__].grossgrams}"
+							th:placeholder="#{grossgrams}"></td>
+						<td><input class="form-control"
+							th:field="*{objects[__${osStat.index}__].description}"
+							th:placeholder="#{description}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</form>
+</div>
+</html>

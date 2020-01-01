@@ -92,4 +92,7 @@ public interface PawnsRepository extends CrudRepository<PawnEntity, Long> {
 			@Param("dateUntil") @Temporal(TemporalType.DATE) Date dateuntil);
 
 	public List<PawnEntity> findByClient(ClientPawnEntity client);
+
+	public List<PawnEntity> findByClientAndPlaceAndDateretiredIsNotNullAndReturnpawnFalse(ClientPawnEntity client,
+			PlaceEntity placeEntity);
 }

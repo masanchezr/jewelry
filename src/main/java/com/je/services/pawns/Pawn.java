@@ -30,6 +30,11 @@ public class Pawn extends OperationForm {
 	private PlaceEntity place;
 
 	/**
+	 * Informa el id del empeño que se ha vuelto a empeñar
+	 */
+	private Long idreturnpawn;
+
+	/**
 	 * Gets the numpawn.
 	 *
 	 * @return the numpawn
@@ -115,5 +120,13 @@ public class Pawn extends OperationForm {
 
 	public void setNumrenovations(Integer renovations) {
 		this.numrenovations = renovations;
+	}
+
+	public Long getIdreturnpawn() {
+		return idreturnpawn;
+	}
+
+	public void setIdreturnpawn(Long idreturnpawn) {
+		this.idreturnpawn = idreturnpawn;
 	}
 }

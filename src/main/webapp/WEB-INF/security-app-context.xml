@@ -82,6 +82,8 @@
 			access="hasAnyRole('ROLE_USER','ROLE_AR','ROLE_NA')" />
 		<intercept-url pattern="/employee/searchsalepostponed"
 			access="hasAnyRole('ROLE_USER','ROLE_AR','ROLE_NA')" />
+		<intercept-url pattern="/employee/searchclientreturnpawn"
+			access="hasAnyRole('ROLE_USER','ROLE_AR','ROLE_NA')" />
 		<form-login login-page="/employee/login"
 			default-target-url="/employee/admin"
 			authentication-failure-url="/employee/login"

@@ -40,6 +40,8 @@
 					<div class="bg-white py-2 collapse-inner rounded">
 						<a class="collapse-item" th:href="@{newsale}"><span
 							th:text="#{newsale}"></span></a> <a class="collapse-item"
+							th:href="@{searchclientreturnpawn}"><span
+							th:text="#{returnpawn}"></span></a> <a class="collapse-item"
 							th:href="@{removesale}"><span th:text="#{removesale}"></span></a>
 						<a class="collapse-item" th:href="@{removeparcialsale}"><span
 							th:text="#{removeparcialsale}"></span></a> <a class="collapse-item"
@@ -208,10 +210,10 @@
 		</div>
 	</div>
 	<script>
-	function formSubmit() {
-		$("#logoutForm").submit();
-	}
-</script>
+		function formSubmit() {
+			$("#logoutForm").submit();
+		}
+	</script>
 	<!-- jQuery -->
 	<script th:src="@{/resources/js/jquery.min.js}"></script>
 	<script th:src="@{/resources/js/bootstrap.bundle.min.js}"></script>
@@ -223,13 +225,13 @@
 	<script th:src="@{/resources/js/bootstrap-datepicker.es.min.js}"></script>
 	<script th:src="@{/resources/js/employee/discounts.js}"></script>
 	<script>
-	$(function() {
-		$("#sandbox-container input").datepicker({
-			language : "es",
-			autoclose : true,
-			todayHighlight : true
+		$(function() {
+			$("#sandbox-container input").datepicker({
+				language : "es",
+				autoclose : true,
+				todayHighlight : true
+			});
 		});
-	});
-</script>
+	</script>
 </body>
 </html>

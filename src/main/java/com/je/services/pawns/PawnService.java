@@ -88,4 +88,8 @@ public interface PawnService {
 	public boolean isRepeatNumber(String num, String user, int year);
 
 	public List<PawnEntity> getByNIF(String nif);
+
+	public List<PawnEntity> getByNIFAndUserAndRetiredAndReturn(String dni, String user);
+
+	public Daily saveReturnPawn(NewPawn pawn);
 }

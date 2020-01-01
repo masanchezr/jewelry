@@ -92,6 +92,46 @@ public class PawnEntity {
 	private Date meltdate;
 
 	/**
+	 * Nos informa si ha sido reempeñado
+	 */
+	@Column(name = "RETURNPAWN")
+	private Boolean returnpawn;
+
+	/**
+	 * Nos informa el id del empeño del que hemos reempeñado
+	 */
+	@Column(name = "IDRETURNPAWN")
+	private Long idreturnpawn;
+
+	/**
+	 * @return the idreturnpawn
+	 */
+	public Long getIdreturnpawn() {
+		return idreturnpawn;
+	}
+
+	/**
+	 * @param idreturnpawn the idreturnpawn to set
+	 */
+	public void setIdreturnpawn(Long idreturnpawn) {
+		this.idreturnpawn = idreturnpawn;
+	}
+
+	/**
+	 * @return the returnpawn
+	 */
+	public Boolean getReturnpawn() {
+		return returnpawn;
+	}
+
+	/**
+	 * @param returnpawn the returnpawn to set
+	 */
+	public void setReturnpawn(Boolean returnpawn) {
+		this.returnpawn = returnpawn;
+	}
+
+	/**
 	 * Gets the idpawn.
 	 *
 	 * @return the idpawn

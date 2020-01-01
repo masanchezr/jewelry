@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.je.admin.forms.AdminForm;
 import com.je.dbaccess.entities.MetalEntity;
 import com.je.dbaccess.entities.ObjectPawnEntity;
 import com.je.employee.validators.NewPawnFormValidator;
 import com.je.employee.validators.PawnFormValidator;
+import com.je.employee.validators.ReturnPawnFormValidator;
 import com.je.services.metal.MetalService;
 import com.je.services.nations.NationService;
 import com.je.services.pawns.NewPawn;
@@ -66,10 +68,103 @@ public class PawnsController {
 	@Autowired
 	private PawnFormValidator pawnFormValidator;
 
+	@Autowired
+	private ReturnPawnFormValidator returnPawnFormValidator;
+
 	private static final String VIEWNEWPAWN = "employee/pawns/newpawn/newPawn";
 	private static final String VIEWSEARCHCLIENT = "employee/pawns/newpawn/searchclient";
 	private static final String FORMSEARCHPAWN = "searchPawnForm";
 	private static final String VIEWSEARCHREMOVEPAWN = "employee/pawns/removepawn/searchpawn";
+
+	/**
+	 * Primera Pantalla NUEVO EMPEÑO
+	 * 
+	 * @return ModelAndView
+	 */
+	@GetMapping("/employee/searchclientpawn")
+	public ModelAndView searchClientPawn() {
+		ModelAndView model = new ModelAndView(VIEWSEARCHCLIENT);
+		NewPawn pawn = new NewPawn();
+		model.addObject(ConstantsViews.PAWNFORM, pawn);
+		return model;
+	}
+
+	/**
+	 * Primera Pantalla REEMPEÑO
+	 * 
+	 * @return ModelAndView
+	 */
+	@GetMapping("/employee/searchclientreturnpawn")
+	public ModelAndView searchClientReturnPawn() {
+		ModelAndView model = new ModelAndView("employee/pawns/returnpawn/searchclient");
+		NewPawn pawn = new NewPawn();
+		model.addObject(ConstantsViews.PAWNFORM, pawn);
+		return model;
+	}
+
+	@PostMapping("/employee/searchreturnpawn")
+	public ModelAndView searchreturnpawn(@ModelAttribute(ConstantsViews.PAWNFORM) NewPawn pawn, BindingResult errors) {
+		String user = SecurityContextHolder.getContext().getAuthentication().getName();
+		String dni = Util.refactorNIF(pawn.getNif());
+		ModelAndView model = new ModelAndView();
+		if (dni != null && dni.length() > 13) {
+			errors.rejectValue(ConstantsViews.NIF, "niftoolong");
+			model.setViewName(VIEWSEARCHCLIENT);
+		} else if (!Util.isNifNie(dni)) {
+			errors.rejectValue(ConstantsViews.NIF, "nifnotvalid");
+			model.setViewName(VIEWSEARCHCLIENT);
+		} else {
+			model.addObject("pawns", pawnService.getByNIFAndUserAndRetiredAndReturn(dni, user));
+			model.setViewName("employee/pawns/returnpawn/resultpawn");
+		}
+		return model;
+	}
+
+	@PostMapping("/employee/newreturnpawn")
+	public ModelAndView newreturnpawn(@ModelAttribute(ConstantsViews.PAWNFORM) Pawn pawn) {
+		ModelAndView model = new ModelAndView();
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
+		NewPawn p = pawnService.findByIdpawn(pawn.getId());
+		model.setViewName("employee/pawns/returnpawn/newPawn");
+		model.addObject(ConstantsViews.PAWNFORM, p);
+		model.addObject(Constants.NATIONS, nationservice.getNations());
+		model.addObject(Constants.TRACKS, trackservice.getTracks());
+		model.addObject(ConstantsViews.MATERIALS, materialService.getAllMetals());
+		return model;
+	}
+
+	@PostMapping("/employee/savereturnpawn")
+	public ModelAndView savereturnPawn(@ModelAttribute(ConstantsViews.PAWNFORM) NewPawn pawn, BindingResult result) {
+		ModelAndView model = new ModelAndView();
+		returnPawnFormValidator.validate(pawn, result);
+		if (result.hasErrors()) {
+			List<MetalEntity> materials = materialService.getAllMetalsActive();
+			Iterator<MetalEntity> imaterials = materials.iterator();
+			List<ObjectPawnEntity> lop = new ArrayList<>();
+			while (imaterials.hasNext()) {
+				ObjectPawnEntity op = new ObjectPawnEntity();
+				op.setMetal(imaterials.next());
+				lop.add(op);
+			}
+			pawn.setObjects(lop);
+			model.addObject(ConstantsViews.PAWNFORM, pawn);
+			model.addObject(Constants.TRACKS, trackservice.getTracks());
+			model.addObject(Constants.NATIONS, nationservice.getNations());
+			model.setViewName("employee/pawns/returnpawn/newPawn");
+		} else {
+			String user = SecurityContextHolder.getContext().getAuthentication().getName();
+			pawn.setUser(user);
+			pawn.setRetired(false);
+			String sdate = pawn.getCreationdate();
+			if (Util.isEmpty(sdate)) {
+				sdate = DateUtil.getStringDateddMMyyyy(new Date());
+			}
+			model.addObject(ConstantsViews.DAILY, pawnService.saveReturnPawn(pawn));
+			model.setViewName(ConstantsViews.VIEWDAILYARROW);
+			model.addObject(ConstantsViews.DATEDAILY, sdate);
+		}
+		return model;
+	}
 
 	/**
 	 * Save pawn.
@@ -177,19 +272,6 @@ public class PawnsController {
 			model.addObject(Constants.NATIONS, nationservice.getNations());
 			model.setViewName(VIEWNEWPAWN);
 		}
-		model.addObject(ConstantsViews.PAWNFORM, pawn);
-		return model;
-	}
-
-	/**
-	 * Primera Pantalla
-	 * 
-	 * @return ModelAndView
-	 */
-	@GetMapping("/employee/searchclientpawn")
-	public ModelAndView searchClientPawn() {
-		ModelAndView model = new ModelAndView(VIEWSEARCHCLIENT);
-		NewPawn pawn = new NewPawn();
 		model.addObject(ConstantsViews.PAWNFORM, pawn);
 		return model;
 	}
@@ -329,7 +411,8 @@ public class PawnsController {
 	}
 
 	@PostMapping("/employee/resultRenovationsPawns")
-	public ModelAndView resultRenovationsPawns(@ModelAttribute(ConstantsViews.PAWNFORM) Pawn pawn, BindingResult result) {
+	public ModelAndView resultRenovationsPawns(@ModelAttribute(ConstantsViews.PAWNFORM) Pawn pawn,
+			BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		pawnFormValidator.validate(pawn, result);
 		if (result.hasErrors()) {

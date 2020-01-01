@@ -31,7 +31,7 @@
 							<tr th:each="sale:${daily.sales}">
 								<td th:text="#{sale}"></td>
 								<td><a th:href="@{'/showsale'+${sale.idsale}}"><span
-									th:text="${sale.numsale}"></span></a></td>
+										th:text="${sale.numsale}"></span></a></td>
 								<td><span th:text="${sale.total}"><i
 										class="fas fa-euro-sign"></i></span></td>
 								<td th:text="${sale.payments}"></td>
@@ -62,7 +62,10 @@
 								</a></td>
 								<td><span th:text="${pawn.amount}"><i
 										class="fas fa-euro-sign"></i></span></td>
-								<td th:text="#{newpawn}"></td>
+								<td th:if="${pawn.idreturnpawn==null}"><span
+									th:text="#{newpawn}"></span></td>
+								<td th:if="${pawn.idreturnpawn!=null}"><span
+									th:text="#{returnpawn}"></span></td>
 							</tr>
 							<tr th:each="adjustment:${daily.adjustments}">
 								<td th:text="#{adjustment}"><span

@@ -84,6 +84,44 @@ public class PawnServiceImpl implements PawnService {
 		pawnEntity.setPlace(place);
 		pawnEntity.setClient(cpe);
 		pawnEntity.setYear(year);
+		pawnEntity.setReturnpawn(Boolean.FALSE);
+		ObjectPawnEntity ope;
+		while (iobjects.hasNext()) {
+			ope = iobjects.next();
+			if (ope.getGrossgrams() != null) {
+				ope.setPawn(pawnEntity);
+				newobjects.add(ope);
+			}
+		}
+		pawnEntity.setObjects(newobjects);
+		pawnsRepository.save(pawnEntity);
+		return dailyService.getDaily(DateUtil.getDateFormated(pawnEntity.getCreationdate()), place, null);
+	}
+
+	@Override
+	public Daily saveReturnPawn(NewPawn pawn) {
+		PawnEntity pawnEnt = mapper.map(pawn, PawnEntity.class);
+		PawnEntity pawnEntity = pawnsRepository.findById(pawn.getId()).orElse(null);
+		pawnEntity.setReturnpawn(Boolean.TRUE);
+		pawnsRepository.save(pawnEntity);
+		PlaceEntity place = placeUserRepository.findByUsername(pawn.getUser()).get(0).getPlace();
+		pawnEntity.setAmount(pawnEnt.getAmount());
+		pawnEntity.setPercent(pawnEnt.getPercent());
+		pawnEntity.setCreationdate(new Date());
+		pawnEntity.setIdpawn(null);
+		pawnEntity.setRenovations(null);
+		pawnEntity.setDateretired(null);
+		pawnEntity.setObjects(null);
+		pawnEntity.setMonths(null);
+		pawnEntity.setReturnpawn(Boolean.FALSE);
+		pawnEntity.setIdreturnpawn(pawn.getId());
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(pawnEntity.getCreationdate());
+		int year = calendar.get(Calendar.YEAR);
+		List<ObjectPawnEntity> newobjects = new ArrayList<>();
+		List<ObjectPawnEntity> object = pawnEnt.getObjects();
+		Iterator<ObjectPawnEntity> iobjects = object.iterator();
+		pawnEntity.setYear(year);
 		ObjectPawnEntity ope;
 		while (iobjects.hasNext()) {
 			ope = iobjects.next();
@@ -405,8 +443,8 @@ public class PawnServiceImpl implements PawnService {
 			searchShopping = shoppingsRepository.findByNumshopAndPlaceAndYear(Long.valueOf(num), placeEntity, year);
 		}
 		// miramos también si existe como empeño no retirado
-		PawnEntity pawn = pawnsRepository.findByNumpawnAndPlaceAndYearAndDateretiredIsNull(num, placeEntity, year);
-		if (searchShopping == null && pawn == null) {
+		List<PawnEntity> pawn = pawnsRepository.findByNumpawnAndPlaceAndYear(num, placeEntity, year);
+		if (searchShopping == null && (pawn == null || pawn.isEmpty())) {
 			repeat = false;
 		}
 		return repeat;
@@ -417,5 +455,13 @@ public class PawnServiceImpl implements PawnService {
 		ClientPawnEntity client = new ClientPawnEntity();
 		client.setNif(nif);
 		return pawnsRepository.findByClient(client);
+	}
+
+	@Override
+	public List<PawnEntity> getByNIFAndUserAndRetiredAndReturn(String nif, String user) {
+		ClientPawnEntity client = new ClientPawnEntity();
+		PlaceEntity place = placeUserRepository.findByUsername(user).get(0).getPlace();
+		client.setNif(nif);
+		return pawnsRepository.findByClientAndPlaceAndDateretiredIsNotNullAndReturnpawnFalse(client, place);
 	}
 }
