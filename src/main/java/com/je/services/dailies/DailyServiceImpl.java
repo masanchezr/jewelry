@@ -261,16 +261,18 @@ public class DailyServiceImpl implements DailyService {
 			while (iplaceUsers.hasNext()) {
 				user.setUsername(iplaceUsers.next().getUsername());
 				List<PayrollEntity> payrolls = payrollRepository.findByCreationdateAndUser(date, user);
+				List<PayrollEntity> payrollsview = new ArrayList<PayrollEntity>();
 				if (payrolls != null && !payrolls.isEmpty()) {
 					Iterator<PayrollEntity> ipayroll = payrolls.iterator();
 					PayrollEntity pre;
 					while (ipayroll.hasNext()) {
 						pre = ipayroll.next();
 						payrollamount = payrollamount.subtract(pre.getAmount());
-						daily.setPayroll(pre);
+						payrollsview.add(pre);
 					}
 					daily.setNumoperations(daily.getNumoperations() + payrolls.size());
 				}
+				daily.setPayroll(payrollsview);
 			}
 		}
 		return payrollamount;

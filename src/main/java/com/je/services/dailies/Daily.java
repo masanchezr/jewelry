@@ -55,7 +55,8 @@ public class Daily {
 	private List<Rental> rentals;
 
 	private List<Discount> discounts;
-	private PayrollEntity payroll;
+
+	private List<PayrollEntity> payroll;
 
 	private int numoperations;
 
@@ -235,11 +236,11 @@ public class Daily {
 		this.lsalespost = lsalespost;
 	}
 
-	public PayrollEntity getPayroll() {
+	public List<PayrollEntity> getPayroll() {
 		return payroll;
 	}
 
-	public void setPayroll(PayrollEntity payroll) {
+	public void setPayroll(List<PayrollEntity> payroll) {
 		this.payroll = payroll;
 	}
 
