@@ -21,7 +21,7 @@ public class ClientServiceImpl implements ClientService {
 
 	public List<Client> searchClients(Client client) {
 		List<Client> clients = new ArrayList<>();
-		List<ClientPawnEntity> lclients = null;
+		List<ClientPawnEntity> lclients = new ArrayList<>();
 		ClientPawnEntity entity;
 		String name = client.getName();
 		String surname = client.getSurname();
@@ -33,10 +33,10 @@ public class ClientServiceImpl implements ClientService {
 			}
 		}
 		if (!Util.isEmpty(name)) {
-			lclients = clientpawnsrepository.findByNameLike(name);
+			lclients.addAll(clientpawnsrepository.findByNameLike(name));
 		}
 		if (!Util.isEmpty(surname)) {
-			lclients = clientpawnsrepository.findBySurnameLike(surname);
+			lclients.addAll(clientpawnsrepository.findBySurnameLike(surname));
 		}
 		if (lclients != null) {
 			Iterator<ClientPawnEntity> iclients = lclients.iterator();
