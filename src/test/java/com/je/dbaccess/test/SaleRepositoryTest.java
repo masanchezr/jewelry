@@ -47,7 +47,7 @@ public class SaleRepositoryTest {
 		sale.setCreationdate(new Date());
 		AddressEntity addressmailing = new AddressEntity();
 		addressmailing.setAddress("ezequiel solana 12");
-		addressmailing.setDatecreation(new Date());
+		addressmailing.setCreationdate(new Date());
 		addressmailing.setCity("Madrid");
 		addressmailing.setPostalcode(28017L);
 		addressmailing.setCountry("España");

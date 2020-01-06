@@ -174,7 +174,8 @@ public class ShoppingServiceImpl implements ShoppingService {
 			shoppings = mapper(shoppingsRepository.findByCreationdateBetweenAndPlace(datefrom, dateuntil, place));
 		} else {
 			Date datefrom = DateUtil.getDate(sDateFrom);
-			shoppings = mapper(shoppingsRepository.findByCreationdateBetweenAndPlace(datefrom, DateUtil.getDateFormated(new Date()), place));
+			shoppings = mapper(shoppingsRepository.findByCreationdateBetweenAndPlace(datefrom,
+					DateUtil.getDateFormated(new Date()), place));
 		}
 		return shoppings;
 	}
@@ -464,10 +465,11 @@ public class ShoppingServiceImpl implements ShoppingService {
 		if (shoppingEntity.getCreationdate() == null) {
 			shoppingEntity.setCreationdate(new Date());
 		}
+		calendar.setTime(shoppingEntity.getCreationdate());
+		shoppingEntity.setYear(calendar.get(Calendar.YEAR));
 		shoppingEntity.setPlace(place);
 		shoppingEntity.setSpayments(paymentshop);
 		shoppingEntity.setObjects(newobjects);
-		shoppingEntity.setYear(calendar.get(Calendar.YEAR));
 		shoppingEntity.setTotalamount(totalamount);
 		shoppingsRepository.save(shoppingEntity);
 

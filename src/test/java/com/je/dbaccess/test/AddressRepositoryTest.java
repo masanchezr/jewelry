@@ -37,7 +37,7 @@ public class AddressRepositoryTest {
 		mailing.setCity("Madrid");
 		mailing.setCountry("España");
 		mailing.setPostalcode(28017L);
-		mailing.setDatecreation(new Date());
+		mailing.setCreationdate(new Date());
 		// addressRepository.save(mailing);
 	}
 

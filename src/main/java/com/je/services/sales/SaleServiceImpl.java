@@ -148,13 +148,13 @@ public class SaleServiceImpl implements SaleService {
 		List<AddressEntity> addresses = new ArrayList<>();
 		AddressEntity invoice = sale.getInvoice();
 		if (invoice != null) {
-			invoice.setDatecreation(new Date());
+			invoice.setCreationdate(new Date());
 			saleEntity.setAddressinvoice(invoice);
 			addresses.add(invoice);
 		}
 		AddressEntity mailing = sale.getMailing();
 		if (mailing != null) {
-			mailing.setDatecreation(new Date());
+			mailing.setCreationdate(new Date());
 			addresses.add(mailing);
 			saleEntity.setAddressmailing(mailing);
 		}

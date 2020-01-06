@@ -50,28 +50,28 @@ public class AddressEntity {
 	@Column(name = "CIF")
 	private String cif;
 
-	/** The datecreation. */
+	/** The creationdate. */
 	@CreatedDate
 	@Temporal(TemporalType.DATE)
-	@Column(name = "DATECREATION")
-	private Date datecreation;
+	@Column(name = "CREATIONDATE")
+	private Date creationdate;
 
 	/**
-	 * Gets the datecreation.
+	 * Gets the creationdate.
 	 *
-	 * @return the datecreation
+	 * @return the creationdate
 	 */
-	public Date getDatecreation() {
-		return datecreation;
+	public Date getCreationdate() {
+		return creationdate;
 	}
 
 	/**
-	 * Sets the datecreation.
+	 * Sets the creationdate.
 	 *
-	 * @param datecreation the new datecreation
+	 * @param creationdate the new creationdate
 	 */
-	public void setDatecreation(Date datecreation) {
-		this.datecreation = datecreation;
+	public void setCreationdate(Date creationdate) {
+		this.creationdate = creationdate;
 	}
 
 	/**

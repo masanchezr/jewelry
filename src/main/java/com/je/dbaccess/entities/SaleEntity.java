@@ -38,7 +38,7 @@ public class SaleEntity {
 	private Long numsale;
 
 	/** The creationdate. */
-	@Column(name = "DATECREATION")
+	@Column(name = "CREATIONDATE")
 	@CreatedDate
 	private Date creationdate;
 
