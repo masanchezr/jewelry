@@ -11,8 +11,8 @@ import com.je.dbaccess.entities.ClientPawnEntity;
  */
 public interface ClientPawnsRepository extends CrudRepository<ClientPawnEntity, String> {
 
-	public List<ClientPawnEntity> findByNameLike(String name);
+	public List<ClientPawnEntity> findByNameContainingIgnoreCase(String name);
 
-	public List<ClientPawnEntity> findBySurnameLike(String surname);
+	public List<ClientPawnEntity> findBySurnameContainingIgnoreCase(String surname);
 
 }

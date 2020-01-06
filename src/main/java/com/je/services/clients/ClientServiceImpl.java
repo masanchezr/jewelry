@@ -33,10 +33,10 @@ public class ClientServiceImpl implements ClientService {
 			}
 		}
 		if (!Util.isEmpty(name)) {
-			lclients.addAll(clientpawnsrepository.findByNameLike(name));
+			lclients.addAll(clientpawnsrepository.findByNameContainingIgnoreCase(name));
 		}
 		if (!Util.isEmpty(surname)) {
-			lclients.addAll(clientpawnsrepository.findBySurnameLike(surname));
+			lclients.addAll(clientpawnsrepository.findBySurnameContainingIgnoreCase(surname));
 		}
 		if (lclients != null) {
 			Iterator<ClientPawnEntity> iclients = lclients.iterator();
