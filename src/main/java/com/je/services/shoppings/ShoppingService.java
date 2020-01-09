@@ -59,4 +59,6 @@ public interface ShoppingService {
 
 	public List<ShoppingEntity> getByNIF(String nif);
 
+	boolean isRepeatNumber(String num, String user, int year);
+
 }

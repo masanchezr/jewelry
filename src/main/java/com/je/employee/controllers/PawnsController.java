@@ -1,7 +1,6 @@
 package com.je.employee.controllers;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
@@ -192,36 +191,16 @@ public class PawnsController {
 			model.addObject(Constants.NATIONS, nationservice.getNations());
 			model.setViewName(VIEWNEWPAWN);
 		} else {
-			Calendar c = Calendar.getInstance();
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
-			String numpawn = pawn.getNumpawn();
 			pawn.setUser(user);
 			pawn.setRetired(false);
-			boolean repeat = pawnService.isRepeatNumber(numpawn, user, c.get(Calendar.YEAR));
-			if (repeat) {
-				List<MetalEntity> materials = materialService.getAllMetalsActive();
-				Iterator<MetalEntity> imaterials = materials.iterator();
-				List<ObjectPawnEntity> lop = new ArrayList<>();
-				while (imaterials.hasNext()) {
-					ObjectPawnEntity op = new ObjectPawnEntity();
-					op.setMetal(imaterials.next());
-					lop.add(op);
-				}
-				pawn.setObjects(lop);
-				model.addObject(ConstantsViews.PAWNFORM, pawn);
-				model.addObject(Constants.TRACKS, trackservice.getTracks());
-				model.addObject(Constants.NATIONS, nationservice.getNations());
-				model.setViewName(VIEWNEWPAWN);
-				result.rejectValue(Constants.NUMPAWN, "numrepeated");
-			} else {
-				String sdate = pawn.getCreationdate();
-				if (Util.isEmpty(sdate)) {
-					sdate = DateUtil.getStringDateddMMyyyy(new Date());
-				}
-				model.addObject(ConstantsViews.DAILY, pawnService.save(pawn));
-				model.setViewName(ConstantsViews.VIEWDAILYARROW);
-				model.addObject(ConstantsViews.DATEDAILY, sdate);
+			String sdate = pawn.getCreationdate();
+			if (Util.isEmpty(sdate)) {
+				sdate = DateUtil.getStringDateddMMyyyy(new Date());
 			}
+			model.addObject(ConstantsViews.DAILY, pawnService.save(pawn));
+			model.setViewName(ConstantsViews.VIEWDAILYARROW);
+			model.addObject(ConstantsViews.DATEDAILY, sdate);
 		}
 		return model;
 	}

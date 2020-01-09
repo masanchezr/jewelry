@@ -21,6 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.je.admin.forms.SearchMissingNumbers;
 import com.je.dbaccess.entities.ClientPawnEntity;
 import com.je.dbaccess.entities.MetalEntity;
 import com.je.dbaccess.entities.ObjectShopEntity;
@@ -480,5 +481,33 @@ public class ShoppingServiceImpl implements ShoppingService {
 		ClientPawnEntity client = new ClientPawnEntity();
 		client.setNif(nif);
 		return shoppingsRepository.findByClient(client);
+	}
+
+	@Override
+	public boolean isRepeatNumber(String num, String user, int year) {
+		boolean repeat = true;
+		PlaceEntity placeEntity = placeUserRepository.findByUsername(user).get(0).getPlace();
+		ShoppingEntity searchShopping = null;
+		if (Util.isNumeric(num)) {
+			searchShopping = shoppingsRepository.findByNumshopAndPlaceAndYear(Long.valueOf(num), placeEntity, year);
+		}
+		if (searchShopping == null) {
+			repeat = false;
+		}
+		return repeat;
+	}
+
+	public List<Long> searchMissingShoppings(SearchMissingNumbers form) {
+		List<Long> nummissings = new ArrayList<>();
+		PlaceEntity place = mapper.map(form.getPlace(), PlaceEntity.class);
+		int year = form.getYear();
+		ShoppingEntity entity;
+		for (long i = form.getNumfrom(); i <= form.getNumuntil(); i++) {
+			entity = shoppingsRepository.findByNumshopAndPlaceAndYear(i, place, year);
+			if (entity == null) {
+				nummissings.add(i);
+			}
+		}
+		return nummissings;
 	}
 }

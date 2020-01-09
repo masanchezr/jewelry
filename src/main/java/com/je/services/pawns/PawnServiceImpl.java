@@ -17,12 +17,10 @@ import com.je.dbaccess.entities.ObjectPawnEntity;
 import com.je.dbaccess.entities.PawnEntity;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.dbaccess.entities.RenovationEntity;
-import com.je.dbaccess.entities.ShoppingEntity;
 import com.je.dbaccess.repositories.ClientPawnsRepository;
 import com.je.dbaccess.repositories.PawnsRepository;
 import com.je.dbaccess.repositories.PlaceUserRepository;
 import com.je.dbaccess.repositories.RenovationsRepository;
-import com.je.dbaccess.repositories.ShoppingsRepository;
 import com.je.services.dailies.Daily;
 import com.je.services.dailies.DailyService;
 import com.je.services.mails.MailService;
@@ -54,9 +52,6 @@ public class PawnServiceImpl implements PawnService {
 	@Autowired
 	private PlaceUserRepository placeUserRepository;
 
-	@Autowired
-	private ShoppingsRepository shoppingsRepository;
-
 	/** The mapper. */
 	@Autowired
 	private Mapper mapper;
@@ -72,7 +67,6 @@ public class PawnServiceImpl implements PawnService {
 		}
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(pawnEntity.getCreationdate());
-		int year = calendar.get(Calendar.YEAR);
 		List<ObjectPawnEntity> newobjects = new ArrayList<>();
 		List<ObjectPawnEntity> object = pawnEntity.getObjects();
 		Iterator<ObjectPawnEntity> iobjects = object.iterator();
@@ -83,7 +77,6 @@ public class PawnServiceImpl implements PawnService {
 		}
 		pawnEntity.setPlace(place);
 		pawnEntity.setClient(cpe);
-		pawnEntity.setYear(year);
 		pawnEntity.setReturnpawn(Boolean.FALSE);
 		ObjectPawnEntity ope;
 		while (iobjects.hasNext()) {
@@ -117,11 +110,9 @@ public class PawnServiceImpl implements PawnService {
 		pawnEntity.setIdreturnpawn(pawn.getId());
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(pawnEntity.getCreationdate());
-		int year = calendar.get(Calendar.YEAR);
 		List<ObjectPawnEntity> newobjects = new ArrayList<>();
 		List<ObjectPawnEntity> object = pawnEnt.getObjects();
 		Iterator<ObjectPawnEntity> iobjects = object.iterator();
-		pawnEntity.setYear(year);
 		ObjectPawnEntity ope;
 		while (iobjects.hasNext()) {
 			ope = iobjects.next();
@@ -432,22 +423,6 @@ public class PawnServiceImpl implements PawnService {
 	@Override
 	public Double sumPawnsActiveByPlace(PlaceEntity place) {
 		return pawnsRepository.sumPawnsActive(mapper.map(place, PlaceEntity.class));
-	}
-
-	@Override
-	public boolean isRepeatNumber(String num, String user, int year) {
-		boolean repeat = true;
-		PlaceEntity placeEntity = placeUserRepository.findByUsername(user).get(0).getPlace();
-		ShoppingEntity searchShopping = null;
-		if (Util.isNumeric(num)) {
-			searchShopping = shoppingsRepository.findByNumshopAndPlaceAndYear(Long.valueOf(num), placeEntity, year);
-		}
-		// miramos también si existe como empeño no retirado
-		List<PawnEntity> pawn = pawnsRepository.findByNumpawnAndPlaceAndYear(num, placeEntity, year);
-		if (searchShopping == null && (pawn == null || pawn.isEmpty())) {
-			repeat = false;
-		}
-		return repeat;
 	}
 
 	@Override

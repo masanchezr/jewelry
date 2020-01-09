@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Iterator;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -62,22 +60,6 @@ public class PawnsRepositoryTest {
 		renovations.add(renovation);
 		pawn.setRenovations(renovations);
 		// pawnsRepository.save(pawn);
-	}
-
-	/**
-	 * Find by numpawn and place and creationdate test.
-	 */
-	@Test
-	public void findByNumpawnAndPlaceAndCreationdateTest() {
-		Calendar calendar = new GregorianCalendar(2014, 7, 26);
-		PlaceEntity place = new PlaceEntity();
-		place.setIdplace(24002L);
-		List<PawnEntity> lpawns = pawnsRepository.findByNumpawnAndPlaceAndCreationdate("665", place,
-				calendar.getTime());
-		Iterator<PawnEntity> ipawns = lpawns.iterator();
-		while (ipawns.hasNext()) {
-			System.out.println("importe entregado:" + ipawns.next().getAmount());
-		}
 	}
 
 	@Test

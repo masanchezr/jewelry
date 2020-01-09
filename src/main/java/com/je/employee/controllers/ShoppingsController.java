@@ -19,7 +19,6 @@ import com.je.dbaccess.entities.MetalEntity;
 import com.je.dbaccess.entities.ObjectShopEntity;
 import com.je.employee.validators.ShoppingsValidator;
 import com.je.services.metal.MetalService;
-import com.je.services.pawns.PawnService;
 import com.je.services.shoppings.Shopping;
 import com.je.services.shoppings.ShoppingService;
 import com.je.utils.constants.ConstantsViews;
@@ -33,9 +32,6 @@ public class ShoppingsController {
 
 	@Autowired
 	private MetalService materialService;
-
-	@Autowired
-	private PawnService pawnService;
 
 	/** The shopping service. */
 	@Autowired
@@ -98,7 +94,7 @@ public class ShoppingsController {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			Long numshop = shoppingForm.getNumshop();
 			shoppingForm.setUser(user);
-			boolean repeat = pawnService.isRepeatNumber(String.valueOf(numshop), user, c.get(Calendar.YEAR));
+			boolean repeat = shoppingService.isRepeatNumber(String.valueOf(numshop), user, c.get(Calendar.YEAR));
 			if (repeat) {
 				model.setViewName(VIEWNEWSHOPPING);
 				List<ObjectShopEntity> los = shoppingForm.getObjects();

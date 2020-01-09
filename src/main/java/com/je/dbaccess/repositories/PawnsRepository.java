@@ -30,9 +30,6 @@ public interface PawnsRepository extends CrudRepository<PawnEntity, Long> {
 	public List<PawnEntity> findByCreationdateAndPlace(@Temporal(TemporalType.DATE) Date creationdate,
 			PlaceEntity placeEntity);
 
-	public List<PawnEntity> findByCreationdateBetweenAndPlace(@Temporal(TemporalType.DATE) Date from,
-			@Temporal(TemporalType.DATE) Date until, PlaceEntity placeEntity);
-
 	/**
 	 * Find by numpawn and place.
 	 *
@@ -41,17 +38,6 @@ public interface PawnsRepository extends CrudRepository<PawnEntity, Long> {
 	 * @return the list
 	 */
 	public List<PawnEntity> findByNumpawnAndPlace(String numpawn, PlaceEntity placeEntity);
-
-	/**
-	 * Find by numpawn and place and creationdate.
-	 *
-	 * @param numpawn      the numpawn
-	 * @param placeEntity  the place entity
-	 * @param creationdate the creationdate
-	 * @return the list
-	 */
-	public List<PawnEntity> findByNumpawnAndPlaceAndCreationdate(String numpawn, PlaceEntity placeEntity,
-			Date creationdate);
 
 	@Query("select sum(p.amount) from PawnEntity p join p.objects o where p.place=:place and p.dateretired is null and o.realgrams is null")
 	public Double sumPawnsActive(@Param(Constants.PLACE) PlaceEntity placeEntity);
@@ -72,8 +58,6 @@ public interface PawnsRepository extends CrudRepository<PawnEntity, Long> {
 
 	public List<PawnEntity> findByNumpawnAndPlaceAndYear(String string, PlaceEntity place, int year);
 
-	public PawnEntity findByNumpawnAndPlaceAndYearAndDateretiredIsNull(String num, PlaceEntity placeEntity, int year);
-
 	public List<PawnEntity> findByDateretiredBetweenAndPlace(Date dfrom, Date duntil, PlaceEntity place);
 
 	@Query("select distinct p from PawnEntity p join p.objects o where p.place=:place and p.dateretired is null and o.realgrams is null")
@@ -84,8 +68,6 @@ public interface PawnsRepository extends CrudRepository<PawnEntity, Long> {
 
 	@Query("select p from PawnEntity p where p.idpawn=:idpawn and PERIOD_DIFF(DATE_FORMAT(p.dateretired,'%Y%m'),DATE_FORMAT(p.creationdate,'%Y%m'))>p.months")
 	public List<PawnEntity> searchMissingMonths(@Param(Constants.IDPAWN) Long idpawn);
-
-	public List<PawnEntity> findByPlaceAndYearOrderByCreationdateDesc(PlaceEntity placeEntity, int i);
 
 	@Query("select sum(os.realgrams), sum(os.grossgrams), sum(s.amount), os.metal from PawnEntity s join s.objects os where s.creationdate>=:dateFrom and s.creationdate<=:dateUntil and os.pawn.idpawn=s.idpawn GROUP BY os.metal")
 	public List<Object[]> findGrossGramsByMetal(@Param("dateFrom") @Temporal(TemporalType.DATE) Date datefrom,
