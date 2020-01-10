@@ -69,7 +69,14 @@ public interface PawnsRepository extends CrudRepository<PawnEntity, Long> {
 	@Query("select p from PawnEntity p where p.idpawn=:idpawn and PERIOD_DIFF(DATE_FORMAT(p.dateretired,'%Y%m'),DATE_FORMAT(p.creationdate,'%Y%m'))>p.months")
 	public List<PawnEntity> searchMissingMonths(@Param(Constants.IDPAWN) Long idpawn);
 
-	@Query("select sum(os.realgrams), sum(os.grossgrams), sum(s.amount), os.metal from PawnEntity s join s.objects os where s.creationdate>=:dateFrom and s.creationdate<=:dateUntil and os.pawn.idpawn=s.idpawn GROUP BY os.metal")
+	/**
+	 * 
+	 * @param datefrom
+	 * @param dateuntil
+	 * @return Suma de gramos reales, gramos brutos e importe de los empeños nuevos
+	 *         dado un rango de fechas
+	 */
+	@Query("select sum(os.realgrams), sum(os.grossgrams), sum(s.amount), os.metal from PawnEntity s join s.objects os where s.creationdate>=:dateFrom and s.creationdate<=:dateUntil and s.idreturnpawn is null and os.pawn.idpawn=s.idpawn GROUP BY os.metal")
 	public List<Object[]> findGrossGramsByMetal(@Param("dateFrom") @Temporal(TemporalType.DATE) Date datefrom,
 			@Param("dateUntil") @Temporal(TemporalType.DATE) Date dateuntil);
 
