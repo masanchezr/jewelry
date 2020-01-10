@@ -67,6 +67,7 @@ public class PawnServiceImpl implements PawnService {
 		}
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(pawnEntity.getCreationdate());
+		int year = calendar.get(Calendar.YEAR);
 		List<ObjectPawnEntity> newobjects = new ArrayList<>();
 		List<ObjectPawnEntity> object = pawnEntity.getObjects();
 		Iterator<ObjectPawnEntity> iobjects = object.iterator();
@@ -77,6 +78,7 @@ public class PawnServiceImpl implements PawnService {
 		}
 		pawnEntity.setPlace(place);
 		pawnEntity.setClient(cpe);
+		pawnEntity.setYear(year);
 		pawnEntity.setReturnpawn(Boolean.FALSE);
 		ObjectPawnEntity ope;
 		while (iobjects.hasNext()) {
@@ -110,9 +112,11 @@ public class PawnServiceImpl implements PawnService {
 		pawnEntity.setIdreturnpawn(pawn.getId());
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(pawnEntity.getCreationdate());
+		int year = calendar.get(Calendar.YEAR);
 		List<ObjectPawnEntity> newobjects = new ArrayList<>();
 		List<ObjectPawnEntity> object = pawnEnt.getObjects();
 		Iterator<ObjectPawnEntity> iobjects = object.iterator();
+		pawnEntity.setYear(year);
 		ObjectPawnEntity ope;
 		while (iobjects.hasNext()) {
 			ope = iobjects.next();
