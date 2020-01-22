@@ -7,7 +7,7 @@
 	<version>0.0.8-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<properties>
-		<org.springframework-version>5.2.2.RELEASE</org.springframework-version>
+		<org.springframework-version>5.2.3.RELEASE</org.springframework-version>
 		<spring-security-version>5.2.1.RELEASE</spring-security-version>
 		<sourceEncoding>UTF-8</sourceEncoding>
 	</properties>
@@ -21,7 +21,7 @@
 				</property>
 			</activation>
 			<properties>
-				<database.url>jdbc:mysql://localhost:3307/jewelry?serverTimezone=Europe/Madrid</database.url>
+				<database.url>jdbc:mysql://localhost:3307/jewelrydb?serverTimezone=Europe/Madrid</database.url>
 				<database.user>root</database.user>
 				<database.password>Angeles0466+</database.password>
 				<anyvalue.name>God</anyvalue.name>
@@ -192,14 +192,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-engine</artifactId>
-			<version>5.3.1</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-api</artifactId>
-			<version>5.3.1</version>
+			<artifactId>junit-jupiter</artifactId>
+			<version>5.5.2</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
