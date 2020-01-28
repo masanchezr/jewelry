@@ -97,37 +97,39 @@ public class PawnServiceImpl implements PawnService {
 	public Daily saveReturnPawn(NewPawn pawn) {
 		PawnEntity pawnEnt = mapper.map(pawn, PawnEntity.class);
 		PawnEntity pawnEntity = pawnsRepository.findById(pawn.getId()).orElse(null);
-		pawnEntity.setReturnpawn(Boolean.TRUE);
-		pawnsRepository.save(pawnEntity);
 		PlaceEntity place = placeUserRepository.findByUsername(pawn.getUser()).get(0).getPlace();
-		pawnEntity.setAmount(pawnEnt.getAmount());
-		pawnEntity.setPercent(pawnEnt.getPercent());
-		pawnEntity.setCreationdate(new Date());
-		pawnEntity.setIdpawn(null);
-		pawnEntity.setRenovations(null);
-		pawnEntity.setDateretired(null);
-		pawnEntity.setObjects(null);
-		pawnEntity.setMonths(null);
-		pawnEntity.setReturnpawn(Boolean.FALSE);
-		pawnEntity.setIdreturnpawn(pawn.getId());
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(pawnEntity.getCreationdate());
-		int year = calendar.get(Calendar.YEAR);
-		List<ObjectPawnEntity> newobjects = new ArrayList<>();
-		List<ObjectPawnEntity> object = pawnEnt.getObjects();
-		Iterator<ObjectPawnEntity> iobjects = object.iterator();
-		pawnEntity.setYear(year);
-		ObjectPawnEntity ope;
-		while (iobjects.hasNext()) {
-			ope = iobjects.next();
-			if (ope.getGrossgrams() != null) {
-				ope.setPawn(pawnEntity);
-				newobjects.add(ope);
+		if (pawnEntity != null) {
+			pawnEntity.setReturnpawn(Boolean.TRUE);
+			pawnsRepository.save(pawnEntity);
+			pawnEntity.setAmount(pawnEnt.getAmount());
+			pawnEntity.setPercent(pawnEnt.getPercent());
+			pawnEntity.setCreationdate(new Date());
+			pawnEntity.setIdpawn(null);
+			pawnEntity.setRenovations(null);
+			pawnEntity.setDateretired(null);
+			pawnEntity.setObjects(null);
+			pawnEntity.setMonths(null);
+			pawnEntity.setReturnpawn(Boolean.FALSE);
+			pawnEntity.setIdreturnpawn(pawn.getId());
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(pawnEntity.getCreationdate());
+			int year = calendar.get(Calendar.YEAR);
+			List<ObjectPawnEntity> newobjects = new ArrayList<>();
+			List<ObjectPawnEntity> object = pawnEnt.getObjects();
+			Iterator<ObjectPawnEntity> iobjects = object.iterator();
+			pawnEntity.setYear(year);
+			ObjectPawnEntity ope;
+			while (iobjects.hasNext()) {
+				ope = iobjects.next();
+				if (ope.getGrossgrams() != null) {
+					ope.setPawn(pawnEntity);
+					newobjects.add(ope);
+				}
 			}
+			pawnEntity.setObjects(newobjects);
+			pawnsRepository.save(pawnEntity);
 		}
-		pawnEntity.setObjects(newobjects);
-		pawnsRepository.save(pawnEntity);
-		return dailyService.getDaily(DateUtil.getDateFormated(pawnEntity.getCreationdate()), place, null);
+		return dailyService.getDaily(DateUtil.getDateFormated(pawnEnt.getCreationdate()), place, null);
 	}
 
 	@Override

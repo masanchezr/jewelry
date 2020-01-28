@@ -151,7 +151,10 @@ public class DailyServiceImpl implements DailyService {
 			BigDecimal payrollamount = getPayrollAmount(date, place, daily);
 			double salespostamount = getSalesPostAmount(date, place, daily);
 			if (dEntity == null) {
-				// tengo que sacar el importe del día anterior para calcularlo
+				/**
+				 * tengo que sacar el importe del día anterior para calcularlo, esto no vale por
+				 * ejemplo para los empeños que entran en una fecha diferente
+				 */
 				DailyEntity previousdaily = dailyRepository.findFirstByPlaceOrderByIddailyDesc(place);
 				previousamount = previousdaily.getFinalamount();
 				dEntity = new DailyEntity();
@@ -261,7 +264,7 @@ public class DailyServiceImpl implements DailyService {
 			while (iplaceUsers.hasNext()) {
 				user.setUsername(iplaceUsers.next().getUsername());
 				List<PayrollEntity> payrolls = payrollRepository.findByCreationdateAndUser(date, user);
-				List<PayrollEntity> payrollsview = new ArrayList<PayrollEntity>();
+				List<PayrollEntity> payrollsview = new ArrayList<>();
 				if (payrolls != null && !payrolls.isEmpty()) {
 					Iterator<PayrollEntity> ipayroll = payrolls.iterator();
 					PayrollEntity pre;
