@@ -1,5 +1,7 @@
 package com.je.dbaccess.test;
 
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
@@ -14,8 +16,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.je.dbaccess.entities.DailyEntity;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.dbaccess.repositories.DailyRepository;
-
-import junit.framework.Assert;
 
 /**
  * The Class DailiesRepositoryTest.
@@ -40,7 +40,7 @@ public class DailiesRepositoryTest {
 		daily.setDailydate(calendar.getTime());
 		daily.setPlace(place);
 		daily.setFinalamount(BigDecimal.valueOf(8950));
-		dailyRepository.save(daily);
+		assertNull(dailyRepository.save(daily));
 	}
 
 	/**
@@ -51,19 +51,6 @@ public class DailiesRepositoryTest {
 		PlaceEntity place = new PlaceEntity();
 		place.setIdplace(13700L);
 		DailyEntity daily = dailyRepository.findByPlaceAndDailydate(place, new Date());
-		Assert.assertNull(daily);
-	}
-
-	/**
-	 * Find first by place order by iddaily desc test.
-	 */
-	@Test
-	public void findFirstByPlaceOrderByIddailyDescTest() {
-		PlaceEntity place = new PlaceEntity();
-		place.setIdplace(13700L);
-		DailyEntity daily = dailyRepository.findFirstByPlaceOrderByIddailyDesc(place);
-		if (daily != null) {
-			System.out.println("importe:" + daily.getFinalamount() + " fecha:" + daily.getDailydate());
-		}
+		assertNull(daily);
 	}
 }

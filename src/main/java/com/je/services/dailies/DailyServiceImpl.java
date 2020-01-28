@@ -59,6 +59,7 @@ import com.je.services.rentals.Rental;
 import com.je.services.sales.CancelSale;
 import com.je.services.shoppings.Shopping;
 import com.je.utils.constants.Constants;
+import com.je.utils.date.DateUtil;
 
 /**
  * The Class DailyServiceImpl.
@@ -151,11 +152,12 @@ public class DailyServiceImpl implements DailyService {
 			BigDecimal payrollamount = getPayrollAmount(date, place, daily);
 			double salespostamount = getSalesPostAmount(date, place, daily);
 			if (dEntity == null) {
-				/**
-				 * tengo que sacar el importe del día anterior para calcularlo, esto no vale por
-				 * ejemplo para los empeños que entran en una fecha diferente
-				 */
-				DailyEntity previousdaily = dailyRepository.findFirstByPlaceOrderByIddailyDesc(place);
+				DailyEntity previousdaily = null;
+				Date previousday = date;
+				while (previousdaily == null) {
+					previousday = DateUtil.addDays(previousday, -1);
+					previousdaily = dailyRepository.findByPlaceAndDailydate(place, previousday);
+				}
 				previousamount = previousdaily.getFinalamount();
 				dEntity = new DailyEntity();
 				dEntity.setDailydate(date);
