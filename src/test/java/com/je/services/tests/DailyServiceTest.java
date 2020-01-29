@@ -1,5 +1,7 @@
 package com.je.services.tests;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -10,7 +12,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.je.dbaccess.entities.PlaceEntity;
-import com.je.services.dailies.Daily;
 import com.je.services.dailies.DailyService;
 
 /**
@@ -32,20 +33,8 @@ public class DailyServiceTest {
 	@Test
 	public void getDailyTest() {
 		PlaceEntity place = new PlaceEntity();
-		Calendar c = new GregorianCalendar(2018, 11, 28);
+		Calendar c = new GregorianCalendar(2019, 11, 28);
 		place.setIdplace(28017L);
-		Daily daily = dailyService.getDaily(c.getTime(), place, "prueba");
-		if (daily != null) {
-			System.out.println("N&uacute;mero de operaciones:" + daily.getNumoperations() + " importe final:"
-					+ daily.getFinalamount());
-		}
-	}
-
-	@Test
-	public void calculateDailiesTest() {
-		PlaceEntity place = new PlaceEntity();
-		Calendar c = new GregorianCalendar(2019, 9, 10);
-		place.setIdplace(28017L);
-		dailyService.calculateDailies(c.getTime(), place);
+		assertNotNull(dailyService.getDaily(c.getTime(), place, "prueba"));
 	}
 }

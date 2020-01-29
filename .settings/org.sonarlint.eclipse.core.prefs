@@ -1,4 +1,4 @@
 autoEnabled=true
 eclipse.preferences.version=1
 extraProperties=
-fileExclusions=FILE\:src/main/webapp/WEB-INF/views/admin/shoppings/searchshoppings/updateshopping.html
+fileExclusions=FILE\:src/main/webapp/WEB-INF/views/admin/shoppings/searchshoppings/updateshopping.html\r\nFILE\:src/main/webapp/WEB-INF/views/admin/shoppings/newshop/newshop.html

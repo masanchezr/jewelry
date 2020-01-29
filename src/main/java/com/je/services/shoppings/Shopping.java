@@ -36,6 +36,8 @@ public class Shopping extends OperationForm {
 
 	private String town;
 
+	private ObjectShopEntity moreobject;
+
 	/**
 	 * Gets the numshop.
 	 *
@@ -134,5 +136,13 @@ public class Shopping extends OperationForm {
 
 	public void setTown(String town) {
 		this.town = town;
+	}
+
+	public ObjectShopEntity getMoreobject() {
+		return moreobject;
+	}
+
+	public void setMoreobject(ObjectShopEntity moreobject) {
+		this.moreobject = moreobject;
 	}
 }

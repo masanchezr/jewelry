@@ -199,9 +199,9 @@ public class ShoppingServiceImpl implements ShoppingService {
 			Iterator<ObjectShopEntity> iobjects;
 			List<ObjectShopEntity> newobjects = new ArrayList<>();
 			List<ObjectShopEntity> los = shopping.getObjects();
-			Iterator<ObjectShopEntity> ilos = los.iterator();
 			ObjectShopEntity object;
 			ObjectShopEntity os;
+			Iterator<ObjectShopEntity> ilos = los.iterator();
 			while (ilos.hasNext()) {
 				os = ilos.next();
 				iobjects = objects.iterator();
@@ -210,11 +210,17 @@ public class ShoppingServiceImpl implements ShoppingService {
 					if (object.getIdobjectshop().equals(os.getIdobjectshop())) {
 						object.setRealgrams(os.getRealgrams());
 						object.setGrossgrams(os.getGrossgrams());
+						object.setNetgrams(os.getNetgrams());
 						object.setAmount(os.getAmount());
 						object.setMetal(os.getMetal());
 						newobjects.add(object);
 					}
 				}
+			}
+			os = shopping.getMoreobject();
+			if (os != null) {
+				os.setShop(shoppingEntity);
+				newobjects.add(shopping.getMoreobject());
 			}
 			shoppingEntity.setObjects(newobjects);
 			shoppingEntity.setMeltdate(new Date());
