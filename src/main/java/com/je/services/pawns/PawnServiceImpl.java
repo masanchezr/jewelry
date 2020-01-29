@@ -98,6 +98,10 @@ public class PawnServiceImpl implements PawnService {
 		PawnEntity pawnEnt = mapper.map(pawn, PawnEntity.class);
 		PawnEntity pawnEntity = pawnsRepository.findById(pawn.getId()).orElse(null);
 		PlaceEntity place = placeUserRepository.findByUsername(pawn.getUser()).get(0).getPlace();
+		Date datedaily = pawnEnt.getCreationdate();
+		if (datedaily == null) {
+			datedaily = DateUtil.getDateFormated(new Date());
+		}
 		if (pawnEntity != null) {
 			pawnEntity.setReturnpawn(Boolean.TRUE);
 			pawnsRepository.save(pawnEntity);
@@ -129,7 +133,7 @@ public class PawnServiceImpl implements PawnService {
 			pawnEntity.setObjects(newobjects);
 			pawnsRepository.save(pawnEntity);
 		}
-		return dailyService.getDaily(DateUtil.getDateFormated(pawnEnt.getCreationdate()), place, null);
+		return dailyService.getDaily(datedaily, place, null);
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package com.je.dbaccess.test;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.math.BigDecimal;
@@ -40,7 +41,7 @@ public class DailiesRepositoryTest {
 		daily.setDailydate(calendar.getTime());
 		daily.setPlace(place);
 		daily.setFinalamount(BigDecimal.valueOf(8950));
-		assertNull(dailyRepository.save(daily));
+		assertNotNull(dailyRepository.save(daily));
 	}
 
 	/**
