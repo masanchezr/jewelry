@@ -218,7 +218,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 				}
 			}
 			os = shopping.getMoreobject();
-			if (os != null) {
+			if (os != null && os.getRealgrams() != null) {
 				os.setShop(shoppingEntity);
 				newobjects.add(shopping.getMoreobject());
 			}
