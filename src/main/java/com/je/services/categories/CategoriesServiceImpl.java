@@ -24,7 +24,7 @@ public class CategoriesServiceImpl implements CategoriesService {
 
 	@Override
 	public Iterable<CategoryEntity> getAllCategoriesOrderByName() {
-		return categoriesRepository.findByActiveTrue(new Sort(Direction.ASC, "namecategory"));
+		return categoriesRepository.findByActiveTrue(Sort.by(Direction.ASC, "namecategory"));
 	}
 
 	@Override

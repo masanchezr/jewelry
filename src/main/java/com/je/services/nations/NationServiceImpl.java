@@ -16,7 +16,7 @@ public class NationServiceImpl implements NationService {
 
 	@Override
 	public List<NationEntity> getNations() {
-		return nationsrepository.findAll(new Sort(Direction.ASC, "nation"));
+		return nationsrepository.findAll(Sort.by(Direction.ASC, "nation"));
 	}
 
 }

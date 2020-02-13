@@ -47,7 +47,7 @@ public class CategoriesRepositoryTest {
 	@Test
 	public void findByActiveTest() {
 		Iterable<CategoryEntity> categories = categoriesRepository
-				.findByActiveTrue(new Sort(Direction.ASC, "namecategory"));
+				.findByActiveTrue(Sort.by(Direction.ASC, "namecategory"));
 		if (categories != null) {
 			Iterator<CategoryEntity> icategories = categories.iterator();
 			while (icategories.hasNext()) {
@@ -63,7 +63,7 @@ public class CategoriesRepositoryTest {
 	 */
 	@Test
 	public void findAllOrderByNamecategoryTest() {
-		Iterable<CategoryEntity> categories = categoriesRepository.findAll(new Sort(Direction.ASC, "namecategory"));
+		Iterable<CategoryEntity> categories = categoriesRepository.findAll(Sort.by(Direction.ASC, "namecategory"));
 		if (categories != null) {
 			Iterator<CategoryEntity> icategories = categories.iterator();
 			while (icategories.hasNext()) {

@@ -46,6 +46,6 @@ public class PlaceServiceImpl implements PlaceService {
 
 	@Override
 	public Iterable<PlaceEntity> getAllPlaces() {
-		return placeRepository.findAll(new Sort(Direction.ASC, Constants.DESCRIPTION));
+		return placeRepository.findAll(Sort.by(Direction.ASC, Constants.DESCRIPTION));
 	}
 }
