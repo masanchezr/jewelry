@@ -34,7 +34,7 @@
 							</thead>
 							<tbody>
 								<tr th:each="jewel:${jewels}">
-									<td><input type="radio" th:field="idjewel"
+									<td><input type="radio" th:field="*{idjewel}"
 										th:value="${jewel.idjewel}"></td>
 									<td th:text="${jewel.reference}"></td>
 									<td th:text="${jewel.name}"></td>
