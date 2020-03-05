@@ -374,13 +374,14 @@ public class JewelsController {
 			model.setViewName(VIEWSEARCHINVENTORY);
 		} else {
 			model.addObject("toUpdateForm", new Jewel());
-			model.addObject(ConstantsViews.JEWELS, jewelService.searchByReference(mapper.map(jewel, JewelEntity.class)));
+			model.addObject(ConstantsViews.JEWELS,
+					jewelService.searchByReference(mapper.map(jewel, JewelEntity.class)));
 			model.setViewName("admin/jewels/revise/resultsearch");
 		}
 		return model;
 	}
 
-	@GetMapping("/revised")
+	@PostMapping("/revised")
 	public ModelAndView revise(@ModelAttribute("toUpdateForm") Jewel jewel) {
 		if (jewel.getIdjewel() == null) {
 			ModelAndView model = new ModelAndView();
