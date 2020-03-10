@@ -22,7 +22,8 @@
 							</div>
 							<div class="form-group">
 								<span th:text="#{description}"></span>
-								<textarea class="form-control" th:text="${incident.description}"></textarea>
+								<textarea class="form-control" th:field=*{description}
+									th:text="${incident.description}"></textarea>
 							</div>
 							<div class="form-group">
 								<button class="btn btn-primary" value="submit">
