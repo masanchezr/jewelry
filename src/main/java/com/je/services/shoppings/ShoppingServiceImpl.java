@@ -212,7 +212,6 @@ public class ShoppingServiceImpl implements ShoppingService {
 						object.setGrossgrams(os.getGrossgrams());
 						object.setNetgrams(os.getNetgrams());
 						object.setAmount(os.getAmount());
-						object.setMetal(os.getMetal());
 						newobjects.add(object);
 					}
 				}
