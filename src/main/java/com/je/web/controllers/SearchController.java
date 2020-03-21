@@ -3,8 +3,8 @@ package com.je.web.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -44,7 +44,7 @@ public class SearchController {
 		Page<JewelEntity> page = searchService.searchActivesWithImg(search.getSearchname(), null, 1);
 		Iterable<CategoryEntity> categories = searchCategoriesService.getAllCategoriesOrderByName();
 		PlaceEntity place = new PlaceEntity();
-		ModelAndView model = new ModelAndView("home");
+		ModelAndView model = new ModelAndView("web/index");
 		place.setIdplace(Constants.WEB);
 		int current = page.getNumber() + 1;
 		int begin = Math.max(1, current - 5);

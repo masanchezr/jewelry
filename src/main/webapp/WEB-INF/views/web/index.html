@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="web/template :: page">
+<!-- Product Catagories Area Start -->
+<div class="products-catagories-area clearfix" th:fragment="content">
+	<div class="amado-pro-catagory clearfix" th:each="jewel:${jewels}">
+		<!-- Single Catagory -->
+		<div class="single-products-catagory clearfix">
+			<a href="shop.html"> <img
+				th:src="@{resources/img/web/bg-img/1.jpg}" alt=""> <!-- Hover Content -->
+				<div class="hover-content">
+					<div class="line"></div>
+					<p th:text="${jewel.price}"></p>
+					<h4 th:text="${jewel.name}"></h4>
+				</div>
+			</a>
+		</div>
+	</div>
+</div>
+<!-- Product Catagories Area End -->
+<!-- ##### Main Content Wrapper End ##### -->
+</html>

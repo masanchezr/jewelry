@@ -43,13 +43,13 @@ public class HomeController {
 	 * @return the string
 	 */
 
-	@GetMapping("/index.html")
+	@GetMapping("/index")
 	public ModelAndView home() {
 		// Recuperar toda la lista de categorias
 		Iterable<CategoryEntity> categories = searchCategoriesService.getAllCategoriesOrderByName();
 		PlaceEntity place = new PlaceEntity();
 		Page<JewelEntity> page;
-		ModelAndView model = new ModelAndView("home");
+		ModelAndView model = new ModelAndView("web/index");
 		place.setIdplace(Constants.WEB);
 		page = jewelService.searchWithImg(1);
 		int current = page.getNumber() + 1;
@@ -83,7 +83,7 @@ public class HomeController {
 		int current = page.getNumber() + 1;
 		int begin = Math.max(1, current - 5);
 		int end = Math.min(begin + 10, page.getTotalPages());
-		ModelAndView model = new ModelAndView("home");
+		ModelAndView model = new ModelAndView("web/home");
 		model.addObject(ConstantsViews.CATEGORIES, categories);
 		model.addObject(ConstantsViews.JEWELS, page.getContent());
 		model.addObject(ConstantsViews.BREADCRUMBS, "Home");
