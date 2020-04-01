@@ -71,7 +71,7 @@ public class JewelServiceTest {
 
 	@Test
 	public void searchWithImgTest() {
-		Page<JewelEntity> page = objectService.searchWithImg(1);
+		Page<JewelEntity> page = objectService.searchActive(1);
 		page.getTotalElements();
 	}
 }

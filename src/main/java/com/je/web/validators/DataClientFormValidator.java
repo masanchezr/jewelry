@@ -17,13 +17,6 @@ import com.je.web.forms.DataClientForm;
  */
 public class DataClientFormValidator implements Validator {
 
-	/** The Constant EMAIL_PATTERN. */
-	private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-
-	private static final String EMAIL = "email";
-
-	private static final String ERRORSELECTMAIL = "selectmail";
-
 	@Override
 	public boolean supports(Class<?> arg0) {
 		return DataClientForm.class.isAssignableFrom(arg0);
@@ -38,13 +31,13 @@ public class DataClientFormValidator implements Validator {
 		String nif = data.getNif();
 		if (!Util.isEmpty(email)) {
 			// aqui validar email
-			Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+			Pattern pattern = Pattern.compile(ConstantsViews.EMAIL_PATTERN);
 			Matcher matcher = pattern.matcher(email);
 			if (!matcher.matches()) {
-				arg1.rejectValue(EMAIL, ERRORSELECTMAIL);
+				arg1.rejectValue(ConstantsViews.EMAIL, ConstantsViews.ERRORSELECTMAIL);
 			}
 		} else if (data.getTelephone() == null) {
-			arg1.rejectValue(EMAIL, ERRORSELECTMAIL);
+			arg1.rejectValue(ConstantsViews.EMAIL, ConstantsViews.ERRORSELECTMAIL);
 			arg1.rejectValue("telephone", "selecttelephone");
 		}
 		if (Util.isEmpty(nif) || !Util.isNifNie(nif)) {

@@ -1,7 +1,6 @@
 package com.je.web.controllers;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -43,15 +42,30 @@ public class HomeController {
 	 * @return the string
 	 */
 
-	@GetMapping("/index")
+	@GetMapping({ "/index", "/" })
 	public ModelAndView home() {
+		// Recuperar toda la lista de categorias
+		Iterable<CategoryEntity> categories = searchCategoriesService.getAllCategoriesOrderByName();
+		Page<JewelEntity> page;
+		ModelAndView model = new ModelAndView("web/index");
+		page = jewelService.searchActive(1);
+		model.addObject(ConstantsViews.CATEGORIES, categories);
+		model.addObject(ConstantsViews.JEWELS, page.getContent());
+		model.addObject(ConstantsViews.BREADCRUMBS, "Home");
+		model.addObject(ConstantsViews.FORMSEARCH, new SearchJewelForm());
+		model.addObject("page", page);
+		return model;
+	}
+
+	@GetMapping("/shop")
+	public ModelAndView shop() {
 		// Recuperar toda la lista de categorias
 		Iterable<CategoryEntity> categories = searchCategoriesService.getAllCategoriesOrderByName();
 		PlaceEntity place = new PlaceEntity();
 		Page<JewelEntity> page;
-		ModelAndView model = new ModelAndView("web/index");
+		ModelAndView model = new ModelAndView("web/shop");
 		place.setIdplace(Constants.WEB);
-		page = jewelService.searchWithImg(1);
+		page = jewelService.searchActive(1);
 		int current = page.getNumber() + 1;
 		int begin = Math.max(1, current - 5);
 		int end = Math.min(begin + 10, page.getTotalPages());
@@ -59,13 +73,14 @@ public class HomeController {
 		model.addObject(ConstantsViews.JEWELS, page.getContent());
 		model.addObject(ConstantsViews.BREADCRUMBS, "Home");
 		model.addObject(ConstantsViews.FORMSEARCH, new SearchJewelForm());
-		model.addObject("deploymentLog", page);
+		model.addObject("page", page);
 		model.addObject("beginIndex", begin);
 		model.addObject("endIndex", end);
 		model.addObject("currentIndex", current);
 		model.addObject("totalprice", 0);
 		model.addObject(ConstantsViews.FORMSEARCH, new SearchJewelForm());
 		return model;
+
 	}
 
 	@GetMapping("/page/{pageNumber}")
@@ -76,19 +91,19 @@ public class HomeController {
 		Page<JewelEntity> page;
 		place.setIdplace(Constants.WEB);
 		// Recuperamos productos activos
-		page = jewelService.searchWithImg(pageNumber);
+		page = jewelService.searchActive(pageNumber);
 		if (page == null) {
-			page = jewelService.searchWithImg(1);
+			page = jewelService.searchActive(1);
 		}
 		int current = page.getNumber() + 1;
 		int begin = Math.max(1, current - 5);
 		int end = Math.min(begin + 10, page.getTotalPages());
-		ModelAndView model = new ModelAndView("web/home");
+		ModelAndView model = new ModelAndView("web/index");
 		model.addObject(ConstantsViews.CATEGORIES, categories);
 		model.addObject(ConstantsViews.JEWELS, page.getContent());
 		model.addObject(ConstantsViews.BREADCRUMBS, "Home");
 		model.addObject(ConstantsViews.FORMSEARCH, new SearchJewelForm());
-		model.addObject("deploymentLog", page);
+		model.addObject("page", page);
 		model.addObject("beginIndex", begin);
 		model.addObject("endIndex", end);
 		model.addObject("currentIndex", current);
@@ -102,7 +117,7 @@ public class HomeController {
 	 */
 	@GetMapping("/contacto")
 	public ModelAndView contact() {
-		ModelAndView model = new ModelAndView("contact");
+		ModelAndView model = new ModelAndView("web/contact");
 		model.addObject(ConstantsViews.FORMSEARCH, new SearchJewelForm());
 		model.addObject(ConstantsViews.CATEGORIES, searchCategoriesService.getAllCategoriesOrderByName());
 		return model;
@@ -115,7 +130,7 @@ public class HomeController {
 	 */
 	@GetMapping("/faqs")
 	public ModelAndView faqs() {
-		ModelAndView model = new ModelAndView("faqs");
+		ModelAndView model = new ModelAndView("web/faqs");
 		model.addObject(ConstantsViews.FORMSEARCH, new SearchJewelForm());
 		model.addObject(ConstantsViews.CATEGORIES, searchCategoriesService.getAllCategoriesOrderByName());
 		return model;
@@ -128,23 +143,36 @@ public class HomeController {
 	 */
 	@GetMapping("/terms")
 	public ModelAndView terms() {
-		ModelAndView model = new ModelAndView("termsconditions");
+		ModelAndView model = new ModelAndView("web/terms");
 		model.addObject(ConstantsViews.FORMSEARCH, new SearchJewelForm());
+		model.addObject(ConstantsViews.CATEGORIES, searchCategoriesService.getAllCategoriesOrderByName());
 		return model;
 	}
 
 	@GetMapping("/{keyword}")
 	public ModelAndView searchByKeyWord(@PathVariable String keyword) {
+		return searchByKeyword(keyword, 1);
+	}
+
+	@GetMapping("/{keyword}/{pageNumber}")
+	public ModelAndView searchByKeyWord(@PathVariable String keyword, @PathVariable Integer pageNumber) {
+		return searchByKeyword(keyword, pageNumber);
+	}
+
+	private ModelAndView searchByKeyword(String keyword, int pagenumber) {
 		Iterable<CategoryEntity> categories = searchCategoriesService.getAllCategoriesOrderByName();
-		List<JewelEntity> jewels = jewelService.searchJewelsByKeyWordCategory(keyword);
+		CategoryEntity category = searchCategoriesService.getCategoryByKeyword(keyword);
+		Page<JewelEntity> jewels = jewelService.searchJewelsByCategory(category, pagenumber);
 		if (jewels == null || jewels.isEmpty()) {
 			return home();
 		} else {
 			ModelAndView model = new ModelAndView();
 			model.addObject(ConstantsViews.CATEGORIES, categories);
-			model.addObject(ConstantsViews.JEWELS, jewels);
+			model.addObject(ConstantsViews.JEWELS, jewels.getContent());
 			model.addObject(ConstantsViews.FORMSEARCH, new SearchJewelForm());
-			model.setViewName("home");
+			model.addObject("page", jewels);
+			model.addObject("keyword", keyword);
+			model.setViewName("web/shop");
 			return model;
 		}
 	}
@@ -162,10 +190,9 @@ public class HomeController {
 		Iterable<CategoryEntity> categories = searchCategoriesService.getAllCategoriesOrderByName();
 		model.addObject(ConstantsViews.CATEGORIES, categories);
 		model.addObject("jewel", jewel);
-		model.addObject(ConstantsViews.BREADCRUMBS, "Home >> Producto seleccionado");
 		model.addObject(ConstantsViews.FORMSEARCH, new SearchJewelForm());
 		model.addObject("url", System.getenv("OPENSHIFT_DATA_DIR"));
-		model.setViewName("resultSearch");
+		model.setViewName("web/product-details");
 		if (!m.containsAttribute("cart")) {
 			m.addAttribute("cart", new ArrayList<JewelEntity>());
 		}

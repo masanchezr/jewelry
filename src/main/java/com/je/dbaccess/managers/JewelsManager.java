@@ -19,8 +19,7 @@ public interface JewelsManager {
 	/**
 	 * Save.
 	 *
-	 * @param object
-	 *            the object
+	 * @param object the object
 	 * @return
 	 */
 	public JewelEntity save(JewelEntity object);
@@ -35,10 +34,8 @@ public interface JewelsManager {
 	/**
 	 * Search by name desc category actives.
 	 *
-	 * @param searchName
-	 *            the search name
-	 * @param category
-	 *            the category
+	 * @param searchName the search name
+	 * @param category   the category
 	 * @return the list
 	 */
 	public Page<JewelEntity> searchByNameDescCategoryActives(String searchName, CategoryEntity category,
@@ -47,8 +44,7 @@ public interface JewelsManager {
 	/**
 	 * Search by name desc category.
 	 *
-	 * @param searchName
-	 *            the search name
+	 * @param searchName the search name
 	 * @return the list
 	 */
 	public List<JewelEntity> searchByNameDescCategory(String searchName);
@@ -56,8 +52,7 @@ public interface JewelsManager {
 	/**
 	 * Search by id.
 	 *
-	 * @param idjewel
-	 *            the idjewel
+	 * @param idjewel the idjewel
 	 * @return the jewel entity
 	 */
 	public JewelEntity searchById(Long idjewel);
@@ -72,17 +67,15 @@ public interface JewelsManager {
 	/**
 	 * Search by category active.
 	 *
-	 * @param keywordcategory
-	 *            the keywordcategory
+	 * @param category the keywordcategory
 	 * @return the list
 	 */
-	public List<JewelEntity> searchByCategoryActive(String keywordcategory);
+	public Page<JewelEntity> searchByCategoryActive(CategoryEntity category, Pageable page);
 
 	/**
 	 * Search by reference.
 	 *
-	 * @param jewel
-	 *            the jewel
+	 * @param jewel the jewel
 	 * @return the iterator
 	 */
 	public List<JewelEntity> searchByReferenceAndCategory(JewelEntity jewel);
@@ -90,8 +83,7 @@ public interface JewelsManager {
 	/**
 	 * Search by reference category material place active.
 	 *
-	 * @param jewel
-	 *            the jewel
+	 * @param jewel the jewel
 	 * @return the jewel entity
 	 */
 	public JewelEntity searchByReferenceCategoryMetalPlaceActive(JewelEntity jewel);
@@ -99,8 +91,7 @@ public interface JewelsManager {
 	/**
 	 * Search by reference category material place.
 	 *
-	 * @param jewelEntity
-	 *            the jewel entity
+	 * @param jewelEntity the jewel entity
 	 * @return the jewel entity
 	 */
 	public JewelEntity searchByReferenceCategoryMetalPlace(JewelEntity jewelEntity);
@@ -121,7 +112,7 @@ public interface JewelsManager {
 
 	public JewelEntity findById(Long idjewel);
 
-	public Page<JewelEntity> searchWithImg(Pageable pageable);
+	public Page<JewelEntity> searchActive(Pageable pageable);
 
 	public void setGrams();
 

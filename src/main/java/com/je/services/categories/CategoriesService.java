@@ -17,8 +17,7 @@ public interface CategoriesService {
 	/**
 	 * Save.
 	 *
-	 * @param category
-	 *            the category
+	 * @param category the category
 	 */
 	public void save(CategoryEntity category);
 
@@ -28,5 +27,7 @@ public interface CategoriesService {
 	 * @return the all categories order by name
 	 */
 	public Iterable<CategoryEntity> getAllCategoriesOrderByName();
+
+	public CategoryEntity getCategoryByKeyword(String keyword);
 
 }

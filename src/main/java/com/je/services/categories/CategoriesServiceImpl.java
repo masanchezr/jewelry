@@ -35,4 +35,9 @@ public class CategoriesServiceImpl implements CategoriesService {
 
 	}
 
+	@Override
+	public CategoryEntity getCategoryByKeyword(String keyword) {
+		return categoriesRepository.findByKeyword(keyword);
+	}
+
 }

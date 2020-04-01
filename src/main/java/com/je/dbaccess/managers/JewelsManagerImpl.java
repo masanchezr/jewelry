@@ -15,7 +15,6 @@ import com.je.dbaccess.entities.CategoryEntity;
 import com.je.dbaccess.entities.JewelEntity;
 import com.je.dbaccess.entities.MetalEntity;
 import com.je.dbaccess.entities.PlaceEntity;
-import com.je.dbaccess.repositories.CategoriesRepository;
 import com.je.dbaccess.repositories.JewelRepository;
 import com.je.utils.constants.Constants;
 import com.je.utils.string.Util;
@@ -28,10 +27,6 @@ public class JewelsManagerImpl implements JewelsManager {
 	/** The object repository. */
 	@Autowired
 	private JewelRepository jewelRepository;
-
-	/** The category repository. */
-	@Autowired
-	private CategoriesRepository categoryRepository;
 
 	@Override
 	public JewelEntity save(JewelEntity object) {
@@ -61,10 +56,8 @@ public class JewelsManagerImpl implements JewelsManager {
 	 * nombre y la categoria son nulas, buscara todas las joyas activas. Si la
 	 * categoria es nula buscará solo por nombres.
 	 *
-	 * @param searchName
-	 *            the search name
-	 * @param category
-	 *            the category
+	 * @param searchName the search name
+	 * @param category   the category
 	 * @return the list
 	 */
 
@@ -115,22 +108,10 @@ public class JewelsManagerImpl implements JewelsManager {
 		return jewels;
 	}
 
-	@Override
-	public List<JewelEntity> searchByCategoryActive(String keywordcategory) {
-		List<JewelEntity> jewels = null;
-		CategoryEntity category = categoryRepository.findByKeyword(keywordcategory);
-		if (category != null) {
-			jewels = new ArrayList<>();
-			jewels.addAll(iterableToList(jewelRepository.findByCategoryAndActiveTrueAndImgNotNull(category)));
-		}
-		return jewels;
-	}
-
 	/**
 	 * Iterable to list.
 	 * 
-	 * @param ijewels
-	 *            the ijewels
+	 * @param ijewels the ijewels
 	 * @return the list
 	 */
 	private List<JewelEntity> iterableToList(Iterable<JewelEntity> ijewels) {
@@ -222,8 +203,8 @@ public class JewelsManagerImpl implements JewelsManager {
 	}
 
 	@Override
-	public Page<JewelEntity> searchWithImg(Pageable pageable) {
-		return jewelRepository.findByImgIsNotNullAndActiveTrue(pageable);
+	public Page<JewelEntity> searchActive(Pageable pageable) {
+		return jewelRepository.findByActiveTrue(pageable);
 	}
 
 	@Override
@@ -251,5 +232,14 @@ public class JewelsManagerImpl implements JewelsManager {
 				}
 			}
 		}
+	}
+
+	@Override
+	public Page<JewelEntity> searchByCategoryActive(CategoryEntity category, Pageable page) {
+		Page<JewelEntity> jewels = null;
+		if (category != null) {
+			jewels = jewelRepository.findByCategoryAndActiveTrue(category, page);
+		}
+		return jewels;
 	}
 }

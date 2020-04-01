@@ -22,8 +22,7 @@ public interface JewelRepository extends PagingAndSortingRepository<JewelEntity,
 	/**
 	 * Find by name actives.
 	 *
-	 * @param searchName
-	 *            the search name
+	 * @param searchName the search name
 	 * @return the iterable
 	 */
 	@Query("select o from JewelEntity o where (o.name = :searchName or o.description = :searchName) and o.active=true and o.img is not null")
@@ -32,8 +31,7 @@ public interface JewelRepository extends PagingAndSortingRepository<JewelEntity,
 	/**
 	 * Find by category actives.
 	 *
-	 * @param category
-	 *            the category
+	 * @param category the category
 	 * @return the iterable
 	 */
 	@Query("select o from JewelEntity o where o.category = :category and o.img is not null")
@@ -43,10 +41,8 @@ public interface JewelRepository extends PagingAndSortingRepository<JewelEntity,
 	/**
 	 * Find by name and category actives.
 	 *
-	 * @param searchName
-	 *            the search name
-	 * @param category
-	 *            the category
+	 * @param searchName the search name
+	 * @param category   the category
 	 * @return the iterable
 	 */
 	@Query("select o from JewelEntity o where (o.category = :category or o.name = :searchName or o.description = :searchName) and o.active=true and o.img is not null")
@@ -56,8 +52,7 @@ public interface JewelRepository extends PagingAndSortingRepository<JewelEntity,
 	/**
 	 * Find by name and category.
 	 *
-	 * @param searchName
-	 *            the search name
+	 * @param searchName the search name
 	 * @return the iterable
 	 */
 	@Query("select distinct o from JewelEntity o where o.category.namecategory like :searchName or o.name like :searchName or o.description like :searchName")
@@ -77,10 +72,8 @@ public interface JewelRepository extends PagingAndSortingRepository<JewelEntity,
 	/**
 	 * Find by reference.
 	 *
-	 * @param reference
-	 *            the reference
-	 * @param category
-	 *            the category
+	 * @param reference the reference
+	 * @param category  the category
 	 * @return the list
 	 */
 	public List<JewelEntity> findByReferenceAndCategory(String reference, CategoryEntity category);
@@ -88,16 +81,11 @@ public interface JewelRepository extends PagingAndSortingRepository<JewelEntity,
 	/**
 	 * Find by reference and category and material and place and active.
 	 *
-	 * @param reference
-	 *            the reference
-	 * @param category
-	 *            the category
-	 * @param material
-	 *            the material
-	 * @param place
-	 *            the place
-	 * @param active
-	 *            the active
+	 * @param reference the reference
+	 * @param category  the category
+	 * @param material  the material
+	 * @param place     the place
+	 * @param active    the active
 	 * @return the list
 	 */
 	public List<JewelEntity> findByReferenceAndCategoryAndMetalAndPlaceAndActive(String reference,
@@ -106,14 +94,10 @@ public interface JewelRepository extends PagingAndSortingRepository<JewelEntity,
 	/**
 	 * Find by constraint unique.
 	 *
-	 * @param reference
-	 *            the reference
-	 * @param category
-	 *            the category
-	 * @param material
-	 *            the material
-	 * @param place
-	 *            the place
+	 * @param reference the reference
+	 * @param category  the category
+	 * @param material  the material
+	 * @param place     the place
 	 * @return JewelEntity
 	 */
 	public List<JewelEntity> findByReferenceAndCategoryAndMetalAndPlace(String reference, CategoryEntity category,
@@ -140,9 +124,9 @@ public interface JewelRepository extends PagingAndSortingRepository<JewelEntity,
 
 	public Page<JewelEntity> findByImgIsNotNull(Pageable pageable);
 
-	public Page<JewelEntity> findByImgIsNotNullAndActiveTrue(Pageable pageable);
+	public Page<JewelEntity> findByActiveTrue(Pageable pageable);
 
-	public Iterable<JewelEntity> findByCategoryAndActiveTrueAndImgNotNull(CategoryEntity category);
+	public Page<JewelEntity> findByCategoryAndActiveTrue(CategoryEntity category, Pageable pageable);
 
 	public List<JewelEntity> findByMetalAndGramsIsNull(MetalEntity material);
 

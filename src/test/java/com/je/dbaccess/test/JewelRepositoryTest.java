@@ -80,23 +80,6 @@ public class JewelRepositoryTest {
 	}
 
 	/**
-	 * Find by category test.
-	 */
-	@Test
-	public void findByCategoryTest() {
-		CategoryEntity category = new CategoryEntity();
-		category.setIdcategory(17L);
-		Iterable<JewelEntity> ijewels = jewelRepository.findByCategoryAndActiveTrueAndImgNotNull(category);
-		Iterator<JewelEntity> itjewels = ijewels.iterator();
-		JewelEntity jewel;
-		while (itjewels.hasNext()) {
-			jewel = itjewels.next();
-			System.out.println("idjewel:" + jewel.getIdjewel() + "reference: " + jewel.getReference() + " price:"
-					+ jewel.getPrice() + "description:" + jewel.getDescription());
-		}
-	}
-
-	/**
 	 * Find by name and category test.
 	 */
 	@Test

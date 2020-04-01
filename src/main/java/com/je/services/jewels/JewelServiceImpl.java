@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
+import com.je.dbaccess.entities.CategoryEntity;
 import com.je.dbaccess.entities.JewelEntity;
 import com.je.dbaccess.entities.MetalEntity;
 import com.je.dbaccess.entities.PlaceEntity;
@@ -33,8 +34,7 @@ public class JewelServiceImpl implements JewelService {
 	/**
 	 * Adds the jewel.
 	 * 
-	 * @param thing
-	 *            the thing
+	 * @param thing the thing
 	 */
 
 	@Override
@@ -63,14 +63,6 @@ public class JewelServiceImpl implements JewelService {
 	@Override
 	public Page<JewelEntity> searchPageableByPlace(int pageNumber, PlaceEntity place) {
 		return jewelsManager.findByPlaceAndActiveTrue(place, PageRequest.of(pageNumber - 1, Constants.PAGE_SIZE));
-	}
-
-	/**
-	 * Búsqueda por categoría activa, joya activa y con imagen
-	 */
-	@Override
-	public List<JewelEntity> searchJewelsByKeyWordCategory(String keywordcategory) {
-		return jewelsManager.searchByCategoryActive(keywordcategory);
 	}
 
 	@Override
@@ -138,8 +130,8 @@ public class JewelServiceImpl implements JewelService {
 	}
 
 	@Override
-	public Page<JewelEntity> searchWithImg(int i) {
-		return jewelsManager.searchWithImg(PageRequest.of(i - 1, Constants.PAGE_SIZE));
+	public Page<JewelEntity> searchActive(int i) {
+		return jewelsManager.searchActive(PageRequest.of(i - 1, Constants.PAGE_SIZE));
 	}
 
 	public List<JewelEntity> searchJewels(List<JewelEntity> jewels, PlaceEntity place) {
@@ -160,5 +152,10 @@ public class JewelServiceImpl implements JewelService {
 			}
 		}
 		return newjewels;
+	}
+
+	@Override
+	public Page<JewelEntity> searchJewelsByCategory(CategoryEntity category, int i) {
+		return jewelsManager.searchByCategoryActive(category, PageRequest.of(i - 1, Constants.PAGE_SIZE));
 	}
 }

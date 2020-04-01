@@ -73,4 +73,6 @@
 		class="com.je.employee.validators.SalePostPonedValidator" />
 	<bean id="installmentvalidator"
 		class="com.je.employee.validators.InstallmentValidator" />
+	<bean id="messageFormValidator"
+		class="com.je.web.validators.MessageFormValidator" />
 </beans>

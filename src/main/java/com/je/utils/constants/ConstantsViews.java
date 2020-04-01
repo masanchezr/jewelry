@@ -75,4 +75,12 @@ public class ConstantsViews {
 	public static final Long DISCOUNTANDCASH = 6L;
 	public static final Long SAME = 5L;
 
+	/** The Constant EMAIL_PATTERN. */
+	public static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+	public static final String EMAIL = "email";
+
+	public static final String ERRORSELECTMAIL = "selectmail";
+	public static final String ERRORWRITEMESSAGE = "writemessage";
+
 }
