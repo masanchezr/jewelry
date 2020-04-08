@@ -151,15 +151,15 @@ public class HomeController {
 
 	@GetMapping("/{keyword}")
 	public ModelAndView searchByKeyWord(@PathVariable String keyword) {
-		return searchByKeyword(keyword, 1);
+		return searchByKeywordPagination(keyword, 1);
 	}
 
 	@GetMapping("/{keyword}/{pageNumber}")
 	public ModelAndView searchByKeyWord(@PathVariable String keyword, @PathVariable Integer pageNumber) {
-		return searchByKeyword(keyword, pageNumber);
+		return searchByKeywordPagination(keyword, pageNumber);
 	}
 
-	private ModelAndView searchByKeyword(String keyword, int pagenumber) {
+	private ModelAndView searchByKeywordPagination(String keyword, int pagenumber) {
 		Iterable<CategoryEntity> categories = searchCategoriesService.getAllCategoriesOrderByName();
 		CategoryEntity category = searchCategoriesService.getCategoryByKeyword(keyword);
 		Page<JewelEntity> jewels = jewelService.searchJewelsByCategory(category, pagenumber);

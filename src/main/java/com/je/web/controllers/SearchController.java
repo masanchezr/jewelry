@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.dbaccess.entities.CategoryEntity;
@@ -40,8 +40,8 @@ public class SearchController {
 	 * @return the string
 	 */
 	@GetMapping
-	public ModelAndView search(@ModelAttribute(ConstantsViews.FORMSEARCH) SearchJewelForm search) {
-		Page<JewelEntity> page = searchService.searchActivesWithImg(search.getSearchname(), null, 1);
+	public ModelAndView search(@RequestParam String searchname) {
+		Page<JewelEntity> page = searchService.searchActives(searchname, 1);
 		Iterable<CategoryEntity> categories = searchCategoriesService.getAllCategoriesOrderByName();
 		PlaceEntity place = new PlaceEntity();
 		ModelAndView model = new ModelAndView("web/index");
@@ -53,12 +53,11 @@ public class SearchController {
 		model.addObject(ConstantsViews.JEWELS, page.getContent());
 		model.addObject(ConstantsViews.BREADCRUMBS, "Home");
 		model.addObject(ConstantsViews.FORMSEARCH, new SearchJewelForm());
-		model.addObject("deploymentLog", page);
+		model.addObject("page", page);
 		model.addObject("beginIndex", begin);
 		model.addObject("endIndex", end);
 		model.addObject("currentIndex", current);
 		model.addObject("url", System.getenv("OPENSHIFT_DATA_DIR"));
-		model.addObject("totalprice", 0);
 		model.addObject(ConstantsViews.FORMSEARCH, new SearchJewelForm());
 		return model;
 	}

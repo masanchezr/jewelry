@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import com.je.dbaccess.entities.CategoryEntity;
@@ -62,24 +63,6 @@ public class JewelsManagerImpl implements JewelsManager {
 	 */
 
 	@Override
-	public Page<JewelEntity> searchByNameDescCategoryActives(String searchName, CategoryEntity category,
-			Pageable pageable) {
-		Page<JewelEntity> jewels = null;
-		if (searchName == null && category == null) {
-			jewels = searchAllActivePageable(pageable);
-		} else if (searchName != null && category == null) {
-			jewels = jewelRepository.findByNameActivesWithImg(searchName, pageable);
-
-		} else if (searchName == null) {
-			jewels = jewelRepository.findByCategoryActivesWithImg(category, pageable);
-
-		} else {
-			jewels = jewelRepository.findByNameAndCategoryActivesWithImg(searchName, category, pageable);
-		}
-		return jewels;
-	}
-
-	@Override
 	public JewelEntity searchById(Long idjewel) {
 		return jewelRepository.findById(idjewel).orElse(null);
 	}
@@ -90,22 +73,8 @@ public class JewelsManagerImpl implements JewelsManager {
 	}
 
 	@Override
-	public List<JewelEntity> searchByNameDescCategory(String searchName) {
-		List<JewelEntity> jewels = null;
-		if (Util.isEmpty(searchName)) {
-			Iterable<JewelEntity> iJewels = searchAll();
-			if (iJewels != null) {
-				jewels = new ArrayList<>();
-				Iterator<JewelEntity> itJewels = iJewels.iterator();
-				while (itJewels.hasNext()) {
-					JewelEntity jewel = itJewels.next();
-					jewels.add(jewel);
-				}
-			}
-		} else {
-			jewels = iterableToList(jewelRepository.findByNameAndCategory("%" + searchName + "%"));
-		}
-		return jewels;
+	public Page<JewelEntity> searchByNameDescCategory(String searchName, PageRequest page) {
+		return jewelRepository.findByNameAndCategory("%" + searchName + "%", page);
 	}
 
 	/**

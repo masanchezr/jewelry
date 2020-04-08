@@ -80,15 +80,6 @@ public class JewelRepositoryTest {
 	}
 
 	/**
-	 * Find by name and category test.
-	 */
-	@Test
-	public void findByNameAndCategoryTest() {
-		Iterable<JewelEntity> jewels = jewelRepository.findByNameAndCategory("%juego%");
-		print(jewels.iterator());
-	}
-
-	/**
 	 * Find by reference and category and material and place and active test.
 	 */
 	@Test

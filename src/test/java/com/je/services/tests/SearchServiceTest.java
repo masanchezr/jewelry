@@ -1,11 +1,11 @@
 package com.je.services.tests;
 
-import java.util.Iterator;
-import java.util.List;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -28,16 +28,7 @@ public class SearchServiceTest {
 	 */
 	@Test
 	public void searchTest() {
-		List<JewelEntity> jewels = searchService.search("sello");
-		if (jewels != null) {
-			Iterator<JewelEntity> ijewels = jewels.iterator();
-			while (ijewels.hasNext()) {
-				JewelEntity jewel = ijewels.next();
-				System.out.println("Id:" + jewel.getIdjewel() + "Nombre:" + jewel.getName() + "Descripcion:"
-						+ jewel.getDescription() + "Img:" + jewel.getImg());
-			}
-		} else {
-			System.out.println("Lista nula");
-		}
+		Page<JewelEntity> jewels = searchService.searchActives("sello", 1);
+		assertNotNull(jewels);
 	}
 }

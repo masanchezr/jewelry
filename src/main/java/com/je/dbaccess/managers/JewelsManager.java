@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import com.je.dbaccess.entities.CategoryEntity;
@@ -32,22 +33,14 @@ public interface JewelsManager {
 	public Collection<JewelEntity> searchAll();
 
 	/**
-	 * Search by name desc category actives.
-	 *
-	 * @param searchName the search name
-	 * @param category   the category
-	 * @return the list
-	 */
-	public Page<JewelEntity> searchByNameDescCategoryActives(String searchName, CategoryEntity category,
-			Pageable pageable);
-
-	/**
 	 * Search by name desc category.
 	 *
-	 * @param searchName the search name
+	 * @param searchName  the search name
+	 * @param pageRequest
+	 * @param pageRequest
 	 * @return the list
 	 */
-	public List<JewelEntity> searchByNameDescCategory(String searchName);
+	public Page<JewelEntity> searchByNameDescCategory(String searchName, PageRequest pageRequest);
 
 	/**
 	 * Search by id.

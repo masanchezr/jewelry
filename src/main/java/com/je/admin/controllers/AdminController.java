@@ -1,12 +1,11 @@
 package com.je.admin.controllers;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -100,8 +99,8 @@ public class AdminController {
 	@GetMapping("/searchJewels")
 	public ModelAndView searchJewels(@RequestParam String search) {
 		ModelAndView model = new ModelAndView("admin/jewels/searchjewels/resultsearchbyreference");
-		List<JewelEntity> jewels = searchService.search(search);
-		model.addObject(ConstantsViews.JEWELS, jewels);
+		Page<JewelEntity> jewels = searchService.searchActives(search, 1);
+		model.addObject(ConstantsViews.JEWELS, jewels.getContent());
 		model.addObject("toUpdate", new JewelEntity());
 		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		return model;
