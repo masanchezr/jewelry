@@ -1,9 +1,6 @@
 package com.je.dbaccess.test;
 
-import java.math.BigDecimal;
-import java.util.Iterator;
-import java.util.List;
-
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +8,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.je.dbaccess.entities.CategoryEntity;
-import com.je.dbaccess.entities.JewelEntity;
 import com.je.dbaccess.entities.MetalEntity;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.dbaccess.repositories.JewelRepository;
@@ -28,38 +24,11 @@ public class JewelRepositoryTest {
 	private JewelRepository jewelRepository;
 
 	/**
-	 * Save test.
-	 */
-	@Test
-	public void saveTest() {
-		JewelEntity jewel = new JewelEntity();
-		PlaceEntity place = new PlaceEntity();
-		CategoryEntity category = new CategoryEntity();
-		MetalEntity material = new MetalEntity();
-		material.setIdmetal(2L);
-		category.setIdcategory(38L);
-		place.setIdplace(28017L);
-		// jewel.setIdjewel(978L);
-		jewel.setActive(true);
-		jewel.setMetal(material);
-		jewel.setPrice(BigDecimal.valueOf(195));
-		jewel.setReference("PORTAFOTOSG120");
-		jewel.setCategory(category);
-		// jewel.setImg("dfasf");
-		jewel.setPlace(place);
-		// jewel.setName("pendientes");
-		jewel.setDescription("portafotos de plata");
-		jewel.setGrams(BigDecimal.valueOf(1.20));
-		// jewelRepository.save(jewel);
-	}
-
-	/**
 	 * Count test.
 	 */
 	@Test
 	public void countTest() {
-		long num = jewelRepository.count();
-		System.out.print("N&uacute;mero de joyas:" + num);
+		Assertions.assertNotNull(jewelRepository.count());
 	}
 
 	/**
@@ -69,14 +38,7 @@ public class JewelRepositoryTest {
 	public void findByReferenceTest() {
 		CategoryEntity category = new CategoryEntity();
 		category.setIdcategory(5L);
-		Iterable<JewelEntity> jewels = jewelRepository.findByReferenceAndCategory("h183", category);
-		Iterator<JewelEntity> ijewels = jewels.iterator();
-		JewelEntity jewel;
-		while (ijewels.hasNext()) {
-			jewel = ijewels.next();
-			System.out.println("idjewel: " + jewel.getIdjewel() + "description: " + jewel.getDescription() + " active:"
-					+ jewel.getActive());
-		}
+		Assertions.assertNotNull(jewelRepository.findByReferenceAndCategory("h183", category));
 	}
 
 	/**
@@ -90,36 +52,14 @@ public class JewelRepositoryTest {
 		material.setIdmetal(1L);
 		category.setIdcategory(1L);
 		place.setIdplace(24003L);
-		List<JewelEntity> jewels = jewelRepository.findByReferenceAndCategoryAndMetalAndPlaceAndActive("b186", category,
-				material, place, Boolean.TRUE);
-		if (jewels != null) {
-
-		}
+		Assertions.assertNotNull(jewelRepository.findByReferenceAndCategoryAndMetalAndPlaceAndActive("b186", category,
+				material, place, Boolean.TRUE));
 	}
 
 	@Test
 	public void findByPlaceAndActiveTrueTest() {
 		PlaceEntity place = new PlaceEntity();
 		place.setIdplace(24003L);
-		Iterable<JewelEntity> jewels = jewelRepository.findByPlaceAndActiveTrueOrderByReference(place);
-		if (jewels != null) {
-			print(jewels.iterator());
-		}
-
+		Assertions.assertNotNull(jewelRepository.findByPlaceAndActiveTrueOrderByReference(place));
 	}
-
-	/**
-	 * Prints the.
-	 *
-	 * @param ijewels the ijewels
-	 */
-	private void print(Iterator<JewelEntity> ijewels) {
-		while (ijewels != null && ijewels.hasNext()) {
-			JewelEntity jewel = ijewels.next();
-			System.out.println("id:" + jewel.getIdjewel() + " reference:" + jewel.getReference() + " name: "
-					+ jewel.getName() + " active:" + jewel.getActive() + " description:" + jewel.getDescription()
-					+ " precio:" + jewel.getPrice() + " categoria: " + jewel.getCategory().getNamecategory());
-		}
-	}
-
 }

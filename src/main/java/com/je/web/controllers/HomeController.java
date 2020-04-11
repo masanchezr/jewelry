@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,9 +20,13 @@ import com.je.dbaccess.entities.JewelEntity;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.services.categories.CategoriesService;
 import com.je.services.jewels.JewelService;
+import com.je.services.mails.MailService;
+import com.je.services.search.SearchService;
 import com.je.utils.constants.Constants;
 import com.je.utils.constants.ConstantsViews;
+import com.je.web.forms.MessageForm;
 import com.je.web.forms.SearchJewelForm;
+import com.je.web.validators.MessageFormValidator;
 
 /**
  * Handles requests for the application home page.
@@ -35,6 +42,31 @@ public class HomeController {
 	/** The jewel service. */
 	@Autowired
 	private JewelService jewelService;
+
+	/** The search service. */
+	@Autowired
+	private SearchService searchService;
+
+	@Autowired
+	private MessageFormValidator messageformvalidator;
+
+	@PostMapping("/sendMessage")
+	public ModelAndView sendMessage(@ModelAttribute("messageForm") MessageForm message, BindingResult result) {
+		ModelAndView model = new ModelAndView();
+		messageformvalidator.validate(message, result);
+		model.addObject(ConstantsViews.FORMSEARCH, new SearchJewelForm());
+		model.addObject(ConstantsViews.CATEGORIES, searchCategoriesService.getAllCategoriesOrderByName());
+		if (result.hasErrors()) {
+			model.setViewName("web/messagesent");
+			model.addObject("messageForm", new MessageForm());
+		} else {
+			MailService mailService = new MailService(message.getMessage().concat(message.getEmail()), "Nuevo contacto",
+					null);
+			mailService.start();
+			model.setViewName("web/messagesent");
+		}
+		return model;
+	}
 
 	/**
 	 * Home.
@@ -83,30 +115,48 @@ public class HomeController {
 
 	}
 
+	@PostMapping("/busqueda")
+	public ModelAndView search(@ModelAttribute("searchDateForm") SearchJewelForm searchForm) {
+		Page<JewelEntity> page = searchService.searchActives(searchForm.getSearchname(), 1);
+		Iterable<CategoryEntity> categories = searchCategoriesService.getAllCategoriesOrderByName();
+		ModelAndView model = new ModelAndView("web/indexsearch");
+		model.addObject(ConstantsViews.CATEGORIES, categories);
+		model.addObject(ConstantsViews.JEWELS, page.getContent());
+		model.addObject(ConstantsViews.BREADCRUMBS, "Home");
+		model.addObject(ConstantsViews.FORMSEARCH, searchForm);
+		model.addObject("page", page);
+		return model;
+	}
+
+	@GetMapping("/page/{search}/{pageNumber}")
+	public ModelAndView search(@PathVariable String search, @PathVariable Integer pageNumber) {
+		Page<JewelEntity> page = searchService.searchActives(search, pageNumber);
+		Iterable<CategoryEntity> categories = searchCategoriesService.getAllCategoriesOrderByName();
+		ModelAndView model = new ModelAndView("web/indexsearch");
+		model.addObject(ConstantsViews.CATEGORIES, categories);
+		model.addObject(ConstantsViews.JEWELS, page.getContent());
+		model.addObject(ConstantsViews.BREADCRUMBS, "Home");
+		model.addObject(ConstantsViews.FORMSEARCH, new SearchJewelForm());
+		model.addObject("page", page);
+		return model;
+	}
+
 	@GetMapping("/page/{pageNumber}")
 	public ModelAndView page(@PathVariable Integer pageNumber) {
 		// Recuperar toda la lista de categorias
 		Iterable<CategoryEntity> categories = searchCategoriesService.getAllCategoriesOrderByName();
-		PlaceEntity place = new PlaceEntity();
 		Page<JewelEntity> page;
-		place.setIdplace(Constants.WEB);
 		// Recuperamos productos activos
 		page = jewelService.searchActive(pageNumber);
 		if (page == null) {
 			page = jewelService.searchActive(1);
 		}
-		int current = page.getNumber() + 1;
-		int begin = Math.max(1, current - 5);
-		int end = Math.min(begin + 10, page.getTotalPages());
 		ModelAndView model = new ModelAndView("web/index");
 		model.addObject(ConstantsViews.CATEGORIES, categories);
 		model.addObject(ConstantsViews.JEWELS, page.getContent());
 		model.addObject(ConstantsViews.BREADCRUMBS, "Home");
 		model.addObject(ConstantsViews.FORMSEARCH, new SearchJewelForm());
 		model.addObject("page", page);
-		model.addObject("beginIndex", begin);
-		model.addObject("endIndex", end);
-		model.addObject("currentIndex", current);
 		return model;
 	}
 
@@ -118,6 +168,7 @@ public class HomeController {
 	@GetMapping("/contacto")
 	public ModelAndView contact() {
 		ModelAndView model = new ModelAndView("web/contact");
+		model.addObject("messageForm", new MessageForm());
 		model.addObject(ConstantsViews.FORMSEARCH, new SearchJewelForm());
 		model.addObject(ConstantsViews.CATEGORIES, searchCategoriesService.getAllCategoriesOrderByName());
 		return model;
@@ -199,7 +250,7 @@ public class HomeController {
 		return model;
 	}
 
-	@GetMapping("/endcart")
+	@PostMapping("/endcart")
 	public String goodbye(SessionStatus status) {
 		status.setComplete();
 		return "goodbye";

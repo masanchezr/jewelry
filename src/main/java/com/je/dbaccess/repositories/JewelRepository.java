@@ -25,7 +25,7 @@ public interface JewelRepository extends PagingAndSortingRepository<JewelEntity,
 	 * @param page
 	 * @return the iterable
 	 */
-	@Query("select distinct o from JewelEntity o where o.category.namecategory like :searchName or o.name like :searchName or o.description like :searchName")
+	@Query("select distinct o from JewelEntity o where o.active=true and o.category.active=true and o.category.namecategory like :searchName or o.name like :searchName or o.description like :searchName")
 	public Page<JewelEntity> findByNameAndCategory(@Param("searchName") String searchName, Pageable page);
 
 	/**
