@@ -55,7 +55,8 @@
 					</div>
 				</div>
 				<a class="btn btn-success btn-sm ml-3" th:href="@{/cart}"> <i
-					class="fa fa-shopping-cart"></i><span class="badge badge-light"></span>
+					class="fa fa-shopping-cart"></i><span class="badge badge-light"
+					th:text="${#lists.size(cart)}"></span>
 				</a>
 			</form>
 		</div>

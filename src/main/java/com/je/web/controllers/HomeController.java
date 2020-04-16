@@ -1,6 +1,7 @@
 package com.je.web.controllers;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -254,5 +255,10 @@ public class HomeController {
 	public String goodbye(SessionStatus status) {
 		status.setComplete();
 		return "goodbye";
+	}
+
+	@ModelAttribute("cart")
+	public List<JewelEntity> todos() {
+		return new ArrayList<JewelEntity>();
 	}
 }
