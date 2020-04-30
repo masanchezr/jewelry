@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.je.dbaccess.entities.CategoryEntity;
 import com.je.dbaccess.entities.JewelEntity;
@@ -25,6 +26,7 @@ import com.je.services.mails.MailService;
 import com.je.services.search.SearchService;
 import com.je.utils.constants.Constants;
 import com.je.utils.constants.ConstantsViews;
+import com.je.web.forms.DataClientForm;
 import com.je.web.forms.MessageForm;
 import com.je.web.forms.SearchJewelForm;
 import com.je.web.validators.MessageFormValidator;
@@ -248,6 +250,28 @@ public class HomeController {
 		if (!m.containsAttribute("cart")) {
 			m.addAttribute("cart", new ArrayList<JewelEntity>());
 		}
+		return model;
+	}
+
+	/**
+	 * The shopping cart (list of products) is stored in session. Simply inject it
+	 * using method argument
+	 */
+	@GetMapping("/addProduct/{id}")
+	public String addProduct(@PathVariable Long id, @ModelAttribute("cart") List<JewelEntity> cart,
+			RedirectAttributes attributes) {
+		cart.add(jewelService.selectProduct(id));
+		attributes.addFlashAttribute("cart", cart);
+		return "redirect:/productoSeleccionado" + id;
+	}
+
+	@GetMapping("/cart")
+	public ModelAndView cart() {
+		ModelAndView model = new ModelAndView("web/cart");
+		Iterable<CategoryEntity> categories = searchCategoriesService.getAllCategoriesOrderByName();
+		model.addObject(ConstantsViews.CATEGORIES, categories);
+		model.addObject("dataForm", new DataClientForm());
+		model.addObject(ConstantsViews.FORMSEARCH, new SearchJewelForm());
 		return model;
 	}
 

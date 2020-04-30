@@ -6,9 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
@@ -64,7 +65,7 @@ public class SaleController {
 	 * @param result   the result
 	 * @return the model and view
 	 */
-	@GetMapping("/comprar")
+	@PostMapping("/comprar")
 	public ModelAndView buy(@ModelAttribute("dataForm") DataClientForm dataForm, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		Iterable<CategoryEntity> categories = searchCategoriesService.getAllCategoriesOrderByName();
@@ -94,7 +95,7 @@ public class SaleController {
 			if (addresses != null) {
 				model.addObject("addressesbilling", addresses.getAddressesBilling());
 				model.addObject("addressesmailing", addresses.getAddressesMailing());
-				jsp = "chooseAddress";
+				jsp = "web/chooseAddress";
 			}
 			BuyForm buyForm = new BuyForm();
 			buyForm.setJewels(dataForm.getJewels());
@@ -104,7 +105,7 @@ public class SaleController {
 			model.setViewName(jsp);
 			model.addObject(ConstantsViews.BREADCRUMBS, "Home >> Producto seleccionado >> Comprar");
 		} else {
-			model.setViewName(VIEWSHOPPINGCART);
+			model.setViewName("web/cart");
 		}
 		model.addObject(ConstantsViews.FORMSEARCH, new SearchJewelForm());
 		model.addObject(ConstantsViews.CATEGORIES, categories);
