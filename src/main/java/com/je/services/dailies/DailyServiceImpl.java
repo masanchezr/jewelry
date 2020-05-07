@@ -260,13 +260,13 @@ public class DailyServiceImpl implements DailyService {
 	private BigDecimal getPayrollAmount(Date date, PlaceEntity place, Daily daily) {
 		BigDecimal payrollamount = BigDecimal.ZERO;
 		List<PlaceUserEntity> placeUsers = placeUserRepository.findByPlace(place);
+		List<PayrollEntity> payrollsview = new ArrayList<>();
 		if (placeUsers != null) {
 			Iterator<PlaceUserEntity> iplaceUsers = placeUsers.iterator();
 			UserEntity user = new UserEntity();
 			while (iplaceUsers.hasNext()) {
 				user.setUsername(iplaceUsers.next().getUsername());
 				List<PayrollEntity> payrolls = payrollRepository.findByCreationdateAndUser(date, user);
-				List<PayrollEntity> payrollsview = new ArrayList<>();
 				if (payrolls != null && !payrolls.isEmpty()) {
 					Iterator<PayrollEntity> ipayroll = payrolls.iterator();
 					PayrollEntity pre;
@@ -277,8 +277,8 @@ public class DailyServiceImpl implements DailyService {
 					}
 					daily.setNumoperations(daily.getNumoperations() + payrolls.size());
 				}
-				daily.setPayroll(payrollsview);
 			}
+			daily.setPayroll(payrollsview);
 		}
 		return payrollamount;
 	}
