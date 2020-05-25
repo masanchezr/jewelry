@@ -67,6 +67,10 @@
 			<a>user</a>
 			<b>username.username</b>
 		</field>
+		<field>
+			<a>date</a>
+			<b>creationdate</b>
+		</field>
 	</mapping>
 	<mapping>
 		<class-a>com.je.forms.SalePostPoned</class-a>

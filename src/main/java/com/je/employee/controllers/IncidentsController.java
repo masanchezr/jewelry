@@ -61,7 +61,7 @@ public class IncidentsController {
 		return model;
 	}
 
-	@GetMapping("/employee/resultIncidents")
+	@PostMapping("/employee/resultIncidents")
 	public ModelAndView resultSearchIncidents(@ModelAttribute(ConstantsViews.FORMSEARCH) SearchForm form,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
