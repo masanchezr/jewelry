@@ -26,6 +26,4 @@ public interface OtherConceptsRepository extends CrudRepository<OtherConceptEnti
 	List<OtherConceptEntity> findByCreationdateAndPlace(@Temporal(TemporalType.DATE) Date creationdate,
 			PlaceEntity placeEntity);
 
-	List<OtherConceptEntity> findByDescription(String description);
-
 }

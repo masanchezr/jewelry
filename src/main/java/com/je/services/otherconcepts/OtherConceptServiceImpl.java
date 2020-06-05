@@ -39,13 +39,9 @@ public class OtherConceptServiceImpl implements OtherConceptService {
 		OtherConceptEntity otherConceptEntity = mapper.map(otherconcept, OtherConceptEntity.class);
 		List<PlaceUserEntity> places = placeUserRepository.findByUsername(otherconcept.getUser());
 		PlaceEntity place = places.get(0).getPlace();
-		List<OtherConceptEntity> othersconcepts = othersConceptsRepository
-				.findByDescription(otherConceptEntity.getDescription());
 		otherConceptEntity.setPlace(place);
 		otherConceptEntity.setCreationdate(new Date());
-		if (othersconcepts == null || othersconcepts.isEmpty()) {
-			othersConceptsRepository.save(otherConceptEntity);
-		}
+		othersConceptsRepository.save(otherConceptEntity);
 		return dailyService.getDaily(DateUtil.getDateFormated(new Date()), place, null);
 	}
 }
