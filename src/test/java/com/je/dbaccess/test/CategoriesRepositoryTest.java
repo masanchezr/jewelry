@@ -80,8 +80,7 @@ public class CategoriesRepositoryTest {
 	@Test
 	public void saveTest() {
 		CategoryEntity category = new CategoryEntity();
-		category.setIdcategory(11L);
-		category.setNamecategory("Cadena");
+		category.setNamecategory("Billetes");
 		category.setActive(true);
 		category.setKeyword(Util.getKeyword(category.getNamecategory()));
 		// categoriesRepository.save(category);

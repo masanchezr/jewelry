@@ -8,10 +8,11 @@
 				th:text="#{categories}"></span></a></li>
 		<li class="breadcrumb-item active" th:text="#{newcategory}"></li>
 	</ol>
-	<form method="post" th:action="@{/saveCategory}" th:object="${category}">
+	<form method="post" th:action="@{/saveCategory}"
+		th:object="${category}">
 		<div class="form-group">
 			<span th:text="#{namecategory}"></span> <input class="form-control"
-				id="namecategory" />
+				th:field="*{namecategory}" />
 		</div>
 		<div class="form-group">
 			<span th:text="#{active}"></span> <input type="checkbox"
