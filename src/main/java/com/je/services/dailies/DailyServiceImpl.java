@@ -518,7 +518,7 @@ public class DailyServiceImpl implements DailyService {
 	private BigDecimal getAdjustmentsWorkAmount(Date date, PlaceEntity place, Daily daily) {
 		BigDecimal adjustmentsworkamount = BigDecimal.ZERO;
 		List<AdjustmentEntity> adjustmentswork = adjustmentRepository
-				.findByCreationdateAndPlaceAndAmountworkNotNullAndWorkFalse(date, place);
+				.findByCreationdateAndPlaceAndAmountworkNotNull(date, place);
 		if (adjustmentswork != null && !adjustmentswork.isEmpty()) {
 			Iterator<AdjustmentEntity> iadjustments = adjustmentswork.iterator();
 			AdjustmentEntity adjustment;
