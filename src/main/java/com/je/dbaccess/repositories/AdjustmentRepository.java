@@ -27,7 +27,15 @@ public interface AdjustmentRepository extends CrudRepository<AdjustmentEntity, L
 	List<AdjustmentEntity> findByCreationdateBetweenAndWorkTrue(@Temporal(TemporalType.DATE) Date from,
 			@Temporal(TemporalType.DATE) Date until);
 
-	List<AdjustmentEntity> findByCreationdateAndPlaceAndAmountworkNotNull(
+	/**
+	 * Devuelve las hechuras de arreglo que no han sido de Jorge, porque Jorge cobra
+	 * aparte
+	 * 
+	 * @param creationdate
+	 * @param placeEntity
+	 * @return
+	 */
+	List<AdjustmentEntity> findByCreationdateAndPlaceAndAmountworkNotNullAndWorkFalse(
 			@Temporal(TemporalType.DATE) Date creationdate, PlaceEntity placeEntity);
 
 	List<AdjustmentEntity> findByCarrydateBetweenAndPayment(@Temporal(TemporalType.DATE) Date from,
