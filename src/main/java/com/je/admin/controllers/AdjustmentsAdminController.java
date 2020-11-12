@@ -45,7 +45,7 @@ public class AdjustmentsAdminController {
 		return model;
 	}
 
-	@GetMapping("/sumadjustments")
+	@PostMapping("/sumadjustments")
 	public ModelAndView sumAdjustments(@ModelAttribute(ConstantsViews.FORMSEARCH) SearchForm searchForm,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
