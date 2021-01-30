@@ -1,5 +1,6 @@
 package com.je.dbaccess.managers;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 
@@ -108,5 +109,9 @@ public interface JewelsManager {
 	public Page<JewelEntity> searchActive(Pageable pageable);
 
 	public void setGrams();
+
+	public List<JewelEntity> searchByPrice(BigDecimal price);
+
+	public List<JewelEntity> searchByPriceAndReference(BigDecimal price, String reference);
 
 }

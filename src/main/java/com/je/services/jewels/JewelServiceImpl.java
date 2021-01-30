@@ -1,5 +1,6 @@
 package com.je.services.jewels;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -157,5 +158,20 @@ public class JewelServiceImpl implements JewelService {
 	@Override
 	public Page<JewelEntity> searchJewelsByCategory(CategoryEntity category, int i) {
 		return jewelsManager.searchByCategoryActive(category, PageRequest.of(i - 1, Constants.PAGE_SIZE));
+	}
+
+	@Override
+	public List<JewelEntity> searchByPrice(JewelEntity jewel) {
+		String reference = jewel.getReference();
+		BigDecimal price = jewel.getPrice();
+		if (!Util.isEmpty(reference)) {
+			if (price != null) {
+				return jewelsManager.searchByPriceAndReference(price, reference);
+			} else {
+				return jewelsManager.searchByReference(reference);
+			}
+		} else {
+			return jewelsManager.searchByPrice(price);
+		}
 	}
 }

@@ -90,4 +90,6 @@ public interface JewelService {
 
 	public Page<JewelEntity> searchJewelsByCategory(CategoryEntity category, int i);
 
+	public List<JewelEntity> searchByPrice(JewelEntity map);
+
 }

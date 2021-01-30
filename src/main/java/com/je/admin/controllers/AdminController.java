@@ -98,7 +98,7 @@ public class AdminController {
 	 */
 	@GetMapping("/searchJewels")
 	public ModelAndView searchJewels(@RequestParam String search) {
-		ModelAndView model = new ModelAndView("admin/jewels/searchjewels/resultsearchbyreference");
+		ModelAndView model = new ModelAndView("admin/jewels/searchjewels/resultSearch");
 		Page<JewelEntity> jewels = searchService.searchActives(search, 1);
 		model.addObject(ConstantsViews.JEWELS, jewels.getContent());
 		model.addObject("toUpdate", new JewelEntity());
