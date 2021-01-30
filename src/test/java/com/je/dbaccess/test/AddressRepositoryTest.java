@@ -1,8 +1,8 @@
 package com.je.dbaccess.test;
 
 import java.util.Date;
-import java.util.Iterator;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import com.je.dbaccess.repositories.AddressRepository;
  */
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = { "classpath*:spring-db-context-test.xml" })
-public class AddressRepositoryTest {
+class AddressRepositoryTest {
 
 	/** The address repository. */
 	@Autowired
@@ -28,7 +28,7 @@ public class AddressRepositoryTest {
 	 * Save test.
 	 */
 	@Test
-	public void saveTest() {
+	void saveTest() {
 		ClientEntity knowClient = new ClientEntity();
 		knowClient.setNifclient("71222013Y");
 		knowClient.setEmail("prueba");
@@ -38,24 +38,14 @@ public class AddressRepositoryTest {
 		mailing.setCountry("España");
 		mailing.setPostalcode(28017L);
 		mailing.setCreationdate(new Date());
-		// addressRepository.save(mailing);
+		Assertions.assertNotNull(addressRepository.save(mailing));
 	}
 
 	/**
 	 * Find all test.
 	 */
 	@Test
-	public void findAllTest() {
-		Iterable<AddressEntity> iaddresses = addressRepository.findAll();
-		if (iaddresses != null) {
-			Iterator<AddressEntity> itaddress = iaddresses.iterator();
-			if (itaddress != null) {
-				AddressEntity address;
-				while (itaddress.hasNext()) {
-					address = itaddress.next();
-					System.out.println("Direccion: " + address.getAddress() + " id:" + address.getIdaddress());
-				}
-			}
-		}
+	void findAllTest() {
+		Assertions.assertNotNull(addressRepository.findAll());
 	}
 }

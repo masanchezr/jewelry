@@ -9,7 +9,7 @@
 				th:text="#{adjustments}"></span></a></li>
 		<li class="breadcrumb-item active" th:text="#{adjustment}"></li>
 	</ol>
-	<div class="row">
+	<div class="row" th:if="${adjustment!=null}">
 		<div class="col-lg-12">
 			<div class="card-body">
 				<div class="table-responsive">
@@ -41,6 +41,9 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="row" th:if="${adjustment==null}">
+		<span th:text="#{noresults}"></span>
 	</div>
 </div>
 </html>
