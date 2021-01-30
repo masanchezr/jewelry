@@ -211,15 +211,4 @@ public class JewelsManagerImpl implements JewelsManager {
 		}
 		return jewels;
 	}
-
-	@Override
-	public List<JewelEntity> searchByPrice(BigDecimal price) {
-
-		return jewelRepository.findByPrice(price);
-	}
-
-	@Override
-	public List<JewelEntity> searchByPriceAndReference(BigDecimal price, String reference) {
-		return jewelRepository.findByPriceAndReference(price, reference);
-	}
 }

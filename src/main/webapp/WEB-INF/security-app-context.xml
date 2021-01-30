@@ -82,8 +82,7 @@
 			access="hasAnyRole('ROLE_USER','ROLE_AR','ROLE_NA')" />
 		<intercept-url pattern="/employee/searchsalepostponed"
 			access="hasAnyRole('ROLE_USER','ROLE_AR','ROLE_NA')" />
-		<intercept-url
-			pattern="/employee/searchclientreturnpawn"
+		<intercept-url pattern="/employee/searchclientreturnpawn"
 			access="hasAnyRole('ROLE_USER','ROLE_AR','ROLE_NA')" />
 		<form-login login-page="/employee/login"
 			default-target-url="/employee/admin"
@@ -237,8 +236,6 @@
 		<intercept-url pattern="/searchRegisterEmployees"
 			access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/newcoin"
-			access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/searchByPrice"
 			access="hasRole('ROLE_ADMIN')" />
 	</http>
 
