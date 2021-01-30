@@ -1,5 +1,6 @@
 package com.je.dbaccess.repositories;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -99,5 +100,9 @@ public interface JewelRepository extends PagingAndSortingRepository<JewelEntity,
 	public Page<JewelEntity> findByCategoryAndActiveTrue(CategoryEntity category, Pageable pageable);
 
 	public List<JewelEntity> findByMetalAndGramsIsNull(MetalEntity material);
+
+	public List<JewelEntity> findByPrice(BigDecimal price);
+
+	public List<JewelEntity> findByPriceAndReference(BigDecimal price, String reference);
 
 }

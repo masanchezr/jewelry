@@ -120,6 +120,19 @@ public class JewelsController {
 	}
 
 	/**
+	 * Search by reference.
+	 *
+	 * @return the model and view
+	 */
+	@GetMapping("/searchByPrice")
+	public ModelAndView searchByPrice() {
+		ModelAndView model = new ModelAndView("admin/jewels/searchjewels/searchByPrice");
+		model.addObject(FORMJEWEL, new JewelEntity());
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
+		return model;
+	}
+
+	/**
 	 * Result search by reference.
 	 *
 	 * @param jewelForm the jewel form
@@ -129,7 +142,22 @@ public class JewelsController {
 	public ModelAndView resultSearchByReference(@ModelAttribute(FORMJEWEL) Jewel jewelForm) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsViews.JEWELS, jewelService.search(mapper.map(jewelForm, JewelEntity.class)));
-		model.setViewName("admin/jewels/searchjewels/resultsearchbyreference");
+		model.setViewName("admin/jewels/searchjewels/resultSearch");
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
+		return model;
+	}
+
+	/**
+	 * Result search by price.
+	 *
+	 * @param jewelForm the jewel form
+	 * @return the model and view
+	 */
+	@PostMapping("resultsearchbyprice")
+	public ModelAndView resultSearchByPrice(@ModelAttribute(FORMJEWEL) Jewel jewelForm) {
+		ModelAndView model = new ModelAndView();
+		model.addObject(ConstantsViews.JEWELS, jewelService.searchByPrice(mapper.map(jewelForm, JewelEntity.class)));
+		model.setViewName("admin/jewels/searchjewels/resultSearch");
 		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		return model;
 	}
@@ -348,7 +376,7 @@ public class JewelsController {
 
 	@PostMapping("/resultjewelsactive")
 	public ModelAndView resultjewelsactive(@ModelAttribute(FORMJEWEL) Jewel jewelForm) {
-		ModelAndView model = new ModelAndView("admin/jewels/searchjewels/resultsearchbyreference");
+		ModelAndView model = new ModelAndView("admin/jewels/searchjewels/resultSearch");
 		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		jewelForm.setActive(true);
 		model.addObject(ConstantsViews.JEWELS,
