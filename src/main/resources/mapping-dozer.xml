@@ -100,4 +100,12 @@
 			<b>sdiscount</b>
 		</field>
 	</mapping>
+	<mapping>
+		<class-a>com.je.dbaccess.entities.AdjustmentEntity</class-a>
+		<class-b>com.je.services.adjustments.Adjustment</class-b>
+		<field>
+			<a>place.description</a>
+			<b>user</b>
+		</field>
+	</mapping>
 </mappings>
