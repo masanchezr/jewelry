@@ -21,13 +21,10 @@ public class SearchSaleRepeatedServiceImpl implements SearchSaleRepeatedService 
 	@Autowired
 	private OtherSaleRepository othersaleRepository;
 
-	public boolean isSaleRepeated(Long num) {
-		List<SaleEntity> sales = saleRepository.findByNumsale(num);
-		List<OtherSaleEntity> othersales = othersaleRepository.findByNumsale(num);
-		if ((sales == null || sales.isEmpty()) && (othersales == null || othersales.isEmpty())) {
-			return discountsRepository.existsById(num);
-		} else {
-			return true;
-		}
+	public boolean isSaleRepeated(Long num, int year) {
+		List<SaleEntity> sales = saleRepository.findByNumsaleAndYear(num, year);
+		List<OtherSaleEntity> othersales = othersaleRepository.findByNumsaleAndYear(num, year);
+		return (sales == null || sales.isEmpty()) && (othersales == null || othersales.isEmpty())
+				&& discountsRepository.findByNumsaleAndYear(num, year) != null;
 	}
 }

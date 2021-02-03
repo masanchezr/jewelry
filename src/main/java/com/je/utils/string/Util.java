@@ -34,7 +34,7 @@ public class Util {
 	 * @return the keyword
 	 */
 	public static String getKeyword(String name) {
-		return name.toLowerCase().replaceAll(" ", "-");
+		return name.toLowerCase().replace(" ", "-");
 	}
 
 	public static boolean isNumeric(String cadena) {
@@ -55,7 +55,7 @@ public class Util {
 	}
 
 	public static String refactorNIF(String nif) {
-		nif = nif.replaceAll("-", "");
+		nif = nif.replace("-", "");
 		nif = nif.toUpperCase();
 		return nif.replaceAll("\\s", "");
 	}

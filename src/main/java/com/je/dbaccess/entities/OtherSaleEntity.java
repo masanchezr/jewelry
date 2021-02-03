@@ -51,6 +51,9 @@ public class OtherSaleEntity {
 	@Column(name = "DESCRIPTION")
 	private String description;
 
+	@Column(name = "YEAR")
+	private Integer year;
+
 	/**
 	 * @return the amount
 	 */

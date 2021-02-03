@@ -105,7 +105,8 @@ public class SalesController {
 				sale.setJewels(newjewels);
 				sale.setPlace(place);
 				// comprobamos si ya existe la venta
-				if (!searchSaleRepeatedService.isSaleRepeated(sale.getNumsale())) {
+				if (!searchSaleRepeatedService.isSaleRepeated(sale.getNumsale(),
+						DateUtil.getYear(sale.getSaledate()))) {
 					saleService.buy(sale);
 					model.setViewName("employee/sales/finishsale");
 					model.addObject(ConstantsViews.FORMSALE, sale);
@@ -167,7 +168,7 @@ public class SalesController {
 			PlaceEntity place = placeService.getPlaceUser(user);
 			Sale entitysale = saleService.searchByNumsaleAndPlace(sale.getNumsale(), place.getIdplace());
 			if (entitysale != null) {
-				entitysale.setJewelstocancel(new ArrayList<Long>());
+				entitysale.setJewelstocancel(new ArrayList<>());
 				model.setViewName(VIEWCANCELPARCIALSALE);
 				model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
 				model.addObject(ConstantsViews.FORMSALE, entitysale);

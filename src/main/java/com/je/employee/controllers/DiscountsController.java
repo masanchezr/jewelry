@@ -55,16 +55,16 @@ public class DiscountsController {
 	public ModelAndView savediscount(@ModelAttribute("discountForm") Discount discount, HttpServletRequest request,
 			BindingResult errors) {
 		ModelAndView model = new ModelAndView();
+		Date today = new Date();
 		discountsValidator.validate(discount, errors);
 		if (errors.hasErrors()) {
 			model.setViewName(VIEWNEWDISCOUNT);
 			model.addObject(FORMDISCOUNT, discount);
-		} else if (searchSaleRepeatedService.isSaleRepeated(discount.getIddiscount())) {
+		} else if (searchSaleRepeatedService.isSaleRepeated(discount.getIddiscount(), DateUtil.getYear(today))) {
 			model.setViewName(VIEWNEWDISCOUNT);
 			model.addObject(FORMDISCOUNT, discount);
 			errors.rejectValue("iddiscount", "numrepeated");
 		} else {
-			Date today = new Date();
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			PlaceEntity place = placeService.getPlaceUser(user);
 			String ipAddress = request.getHeader(ConstantsViews.XFORWARDEDFOR);

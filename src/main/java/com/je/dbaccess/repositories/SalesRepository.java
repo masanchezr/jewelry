@@ -67,4 +67,6 @@ public interface SalesRepository extends CrudRepository<SaleEntity, Long> {
 			@Temporal(TemporalType.DATE) Date from, Long numsale);
 
 	public List<SaleEntity> findByNumsale(Long numsale);
+
+	public List<SaleEntity> findByNumsaleAndYear(Long num, int year);
 }

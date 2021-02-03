@@ -31,4 +31,6 @@ public interface OtherSaleRepository extends CrudRepository<OtherSaleEntity, Lon
 	List<OtherSaleEntity> findByCreationdateBetweenAndPay(@Temporal(TemporalType.DATE) Date from,
 			@Temporal(TemporalType.DATE) Date until, PaymentEntity payment);
 
+	List<OtherSaleEntity> findByNumsaleAndYear(Long num, int year);
+
 }

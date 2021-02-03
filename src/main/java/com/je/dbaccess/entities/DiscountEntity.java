@@ -49,6 +49,12 @@ public class DiscountEntity {
 	@Column(name = "numsaleaplication")
 	private Long numsaleaplication;
 
+	@Column(name = "numsale")
+	private Long numsale;
+
+	@Column(name = "YEAR")
+	private Integer year;
+
 	public Long getIddiscount() {
 		return iddiscount;
 	}
@@ -111,6 +117,14 @@ public class DiscountEntity {
 
 	public void setNumsaleaplication(Long numsaleaplication) {
 		this.numsaleaplication = numsaleaplication;
+	}
+
+	public Long getNumsale() {
+		return numsale;
+	}
+
+	public void setNumsale(Long numsale) {
+		this.numsale = numsale;
 	}
 
 }

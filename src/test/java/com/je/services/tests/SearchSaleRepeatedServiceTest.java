@@ -8,15 +8,17 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.je.services.salesrepeated.SearchSaleRepeatedService;
 
+import junit.framework.Assert;
+
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = { "classpath*:application-context-test.xml" })
-public class SearchSaleRepeatedServiceTest {
+class SearchSaleRepeatedServiceTest {
 
 	@Autowired
 	private SearchSaleRepeatedService searchSaleRepeatedService;
 
 	@Test
-	public void isSaleRepeatedTest() {
-		System.out.print("Hay ventas repetidas?" + searchSaleRepeatedService.isSaleRepeated(5L));
+	void isSaleRepeatedTest() {
+		Assert.assertEquals(true, searchSaleRepeatedService.isSaleRepeated(5L, 2020));
 	}
 }

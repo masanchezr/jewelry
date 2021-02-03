@@ -74,13 +74,15 @@ public class SaleServiceImpl implements SaleService {
 		} else {
 			saleEntity.setCreationdate(DateUtil.getDate(sale.getSaledate()));
 		}
+		int year = DateUtil.getYear(saleEntity.getCreationdate());
+		saleEntity.setYear(year);
 		Iterator<JewelEntity> ijewels = sale.getJewels().iterator();
 		BigDecimal importeTotal = getTotalAmount(salesJewels, saleEntity, ijewels);
 		setAddresses(sale, saleEntity);
 		BigDecimal discount = sale.getDiscount();
 		Long iddiscount = sale.getIddiscount();
 		if (iddiscount != null) {
-			DiscountEntity discountEntity = discountsRepository.findById(iddiscount).orElse(null);
+			DiscountEntity discountEntity = discountsRepository.findByNumsaleAndYear(iddiscount, year);
 			if (discount == null) {
 				discount = BigDecimal.ZERO;
 			}

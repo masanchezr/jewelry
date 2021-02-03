@@ -1,8 +1,5 @@
 package com.je.services.tests;
 
-import java.util.Iterator;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +10,17 @@ import com.je.admin.forms.SearchMissingNumbers;
 import com.je.dbaccess.entities.PlaceEntity;
 import com.je.services.searchmissingnumbers.SearchMissingNumberService;
 
+import junit.framework.Assert;
+
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = { "classpath*:application-context-test.xml" })
-public class SearchMissingNumberServiceTest {
+class SearchMissingNumberServiceTest {
 
 	@Autowired
 	private SearchMissingNumberService searchMissingNumbers;
 
 	@Test
-	public void searchMissingShoppingsTest() {
+	void searchMissingShoppingsTest() {
 		SearchMissingNumbers form = new SearchMissingNumbers();
 		PlaceEntity place = new PlaceEntity();
 		place.setIdplace(13700L);
@@ -29,10 +28,6 @@ public class SearchMissingNumberServiceTest {
 		form.setNumuntil(2L);
 		form.setYear(2018);
 		form.setPlace(place);
-		List<Long> missings = searchMissingNumbers.searchMissingShoppings(form);
-		Iterator<Long> imissings = missings.iterator();
-		while (imissings.hasNext()) {
-			System.out.println(imissings.next());
-		}
+		Assert.assertNotNull(searchMissingNumbers.searchMissingShoppings(form));
 	}
 }

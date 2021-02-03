@@ -122,4 +122,17 @@ public class DateUtil {
 	public static Date getDateFormated(Date date) {
 		return getDate(getStringDateddMMyyyy(date));
 	}
+
+	public static int getYear(String sdate) {
+		Date date = getDate(sdate);
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		return c.get(Calendar.YEAR);
+	}
+
+	public static int getYear(Date date) {
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		return c.get(Calendar.YEAR);
+	}
 }

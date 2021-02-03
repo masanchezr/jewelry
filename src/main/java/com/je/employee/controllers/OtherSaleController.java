@@ -69,13 +69,14 @@ public class OtherSaleController {
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		ModelAndView model = new ModelAndView();
 		Long numsale = recording.getNumsale();
+		Date today = new Date();
 		recordingValidator.validate(recording, errors);
 		if (errors.hasErrors()) {
 			model.setViewName(VIEWNEWRECORDING);
 			model.addObject(FORMRECORDING, recording);
 			model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
 			model.addObject(TYPES, otherSaleService.findAllTypes());
-		} else if (numsale != null && searchSaleRepeatedService.isSaleRepeated(numsale)) {
+		} else if (numsale != null && searchSaleRepeatedService.isSaleRepeated(numsale, DateUtil.getYear(today))) {
 			model.setViewName(VIEWNEWRECORDING);
 			model.addObject(FORMRECORDING, recording);
 			model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
@@ -86,7 +87,7 @@ public class OtherSaleController {
 			if (ipAddress == null) {
 				ipAddress = request.getRemoteAddr();
 			}
-			Date today = DateUtil.getDateFormated(new Date());
+			today = DateUtil.getDateFormated(today);
 			PlaceEntity place = placeService.getPlaceUser(user);
 			recording.setPlace(place);
 			otherSaleService.save(mapper.map(recording, OtherSaleEntity.class));

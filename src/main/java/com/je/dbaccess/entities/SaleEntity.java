@@ -42,6 +42,9 @@ public class SaleEntity {
 	@CreatedDate
 	private Date creationdate;
 
+	@Column(name = "YEAR")
+	private Integer year;
+
 	/**
 	 * The client_nif. Quito el manytoOne porque voy a guardar antes al cliente, si
 	 * quisieramos guardar el cliente a la vez que la compra el cascadetype sería
@@ -266,5 +269,13 @@ public class SaleEntity {
 
 	public void setSpayments(List<SalesPayments> spayments) {
 		this.spayments = spayments;
+	}
+
+	public Integer getYear() {
+		return year;
+	}
+
+	public void setYear(Integer year) {
+		this.year = year;
 	}
 }

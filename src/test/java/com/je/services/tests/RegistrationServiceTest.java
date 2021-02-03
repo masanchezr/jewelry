@@ -9,12 +9,14 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.je.services.users.Client;
 import com.je.services.users.RegistrationService;
 
+import junit.framework.Assert;
+
 /**
  * The Class RegistrationServiceTest.
  */
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = { "classpath*:application-context-test.xml" })
-public class RegistrationServiceTest {
+class RegistrationServiceTest {
 
 	/** The registration service. */
 	@Autowired
@@ -24,14 +26,14 @@ public class RegistrationServiceTest {
 	 * Register user test.
 	 */
 	@Test
-	public void registerUserTest() {
+	void registerUserTest() {
 		Client user = new Client();
 		user.setEmail("mangeles.sanchez0807@gmail.com");
 		user.setName("maria");
 		// user.setSurname("fdafsafa");
 		user.setNifclient("085478564K");
 		user.setAddress("dfsdaf");
-		registrationService.registerUser(user);
+		Assert.assertEquals(false, registrationService.registerUser(user));
 	}
 
 }
