@@ -155,17 +155,14 @@ public class SalesController {
 	 * @return the model and view
 	 */
 	@PostMapping("/employee/cancelparcialsale")
-	public ModelAndView cancelParcialSale(@ModelAttribute(ConstantsViews.FORMSALE) Sale sale,
-			HttpServletRequest request, BindingResult result) {
+	public ModelAndView cancelParcialSale(@ModelAttribute(ConstantsViews.FORMSALE) Sale sale, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		Long numsale = sale.getNumsale();
 		if (numsale == null || numsale.equals(0L)) {
 			model.setViewName(VIEWREMOVEPARCIALSALE);
 			model.addObject(ConstantsViews.FORMSALE, sale);
 		} else {
-			String user = SecurityContextHolder.getContext().getAuthentication().getName();
-			PlaceEntity place = placeService.getPlaceUser(user);
-			Sale entitysale = saleService.searchByNumsaleAndPlace(sale.getNumsale(), place.getIdplace());
+			Sale entitysale = saleService.searchByNumsaleAndYear(sale.getNumsale(), DateUtil.getYear(new Date()));
 			if (entitysale != null) {
 				entitysale.setJewelstocancel(new ArrayList<>());
 				model.setViewName(VIEWCANCELPARCIALSALE);
@@ -244,7 +241,8 @@ public class SalesController {
 			// ahora hay que mirar si existe la venta para ese lugar
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			PlaceEntity place = placeService.getPlaceUser(user);
-			Sale searchSale = saleService.searchByNumsaleAndPlace(removeSaleForm.getNumsale(), place.getIdplace());
+			Sale searchSale = saleService.searchByNumsaleAndYear(removeSaleForm.getNumsale(),
+					DateUtil.getYear(new Date()));
 			if (searchSale == null) {
 				model.addObject(FORMREMOVESALE, new Sale());
 				model.setViewName(VIEWREMOVESALE);

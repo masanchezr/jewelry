@@ -80,5 +80,5 @@ public interface SaleManager {
 
 	public SaleEntity searchByPK(Long idsale);
 
-	public SaleEntity searchByNumsaleAndPlace(Long numsale, Long idplace);
+	SaleEntity searchByNumsaleAndYear(Long numsale, int year);
 }

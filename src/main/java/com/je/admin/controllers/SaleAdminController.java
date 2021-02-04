@@ -32,6 +32,7 @@ import com.je.services.sales.SearchSale;
 import com.je.services.salescard.SalesCardService;
 import com.je.utils.constants.Constants;
 import com.je.utils.constants.ConstantsViews;
+import com.je.utils.date.DateUtil;
 import com.je.utils.string.Util;
 import com.je.validators.SaleFormValidator;
 import com.je.validators.SearchFormValidator;
@@ -188,7 +189,8 @@ public class SaleAdminController {
 			if (!jewels.isEmpty() && existsJewels(jewels, place)) {
 				sale.setJewels(newjewels);
 				// comprobamos si ya existe la venta
-				Sale entitySale = saleService.searchByNumsaleAndPlace(sale.getNumsale(), place.getIdplace());
+				Sale entitySale = saleService.searchByNumsaleAndYear(sale.getNumsale(),
+						DateUtil.getYear(sale.getSaledate()));
 				if (entitySale == null) {
 					saleService.buy(sale);
 					model.setViewName("admin/sales/finishsale");

@@ -19,6 +19,6 @@ class SearchSaleRepeatedServiceTest {
 
 	@Test
 	void isSaleRepeatedTest() {
-		Assert.assertEquals(true, searchSaleRepeatedService.isSaleRepeated(5L, 2020));
+		Assert.assertEquals(false, searchSaleRepeatedService.isSaleRepeated(5L, 2020));
 	}
 }

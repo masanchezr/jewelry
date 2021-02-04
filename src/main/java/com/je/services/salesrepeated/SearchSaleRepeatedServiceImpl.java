@@ -22,9 +22,9 @@ public class SearchSaleRepeatedServiceImpl implements SearchSaleRepeatedService 
 	private OtherSaleRepository othersaleRepository;
 
 	public boolean isSaleRepeated(Long num, int year) {
-		List<SaleEntity> sales = saleRepository.findByNumsaleAndYear(num, year);
+		SaleEntity sales = saleRepository.findByNumsaleAndYear(num, year);
 		List<OtherSaleEntity> othersales = othersaleRepository.findByNumsaleAndYear(num, year);
-		return (sales == null || sales.isEmpty()) && (othersales == null || othersales.isEmpty())
+		return sales == null && (othersales == null || othersales.isEmpty())
 				&& discountsRepository.findByNumsaleAndYear(num, year) != null;
 	}
 }

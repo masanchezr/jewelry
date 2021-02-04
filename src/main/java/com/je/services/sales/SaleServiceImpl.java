@@ -237,8 +237,7 @@ public class SaleServiceImpl implements SaleService {
 		CancelSalePaymentEntity csp;
 		DiscountEntity discount = null;
 		BigDecimal optionalpayment = removeSaleForm.getOptionalpayment();
-		SaleEntity sale = saleManager.searchByNumsaleAndPlace(removeSaleForm.getNumsale(),
-				removeSaleForm.getPlace().getIdplace());
+		SaleEntity sale = saleManager.searchByNumsaleAndYear(removeSaleForm.getNumsale(), DateUtil.getYear(new Date()));
 		CancelSaleEntity cancel = new CancelSaleEntity();
 		cancel.setNumsale(sale.getNumsale());
 		cancel.setCreationdate(new Date());
@@ -280,7 +279,7 @@ public class SaleServiceImpl implements SaleService {
 		cancel.setSpayments(payments);
 		if (iddiscount != null) {
 			discount = new DiscountEntity();
-			discount.setIddiscount(iddiscount);
+			discount.setNumsale(iddiscount);
 			discount.setCreationdate(new Date());
 			discount.setNumsalecancel(removeSaleForm.getNumsale());
 			discount.setNumsalechange(removeSaleForm.getNumsalechange());
@@ -303,7 +302,7 @@ public class SaleServiceImpl implements SaleService {
 		cancel.setPlace(sale.getPlace());
 		if (iddiscount != null) {
 			discount = new DiscountEntity();
-			discount.setIddiscount(iddiscount);
+			discount.setNumsale(iddiscount);
 			discount.setCreationdate(new Date());
 			discount.setNumsalecancel(removeSaleForm.getNumsale());
 			discount.setNumsalechange(removeSaleForm.getNumsalechange());
@@ -314,17 +313,6 @@ public class SaleServiceImpl implements SaleService {
 		payments.add(csp);
 		cancel.setSpayments(payments);
 		return saleManager.cancelParcialSale(cancel, removeSaleForm.getJewelstocancel(), discount);
-	}
-
-	@Override
-	public Sale searchByNumsaleAndPlace(Long numsale, Long idplace) {
-		SaleEntity saleEntity = saleManager.searchByNumsaleAndPlace(numsale, idplace);
-		Sale sale = null;
-		if (saleEntity != null) {
-			sale = mapper.map(saleEntity, Sale.class);
-			sale.setJewels(mapperListJewels(saleEntity.getSjewels()));
-		}
-		return sale;
 	}
 
 	@Override
@@ -362,5 +350,16 @@ public class SaleServiceImpl implements SaleService {
 	@Override
 	public boolean exists(Long numsale) {
 		return saleManager.existSale(numsale);
+	}
+
+	@Override
+	public Sale searchByNumsaleAndYear(Long numsale, int year) {
+		SaleEntity saleEntity = saleManager.searchByNumsaleAndYear(numsale, year);
+		Sale sale = null;
+		if (saleEntity != null) {
+			sale = mapper.map(saleEntity, Sale.class);
+			sale.setJewels(mapperListJewels(saleEntity.getSjewels()));
+		}
+		return sale;
 	}
 }

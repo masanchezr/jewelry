@@ -47,15 +47,6 @@ public interface SalesRepository extends CrudRepository<SaleEntity, Long> {
 	public List<SaleEntity> findByCreationdateAndPlace(@Temporal(TemporalType.DATE) Date creationdate,
 			PlaceEntity place);
 
-	/**
-	 * Find by idsale and place.
-	 *
-	 * @param idsale the idsale
-	 * @param place  the place
-	 * @return the sale entity
-	 */
-	public SaleEntity findByNumsaleAndPlace(Long idsale, PlaceEntity place);
-
 	public Iterable<SaleEntity> findByCreationdateBetweenAndPlaceOrderByIdsaleAsc(
 			@Temporal(TemporalType.DATE) Date from, @Temporal(TemporalType.DATE) Date until, PlaceEntity place);
 
@@ -68,5 +59,5 @@ public interface SalesRepository extends CrudRepository<SaleEntity, Long> {
 
 	public List<SaleEntity> findByNumsale(Long numsale);
 
-	public List<SaleEntity> findByNumsaleAndYear(Long num, int year);
+	public SaleEntity findByNumsaleAndYear(Long num, int year);
 }

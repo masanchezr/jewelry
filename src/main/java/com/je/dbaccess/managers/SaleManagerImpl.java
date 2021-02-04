@@ -129,7 +129,7 @@ public class SaleManagerImpl implements SaleManager {
 		while (isalesjewels.hasNext() && exit) {
 			entity = isalesjewels.next();
 			jewel = entity.getJewelEntity();
-			if (jewel.getActive()) {
+			if (Boolean.TRUE.equals(jewel.getActive())) {
 				exit = false;
 			} else {
 				jewel.setActive(true);
@@ -284,9 +284,7 @@ public class SaleManagerImpl implements SaleManager {
 	}
 
 	@Override
-	public SaleEntity searchByNumsaleAndPlace(Long numsale, Long idplace) {
-		PlaceEntity place = new PlaceEntity();
-		place.setIdplace(idplace);
-		return saleRepository.findByNumsaleAndPlace(numsale, place);
+	public SaleEntity searchByNumsaleAndYear(Long numsale, int year) {
+		return saleRepository.findByNumsaleAndYear(numsale, year);
 	}
 }

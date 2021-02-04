@@ -53,15 +53,6 @@ public interface SaleService {
 
 	public boolean removeSaleParcial(Sale removeSaleForm);
 
-	/**
-	 * Search by id and place.
-	 *
-	 * @param idsale  the idsale
-	 * @param valueOf the value of
-	 * @return the sale
-	 */
-	public Sale searchByNumsaleAndPlace(Long numsale, Long valueOf);
-
 	public Map<String, Object> searchByDatesAndPlace(String sDateFrom, String sDateUntil, PlaceEntity place);
 
 	public Sale searchByPK(Long idsale);
@@ -69,4 +60,6 @@ public interface SaleService {
 	public List<Long> calculateMissingSales(SearchMissingNumbers form);
 
 	public boolean exists(Long numsale);
+
+	public Sale searchByNumsaleAndYear(Long numsale, int year);
 }
