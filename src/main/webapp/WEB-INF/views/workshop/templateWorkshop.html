@@ -2,14 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org" th:fragment="page">
 <head th:replace="workshop/header"></head>
 <body id="page-top">
+	<!-- csrt support -->
+	<form th:action="@{/workshop/j_spring_security_logout}" method="post"
+		id="logoutForm">
+		<input type="hidden" name="${_csrf.parameterName}"
+			value="${_csrf.token}" />
+	</form>
+	<!-- Page Wrapper -->
 	<div id="wrapper">
-		<!-- csrt support -->
-		<form th:action="@{/workshop/j_spring_security_logout}" method="post"
-			id="logoutForm">
-			<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}" />
-		</form>
-		<!-- Page Wrapper -->
 		<!-- Sidebar -->
 		<ul
 			class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"

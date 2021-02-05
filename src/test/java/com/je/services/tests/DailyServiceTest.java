@@ -19,7 +19,7 @@ import com.je.services.dailies.DailyService;
  */
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = { "classpath*:application-context-test.xml" })
-public class DailyServiceTest {
+class DailyServiceTest {
 
 	/** The daily service. */
 	@Autowired
@@ -31,7 +31,7 @@ public class DailyServiceTest {
 	 * @return the daily test
 	 */
 	@Test
-	public void getDailyTest() {
+	void getDailyTest() {
 		PlaceEntity place = new PlaceEntity();
 		Calendar c = new GregorianCalendar(2020, 11, 28);
 		place.setIdplace(28017L);
