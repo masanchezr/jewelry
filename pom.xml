@@ -8,7 +8,7 @@
 	<packaging>war</packaging>
 	<properties>
 		<org.springframework-version>5.3.4</org.springframework-version>
-		<spring-security-version>5.4.2</spring-security-version>
+		<spring-security-version>5.4.5</spring-security-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<sourceEncoding>UTF-8</sourceEncoding>
 	</properties>
