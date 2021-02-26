@@ -102,6 +102,9 @@ public class AdjustmentServiceImpl implements AdjustmentService {
 			adjustmentlast.setGrams(adjustmentEntity.getGrams());
 			adjustmentRepository.save(adjustmentlast);
 		} else {
+			if (adjustmentEntity.getPlace().getIdplace() == null) {
+				adjustmentEntity.setPlace(null);
+			}
 			adjustmentEntity.setCreationdate(new Date());
 			adjustmentEntity.setWork(Boolean.TRUE);
 			adjustmentEntity.setPaymentwork(pay);
