@@ -4,18 +4,18 @@ import com.je.dbaccess.entities.PlaceEntity;
 
 public class Discount {
 
-	private Long iddiscount;
+	private Long numsale;
 
 	private String sdiscount;
 
 	private PlaceEntity place;
 
-	public Long getIddiscount() {
-		return iddiscount;
+	public Long getNumsale() {
+		return numsale;
 	}
 
-	public void setIddiscount(Long iddiscount) {
-		this.iddiscount = iddiscount;
+	public void setNumsale(Long numsale) {
+		this.numsale = numsale;
 	}
 
 	public String getSdiscount() {

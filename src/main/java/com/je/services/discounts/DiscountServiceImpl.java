@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.je.dbaccess.entities.DiscountEntity;
 import com.je.dbaccess.repositories.DiscountsRepository;
+import com.je.utils.date.DateUtil;
 
 public class DiscountServiceImpl implements DiscountService {
 
@@ -19,7 +20,9 @@ public class DiscountServiceImpl implements DiscountService {
 
 	public void save(Discount discount) {
 		DiscountEntity discountEntity = mapper.map(discount, DiscountEntity.class);
-		discountEntity.setCreationdate(new Date());
+		Date today = new Date();
+		discountEntity.setCreationdate(today);
+		discountEntity.setYear(DateUtil.getYear(today));
 		discountsRepository.save(discountEntity);
 	}
 }

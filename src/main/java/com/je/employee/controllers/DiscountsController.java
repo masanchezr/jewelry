@@ -60,7 +60,7 @@ public class DiscountsController {
 		if (errors.hasErrors()) {
 			model.setViewName(VIEWNEWDISCOUNT);
 			model.addObject(FORMDISCOUNT, discount);
-		} else if (searchSaleRepeatedService.isSaleRepeated(discount.getIddiscount(), DateUtil.getYear(today))) {
+		} else if (searchSaleRepeatedService.isSaleRepeated(discount.getNumsale(), DateUtil.getYear(today))) {
 			model.setViewName(VIEWNEWDISCOUNT);
 			model.addObject(FORMDISCOUNT, discount);
 			errors.rejectValue("iddiscount", "numrepeated");
