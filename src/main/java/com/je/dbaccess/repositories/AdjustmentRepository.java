@@ -28,6 +28,14 @@ public interface AdjustmentRepository extends CrudRepository<AdjustmentEntity, L
 			@Temporal(TemporalType.DATE) Date until);
 
 	/**
+	 * Miramos si el arreglo ya se lo ha llevado el cliente
+	 * 
+	 * @param placeEntity
+	 * @return
+	 */
+	List<AdjustmentEntity> findByCarrydateIsNotNullAndIdadjustment(Long idadjustment);
+
+	/**
 	 * Devuelve las hechuras de arreglo que no han sido de Jorge, porque Jorge cobra
 	 * aparte
 	 * 

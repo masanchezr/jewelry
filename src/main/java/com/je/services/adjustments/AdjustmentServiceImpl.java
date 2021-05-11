@@ -46,7 +46,7 @@ public class AdjustmentServiceImpl implements AdjustmentService {
 		MailService mailAdjustmentService;
 		// primeramente miramos si existe el arreglo
 		Long idadjustment = adjustment.getIdadjustment();
-		AdjustmentEntity adjustmentEntity = adjustmentRepository.findById(adjustment.getIdadjustment()).orElse(null);
+		AdjustmentEntity adjustmentEntity = adjustmentRepository.findById(idadjustment).orElse(null);
 		BigDecimal amount = Util.getNumber(adjustment.getAmount());
 		List<PlaceUserEntity> placeuser = placeUserRepository.findByUsername(adjustment.getUser());
 		PlaceEntity place = placeuser.get(0).getPlace();
@@ -74,12 +74,13 @@ public class AdjustmentServiceImpl implements AdjustmentService {
 				adjustmentEntity.setAmountwork(amount.abs());
 				adjustmentEntity.setCreationdate(new Date());
 				adjustmentEntity.setPaymentwork(adjustment.getPayment());
-			} else {
+				adjustmentRepository.save(adjustmentEntity);
+			} else if (adjustmentRepository.findByCarrydateIsNotNullAndIdadjustment(idadjustment).isEmpty()) {
 				adjustmentEntity.setPayment(adjustment.getPayment());
 				adjustmentEntity.setCarrydate(new Date());
 				adjustmentEntity.setAmount(amount);
+				adjustmentRepository.save(adjustmentEntity);
 			}
-			adjustmentRepository.save(adjustmentEntity);
 		}
 		return dailyService.getDaily(DateUtil.getDateFormated(new Date()), place, null);
 	}
