@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="web/template :: page">
+<!-- Product Details Area Start -->
+<div th:fragment="content">
+	<div class="card mt-4">
+		<img class="card-img-top img-fluid" src="http://placehold.it/900x400"
+			alt="">
+		<div class="card-body">
+			<h3 class="card-title" th:text="${jewel.name}"></h3>
+			<h4 th:text="${jewel.price}"></h4>
+			<p class="card-text" th:text="${jewel.description}"></p>
+		</div>
+	</div>
+	<!-- /.card -->
+	<div class="card card-outline-secondary my-4">
+		<div class="card-header">Product Reviews</div>
+		<div class="card-body">
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+				Omnis et enim aperiam inventore, similique necessitatibus neque non!
+				Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi
+				mollitia, necessitatibus quae sint natus.</p>
+			<small class="text-muted">Posted by Anonymous on 3/1/17</small>
+			<hr>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+				Omnis et enim aperiam inventore, similique necessitatibus neque non!
+				Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi
+				mollitia, necessitatibus quae sint natus.</p>
+			<small class="text-muted">Posted by Anonymous on 3/1/17</small>
+			<hr>
+			<a th:href="@{'/addProduct/'+${jewel.idjewel}}"
+				class="btn btn-success"><span th:text="#{addcart}"></span></a>
+		</div>
+	</div>
+	<!-- /.card -->
+</div>
+<!-- /.col-lg-9 -->
+</html>

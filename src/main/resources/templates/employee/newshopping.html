@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="employee/template :: page">
+<div th:fragment="content">
+	<form method="post" th:action="@{/employee/saveShopping}"
+		th:object="${shoppingForm}" role="form">
+		<!-- Breadcrumbs-->
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item active" th:text="#{newshopping}"></li>
+		</ol>
+		<div class="card-body">
+			<div class="table-responsive">
+				<table class="table">
+					<tbody>
+						<tr>
+							<td>
+								<button class="btn btn-primary" value="submit">
+									<span th:text="#{save}"></span>
+								</button>
+							</td>
+							<td><input class="form-control" th:field="*{numshop}"
+								th:placeholder="#{numshop}"></td>
+							<td class="form-group has-error"><label
+								class="control-label" for="inputSuccess"><small
+									class="form-text text-danger"
+									th:if="${#fields.hasErrors('numshop')}" th:errors="*{numshop}"></small></label></td>
+							<td><input class="form-control" th:field="*{cashamount}"
+								th:placeholder="#{cashamount}"></td>
+							<td><input class="form-control" th:field="*{description}"
+								th:placeholder="#{description}"></td>
+						</tr>
+						<tr th:each="os:${shoppingForm.objects}">
+							<td><input class="form-control" type="hidden"
+								th:field="*{objects[__${osStat.index}__].metal.idmetal}"
+								th:text="${os.metal.description}" ></td>
+							<td><input class="form-control"
+								th:field="*{objects[__${osStat.index}__].grossgrams}"
+								th:placeholder="#{grossgrams}"></td>
+							<td><input class="form-control"
+								th:field="*{objects[__${osStat.index}__].netgrams}"
+								th:placeholder="#{netgrams}"></td>
+							<td><input class="form-control"
+								th:field="*{objects[__${osStat.index}__].amount}"
+								th:placeholder="#{amount}"></td>
+							<td><input class="form-control"
+								th:field="*{objects[__${osStat.index}__].description}"
+								th:placeholder="#{description}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="row">
+				<div class="col-lg-4">
+					<div class="form-group">
+						<input class="form-control" th:field="*{wiretransfer}"
+							th:placeholder="#{wiretransfer}" />
+						<p class="text-danger">
+							<small class="form-text text-danger"
+								th:if="${#fields.hasErrors('wiretransfer')}"
+								th:errors="wiretransfer"></small>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+</html>

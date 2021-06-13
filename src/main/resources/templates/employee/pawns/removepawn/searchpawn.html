@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="employee/template :: page">
+<div th:fragment="content">
+	<!-- Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#"><span
+				th:text="#{pawns}"></span></a></li>
+		<li class="breadcrumb-item active" th:text="#{removepawn}"></li>
+	</ol>
+	<div class="form-row">
+		<div class="col-lg-12">
+			<div class="panel card-default">
+				<div class="card-heading">
+					<span th:text="#{removepawn}"></span>
+				</div>
+				<div class="card-body">
+					<div class="form-row">
+						<div class="col-lg-6">
+							<form method="post" th:action="@{/employee/searchRemovePawn}"
+								th:object="${searchPawnForm}" role="form">
+								<div class="form-group">
+									<input class="form-control" th:field="*{numpawn}"
+										th:placeholder="#{numpawn}" />
+									<div class="form-group has-error">
+										<label class="control-label" for="inputSuccess"
+											th:if="${#fields.hasErrors('numpawn')}"
+											th:errors="*{numpawn}"></label>
+									</div>
+								</div>
+								<div class="form-group">
+									<button class="btn btn-primary" value="submit">
+										<span th:text="#{search}"></span>
+									</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</html>

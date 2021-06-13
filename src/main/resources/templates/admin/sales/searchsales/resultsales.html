@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="admin/templateAdmin :: page">
+<div th:fragment="content">
+	<!-- Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#"><span
+				th:text="#{sales}"></span></a></li>
+		<li class="breadcrumb-item active" th:text="#{resultsearch}"></li>
+	</ol>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered table-hover"
+						id="dataTables-example">
+						<thead>
+							<tr>
+								<th th:text="#{numsale}"></th>
+								<th th:text="#{total}"></th>
+								<th th:text="#{place}"></th>
+								<th th:text="#{saledate}"></th>
+								<th th:text="#{discount}"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="sale:${sales}">
+								<td th:text="${sale.numsale}"></td>
+								<td><span th:text="${sale.total}"><i class="fas fa-euro-sign"></i></span>
+								</td>
+								<td th:text="${sale.place.description}"></td>
+								<td th:text="${sale.saledate}"></td>
+								<td th:text="${sale.discount}"><i class="fas fa-euro-sign"></i></td>
+							</tr>
+							<tr th:each="sale:${salespostponed}">
+								<td th:text="${sale.idsalepostponed}"></td>
+								<td th:text="${sale.totalamount}"></td>
+								<td th:text="${sale.place.description}"></td>
+								<td th:text="${sale.dateretired}"></td>
+								<td th:text="#{salepostponed}"></td>
+							</tr>
+							<tr th:each="strap:${straps}">
+								<td th:text="${strap.numsale}"></td>
+								<td th:text="${strap.amount}"></td>
+								<td th:text="${strap.place.description}"></td>
+								<td th:text="#{strap}"></td>
+								<td></td>
+							</tr>
+							<tr th:each="battery:${batteries}">
+								<td th:text="${battery.numsale}"></td>
+								<td th:text="${battery.amount}"></td>
+								<td th:text="${battery.place.description}"></td>
+								<td th:text="#{battery}"></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="form-group">
+							<span th:text="#{totalamount}"></span>
+							<th:block th:text="${total}" />
+							<i class="fas fa-euro-sign"></i>
+						</div>
+						<div class="form-group">
+							<span th:text="#{cost}"></span>
+							<th:block th:text value="${cost}" />
+							<i class="fas fa-euro-sign"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</html>

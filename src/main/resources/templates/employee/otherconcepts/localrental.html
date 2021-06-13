@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="employee/templateDateMonth :: page">
+<div th:fragment="content">
+	<form method="post" th:action="@{/employee/savelocalrental}"
+		th:object="${rentalForm}" role="form" autocomplete="off">
+		<!-- Breadcrumbs-->
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="#"><span
+					th:text="#{othersconcepts}"></span></a></li>
+			<li class="breadcrumb-item active" th:text="#{localrental}"></li>
+		</ol>
+		<div class="form-row">
+			<div class="col-lg-12">
+				<div class="card-body">
+					<div class="form-row">
+						<div class="col-lg-6">
+							<div class="form-group">
+								<input class="form-control" th:field="*{amount}"
+									th:placeholder="#{amount}" />
+								<p class="text-danger" th:if="${#fields.hasErrors('amount')}"
+									th:erros="*{amount}"></p>
+							</div>
+							<div class="form-group">
+								<div id="sandbox-container">
+									<input class="form-control" type="text"
+										th:field="*{rentaldate}" th:placeholder="#{monthrentaldate}" />
+								</div>
+								<p class="text-danger"
+									th:if="${#fields.hasErrors('rentaldate')}"
+									th:errors="rentaldate"></p>
+							</div>
+							<div class="form-group">
+								<button class="btn btn-primary" value="submit">
+									<span th:text="#{save}"></span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+</html>

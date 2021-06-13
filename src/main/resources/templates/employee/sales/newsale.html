@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="employee/template :: page">
+<div th:fragment="content">
+	<form method="post" th:action="@{/employee/resultsale}"
+		th:object="${saleForm}" role="form">
+		<!-- Breadcrumbs-->
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item active" th:text="#{newsale}"></li>
+		</ol>
+		<div class="card-body">
+			<div class="table-responsive">
+				<table class="table">
+					<tbody>
+						<tr>
+							<td><input class="form-control" th:field="*{numsale}"
+								th:placeholder="#{numberofsale}"></td>
+							<td th:if="${#fields.hasErrors('numsale')}"
+								th:errors="*{numsale}" class="text-danger"></td>
+							<td><select th:field="*{payment.idpayment}"
+								class="form-control"><option
+										th:each="payment:${payments}" th:value="${payment.idpayment}"
+										th:text="${payment.name}" />
+							</select></td>
+						</tr>
+						<tr th:each="jewel:${saleForm.jewels}">
+							<td><input class="form-control"
+								th:field="*{jewels[__${jewelStat.index}__].reference}"
+								th:placeholder="#{reference}"></td>
+							<td><select class="form-control"
+								th:field="*{jewels[__${jewelStat.index}__].category.idcategory}">
+									<option th:each="category:${categories}"
+										th:value="${category.idcategory}"
+										th:text="${category.namecategory}" />
+							</select></td>
+							<td><select class="form-control"
+								th:field="*{jewels[__${jewelStat.index}__].metal.idmetal}">
+									<option th:each="material:${materials}"
+										th:value="${material.idmetal}"
+										th:text="${material.description}" />
+							</select></td>
+						</tr>
+						<tr>
+							<td><input class="form-control" th:field="*{discount}"
+								th:placeholder="#{discount}"></td>
+							<td th:if="${#fields.hasErrors('numsale')}"
+								th:errors="*{numsale}" class="text-danger"></td>
+							<td><button class="btn btn-primary" value="submit">
+									<span th:text="#{save}"></span>
+								</button></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="form-row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<span th:text="#{clientdiscount}"></span> <input
+							class="form-control" th:field="*{iddiscount}" />
+					</div>
+					<div class="form-group">
+						<span th:text="#{severalpayments}"></span> <input
+							class="form-control" th:field="*{optionalpayment}" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+</html>

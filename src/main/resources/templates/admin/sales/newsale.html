@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="admin/templateAdmin :: page">
+<div th:fragment="content">
+	<!-- Breadcrumbs-->
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#"><span
+				th:text="#{sales}"></span></a></li>
+		<li class="breadcrumb-item active" th:text="#{newsale}"></li>
+	</ol>
+	<form method="post" th:action="@{/resultsale}" th:object="${saleForm}"
+		role="form">
+		<div class="card-body">
+			<div class="table-responsive">
+				<table class="table">
+					<tbody>
+						<tr>
+							<td><input class="form-control" th:field="*{numsale}"
+								th:placeholder="#{numberofsale}"></td>
+							<td><span th:text="#{payment}"></span><select
+								th:field="*{payment.idpayment}" class="form-control"><option
+										th:each="payment:${payments}" th:value="${payment.idpayment}"
+										th:text="${payment.name}" />
+							</select></td>
+							<td><span th:text="#{place}"></span><select
+								th:field="*{place.idplace}" class="form-control">
+									<option th:each="place : ${places}" th:value="${place.idplace}"
+										th:text="${place.description}" />
+							</select></td>
+						</tr>
+						<tr th:each="jewel:${saleForm.jewels}">
+							<td><input class="form-control"
+								th:field="*{jewels[__${jewelStat.index}__].reference}"
+								th:placeholder="#{reference}"></td>
+							<td><select class="form-control"
+								th:field="*{jewels[__${jewelStat.index}__].category.idcategory}">
+									<option th:each="category:${categories}"
+										th:value="${category.idcategory}"
+										th:text="${category.namecategory}" />
+							</select></td>
+							<td><select class="form-control"
+								th:field="*{jewels[__${jewelStat.index}__].metal.idmetal}">
+									<option th:each="material:${materials}"
+										th:value="${material.idmetal}"
+										th:text="${material.description}" />
+							</select></td>
+						</tr>
+						<tr>
+							<td>
+								<div id="sandbox-container">
+									<input class="form-control" type="text" th:field="*{saledate}"
+										th:placeholder="#{saledate}" autocomplete="off" />
+								</div>
+							</td>
+							<td><input class="form-control" th:field="*{discount}"
+								th:placeholder="#{discount}"></td>
+							<td><button class="btn btn-primary" value="submit">
+									<span th:text="#{save}"></span>
+								</button></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="form-row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<span th:text="#{clientdiscount}"></span> <input
+							class="form-control" th:field="*{iddiscount}" />
+					</div>
+					<div class="form-group">
+						<span th:text="#{severalpayments}"></span> <input
+							class="form-control" th:field="*{optionalpayment}" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+</html>

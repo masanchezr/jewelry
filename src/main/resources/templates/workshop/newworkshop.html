@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:include="workshop/templateWorkshop:: page">
+<div th:fragment="content">
+	<form method="post" th:action="@{/workshop/saveworkshop}" th:object="${workshop}">
+		<div class="panel card-default">
+			<div class="card-heading">
+				<span th:text="#{newworkshop}"></span>
+			</div>
+			<div class="card-body">
+				<div class="form-group">
+					<input class="form-control" th:field="*{description}"
+						th:placeholder="#{description}" /> <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('description')}"
+						th:errors="description"></small>
+				</div>
+				<div class="form-group">
+					<input class="form-control" th:field="*{grams}" th:placeholder="#{grams}" />
+					<small class="form-text text-danger"
+						th:if="${#fields.hasErrors('grams')}" th:errors="grams"></small>
+				</div>
+				<div class="form-group">
+					<span th:text="#{material}"></span> <select
+						th:field="*{metal.idmetal}" class="form-control">
+						<option th:each="material : ${materials}"
+							th:value="${material.idmetal}" th:text="${material.description}" />
+					</select>
+				</div>
+				<div class="form-group">
+					<input class="form-control" th:field="*{amount}" th:placeholder="#{amount}" />
+					<small class="form-text text-danger"
+						th:if="${#fields.hasErrors('amount')}" th:erros="*{amount}"></small>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-primary" value="submit">
+						<span th:text="#{save}"></span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+</html>
