@@ -31,7 +31,7 @@
 				<activatedProperties>prod</activatedProperties>
 			</properties>
 			<build>
-				<finalName>joyeria</finalName>
+				<finalName>ROOT</finalName>
 				<plugins>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
