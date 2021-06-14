@@ -64,10 +64,6 @@
 		<class-a>com.je.jsboot.services.incidents.Incident</class-a>
 		<class-b>com.je.jsboot.dbaccess.entities.IncidentEntity</class-b>
 		<field>
-			<a>user</a>
-			<b>username.username</b>
-		</field>
-		<field>
 			<a>date</a>
 			<b>creationdate</b>
 		</field>

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.je.jsboot.dbaccess.entities.IncidentEntity;
 import com.je.jsboot.dbaccess.entities.UserEntity;
 import com.je.jsboot.dbaccess.repositories.IncidentRepository;
+import com.je.jsboot.dbaccess.repositories.UsersRepository;
 import com.je.jsboot.forms.SearchForm;
 import com.je.jsboot.services.mails.MailService;
 import com.je.jsboot.utils.date.DateUtil;
@@ -24,6 +25,9 @@ public class IncidentServiceImpl implements IncidentService {
 	private IncidentRepository incidentRepository;
 
 	@Autowired
+	private UsersRepository usersRepository;
+
+	@Autowired
 	private Mapper mapper;
 
 	@Override
@@ -31,6 +35,7 @@ public class IncidentServiceImpl implements IncidentService {
 		MailService mailIncidentService;
 		IncidentEntity entity = mapper.map(incident, IncidentEntity.class);
 		entity.setCreationdate(new Date());
+		entity.setUsername(usersRepository.findByUsername(incident.getUser()));
 		entity = incidentRepository.save(entity);
 		incident.setIdincident(entity.getIdincident());
 		mailIncidentService = new MailService("Número de incidencia: " + entity.getIdincident() + " usuario: "
