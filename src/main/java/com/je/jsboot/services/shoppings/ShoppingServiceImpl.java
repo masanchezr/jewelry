@@ -26,11 +26,13 @@ import com.je.jsboot.admin.forms.SearchMissingNumbers;
 import com.je.jsboot.dbaccess.entities.ClientPawnEntity;
 import com.je.jsboot.dbaccess.entities.MetalEntity;
 import com.je.jsboot.dbaccess.entities.ObjectShopEntity;
+import com.je.jsboot.dbaccess.entities.PawnEntity;
 import com.je.jsboot.dbaccess.entities.PaymentEntity;
 import com.je.jsboot.dbaccess.entities.PaymentShopEntity;
 import com.je.jsboot.dbaccess.entities.PlaceEntity;
 import com.je.jsboot.dbaccess.entities.ShoppingEntity;
 import com.je.jsboot.dbaccess.repositories.ClientPawnsRepository;
+import com.je.jsboot.dbaccess.repositories.PawnsRepository;
 import com.je.jsboot.dbaccess.repositories.PlaceUserRepository;
 import com.je.jsboot.dbaccess.repositories.ShoppingsRepository;
 import com.je.jsboot.services.dailies.Daily;
@@ -45,20 +47,24 @@ import com.je.jsboot.utils.string.Util;
 @Service
 public class ShoppingServiceImpl implements ShoppingService {
 
+	/** The client pawns repository. */
+	@Autowired
+	private ClientPawnsRepository clientPawnsRepository;
+
 	/** The daily service. */
 	@Autowired
 	private DailyService dailyService;
 
-	/** The shoppings repository. */
+	/** The pawns repository. */
 	@Autowired
-	private ShoppingsRepository shoppingsRepository;
+	private PawnsRepository pawnsRepository;
 
 	@Autowired
 	private PlaceUserRepository placeUserRepository;
 
-	/** The client pawns repository. */
+	/** The shoppings repository. */
 	@Autowired
-	private ClientPawnsRepository clientPawnsRepository;
+	private ShoppingsRepository shoppingsRepository;
 
 	/** The mapper. */
 	@Autowired
@@ -292,7 +298,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 			Cell country = row.createCell(6);
 			Cell objects = row.createCell(7);
 			Cell material = row.createCell(8);
-			Cell record = row.createCell(9);
+			Cell recording = row.createCell(9);
 			Cell rock = row.createCell(10);
 			List<Shopping> shoppings = searchShoppings(datefrom, dateuntil, place, null);
 			List<ObjectShopEntity> lobjects;
@@ -322,8 +328,8 @@ public class ShoppingServiceImpl implements ShoppingService {
 			objects.setCellStyle(style);
 			material.setCellValue("METAL");
 			material.setCellStyle(style);
-			record.setCellValue("GRABACIONES");
-			record.setCellStyle(style);
+			recording.setCellValue("GRABACIONES");
+			recording.setCellStyle(style);
 			rock.setCellValue("PIEDRAS");
 			rock.setCellStyle(style);
 			row = spreadsheet.createRow(i);
@@ -337,7 +343,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 				country = row.createCell(6);
 				objects = row.createCell(7);
 				material = row.createCell(8);
-				record = row.createCell(9);
+				recording = row.createCell(9);
 				rock = row.createCell(10);
 				shop = ishoppings.next();
 				numshop.setCellValue(shop.getNumshop());
@@ -354,7 +360,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 					material.setCellValue(os.getMetal().getDescription());
 					description = os.getDescription();
 					descriptions = description.split(";");
-					i = setCells(descriptions, spreadsheet, objects, record, rock, i);
+					i = setCells(descriptions, spreadsheet, objects, recording, rock, i);
 					row = spreadsheet.createRow(i);
 					material = row.createCell(8);
 					objects = row.createCell(7);
@@ -376,7 +382,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 		}
 	}
 
-	private int setCells(String[] descriptions, XSSFSheet spreadsheet, Cell objects, Cell record, Cell rock, int i) {
+	private int setCells(String[] descriptions, XSSFSheet spreadsheet, Cell objects, Cell recording, Cell rock, int i) {
 		String descrip;
 		XSSFRow row;
 		for (int d = 0; d < descriptions.length; d++) {
@@ -384,15 +390,15 @@ public class ShoppingServiceImpl implements ShoppingService {
 			if (d > 0) {
 				row = spreadsheet.createRow(i);
 				objects = row.createCell(7);
-				record = row.createCell(9);
+				recording = row.createCell(9);
 				rock = row.createCell(10);
 			}
 			if (descrip.contains("p:") && descrip.contains("g:")) {
 				rock.setCellValue(descrip.substring(descrip.indexOf("p:"), descrip.indexOf("g:")));
-				record.setCellValue(descrip.substring(descrip.indexOf("g:") + 2, descrip.length()));
+				recording.setCellValue(descrip.substring(descrip.indexOf("g:") + 2, descrip.length()));
 				objects.setCellValue(descrip.substring(0, descrip.indexOf("p:")));
 			} else if (descrip.contains("g:")) {
-				record.setCellValue(descrip.substring(descrip.indexOf("g:") + 2, descrip.length()));
+				recording.setCellValue(descrip.substring(descrip.indexOf("g:") + 2, descrip.length()));
 				objects.setCellValue(descrip.substring(0, descrip.indexOf("g:")));
 			} else if (descrip.contains("p:")) {
 				rock.setCellValue(descrip.substring(descrip.indexOf("p:") + 2, descrip.length()));
@@ -498,9 +504,12 @@ public class ShoppingServiceImpl implements ShoppingService {
 		ShoppingEntity searchShopping = null;
 		if (Util.isNumeric(num)) {
 			searchShopping = shoppingsRepository.findByNumshopAndPlaceAndYear(Long.valueOf(num), placeEntity, year);
-		}
-		if (searchShopping == null) {
-			repeat = false;
+			if (searchShopping == null) {
+				List<PawnEntity> pawns = pawnsRepository.findByNumpawnAndPlaceAndYear(num, placeEntity, year);
+				if (pawns == null || pawns.isEmpty()) {
+					repeat = false;
+				}
+			}
 		}
 		return repeat;
 	}

@@ -107,7 +107,7 @@ public class JsbootSecurityConfig {
 							"/searchcalculatedailies", "/outofdate", "/searchEntries", "/upload", "/investedMoney",
 							"/checkinventory", "/searchgramsnull", "/searchsumadjustments", "/searchadjustment",
 							"/tomelloso", "/exceltomelloso", "/newsale", "/searchsalepostponed", "/allcoins",
-							"/searchRegisterEmployees", "/newcoin", "/searchByPrice")
+							"/searchRegisterEmployees", "/newcoin", "/beforeday*", "/againday*", "/searchByPrice")
 					.hasRole(ROLEADMIN).anyRequest().authenticated().and().formLogin().loginPage(LOGINURL).permitAll()
 					.defaultSuccessUrl(ADMINURL, true).failureForwardUrl(LOGINURL).and().exceptionHandling()
 					.accessDeniedPage("/403admin").and().logout().logoutUrl("/j_spring_security_logout")
