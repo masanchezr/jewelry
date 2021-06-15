@@ -226,6 +226,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 			os = shopping.getMoreobject();
 			if (os != null && os.getRealgrams() != null) {
 				os.setShop(shoppingEntity);
+				shoppingEntity.getObjects().add(os);
 			}
 			shoppingEntity.setMeltdate(new Date());
 			shoppingsRepository.save(shoppingEntity);
