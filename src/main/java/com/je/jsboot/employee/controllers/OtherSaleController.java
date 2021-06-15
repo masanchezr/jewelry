@@ -74,7 +74,7 @@ public class OtherSaleController {
 			model.addObject(FORMRECORDING, recording);
 			model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
 			model.addObject(TYPES, otherSaleService.findAllTypes());
-		} else if (numsale != null && searchSaleRepeatedService.isSaleRepeated(numsale, DateUtil.getYear(today))) {
+		} else if (numsale != null && !searchSaleRepeatedService.isNotRepeatSale(numsale, DateUtil.getYear(today))) {
 			model.setViewName(VIEWNEWRECORDING);
 			model.addObject(FORMRECORDING, recording);
 			model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());

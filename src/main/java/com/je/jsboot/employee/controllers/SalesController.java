@@ -95,7 +95,7 @@ public class SalesController {
 				sale.setJewels(newjewels);
 				sale.setPlace(place);
 				// comprobamos si ya existe la venta
-				if (!searchSaleRepeatedService.isSaleRepeated(sale.getNumsale(), DateUtil.getYear(new Date()))) {
+				if (searchSaleRepeatedService.isNotRepeatSale(sale.getNumsale(), DateUtil.getYear(new Date()))) {
 					saleService.buy(sale);
 					model.setViewName("employee/sales/finishsale");
 					model.addObject(ConstantsViews.FORMSALE, sale);
