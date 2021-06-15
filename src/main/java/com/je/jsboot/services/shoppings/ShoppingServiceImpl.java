@@ -205,7 +205,6 @@ public class ShoppingServiceImpl implements ShoppingService {
 		if (shoppingEntity != null) {
 			List<ObjectShopEntity> objects = shoppingEntity.getObjects();
 			Iterator<ObjectShopEntity> iobjects;
-			List<ObjectShopEntity> newobjects = new ArrayList<>();
 			List<ObjectShopEntity> los = shopping.getObjects();
 			ObjectShopEntity object;
 			ObjectShopEntity os;
@@ -221,16 +220,13 @@ public class ShoppingServiceImpl implements ShoppingService {
 						object.setNetgrams(os.getNetgrams());
 						object.setAmount(os.getAmount());
 						object.setMetal(os.getMetal());
-						newobjects.add(object);
 					}
 				}
 			}
 			os = shopping.getMoreobject();
 			if (os != null && os.getRealgrams() != null) {
 				os.setShop(shoppingEntity);
-				newobjects.add(shopping.getMoreobject());
 			}
-			shoppingEntity.setObjects(newobjects);
 			shoppingEntity.setMeltdate(new Date());
 			shoppingsRepository.save(shoppingEntity);
 		}
