@@ -128,7 +128,7 @@ public class PawnServiceImpl implements PawnService {
 			while (iobjects.hasNext()) {
 				ope = iobjects.next();
 				if (ope.getGrossgrams() != null) {
-					ope.setPawn(pawnEntity);
+					// ope.setPawn(pawnEntity);
 					newobjects.add(ope);
 				}
 			}
