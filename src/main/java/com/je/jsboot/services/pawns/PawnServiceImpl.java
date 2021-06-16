@@ -107,33 +107,32 @@ public class PawnServiceImpl implements PawnService {
 		if (pawnEntity != null) {
 			pawnEntity.setReturnpawn(Boolean.TRUE);
 			pawnsRepository.save(pawnEntity);
-			pawnEntity.setAmount(pawnEnt.getAmount());
-			pawnEntity.setPercent(pawnEnt.getPercent());
-			pawnEntity.setCreationdate(new Date());
-			pawnEntity.setIdpawn(null);
-			pawnEntity.setRenovations(null);
-			pawnEntity.setDateretired(null);
-			pawnEntity.setObjects(null);
-			pawnEntity.setMonths(null);
-			pawnEntity.setReturnpawn(Boolean.FALSE);
-			pawnEntity.setIdreturnpawn(pawn.getId());
+			PawnEntity newpawn = new PawnEntity();
+			newpawn.setAmount(pawnEnt.getAmount());
+			newpawn.setPercent(pawnEnt.getPercent());
+			newpawn.setCreationdate(new Date());
+			newpawn.setReturnpawn(Boolean.FALSE);
+			newpawn.setIdreturnpawn(pawn.getId());
+			newpawn.setClient(pawnEntity.getClient());
+			newpawn.setNumpawn(pawnEntity.getNumpawn());
+			newpawn.setPlace(pawnEntity.getPlace());
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTime(pawnEntity.getCreationdate());
 			int year = calendar.get(Calendar.YEAR);
 			List<ObjectPawnEntity> newobjects = new ArrayList<>();
 			List<ObjectPawnEntity> object = pawnEnt.getObjects();
 			Iterator<ObjectPawnEntity> iobjects = object.iterator();
-			pawnEntity.setYear(year);
+			newpawn.setYear(year);
 			ObjectPawnEntity ope;
 			while (iobjects.hasNext()) {
 				ope = iobjects.next();
 				if (ope.getGrossgrams() != null) {
-					// ope.setPawn(pawnEntity);
+					ope.setPawn(newpawn);
 					newobjects.add(ope);
 				}
 			}
-			pawnEntity.setObjects(newobjects);
-			pawnsRepository.save(pawnEntity);
+			newpawn.setObjects(newobjects);
+			pawnsRepository.save(newpawn);
 		}
 		return dailyService.getDaily(datedaily, place, null);
 	}
