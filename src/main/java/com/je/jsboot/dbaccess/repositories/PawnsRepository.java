@@ -56,8 +56,6 @@ public interface PawnsRepository extends CrudRepository<PawnEntity, Long> {
 
 	public List<PawnEntity> findByDateretiredAndPlace(@Temporal(TemporalType.DATE) Date date, PlaceEntity placeEntity);
 
-	public List<PawnEntity> findByNumpawnAndPlaceAndYear(String string, PlaceEntity place, int year);
-
 	public List<PawnEntity> findByDateretiredBetweenAndPlace(Date dfrom, Date duntil, PlaceEntity place);
 
 	@Query("select distinct p from PawnEntity p join p.objects o where p.place=:place and p.dateretired is null and o.realgrams is null")
@@ -84,4 +82,7 @@ public interface PawnsRepository extends CrudRepository<PawnEntity, Long> {
 
 	public List<PawnEntity> findByClientAndPlaceAndDateretiredIsNotNullAndReturnpawnFalse(ClientPawnEntity client,
 			PlaceEntity placeEntity);
+
+	public List<PawnEntity> findByNumpawnAndPlaceAndYearAndIdreturnpawnIsNull(String num, PlaceEntity placeEntity,
+			int year);
 }

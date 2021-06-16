@@ -502,7 +502,8 @@ public class ShoppingServiceImpl implements ShoppingService {
 		if (Util.isNumeric(num)) {
 			searchShopping = shoppingsRepository.findByNumshopAndPlaceAndYear(Long.valueOf(num), placeEntity, year);
 			if (searchShopping == null) {
-				List<PawnEntity> pawns = pawnsRepository.findByNumpawnAndPlaceAndYear(num, placeEntity, year);
+				List<PawnEntity> pawns = pawnsRepository.findByNumpawnAndPlaceAndYearAndIdreturnpawnIsNull(num,
+						placeEntity, year);
 				if (pawns == null || pawns.isEmpty()) {
 					repeat = false;
 				}

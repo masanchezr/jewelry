@@ -37,7 +37,8 @@ public class SearchMissingNumberServiceImpl implements SearchMissingNumberServic
 		for (long i = form.getNumfrom(); i <= form.getNumuntil(); i++) {
 			entity = shoppingsRepository.findByNumshopAndPlaceAndYear(i, place, year);
 			if (entity == null) {
-				pawns = pawnsRepository.findByNumpawnAndPlaceAndYear(String.valueOf(i), place, year);
+				pawns = pawnsRepository.findByNumpawnAndPlaceAndYearAndIdreturnpawnIsNull(String.valueOf(i), place,
+						year);
 				if (pawns == null || pawns.isEmpty()) {
 					nummissings.add(i);
 				}
