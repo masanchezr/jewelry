@@ -369,6 +369,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 			String path = System.getenv(Constants.OPENSHIFT_DATA_DIR);
 			logger.warn("path: ".concat(path));
 			File file = new File(path.concat("workbook.xlsx"));
+			file.setWritable(true);
 			if (file == null) {
 				logger.warn("file null");
 			} else {
