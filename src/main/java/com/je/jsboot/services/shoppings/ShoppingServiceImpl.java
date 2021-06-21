@@ -372,7 +372,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 			if (file == null) {
 				logger.warn("file null");
 			} else {
-				logger.warn("file not null");
+				logger.warn(file.getAbsolutePath());
 			}
 			FileOutputStream out = new FileOutputStream(file);
 			if (out == null) {
@@ -390,7 +390,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 			out.close();
 			return file;
 		} catch (IOException e) {
-			logger.error(java.util.logging.Level.SEVERE.getName());
+			logger.error(java.util.logging.Level.SEVERE.getName(), e);
 			return null;
 		}
 	}
