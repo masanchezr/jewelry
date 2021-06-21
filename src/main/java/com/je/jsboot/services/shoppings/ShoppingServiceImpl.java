@@ -367,6 +367,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 				spreadsheet.autoSizeColumn(i);
 			}
 			String path = System.getenv(Constants.OPENSHIFT_DATA_DIR);
+			logger.warn("path: ".concat(path));
 			File file = new File(path.concat("workbook.xlsx"));
 			FileOutputStream out = new FileOutputStream(file);
 			// write operation workbook using file out object
