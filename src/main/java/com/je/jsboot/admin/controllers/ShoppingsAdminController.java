@@ -322,24 +322,17 @@ public class ShoppingsAdminController {
 	}
 
 	@PostMapping("/downloadexcel")
-	public ModelAndView downloadexcel(
+	public void downloadexcel(
 			@Validated(SearchFormValidator.class) @ModelAttribute(ConstantsViews.FORMSEARCH) SearchForm form,
-			BindingResult result, HttpServletResponse response) {
-		ModelAndView model = new ModelAndView("admin/shoppings/exceltomelloso");
-		if (result.hasErrors()) {
-			model.addObject(ConstantsViews.FORMSEARCH, new SearchForm());
-		} else {
-			File file = shoppingService.generateExcel(form.getDatefrom(), form.getDateuntil());
-			try (InputStream inputStream = new FileInputStream(file)) {
-				response.setContentType("application/force-download");
-				response.setHeader("Content-Disposition", "attachment; filename=workbook.xlsx");
-				IOUtils.copy(inputStream, response.getOutputStream());
-				response.flushBuffer();
-			} catch (IOException e) {
-				logger.error(java.util.logging.Level.SEVERE.getName());
-			}
+			HttpServletResponse response) {
+		File file = shoppingService.generateExcel(form.getDatefrom(), form.getDateuntil());
+		try (InputStream inputStream = new FileInputStream(file)) {
+			response.setContentType("application/force-download");
+			response.setHeader("Content-Disposition", "attachment; filename=workbook.xlsx");
+			IOUtils.copy(inputStream, response.getOutputStream());
+			response.flushBuffer();
+		} catch (IOException e) {
+			logger.error(java.util.logging.Level.SEVERE.getName());
 		}
-		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
-		return model;
 	}
 }
