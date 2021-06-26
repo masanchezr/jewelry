@@ -415,17 +415,27 @@ public class JewelsController {
 	}
 
 	@GetMapping("/image/{fileName}")
-	public void getImage(@PathVariable String fileName, HttpServletRequest req, HttpServletResponse res)
-			throws IOException {
+	public void getImage(@PathVariable String fileName, HttpServletRequest req, HttpServletResponse res) {
 		File file = new File(System.getenv(Constants.OPENSHIFT_DATA_DIR).concat(fileName).concat(Constants.JPG));
 		res.setHeader("Cache-Control", "no-store");
 		res.setHeader("Pragma", "no-cache");
 		res.setDateHeader("Expires", 0);
 		res.setContentType("image/x-png");
-		ServletOutputStream ostream = res.getOutputStream();
-		IOUtils.copy(new FileInputStream(file), ostream);
-		ostream.flush();
-		ostream.close();
+		try (ServletOutputStream ostream = res.getOutputStream()) {
+			copyFile(file, ostream);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void copyFile(File file, ServletOutputStream ostream) {
+		try (FileInputStream f = new FileInputStream(file)) {
+			IOUtils.copy(f, ostream);
+			ostream.flush();
+			ostream.close();
+		} catch (IOException f) {
+			f.printStackTrace();
+		}
 	}
 
 	@GetMapping("/endnewjewel")
