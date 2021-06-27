@@ -35,9 +35,8 @@ public class JsbootSecurityConfig {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http.antMatcher("/workshop/**").authorizeRequests().anyRequest().hasRole(ROLEJORGE).and().formLogin()
-					.loginPage(LOGINURL).permitAll().defaultSuccessUrl(ADMINURL, true)
-					.loginProcessingUrl("/workshop/jspringsecuritycheckws").failureForwardUrl(LOGINURL).and()
-					.exceptionHandling().accessDeniedPage("/403wks").and().logout()
+					.loginPage(LOGINURL).permitAll().defaultSuccessUrl(ADMINURL, true).failureForwardUrl("/403wks")
+					.and().exceptionHandling().accessDeniedPage("/403wks").and().logout()
 					.logoutUrl("/workshop/j_spring_security_logout").logoutSuccessUrl(LOGINURL)
 					.invalidateHttpSession(true);
 		}
@@ -74,10 +73,9 @@ public class JsbootSecurityConfig {
 					.antMatchers("/employee/renewPawn", "/employee/searchrenovations",
 							"/employee/resultRenovationsPawns")
 					.hasAnyRole(ROLEUSER, ROLENA).anyRequest().authenticated().and().formLogin().loginPage(LOGINURL)
-					.permitAll().defaultSuccessUrl(ADMINURL, true).loginProcessingUrl("/employee/jspringsecuritycheck")
-					.failureForwardUrl(LOGINURL).and().exceptionHandling().accessDeniedPage("/403").and().logout()
-					.logoutUrl("/employee/j_spring_security_logout").logoutSuccessUrl(LOGINURL)
-					.invalidateHttpSession(true);
+					.permitAll().defaultSuccessUrl(ADMINURL, true).failureForwardUrl("/403").and().exceptionHandling()
+					.accessDeniedPage("/403").and().logout().logoutUrl("/employee/j_spring_security_logout")
+					.logoutSuccessUrl(LOGINURL).invalidateHttpSession(true);
 		}
 
 		@Override
@@ -109,7 +107,7 @@ public class JsbootSecurityConfig {
 							"/tomelloso", "/exceltomelloso", "/newsale", "/searchsalepostponed", "/allcoins",
 							"/searchRegisterEmployees", "/newcoin", "/beforeday*", "/againday*", "/searchByPrice")
 					.hasRole(ROLEADMIN).anyRequest().authenticated().and().formLogin().loginPage(LOGINURL).permitAll()
-					.defaultSuccessUrl(ADMINURL, true).failureForwardUrl(LOGINURL).and().exceptionHandling()
+					.defaultSuccessUrl(ADMINURL, true).failureForwardUrl("/403admin").and().exceptionHandling()
 					.accessDeniedPage("/403admin").and().logout().logoutUrl("/j_spring_security_logout")
 					.logoutSuccessUrl(LOGINURL).invalidateHttpSession(true);
 		}

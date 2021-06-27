@@ -60,6 +60,7 @@ public class AdminController {
 			ipAddress = request.getRemoteAddr();
 		}
 		connectionService.saveConnection(ipAddress);
+		log.warn("probando admin");
 		return new ModelAndView("admin/admin", ConstantsViews.ADMINFORM, new AdminForm());
 	}
 
@@ -115,6 +116,7 @@ public class AdminController {
 	@RequestMapping("/403admin")
 	public ModelAndView accessDeniedPage() {
 		ModelAndView model = new ModelAndView("admin/403");
+		log.warn("probando 403");
 		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		return model;
 	}

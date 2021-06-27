@@ -5,7 +5,7 @@
 <link href="css/admin/sb-admin-2.css" rel="stylesheet">
 <!-- Bootstrap core JavaScript-->
 <script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core plugin JavaScript-->
 <script src="js/jquery.easing.min.js"></script>
 <title th:text="#{goldburgos}"></title>
@@ -38,9 +38,8 @@
 												type="password" th:placeholder="#{enterpassword}"
 												name='password' />
 										</div>
-										<input type="hidden" name="${_csrf.parameterName}"
-											value="${_csrf.token}" /> <input
-											class="btn btn-primary btn-block" name="submit" type="submit" />
+										<input class="btn btn-primary btn-block" name="submit"
+											type="submit" />
 									</form>
 									<div class="text-center">
 										<span th:text="#{accessdenied}"></span>

@@ -16,8 +16,8 @@
 									<div class="text-center">
 										<h1 class="h4 text-gray-900 mb-4" th:text="#{login}"></h1>
 									</div>
-									<form role="form" name='f'
-										th:action="@{/employee/jspringsecuritycheck}" method="post">
+									<form role="form" name='f' th:action="@{/employee/login}"
+										method="post">
 										<div class="form-group">
 											<label for="exampleInputEmail1" th:text="#{user}"></label> <input
 												id="exampleInputEmail1" th:placeholder="#{enteruser}"
