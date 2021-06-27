@@ -24,7 +24,7 @@ import com.je.jsboot.dbaccess.repositories.PlaceUserRepository;
 import com.je.jsboot.dbaccess.repositories.RenovationsRepository;
 import com.je.jsboot.services.dailies.Daily;
 import com.je.jsboot.services.dailies.DailyService;
-import com.je.jsboot.services.mails.MailService;
+import com.je.jsboot.services.mails.EmailService;
 import com.je.jsboot.utils.constants.Constants;
 import com.je.jsboot.utils.date.DateUtil;
 import com.je.jsboot.utils.string.Util;
@@ -38,6 +38,9 @@ public class PawnServiceImpl implements PawnService {
 	/** The daily service. */
 	@Autowired
 	private DailyService dailyService;
+
+	@Autowired
+	private EmailService emailService;
 
 	/** The pawns repository. */
 	@Autowired
@@ -269,7 +272,6 @@ public class PawnServiceImpl implements PawnService {
 
 	@Override
 	public Daily remove(Pawn pawn) {
-		MailService mailService;
 		Long idpawn = pawn.getId();
 		PawnEntity pawnEntity = pawnsRepository.findById(idpawn).orElse(null);
 		PlaceEntity place = null;
@@ -290,9 +292,9 @@ public class PawnServiceImpl implements PawnService {
 				pawns = pawnsRepository.searchMissingRenovations(idpawn);
 			}
 			if (pawns != null && !pawns.isEmpty()) {
-				mailService = new MailService("Número empeño: " + pawnEntity.getNumpawn() + ", fecha creación: "
-						+ pawnEntity.getCreationdate() + ", lugar:" + idplace, null, "REVISAR EMPEÑO.");
-				mailService.start();
+				emailService.sendSimpleMessage("mangeles.sanchez0807@gmail.com", "REVISAR EMPEÑO",
+						"Número empeño: " + pawnEntity.getNumpawn() + ", fecha creación: "
+								+ pawnEntity.getCreationdate() + ", lugar:" + idplace);
 			}
 		}
 		return dailyService.getDaily(DateUtil.getDateFormated(new Date()), place, null);

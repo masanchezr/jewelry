@@ -14,7 +14,7 @@ import com.je.jsboot.dbaccess.entities.UserEntity;
 import com.je.jsboot.dbaccess.repositories.IncidentRepository;
 import com.je.jsboot.dbaccess.repositories.UsersRepository;
 import com.je.jsboot.forms.SearchForm;
-import com.je.jsboot.services.mails.MailService;
+import com.je.jsboot.services.mails.EmailService;
 import com.je.jsboot.utils.date.DateUtil;
 import com.je.jsboot.utils.string.Util;
 
@@ -28,19 +28,21 @@ public class IncidentServiceImpl implements IncidentService {
 	private UsersRepository usersRepository;
 
 	@Autowired
+	private EmailService emailService;
+
+	@Autowired
 	private Mapper mapper;
 
 	@Override
 	public void save(Incident incident) {
-		MailService mailIncidentService;
 		IncidentEntity entity = mapper.map(incident, IncidentEntity.class);
 		entity.setCreationdate(new Date());
 		entity.setUsername(usersRepository.findByUsername(incident.getUser()));
 		entity = incidentRepository.save(entity);
 		incident.setIdincident(entity.getIdincident());
-		mailIncidentService = new MailService("Número de incidencia: " + entity.getIdincident() + " usuario: "
-				+ incident.getUser() + " descripción: " + incident.getDescription(), null, "NUEVA INCIDENCIA");
-		mailIncidentService.start();
+		emailService.sendSimpleMessage("mangeles.sanchez0807@gmail.com", "NUEVA INCIDENCIA",
+				"Número de incidencia: " + entity.getIdincident() + " usuario: " + incident.getUser() + " descripción: "
+						+ incident.getDescription());
 	}
 
 	@Override

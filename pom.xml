@@ -17,6 +17,7 @@
 	<description>Jewelry project for Spring Boot</description>
 	<properties>
 		<java.version>1.8</java.version>
+		<sourceEncoding>UTF-8</sourceEncoding>
 	</properties>
 	<profiles>
 		<profile>
@@ -102,6 +103,10 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
@@ -115,11 +120,6 @@
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.4</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-			<version>1.4.7</version>
 		</dependency>
 		<dependency>
 			<groupId>com.itextpdf</groupId>

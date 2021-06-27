@@ -29,7 +29,7 @@ import com.je.jsboot.dbaccess.managers.UsersManager;
 import com.je.jsboot.dbaccess.repositories.DiscountsRepository;
 import com.je.jsboot.forms.Payment;
 import com.je.jsboot.forms.Sale;
-import com.je.jsboot.services.mails.MailService;
+import com.je.jsboot.services.mails.EmailService;
 import com.je.jsboot.services.users.Client;
 import com.je.jsboot.utils.constants.Constants;
 import com.je.jsboot.utils.constants.ConstantsViews;
@@ -41,6 +41,9 @@ import com.je.jsboot.utils.string.Util;
  */
 @Service
 public class SaleServiceImpl implements SaleService {
+
+	@Autowired
+	private EmailService emailService;
 
 	@Autowired
 	private DiscountsRepository discountsRepository;
@@ -61,7 +64,6 @@ public class SaleServiceImpl implements SaleService {
 	public Long buy(Sale sale) {
 		// Tengo que crear un saleentity y varios salesjewels
 		SaleEntity saleEntity = new SaleEntity();
-		MailService mailService;
 		List<SalesJewels> salesJewels = new ArrayList<>();
 		List<SalesPayments> payments = new ArrayList<>();
 		Client saleclient = sale.getClient();
@@ -124,10 +126,8 @@ public class SaleServiceImpl implements SaleService {
 		saleEntity.setSpayments(payments);
 		sale.setTotal(saleEntity.getTotal());
 		if (sale.getNumsale() > 0 && !saleManager.existSale(sale.getNumsale() - 1)) {
-			mailService = new MailService(
-					"Número de venta " + sale.getNumsale() + " lugar: " + saleEntity.getPlace().getIdplace(), null,
-					"REVISAR NUMERO VENTA.");
-			mailService.start();
+			emailService.sendSimpleMessage("mangeles.sanchez0807@gmail.com", "REVISAR NÚMERO DE VENTA",
+					"Número de venta " + sale.getNumsale() + " lugar: " + saleEntity.getPlace().getIdplace());
 		}
 		return saleManager.buy(saleEntity);
 	}

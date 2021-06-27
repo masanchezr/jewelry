@@ -23,7 +23,7 @@ import com.je.jsboot.dbaccess.entities.JewelEntity;
 import com.je.jsboot.dbaccess.entities.PlaceEntity;
 import com.je.jsboot.services.categories.CategoriesService;
 import com.je.jsboot.services.jewels.JewelService;
-import com.je.jsboot.services.mails.MailService;
+import com.je.jsboot.services.mails.EmailService;
 import com.je.jsboot.services.search.SearchService;
 import com.je.jsboot.utils.constants.Constants;
 import com.je.jsboot.utils.constants.ConstantsViews;
@@ -42,6 +42,9 @@ public class HomeController {
 	/** The search categories service. */
 	@Autowired
 	private CategoriesService searchCategoriesService;
+
+	@Autowired
+	private EmailService emailService;
 
 	/** The jewel service. */
 	@Autowired
@@ -62,9 +65,7 @@ public class HomeController {
 			model.setViewName("web/messagesent");
 			model.addObject("messageForm", new MessageForm());
 		} else {
-			MailService mailService = new MailService(message.getMessage().concat(message.getEmail()), "Nuevo contacto",
-					null);
-			mailService.start();
+			emailService.sendSimpleMessage(null, null, null);
 			model.setViewName("web/messagesent");
 		}
 		return model;
@@ -282,6 +283,6 @@ public class HomeController {
 
 	@ModelAttribute("cart")
 	public List<JewelEntity> todos() {
-		return new ArrayList<JewelEntity>();
+		return new ArrayList<>();
 	}
 }

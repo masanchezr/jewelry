@@ -18,7 +18,7 @@ import com.je.jsboot.dbaccess.repositories.AdjustmentRepository;
 import com.je.jsboot.dbaccess.repositories.PlaceUserRepository;
 import com.je.jsboot.services.dailies.Daily;
 import com.je.jsboot.services.dailies.DailyService;
-import com.je.jsboot.services.mails.MailService;
+import com.je.jsboot.services.mails.EmailService;
 import com.je.jsboot.utils.constants.Constants;
 import com.je.jsboot.utils.date.DateUtil;
 import com.je.jsboot.utils.string.Util;
@@ -39,13 +39,15 @@ public class AdjustmentServiceImpl implements AdjustmentService {
 	@Autowired
 	private DailyService dailyService;
 
+	@Autowired
+	private EmailService emailService;
+
 	/** The mapper. */
 	@Autowired
 	private Mapper mapper;
 
 	@Override
 	public Daily save(Adjustment adjustment) {
-		MailService mailAdjustmentService;
 		// primeramente miramos si existe el arreglo
 		Long idadjustment = adjustment.getIdadjustment();
 		AdjustmentEntity adjustmentEntity = adjustmentRepository.findById(adjustment.getIdadjustment()).orElse(null);
@@ -59,11 +61,10 @@ public class AdjustmentServiceImpl implements AdjustmentService {
 				if (recommendedprice != null && recommendedprice.compareTo(BigDecimal.ZERO) > 0
 						&& recommendedprice.compareTo(amount) != 0) {
 					// envio un mail u otro tipo de alerta
-					mailAdjustmentService = new MailService(
+					emailService.sendSimpleMessage("mangeles.sanchez0807@gmail.com",
+							"Arreglo no coincide con precio recomendado.",
 							"N&uacute;mero de arreglo: " + idadjustment + ", importe recomendado:" + recommendedprice
-									+ " euros, importe cobrado al cliente:" + amount + " euros.",
-							null, "Arreglo no coincide con precio recomendado.");
-					mailAdjustmentService.start();
+									+ " euros, importe cobrado al cliente:" + amount + " euros.");
 				}
 			} else {
 				adjustmentEntity = new AdjustmentEntity();
