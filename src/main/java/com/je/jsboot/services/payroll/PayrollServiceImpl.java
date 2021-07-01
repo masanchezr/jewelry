@@ -34,7 +34,7 @@ public class PayrollServiceImpl implements PayrollService {
 
 	@Override
 	public Daily addPayroll(PayrollEntity payroll) {
-		List<PlaceUserEntity> lplue = placeUserRepository.findByUsername(payroll.getUser().getUsername());
+		List<PlaceUserEntity> lplue = placeUserRepository.findByUser(payroll.getUser());
 		payroll.setCreationdate(new Date());
 		payrollrepository.save(payroll);
 		return dailyService.getDaily(DateUtil.getDateFormated(new Date()), lplue.get(0).getPlace(), null);

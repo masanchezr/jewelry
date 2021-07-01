@@ -11,6 +11,7 @@ import com.je.jsboot.dbaccess.entities.EntryMoneyEntity;
 import com.je.jsboot.dbaccess.entities.PlaceEntity;
 import com.je.jsboot.dbaccess.repositories.EntryMoneyRepository;
 import com.je.jsboot.dbaccess.repositories.PlaceUserRepository;
+import com.je.jsboot.dbaccess.repositories.UsersRepository;
 import com.je.jsboot.services.dailies.Daily;
 import com.je.jsboot.services.dailies.DailyService;
 import com.je.jsboot.utils.date.DateUtil;
@@ -27,9 +28,12 @@ public class EntryMoneyServiceImpl implements EntryMoneyService {
 	@Autowired
 	private PlaceUserRepository placeUserRepository;
 
+	@Autowired
+	private UsersRepository usersRepository;
+
 	public Daily saveEntryMoney(String user, BigDecimal amount) {
 		EntryMoneyEntity entrymoney = new EntryMoneyEntity();
-		PlaceEntity place = placeUserRepository.findByUsername(user).get(0).getPlace();
+		PlaceEntity place = placeUserRepository.findByUser(usersRepository.findByUsername(user)).get(0).getPlace();
 		entrymoney.setAmount(amount);
 		entrymoney.setCreationdate(new Date());
 		entrymoney.setPlace(place);

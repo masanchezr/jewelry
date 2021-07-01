@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
 		if (entity == null) {
 			PlaceUserEntity pue = new PlaceUserEntity();
 			pue.setPlace(mapper.map(user.getPlace(), PlaceEntity.class));
-			pue.setUsername(username);
+			pue.setUser(entity);
 			placeUserRepository.save(pue);
 		}
 		user.setPassword(pbkdf2Encoder.encode(user.getPassword()));

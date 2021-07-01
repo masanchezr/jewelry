@@ -48,7 +48,7 @@ public class RegisterServiceImpl implements RegisterService {
 
 	public void register(String user, String ipaddress) {
 		Calendar calendar = Calendar.getInstance();
-		List<PlaceUserEntity> placeuser = placeUserRepository.findByUsername(user);
+		List<PlaceUserEntity> placeuser = placeUserRepository.findByUser(employeesRepository.findByUsername(user));
 		if (Calendar.SUNDAY != calendar.get(Calendar.DAY_OF_WEEK)
 				&& Calendar.SATURDAY != calendar.get(Calendar.DAY_OF_WEEK)
 				&& holidayRepository.findByHolidayAndPlace(calendar.getTime(), placeuser.get(0).getPlace()) == null) {

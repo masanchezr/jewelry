@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.je.jsboot.dbaccess.entities.PlaceEntity;
 import com.je.jsboot.dbaccess.entities.PlaceUserEntity;
+import com.je.jsboot.dbaccess.entities.UserEntity;
 import com.je.jsboot.dbaccess.repositories.PlaceRepository;
 import com.je.jsboot.dbaccess.repositories.PlaceUserRepository;
+import com.je.jsboot.dbaccess.repositories.UsersRepository;
 import com.je.jsboot.utils.constants.Constants;
 
 /**
@@ -26,6 +28,9 @@ public class PlaceServiceImpl implements PlaceService {
 	@Autowired
 	private PlaceUserRepository placeUserRepository;
 
+	@Autowired
+	private UsersRepository usersRepository;
+
 	@Override
 	public Iterable<PlaceEntity> getAllPlacesActive() {
 		return placeRepository.findByActiveTrueOrderByDescription();
@@ -38,7 +43,8 @@ public class PlaceServiceImpl implements PlaceService {
 
 	@Override
 	public PlaceEntity getPlaceUser(String user) {
-		List<PlaceUserEntity> placeuser = placeUserRepository.findByUsername(user);
+		UserEntity u = usersRepository.findByUsername(user);
+		List<PlaceUserEntity> placeuser = placeUserRepository.findByUser(u);
 		PlaceEntity place = null;
 		if (placeuser != null && !placeuser.isEmpty()) {
 			place = placeuser.get(0).getPlace();

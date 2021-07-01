@@ -32,7 +32,6 @@ import com.je.jsboot.dbaccess.entities.SaleEntity;
 import com.je.jsboot.dbaccess.entities.SalePostponedEntity;
 import com.je.jsboot.dbaccess.entities.SalesPayments;
 import com.je.jsboot.dbaccess.entities.ShoppingEntity;
-import com.je.jsboot.dbaccess.entities.UserEntity;
 import com.je.jsboot.dbaccess.managers.HolidaysManager;
 import com.je.jsboot.dbaccess.managers.SaleManager;
 import com.je.jsboot.dbaccess.repositories.AdjustmentRepository;
@@ -265,10 +264,9 @@ public class DailyServiceImpl implements DailyService {
 		List<PayrollEntity> payrollsview = new ArrayList<>();
 		if (placeUsers != null) {
 			Iterator<PlaceUserEntity> iplaceUsers = placeUsers.iterator();
-			UserEntity user = new UserEntity();
 			while (iplaceUsers.hasNext()) {
-				user.setUsername(iplaceUsers.next().getUsername());
-				List<PayrollEntity> payrolls = payrollRepository.findByCreationdateAndUser(date, user);
+				List<PayrollEntity> payrolls = payrollRepository.findByCreationdateAndUser(date,
+						iplaceUsers.next().getUser());
 				if (payrolls != null && !payrolls.isEmpty()) {
 					Iterator<PayrollEntity> ipayroll = payrolls.iterator();
 					PayrollEntity pre;

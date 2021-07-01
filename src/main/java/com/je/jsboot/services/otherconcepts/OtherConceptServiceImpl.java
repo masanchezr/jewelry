@@ -12,6 +12,7 @@ import com.je.jsboot.dbaccess.entities.PlaceEntity;
 import com.je.jsboot.dbaccess.entities.PlaceUserEntity;
 import com.je.jsboot.dbaccess.repositories.OtherConceptsRepository;
 import com.je.jsboot.dbaccess.repositories.PlaceUserRepository;
+import com.je.jsboot.dbaccess.repositories.UsersRepository;
 import com.je.jsboot.services.dailies.Daily;
 import com.je.jsboot.services.dailies.DailyService;
 import com.je.jsboot.utils.date.DateUtil;
@@ -33,13 +34,17 @@ public class OtherConceptServiceImpl implements OtherConceptService {
 	@Autowired
 	private PlaceUserRepository placeUserRepository;
 
+	@Autowired
+	private UsersRepository usersRepository;
+
 	/** The mapper. */
 	@Autowired
 	private Mapper mapper;
 
 	public Daily save(OtherConcept otherconcept) {
 		OtherConceptEntity otherConceptEntity = mapper.map(otherconcept, OtherConceptEntity.class);
-		List<PlaceUserEntity> places = placeUserRepository.findByUsername(otherconcept.getUser());
+		List<PlaceUserEntity> places = placeUserRepository
+				.findByUser(usersRepository.findByUsername(otherconcept.getUser()));
 		PlaceEntity place = places.get(0).getPlace();
 		otherConceptEntity.setPlace(place);
 		otherConceptEntity.setCreationdate(new Date());

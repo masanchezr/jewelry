@@ -23,8 +23,9 @@ public class PlaceUserEntity {
 	@JoinColumn(name = "IDPLACE", referencedColumnName = "IDPLACE")
 	private PlaceEntity place;
 
-	@Column(name = "USERNAME")
-	private String username;
+	@ManyToOne
+	@JoinColumn(name = "USERID", referencedColumnName = "ID")
+	private UserEntity user;
 
 	public Long getIdplacerole() {
 		return idplacerole;
@@ -42,11 +43,11 @@ public class PlaceUserEntity {
 		this.place = place;
 	}
 
-	public String getUsername() {
-		return username;
+	public UserEntity getUser() {
+		return user;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUser(UserEntity user) {
+		this.user = user;
 	}
 }

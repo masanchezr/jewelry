@@ -16,6 +16,7 @@ import com.je.jsboot.dbaccess.entities.PlaceEntity;
 import com.je.jsboot.dbaccess.entities.PlaceUserEntity;
 import com.je.jsboot.dbaccess.repositories.AdjustmentRepository;
 import com.je.jsboot.dbaccess.repositories.PlaceUserRepository;
+import com.je.jsboot.dbaccess.repositories.UsersRepository;
 import com.je.jsboot.services.dailies.Daily;
 import com.je.jsboot.services.dailies.DailyService;
 import com.je.jsboot.services.mails.EmailService;
@@ -37,6 +38,9 @@ public class AdjustmentServiceImpl implements AdjustmentService {
 	private PlaceUserRepository placeUserRepository;
 
 	@Autowired
+	private UsersRepository usersRepository;
+
+	@Autowired
 	private DailyService dailyService;
 
 	@Autowired
@@ -52,7 +56,8 @@ public class AdjustmentServiceImpl implements AdjustmentService {
 		Long idadjustment = adjustment.getIdadjustment();
 		AdjustmentEntity adjustmentEntity = adjustmentRepository.findById(adjustment.getIdadjustment()).orElse(null);
 		BigDecimal amount = Util.getNumber(adjustment.getAmount());
-		List<PlaceUserEntity> placeuser = placeUserRepository.findByUsername(adjustment.getUser());
+		List<PlaceUserEntity> placeuser = placeUserRepository
+				.findByUser(usersRepository.findByUsername(adjustment.getUser()));
 		PlaceEntity place = placeuser.get(0).getPlace();
 		if (amount != null) {
 			if (adjustmentEntity != null) {

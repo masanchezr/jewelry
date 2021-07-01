@@ -22,6 +22,7 @@ import com.je.jsboot.dbaccess.repositories.ClientPawnsRepository;
 import com.je.jsboot.dbaccess.repositories.PawnsRepository;
 import com.je.jsboot.dbaccess.repositories.PlaceUserRepository;
 import com.je.jsboot.dbaccess.repositories.RenovationsRepository;
+import com.je.jsboot.dbaccess.repositories.UsersRepository;
 import com.je.jsboot.services.dailies.Daily;
 import com.je.jsboot.services.dailies.DailyService;
 import com.je.jsboot.services.mails.EmailService;
@@ -42,20 +43,23 @@ public class PawnServiceImpl implements PawnService {
 	@Autowired
 	private EmailService emailService;
 
+	/** The client pawns repository. */
+	@Autowired
+	private ClientPawnsRepository clientPawnsRepository;
+
 	/** The pawns repository. */
 	@Autowired
 	private PawnsRepository pawnsRepository;
+
+	@Autowired
+	private PlaceUserRepository placeUserRepository;
 
 	/** The renovations repository. */
 	@Autowired
 	private RenovationsRepository renovationsRepository;
 
-	/** The client pawns repository. */
 	@Autowired
-	private ClientPawnsRepository clientPawnsRepository;
-
-	@Autowired
-	private PlaceUserRepository placeUserRepository;
+	private UsersRepository usersRepository;
 
 	/** The mapper. */
 	@Autowired
@@ -66,7 +70,8 @@ public class PawnServiceImpl implements PawnService {
 		// cuidado con el mapeo del creationdate
 		PawnEntity pawnEntity = mapper.map(pawn, PawnEntity.class);
 		ClientPawnEntity cpe = clientPawnsRepository.findById(pawn.getNif()).orElse(null);
-		PlaceEntity place = placeUserRepository.findByUsername(pawn.getUser()).get(0).getPlace();
+		PlaceEntity place = placeUserRepository.findByUser(usersRepository.findByUsername(pawn.getUser())).get(0)
+				.getPlace();
 		if (Util.isEmpty(pawn.getCreationdate())) {
 			pawnEntity.setCreationdate(new Date());
 		}
@@ -102,7 +107,8 @@ public class PawnServiceImpl implements PawnService {
 	public Daily saveReturnPawn(NewPawn pawn) {
 		PawnEntity pawnEnt = mapper.map(pawn, PawnEntity.class);
 		PawnEntity pawnEntity = pawnsRepository.findById(pawn.getId()).orElse(null);
-		PlaceEntity place = placeUserRepository.findByUsername(pawn.getUser()).get(0).getPlace();
+		PlaceEntity place = placeUserRepository.findByUser(usersRepository.findByUsername(pawn.getUser())).get(0)
+				.getPlace();
 		Date datedaily = pawnEnt.getCreationdate();
 		if (datedaily == null) {
 			datedaily = DateUtil.getDateFormated(new Date());
@@ -199,7 +205,8 @@ public class PawnServiceImpl implements PawnService {
 
 	@Override
 	public List<Pawn> searchRenewByNumpawn(Pawn pawn) {
-		PlaceEntity place = placeUserRepository.findByUsername(pawn.getUser()).get(0).getPlace();
+		PlaceEntity place = placeUserRepository.findByUser(usersRepository.findByUsername(pawn.getUser())).get(0)
+				.getPlace();
 		return mapper(pawnsRepository.findByNumpawnAndPlaceAndRetired(pawn.getNumpawn(), place));
 	}
 
@@ -238,7 +245,7 @@ public class PawnServiceImpl implements PawnService {
 			}
 		}
 		daily = dailyService.getDaily(DateUtil.getDateFormated(new Date()),
-				placeUserRepository.findByUsername(pawn.getUser()).get(0).getPlace(), null);
+				placeUserRepository.findByUser(usersRepository.findByUsername(pawn.getUser())).get(0).getPlace(), null);
 		return daily;
 	}
 
@@ -448,7 +455,7 @@ public class PawnServiceImpl implements PawnService {
 	@Override
 	public List<PawnEntity> getByNIFAndUserAndRetiredAndReturn(String nif, String user) {
 		ClientPawnEntity client = new ClientPawnEntity();
-		PlaceEntity place = placeUserRepository.findByUsername(user).get(0).getPlace();
+		PlaceEntity place = placeUserRepository.findByUser(usersRepository.findByUsername(user)).get(0).getPlace();
 		client.setNif(nif);
 		return pawnsRepository.findByClientAndPlaceAndDateretiredIsNotNullAndReturnpawnFalse(client, place);
 	}

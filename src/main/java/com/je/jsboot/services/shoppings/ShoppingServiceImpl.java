@@ -35,6 +35,7 @@ import com.je.jsboot.dbaccess.repositories.ClientPawnsRepository;
 import com.je.jsboot.dbaccess.repositories.PawnsRepository;
 import com.je.jsboot.dbaccess.repositories.PlaceUserRepository;
 import com.je.jsboot.dbaccess.repositories.ShoppingsRepository;
+import com.je.jsboot.dbaccess.repositories.UsersRepository;
 import com.je.jsboot.services.dailies.Daily;
 import com.je.jsboot.services.dailies.DailyService;
 import com.je.jsboot.utils.constants.Constants;
@@ -66,6 +67,9 @@ public class ShoppingServiceImpl implements ShoppingService {
 	@Autowired
 	private ShoppingsRepository shoppingsRepository;
 
+	@Autowired
+	private UsersRepository usersRepository;
+
 	/** The mapper. */
 	@Autowired
 	private Mapper mapper;
@@ -84,7 +88,8 @@ public class ShoppingServiceImpl implements ShoppingService {
 			shoppingEntity.setClient(cpe);
 		}
 		Calendar calendar = Calendar.getInstance();
-		PlaceEntity place = placeUserRepository.findByUsername(shopping.getUser()).get(0).getPlace();
+		PlaceEntity place = placeUserRepository.findByUser(usersRepository.findByUsername(shopping.getUser())).get(0)
+				.getPlace();
 		List<ObjectShopEntity> objects = shoppingEntity.getObjects();
 		List<ObjectShopEntity> newobjects = new ArrayList<>();
 		Iterator<ObjectShopEntity> iobjects = objects.iterator();
@@ -413,7 +418,8 @@ public class ShoppingServiceImpl implements ShoppingService {
 		Calendar c = Calendar.getInstance();
 		boolean isCorrectNumber = false;
 		Long number = shoppingForm.getNumshop();
-		PlaceEntity placeEntity = placeUserRepository.findByUsername(shoppingForm.getUser()).get(0).getPlace();
+		PlaceEntity placeEntity = placeUserRepository.findByUser(usersRepository.findByUsername(shoppingForm.getUser()))
+				.get(0).getPlace();
 		ShoppingEntity shopping = shoppingsRepository.findFirstByPlaceAndYearOrderByNumshopDesc(placeEntity,
 				c.get(Calendar.YEAR));
 		if (shopping == null) {
@@ -432,7 +438,8 @@ public class ShoppingServiceImpl implements ShoppingService {
 	public Long getNextNumber(String user) {
 		Calendar c = Calendar.getInstance();
 		Long number = null;
-		PlaceEntity placeEntity = placeUserRepository.findByUsername(user).get(0).getPlace();
+		PlaceEntity placeEntity = placeUserRepository.findByUser(usersRepository.findByUsername(user)).get(0)
+				.getPlace();
 		ShoppingEntity shopping = shoppingsRepository.findFirstByPlaceAndYearOrderByNumshopDesc(placeEntity,
 				c.get(Calendar.YEAR));
 		if (shopping != null) {
@@ -449,7 +456,8 @@ public class ShoppingServiceImpl implements ShoppingService {
 		clientPawnsRepository.save(cpe);
 		shoppingEntity.setClient(cpe);
 		Calendar calendar = Calendar.getInstance();
-		PlaceEntity place = placeUserRepository.findByUsername(shopping.getUser()).get(0).getPlace();
+		PlaceEntity place = placeUserRepository.findByUser(usersRepository.findByUsername(shopping.getUser())).get(0)
+				.getPlace();
 		List<ObjectShopEntity> objects = shoppingEntity.getObjects();
 		List<ObjectShopEntity> newobjects = new ArrayList<>();
 		Iterator<ObjectShopEntity> iobjects = objects.iterator();
@@ -497,7 +505,8 @@ public class ShoppingServiceImpl implements ShoppingService {
 	@Override
 	public boolean isRepeatNumber(String num, String user, int year) {
 		boolean repeat = true;
-		PlaceEntity placeEntity = placeUserRepository.findByUsername(user).get(0).getPlace();
+		PlaceEntity placeEntity = placeUserRepository.findByUser(usersRepository.findByUsername(user)).get(0)
+				.getPlace();
 		ShoppingEntity searchShopping = null;
 		if (Util.isNumeric(num)) {
 			searchShopping = shoppingsRepository.findByNumshopAndPlaceAndYear(Long.valueOf(num), placeEntity, year);

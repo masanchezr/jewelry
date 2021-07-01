@@ -11,6 +11,7 @@ import com.je.jsboot.dbaccess.entities.PlaceEntity;
 import com.je.jsboot.dbaccess.entities.RentalEntity;
 import com.je.jsboot.dbaccess.repositories.PlaceUserRepository;
 import com.je.jsboot.dbaccess.repositories.RentalsRepository;
+import com.je.jsboot.dbaccess.repositories.UsersRepository;
 import com.je.jsboot.services.dailies.Daily;
 import com.je.jsboot.services.dailies.DailyService;
 import com.je.jsboot.utils.date.DateUtil;
@@ -29,12 +30,16 @@ public class RentalServiceImpl implements RentalService {
 	private PlaceUserRepository placeUserRepository;
 
 	@Autowired
+	private UsersRepository usersRepository;
+
+	@Autowired
 	private Mapper mapper;
 
 	@Override
 	public Daily saveRental(Rental rental) {
 		Date date = DateUtil.getDate(rental.getRentaldate());
-		PlaceEntity place = placeUserRepository.findByUsername(rental.getUser()).get(0).getPlace();
+		PlaceEntity place = placeUserRepository.findByUser(usersRepository.findByUsername(rental.getUser())).get(0)
+				.getPlace();
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
 		String id = String.valueOf(calendar.get(Calendar.YEAR)).concat(String.valueOf(calendar.get(Calendar.MONTH) + 1))
@@ -54,8 +59,8 @@ public class RentalServiceImpl implements RentalService {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
 		String id = String.valueOf(calendar.get(Calendar.YEAR)).concat(String.valueOf(calendar.get(Calendar.MONTH) + 1))
-				.concat(String
-						.valueOf(placeUserRepository.findByUsername(rental.getUser()).get(0).getPlace().getIdplace()));
+				.concat(String.valueOf(placeUserRepository.findByUser(usersRepository.findByUsername(rental.getUser()))
+						.get(0).getPlace().getIdplace()));
 		return rentalsRepository.existsById(Long.valueOf(id));
 	}
 

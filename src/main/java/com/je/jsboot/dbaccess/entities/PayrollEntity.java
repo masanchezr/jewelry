@@ -43,7 +43,7 @@ public class PayrollEntity {
 
 	/** The place. */
 	@ManyToOne
-	@JoinColumn(name = "USERNAME", referencedColumnName = "USERNAME")
+	@JoinColumn(name = "USERID", referencedColumnName = "ID")
 	private UserEntity user;
 
 	@ManyToOne
