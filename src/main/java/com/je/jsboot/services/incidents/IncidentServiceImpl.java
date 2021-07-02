@@ -98,8 +98,7 @@ public class IncidentServiceImpl implements IncidentService {
 
 	@Override
 	public List<Incident> searchPendingByUser(String user) {
-		UserEntity entity = new UserEntity();
-		entity.setUsername(user);
+		UserEntity entity = usersRepository.findByUsername(user);
 		return mapper(incidentRepository.findByUsernameAndState(entity, Boolean.FALSE));
 	}
 

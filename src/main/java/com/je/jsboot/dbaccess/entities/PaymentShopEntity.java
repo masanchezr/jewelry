@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,8 +22,8 @@ public class PaymentShopEntity {
 	private Long idpaymentshop;
 
 	/** The pay. */
-	@JoinColumn(name = "IDPAYMENT")
-	@ManyToOne
+	@JoinColumn(name = "IDPAYMENT", referencedColumnName = "IDPAYMENT")
+	@ManyToOne(fetch = FetchType.EAGER)
 	private PaymentEntity payment;
 
 	/** The amount. */
