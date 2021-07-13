@@ -418,7 +418,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 		Long number = null;
 		PlaceEntity placeEntity = placeUserRepository.findByUser(usersRepository.findByUsername(user)).get(0)
 				.getPlace();
-		ShoppingEntity shopping = shoppingsRepository.findFirstByPlaceOrderByCreationdateDesc(placeEntity);
+		ShoppingEntity shopping = shoppingsRepository.findFirstByPlaceOrderByIdshopDesc(placeEntity);
 		if (shopping != null) {
 			number = shopping.getNumshop() + 1;
 		}
