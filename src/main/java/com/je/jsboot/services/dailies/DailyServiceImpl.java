@@ -392,7 +392,7 @@ public class DailyServiceImpl implements DailyService {
 	}
 
 	private double getSalesPostAmount(Date date, PlaceEntity place, Daily daily) {
-		List<SalePostponedEntity> salespost = salespostponedrepository.findByDateretiredAndPlace(date, place);
+		List<SalePostponedEntity> salespost = salespostponedrepository.findByDateretiredAndPlaceAndTimeoutFalse(date, place);
 		double salespostamount = 0;
 		if (salespost != null && !salespost.isEmpty()) {
 			Iterator<SalePostponedEntity> isalespost = salespost.iterator();

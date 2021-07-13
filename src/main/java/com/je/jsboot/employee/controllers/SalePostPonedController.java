@@ -129,7 +129,7 @@ public class SalePostPonedController {
 		return model;
 	}
 
-	@GetMapping("/employee//addinstallment")
+	@GetMapping("/employee/addinstallment")
 	public ModelAndView addinstallment() {
 		ModelAndView model = new ModelAndView(ADDINSTALLMENT);
 		model.addObject(INSTALLMENT, new Installment());
@@ -184,7 +184,7 @@ public class SalePostPonedController {
 		return model;
 	}
 
-	@GetMapping("/employee//howmanyamount")
+	@GetMapping("/employee/howmanyamount")
 	public ModelAndView howmanyamount(@ModelAttribute(ConstantsViews.FORMSALE) SalePostPoned sale, BindingResult arg1) {
 		ModelAndView model = new ModelAndView(ADDINSTALLMENT);
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, ConstantsViews.IDSALE, ConstantsViews.ERRORSELECTIDSALE);
