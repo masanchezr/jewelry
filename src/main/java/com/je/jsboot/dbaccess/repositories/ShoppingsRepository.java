@@ -77,7 +77,7 @@ public interface ShoppingsRepository extends CrudRepository<ShoppingEntity, Long
 			@Param("dateFrom") @Temporal(TemporalType.DATE) Date datefrom,
 			@Param("dateUntil") @Temporal(TemporalType.DATE) Date dateuntil);
 
-	public ShoppingEntity findFirstByPlaceAndYearOrderByNumshopDesc(PlaceEntity placeEntity, int i);
+	public ShoppingEntity findFirstByPlaceOrderByCreationdateDesc(PlaceEntity placeEntity);
 
 	public List<ShoppingEntity> findByPlaceAndYearOrderByNumshopDesc(PlaceEntity placeEntity, int i);
 
