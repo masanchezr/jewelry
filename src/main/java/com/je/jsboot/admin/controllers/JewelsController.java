@@ -256,6 +256,7 @@ public class JewelsController {
 			} else {
 				jewelf.setPlace(placeService.getPlace(jewelForm.getPlace().getIdplace()));
 				jewelf = jewelService.addObject(jewelf);
+				jewelf.setCategory(categoriesService.findById(jewelf.getCategory().getIdcategory()));
 				model.setViewName("admin/jewels/newjewel/successjewel");
 				model.addObject("jewel", jewelf);
 				m.addAttribute("placeselected", jewelf.getPlace());

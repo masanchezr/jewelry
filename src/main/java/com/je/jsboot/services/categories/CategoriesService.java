@@ -30,4 +30,6 @@ public interface CategoriesService {
 
 	public CategoryEntity getCategoryByKeyword(String keyword);
 
+	public CategoryEntity findById(Long idcategory);
+
 }
