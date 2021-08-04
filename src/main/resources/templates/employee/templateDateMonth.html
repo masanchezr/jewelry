@@ -31,7 +31,7 @@
 				class="nav-link"><i class="fa fa-shopping-basket fa-fw"></i> <span
 					th:text="#{newshopping}"></span></a></li>
 			<li class="nav-item"><a class="nav-link collapsed"
-				data-toggle="collapse" href="#" data-target="#collapseComponents"
+				data-bs-toggle="collapse" href="#" data-bs-target="#collapseComponents"
 				aria-expanded="true" aria-controls="collapseComponents"> <i
 					class="fa fa-fw fa-gift"></i> <span th:text="#{sales}"></span>
 			</a>
@@ -51,8 +51,8 @@
 					</div>
 				</div></li>
 			<li class="nav-item"><a class="nav-link collapsed"
-				data-toggle="collapse" href="#"
-				data-target="#collapseSalesPostPoned"
+				data-bs-toggle="collapse" href="#"
+				data-bs-target="#collapseSalesPostPoned"
 				aria-controls="collapseSalesPostPoned" aria-expanded="true"> <i
 					class="fa fa-fw fa-tasks"></i> <span th:text="#{salespostponed}"></span>
 			</a>
@@ -67,7 +67,7 @@
 					</div>
 				</div></li>
 			<li class="nav-item"><a class="nav-link collapsed"
-				data-toggle="collapse" href="#" data-target="#collapsePawns"
+				data-bs-toggle="collapse" href="#" data-bs-target="#collapsePawns"
 				aria-expanded="true" aria-controls="collapsePawns"> <i
 					class="fa fa-fw fa-money-bill-alt"></i> <span th:text="#{pawns}"></span>
 			</a>
@@ -92,7 +92,7 @@
 				class="nav-link"><i class="fa fa-euro-sign fa-fw"></i> <span
 					th:text="#{entrymoney}"> </span></a></li>
 			<li class="nav-item"><a class="nav-link collapsed"
-				data-toggle="collapse" href="#" data-target="#collapseOConcepts"
+				data-bs-toggle="collapse" href="#" data-bs-target="#collapseOConcepts"
 				aria-expanded="true" aria-controls="collapseOConcepts"> <i
 					class="fa fa-fw fa-tags"></i> <span th:text="#{othersconcepts}"></span>
 			</a>
@@ -107,7 +107,7 @@
 					</div>
 				</div></li>
 			<li class="nav-item"><a class="nav-link collapsed"
-				data-toggle="collapse" href="#" data-target="#collapseDailies"
+				data-bs-toggle="collapse" href="#" data-bs-target="#collapseDailies"
 				aria-expanded="true" aria-controls="collapseDailies"> <i
 					class="fa fa-fw fa-calendar"></i> <span th:text="#{dailies}"></span>
 			</a>
@@ -120,7 +120,7 @@
 					</div>
 				</div></li>
 			<li class="nav-item"><a class="nav-link collapsed"
-				data-toggle="collapse" href="#" data-target="#collapseincidents"
+				data-bs-toggle="collapse" href="#" data-bs-target="#collapseincidents"
 				aria-expanded="true" aria-controls="collapseincidents"> <i
 					class="fa fa-exclamation"></i> <span th:text="#{incidents}"></span></a>
 				<div class="collapse" data-parent="#accordionSidebar"
@@ -155,7 +155,7 @@
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item dropdown no-arrow"><a
 							class="nav-link dropdown-toggle" href="#" id="userDropdown"
-							role="button" data-toggle="dropdown" aria-haspopup="true"
+							role="button" data-bs-toggle="dropdown" aria-haspopup="true"
 							aria-expanded="false"> <span
 								class="mr-2 d-none d-lg-inline text-gray-600 small"
 								th:text="#{close}"></span>
@@ -163,8 +163,8 @@
 							<div
 								class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
 								aria-labelledby="userDropdown">
-								<a class="dropdown-item" href="#" data-toggle="modal"
-									data-target="#logoutModal"> <i
+								<a class="dropdown-item" href="#" data-bs-toggle="modal"
+									data-bs-target="#logoutModal"> <i
 									class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
 									Salir
 								</a>
@@ -192,7 +192,7 @@
 					<h5 class="modal-title" id="exampleModalLabel">
 						<span th:text="#{readyToLeave}"></span>
 					</h5>
-					<button class="close" type="button" data-dismiss="modal"
+					<button class="close" type="button" data-bs-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true" th:text="#{close}"></span>
 					</button>
@@ -202,7 +202,7 @@
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-secondary" type="button"
-						data-dismiss="modal">
+						data-bs-dismiss="modal">
 						<span th:text="#{cancel}"></span>
 					</button>
 					<a class="btn btn-primary" href="javascript:formSubmit()"><span
@@ -222,9 +222,9 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script-->
 	<script th:src="@{/js/comun/bootstrap.bundle.min.js}"></script>
 	<script th:src="@{/js/comun/jquery.easing.min.js}"></script>
-	<script th:src="@{/js/comun/sb-admin-2.min.js}"></script>
-	<script th:src="@{/js/comun/jquery.dataTables.min.js}"></script>
-	<script th:src="@{/js/comun/dataTables.bootstrap4.min.js}"></script>
+	<script th:src="@{/js/comun/sb-admin-2.js}"></script>
+	<script th:src="@{/js/comun/jquery.dataTables.js}"></script>
+	<script th:src="@{/js/comun/dataTables.bootstrap.js}"></script>
 	<script th:src="@{/js/comun/bootstrap-datepicker.min.js}"></script>
 	<script th:src="@{/js/comun/bootstrap-datepicker.es.min.js}"></script>
 	<script>

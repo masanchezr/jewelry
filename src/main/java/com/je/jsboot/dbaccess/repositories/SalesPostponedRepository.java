@@ -17,7 +17,16 @@ import com.je.jsboot.dbaccess.entities.SalePostponedEntity;
 
 public interface SalesPostponedRepository extends CrudRepository<SalePostponedEntity, Long> {
 
-	public List<SalePostponedEntity> findByDateretiredAndPlace(@Temporal(TemporalType.DATE) Date date,
+	/**
+	 * Ventas a plazos retiradas, como hay en ocasiones que se dan de baja después
+	 * de retirar porque el cliente lo cambia por otra cosa, por eso hay que mirar
+	 * el timeout para calcular el daily
+	 * 
+	 * @param date
+	 * @param place
+	 * @return ventas a plazos
+	 */
+	public List<SalePostponedEntity> findByDateretiredAndPlaceAndTimeoutFalse(@Temporal(TemporalType.DATE) Date date,
 			PlaceEntity place);
 
 	@Query("select s from SalePostponedEntity s join s.spayments p where p.creationdate>=:from and p.creationdate<=:until and p.pay=:pay")

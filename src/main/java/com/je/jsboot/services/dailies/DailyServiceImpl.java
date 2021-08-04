@@ -358,10 +358,13 @@ public class DailyServiceImpl implements DailyService {
 				payments = "";
 				while (ipaymentshop.hasNext()) {
 					PaymentShopEntity paymentShopEntity = ipaymentshop.next();
+					String spayment = paymentShopEntity.getPayment().getName();
 					if (paymentShopEntity.getPayment().getIdpayment().equals(Constants.EFECTIVO)) {
 						shoppingsamount = shoppingsamount.subtract(paymentShopEntity.getAmount());
 					}
-					payments = payments.concat(paymentShopEntity.getPayment().getName()).concat(" ");
+					if (spayment != null) {
+						payments = payments.concat(paymentShopEntity.getPayment().getName()).concat(" ");
+					}
 				}
 				shopView = mapper.map(shopping, Shopping.class);
 				shopView.setPayments(payments);
@@ -392,7 +395,8 @@ public class DailyServiceImpl implements DailyService {
 	}
 
 	private double getSalesPostAmount(Date date, PlaceEntity place, Daily daily) {
-		List<SalePostponedEntity> salespost = salespostponedrepository.findByDateretiredAndPlace(date, place);
+		List<SalePostponedEntity> salespost = salespostponedrepository.findByDateretiredAndPlaceAndTimeoutFalse(date,
+				place);
 		double salespostamount = 0;
 		if (salespost != null && !salespost.isEmpty()) {
 			Iterator<SalePostponedEntity> isalespost = salespost.iterator();

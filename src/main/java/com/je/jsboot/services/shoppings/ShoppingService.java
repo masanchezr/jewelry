@@ -51,8 +51,6 @@ public interface ShoppingService {
 
 	public File generateExcel(String datefrom, String dateuntil);
 
-	public boolean isCorrectNumber(Shopping shoppingForm);
-
 	public Long getNextNumber(String user);
 
 	public void saveAdmin(Shopping shoppingForm);

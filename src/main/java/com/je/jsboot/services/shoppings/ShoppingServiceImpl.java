@@ -414,34 +414,11 @@ public class ShoppingServiceImpl implements ShoppingService {
 	}
 
 	@Override
-	public boolean isCorrectNumber(Shopping shoppingForm) {
-		Calendar c = Calendar.getInstance();
-		boolean isCorrectNumber = false;
-		Long number = shoppingForm.getNumshop();
-		PlaceEntity placeEntity = placeUserRepository.findByUser(usersRepository.findByUsername(shoppingForm.getUser()))
-				.get(0).getPlace();
-		ShoppingEntity shopping = shoppingsRepository.findFirstByPlaceAndYearOrderByNumshopDesc(placeEntity,
-				c.get(Calendar.YEAR));
-		if (shopping == null) {
-			isCorrectNumber = true;
-		} else {
-			if (number == shopping.getNumshop() + 1) {
-				isCorrectNumber = true;
-			} else {
-				isCorrectNumber = false;
-			}
-		}
-		return isCorrectNumber;
-	}
-
-	@Override
 	public Long getNextNumber(String user) {
-		Calendar c = Calendar.getInstance();
 		Long number = null;
 		PlaceEntity placeEntity = placeUserRepository.findByUser(usersRepository.findByUsername(user)).get(0)
 				.getPlace();
-		ShoppingEntity shopping = shoppingsRepository.findFirstByPlaceAndYearOrderByNumshopDesc(placeEntity,
-				c.get(Calendar.YEAR));
+		ShoppingEntity shopping = shoppingsRepository.findFirstByPlaceOrderByIdshopDesc(placeEntity);
 		if (shopping != null) {
 			number = shopping.getNumshop() + 1;
 		}

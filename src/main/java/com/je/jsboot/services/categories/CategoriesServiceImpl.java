@@ -1,5 +1,7 @@
 package com.je.jsboot.services.categories;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -40,6 +42,15 @@ public class CategoriesServiceImpl implements CategoriesService {
 	@Override
 	public CategoryEntity getCategoryByKeyword(String keyword) {
 		return categoriesRepository.findByKeyword(keyword);
+	}
+
+	@Override
+	public CategoryEntity findById(Long idcategory) {
+		Optional<CategoryEntity> oc = categoriesRepository.findById(idcategory);
+		if (oc.isPresent()) {
+			return oc.get();
+		} else
+			return null;
 	}
 
 }

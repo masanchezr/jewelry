@@ -31,4 +31,11 @@ class ShoppingRepositoryTest {
 		Date datefrom = DateUtil.getDate("2015-12-01");
 		Assertions.assertNotNull(shoppingsRepository.findGramsNull(place, datefrom, new Date()));
 	}
+	
+	@Test
+	void findFirstByPlaceOrderByCreationdateDescTest() {
+		PlaceEntity place = new PlaceEntity();
+		place.setIdplace(13700L);
+		Assertions.assertNotNull(shoppingsRepository.findFirstByPlaceOrderByIdshopDesc(place));
+	}
 }
