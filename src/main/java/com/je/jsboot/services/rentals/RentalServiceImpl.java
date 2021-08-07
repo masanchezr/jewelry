@@ -3,7 +3,7 @@ package com.je.jsboot.services.rentals;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +33,7 @@ public class RentalServiceImpl implements RentalService {
 	private UsersRepository usersRepository;
 
 	@Autowired
-	private Mapper mapper;
+	private ModelMapper mapper;
 
 	@Override
 	public Daily saveRental(Rental rental) {

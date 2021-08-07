@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +37,7 @@ public class SetServiceImpl implements SetService {
 
 	/** The mapper. */
 	@Autowired
-	private Mapper mapper;
+	private ModelMapper mapper;
 
 	public void saveSet(NewSet set) {
 		MetalEntity material = mapper.map(set.getMetal(), MetalEntity.class);
@@ -98,9 +98,9 @@ public class SetServiceImpl implements SetService {
 				SetEntity setEntity;
 				List<JewelEntity> jewels;
 				Set set;
-				sets = new ArrayList<Set>();
+				sets = new ArrayList<>();
 				while (isets.hasNext()) {
-					jewels = new ArrayList<JewelEntity>();
+					jewels = new ArrayList<>();
 					setEntity = isets.next();
 					if (setEntity.getBracelet() != null) {
 						jewels.add(setEntity.getBracelet());

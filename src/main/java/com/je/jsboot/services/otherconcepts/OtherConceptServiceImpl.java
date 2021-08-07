@@ -3,7 +3,7 @@ package com.je.jsboot.services.otherconcepts;
 import java.util.Date;
 import java.util.List;
 
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +39,7 @@ public class OtherConceptServiceImpl implements OtherConceptService {
 
 	/** The mapper. */
 	@Autowired
-	private Mapper mapper;
+	private ModelMapper mapper;
 
 	public Daily save(OtherConcept otherconcept) {
 		OtherConceptEntity otherConceptEntity = mapper.map(otherconcept, OtherConceptEntity.class);

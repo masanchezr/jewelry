@@ -1,6 +1,6 @@
 package com.je.jsboot.admin.controllers;
 
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +25,7 @@ public class PaymentsController {
 	private PaymentService paymentService;
 
 	@Autowired
-	private Mapper mapper;
+	private ModelMapper mapper;
 
 	/**
 	 * Save payment.

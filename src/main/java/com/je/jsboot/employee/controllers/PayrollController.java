@@ -3,7 +3,7 @@ package com.je.jsboot.employee.controllers;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -30,7 +30,7 @@ public class PayrollController {
 	private PayrollService payrollservice;
 
 	@Autowired
-	private Mapper mapper;
+	private ModelMapper mapper;
 
 	private static final String FORMPAYROLL = "payrollForm";
 	private static final String VIEWNEWPAYROLL = "employee/otherconcepts/payroll";

@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +23,7 @@ import com.je.jsboot.dbaccess.repositories.PawnsRepository;
 import com.je.jsboot.dbaccess.repositories.PlaceUserRepository;
 import com.je.jsboot.dbaccess.repositories.RenovationsRepository;
 import com.je.jsboot.dbaccess.repositories.UsersRepository;
+import com.je.jsboot.services.converters.PawnEntityConverter;
 import com.je.jsboot.services.dailies.Daily;
 import com.je.jsboot.services.dailies.DailyService;
 import com.je.jsboot.services.mails.EmailService;
@@ -63,7 +64,10 @@ public class PawnServiceImpl implements PawnService {
 
 	/** The mapper. */
 	@Autowired
-	private Mapper mapper;
+	private ModelMapper mapper;
+
+	@Autowired
+	private PawnEntityConverter converter;
 
 	@Override
 	public Daily save(NewPawn pawn) {
@@ -212,7 +216,7 @@ public class PawnServiceImpl implements PawnService {
 
 	@Override
 	public List<Pawn> searchByNumpawn(Pawn pawn) {
-		return mapper(pawnsRepository.findByNumpawnAndPlace(pawn.getNumpawn(),
+		return converter.entitiesToDTO(pawnsRepository.findByNumpawnAndPlace(pawn.getNumpawn(),
 				mapper.map(pawn.getPlace(), PlaceEntity.class)));
 	}
 

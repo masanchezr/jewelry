@@ -4,7 +4,7 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -46,7 +46,7 @@ public class OtherSaleController {
 	private SearchSaleRepeatedService searchSaleRepeatedService;
 
 	@Autowired
-	private Mapper mapper;
+	private ModelMapper mapper;
 
 	private static final String FORMRECORDING = "recording";
 	private static final String TYPES = "types";

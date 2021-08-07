@@ -3,7 +3,7 @@ package com.je.jsboot.services.messages;
 import java.util.Date;
 import java.util.List;
 
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ public class MessageServiceImpl implements MessageService {
 	private MessagesRepository messagesrepository;
 
 	@Autowired
-	private Mapper mapper;
+	private ModelMapper mapper;
 
 	@Override
 	public List<MessageEntity> getMessagesActiveNow(String user) {

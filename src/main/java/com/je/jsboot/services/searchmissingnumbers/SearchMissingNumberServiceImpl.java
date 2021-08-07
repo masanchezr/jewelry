@@ -3,7 +3,7 @@ package com.je.jsboot.services.searchmissingnumbers;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +26,7 @@ public class SearchMissingNumberServiceImpl implements SearchMissingNumberServic
 	private PawnsRepository pawnsRepository;
 	/** The mapper. */
 	@Autowired
-	private Mapper mapper;
+	private ModelMapper mapper;
 
 	public List<Long> searchMissingShoppings(SearchMissingNumbers form) {
 		List<Long> nummissings = new ArrayList<>();

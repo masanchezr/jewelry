@@ -2,7 +2,6 @@ package com.je.jsboot.employee.validators;
 
 import java.math.BigDecimal;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -32,14 +31,10 @@ public class OtherConceptValidator implements Validator {
 		} else {
 			String description = concept.getDescription();
 			// no pongo pila porque puede ser la de la caja fuerte
-			if (StringUtils.containsIgnoreCase(description, "saldo")
-					|| StringUtils.containsIgnoreCase(description, "entrante")
-					|| StringUtils.containsIgnoreCase(description, "correa")
-					|| StringUtils.containsIgnoreCase(description, "nomina")
-					|| StringUtils.containsIgnoreCase(description, "comisi")
-					|| StringUtils.containsIgnoreCase(description, "incentivo")
-					|| StringUtils.containsIgnoreCase(description, "suplem")
-					|| StringUtils.containsIgnoreCase(description, "venta")) {
+			if (description.contains("saldo") || description.contains("entrante") || description.contains("correa")
+					|| description.contains("nomina") || description.contains("comisi")
+					|| description.contains("incentivo") || description.contains("suplem")
+					|| description.contains("venta")) {
 				arg1.rejectValue(Constants.DESCRIPTION, "funcionalityexists");
 			}
 		}

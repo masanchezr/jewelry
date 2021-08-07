@@ -2,7 +2,7 @@ package com.je.jsboot.services.discounts;
 
 import java.util.Date;
 
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ public class DiscountServiceImpl implements DiscountService {
 
 	/** The mapper. */
 	@Autowired
-	private Mapper mapper;
+	private ModelMapper mapper;
 
 	public void save(Discount discount) {
 		DiscountEntity discountEntity = mapper.map(discount, DiscountEntity.class);
