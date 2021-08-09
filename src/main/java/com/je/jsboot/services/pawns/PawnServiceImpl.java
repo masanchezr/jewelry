@@ -184,7 +184,7 @@ public class PawnServiceImpl implements PawnService {
 			cpe.setCreationclient(new Date());
 			clientPawnsRepository.save(cpe);
 			pawnEntity.setMeltdate(new Date());
-			pawnEntity.setObjects(newobjects);
+			// pawnEntity.setObjects(newobjects);
 			pawnEntity.setPercent(Util.getNumber(pawn.getPercent()));
 			pawnEntity.setAmount(Util.getNumber(pawn.getAmount()));
 			pawnsRepository.save(pawnEntity);
@@ -201,7 +201,7 @@ public class PawnServiceImpl implements PawnService {
 		PawnEntity pawnEntity = pawnsRepository.findById(idpawn).orElse(null);
 		NewPawn pawn = null;
 		if (pawnEntity != null) {
-			pawn = mapper.map(pawnEntity, NewPawn.class);
+			pawn = converter.convertToNewPawn(pawnEntity);
 			mapper.map(pawnEntity.getClient(), pawn);
 		}
 		return pawn;
@@ -216,7 +216,7 @@ public class PawnServiceImpl implements PawnService {
 
 	@Override
 	public List<Pawn> searchByNumpawn(Pawn pawn) {
-		return converter.entitiesToDTO(pawnsRepository.findByNumpawnAndPlace(pawn.getNumpawn(),
+		return converter.entitiesToPawns(pawnsRepository.findByNumpawnAndPlace(pawn.getNumpawn(),
 				mapper.map(pawn.getPlace(), PlaceEntity.class)));
 	}
 
