@@ -184,7 +184,6 @@ public class PawnServiceImpl implements PawnService {
 			cpe.setCreationclient(new Date());
 			clientPawnsRepository.save(cpe);
 			pawnEntity.setMeltdate(new Date());
-			// pawnEntity.setObjects(newobjects);
 			pawnEntity.setPercent(Util.getNumber(pawn.getPercent()));
 			pawnEntity.setAmount(Util.getNumber(pawn.getAmount()));
 			pawnsRepository.save(pawnEntity);
@@ -211,31 +210,13 @@ public class PawnServiceImpl implements PawnService {
 	public List<Pawn> searchRenewByNumpawn(Pawn pawn) {
 		PlaceEntity place = placeUserRepository.findByUser(usersRepository.findByUsername(pawn.getUser())).get(0)
 				.getPlace();
-		return mapper(pawnsRepository.findByNumpawnAndPlaceAndRetired(pawn.getNumpawn(), place));
+		return converter.entitiesToPawns(pawnsRepository.findByNumpawnAndPlaceAndRetired(pawn.getNumpawn(), place));
 	}
 
 	@Override
 	public List<Pawn> searchByNumpawn(Pawn pawn) {
 		return converter.entitiesToPawns(pawnsRepository.findByNumpawnAndPlace(pawn.getNumpawn(),
 				mapper.map(pawn.getPlace(), PlaceEntity.class)));
-	}
-
-	/**
-	 * Mapper.
-	 *
-	 * @param findByNumpawnAndPlace the find by numpawn and place
-	 * @return the list
-	 */
-	private List<Pawn> mapper(List<PawnEntity> entities) {
-		List<Pawn> pawns = null;
-		if (entities != null) {
-			Iterator<PawnEntity> ipawns = entities.iterator();
-			pawns = new ArrayList<>();
-			while (ipawns.hasNext()) {
-				pawns.add(mapper.map(ipawns.next(), Pawn.class));
-			}
-		}
-		return pawns;
 	}
 
 	@Override
