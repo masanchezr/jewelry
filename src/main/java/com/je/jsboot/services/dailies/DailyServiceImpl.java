@@ -51,6 +51,7 @@ import com.je.jsboot.dbaccess.repositories.ShoppingsRepository;
 import com.je.jsboot.forms.Sale;
 import com.je.jsboot.forms.SalePostPoned;
 import com.je.jsboot.services.adjustments.Adjustment;
+import com.je.jsboot.services.converters.ShoppingEntityConverter;
 import com.je.jsboot.services.discounts.Discount;
 import com.je.jsboot.services.otherconcepts.OtherConcept;
 import com.je.jsboot.services.pawns.Pawn;
@@ -126,6 +127,9 @@ public class DailyServiceImpl implements DailyService {
 	/** The mapper. */
 	@Autowired
 	private ModelMapper mapper;
+
+	@Autowired
+	private ShoppingEntityConverter shopConverter;
 
 	@Override
 	public Daily getDaily(Date date, PlaceEntity place, String ipaddress) {
@@ -366,7 +370,7 @@ public class DailyServiceImpl implements DailyService {
 						payments = payments.concat(paymentShopEntity.getPayment().getName()).concat(" ");
 					}
 				}
-				shopView = mapper.map(shopping, Shopping.class);
+				shopView = shopConverter.convertTo(shopping);
 				shopView.setPayments(payments);
 				lshoppings.add(shopView);
 			}
