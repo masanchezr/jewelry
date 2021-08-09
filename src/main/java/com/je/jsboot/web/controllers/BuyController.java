@@ -2,7 +2,7 @@ package com.je.jsboot.web.controllers;
 
 import java.util.List;
 
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -47,7 +47,7 @@ public class BuyController {
 	private SaleService saleService;
 
 	@Autowired
-	private Mapper mapper;
+	private ModelMapper mapper;
 
 	/**
 	 * este caso es para cuando el cliente es nuevo.

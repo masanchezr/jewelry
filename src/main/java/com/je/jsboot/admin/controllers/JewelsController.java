@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -75,7 +75,7 @@ public class JewelsController {
 	private SetService setService;
 
 	@Autowired
-	private Mapper mapper;
+	private ModelMapper mapper;
 
 	private static final String VIEWSEARCHINVENTORY = "admin/jewels/revise/search";
 	private static final String FORMJEWEL = "jewelForm";

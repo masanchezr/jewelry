@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -125,7 +125,7 @@ public class DailyServiceImpl implements DailyService {
 	private PlaceUserRepository placeUserRepository;
 	/** The mapper. */
 	@Autowired
-	private Mapper mapper;
+	private ModelMapper mapper;
 
 	@Override
 	public Daily getDaily(Date date, PlaceEntity place, String ipaddress) {

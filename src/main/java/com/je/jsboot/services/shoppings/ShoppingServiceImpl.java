@@ -16,7 +16,7 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,7 +72,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 
 	/** The mapper. */
 	@Autowired
-	private Mapper mapper;
+	private ModelMapper mapper;
 
 	@Override
 	public Daily save(Shopping shopping) {

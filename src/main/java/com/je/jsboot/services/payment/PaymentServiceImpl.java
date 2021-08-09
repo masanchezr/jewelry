@@ -2,7 +2,6 @@ package com.je.jsboot.services.payment;
 
 import java.util.List;
 
-import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +17,6 @@ public class PaymentServiceImpl implements PaymentService {
 	/** The payment repository. */
 	@Autowired
 	public PaymentRepository paymentRepository;
-
-	/** The mapper. */
-	@Autowired
-	Mapper mapper;
 
 	public void save(PaymentEntity payment) {
 		paymentRepository.save(payment);

@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,7 +48,7 @@ public class AdjustmentServiceImpl implements AdjustmentService {
 
 	/** The mapper. */
 	@Autowired
-	private Mapper mapper;
+	private ModelMapper mapper;
 
 	@Override
 	public Daily save(Adjustment adjustment) {

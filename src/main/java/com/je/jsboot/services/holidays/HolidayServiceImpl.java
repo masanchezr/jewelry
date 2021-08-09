@@ -1,11 +1,12 @@
 package com.je.jsboot.services.holidays;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,7 @@ public class HolidayServiceImpl implements HolidayService {
 
 	/** The mapper. */
 	@Autowired
-	private Mapper mapper;
+	private ModelMapper mapper;
 
 	public void addHoliday(Holiday holiday) {
 		holidayRepository.save(mapper.map(holiday, HolidayEntity.class));
@@ -73,7 +74,7 @@ public class HolidayServiceImpl implements HolidayService {
 		if (iholidays != null) {
 			return mapper(iholidays);
 		} else {
-			return null;
+			return Collections.emptyList();
 		}
 	}
 
@@ -85,7 +86,7 @@ public class HolidayServiceImpl implements HolidayService {
 	 */
 	private List<Holiday> mapper(Iterable<HolidayEntity> holidays) {
 		Iterator<HolidayEntity> iholidays = holidays.iterator();
-		List<Holiday> lholidays = new ArrayList<Holiday>();
+		List<Holiday> lholidays = new ArrayList<>();
 		while (iholidays.hasNext()) {
 			lholidays.add(mapper.map(iholidays.next(), Holiday.class));
 		}

@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +34,7 @@ public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 
 	/** The mapper. */
 	@Autowired
-	private Mapper mapper;
+	private ModelMapper mapper;
 
 	@Override
 	public void buy(SalePostPoned sale) {
@@ -127,7 +127,7 @@ public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 			SalePostPoned sale = mapper.map(saleEntity, SalePostPoned.class);
 			List<SalePostPonedJewel> sjewels = saleEntity.getSjewels();
 			Iterator<SalePostPonedJewel> isjewels = sjewels.iterator();
-			sale.setJewels(new ArrayList<JewelEntity>());
+			sale.setJewels(new ArrayList<>());
 			while (isjewels.hasNext()) {
 				sale.getJewels().add(isjewels.next().getJewel());
 			}
@@ -143,7 +143,7 @@ public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 			SalePostPoned sale = mapper.map(saleEntity, SalePostPoned.class);
 			List<SalePostPonedJewel> sjewels = saleEntity.getSjewels();
 			Iterator<SalePostPonedJewel> isjewels = sjewels.iterator();
-			sale.setJewels(new ArrayList<JewelEntity>());
+			sale.setJewels(new ArrayList<>());
 			while (isjewels.hasNext()) {
 				sale.getJewels().add(isjewels.next().getJewel());
 			}

@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +31,7 @@ public class IncidentServiceImpl implements IncidentService {
 	private EmailService emailService;
 
 	@Autowired
-	private Mapper mapper;
+	private ModelMapper mapper;
 
 	@Override
 	public void save(Incident incident) {

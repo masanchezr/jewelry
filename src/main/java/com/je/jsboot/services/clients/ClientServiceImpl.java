@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.dozer.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ public class ClientServiceImpl implements ClientService {
 	private ClientPawnsRepository clientpawnsrepository;
 
 	@Autowired
-	private Mapper mapper;
+	private ModelMapper mapper;
 
 	public List<Client> searchClients(Client client) {
 		List<Client> clients = new ArrayList<>();
@@ -40,11 +40,9 @@ public class ClientServiceImpl implements ClientService {
 		if (!Util.isEmpty(surname)) {
 			lclients.addAll(clientpawnsrepository.findBySurnameContainingIgnoreCase(surname));
 		}
-		if (lclients != null) {
-			Iterator<ClientPawnEntity> iclients = lclients.iterator();
-			while (iclients.hasNext()) {
-				clients.add(mapper.map(iclients.next(), Client.class));
-			}
+		Iterator<ClientPawnEntity> iclients = lclients.iterator();
+		while (iclients.hasNext()) {
+			clients.add(mapper.map(iclients.next(), Client.class));
 		}
 		return clients;
 	}
