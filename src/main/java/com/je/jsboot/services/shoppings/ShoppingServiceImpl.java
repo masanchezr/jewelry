@@ -133,9 +133,6 @@ public class ShoppingServiceImpl implements ShoppingService {
 			paymentshop.add(payshop);
 			totalamount = totalamount.add(cashamount);
 		}
-		if (shoppingEntity.getCreationdate() == null) {
-			shoppingEntity.setCreationdate(new Date());
-		}
 		shoppingEntity.setPlace(place);
 		shoppingEntity.setSpayments(paymentshop);
 		shoppingEntity.setObjects(newobjects);
