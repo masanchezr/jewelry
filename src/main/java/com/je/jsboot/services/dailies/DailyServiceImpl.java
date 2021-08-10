@@ -51,6 +51,7 @@ import com.je.jsboot.dbaccess.repositories.ShoppingsRepository;
 import com.je.jsboot.forms.Sale;
 import com.je.jsboot.forms.SalePostPoned;
 import com.je.jsboot.services.adjustments.Adjustment;
+import com.je.jsboot.services.converters.DiscountEntityConverter;
 import com.je.jsboot.services.converters.ShoppingEntityConverter;
 import com.je.jsboot.services.discounts.Discount;
 import com.je.jsboot.services.otherconcepts.OtherConcept;
@@ -127,6 +128,9 @@ public class DailyServiceImpl implements DailyService {
 	/** The mapper. */
 	@Autowired
 	private ModelMapper mapper;
+
+	@Autowired
+	private DiscountEntityConverter converterDiscount;
 
 	@Autowired
 	private ShoppingEntityConverter shopConverter;
@@ -216,7 +220,7 @@ public class DailyServiceImpl implements DailyService {
 			List<Discount> ldiscounts = new ArrayList<>();
 			while (idiscounts.hasNext()) {
 				discount = idiscounts.next();
-				ldiscounts.add(mapper.map(discount, Discount.class));
+				ldiscounts.add(converterDiscount.convertToEntity(discount));
 				if (discount.getNumsalecancel() != null && discount.getNumsalechange() != null) {
 					discountsamount = discountsamount.add(discount.getDiscount());
 				}
