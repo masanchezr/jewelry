@@ -1,5 +1,9 @@
 package com.je.jsboot.services.converters;
 
+import java.util.Date;
+
+import org.modelmapper.AbstractConverter;
+import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,6 +19,12 @@ public class ShoppingEntityConverter {
 	@Autowired
 	private ModelMapper mapper;
 
+	Converter<String, Date> toDate = new AbstractConverter<String, Date>() {
+		protected Date convert(String source) {
+			return DateUtil.getDate(source);
+		}
+	};
+
 	public Shopping convertToShopping(ShoppingEntity entity) {
 		Shopping shop = mapper.map(entity, Shopping.class);
 		shop.setAmount(entity.getTotalamount().toString());
@@ -22,9 +32,8 @@ public class ShoppingEntityConverter {
 	}
 
 	public ShoppingEntity convertToShoppingEntity(Shopping shop) {
-		ShoppingEntity entity = mapper.map(shop, ShoppingEntity.class);
-		entity.setCreationdate(DateUtil.getDate(shop.getCreationdate()));
-		return entity;
+		mapper.addConverter(toDate);
+		return mapper.map(shop, ShoppingEntity.class);
 	}
 
 }
