@@ -370,7 +370,7 @@ public class DailyServiceImpl implements DailyService {
 						payments = payments.concat(paymentShopEntity.getPayment().getName()).concat(" ");
 					}
 				}
-				shopView = shopConverter.convertTo(shopping);
+				shopView = shopConverter.convertToShopping(shopping);
 				shopView.setPayments(payments);
 				lshoppings.add(shopView);
 			}

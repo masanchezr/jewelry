@@ -36,6 +36,7 @@ import com.je.jsboot.dbaccess.repositories.PawnsRepository;
 import com.je.jsboot.dbaccess.repositories.PlaceUserRepository;
 import com.je.jsboot.dbaccess.repositories.ShoppingsRepository;
 import com.je.jsboot.dbaccess.repositories.UsersRepository;
+import com.je.jsboot.services.converters.ShoppingEntityConverter;
 import com.je.jsboot.services.dailies.Daily;
 import com.je.jsboot.services.dailies.DailyService;
 import com.je.jsboot.utils.constants.Constants;
@@ -73,6 +74,9 @@ public class ShoppingServiceImpl implements ShoppingService {
 	/** The mapper. */
 	@Autowired
 	private ModelMapper mapper;
+
+	@Autowired
+	private ShoppingEntityConverter converter;
 
 	@Override
 	public Daily save(Shopping shopping) {
@@ -427,7 +431,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 
 	@Override
 	public void saveAdmin(Shopping shopping) {
-		ShoppingEntity shoppingEntity = mapper.map(shopping, ShoppingEntity.class);
+		ShoppingEntity shoppingEntity = converter.convertToShoppingEntity(shopping);
 		ClientPawnEntity cpe = mapper.map(shopping, ClientPawnEntity.class);
 		cpe.setCreationclient(new Date());
 		clientPawnsRepository.save(cpe);
