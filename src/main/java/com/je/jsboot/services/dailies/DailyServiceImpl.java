@@ -52,6 +52,8 @@ import com.je.jsboot.forms.Sale;
 import com.je.jsboot.forms.SalePostPoned;
 import com.je.jsboot.services.adjustments.Adjustment;
 import com.je.jsboot.services.converters.DiscountEntityConverter;
+import com.je.jsboot.services.converters.PawnEntityConverter;
+import com.je.jsboot.services.converters.SalePostPonedEntityConverter;
 import com.je.jsboot.services.converters.ShoppingEntityConverter;
 import com.je.jsboot.services.discounts.Discount;
 import com.je.jsboot.services.otherconcepts.OtherConcept;
@@ -125,12 +127,19 @@ public class DailyServiceImpl implements DailyService {
 
 	@Autowired
 	private PlaceUserRepository placeUserRepository;
+
 	/** The mapper. */
 	@Autowired
 	private ModelMapper mapper;
 
 	@Autowired
 	private DiscountEntityConverter converterDiscount;
+
+	@Autowired
+	private PawnEntityConverter pawnConverter;
+
+	@Autowired
+	private SalePostPonedEntityConverter salePostPonedConverter;
 
 	@Autowired
 	private ShoppingEntityConverter shopConverter;
@@ -429,7 +438,7 @@ public class DailyServiceImpl implements DailyService {
 					}
 					payments = payments.concat(payment.getName()).concat(" ");
 				}
-				saleView = mapper.map(sale, SalePostPoned.class);
+				saleView = salePostPonedConverter.convertToDTO(sale);
 				saleView.setPayments(payments);
 				lsalespost.add(saleView);
 			}
@@ -486,7 +495,7 @@ public class DailyServiceImpl implements DailyService {
 			Pawn pawn;
 			while (ipawns.hasNext()) {
 				pawnEntity = ipawns.next();
-				pawn = mapper.map(pawnEntity, Pawn.class);
+				pawn = pawnConverter.convertToPawn(pawnEntity);
 				amount = pawnEntity.getAmount();
 				BigDecimal percent = pawnEntity.getPercent();
 				Integer months = pawnEntity.getMonths();
@@ -517,7 +526,7 @@ public class DailyServiceImpl implements DailyService {
 			Pawn pawn;
 			while (ipawns.hasNext()) {
 				pawnEntity = ipawns.next();
-				pawn = mapper.map(pawnEntity, Pawn.class);
+				pawn = pawnConverter.convertToPawn(pawnEntity);
 				newpawnsamount = newpawnsamount.subtract(pawnEntity.getAmount());
 				lpawns.add(pawn);
 			}
