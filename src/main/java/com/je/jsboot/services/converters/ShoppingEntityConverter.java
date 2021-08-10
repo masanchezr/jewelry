@@ -21,7 +21,10 @@ public class ShoppingEntityConverter {
 
 	Converter<String, Date> toDate = new AbstractConverter<String, Date>() {
 		protected Date convert(String source) {
-			return DateUtil.getDate(source);
+			if (source == null) {
+				return new Date();
+			} else
+				return DateUtil.getDate(source);
 		}
 	};
 
