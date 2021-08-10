@@ -80,7 +80,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 
 	@Override
 	public Daily save(Shopping shopping) {
-		ShoppingEntity shoppingEntity = mapper.map(shopping, ShoppingEntity.class);
+		ShoppingEntity shoppingEntity = converter.convertToShoppingEntity(shopping);
 		String nif = shopping.getNif();
 		if (nif != null) {
 			ClientPawnEntity cpe = clientPawnsRepository.findById(nif).orElse(null);
