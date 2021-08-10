@@ -1,5 +1,6 @@
 package com.je.jsboot.services.discounts;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.modelmapper.ModelMapper;
@@ -21,6 +22,7 @@ public class DiscountServiceImpl implements DiscountService {
 
 	public void save(Discount discount) {
 		DiscountEntity discountEntity = mapper.map(discount, DiscountEntity.class);
+		discountEntity.setDiscount(new BigDecimal(discount.getSdiscount()));
 		discountEntity.setCreationdate(new Date());
 		discountsRepository.save(discountEntity);
 	}
