@@ -12,7 +12,7 @@ public class Incident {
 
 	private String user;
 
-	private Date date;
+	private Date creationdate;
 
 	public Long getIdincident() {
 		return idincident;
@@ -46,11 +46,11 @@ public class Incident {
 		this.user = user;
 	}
 
-	public Date getDate() {
-		return date;
+	public Date getCreationdate() {
+		return creationdate;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setCreationdate(Date date) {
+		this.creationdate = date;
 	}
 }

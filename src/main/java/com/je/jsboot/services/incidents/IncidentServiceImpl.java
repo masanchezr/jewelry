@@ -81,6 +81,7 @@ public class IncidentServiceImpl implements IncidentService {
 			entity = ientities.next();
 			incident = new Incident();
 			mapper.map(entity, incident);
+			incident.setUser(entity.getUsername().getUsername());
 			incidents.add(incident);
 		}
 		return incidents;

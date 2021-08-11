@@ -26,7 +26,8 @@
 							<tr th:each="incident:${incidents}">
 								<td th:text="${incident.idincident}"></td>
 								<td th:text="${incident.description}"></td>
-								<td th:text="${#dates.format(incident.date,'yyyy-MM-dd')}"></td>
+								<td
+									th:text="${#dates.format(incident.creationdate,'yyyy-MM-dd')}"></td>
 								<td th:if="${incident.state}"><span th:text="#{resolved}"></span></td>
 								<td th:if="${!incident.state}"><span th:text="#{pending}"></span></td>
 							</tr>
