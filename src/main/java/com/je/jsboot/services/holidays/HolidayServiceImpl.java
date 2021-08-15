@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +13,7 @@ import com.je.jsboot.dbaccess.entities.HolidayEntity;
 import com.je.jsboot.dbaccess.entities.PlaceEntity;
 import com.je.jsboot.dbaccess.repositories.HolidayRepository;
 import com.je.jsboot.dbaccess.repositories.PlaceRepository;
+import com.je.jsboot.services.converters.HolidayEntityConverter;
 import com.je.jsboot.utils.date.DateUtil;
 import com.je.jsboot.utils.string.Util;
 
@@ -32,17 +32,17 @@ public class HolidayServiceImpl implements HolidayService {
 
 	/** The mapper. */
 	@Autowired
-	private ModelMapper mapper;
+	private HolidayEntityConverter converter;
 
 	public void addHoliday(Holiday holiday) {
-		holidayRepository.save(mapper.map(holiday, HolidayEntity.class));
+		holidayRepository.save(converter.convertToEntity(holiday));
 	}
 
 	public void addHolidayAllPlaces(Holiday holiday) {
 		Iterable<PlaceEntity> place = placeRepository.findAll();
 		Iterator<PlaceEntity> iplace = place.iterator();
 		while (iplace.hasNext()) {
-			HolidayEntity entity = mapper.map(holiday, HolidayEntity.class);
+			HolidayEntity entity = converter.convertToEntity(holiday);
 			entity.setPlace(iplace.next());
 			holidayRepository.save(entity);
 		}
@@ -50,12 +50,17 @@ public class HolidayServiceImpl implements HolidayService {
 
 	public List<Holiday> findAll() {
 		Iterable<HolidayEntity> holidays = holidayRepository.findAll();
-		return mapper(holidays);
+		Iterator<HolidayEntity> iholidays = holidays.iterator();
+		List<Holiday> lholidays = new ArrayList<>();
+		while (iholidays.hasNext()) {
+			lholidays.add(converter.convertToDTO(iholidays.next()));
+		}
+		return lholidays;
 	}
 
 	public boolean existsHoliday(Holiday holiday) {
 		HolidayEntity entity = holidayRepository.findByHolidayAndPlace(DateUtil.getDate(holiday.getDateholiday()),
-				mapper.map(holiday.getPlace(), PlaceEntity.class));
+				holiday.getPlace());
 		boolean exists = false;
 		if (entity != null) {
 			exists = true;
@@ -70,26 +75,11 @@ public class HolidayServiceImpl implements HolidayService {
 		if (!Util.isEmpty(suntil)) {
 			until = DateUtil.getDate(suntil);
 		}
-		Iterable<HolidayEntity> iholidays = holidayRepository.findByHolidayBetween(from, until);
+		List<HolidayEntity> iholidays = holidayRepository.findByHolidayBetween(from, until);
 		if (iholidays != null) {
-			return mapper(iholidays);
+			return converter.entitiesToDTOs(iholidays);
 		} else {
 			return Collections.emptyList();
 		}
-	}
-
-	/**
-	 * Mapper.
-	 *
-	 * @param holidays the holidays
-	 * @return the list
-	 */
-	private List<Holiday> mapper(Iterable<HolidayEntity> holidays) {
-		Iterator<HolidayEntity> iholidays = holidays.iterator();
-		List<Holiday> lholidays = new ArrayList<>();
-		while (iholidays.hasNext()) {
-			lholidays.add(mapper.map(iholidays.next(), Holiday.class));
-		}
-		return lholidays;
 	}
 }

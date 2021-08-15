@@ -1,6 +1,7 @@
 package com.je.jsboot.dbaccess.repositories;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.TemporalType;
 
@@ -24,6 +25,6 @@ public interface HolidayRepository extends CrudRepository<HolidayEntity, Long> {
 	 */
 	public HolidayEntity findByHolidayAndPlace(@Temporal(TemporalType.DATE) Date holiday, PlaceEntity place);
 
-	public Iterable<HolidayEntity> findByHolidayBetween(@Temporal(TemporalType.DATE) Date from,
+	public List<HolidayEntity> findByHolidayBetween(@Temporal(TemporalType.DATE) Date from,
 			@Temporal(TemporalType.DATE) Date until);
 }
