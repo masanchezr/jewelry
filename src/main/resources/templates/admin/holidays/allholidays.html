@@ -23,8 +23,8 @@
 						</thead>
 						<tbody>
 							<tr th:each="holiday:${holidays}">
-								<td th:text="${holiday.place.description}"></td>
 								<td th:text="${holiday.dateholiday}"></td>
+								<td th:text="${holiday.place.description}"></td>
 								<td th:text="${holiday.description}"></td>
 							</tr>
 						</tbody>
