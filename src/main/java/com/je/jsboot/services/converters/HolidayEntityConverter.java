@@ -25,7 +25,9 @@ public class HolidayEntityConverter {
 	}
 
 	public Holiday convertToDTO(HolidayEntity entity) {
-		return mapper.map(entity, Holiday.class);
+		Holiday holiday = mapper.map(entity, Holiday.class);
+		holiday.setDateholiday(DateUtil.getStringDateddMMyyyy(entity.getHoliday()));
+		return holiday;
 	}
 
 	public List<Holiday> entitiesToDTOs(List<HolidayEntity> entities) {
