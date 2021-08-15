@@ -9,6 +9,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.je.jsboot.dbaccess.entities.HolidayEntity;
 import com.je.jsboot.dbaccess.entities.PlaceEntity;
+import java.util.List;
 
 /**
  * The Interface HolidayRepository.
@@ -24,6 +25,6 @@ public interface HolidayRepository extends CrudRepository<HolidayEntity, Long> {
 	 */
 	public HolidayEntity findByHolidayAndPlace(@Temporal(TemporalType.DATE) Date holiday, PlaceEntity place);
 
-	public Iterable<HolidayEntity> findByHolidayBetween(@Temporal(TemporalType.DATE) Date from,
+	public List<HolidayEntity> findByHolidayBetween(@Temporal(TemporalType.DATE) Date from,
 			@Temporal(TemporalType.DATE) Date until);
 }
