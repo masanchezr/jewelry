@@ -1,6 +1,7 @@
 package com.je.jsboot.dbaccess.repositories;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.TemporalType;
 
@@ -9,7 +10,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.je.jsboot.dbaccess.entities.HolidayEntity;
 import com.je.jsboot.dbaccess.entities.PlaceEntity;
-import java.util.List;
 
 /**
  * The Interface HolidayRepository.

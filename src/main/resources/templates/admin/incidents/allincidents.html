@@ -33,7 +33,8 @@
 										</th:block> <span th:text="${incident.idincident}"></span></td>
 									<td th:text="${incident.user}"></td>
 									<td th:text="${incident.description}"></td>
-									<td th:text="${#dates.format(incident.date, 'yyyy-MM-dd')}"></td>
+									<td
+										th:text="${#dates.format(incident.creationdate, 'yyyy-MM-dd')}"></td>
 									<td><th:block th:if="${incident.state}">
 											<span th:text="#{resolved}"></span>
 										</th:block> <th:block th:if="${!incident.state}">
