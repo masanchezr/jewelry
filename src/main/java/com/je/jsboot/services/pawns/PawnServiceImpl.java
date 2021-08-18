@@ -71,14 +71,10 @@ public class PawnServiceImpl implements PawnService {
 
 	@Override
 	public Daily save(NewPawn pawn) {
-		// cuidado con el mapeo del creationdate
-		PawnEntity pawnEntity = mapper.map(pawn, PawnEntity.class);
+		PawnEntity pawnEntity = converter.convertToDTO(pawn);
 		ClientPawnEntity cpe = clientPawnsRepository.findById(pawn.getNif()).orElse(null);
 		PlaceEntity place = placeUserRepository.findByUser(usersRepository.findByUsername(pawn.getUser())).get(0)
 				.getPlace();
-		if (Util.isEmpty(pawn.getCreationdate())) {
-			pawnEntity.setCreationdate(new Date());
-		}
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(pawnEntity.getCreationdate());
 		int year = calendar.get(Calendar.YEAR);
