@@ -25,6 +25,7 @@ import com.je.jsboot.dbaccess.repositories.OtherSaleRepository;
 import com.je.jsboot.dbaccess.repositories.SalesPostponedRepository;
 import com.je.jsboot.forms.Sale;
 import com.je.jsboot.services.adjustments.Adjustment;
+import com.je.jsboot.services.converters.SaleEntityConverter;
 import com.je.jsboot.services.sales.SearchSale;
 import com.je.jsboot.utils.constants.Constants;
 import com.je.jsboot.utils.constants.ConstantsViews;
@@ -50,6 +51,9 @@ public class SalesCardServiceImpl implements SalesCardService {
 
 	@Autowired
 	private SalesPostponedRepository salespostponedrepository;
+
+	@Autowired
+	private SaleEntityConverter converter;
 
 	@Override
 	public Map<String, Object> searchByDates(SearchSale searchSale) {
@@ -81,7 +85,7 @@ public class SalesCardServiceImpl implements SalesCardService {
 			List<Sale> sales = new ArrayList<>();
 			while (isales.hasNext()) {
 				SaleEntity saleEntity = isales.next();
-				Sale sale = mapper.map(saleEntity, Sale.class);
+				Sale sale = converter.convertToDTO(saleEntity);
 				sale.setJewels(mapperListJewels(saleEntity.getSjewels()));
 				sales.add(sale);
 				total = total.add(sale.getTotal());
