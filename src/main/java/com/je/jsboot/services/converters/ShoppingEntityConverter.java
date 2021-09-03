@@ -30,6 +30,7 @@ public class ShoppingEntityConverter {
 
 	public Shopping convertToShopping(ShoppingEntity entity) {
 		Shopping shop = mapper.map(entity, Shopping.class);
+		shop.setId(entity.getIdshop());
 		shop.setAmount(entity.getTotalamount().toString());
 		return shop;
 	}
