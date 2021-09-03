@@ -37,7 +37,8 @@ public class ShoppingEntityConverter {
 
 	public ShoppingEntity convertToShoppingEntity(Shopping shop) {
 		mapper.addConverter(toDate);
-		return mapper.map(shop, ShoppingEntity.class);
+		ShoppingEntity entity = mapper.map(shop, ShoppingEntity.class);
+		entity.setIdshop(shop.getId());
+		return entity;
 	}
-
 }
