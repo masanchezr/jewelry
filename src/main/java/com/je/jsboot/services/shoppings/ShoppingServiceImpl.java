@@ -200,7 +200,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 		ShoppingEntity shopping = shoppingsRepository.findById(idshop).orElse(null);
 		Shopping shop = null;
 		if (shopping != null) {
-			shop = mapper.map(shopping, Shopping.class);
+			shop = converter.convertToShopping(shopping);
 		}
 		return shop;
 	}
