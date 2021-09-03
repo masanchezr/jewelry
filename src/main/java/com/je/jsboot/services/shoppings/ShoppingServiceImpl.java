@@ -159,7 +159,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 			while (ishoppingsEntity.hasNext()) {
 				shoppingEntity = ishoppingsEntity.next();
 				client = shoppingEntity.getClient();
-				shopping = mapper.map(shoppingEntity, Shopping.class);
+				shopping = converter.convertToShopping(shoppingEntity);
 				if (client != null) {
 					mapper.map(shoppingEntity.getClient(), shopping);
 				}
