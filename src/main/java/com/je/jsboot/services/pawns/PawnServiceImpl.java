@@ -218,44 +218,31 @@ public class PawnServiceImpl implements PawnService {
 	@Override
 	public Daily renew(Pawn pawn) {
 		Daily daily = null;
-		PawnEntity pawnEntity;
-		for (int i = 0; i < pawn.getNumrenovations(); i++) {
-			pawnEntity = pawnsRepository.findById(pawn.getId()).orElse(null);
-			if (pawnEntity != null) {
-				createRenovation(pawnEntity);
+		PawnEntity pawnEntity = pawnsRepository.findById(pawn.getId()).orElse(null);
+		List<RenovationEntity> renovations = pawnEntity.getRenovations();
+		for (int i = 0; i < pawn.getNumrenovations() && pawnEntity != null; i++) {
+			Calendar calendar = Calendar.getInstance();
+			Date date;
+			if (renovations != null && !renovations.isEmpty()) {
+				date = renovations.get(renovations.size() - 1).getNextrenovationdate();
+				calendar.setTime(date);
+				calendar.add(Calendar.MONTH, 1);
+			} else {
+				date = pawnEntity.getCreationdate();
+				calendar.setTime(date);
+				calendar.add(Calendar.MONTH, 2);
 			}
+			RenovationEntity entity = new RenovationEntity();
+			entity.setPawn(pawnEntity);
+			entity.setCreationdate(new Date());
+			entity.setNextrenovationdate(calendar.getTime());
+			renovations.add(entity);
 		}
+		pawnEntity.setRenovations(renovations);
+		pawnsRepository.save(pawnEntity);
 		daily = dailyService.getDaily(DateUtil.getDateFormated(new Date()),
 				placeUserRepository.findByUser(usersRepository.findByUsername(pawn.getUser())).get(0).getPlace(), null);
 		return daily;
-	}
-
-	private void createRenovation(PawnEntity pawnEntity) {
-		List<RenovationEntity> renovations = pawnEntity.getRenovations();
-		Calendar calendar = Calendar.getInstance();
-		Date date;
-		if (renovations != null && !renovations.isEmpty()) {
-			Date daterenovation;
-			date = renovations.get(0).getNextrenovationdate();
-			for (int r = 1; r < renovations.size(); r++) {
-				daterenovation = renovations.get(r).getNextrenovationdate();
-				if (daterenovation.after(date)) {
-					date = daterenovation;
-				}
-			}
-			calendar.setTime(date);
-			calendar.add(Calendar.MONTH, 1);
-		} else {
-			date = pawnEntity.getCreationdate();
-			calendar.setTime(date);
-			calendar.add(Calendar.MONTH, 2);
-		}
-		RenovationEntity entity = new RenovationEntity();
-		entity.setPawn(pawnEntity);
-		entity.setCreationdate(new Date());
-		entity.setNextrenovationdate(calendar.getTime());
-		renovationsRepository.save(entity);
-
 	}
 
 	@Override
