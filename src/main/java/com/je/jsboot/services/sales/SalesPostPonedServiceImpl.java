@@ -20,6 +20,7 @@ import com.je.jsboot.dbaccess.entities.SalePostponedEntity;
 import com.je.jsboot.dbaccess.repositories.InstallmentsRepository;
 import com.je.jsboot.dbaccess.repositories.SalesPostponedRepository;
 import com.je.jsboot.forms.SalePostPoned;
+import com.je.jsboot.services.converters.SalePostPonedEntityConverter;
 import com.je.jsboot.utils.date.DateUtil;
 import com.je.jsboot.utils.string.Util;
 
@@ -27,14 +28,17 @@ import com.je.jsboot.utils.string.Util;
 public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 
 	@Autowired
-	private SalesPostponedRepository salespostponedrepository;
+	private InstallmentsRepository installmentsrepository;
 
 	@Autowired
-	private InstallmentsRepository installmentsrepository;
+	private SalesPostponedRepository salespostponedrepository;
 
 	/** The mapper. */
 	@Autowired
 	private ModelMapper mapper;
+
+	@Autowired
+	private SalePostPonedEntityConverter converter;
 
 	@Override
 	public void buy(SalePostPoned sale) {
@@ -124,7 +128,7 @@ public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 	public SalePostPoned searchByPK(long id) {
 		SalePostponedEntity saleEntity = salespostponedrepository.findById(id).orElse(null);
 		if (saleEntity != null) {
-			SalePostPoned sale = mapper.map(saleEntity, SalePostPoned.class);
+			SalePostPoned sale = converter.convertToDTO(saleEntity);
 			List<SalePostPonedJewel> sjewels = saleEntity.getSjewels();
 			Iterator<SalePostPonedJewel> isjewels = sjewels.iterator();
 			sale.setJewels(new ArrayList<>());

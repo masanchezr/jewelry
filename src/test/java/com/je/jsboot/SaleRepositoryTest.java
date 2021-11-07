@@ -38,7 +38,7 @@ class SaleRepositoryTest {
 	void findByCreationdateBetweenPayTest() {
 		PaymentEntity pay = new PaymentEntity();
 		Calendar c = Calendar.getInstance();
-		c.set(2015, 1, 1);
+		c.set(2021, 11, 1);
 		pay.setIdpayment(3L);
 		Assertions.assertNotNull(saleRepository.findByCreationdateBetweenPay(c.getTime(), new Date(), pay));
 	}

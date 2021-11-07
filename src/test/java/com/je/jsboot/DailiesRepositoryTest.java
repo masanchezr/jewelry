@@ -30,7 +30,7 @@ class DailiesRepositoryTest {
 	void saveTest() {
 		PlaceEntity place = new PlaceEntity();
 		place.setIdplace(24002L);
-		Calendar calendar = new GregorianCalendar(2020, 11, 29);
+		Calendar calendar = new GregorianCalendar(2020, 11, 30);
 		DailyEntity daily = dailyRepository.findByPlaceAndDailydate(place, calendar.getTime());
 		daily.setDailydate(calendar.getTime());
 		daily.setPlace(place);
