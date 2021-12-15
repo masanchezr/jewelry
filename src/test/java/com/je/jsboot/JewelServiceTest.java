@@ -37,6 +37,7 @@ class JewelServiceTest {
 		jewel.setCategory(category);
 		jewel.setReference("b186");
 		jewel.setMetal(material);
+		jewel.setActive(Boolean.TRUE);
 		Assertions.assertNull(objectService.searchByReferenceCategoryMetalPlaceActive(jewel));
 	}
 

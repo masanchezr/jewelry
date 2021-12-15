@@ -145,7 +145,7 @@ public class JewelServiceImpl implements JewelService {
 			jewel = ijewels.next();
 			if (!Util.isEmpty(jewel.getReference())) {
 				jewel.setPlace(place);
-				jewel.setActive(true);
+				jewel.setActive(Boolean.TRUE);
 				jewel = searchByReferenceCategoryMetalPlaceActive(jewel);
 				if (jewel != null && jewel.getIdjewel() != null) {
 					newjewels.add(jewel);
