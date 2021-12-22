@@ -27,7 +27,8 @@ public class AdjustmentValidator implements Validator {
 				ConstantsViews.ERRORSELECTIDADJUSTMENT);
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.DESCRIPTION, ConstantsViews.ERRORSELECTDESCRIPTION);
 		Adjustment adjustment = (Adjustment) arg0;
-		if (Util.getNumber(adjustment.getAmountwork()).compareTo(BigDecimal.ZERO) <= 0) {
+		BigDecimal amount = Util.getNumber(adjustment.getAmountwork());
+		if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
 			arg1.rejectValue("amountwork", ConstantsViews.ERRORSELECTAMOUNT);
 		}
 	}
