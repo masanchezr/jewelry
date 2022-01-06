@@ -232,8 +232,7 @@ public class SalesController {
 			// ahora hay que mirar si existe la venta para ese lugar
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			PlaceEntity place = placeService.getPlaceUser(user);
-			Sale searchSale = saleService.searchByNumsaleAndYear(removeSaleForm.getNumsale(),
-					DateUtil.getYear(new Date()));
+			Sale searchSale = saleService.searchByNumsaleAndYear(removeSaleForm.getNumsale(), removeSaleForm.getYear());
 			if (searchSale == null) {
 				model.addObject(FORMREMOVESALE, new Sale());
 				model.setViewName(VIEWREMOVESALE);

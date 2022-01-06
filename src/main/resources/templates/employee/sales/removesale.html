@@ -25,6 +25,12 @@
 								th:text="${payment.name}" />
 						</select>
 					</div>
+					<div id="sandbox-container" class="form-group">
+						<input class="form-control" th:field="*{year}"
+							th:placeholder="#{year}" />
+						<p class="text-danger" th:if="${#fields.hasErrors('year')}"
+							th:errors="*{year}"></p>
+					</div>
 					<div id="discount" class="d-none">
 						<div class="form-group">
 							<span th:text="#{iddiscount}"></span> <input class="form-control"

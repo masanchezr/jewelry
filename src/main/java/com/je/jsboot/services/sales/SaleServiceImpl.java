@@ -239,7 +239,7 @@ public class SaleServiceImpl implements SaleService {
 		CancelSalePaymentEntity csp;
 		DiscountEntity discount = null;
 		BigDecimal optionalpayment = removeSaleForm.getOptionalpayment();
-		SaleEntity sale = saleManager.searchByNumsaleAndYear(removeSaleForm.getNumsale(), DateUtil.getYear(new Date()));
+		SaleEntity sale = saleManager.searchByNumsaleAndYear(removeSaleForm.getNumsale(), removeSaleForm.getYear());
 		CancelSaleEntity cancel = new CancelSaleEntity();
 		cancel.setNumsale(sale.getNumsale());
 		cancel.setCreationdate(new Date());

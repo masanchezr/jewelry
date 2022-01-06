@@ -35,6 +35,8 @@ public class Sale extends SaleParent {
 
 	private Long numsalechange;
 
+	private Integer year;
+
 	/**
 	 * Gets the client.
 	 *
@@ -155,5 +157,13 @@ public class Sale extends SaleParent {
 
 	public void setJewelstocancel(List<Long> jewelstocancel) {
 		this.jewelstocancel = jewelstocancel;
+	}
+
+	public Integer getYear() {
+		return year;
+	}
+
+	public void setYear(Integer year) {
+		this.year = year;
 	}
 }
