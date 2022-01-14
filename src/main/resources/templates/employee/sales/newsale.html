@@ -58,6 +58,12 @@
 						<span th:text="#{clientdiscount}"></span> <input
 							class="form-control" th:field="*{iddiscount}" />
 					</div>
+					<div id="sandbox-container" class="form-group">
+						<input class="form-control" th:field="*{year}"
+							th:placeholder="#{yeardiscount}" />
+						<p class="text-danger" th:if="${#fields.hasErrors('year')}"
+							th:errors="*{year}"></p>
+					</div>
 					<div class="form-group">
 						<span th:text="#{severalpayments}"></span> <input
 							class="form-control" th:field="*{optionalpayment}" />
