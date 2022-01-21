@@ -24,8 +24,6 @@ public class UserDetailServiceImpl implements UserDetailsService {
 	@Autowired
 	private UsersRepository usersRepository;
 
-	PasswordEncoder encode;
-
 	@Override
 	public UserDetails loadUserByUsername(String username) {
 		UserEntity appUser = usersRepository.findByUsername(username);
@@ -57,8 +55,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
 	@Bean
 	public PasswordEncoder encoder() {
-		encode = new Pbkdf2PasswordEncoder();
-		return encode;
+		return new Pbkdf2PasswordEncoder();
 	}
 
 	public List<UserEntity> allEmployeesActives() {
