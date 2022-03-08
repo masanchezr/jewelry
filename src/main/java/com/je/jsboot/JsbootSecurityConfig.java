@@ -18,7 +18,7 @@ public class JsbootSecurityConfig {
 
 	@Autowired
 	private UserDetailServiceImpl userDetailsService;
-	private static String[] resources = new String[] { "/css/**", "/img/**", "/js/**" };
+	private static String[] resources = new String[] { "/css/**", "/img/**", "/js/**", "/" };
 
 	@Configuration
 	@Order(1)
@@ -34,11 +34,6 @@ public class JsbootSecurityConfig {
 					.and().exceptionHandling().accessDeniedPage("/403wks").and().logout()
 					.logoutUrl("/workshop/j_spring_security_logout").logoutSuccessUrl(LOGINURL)
 					.invalidateHttpSession(true);
-		}
-
-		@Override
-		public void configure(WebSecurity web) throws Exception {
-			web.ignoring().antMatchers(HttpMethod.GET, resources);
 		}
 	}
 
@@ -72,11 +67,6 @@ public class JsbootSecurityConfig {
 					.accessDeniedPage("/403").and().logout().logoutUrl("/employee/j_spring_security_logout")
 					.logoutSuccessUrl(LOGINURL).invalidateHttpSession(true);
 		}
-
-		@Override
-		public void configure(WebSecurity web) throws Exception {
-			web.ignoring().antMatchers(HttpMethod.GET, resources);
-		}
 	}
 
 	@Configuration
@@ -106,7 +96,11 @@ public class JsbootSecurityConfig {
 					.accessDeniedPage("/403admin").and().logout().logoutUrl("/j_spring_security_logout")
 					.logoutSuccessUrl(LOGINURL).invalidateHttpSession(true);
 		}
+	}
 
+	@Configuration
+	@Order(4)
+	public static class AllSecurityConfig extends WebSecurityConfigurerAdapter {
 		@Override
 		public void configure(WebSecurity web) throws Exception {
 			web.ignoring().antMatchers(HttpMethod.GET, resources);
