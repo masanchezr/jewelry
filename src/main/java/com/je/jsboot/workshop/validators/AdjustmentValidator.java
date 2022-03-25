@@ -9,7 +9,6 @@ import org.springframework.validation.Validator;
 import com.je.jsboot.services.adjustments.Adjustment;
 import com.je.jsboot.utils.constants.Constants;
 import com.je.jsboot.utils.constants.ConstantsViews;
-import com.je.jsboot.utils.string.Util;
 
 /**
  * The Class AdjustmentValidator.
@@ -27,7 +26,7 @@ public class AdjustmentValidator implements Validator {
 				ConstantsViews.ERRORSELECTIDADJUSTMENT);
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.DESCRIPTION, ConstantsViews.ERRORSELECTDESCRIPTION);
 		Adjustment adjustment = (Adjustment) arg0;
-		BigDecimal amount = Util.getNumber(adjustment.getAmountwork());
+		BigDecimal amount = adjustment.getAmountwork();
 		if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
 			arg1.rejectValue("amountwork", ConstantsViews.ERRORSELECTAMOUNT);
 		}
