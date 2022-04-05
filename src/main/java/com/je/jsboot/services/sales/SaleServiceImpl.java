@@ -282,6 +282,7 @@ public class SaleServiceImpl implements SaleService {
 			discount = new DiscountEntity();
 			discount.setNumsale(iddiscount);
 			discount.setCreationdate(new Date());
+			discount.setYear(DateUtil.getYear(discount.getCreationdate()));
 			discount.setNumsalecancel(removeSaleForm.getNumsale());
 			discount.setNumsalechange(removeSaleForm.getNumsalechange());
 			discount.setPlace(mapper.map(removeSaleForm.getPlace(), PlaceEntity.class));
