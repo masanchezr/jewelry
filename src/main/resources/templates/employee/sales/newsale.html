@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	th:include="employee/template :: page">
+	th:include="employee/templateCancelSale :: page">
 <div th:fragment="content">
 	<form method="post" th:action="@{/employee/resultsale}"
 		th:object="${saleForm}" role="form">
