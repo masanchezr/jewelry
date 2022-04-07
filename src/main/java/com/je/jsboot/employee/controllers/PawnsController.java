@@ -352,8 +352,8 @@ public class PawnsController {
 	@PostMapping("/employee/searchRemovePawn")
 	public ModelAndView searchRemovePawn(Pawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
+		model.addObject(ConstantsViews.PAWNFORM, new Pawn());
 		if (result.hasErrors()) {
-			model.addObject(ConstantsViews.PAWNFORM, new Pawn());
 			model.setViewName(VIEWSEARCHREMOVEPAWN);
 		} else {
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
