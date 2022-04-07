@@ -350,7 +350,7 @@ public class PawnsController {
 	 * @return the model and view
 	 */
 	@PostMapping("/employee/searchRemovePawn")
-	public ModelAndView searchRemovePawn(@Valid Pawn pawn, BindingResult result) {
+	public ModelAndView searchRemovePawn(Pawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		if (result.hasErrors()) {
 			model.addObject(ConstantsViews.PAWNFORM, new Pawn());
