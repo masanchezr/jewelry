@@ -60,7 +60,7 @@ public class HolidaysController {
 	@PostMapping("/addHoliday")
 	public ModelAndView addHoliday(Holiday holiday, BindingResult result) {
 		ModelAndView model = new ModelAndView();
-		validator.validate(model, result);
+		validator.validate(holiday, result);
 		if (result.hasErrors()) {
 			model.addObject(ConstantsViews.FORMHOLIDAY, holiday);
 			model.addObject(ConstantsViews.PLACES, placeService.getAllPlacesActive());
