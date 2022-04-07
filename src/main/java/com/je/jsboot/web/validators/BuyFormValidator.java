@@ -1,5 +1,6 @@
 package com.je.jsboot.web.validators;
 
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -11,6 +12,8 @@ import com.je.jsboot.web.forms.BuyForm;
 /**
  * The Class BuyFormValidator.
  */
+
+@Component
 public class BuyFormValidator implements Validator {
 
 	@Override

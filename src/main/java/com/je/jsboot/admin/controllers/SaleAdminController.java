@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -67,14 +66,26 @@ public class SaleAdminController {
 	@Autowired
 	private PaymentService paymentService;
 
+	@Autowired
+	private SearchSalesValidator searchSalesValidator;
+
+	@Autowired
+	private SearchMissingNumbersValidator searchMissingNumbersValidator;
+
+	@Autowired
+	private SearchFormValidator searchFormValidator;
+
+	@Autowired
+	private SaleFormValidator saleFormValidator;
+
 	private static final String VIEWNEWSALEADMIN = "admin/sales/newsale";
 
 	@PostMapping("/resultSalesCard")
-	public ModelAndView resultSalesCard(
-			@Validated(SearchSalesValidator.class) @ModelAttribute("searchSaleForm") SearchSale searchSaleForm,
+	public ModelAndView resultSalesCard(@ModelAttribute("searchSaleForm") SearchSale searchSaleForm,
 			BindingResult bindingResult) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
+		searchSalesValidator.validate(searchSaleForm, bindingResult);
 		if (bindingResult.hasErrors()) {
 			model.setViewName("admin/salescard/searchsalescard");
 			model.addObject("searchSaleForm", searchSaleForm);
@@ -116,11 +127,11 @@ public class SaleAdminController {
 	}
 
 	@PostMapping("/resultNumMissing")
-	public ModelAndView resultNumMissing(
-			@Validated(SearchMissingNumbersValidator.class) @ModelAttribute(ConstantsViews.FORMSEARCH) SearchMissingNumbers searchForm,
+	public ModelAndView resultNumMissing(@ModelAttribute(ConstantsViews.FORMSEARCH) SearchMissingNumbers searchForm,
 			BindingResult bindingResult) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
+		searchMissingNumbersValidator.validate(searchForm, bindingResult);
 		if (bindingResult.hasErrors()) {
 			model.setViewName("searchnummissing");
 			model.addObject(ConstantsViews.FORMSEARCH, searchForm);
@@ -132,11 +143,11 @@ public class SaleAdminController {
 	}
 
 	@PostMapping("/resultSales")
-	public ModelAndView resultsales(
-			@Validated(SearchFormValidator.class) @ModelAttribute(ConstantsViews.FORMSEARCH) SearchForm searchSaleForm,
+	public ModelAndView resultsales(@ModelAttribute(ConstantsViews.FORMSEARCH) SearchForm searchSaleForm,
 			BindingResult bindingResult) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
+		searchFormValidator.validate(searchSaleForm, bindingResult);
 		if (bindingResult.hasErrors()) {
 			model.setViewName("admin/sales/searchsales/searchsales");
 			model.addObject(ConstantsViews.FORMSEARCH, searchSaleForm);
@@ -166,10 +177,10 @@ public class SaleAdminController {
 	 * @return the model and view
 	 */
 	@PostMapping("/resultsale")
-	public ModelAndView sale(@Validated(SaleFormValidator.class) @ModelAttribute(ConstantsViews.FORMSALE) Sale sale,
-			BindingResult result) {
+	public ModelAndView sale(@ModelAttribute(ConstantsViews.FORMSALE) Sale sale, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
+		saleFormValidator.validate(sale, result);
 		if (!result.hasErrors()) {
 			List<JewelEntity> jewels = sale.getJewels();
 			PlaceEntity place = sale.getPlace();

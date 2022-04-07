@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,6 +35,9 @@ public class RegisterEmployeesController {
 	@Autowired
 	private RegisterService registerService;
 
+	@Autowired
+	private SearchFormValidator searchFormValidator;
+
 	/** The logger. */
 	private static Logger logger = LoggerFactory.getLogger(RegisterEmployeesController.class);
 
@@ -48,12 +50,12 @@ public class RegisterEmployeesController {
 	}
 
 	@PostMapping("/registeremployees")
-	public ModelAndView registeremployees(
-			@Validated(SearchFormValidator.class) @ModelAttribute(ConstantsViews.FORMSEARCH) SearchForm form,
+	public ModelAndView registeremployees(@ModelAttribute(ConstantsViews.FORMSEARCH) SearchForm form,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		String sfrom = form.getDatefrom();
 		String suntil = form.getDateuntil();
+		searchFormValidator.validate(form, result);
 		if (result.hasErrors()) {
 			model.addObject(ConstantsViews.FORMSEARCH, new SearchForm());
 			model.setViewName("admin/register/search");

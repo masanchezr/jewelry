@@ -2,7 +2,12 @@ package com.je.jsboot.services.workshop;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import com.je.jsboot.dbaccess.entities.MetalEntity;
+import com.je.jsboot.utils.constants.ConstantsViews;
 
 /**
  * The Class Workshop.
@@ -10,9 +15,12 @@ import com.je.jsboot.dbaccess.entities.MetalEntity;
 public class Workshop {
 
 	/** The amount. */
+	@DecimalMin(value = "0.1", message = ConstantsViews.ERRORSELECTAMOUNT)
 	private BigDecimal amount;
 
 	/** The description. */
+	@NotNull(message = ConstantsViews.ERRORSELECTDESCRIPTION)
+	@NotEmpty(message = ConstantsViews.ERRORSELECTDESCRIPTION)
 	private String description;
 
 	/** The grams. */
@@ -32,8 +40,7 @@ public class Workshop {
 	/**
 	 * Sets the amount.
 	 *
-	 * @param amount
-	 *            the new amount
+	 * @param amount the new amount
 	 */
 	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
@@ -51,8 +58,7 @@ public class Workshop {
 	/**
 	 * Sets the description.
 	 *
-	 * @param description
-	 *            the new description
+	 * @param description the new description
 	 */
 	public void setDescription(String description) {
 		this.description = description;

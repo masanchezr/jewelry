@@ -3,20 +3,19 @@ package com.je.jsboot.employee.controllers;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.validation.Valid;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.jsboot.dbaccess.entities.PayrollEntity;
 import com.je.jsboot.dbaccess.entities.UserEntity;
-import com.je.jsboot.employee.validators.PayrollFormValidator;
 import com.je.jsboot.services.payroll.Payroll;
 import com.je.jsboot.services.payroll.PayrollService;
 import com.je.jsboot.utils.constants.Constants;
@@ -44,8 +43,7 @@ public class PayrollController {
 	}
 
 	@PostMapping("/employee/savepayroll")
-	public ModelAndView savePayroll(@Validated(PayrollFormValidator.class) @ModelAttribute(FORMPAYROLL) Payroll payroll,
-			BindingResult result) {
+	public ModelAndView savePayroll(@Valid Payroll payroll, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		PayrollEntity payrollEntity = mapper.map(payroll, PayrollEntity.class);
 		if (result.hasErrors()) {

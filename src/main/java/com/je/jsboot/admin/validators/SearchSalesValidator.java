@@ -1,5 +1,6 @@
 package com.je.jsboot.admin.validators;
 
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -8,6 +9,7 @@ import com.je.jsboot.utils.constants.ConstantsViews;
 import com.je.jsboot.utils.date.DateUtil;
 import com.je.jsboot.utils.string.Util;
 
+@Component
 public class SearchSalesValidator implements Validator {
 
 	@Override

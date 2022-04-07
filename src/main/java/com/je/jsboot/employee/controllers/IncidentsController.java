@@ -2,17 +2,17 @@ package com.je.jsboot.employee.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.je.jsboot.employee.validators.IncidentValidator;
 import com.je.jsboot.forms.SearchForm;
 import com.je.jsboot.services.incidents.Incident;
 import com.je.jsboot.services.incidents.IncidentService;
@@ -25,6 +25,9 @@ public class IncidentsController {
 	@Autowired
 	private IncidentService incidentService;
 
+	@Autowired
+	private SearchFormValidator searchFormValidator;
+
 	@GetMapping("/employee/newincident")
 	public ModelAndView newIncident() {
 		ModelAndView model = new ModelAndView("employee/incidents/newincident");
@@ -33,9 +36,7 @@ public class IncidentsController {
 	}
 
 	@PostMapping("/employee/saveincident")
-	public ModelAndView saveIncident(
-			@Validated(IncidentValidator.class) @ModelAttribute(ConstantsViews.FORMINCIDENT) Incident incident,
-			BindingResult result) {
+	public ModelAndView saveIncident(@Valid Incident incident, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		if (result.hasErrors()) {
 			model.setViewName("employee/incidents/newincident");
@@ -57,10 +58,10 @@ public class IncidentsController {
 	}
 
 	@PostMapping("/employee/resultIncidents")
-	public ModelAndView resultSearchIncidents(
-			@Validated(SearchFormValidator.class) @ModelAttribute(ConstantsViews.FORMSEARCH) SearchForm form,
+	public ModelAndView resultSearchIncidents(@ModelAttribute(ConstantsViews.FORMSEARCH) SearchForm form,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
+		searchFormValidator.validate(form, result);
 		if (result.hasErrors()) {
 			model.addObject(ConstantsViews.FORMSEARCH, form);
 			model.setViewName("employee/incidents/searchincidents");

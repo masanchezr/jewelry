@@ -6,13 +6,14 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +24,6 @@ import com.je.jsboot.admin.forms.AdminForm;
 import com.je.jsboot.dbaccess.entities.MetalEntity;
 import com.je.jsboot.dbaccess.entities.ObjectPawnEntity;
 import com.je.jsboot.employee.validators.NewPawnFormValidator;
-import com.je.jsboot.employee.validators.PawnFormValidator;
 import com.je.jsboot.employee.validators.ReturnPawnFormValidator;
 import com.je.jsboot.services.metal.MetalService;
 import com.je.jsboot.services.nations.NationService;
@@ -59,6 +59,12 @@ public class PawnsController {
 
 	@Autowired
 	private TrackService trackservice;
+
+	@Autowired
+	private NewPawnFormValidator newPawnFormValidator;
+
+	@Autowired
+	private ReturnPawnFormValidator returnPawnFormValidator;
 
 	private static final String VIEWNEWPAWN = "employee/pawns/newpawn/newPawn";
 	private static final String VIEWSEARCHCLIENT = "employee/pawns/newpawn/searchclient";
@@ -123,10 +129,9 @@ public class PawnsController {
 	}
 
 	@PostMapping("/employee/savereturnpawn")
-	public ModelAndView savereturnPawn(
-			@Validated(ReturnPawnFormValidator.class) @ModelAttribute(ConstantsViews.PAWNFORM) NewPawn pawn,
-			BindingResult result) {
+	public ModelAndView savereturnPawn(@ModelAttribute(ConstantsViews.PAWNFORM) NewPawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
+		returnPawnFormValidator.validate(pawn, result);
 		if (result.hasErrors()) {
 			List<MetalEntity> materials = materialService.getAllMetalsActive();
 			Iterator<MetalEntity> imaterials = materials.iterator();
@@ -164,10 +169,9 @@ public class PawnsController {
 	 * @return the string
 	 */
 	@PostMapping("/employee/savePawn")
-	public ModelAndView savePawn(
-			@Validated(NewPawnFormValidator.class) @ModelAttribute(ConstantsViews.PAWNFORM) NewPawn pawn,
-			BindingResult result) {
+	public ModelAndView savePawn(@ModelAttribute(ConstantsViews.PAWNFORM) NewPawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
+		newPawnFormValidator.validate(pawn, result);
 		if (result.hasErrors()) {
 			List<MetalEntity> materials = materialService.getAllMetalsActive();
 			Iterator<MetalEntity> imaterials = materials.iterator();
@@ -279,8 +283,7 @@ public class PawnsController {
 	 * @return the model and view
 	 */
 	@PostMapping("/employee/searchRenewPawn")
-	public ModelAndView searchRenewPawn(@Validated(PawnFormValidator.class) @ModelAttribute("searchPawnForm") Pawn pawn,
-			BindingResult result) {
+	public ModelAndView searchRenewPawn(@Valid Pawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		if (result.hasErrors()) {
 			model.addObject(FORMSEARCHPAWN, new Pawn());
@@ -347,9 +350,7 @@ public class PawnsController {
 	 * @return the model and view
 	 */
 	@PostMapping("/employee/searchRemovePawn")
-	public ModelAndView searchRemovePawn(
-			@Validated(PawnFormValidator.class) @ModelAttribute(ConstantsViews.PAWNFORM) Pawn pawn,
-			BindingResult result) {
+	public ModelAndView searchRemovePawn(@Valid Pawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		if (result.hasErrors()) {
 			model.addObject(ConstantsViews.PAWNFORM, new Pawn());
@@ -383,9 +384,7 @@ public class PawnsController {
 	}
 
 	@PostMapping("/employee/resultRenovationsPawns")
-	public ModelAndView resultRenovationsPawns(
-			@Validated(PawnFormValidator.class) @ModelAttribute(ConstantsViews.PAWNFORM) Pawn pawn,
-			BindingResult result) {
+	public ModelAndView resultRenovationsPawns(@Valid Pawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		if (result.hasErrors()) {
 			model.setViewName("employee/pawns/searchrenovations/searchpawn");

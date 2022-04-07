@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -37,6 +35,10 @@ public class ShoppingsController {
 	/** The shopping service. */
 	@Autowired
 	private ShoppingService shoppingService;
+
+	@Autowired
+	private ShoppingsValidator validator;
+
 	private static final String VIEWNEWSHOPPING = "employee/newshopping";
 
 	/**
@@ -69,10 +71,9 @@ public class ShoppingsController {
 	 * @return the model and view
 	 */
 	@PostMapping("/employee/saveShopping")
-	public ModelAndView saveShopping(
-			@Validated(ShoppingsValidator.class) @ModelAttribute(ConstantsViews.SHOPPINGFORM) Shopping shoppingForm,
-			BindingResult result) {
+	public ModelAndView saveShopping(Shopping shoppingForm, BindingResult result) {
 		ModelAndView model = new ModelAndView();
+		validator.validate(shoppingForm, result);
 		if (result.hasErrors()) {
 			model.setViewName(VIEWNEWSHOPPING);
 			List<ObjectShopEntity> los = shoppingForm.getObjects();

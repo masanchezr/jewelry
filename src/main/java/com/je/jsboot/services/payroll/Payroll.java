@@ -2,12 +2,16 @@ package com.je.jsboot.services.payroll;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.DecimalMin;
+
 import com.je.jsboot.dbaccess.entities.PayrolltypeEntity;
+import com.je.jsboot.utils.constants.ConstantsViews;
 
 public class Payroll {
 
 	private String payrolldate;
 
+	@DecimalMin(value = "0.1", message = ConstantsViews.ERRORSELECTAMOUNT)
 	private BigDecimal amount;
 
 	private PayrolltypeEntity payrolltype;

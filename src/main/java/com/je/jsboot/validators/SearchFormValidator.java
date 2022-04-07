@@ -2,6 +2,7 @@ package com.je.jsboot.validators;
 
 import java.util.Date;
 
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -10,6 +11,7 @@ import com.je.jsboot.utils.constants.ConstantsViews;
 import com.je.jsboot.utils.date.DateUtil;
 import com.je.jsboot.utils.string.Util;
 
+@Component
 public class SearchFormValidator implements Validator {
 
 	@Override

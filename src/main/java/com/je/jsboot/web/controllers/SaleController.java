@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,6 +52,9 @@ public class SaleController {
 	@Autowired
 	private CategoriesService searchCategoriesService;
 
+	@Autowired
+	private DataClientFormValidator validator;
+
 	private static final String VIEWSHOPPINGCART = "shoppingcart";
 
 	/**
@@ -63,12 +65,11 @@ public class SaleController {
 	 * @return the model and view
 	 */
 	@PostMapping("/comprar")
-	public ModelAndView buy(
-			@Validated(DataClientFormValidator.class) @ModelAttribute("dataForm") DataClientForm dataForm,
-			BindingResult result) {
+	public ModelAndView buy(DataClientForm dataForm, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		Iterable<CategoryEntity> categories = searchCategoriesService.getAllCategoriesOrderByName();
 		String jsp = "sale";
+		validator.validate(dataForm, result);
 		if (!result.hasErrors()) {
 			// guardamos o actualizamos información del cliente
 			Client client = new Client();

@@ -2,8 +2,13 @@ package com.je.jsboot.forms;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import com.je.jsboot.dbaccess.entities.MetalEntity;
 import com.je.jsboot.dbaccess.entities.PlaceEntity;
+import com.je.jsboot.utils.constants.ConstantsViews;
 
 public class Coin {
 
@@ -13,6 +18,9 @@ public class Coin {
 
 	private MetalEntity metal;
 
+	@NotBlank(message = ConstantsViews.ERRORSELECTDESCRIPTION)
+	@NotEmpty(message = ConstantsViews.ERRORSELECTDESCRIPTION)
+	@NotNull(message = ConstantsViews.ERRORSELECTDESCRIPTION)
 	private String description;
 
 	private Double price;

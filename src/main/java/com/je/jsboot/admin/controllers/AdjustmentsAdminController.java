@@ -5,7 +5,6 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,6 +30,9 @@ public class AdjustmentsAdminController {
 	@Autowired
 	private PlaceService placeService;
 
+	@Autowired
+	private SearchFormValidator validator;
+
 	private static final String VIEWSEARCHADJUSTMENT = "admin/adjustments/searchadjustment";
 	private static final String VIEWSEARCHSUMADJUSTMENTS = "admin/adjustments/searchsumadjustments";
 
@@ -44,11 +46,10 @@ public class AdjustmentsAdminController {
 	}
 
 	@PostMapping("/sumadjustments")
-	public ModelAndView sumAdjustments(
-			@Validated(SearchFormValidator.class) @ModelAttribute(ConstantsViews.FORMSEARCH) SearchForm searchForm,
-			BindingResult result) {
+	public ModelAndView sumAdjustments(SearchForm searchForm, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
+		validator.validate(searchForm, result);
 		if (result.hasErrors()) {
 			model.addObject(ConstantsViews.FORMSEARCH, searchForm);
 			model.addObject(ConstantsViews.PLACES, placeService.getAllPlacesActive());

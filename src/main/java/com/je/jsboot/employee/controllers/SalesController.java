@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -69,6 +68,15 @@ public class SalesController {
 	@Autowired
 	private SearchSaleRepeatedService searchSaleRepeatedService;
 
+	@Autowired
+	private SaleFormValidator saleFormValidator;
+
+	@Autowired
+	private PartialCancelSaleValidator partialCancelSaleValidator;
+
+	@Autowired
+	private RemoveSaleFormValidator removeSaleFormValidator;
+
 	private static final String VIEWNEWSALE = "employee/sales/newsale";
 	private static final String VIEWREMOVEPARCIALSALE = "employee/sales/removeparcialsale";
 	private static final String VIEWREMOVESALE = "employee/sales/removesale";
@@ -83,9 +91,9 @@ public class SalesController {
 	 * @return the model and view
 	 */
 	@PostMapping("/employee/resultsale")
-	public ModelAndView sale(@Validated(SaleFormValidator.class) @ModelAttribute(ConstantsViews.FORMSALE) Sale sale,
-			BindingResult result) {
+	public ModelAndView sale(@ModelAttribute(ConstantsViews.FORMSALE) Sale sale, BindingResult result) {
 		ModelAndView model = new ModelAndView();
+		saleFormValidator.validate(sale, result);
 		if (!result.hasErrors()) {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			List<JewelEntity> jewels = sale.getJewels();
@@ -168,10 +176,9 @@ public class SalesController {
 	}
 
 	@PostMapping("/employee/savecancelparcial")
-	public ModelAndView savecancelparcial(
-			@Validated(PartialCancelSaleValidator.class) @ModelAttribute(ConstantsViews.FORMSALE) Sale sale,
-			BindingResult result) {
+	public ModelAndView savecancelparcial(@ModelAttribute(ConstantsViews.FORMSALE) Sale sale, BindingResult result) {
 		ModelAndView model = new ModelAndView();
+		partialCancelSaleValidator.validate(sale, result);
 		if (result.hasErrors()) {
 			Sale entitysale = saleService.searchByPK(sale.getIdsale());
 			model.setViewName(VIEWCANCELPARCIALSALE);
@@ -221,9 +228,9 @@ public class SalesController {
 	 * @return the model and view
 	 */
 	@PostMapping("/employee/deletesale")
-	public ModelAndView deleteSale(@Validated(RemoveSaleFormValidator.class) Sale removeSaleForm,
-			HttpServletRequest request, BindingResult result) {
+	public ModelAndView deleteSale(Sale removeSaleForm, BindingResult result, HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
+		removeSaleFormValidator.validate(removeSaleForm, result);
 		if (result.hasErrors()) {
 			model.addObject(FORMREMOVESALE, new Sale());
 			model.setViewName(VIEWREMOVESALE);

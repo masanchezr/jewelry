@@ -7,6 +7,7 @@ import java.io.IOException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.apache.commons.io.IOUtils;
 import org.modelmapper.ModelMapper;
@@ -14,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,9 +24,6 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.jsboot.admin.forms.AdminForm;
-import com.je.jsboot.admin.validators.CoinFormValidator;
-import com.je.jsboot.admin.validators.JewelFormValidator;
-import com.je.jsboot.admin.validators.SelectCategoryValidator;
 import com.je.jsboot.dbaccess.entities.CategoryEntity;
 import com.je.jsboot.dbaccess.entities.CoinEntity;
 import com.je.jsboot.dbaccess.entities.JewelEntity;
@@ -233,9 +230,7 @@ public class JewelsController {
 	 * @return the string
 	 */
 	@PostMapping("/saveJewel")
-	public ModelAndView addJewelEntity(
-			@Validated(SelectCategoryValidator.class) @ModelAttribute(FORMJEWEL) Jewel jewelForm, BindingResult result,
-			Model m) {
+	public ModelAndView addJewelEntity(@Valid Jewel jewelForm, BindingResult result, Model m) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		if (result.hasErrors()) {
@@ -329,8 +324,7 @@ public class JewelsController {
 	 * @return the model and view
 	 */
 	@GetMapping("/addcoin")
-	public ModelAndView addCoin(@Validated(CoinFormValidator.class) @ModelAttribute("coinForm") Coin coin,
-			BindingResult result) {
+	public ModelAndView addCoin(@Valid @ModelAttribute("coinForm") Coin coin, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		if (result.hasErrors()) {
 			model.addObject(ConstantsViews.PLACES, placeService.getAllPlacesActive());
@@ -386,8 +380,7 @@ public class JewelsController {
 	}
 
 	@PostMapping("/resultSearchRevise")
-	public ModelAndView resultSearchRevise(@Validated(JewelFormValidator.class) @ModelAttribute(FORMJEWEL) Jewel jewel,
-			BindingResult e) {
+	public ModelAndView resultSearchRevise(@Valid @ModelAttribute(FORMJEWEL) Jewel jewel, BindingResult e) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		if (e.hasErrors()) {

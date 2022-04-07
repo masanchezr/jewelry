@@ -2,7 +2,11 @@ package com.je.jsboot.services.adjustments;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import com.je.jsboot.dbaccess.entities.PaymentEntity;
+import com.je.jsboot.utils.constants.ConstantsViews;
 
 /**
  * The Class Adjustment.
@@ -10,9 +14,12 @@ import com.je.jsboot.dbaccess.entities.PaymentEntity;
 public class Adjustment {
 
 	/** The idadjustment. */
+	@NotNull
 	private Long idadjustment;
 
 	/** The description. */
+	@NotNull(message = ConstantsViews.ERRORSELECTDESCRIPTION)
+	@NotEmpty(message = ConstantsViews.ERRORSELECTDESCRIPTION)
 	private String description;
 
 	private String user;

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -17,6 +18,8 @@ import com.je.jsboot.utils.string.Util;
 /**
  * The Class SaleFormValidator.
  */
+
+@Component
 public class SaleFormValidator implements Validator {
 
 	@Override

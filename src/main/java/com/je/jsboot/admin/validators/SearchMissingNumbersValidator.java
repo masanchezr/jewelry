@@ -1,11 +1,13 @@
 package com.je.jsboot.admin.validators;
 
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.je.jsboot.admin.forms.SearchMissingNumbers;
 
+@Component
 public class SearchMissingNumbersValidator implements Validator {
 
 	public boolean supports(Class<?> arg0) {
@@ -13,10 +15,8 @@ public class SearchMissingNumbersValidator implements Validator {
 	}
 
 	public void validate(Object arg0, Errors arg1) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "numfrom",
-				"selectnumber");
-		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "numuntil",
-				"selectnumber");
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "numfrom", "selectnumber");
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "numuntil", "selectnumber");
 		SearchMissingNumbers sms = (SearchMissingNumbers) arg0;
 		Long numshopfrom = sms.getNumfrom();
 		Long numshopuntil = sms.getNumuntil();

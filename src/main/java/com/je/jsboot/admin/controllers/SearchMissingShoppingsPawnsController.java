@@ -3,7 +3,6 @@ package com.je.jsboot.admin.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +25,9 @@ public class SearchMissingShoppingsPawnsController {
 	@Autowired
 	private PlaceService placeService;
 
+	@Autowired
+	private SearchMissingNumbersValidator searchMissingNumbersValidator;
+
 	private static final String SEARCHMISSINGSHOPPINGS = "searchmissingshoppings";
 
 	@GetMapping("/searchPosibleRepeated")
@@ -39,10 +41,10 @@ public class SearchMissingShoppingsPawnsController {
 
 	@PostMapping("/resultmissingshoppings")
 	public ModelAndView resultMissingShoppings(
-			@Validated(SearchMissingNumbersValidator.class) @ModelAttribute(SEARCHMISSINGSHOPPINGS) SearchMissingNumbers searchmissingshoppings,
-			BindingResult result) {
+			@ModelAttribute(SEARCHMISSINGSHOPPINGS) SearchMissingNumbers searchmissingshoppings, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
+		searchMissingNumbersValidator.validate(searchmissingshoppings, result);
 		if (result.hasErrors()) {
 			model.addObject(ConstantsViews.PLACES, placeService.getAllPlacesActive());
 			model.addObject(SEARCHMISSINGSHOPPINGS, new SearchMissingNumbers());

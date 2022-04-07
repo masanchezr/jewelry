@@ -2,10 +2,11 @@ package com.je.jsboot.admin.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.je.jsboot.admin.forms.AdminForm;
 import com.je.jsboot.admin.validators.UpdatePawnFormValidator;
-import com.je.jsboot.employee.validators.PawnFormValidator;
 import com.je.jsboot.forms.SearchForm;
 import com.je.jsboot.services.metal.MetalService;
 import com.je.jsboot.services.nations.NationService;
@@ -54,6 +54,12 @@ public class PawnsAdminController {
 	@Autowired
 	private TrackService trackservice;
 
+	@Autowired
+	private UpdatePawnFormValidator updatePawnFormValidator;
+
+	@Autowired
+	private SearchFormValidator searchFormValidator;
+
 	private static final String VIEWSEARCHPAWN = "admin/pawns/searchpawns/searchpawn";
 	private static final String VIEWUPDATEPAWN = "admin/pawns/searchpawns/updatepawn";
 	private static final String VIEWRENOVATIONS = "admin/pawns/searchrenovations/renovations";
@@ -80,9 +86,7 @@ public class PawnsAdminController {
 	 * @return the model and view
 	 */
 	@PostMapping("/resultPawns")
-	public ModelAndView resultPawns(
-			@Validated(PawnFormValidator.class) @ModelAttribute(ConstantsViews.PAWNFORM) Pawn pawn,
-			BindingResult result) {
+	public ModelAndView resultPawns(@Valid Pawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		if (result.hasErrors()) {
@@ -167,10 +171,9 @@ public class PawnsAdminController {
 	 * @return the model and view
 	 */
 	@PostMapping("/savePawn")
-	public ModelAndView savePawn(
-			@Validated(UpdatePawnFormValidator.class) @ModelAttribute(ConstantsViews.PAWNFORM) NewPawn pawn,
-			BindingResult result) {
+	public ModelAndView savePawn(@ModelAttribute(ConstantsViews.PAWNFORM) NewPawn pawn, BindingResult result) {
 		ModelAndView model;
+		updatePawnFormValidator.validate(pawn, result);
 		if (result.hasErrors()) {
 			model = new ModelAndView();
 			model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
@@ -197,9 +200,7 @@ public class PawnsAdminController {
 	}
 
 	@PostMapping("/resultRenovationsPawns")
-	public ModelAndView resultRenovationsPawns(
-			@Validated(PawnFormValidator.class) @ModelAttribute(ConstantsViews.PAWNFORM) Pawn pawn,
-			BindingResult result) {
+	public ModelAndView resultRenovationsPawns(@Valid Pawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		if (result.hasErrors()) {
@@ -222,11 +223,11 @@ public class PawnsAdminController {
 	}
 
 	@PostMapping("/quarterpawns")
-	public ModelAndView quarterpawns(
-			@Validated(SearchFormValidator.class) @ModelAttribute(ConstantsViews.FORMSEARCH) SearchForm search,
+	public ModelAndView quarterpawns(@ModelAttribute(ConstantsViews.FORMSEARCH) SearchForm search,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
+		searchFormValidator.validate(search, result);
 		if (result.hasErrors()) {
 			model.setViewName("admin/pawns/quarters/searchquarter");
 		} else {
@@ -246,11 +247,10 @@ public class PawnsAdminController {
 	}
 
 	@PostMapping("/commissions")
-	public ModelAndView commisions(
-			@Validated(SearchFormValidator.class) @ModelAttribute(ConstantsViews.FORMSEARCH) SearchForm search,
-			BindingResult result) {
+	public ModelAndView commisions(@ModelAttribute(ConstantsViews.FORMSEARCH) SearchForm search, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
+		searchFormValidator.validate(search, result);
 		if (result.hasErrors()) {
 			model.addObject(ConstantsViews.FORMSEARCH, search);
 			model.setViewName("admin/pawns/commissions/searchcommissions");

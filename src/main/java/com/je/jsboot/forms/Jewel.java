@@ -3,18 +3,23 @@ package com.je.jsboot.forms;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import com.je.jsboot.dbaccess.entities.MetalEntity;
 import com.je.jsboot.dbaccess.entities.PlaceEntity;
 import com.je.jsboot.dbaccess.entities.WorkshopEntity;
+import com.je.jsboot.utils.constants.ConstantsViews;
 
 public class Jewel {
 
 	private Long idjewel;
 
 	private String name;
-
 	private String description;
 
+	@DecimalMin(value = "0.1")
 	private BigDecimal price;
 
 	private Boolean active;
@@ -27,6 +32,8 @@ public class Jewel {
 
 	private WorkshopEntity work;
 
+	@NotEmpty(message = ConstantsViews.ERRORSELECTREFERENCE)
+	@NotNull(message = ConstantsViews.ERRORSELECTREFERENCE)
 	private String reference;
 
 	private MetalEntity metal;

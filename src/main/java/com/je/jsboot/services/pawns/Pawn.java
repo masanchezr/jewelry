@@ -2,8 +2,13 @@ package com.je.jsboot.services.pawns;
 
 import java.util.Date;
 
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotEmpty;
+
 import com.je.jsboot.dbaccess.entities.PlaceEntity;
 import com.je.jsboot.forms.OperationForm;
+import com.je.jsboot.utils.constants.ConstantsViews;
 
 /**
  * The Class Pawn.
@@ -11,9 +16,13 @@ import com.je.jsboot.forms.OperationForm;
 public class Pawn extends OperationForm {
 
 	/** The numpawn. */
+
+	@NotEmpty(message = ConstantsViews.IDPAWN)
 	private String numpawn;
 
 	/** The percent. */
+	@DecimalMin(value = "0.1", message = "{errorpercent}")
+	@DecimalMax(value = "100", message = "{errorpercent}")
 	private double percent;
 
 	/** The retired. */

@@ -1,11 +1,11 @@
 package com.je.jsboot.workshop.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,7 +14,6 @@ import com.je.jsboot.services.metal.MetalService;
 import com.je.jsboot.services.workshop.Workshop;
 import com.je.jsboot.services.workshop.WorkshopService;
 import com.je.jsboot.utils.constants.ConstantsViews;
-import com.je.jsboot.workshop.validators.WorkshopValidator;
 
 /**
  * The Class WorkshopController.
@@ -80,8 +79,7 @@ public class WorkshopController {
 	 * @return the model and view
 	 */
 	@PostMapping("/workshop/saveworkshop")
-	public ModelAndView saveworkshop(@Validated(WorkshopValidator.class) @ModelAttribute("workshop") Workshop workshop,
-			BindingResult result) {
+	public ModelAndView saveworkshop(@Valid Workshop workshop, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		if (result.hasErrors()) {
 			model.setViewName("workshop/newworkshop");

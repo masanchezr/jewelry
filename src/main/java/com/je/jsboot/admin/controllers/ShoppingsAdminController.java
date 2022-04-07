@@ -67,6 +67,15 @@ public class ShoppingsAdminController {
 	@Autowired
 	private TrackService trackservice;
 
+	@Autowired
+	private ShoppingFormValidator shoppingFormValidator;
+
+	@Autowired
+	private NewShoppingFormValidator newShoppingFormValidator;
+
+	@Autowired
+	private SearchFormValidator searchFormValidator;
+
 	/** The logger. */
 	private static Logger logger = LoggerFactory.getLogger(ShoppingsAdminController.class);
 
@@ -97,10 +106,10 @@ public class ShoppingsAdminController {
 	 * @return the model and view
 	 */
 	@PostMapping("/resultShoppings")
-	public ModelAndView resultShoppings(
-			@Validated(ShoppingFormValidator.class) @ModelAttribute(ConstantsViews.SHOPPINGFORM) ShoppingSearch shopping,
+	public ModelAndView resultShoppings(@ModelAttribute(ConstantsViews.SHOPPINGFORM) ShoppingSearch shopping,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
+		shoppingFormValidator.validate(shopping, result);
 		if (result.hasErrors()) {
 			model.addObject("shopping", shopping);
 			model.addObject(ConstantsViews.PLACES, placeService.getAllPlacesActive());
@@ -173,10 +182,9 @@ public class ShoppingsAdminController {
 	 * @return the model and view
 	 */
 	@PostMapping("/saveshop")
-	public ModelAndView saveShop(
-			@Validated(NewShoppingFormValidator.class) @ModelAttribute(FORMSHOP) Shopping shoppingForm,
-			BindingResult result) {
+	public ModelAndView saveShop(@ModelAttribute(FORMSHOP) Shopping shoppingForm, BindingResult result) {
 		ModelAndView model;
+		newShoppingFormValidator.validate(shoppingForm, result);
 		if (result.hasErrors()) {
 			List<MetalEntity> materials = materialService.getAllMetalsActive();
 			Iterator<MetalEntity> imaterials = materials.iterator();
@@ -212,10 +220,10 @@ public class ShoppingsAdminController {
 	}
 
 	@PostMapping("/quartermaterial")
-	public ModelAndView quarterMetal(
-			@Validated(SearchFormValidator.class) @ModelAttribute(ConstantsViews.SHOPPINGFORM) SearchForm shopping,
+	public ModelAndView quarterMetal(@ModelAttribute(ConstantsViews.SHOPPINGFORM) SearchForm shopping,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
+		searchFormValidator.validate(shopping, result);
 		if (result.hasErrors()) {
 			model.setViewName("admin/shoppings/quartersmetal/searchquarter");
 			model.addObject(ConstantsViews.PLACES, placeService.getAllPlacesActive());
@@ -241,11 +249,11 @@ public class ShoppingsAdminController {
 	}
 
 	@PostMapping("/resultgramsnull")
-	public ModelAndView resultGramsNull(
-			@Validated(SearchFormValidator.class) @ModelAttribute(ConstantsViews.FORMSEARCH) SearchForm form,
+	public ModelAndView resultGramsNull(@ModelAttribute(ConstantsViews.FORMSEARCH) SearchForm form,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
+		searchFormValidator.validate(form, result);
 		if (result.hasErrors()) {
 			model.setViewName("admin/shoppings/searchshoppings/searchgramsnull");
 			model.addObject(ConstantsViews.FORMSEARCH, form);
