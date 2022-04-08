@@ -283,7 +283,7 @@ public class PawnsController {
 	 * @return the model and view
 	 */
 	@PostMapping("/employee/searchRenewPawn")
-	public ModelAndView searchRenewPawn(@Valid Pawn pawn, BindingResult result) {
+	public ModelAndView searchRenewPawn(Pawn pawn, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		if (result.hasErrors()) {
 			model.addObject(FORMSEARCHPAWN, new Pawn());
