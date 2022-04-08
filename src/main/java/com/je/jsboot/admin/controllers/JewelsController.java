@@ -238,6 +238,7 @@ public class JewelsController {
 			model.addObject(ConstantsViews.PLACES, placeService.getAllPlacesActive());
 			model.addObject(ConstantsViews.MATERIALS, materialService.getAllMetals());
 			model.setViewName(VIEWNEWJEWEL);
+			model.addObject(FORMJEWEL, jewelForm);
 		} else {
 			// primero miro a ver si existe ya esa joya,
 			JewelEntity jewelf = mapper.map(jewelForm, JewelEntity.class);
@@ -247,6 +248,7 @@ public class JewelsController {
 				model.addObject(ConstantsViews.MATERIALS, materialService.getAllMetals());
 				model.addObject(ConstantsViews.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
 				model.setViewName(VIEWNEWJEWEL);
+				model.addObject(FORMJEWEL, jewelForm);
 				result.rejectValue(ConstantsViews.REFERENCE, "selectotherreference");
 			} else {
 				jewelf.setPlace(placeService.getPlace(jewelForm.getPlace().getIdplace()));
