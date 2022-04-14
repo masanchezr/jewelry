@@ -24,7 +24,7 @@ public class PawnEntityConverter {
 
 	Converter<String, Date> toDate = new AbstractConverter<String, Date>() {
 		protected Date convert(String source) {
-			if (source == null || source.isBlank() || source.isEmpty()) {
+			if (source == null || source.isEmpty()) {
 				return new Date();
 			} else
 				return DateUtil.getDate(source);

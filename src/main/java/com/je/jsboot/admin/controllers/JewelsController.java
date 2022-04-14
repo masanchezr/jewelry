@@ -24,6 +24,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.jsboot.admin.forms.AdminForm;
+import com.je.jsboot.admin.validators.SelectCategoryValidator;
 import com.je.jsboot.dbaccess.entities.CategoryEntity;
 import com.je.jsboot.dbaccess.entities.CoinEntity;
 import com.je.jsboot.dbaccess.entities.JewelEntity;
@@ -70,6 +71,9 @@ public class JewelsController {
 	/** The set service. */
 	@Autowired
 	private SetService setService;
+
+	@Autowired
+	private SelectCategoryValidator validator;
 
 	@Autowired
 	private ModelMapper mapper;
@@ -230,15 +234,15 @@ public class JewelsController {
 	 * @return the string
 	 */
 	@PostMapping("/saveJewel")
-	public ModelAndView addJewelEntity(@Valid Jewel jewelForm, BindingResult result, Model m) {
+	public ModelAndView addJewelEntity(@ModelAttribute(FORMJEWEL) Jewel jewelForm, BindingResult result, Model m) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
+		validator.validate(jewelForm, result);
 		if (result.hasErrors()) {
 			model.addObject(ConstantsViews.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
 			model.addObject(ConstantsViews.PLACES, placeService.getAllPlacesActive());
 			model.addObject(ConstantsViews.MATERIALS, materialService.getAllMetals());
 			model.setViewName(VIEWNEWJEWEL);
-			model.addObject(FORMJEWEL, jewelForm);
 		} else {
 			// primero miro a ver si existe ya esa joya,
 			JewelEntity jewelf = mapper.map(jewelForm, JewelEntity.class);
@@ -248,7 +252,6 @@ public class JewelsController {
 				model.addObject(ConstantsViews.MATERIALS, materialService.getAllMetals());
 				model.addObject(ConstantsViews.CATEGORIES, categoriesService.getAllCategoriesOrderByName());
 				model.setViewName(VIEWNEWJEWEL);
-				model.addObject(FORMJEWEL, jewelForm);
 				result.rejectValue(ConstantsViews.REFERENCE, "selectotherreference");
 			} else {
 				jewelf.setPlace(placeService.getPlace(jewelForm.getPlace().getIdplace()));

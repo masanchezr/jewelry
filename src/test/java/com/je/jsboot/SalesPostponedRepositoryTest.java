@@ -32,7 +32,7 @@ class SalesPostponedRepositoryTest {
 		Calendar c = Calendar.getInstance();
 		PlaceEntity place = new PlaceEntity();
 		place.setIdplace(9004L);
-		c.set(2021, 4, 1);
+		c.set(2020, 4, 1);
 		Assertions
 				.assertNotNull(salespostponedrepository.sumDateretiredBetweenAndPlace(c.getTime(), new Date(), place));
 	}
