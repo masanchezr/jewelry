@@ -120,7 +120,7 @@ public class DailiesController {
 			BindingResult arg1) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
-		validator.validate(arg1, arg1);
+		validator.validate(sdf, arg1);
 		if (arg1.hasErrors()) {
 			model.setViewName(VIEWSEARCHCALCULATEDAILIES);
 			model.addObject(ConstantsViews.PLACES, placeService.getAllPlacesActive());
