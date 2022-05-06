@@ -96,6 +96,7 @@ public class PawnsAdminController {
 		} else {
 			model.setViewName("admin/pawns/searchpawns/resultpawn");
 			model.addObject(ConstantsViews.PAWNS, pawnService.searchByNumpawn(pawn));
+			model.addObject(ConstantsViews.PAWNFORM, pawn);
 		}
 		return model;
 	}
