@@ -78,15 +78,14 @@ public class SaleServiceImpl implements SaleService {
 		} else {
 			saleEntity.setCreationdate(DateUtil.getDate(sale.getSaledate()));
 		}
-		int year = DateUtil.getYear(saleEntity.getCreationdate());
-		saleEntity.setYear(year);
+		saleEntity.setYear(DateUtil.getYear(saleEntity.getCreationdate()));
 		Iterator<JewelEntity> ijewels = sale.getJewels().iterator();
 		BigDecimal importeTotal = getTotalAmount(salesJewels, saleEntity, ijewels);
 		setAddresses(sale, saleEntity);
 		BigDecimal discount = sale.getDiscount();
 		Long iddiscount = sale.getIddiscount();
 		if (iddiscount != null) {
-			DiscountEntity discountEntity = discountsRepository.findByNumsaleAndYear(iddiscount, year);
+			DiscountEntity discountEntity = discountsRepository.findByNumsaleAndYear(iddiscount, sale.getYear());
 			if (discount == null) {
 				discount = BigDecimal.ZERO;
 			}
@@ -239,7 +238,7 @@ public class SaleServiceImpl implements SaleService {
 		CancelSalePaymentEntity csp;
 		DiscountEntity discount = null;
 		BigDecimal optionalpayment = removeSaleForm.getOptionalpayment();
-		SaleEntity sale = saleManager.searchByNumsaleAndYear(removeSaleForm.getNumsale(), DateUtil.getYear(new Date()));
+		SaleEntity sale = saleManager.searchByNumsaleAndYear(removeSaleForm.getNumsale(), removeSaleForm.getYear());
 		CancelSaleEntity cancel = new CancelSaleEntity();
 		cancel.setNumsale(sale.getNumsale());
 		cancel.setCreationdate(new Date());
@@ -283,6 +282,7 @@ public class SaleServiceImpl implements SaleService {
 			discount = new DiscountEntity();
 			discount.setNumsale(iddiscount);
 			discount.setCreationdate(new Date());
+			discount.setYear(DateUtil.getYear(discount.getCreationdate()));
 			discount.setNumsalecancel(removeSaleForm.getNumsale());
 			discount.setNumsalechange(removeSaleForm.getNumsalechange());
 			discount.setPlace(mapper.map(removeSaleForm.getPlace(), PlaceEntity.class));

@@ -2,6 +2,7 @@ package com.je.jsboot.admin.validators;
 
 import java.math.BigDecimal;
 
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -13,6 +14,8 @@ import com.je.jsboot.utils.constants.ConstantsViews;
 /**
  * The Class SelectCategoryValidator.
  */
+
+@Component
 public class SelectCategoryValidator implements Validator {
 
 	@Override

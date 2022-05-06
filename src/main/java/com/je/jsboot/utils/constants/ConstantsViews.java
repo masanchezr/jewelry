@@ -43,9 +43,9 @@ public class ConstantsViews {
 	public static final String USER = "user";
 	public static final String SELECTDATE = "selectdate";
 	public static final String DATE = "date";
-	public static final String ERRORSELECTAMOUNT = "selectamount";
-	public static final String ERRORSELECTDESCRIPTION = "selectdescription";
-	public static final String ERRORSELECTREFERENCE = "selectreference";
+	public static final String ERRORSELECTAMOUNT = "{selectamount}";
+	public static final String ERRORSELECTDESCRIPTION = "{selectdescription}";
+	public static final String ERRORSELECTREFERENCE = "{selectreference}";
 	public static final String ERRORSELECTIDSALE = "selectidsale";
 	public static final String CASHAMOUNT = "cashamount";
 	public static final String ERRORSELECTGRAMS = "selectgrams";
@@ -59,7 +59,7 @@ public class ConstantsViews {
 	public static final String TOTAL = "total";
 	public static final String ERRORSELECTNUMSHOP = "selectnumshop";
 	public static final String DATEFROM = "datefrom";
-	public static final String ERRORSELECTNAME = "selectname";
+	public static final String ERRORSELECTNAME = "{selectname}";
 	public static final String SURNAME = "surname";
 	public static final String ERRORSURNAME = "selectsurname";
 	public static final String NIF = "nif";
@@ -71,7 +71,7 @@ public class ConstantsViews {
 	public static final String ERRORNUMSALEREPEATED = "numsalerepeated";
 	public static final String ERRORSALENOTEXIST = "salenotexist";
 	public static final String FORMSALEPOSTPONED = "salepostponed";
-	public static final String ERRORNUMDISCOUNT = "selectnumdiscount";
+	public static final String ERRORNUMDISCOUNT = "{selectnumdiscount}";
 	public static final Long DISCOUNTANDCASH = 6L;
 	public static final Long SAME = 5L;
 
@@ -80,7 +80,8 @@ public class ConstantsViews {
 
 	public static final String EMAIL = "email";
 
-	public static final String ERRORSELECTMAIL = "selectmail";
+	public static final String ERRORSELECTMAIL = "{selectmail}";
 	public static final String ERRORWRITEMESSAGE = "writemessage";
+	public static final String IDPAWN = "{idpawn}";
 
 }

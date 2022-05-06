@@ -3,6 +3,7 @@ package com.je.jsboot.employee.validators;
 import java.math.BigDecimal;
 import java.util.Iterator;
 
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -15,6 +16,7 @@ import com.je.jsboot.utils.string.Util;
 /**
  * The Class ShoppingsValidator.
  */
+@Component
 public class ShoppingsValidator implements Validator {
 
 	@Override

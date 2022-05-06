@@ -5,7 +5,6 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +24,9 @@ public class EntryMoneyAdminController {
 	@Autowired
 	private EntryMoneyService entryMoneyService;
 
+	@Autowired
+	private SearchFormValidator validator;
+
 	private static final String VIEWSEARCHENTRIES = "admin/entriesmoney/searchentries";
 
 	@GetMapping("/searchEntries")
@@ -36,11 +38,10 @@ public class EntryMoneyAdminController {
 	}
 
 	@PostMapping("/resultentries")
-	public ModelAndView resultEntries(
-			@Validated(SearchFormValidator.class) @ModelAttribute(ConstantsViews.FORMSEARCH) SearchForm asf,
-			BindingResult arg1) {
+	public ModelAndView resultEntries(@ModelAttribute(ConstantsViews.FORMSEARCH) SearchForm asf, BindingResult arg1) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
+		validator.validate(asf, arg1);
 		if (arg1.hasErrors()) {
 			model.setViewName("VIEWSEARCHENTRIES");
 			model.addObject(ConstantsViews.FORMSEARCH, asf);

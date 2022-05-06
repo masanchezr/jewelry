@@ -1,6 +1,12 @@
 package com.je.jsboot.services.adjustments;
 
+import java.math.BigDecimal;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import com.je.jsboot.dbaccess.entities.PaymentEntity;
+import com.je.jsboot.utils.constants.ConstantsViews;
 
 /**
  * The Class Adjustment.
@@ -8,24 +14,27 @@ import com.je.jsboot.dbaccess.entities.PaymentEntity;
 public class Adjustment {
 
 	/** The idadjustment. */
+	@NotNull
 	private Long idadjustment;
 
 	/** The description. */
+	@NotNull(message = ConstantsViews.ERRORSELECTDESCRIPTION)
+	@NotEmpty(message = ConstantsViews.ERRORSELECTDESCRIPTION)
 	private String description;
 
 	private String user;
 
 	/** The amount. */
-	private String amount;
+	private BigDecimal amount;
 
 	/** The amountwork. */
-	private String amountwork;
+	private BigDecimal amountwork;
 
 	/** The recommendedprice. */
-	private String recommendedprice;
+	private BigDecimal recommendedprice;
 
 	/** The grams. */
-	private String grams;
+	private BigDecimal grams;
 
 	private PaymentEntity payment;
 
@@ -65,78 +74,6 @@ public class Adjustment {
 		this.description = description;
 	}
 
-	/**
-	 * Gets the amount.
-	 *
-	 * @return the amount
-	 */
-	public String getAmount() {
-		return amount;
-	}
-
-	/**
-	 * Sets the amount.
-	 *
-	 * @param amount the new amount
-	 */
-	public void setAmount(String amount) {
-		this.amount = amount;
-	}
-
-	/**
-	 * Gets the recommendedprice.
-	 *
-	 * @return the recommendedprice
-	 */
-	public String getRecommendedprice() {
-		return recommendedprice;
-	}
-
-	/**
-	 * Sets the recommendedprice.
-	 *
-	 * @param recommendedprice the new recommendedprice
-	 */
-	public void setRecommendedprice(String recommendedprice) {
-		this.recommendedprice = recommendedprice;
-	}
-
-	/**
-	 * Gets the amountwork.
-	 *
-	 * @return the amountwork
-	 */
-	public String getAmountwork() {
-		return amountwork;
-	}
-
-	/**
-	 * Sets the amountwork.
-	 *
-	 * @param amountwork the new amountwork
-	 */
-	public void setAmountwork(String amountwork) {
-		this.amountwork = amountwork;
-	}
-
-	/**
-	 * Gets the grams.
-	 *
-	 * @return the grams
-	 */
-	public String getGrams() {
-		return grams;
-	}
-
-	/**
-	 * Sets the grams.
-	 *
-	 * @param grams the new grams
-	 */
-	public void setGrams(String grams) {
-		this.grams = grams;
-	}
-
 	public PaymentEntity getPayment() {
 		return payment;
 	}
@@ -151,5 +88,37 @@ public class Adjustment {
 
 	public void setUser(String user) {
 		this.user = user;
+	}
+
+	public BigDecimal getAmount() {
+		return amount;
+	}
+
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
+	}
+
+	public BigDecimal getAmountwork() {
+		return amountwork;
+	}
+
+	public void setAmountwork(BigDecimal amountwork) {
+		this.amountwork = amountwork;
+	}
+
+	public BigDecimal getRecommendedprice() {
+		return recommendedprice;
+	}
+
+	public void setRecommendedprice(BigDecimal recommendedprice) {
+		this.recommendedprice = recommendedprice;
+	}
+
+	public BigDecimal getGrams() {
+		return grams;
+	}
+
+	public void setGrams(BigDecimal grams) {
+		this.grams = grams;
 	}
 }

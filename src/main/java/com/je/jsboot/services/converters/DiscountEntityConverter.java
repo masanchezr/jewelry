@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.je.jsboot.dbaccess.entities.DiscountEntity;
 import com.je.jsboot.services.discounts.Discount;
+import com.je.jsboot.utils.date.DateUtil;
 
 @Component
 public class DiscountEntityConverter {
@@ -19,8 +20,10 @@ public class DiscountEntityConverter {
 
 	public DiscountEntity convertToDiscount(Discount discount) {
 		DiscountEntity discountEntity = mapper.map(discount, DiscountEntity.class);
+		Date today = new Date();
 		discountEntity.setDiscount(new BigDecimal(discount.getSdiscount()));
-		discountEntity.setCreationdate(new Date());
+		discountEntity.setCreationdate(today);
+		discountEntity.setYear(DateUtil.getYear(today));
 		return discountEntity;
 	}
 

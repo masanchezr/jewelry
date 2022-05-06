@@ -2,17 +2,16 @@ package com.je.jsboot.employee.controllers;
 
 import java.util.Date;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.je.jsboot.employee.validators.AdjustmentValidator;
 import com.je.jsboot.services.adjustments.Adjustment;
 import com.je.jsboot.services.adjustments.AdjustmentService;
 import com.je.jsboot.services.payment.PaymentService;
@@ -53,9 +52,7 @@ public class AdjustmentsController {
 	 * @return the model and view
 	 */
 	@PostMapping("/employee/saveAdjustment")
-	public ModelAndView saveAdjustment(
-			@Validated(AdjustmentValidator.class) @ModelAttribute(ConstantsViews.FORMADJUSTMENT) Adjustment adjustment,
-			BindingResult result) {
+	public ModelAndView saveAdjustment(@Valid Adjustment adjustment, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		if (result.hasErrors()) {
 			model.setViewName("employee/newadjustment");

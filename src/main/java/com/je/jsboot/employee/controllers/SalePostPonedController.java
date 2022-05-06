@@ -12,7 +12,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ValidationUtils;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -64,6 +63,12 @@ public class SalePostPonedController {
 	@Autowired
 	private SalesPostPonedService saleservicepostponed;
 
+	@Autowired
+	private SalePostPonedValidator salePostPonedValidator;
+
+	@Autowired
+	private InstallmentValidator installmentValidator;
+
 	private static final String ADDINSTALLMENT = "employee/salespostponed/addinstallment";
 	private static final String INSTALLMENT = "installment";
 	private static final String VIEWNEWSALEPOSTPONED = "employee/salespostponed/newsale";
@@ -85,10 +90,10 @@ public class SalePostPonedController {
 	}
 
 	@PostMapping("/employee/savesalepostponed")
-	public ModelAndView savesalepostponed(
-			@Validated(SalePostPonedValidator.class) @ModelAttribute(ConstantsViews.FORMSALE) SalePostPoned sale,
+	public ModelAndView savesalepostponed(@ModelAttribute(ConstantsViews.FORMSALE) SalePostPoned sale,
 			BindingResult result) {
 		ModelAndView model = new ModelAndView();
+		salePostPonedValidator.validate(sale, result);
 		if (!result.hasErrors()) {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			List<JewelEntity> jewels = sale.getJewels();
@@ -138,10 +143,10 @@ public class SalePostPonedController {
 	}
 
 	@PostMapping("/employee/saveinstallment")
-	public ModelAndView saveinstallment(
-			@Validated(InstallmentValidator.class) @ModelAttribute(INSTALLMENT) Installment installment,
-			BindingResult result, HttpServletRequest request) {
+	public ModelAndView saveinstallment(@ModelAttribute(INSTALLMENT) Installment installment, BindingResult result,
+			HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
+		installmentValidator.validate(installment, result);
 		if (result.hasErrors()) {
 			model.setViewName(ADDINSTALLMENT);
 			model.addObject(INSTALLMENT, installment);

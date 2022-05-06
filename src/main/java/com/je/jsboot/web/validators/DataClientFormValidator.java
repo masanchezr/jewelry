@@ -3,6 +3,7 @@ package com.je.jsboot.web.validators;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -15,6 +16,7 @@ import com.je.jsboot.web.forms.DataClientForm;
 /**
  * The Class DataClientFormValidator.
  */
+@Component
 public class DataClientFormValidator implements Validator {
 
 	@Override

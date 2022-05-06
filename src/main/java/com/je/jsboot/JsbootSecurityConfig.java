@@ -1,7 +1,6 @@
 package com.je.jsboot;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
@@ -10,8 +9,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 
 import com.je.jsboot.services.users.UserDetailServiceImpl;
 
@@ -19,11 +16,9 @@ import com.je.jsboot.services.users.UserDetailServiceImpl;
 @EnableWebSecurity
 public class JsbootSecurityConfig {
 
-	PasswordEncoder pbkdf2Encoder;
-
 	@Autowired
 	private UserDetailServiceImpl userDetailsService;
-	private static String[] resources = new String[] { "/css/**", "/img/**", "/js/**" };
+	private static String[] resources = new String[] { "/css/**", "/img/**", "/js/**", "/" };
 
 	@Configuration
 	@Order(1)
@@ -39,11 +34,6 @@ public class JsbootSecurityConfig {
 					.and().exceptionHandling().accessDeniedPage("/403wks").and().logout()
 					.logoutUrl("/workshop/j_spring_security_logout").logoutSuccessUrl(LOGINURL)
 					.invalidateHttpSession(true);
-		}
-
-		@Override
-		public void configure(WebSecurity web) throws Exception {
-			web.ignoring().antMatchers(HttpMethod.GET, resources);
 		}
 	}
 
@@ -77,11 +67,6 @@ public class JsbootSecurityConfig {
 					.accessDeniedPage("/403").and().logout().logoutUrl("/employee/j_spring_security_logout")
 					.logoutSuccessUrl(LOGINURL).invalidateHttpSession(true);
 		}
-
-		@Override
-		public void configure(WebSecurity web) throws Exception {
-			web.ignoring().antMatchers(HttpMethod.GET, resources);
-		}
 	}
 
 	@Configuration
@@ -111,7 +96,11 @@ public class JsbootSecurityConfig {
 					.accessDeniedPage("/403admin").and().logout().logoutUrl("/j_spring_security_logout")
 					.logoutSuccessUrl(LOGINURL).invalidateHttpSession(true);
 		}
+	}
 
+	@Configuration
+	@Order(4)
+	public static class AllSecurityConfig extends WebSecurityConfigurerAdapter {
 		@Override
 		public void configure(WebSecurity web) throws Exception {
 			web.ignoring().antMatchers(HttpMethod.GET, resources);
@@ -123,12 +112,6 @@ public class JsbootSecurityConfig {
 
 		// Setting Service to find User in the database.
 		// And Setting PassswordEncoder
-		auth.userDetailsService(userDetailsService).passwordEncoder(pbkdf2Encoder());
-	}
-
-	@Bean
-	public PasswordEncoder pbkdf2Encoder() {
-		pbkdf2Encoder = new Pbkdf2PasswordEncoder();
-		return pbkdf2Encoder;
+		auth.userDetailsService(userDetailsService);
 	}
 }

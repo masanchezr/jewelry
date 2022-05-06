@@ -2,10 +2,17 @@ package com.je.jsboot.services.incidents;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import com.je.jsboot.utils.constants.ConstantsViews;
+
 public class Incident {
 
 	private Long idincident;
 
+	@NotEmpty(message = ConstantsViews.ERRORSELECTDESCRIPTION)
+	@NotNull(message = ConstantsViews.ERRORSELECTDESCRIPTION)
 	private String description;
 
 	private boolean state;

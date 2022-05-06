@@ -2,6 +2,7 @@ package com.je.jsboot.admin.validators;
 
 import java.math.BigDecimal;
 
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -15,6 +16,7 @@ import com.je.jsboot.utils.string.Util;
 /**
  * The Class UpdatePawnFormValidator.
  */
+@Component
 public class UpdatePawnFormValidator implements Validator {
 
 	@Override

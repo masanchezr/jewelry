@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -22,6 +23,8 @@ import com.je.jsboot.utils.string.Util;
 /**
  * The Class NewPawnFormValidator.
  */
+
+@Component
 public class NewPawnFormValidator implements Validator {
 
 	private static final String ERRORDATEBIRTH = "datebirth";

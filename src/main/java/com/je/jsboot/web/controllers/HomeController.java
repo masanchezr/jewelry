@@ -3,12 +3,13 @@ package com.je.jsboot.web.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,7 +31,6 @@ import com.je.jsboot.utils.constants.ConstantsViews;
 import com.je.jsboot.web.forms.DataClientForm;
 import com.je.jsboot.web.forms.MessageForm;
 import com.je.jsboot.web.forms.SearchJewelForm;
-import com.je.jsboot.web.validators.MessageFormValidator;
 
 /**
  * Handles requests for the application home page.
@@ -55,9 +55,7 @@ public class HomeController {
 	private SearchService searchService;
 
 	@PostMapping("/sendMessage")
-	public ModelAndView sendMessage(
-			@Validated(MessageFormValidator.class) @ModelAttribute("messageForm") MessageForm message,
-			BindingResult result) {
+	public ModelAndView sendMessage(@Valid MessageForm message, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsViews.FORMSEARCH, new SearchJewelForm());
 		model.addObject(ConstantsViews.CATEGORIES, searchCategoriesService.getAllCategoriesOrderByName());

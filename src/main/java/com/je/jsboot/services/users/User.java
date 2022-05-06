@@ -1,8 +1,14 @@
 package com.je.jsboot.services.users;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import com.je.jsboot.dbaccess.entities.PlaceEntity;
 
 public class User {
+
+	@NotEmpty(message = "{selectuser}")
+	@NotNull(message = "{selectuser}")
 	private String username;
 
 	private String password;

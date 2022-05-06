@@ -1,11 +1,20 @@
 package com.je.jsboot.services.discounts;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import com.je.jsboot.dbaccess.entities.PlaceEntity;
+import com.je.jsboot.utils.constants.ConstantsViews;
 
 public class Discount {
 
+	@NotNull(message = ConstantsViews.ERRORNUMDISCOUNT)
 	private Long numsale;
 
+	@NotNull(message = ConstantsViews.ERRORSELECTAMOUNT)
+	@NotEmpty(message = ConstantsViews.ERRORSELECTAMOUNT)
+	@NotBlank(message = ConstantsViews.ERRORSELECTAMOUNT)
 	private String sdiscount;
 
 	private PlaceEntity place;

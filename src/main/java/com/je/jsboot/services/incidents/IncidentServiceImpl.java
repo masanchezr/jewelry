@@ -105,7 +105,6 @@ public class IncidentServiceImpl implements IncidentService {
 
 	@Override
 	public List<Incident> searchByUserAndDates(String user, SearchForm form) {
-		UserEntity entity = new UserEntity();
 		Date from = DateUtil.getDate(form.getDatefrom());
 		Date until;
 		String suntil = form.getDateuntil();
@@ -114,7 +113,7 @@ public class IncidentServiceImpl implements IncidentService {
 		} else {
 			until = DateUtil.getDate(suntil);
 		}
-		entity.setUsername(user);
-		return mapper(incidentRepository.findByUsernameAndCreationdateBetween(entity, from, until));
+		return mapper(incidentRepository.findByUsernameAndCreationdateBetween(usersRepository.findByUsername(user),
+				from, until));
 	}
 }

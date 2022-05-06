@@ -3,22 +3,20 @@ package com.je.jsboot.employee.controllers;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.jsboot.dbaccess.entities.OtherSaleEntity;
 import com.je.jsboot.dbaccess.entities.PlaceEntity;
 import com.je.jsboot.employee.forms.OtherSale;
-import com.je.jsboot.employee.validators.OtherSaleValidator;
 import com.je.jsboot.services.dailies.DailyService;
 import com.je.jsboot.services.othersale.OtherSaleService;
 import com.je.jsboot.services.payment.PaymentService;
@@ -62,9 +60,7 @@ public class OtherSaleController {
 	}
 
 	@PostMapping("/employee/saverecording")
-	public ModelAndView saveRecording(
-			@Validated(OtherSaleValidator.class) @ModelAttribute(FORMRECORDING) OtherSale recording,
-			HttpServletRequest request, BindingResult errors) {
+	public ModelAndView saveRecording(@Valid OtherSale recording, BindingResult errors, HttpServletRequest request) {
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
 		ModelAndView model = new ModelAndView();
 		Long numsale = recording.getNumsale();

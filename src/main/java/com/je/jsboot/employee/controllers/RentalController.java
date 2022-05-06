@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +24,9 @@ public class RentalController {
 	@Autowired
 	private RentalService rentalService;
 
+	@Autowired
+	private RentalValidator validator;
+
 	private static final String VIEWLOCALRENTAL = "employee/otherconcepts/localrental";
 	private static final String FORMRENTAL = "rentalForm";
 
@@ -36,9 +38,9 @@ public class RentalController {
 	}
 
 	@PostMapping("/employee/savelocalrental")
-	public ModelAndView saveLocalRental(@Validated(RentalValidator.class) @ModelAttribute(FORMRENTAL) Rental rental,
-			BindingResult result) {
+	public ModelAndView saveLocalRental(@ModelAttribute(FORMRENTAL) Rental rental, BindingResult result) {
 		ModelAndView model = new ModelAndView();
+		validator.validate(rental, result);
 		if (result.hasErrors()) {
 			model.setViewName(VIEWLOCALRENTAL);
 			model.addObject(FORMRENTAL, rental);

@@ -219,27 +219,29 @@ public class PawnServiceImpl implements PawnService {
 	public Daily renew(Pawn pawn) {
 		Daily daily = null;
 		PawnEntity pawnEntity = pawnsRepository.findById(pawn.getId()).orElse(null);
-		List<RenovationEntity> renovations = pawnEntity.getRenovations();
-		for (int i = 0; i < pawn.getNumrenovations() && pawnEntity != null; i++) {
-			Calendar calendar = Calendar.getInstance();
-			Date date;
-			if (renovations != null && !renovations.isEmpty()) {
-				date = renovations.get(renovations.size() - 1).getNextrenovationdate();
-				calendar.setTime(date);
-				calendar.add(Calendar.MONTH, 1);
-			} else {
-				date = pawnEntity.getCreationdate();
-				calendar.setTime(date);
-				calendar.add(Calendar.MONTH, 2);
+		if (pawnEntity != null) {
+			List<RenovationEntity> renovations = pawnEntity.getRenovations();
+			for (int i = 0; i < pawn.getNumrenovations() && renovations != null; i++) {
+				Calendar calendar = Calendar.getInstance();
+				Date date;
+				if (!renovations.isEmpty()) {
+					date = renovations.get(renovations.size() - 1).getNextrenovationdate();
+					calendar.setTime(date);
+					calendar.add(Calendar.MONTH, 1);
+				} else {
+					date = pawnEntity.getCreationdate();
+					calendar.setTime(date);
+					calendar.add(Calendar.MONTH, 2);
+				}
+				RenovationEntity entity = new RenovationEntity();
+				entity.setPawn(pawnEntity);
+				entity.setCreationdate(new Date());
+				entity.setNextrenovationdate(calendar.getTime());
+				renovations.add(entity);
 			}
-			RenovationEntity entity = new RenovationEntity();
-			entity.setPawn(pawnEntity);
-			entity.setCreationdate(new Date());
-			entity.setNextrenovationdate(calendar.getTime());
-			renovations.add(entity);
+			pawnEntity.setRenovations(renovations);
+			pawnsRepository.save(pawnEntity);
 		}
-		pawnEntity.setRenovations(renovations);
-		pawnsRepository.save(pawnEntity);
 		daily = dailyService.getDaily(DateUtil.getDateFormated(new Date()),
 				placeUserRepository.findByUser(usersRepository.findByUsername(pawn.getUser())).get(0).getPlace(), null);
 		return daily;

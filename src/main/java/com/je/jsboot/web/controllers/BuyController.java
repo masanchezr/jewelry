@@ -6,7 +6,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,6 +46,9 @@ public class BuyController {
 	private SaleService saleService;
 
 	@Autowired
+	private BuyFormValidator validator;
+
+	@Autowired
 	private ModelMapper mapper;
 
 	/**
@@ -57,10 +59,10 @@ public class BuyController {
 	 * @return the model and view
 	 */
 	@GetMapping
-	public ModelAndView add(@Validated(BuyFormValidator.class) @ModelAttribute("buyForm") BuyForm buyform,
-			@ModelAttribute("cart") List<JewelEntity> cart, BindingResult result) {
+	public ModelAndView add(BuyForm buyform, @ModelAttribute("cart") List<JewelEntity> cart, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsViews.FORMSEARCH, new SearchJewelForm());
+		validator.validate(buyform, result);
 		if (result.hasErrors()) {
 			Addresses addresses = saleService.searchAddressByClient(buyform.getNif());
 			if (addresses != null) {

@@ -2,6 +2,7 @@ package com.je.jsboot.employee.validators;
 
 import java.math.BigDecimal;
 
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -12,6 +13,7 @@ import com.je.jsboot.utils.constants.ConstantsViews;
 import com.je.jsboot.utils.date.DateUtil;
 import com.je.jsboot.utils.string.Util;
 
+@Component
 public class RentalValidator implements Validator {
 
 	public static final String RENTALDATE = "rentaldate";
@@ -26,7 +28,7 @@ public class RentalValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, Constants.AMOUNT, ConstantsViews.ERRORSELECTAMOUNT);
 		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, RENTALDATE, ConstantsViews.SELECTDATE);
 		Rental rental = (Rental) arg0;
-		if (rental.getAmount() == null || Util.getNumber(rental.getAmount()).compareTo(BigDecimal.ZERO) == 0) {
+		if (rental.getAmount() == null || BigDecimal.ZERO.compareTo(Util.getNumber(rental.getAmount())) == 0) {
 			arg1.rejectValue(Constants.AMOUNT, ConstantsViews.ERRORSELECTAMOUNT);
 		}
 		if (!DateUtil.isDate(rental.getRentaldate())) {

@@ -3,19 +3,17 @@ package com.je.jsboot.employee.controllers;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.jsboot.dbaccess.entities.PlaceEntity;
-import com.je.jsboot.employee.validators.DiscountsValidator;
 import com.je.jsboot.services.dailies.DailyService;
 import com.je.jsboot.services.discounts.Discount;
 import com.je.jsboot.services.discounts.DiscountService;
@@ -50,9 +48,7 @@ public class DiscountsController {
 	}
 
 	@PostMapping("/employee/savediscount")
-	public ModelAndView savediscount(
-			@Validated(DiscountsValidator.class) @ModelAttribute("discountForm") Discount discount,
-			HttpServletRequest request, BindingResult errors) {
+	public ModelAndView savediscount(@Valid Discount discount, BindingResult errors, HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
 		Date today = new Date();
 		if (errors.hasErrors()) {

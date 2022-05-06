@@ -2,12 +2,14 @@ package com.je.jsboot.employee.validators;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import com.je.jsboot.forms.Sale;
 import com.je.jsboot.utils.constants.ConstantsViews;
 
+@Component
 public class PartialCancelSaleValidator implements Validator {
 
 	@Override

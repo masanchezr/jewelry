@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.je.jsboot.dbaccess.entities.IncidentEntity;
 import com.je.jsboot.dbaccess.entities.UserEntity;
 import com.je.jsboot.dbaccess.repositories.IncidentRepository;
+import com.je.jsboot.utils.date.DateUtil;
 
 @SpringBootTest
 class IncidentRepositoryTest {
@@ -29,8 +30,16 @@ class IncidentRepositoryTest {
 		Assertions.assertNotNull(incidentsRepository.save(arg0));
 	}
 
-	@Autowired
+	@Test
 	void allincidentsTest() {
 		Assertions.assertNotNull(incidentsRepository.findAll());
+	}
+
+	@Test
+	void findByUsernameAndCreationdateBetweenTest() {
+		UserEntity user = new UserEntity();
+		Date dFrom = DateUtil.getDate("01-01-2014");
+		user.setId(2L);
+		incidentsRepository.findByUsernameAndCreationdateBetween(user, dFrom, new Date());
 	}
 }

@@ -2,18 +2,17 @@ package com.je.jsboot.employee.controllers;
 
 import java.util.Date;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.jsboot.dbaccess.entities.EntryMoneyEntity;
-import com.je.jsboot.employee.validators.EntryMoneyValidator;
 import com.je.jsboot.forms.EntryMoney;
 import com.je.jsboot.services.entrymoney.EntryMoneyService;
 import com.je.jsboot.utils.constants.ConstantsViews;
@@ -33,9 +32,7 @@ public class EntryMoneyController {
 	}
 
 	@PostMapping("/employee/saveentrymoney")
-	public ModelAndView saveEntryMoney(
-			@Validated(EntryMoneyValidator.class) @ModelAttribute(ConstantsViews.FORMENTRYMONEY) EntryMoney entryMoney,
-			BindingResult result) {
+	public ModelAndView saveEntryMoney(@Valid EntryMoney entryMoney, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		if (result.hasErrors()) {
 			model.addObject(ConstantsViews.FORMENTRYMONEY, entryMoney);

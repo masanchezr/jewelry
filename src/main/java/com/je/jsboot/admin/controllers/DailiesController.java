@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,6 +39,9 @@ public class DailiesController {
 	/** The place service. */
 	@Autowired
 	private PlaceService placeService;
+
+	@Autowired
+	private SearchDailyFormValidator validator;
 
 	private static final String VIEWSEARCHCALCULATEDAILIES = "admin/dailies/searchcalculatedailies";
 
@@ -73,13 +75,13 @@ public class DailiesController {
 	 * @return the model and view
 	 */
 	@PostMapping("/searchDaily")
-	public ModelAndView searchDaily(
-			@Validated(SearchDailyFormValidator.class) @ModelAttribute(ConstantsViews.FORMSEARCHDAILY) SearchDailyForm sdf,
+	public ModelAndView searchDaily(@ModelAttribute(ConstantsViews.FORMSEARCHDAILY) SearchDailyForm sdf,
 			HttpServletRequest request, BindingResult arg1) {
 		ModelAndView model;
 		Date date = DateUtil.getDate(sdf.getDate());
 		PlaceEntity place = sdf.getPlace();
 		String ipAddress = request.getHeader(ConstantsViews.XFORWARDEDFOR);
+		validator.validate(sdf, arg1);
 		if (ipAddress == null) {
 			ipAddress = request.getRemoteAddr();
 		}
@@ -114,11 +116,11 @@ public class DailiesController {
 	}
 
 	@PostMapping("/calculatedailies")
-	public ModelAndView calculateDailies(
-			@Validated(SearchDailyFormValidator.class) @ModelAttribute(ConstantsViews.FORMSEARCHDAILY) SearchDailyForm sdf,
+	public ModelAndView calculateDailies(@ModelAttribute(ConstantsViews.FORMSEARCHDAILY) SearchDailyForm sdf,
 			BindingResult arg1) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
+		validator.validate(sdf, arg1);
 		if (arg1.hasErrors()) {
 			model.setViewName(VIEWSEARCHCALCULATEDAILIES);
 			model.addObject(ConstantsViews.PLACES, placeService.getAllPlacesActive());

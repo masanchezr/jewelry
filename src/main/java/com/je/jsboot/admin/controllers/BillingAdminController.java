@@ -6,24 +6,25 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.je.jsboot.admin.forms.AdminForm;
 import com.je.jsboot.admin.forms.BillingForm;
-import com.je.jsboot.admin.validators.BillingFormValidator;
 import com.je.jsboot.services.workshop.BillingService;
 import com.je.jsboot.utils.constants.ConstantsViews;
 import com.je.jsboot.utils.date.DateUtil;
 import com.je.jsboot.utils.string.Util;
+import com.je.jsboot.validators.SearchFormValidator;
 
 @Controller
 public class BillingAdminController {
 	@Autowired
 	private BillingService billingService;
+
+	@Autowired
+	private SearchFormValidator validator;
 
 	private static final String FORMBILLING = "billingForm";
 	private static final String VIEWBILLINGADMIN = "admin/workshop/billing";
@@ -38,13 +39,12 @@ public class BillingAdminController {
 	}
 
 	@PostMapping("/bill")
-	public ModelAndView bill(
-			@Validated(BillingFormValidator.class) @ModelAttribute(FORMBILLING) BillingForm billingForm,
-			BindingResult result) {
+	public ModelAndView bill(BillingForm billingForm, BindingResult result) {
 		ModelAndView model = new ModelAndView(VIEWBILLINGADMIN);
 		String sdate = billingForm.getDate();
 		Date date;
 		String jsp;
+		validator.validate(billingForm, result);
 		if (result.hasErrors()) {
 			jsp = VIEWSEARCHBILL;
 		} else {

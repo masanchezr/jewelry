@@ -3,14 +3,20 @@ package com.je.jsboot.forms;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.data.annotation.CreatedDate;
 
 import com.je.jsboot.dbaccess.entities.PlaceEntity;
+import com.je.jsboot.utils.constants.ConstantsViews;
 
 public class EntryMoney {
 
 	private Long identrymoney;
 
+	@NotNull(message = ConstantsViews.ERRORSELECTAMOUNT)
+	@DecimalMin(value = "0.1", message = ConstantsViews.ERRORSELECTAMOUNT)
 	private BigDecimal amount;
 
 	@CreatedDate

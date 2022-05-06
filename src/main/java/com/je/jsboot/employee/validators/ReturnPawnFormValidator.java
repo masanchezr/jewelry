@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -14,6 +15,7 @@ import com.je.jsboot.utils.constants.Constants;
 import com.je.jsboot.utils.constants.ConstantsViews;
 import com.je.jsboot.utils.string.Util;
 
+@Component
 public class ReturnPawnFormValidator implements Validator {
 
 	@Override

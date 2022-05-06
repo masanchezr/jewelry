@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,6 +32,9 @@ public class HolidaysController {
 	@Autowired
 	private PlaceService placeService;
 
+	@Autowired
+	private HolidayValidator validator;
+
 	private static final String VIEWNEWHOLIDAY = "admin/holidays/newholiday";
 
 	/**
@@ -56,10 +58,9 @@ public class HolidaysController {
 	 * @return the model and view
 	 */
 	@PostMapping("/addHoliday")
-	public ModelAndView addHoliday(
-			@Validated(HolidayValidator.class) @ModelAttribute(ConstantsViews.FORMHOLIDAY) Holiday holiday,
-			BindingResult result) {
+	public ModelAndView addHoliday(Holiday holiday, BindingResult result) {
 		ModelAndView model = new ModelAndView();
+		validator.validate(holiday, result);
 		if (result.hasErrors()) {
 			model.addObject(ConstantsViews.FORMHOLIDAY, holiday);
 			model.addObject(ConstantsViews.PLACES, placeService.getAllPlacesActive());

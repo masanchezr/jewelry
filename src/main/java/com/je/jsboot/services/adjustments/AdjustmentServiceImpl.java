@@ -22,7 +22,6 @@ import com.je.jsboot.services.dailies.DailyService;
 import com.je.jsboot.services.mails.EmailService;
 import com.je.jsboot.utils.constants.Constants;
 import com.je.jsboot.utils.date.DateUtil;
-import com.je.jsboot.utils.string.Util;
 
 /**
  * The Class AdjustmentServiceImpl.
@@ -55,7 +54,7 @@ public class AdjustmentServiceImpl implements AdjustmentService {
 		// primeramente miramos si existe el arreglo
 		Long idadjustment = adjustment.getIdadjustment();
 		AdjustmentEntity adjustmentEntity = adjustmentRepository.findById(adjustment.getIdadjustment()).orElse(null);
-		BigDecimal amount = Util.getNumber(adjustment.getAmount());
+		BigDecimal amount = adjustment.getAmount();
 		List<PlaceUserEntity> placeuser = placeUserRepository
 				.findByUser(usersRepository.findByUsername(adjustment.getUser()));
 		PlaceEntity place = placeuser.get(0).getPlace();
