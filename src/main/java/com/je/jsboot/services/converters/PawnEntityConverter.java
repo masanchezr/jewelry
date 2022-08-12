@@ -4,16 +4,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.je.jsboot.dbaccess.entities.PawnEntity;
+import com.je.jsboot.services.pawns.NewPawn;
+import com.je.jsboot.services.pawns.Pawn;
+import com.je.jsboot.utils.date.DateUtil;
+
 import org.modelmapper.AbstractConverter;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.je.jsboot.dbaccess.entities.PawnEntity;
-import com.je.jsboot.services.pawns.NewPawn;
-import com.je.jsboot.services.pawns.Pawn;
-import com.je.jsboot.utils.date.DateUtil;
 
 @Component
 public class PawnEntityConverter {
@@ -49,6 +49,6 @@ public class PawnEntityConverter {
 	}
 
 	public List<Pawn> entitiesToPawns(List<PawnEntity> entities) {
-		return entities.stream().map(x -> convertToPawn(x)).collect(Collectors.toList());
+		return entities.stream().map(this::convertToPawn).collect(Collectors.toList());
 	}
 }

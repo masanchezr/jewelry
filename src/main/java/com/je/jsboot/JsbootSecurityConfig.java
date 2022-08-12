@@ -1,5 +1,7 @@
 package com.je.jsboot;
 
+import com.je.jsboot.services.users.UserDetailServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,8 +12,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
-
-import com.je.jsboot.services.users.UserDetailServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -106,8 +106,8 @@ public class JsbootSecurityConfig {
 	@Order(4)
 	public static class AllSecurityConfig {
 		@Bean
-		public WebSecurityCustomizer webSecurityCustomiz() throws Exception {
-			return (web) -> web.ignoring().antMatchers(HttpMethod.GET, resources);
+		public WebSecurityCustomizer webSecurityCustomiz() {
+			return web -> web.ignoring().antMatchers(HttpMethod.GET, resources);
 		}
 	}
 
