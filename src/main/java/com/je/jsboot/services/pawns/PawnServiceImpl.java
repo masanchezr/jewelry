@@ -172,7 +172,7 @@ public class PawnServiceImpl implements PawnService {
 				}
 				if (!exists) {
 					op.setPawn(pawnEntity);
-					newobjects.add(op);
+					pawnEntity.getObjects().add(op);
 				}
 			}
 			ClientPawnEntity cpe = clientPawnsRepository.findById(pawn.getNif()).orElse(new ClientPawnEntity());

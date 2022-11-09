@@ -160,7 +160,7 @@ public class ShoppingsAdminController {
 	}
 
 	/**
-	 * Save shopping.
+	 * Update shopping.
 	 *
 	 * @param shoppingForm the shopping form
 	 * @param result       the result
@@ -175,7 +175,7 @@ public class ShoppingsAdminController {
 	}
 
 	/**
-	 * Save shopping.
+	 * Save shopping from admin
 	 *
 	 * @param shoppingForm the shopping form
 	 * @param result       the result
