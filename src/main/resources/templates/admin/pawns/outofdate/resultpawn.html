@@ -28,7 +28,7 @@
 							</thead>
 							<tbody>
 								<tr th:each="pawn:${pawns}">
-									<td><input type="radio" th:field="id"
+									<td><input type="radio" th:field="*{id}"
 										th:value="${pawn.id}"></td>
 									<td th:text="${pawn.numpawn}"></td>
 									<td th:text="${pawn.percent}"></td>
