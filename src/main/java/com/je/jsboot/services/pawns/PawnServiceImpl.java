@@ -23,6 +23,7 @@ import com.je.jsboot.dbaccess.repositories.PawnsRepository;
 import com.je.jsboot.dbaccess.repositories.PlaceUserRepository;
 import com.je.jsboot.dbaccess.repositories.RenovationsRepository;
 import com.je.jsboot.dbaccess.repositories.UsersRepository;
+import com.je.jsboot.services.converters.ClientPawnEntityConverter;
 import com.je.jsboot.services.converters.PawnEntityConverter;
 import com.je.jsboot.services.dailies.Daily;
 import com.je.jsboot.services.dailies.DailyService;
@@ -67,11 +68,14 @@ public class PawnServiceImpl implements PawnService {
 	private ModelMapper mapper;
 
 	@Autowired
-	private PawnEntityConverter converter;
+	private ClientPawnEntityConverter clientPawnConverter;
+
+	@Autowired
+	private PawnEntityConverter pawnconverter;
 
 	@Override
 	public Daily save(NewPawn pawn) {
-		PawnEntity pawnEntity = converter.convertToDTO(pawn);
+		PawnEntity pawnEntity = pawnconverter.convertToDTO(pawn);
 		ClientPawnEntity cpe = clientPawnsRepository.findById(pawn.getNif()).orElse(null);
 		PlaceEntity place = placeUserRepository.findByUser(usersRepository.findByUsername(pawn.getUser())).get(0)
 				.getPlace();
@@ -147,9 +151,11 @@ public class PawnServiceImpl implements PawnService {
 	}
 
 	@Override
+	/**
+	 * Updating the pawn from the administrator
+	 */
 	public void update(NewPawn pawn) {
 		PawnEntity pawnEntity = pawnsRepository.findById(pawn.getId()).orElse(null);
-		List<ObjectPawnEntity> newobjects = new ArrayList<>();
 		Iterator<ObjectPawnEntity> iobjects;
 		ObjectPawnEntity object;
 		ObjectPawnEntity op;
@@ -163,11 +169,11 @@ public class PawnServiceImpl implements PawnService {
 				exists = false;
 				while (iobjects.hasNext() && !exists) {
 					object = iobjects.next();
-					if (object.getMetal().getIdmetal().equals(op.getMetal().getIdmetal())) {
+					if (object.getIdobjectpawn().equals(op.getIdobjectpawn())) {
 						exists = true;
 						object.setRealgrams(op.getRealgrams());
 						object.setDescription(op.getDescription());
-						newobjects.add(object);
+						object.setMetal(op.getMetal());
 					}
 				}
 				if (!exists) {
@@ -176,8 +182,7 @@ public class PawnServiceImpl implements PawnService {
 				}
 			}
 			ClientPawnEntity cpe = clientPawnsRepository.findById(pawn.getNif()).orElse(new ClientPawnEntity());
-			mapper.map(pawn, cpe);
-			cpe.setDatebirth(DateUtil.getDate(pawn.getDatebirth()));
+			clientPawnConverter.convertToDTO(pawn, cpe);
 			cpe.setCreationclient(new Date());
 			clientPawnsRepository.save(cpe);
 			pawnEntity.setMeltdate(new Date());
@@ -197,7 +202,7 @@ public class PawnServiceImpl implements PawnService {
 		PawnEntity pawnEntity = pawnsRepository.findById(idpawn).orElse(null);
 		NewPawn pawn = null;
 		if (pawnEntity != null) {
-			pawn = converter.convertToNewPawn(pawnEntity);
+			pawn = pawnconverter.convertToNewPawn(pawnEntity);
 			mapper.map(pawnEntity.getClient(), pawn);
 		}
 		return pawn;
@@ -207,12 +212,12 @@ public class PawnServiceImpl implements PawnService {
 	public List<Pawn> searchRenewByNumpawn(Pawn pawn) {
 		PlaceEntity place = placeUserRepository.findByUser(usersRepository.findByUsername(pawn.getUser())).get(0)
 				.getPlace();
-		return converter.entitiesToPawns(pawnsRepository.findByNumpawnAndPlaceAndRetired(pawn.getNumpawn(), place));
+		return pawnconverter.entitiesToPawns(pawnsRepository.findByNumpawnAndPlaceAndRetired(pawn.getNumpawn(), place));
 	}
 
 	@Override
 	public List<Pawn> searchByNumpawn(Pawn pawn) {
-		return converter.entitiesToPawns(pawnsRepository.findByNumpawnAndPlace(pawn.getNumpawn(),
+		return pawnconverter.entitiesToPawns(pawnsRepository.findByNumpawnAndPlace(pawn.getNumpawn(),
 				mapper.map(pawn.getPlace(), PlaceEntity.class)));
 	}
 
