@@ -9,7 +9,6 @@ import javax.validation.constraints.NotNull;
 
 import com.je.jsboot.dbaccess.entities.MetalEntity;
 import com.je.jsboot.dbaccess.entities.PlaceEntity;
-import com.je.jsboot.dbaccess.entities.WorkshopEntity;
 import com.je.jsboot.utils.constants.ConstantsViews;
 
 public class Jewel {
@@ -29,8 +28,6 @@ public class Jewel {
 	private PlaceEntity place;
 
 	private Category category;
-
-	private WorkshopEntity work;
 
 	@NotEmpty(message = ConstantsViews.ERRORSELECTREFERENCE)
 	@NotNull(message = ConstantsViews.ERRORSELECTREFERENCE)
@@ -286,13 +283,5 @@ public class Jewel {
 
 	public void setGrams(BigDecimal grams) {
 		this.grams = grams;
-	}
-
-	public WorkshopEntity getWork() {
-		return work;
-	}
-
-	public void setWork(WorkshopEntity work) {
-		this.work = work;
 	}
 }

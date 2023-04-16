@@ -1,7 +1,5 @@
 package com.je.jsboot;
 
-import com.je.jsboot.services.users.UserDetailServiceImpl;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.je.jsboot.services.users.UserDetailServiceImpl;
+
 @Configuration
 @EnableWebSecurity
 public class JsbootSecurityConfig {
@@ -23,24 +23,6 @@ public class JsbootSecurityConfig {
 
 	@Configuration
 	@Order(1)
-	public static class WorkshopSecurityConfig {
-		private static final String ROLEJORGE = "JORGE";
-		private static final String LOGINURL = "/workshop/login";
-		private static final String ADMINURL = "/workshop/admin";
-
-		@Bean
-		public SecurityFilterChain workshopFilterChain(HttpSecurity http) throws Exception {
-			http.antMatcher("/workshop/**").authorizeRequests().anyRequest().hasRole(ROLEJORGE).and().formLogin()
-					.loginPage(LOGINURL).permitAll().defaultSuccessUrl(ADMINURL, true).failureForwardUrl("/403wks")
-					.and().exceptionHandling().accessDeniedPage("/403wks").and().logout()
-					.logoutUrl("/workshop/j_spring_security_logout").logoutSuccessUrl(LOGINURL)
-					.invalidateHttpSession(true);
-			return http.build();
-		}
-	}
-
-	@Configuration
-	@Order(2)
 	public static class EmployeeSecurityConfig {
 		private static final String ROLEUSER = "USER";
 		private static final String ROLEAR = "AR";
@@ -73,7 +55,7 @@ public class JsbootSecurityConfig {
 	}
 
 	@Configuration
-	@Order(3)
+	@Order(2)
 	public static class AdminSecurityConfig {
 		private static final String ROLEADMIN = "ADMIN";
 		private static final String LOGINURL = "/login";
@@ -103,7 +85,7 @@ public class JsbootSecurityConfig {
 	}
 
 	@Configuration
-	@Order(4)
+	@Order(3)
 	public static class AllSecurityConfig {
 		@Bean
 		public WebSecurityCustomizer webSecurityCustomiz() {
