@@ -177,6 +177,7 @@ public class PawnServiceImpl implements PawnService {
 			}
 			ClientPawnEntity cpe = clientPawnsRepository.findById(pawn.getNif()).orElse(new ClientPawnEntity());
 			mapper.map(pawn, cpe);
+			cpe.setDatebirth(DateUtil.getDate(pawn.getDatebirth()));
 			cpe.setCreationclient(new Date());
 			clientPawnsRepository.save(cpe);
 			pawnEntity.setMeltdate(new Date());
