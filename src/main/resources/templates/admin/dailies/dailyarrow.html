@@ -38,7 +38,7 @@
 							</tr>
 							<tr th:each="salepost:${daily.lsalespost}">
 								<td th:text="#{salepostponed}"></td>
-								<td><a href="@{'/showsale'+${salepost.idsale}}"><span
+								<td><a th:href="@{'/showsalepost'+${salepost.idsale}}"><span
 										th:text="${salepost.idsale}"></span></a></td>
 								<td><span th:text="${salepost.total}"><i
 										class="fas fa-euro-sign"></i></span></td>
