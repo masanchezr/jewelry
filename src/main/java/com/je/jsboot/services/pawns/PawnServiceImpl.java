@@ -80,6 +80,7 @@ public class PawnServiceImpl implements PawnService {
 		PlaceEntity place = placeUserRepository.findByUser(usersRepository.findByUsername(pawn.getUser())).get(0)
 				.getPlace();
 		Calendar calendar = Calendar.getInstance();
+		System.out.println("Line 83" + pawnEntity.getCreationdate());
 		calendar.setTime(pawnEntity.getCreationdate());
 		int year = calendar.get(Calendar.YEAR);
 		List<ObjectPawnEntity> newobjects = new ArrayList<>();
