@@ -63,7 +63,7 @@ public class AdjustmentsController {
 	public ModelAndView saveAdjustment(@Valid Adjustment adjustment, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		if (result.hasErrors()) {
-			model.setViewName("employee/retiredadjustment");
+			model.setViewName("employee/adjustments/retiredadjustment");
 			model.addObject(ConstantsViews.FORMADJUSTMENT, adjustment);
 			model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
 		} else {
@@ -80,7 +80,7 @@ public class AdjustmentsController {
 	public ModelAndView saveWork(@Valid Adjustment adjustment, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		if (result.hasErrors()) {
-			model.setViewName("employee/newadjustment");
+			model.setViewName("employee/adjustments/newadjustment");
 			model.addObject(ConstantsViews.FORMADJUSTMENT, adjustment);
 			model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
 		} else {

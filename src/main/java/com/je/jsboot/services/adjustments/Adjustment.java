@@ -2,6 +2,7 @@ package com.je.jsboot.services.adjustments;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -25,6 +26,8 @@ public class Adjustment {
 	private String user;
 
 	/** The amount. */
+	@NotNull(message = ConstantsViews.ERRORSELECTAMOUNT)
+	@DecimalMin(value = "0.0", inclusive = true)
 	private BigDecimal amount;
 
 	private PaymentEntity payment;
