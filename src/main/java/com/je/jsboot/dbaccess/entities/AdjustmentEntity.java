@@ -42,40 +42,15 @@ public class AdjustmentEntity {
 	@Column(name = "CREATIONDATE")
 	private Date creationdate;
 
-	/** The recommendedprice. */
-	@Column(name = "RECOMMENDEDPRICE")
-	private BigDecimal recommendedprice;
-
-	/** The amountwork. */
-	@Column(name = "AMOUNTWORK")
-	private BigDecimal amountwork;
-
-	/** The carrydate. */
-	@Temporal(TemporalType.DATE)
-	@Column(name = "CARRYDATE")
-	private Date carrydate;
-
 	/** The place. */
 	@ManyToOne
 	@JoinColumn(name = "IDPLACE", referencedColumnName = "IDPLACE")
 	private PlaceEntity place;
 
-	/** The grams. */
-	@Column(name = "GRAMS")
-	private BigDecimal grams;
-
-	@Column(name = "WORK")
-	private Boolean work;
-
 	/** The pay. */
 	@JoinColumn(name = "IDPAYMENT")
 	@ManyToOne
 	private PaymentEntity payment;
-
-	/** The pay. */
-	@JoinColumn(name = "IDPAYMENTWORK")
-	@ManyToOne
-	private PaymentEntity paymentwork;
 
 	/**
 	 * Gets the idadjustment.
@@ -167,99 +142,11 @@ public class AdjustmentEntity {
 		this.place = place;
 	}
 
-	/**
-	 * Gets the recommendedprice.
-	 *
-	 * @return the recommendedprice
-	 */
-	public BigDecimal getRecommendedprice() {
-		return recommendedprice;
-	}
-
-	/**
-	 * Sets the recommendedprice.
-	 *
-	 * @param recommendedprice the new recommendedprice
-	 */
-	public void setRecommendedprice(BigDecimal recommendedprice) {
-		this.recommendedprice = recommendedprice;
-	}
-
-	/**
-	 * Gets the amountwork.
-	 *
-	 * @return the amountwork
-	 */
-	public BigDecimal getAmountwork() {
-		return amountwork;
-	}
-
-	/**
-	 * Sets the amountwork.
-	 *
-	 * @param amountwork the new amountwork
-	 */
-	public void setAmountwork(BigDecimal amountwork) {
-		this.amountwork = amountwork;
-	}
-
-	/**
-	 * Gets the carrydate.
-	 *
-	 * @return the carrydate
-	 */
-	public Date getCarrydate() {
-		return carrydate;
-	}
-
-	/**
-	 * Sets the carrydate.
-	 *
-	 * @param carrydate the new carrydate
-	 */
-	public void setCarrydate(Date carrydate) {
-		this.carrydate = carrydate;
-	}
-
-	/**
-	 * Gets the grams.
-	 *
-	 * @return the grams
-	 */
-	public BigDecimal getGrams() {
-		return grams;
-	}
-
-	/**
-	 * Sets the grams.
-	 *
-	 * @param grams the new grams
-	 */
-	public void setGrams(BigDecimal grams) {
-		this.grams = grams;
-	}
-
-	public Boolean getWork() {
-		return work;
-	}
-
-	public void setWork(Boolean work) {
-		this.work = work;
-	}
-
 	public PaymentEntity getPayment() {
 		return payment;
 	}
 
 	public void setPayment(PaymentEntity payment) {
 		this.payment = payment;
-	}
-
-	public PaymentEntity getPaymentwork() {
-		return paymentwork;
-	}
-
-	public void setPaymentwork(PaymentEntity paymentwork) {
-		this.paymentwork = paymentwork;
 	}
 }

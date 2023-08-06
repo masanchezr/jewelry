@@ -15,8 +15,7 @@ public interface AdjustmentService {
 	/**
 	 * Save.
 	 *
-	 * @param adjustment
-	 *            the adjustment
+	 * @param adjustment the adjustment
 	 * @return
 	 */
 	public Daily save(Adjustment adjustment);
@@ -24,10 +23,10 @@ public interface AdjustmentService {
 	/**
 	 * Save workshop.
 	 *
-	 * @param adjustment
-	 *            the adjustment
+	 * @param adjustment the adjustment
+	 * @return
 	 */
-	void saveWorkshop(Adjustment adjustment);
+	Daily saveWorkshop(Adjustment adjustment);
 
 	public Map<String, BigDecimal> sumAdjustmentByDates(Date from, Date until, PlaceEntity place);
 

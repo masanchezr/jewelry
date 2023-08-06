@@ -21,11 +21,8 @@ import com.je.jsboot.utils.constants.Constants;
  */
 public interface AdjustmentRepository extends CrudRepository<AdjustmentEntity, Long> {
 
-	List<AdjustmentEntity> findByCarrydateAndPlace(@Temporal(TemporalType.DATE) Date carrydate,
+	List<AdjustmentEntity> findByCreationdateAndPlace(@Temporal(TemporalType.DATE) Date creation,
 			PlaceEntity placeEntity);
-
-	List<AdjustmentEntity> findByCreationdateBetweenAndWorkTrue(@Temporal(TemporalType.DATE) Date from,
-			@Temporal(TemporalType.DATE) Date until);
 
 	/**
 	 * Miramos si el arreglo ya se lo ha llevado el cliente
@@ -33,27 +30,12 @@ public interface AdjustmentRepository extends CrudRepository<AdjustmentEntity, L
 	 * @param placeEntity
 	 * @return
 	 */
-	List<AdjustmentEntity> findByCarrydateIsNotNullAndIdadjustment(Long idadjustment);
+	List<AdjustmentEntity> findByCreationdateIsNotNullAndIdadjustment(Long idadjustment);
 
-	/**
-	 * Devuelve las hechuras de arreglo que no han sido de Jorge, porque Jorge cobra
-	 * aparte
-	 * 
-	 * @param creationdate
-	 * @param placeEntity
-	 * @return
-	 */
-	List<AdjustmentEntity> findByCreationdateAndPlaceAndAmountworkNotNullAndWorkFalse(
-			@Temporal(TemporalType.DATE) Date creationdate, PlaceEntity placeEntity);
-
-	List<AdjustmentEntity> findByCarrydateBetweenAndPayment(@Temporal(TemporalType.DATE) Date from,
+	List<AdjustmentEntity> findByCreationdateBetweenAndPayment(@Temporal(TemporalType.DATE) Date from,
 			@Temporal(TemporalType.DATE) Date until, PaymentEntity payment);
 
-	@Query("select sum(a.amountwork) from AdjustmentEntity a where a.carrydate>=:from and a.carrydate<=:until and a.place=:place")
-	BigDecimal sumAmountworkByCreationdateAndPlace(@Param("from") @Temporal(TemporalType.DATE) Date from,
-			@Param("until") @Temporal(TemporalType.DATE) Date until, @Param(Constants.PLACE) PlaceEntity placeEntity);
-
-	@Query("select sum(a.amount) from AdjustmentEntity a where a.carrydate>=:from and a.carrydate<=:until and a.place=:place")
+	@Query("select sum(a.amount) from AdjustmentEntity a where a.creationdate>=:from and a.creationdate<=:until and a.place=:place")
 	BigDecimal sumAmountByCreationdateAndPlace(@Param("from") @Temporal(TemporalType.DATE) Date from,
 			@Param("until") @Temporal(TemporalType.DATE) Date until, @Param(Constants.PLACE) PlaceEntity placeEntity);
 

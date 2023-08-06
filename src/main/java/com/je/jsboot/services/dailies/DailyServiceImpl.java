@@ -32,6 +32,7 @@ import com.je.jsboot.dbaccess.entities.SaleEntity;
 import com.je.jsboot.dbaccess.entities.SalePostponedEntity;
 import com.je.jsboot.dbaccess.entities.SalesPayments;
 import com.je.jsboot.dbaccess.entities.ShoppingEntity;
+import com.je.jsboot.dbaccess.entities.WorkEntity;
 import com.je.jsboot.dbaccess.managers.HolidaysManager;
 import com.je.jsboot.dbaccess.managers.SaleManager;
 import com.je.jsboot.dbaccess.repositories.AdjustmentRepository;
@@ -48,6 +49,7 @@ import com.je.jsboot.dbaccess.repositories.RenovationsRepository;
 import com.je.jsboot.dbaccess.repositories.RentalsRepository;
 import com.je.jsboot.dbaccess.repositories.SalesPostponedRepository;
 import com.je.jsboot.dbaccess.repositories.ShoppingsRepository;
+import com.je.jsboot.dbaccess.repositories.WorksRepository;
 import com.je.jsboot.forms.Sale;
 import com.je.jsboot.forms.SalePostPoned;
 import com.je.jsboot.services.adjustments.Adjustment;
@@ -127,6 +129,9 @@ public class DailyServiceImpl implements DailyService {
 
 	@Autowired
 	private PlaceUserRepository placeUserRepository;
+
+	@Autowired
+	private WorksRepository worksRepository;
 
 	/** The mapper. */
 	@Autowired
@@ -538,18 +543,17 @@ public class DailyServiceImpl implements DailyService {
 
 	private BigDecimal getAdjustmentsWorkAmount(Date date, PlaceEntity place, Daily daily) {
 		BigDecimal adjustmentsworkamount = BigDecimal.ZERO;
-		List<AdjustmentEntity> adjustmentswork = adjustmentRepository
-				.findByCreationdateAndPlaceAndAmountworkNotNullAndWorkFalse(date, place);
+		List<WorkEntity> adjustmentswork = worksRepository.findByCreationdateAndPlace(date, place);
 		if (adjustmentswork != null && !adjustmentswork.isEmpty()) {
-			Iterator<AdjustmentEntity> iadjustments = adjustmentswork.iterator();
-			AdjustmentEntity adjustment;
+			Iterator<WorkEntity> iadjustments = adjustmentswork.iterator();
+			WorkEntity adjustment;
 			BigDecimal amountwork;
 			List<Adjustment> ladjustmentsw = new ArrayList<>();
 			while (iadjustments.hasNext()) {
 				adjustment = iadjustments.next();
-				amountwork = adjustment.getAmountwork();
+				amountwork = adjustment.getAmount();
 				ladjustmentsw.add(mapper.map(adjustment, Adjustment.class));
-				if (adjustment.getPaymentwork().getIdpayment().equals(Constants.EFECTIVO)) {
+				if (adjustment.getPayment().getIdpayment().equals(Constants.EFECTIVO)) {
 					adjustmentsworkamount = adjustmentsworkamount.subtract(amountwork);
 				}
 			}
@@ -560,7 +564,7 @@ public class DailyServiceImpl implements DailyService {
 	}
 
 	private BigDecimal getAdjustmentsAmount(Date date, PlaceEntity place, Daily daily) {
-		List<AdjustmentEntity> adjustments = adjustmentRepository.findByCarrydateAndPlace(date, place);
+		List<AdjustmentEntity> adjustments = adjustmentRepository.findByCreationdateAndPlace(date, place);
 		BigDecimal adjusmentsamount = BigDecimal.ZERO;
 		if (adjustments != null && !adjustments.isEmpty()) {
 			List<Adjustment> ladjustments = new ArrayList<>();

@@ -100,7 +100,7 @@ public class SalesCardServiceImpl implements SalesCardService {
 	private int putAdjustments(Map<String, Object> map, Date from, Date until, PaymentEntity payment) {
 		BigDecimal total = (BigDecimal) map.get(ConstantsViews.TOTAL);
 		int size = 0;
-		List<AdjustmentEntity> adjustments = adjustmentRepository.findByCarrydateBetweenAndPayment(from, until,
+		List<AdjustmentEntity> adjustments = adjustmentRepository.findByCreationdateBetweenAndPayment(from, until,
 				payment);
 		List<Adjustment> ladjustments = null;
 		if (total == null) {

@@ -38,21 +38,46 @@ public class AdjustmentsController {
 	 */
 	@GetMapping("/employee/newadjustment")
 	public ModelAndView newadjustment() {
-		ModelAndView model = new ModelAndView("employee/newadjustment");
+		ModelAndView model = new ModelAndView("employee/adjustments/newadjustment");
+		model.addObject(ConstantsViews.FORMADJUSTMENT, new Adjustment());
+		model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
+		return model;
+	}
+
+	@GetMapping("/employee/retiredadjustment")
+	public ModelAndView retiredadjustment() {
+		ModelAndView model = new ModelAndView("employee/adjustments/retiredadjustment");
 		model.addObject(ConstantsViews.FORMADJUSTMENT, new Adjustment());
 		model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
 		return model;
 	}
 
 	/**
-	 * Save adjustment.
-	 *
+	 * Save adjustment. El cliente retira el arreglo
+	 * 
 	 * @param adjustment the adjustment
 	 * @param result     the result
 	 * @return the model and view
 	 */
 	@PostMapping("/employee/saveAdjustment")
 	public ModelAndView saveAdjustment(@Valid Adjustment adjustment, BindingResult result) {
+		ModelAndView model = new ModelAndView();
+		if (result.hasErrors()) {
+			model.setViewName("employee/retiredadjustment");
+			model.addObject(ConstantsViews.FORMADJUSTMENT, adjustment);
+			model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
+		} else {
+			String user = SecurityContextHolder.getContext().getAuthentication().getName();
+			adjustment.setUser(user);
+			model.addObject(ConstantsViews.DAILY, adjustmentService.save(adjustment));
+			model.setViewName(ConstantsViews.VIEWDAILYARROW);
+			model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
+		}
+		return model;
+	}
+
+	@PostMapping("/employee/saveWork")
+	public ModelAndView saveWork(@Valid Adjustment adjustment, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		if (result.hasErrors()) {
 			model.setViewName("employee/newadjustment");

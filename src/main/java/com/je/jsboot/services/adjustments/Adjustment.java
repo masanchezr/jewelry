@@ -27,15 +27,6 @@ public class Adjustment {
 	/** The amount. */
 	private BigDecimal amount;
 
-	/** The amountwork. */
-	private BigDecimal amountwork;
-
-	/** The recommendedprice. */
-	private BigDecimal recommendedprice;
-
-	/** The grams. */
-	private BigDecimal grams;
-
 	private PaymentEntity payment;
 
 	/**
@@ -96,29 +87,5 @@ public class Adjustment {
 
 	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
-	}
-
-	public BigDecimal getAmountwork() {
-		return amountwork;
-	}
-
-	public void setAmountwork(BigDecimal amountwork) {
-		this.amountwork = amountwork;
-	}
-
-	public BigDecimal getRecommendedprice() {
-		return recommendedprice;
-	}
-
-	public void setRecommendedprice(BigDecimal recommendedprice) {
-		this.recommendedprice = recommendedprice;
-	}
-
-	public BigDecimal getGrams() {
-		return grams;
-	}
-
-	public void setGrams(BigDecimal grams) {
-		this.grams = grams;
 	}
 }

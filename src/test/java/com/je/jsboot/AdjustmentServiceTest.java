@@ -1,5 +1,6 @@
 package com.je.jsboot;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.junit.jupiter.api.Assertions;
@@ -7,7 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.je.jsboot.dbaccess.entities.PaymentEntity;
 import com.je.jsboot.dbaccess.entities.PlaceEntity;
+import com.je.jsboot.services.adjustments.Adjustment;
 import com.je.jsboot.services.adjustments.AdjustmentService;
 import com.je.jsboot.utils.date.DateUtil;
 
@@ -31,5 +34,31 @@ class AdjustmentServiceTest {
 		Date from = DateUtil.getDate(sfrom);
 		Date until = DateUtil.getDate(suntil);
 		Assertions.assertNotNull(adjustmentservice.sumAdjustmentByDates(from, until, place));
+	}
+
+	@Test
+	void saveTest() {
+		Adjustment adjustment = new Adjustment();
+		PaymentEntity pay = new PaymentEntity();
+		pay.setIdpayment(1L);
+		adjustment.setAmount(new BigDecimal(5));
+		adjustment.setDescription("prueba arreglo retirado por el cliente");
+		adjustment.setIdadjustment(11L);
+		adjustment.setUser("SONIAMARCOS");
+		adjustment.setPayment(pay);
+		Assertions.assertNotNull(adjustmentservice.save(adjustment));
+	}
+
+	@Test
+	void saveWorkTest() {
+		Adjustment adjustment = new Adjustment();
+		PaymentEntity pay = new PaymentEntity();
+		pay.setIdpayment(1L);
+		adjustment.setAmount(new BigDecimal(5));
+		adjustment.setDescription("prueba hechura");
+		adjustment.setIdadjustment(11L);
+		adjustment.setUser("24002");
+		adjustment.setPayment(pay);
+		Assertions.assertNotNull(adjustmentservice.saveWorkshop(adjustment));
 	}
 }

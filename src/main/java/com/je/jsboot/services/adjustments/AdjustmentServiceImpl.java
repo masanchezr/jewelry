@@ -11,15 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.je.jsboot.dbaccess.entities.AdjustmentEntity;
-import com.je.jsboot.dbaccess.entities.PaymentEntity;
 import com.je.jsboot.dbaccess.entities.PlaceEntity;
 import com.je.jsboot.dbaccess.entities.PlaceUserEntity;
+import com.je.jsboot.dbaccess.entities.WorkEntity;
 import com.je.jsboot.dbaccess.repositories.AdjustmentRepository;
 import com.je.jsboot.dbaccess.repositories.PlaceUserRepository;
 import com.je.jsboot.dbaccess.repositories.UsersRepository;
+import com.je.jsboot.dbaccess.repositories.WorksRepository;
 import com.je.jsboot.services.dailies.Daily;
 import com.je.jsboot.services.dailies.DailyService;
-import com.je.jsboot.services.mails.EmailService;
 import com.je.jsboot.utils.constants.Constants;
 import com.je.jsboot.utils.date.DateUtil;
 
@@ -40,10 +40,10 @@ public class AdjustmentServiceImpl implements AdjustmentService {
 	private UsersRepository usersRepository;
 
 	@Autowired
-	private DailyService dailyService;
+	private WorksRepository worksRepository;
 
 	@Autowired
-	private EmailService emailService;
+	private DailyService dailyService;
 
 	/** The mapper. */
 	@Autowired
@@ -54,66 +54,45 @@ public class AdjustmentServiceImpl implements AdjustmentService {
 		// primeramente miramos si existe el arreglo
 		Long idadjustment = adjustment.getIdadjustment();
 		AdjustmentEntity adjustmentEntity = adjustmentRepository.findById(adjustment.getIdadjustment()).orElse(null);
-		BigDecimal amount = adjustment.getAmount();
 		List<PlaceUserEntity> placeuser = placeUserRepository
 				.findByUser(usersRepository.findByUsername(adjustment.getUser()));
 		PlaceEntity place = placeuser.get(0).getPlace();
-		if (amount != null) {
-			if (adjustmentEntity != null) {
-				// miro si se ha cobrado el precio recomendado
-				BigDecimal recommendedprice = adjustmentEntity.getRecommendedprice();
-				if (recommendedprice != null && recommendedprice.compareTo(BigDecimal.ZERO) > 0
-						&& recommendedprice.compareTo(amount) != 0) {
-					// envio un mail u otro tipo de alerta
-					emailService.sendSimpleMessage("mangeles.sanchez0807@gmail.com",
-							"Arreglo no coincide con precio recomendado.",
-							"N&uacute;mero de arreglo: " + idadjustment + ", importe recomendado:" + recommendedprice
-									+ " euros, importe cobrado al cliente:" + amount + " euros.");
-				}
-			} else {
-				adjustmentEntity = new AdjustmentEntity();
-				adjustmentEntity.setIdadjustment(idadjustment);
-				adjustmentEntity.setWork(Boolean.FALSE);
-			}
+		if (adjustmentEntity == null) {
+			adjustmentEntity = new AdjustmentEntity();
+			adjustmentEntity.setIdadjustment(idadjustment);
 			adjustmentEntity.setPlace(place);
 			adjustmentEntity.setDescription(adjustment.getDescription());
-			if (amount.compareTo(BigDecimal.ZERO) < 0) {
-				adjustmentEntity.setAmountwork(amount.abs());
-				adjustmentEntity.setCreationdate(new Date());
-				adjustmentEntity.setPaymentwork(adjustment.getPayment());
-			} else if (adjustmentRepository.findByCarrydateIsNotNullAndIdadjustment(idadjustment).isEmpty()) {
-				adjustmentEntity.setPayment(adjustment.getPayment());
-				adjustmentEntity.setCarrydate(new Date());
-				adjustmentEntity.setAmount(amount);
-			}
+			adjustmentEntity.setPayment(adjustment.getPayment());
+			adjustmentEntity.setCreationdate(new Date());
+			adjustmentEntity.setAmount(adjustment.getAmount());
 			adjustmentRepository.save(adjustmentEntity);
 		}
 		return dailyService.getDaily(DateUtil.getDateFormated(new Date()), place, null);
 	}
 
+	/**
+	 * Guardamos hechura
+	 */
 	@Override
-	public void saveWorkshop(Adjustment adjustment) {
-		AdjustmentEntity adjustmentEntity = mapper.map(adjustment, AdjustmentEntity.class);
-		// miramos si ya existía
-		AdjustmentEntity adjustmentlast = adjustmentRepository.findById(adjustment.getIdadjustment()).orElse(null);
-		PaymentEntity pay = new PaymentEntity();
-		pay.setIdpayment(Constants.EFECTIVO);
-		if (adjustmentlast != null) {
-			adjustmentlast.setCreationdate(new Date());
-			adjustmentlast.setWork(Boolean.TRUE);
-			adjustmentlast.setPaymentwork(pay);
-			adjustmentlast.setAmountwork(adjustmentEntity.getAmountwork());
-			adjustmentlast.setRecommendedprice(adjustmentEntity.getRecommendedprice());
-			adjustmentlast
-					.setDescription(adjustmentlast.getDescription().concat(" ").concat(adjustment.getDescription()));
-			adjustmentlast.setGrams(adjustmentEntity.getGrams());
-			adjustmentRepository.save(adjustmentlast);
-		} else {
+	public Daily saveWorkshop(Adjustment adjustment) {
+		// primeramente miramos si existe el arreglo
+		Long idwork = adjustment.getIdadjustment();
+		WorkEntity adjustmentEntity = worksRepository.findById(adjustment.getIdadjustment()).orElse(null);
+		List<PlaceUserEntity> placeuser = placeUserRepository
+				.findByUser(usersRepository.findByUsername(adjustment.getUser()));
+		PlaceEntity place = placeuser.get(0).getPlace();
+		if (adjustmentEntity == null) {
+			adjustmentEntity = new WorkEntity();
+			adjustmentEntity.setIdwork(idwork);
+			adjustmentEntity.setPlace(place);
+			adjustmentEntity.setDescription(adjustment.getDescription());
+			adjustmentEntity.setAmount(adjustment.getAmount());
 			adjustmentEntity.setCreationdate(new Date());
-			adjustmentEntity.setWork(Boolean.TRUE);
-			adjustmentEntity.setPaymentwork(pay);
-			adjustmentRepository.save(adjustmentEntity);
+			adjustmentEntity.setPayment(adjustment.getPayment());
+			worksRepository.save(adjustmentEntity);
 		}
+		return dailyService.getDaily(DateUtil.getDateFormated(new Date()), place, null);
+
 	}
 
 	@Override
@@ -121,8 +100,8 @@ public class AdjustmentServiceImpl implements AdjustmentService {
 		Map<String, BigDecimal> sums = new HashMap<>();
 		sums.put(Constants.AMOUNT, adjustmentRepository.sumAmountByCreationdateAndPlace(from, until,
 				mapper.map(place, PlaceEntity.class)));
-		sums.put("amountwork", adjustmentRepository.sumAmountworkByCreationdateAndPlace(from, until,
-				mapper.map(place, PlaceEntity.class)));
+		sums.put("amountwork",
+				worksRepository.sumAmountByCreationdateAndPlace(from, until, mapper.map(place, PlaceEntity.class)));
 		return sums;
 	}
 
