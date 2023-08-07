@@ -86,7 +86,7 @@ public class AdjustmentsController {
 		} else {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			adjustment.setUser(user);
-			model.addObject(ConstantsViews.DAILY, adjustmentService.save(adjustment));
+			model.addObject(ConstantsViews.DAILY, adjustmentService.saveWorkshop(adjustment));
 			model.setViewName(ConstantsViews.VIEWDAILYARROW);
 			model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 		}
