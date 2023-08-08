@@ -549,10 +549,13 @@ public class DailyServiceImpl implements DailyService {
 			WorkEntity adjustment;
 			BigDecimal amountwork;
 			List<Adjustment> ladjustmentsw = new ArrayList<>();
+			Adjustment a;
 			while (iadjustments.hasNext()) {
 				adjustment = iadjustments.next();
 				amountwork = adjustment.getAmount();
-				ladjustmentsw.add(mapper.map(adjustment, Adjustment.class));
+				a = mapper.map(adjustment, Adjustment.class);
+				a.setIdadjustment(adjustment.getIdwork());
+				ladjustmentsw.add(a);
 				if (adjustment.getPayment().getIdpayment().equals(Constants.EFECTIVO)) {
 					adjustmentsworkamount = adjustmentsworkamount.subtract(amountwork);
 				}
