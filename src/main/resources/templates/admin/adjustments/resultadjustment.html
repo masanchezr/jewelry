@@ -1,39 +1,33 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	th:include="admin/templateAdmin :: page">
+<html xmlns:th="http://www.thymeleaf.org" th:include="admin/templateAdmin :: page">
+
 <head th:replace="admin/headerDateRange"></head>
 <div th:fragment="content">
 	<!-- Breadcrumbs-->
 	<ol class="breadcrumb">
-		<li class="breadcrumb-item"><a href="#"><span
-				th:text="#{adjustments}"></span></a></li>
+		<li class="breadcrumb-item"><a href="#"><span th:text="#{adjustments}"></span></a></li>
 		<li class="breadcrumb-item active" th:text="#{adjustment}"></li>
 	</ol>
 	<div class="row" th:if="${adjustment!=null}">
 		<div class="col-lg-12">
 			<div class="card-body">
 				<div class="table-responsive">
-					<table class="table table-striped table-bordered table-hover"
-						id="dataTables-example">
+					<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 						<thead>
 							<tr>
 								<th th:text="#{id}"></th>
-								<th th:text="#{grams}"></th>
-								<th th:text="#{recommendedprice}"></th>
+								<th th:text="#{user}"></th>
 								<th th:text="#{description}"></th>
-								<th th:text="#{price}"></th>
-								<th th:text="#{amountwork}"></th>
+								<th th:text="#{amount}"></th>
 								<th th:text="#{payment}"></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<td th:text="${adjustment.idadjustment}"></td>
-								<td th:text="${adjustment.grams}"></td>
-								<td th:text="${adjustment.recommendedprice}"></td>
+								<td th:text="${adjustment.user}"></td>
 								<td th:text="${adjustment.description}"></td>
 								<td th:text="${adjustment.amount}"></td>
-								<td th:text="${adjustment.amountwork}"></td>
 								<td th:text="${adjustment.payment.name}"></td>
 							</tr>
 						</tbody>
@@ -46,4 +40,5 @@
 		<span th:text="#{noresults}"></span>
 	</div>
 </div>
+
 </html>
