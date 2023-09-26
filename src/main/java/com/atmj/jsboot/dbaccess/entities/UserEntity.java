@@ -1,5 +1,6 @@
 package com.atmj.jsboot.dbaccess.entities;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -17,7 +18,9 @@ import com.atmj.dbaccess.entities.AuthorityEntity;
 
 @Entity
 @Table(name = "users")
-public class UserEntity {
+public class UserEntity implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
