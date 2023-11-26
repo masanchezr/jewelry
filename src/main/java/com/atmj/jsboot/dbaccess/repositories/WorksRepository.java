@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.TemporalType;
+import jakarta.persistence.TemporalType;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.Temporal;

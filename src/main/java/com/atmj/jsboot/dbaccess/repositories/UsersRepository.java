@@ -7,7 +7,10 @@ import org.springframework.data.repository.CrudRepository;
 import com.atmj.jsboot.dbaccess.entities.UserEntity;
 
 public interface UsersRepository extends CrudRepository<UserEntity, Long> {
+
 	public UserEntity findByUsername(String user);
+
+	public UserEntity findByUsernameAndEnabledTrue(String user);
 
 	public List<UserEntity> findByEnabledTrue();
 }

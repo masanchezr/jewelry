@@ -1,6 +1,6 @@
 package com.atmj.jsboot.admin.forms;
 
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * The Class FileUploadForm.
@@ -8,24 +8,23 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 public class FileUploadForm {
 
 	/** The fichero. */
-	CommonsMultipartFile fichero;
+	MultipartFile fichero;
 
 	/**
 	 * Gets the fichero.
 	 * 
 	 * @return the fichero
 	 */
-	public CommonsMultipartFile getFichero() {
+	public MultipartFile getFichero() {
 		return fichero;
 	}
 
 	/**
 	 * Sets the fichero.
 	 * 
-	 * @param fichero
-	 *            the new fichero
+	 * @param fichero the new fichero
 	 */
-	public void setFichero(CommonsMultipartFile fichero) {
+	public void setFichero(MultipartFile fichero) {
 		this.fichero = fichero;
 	}
 }

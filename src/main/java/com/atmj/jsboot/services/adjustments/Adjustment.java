@@ -2,9 +2,9 @@ package com.atmj.jsboot.services.adjustments;
 
 import java.math.BigDecimal;
 
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import com.atmj.jsboot.dbaccess.entities.PaymentEntity;
 import com.atmj.jsboot.utils.constants.ConstantsViews;

@@ -2,7 +2,7 @@ package com.atmj.jsboot.services.users;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.atmj.jsboot.dbaccess.entities.PlaceEntity;
@@ -21,24 +21,24 @@ public class UserServiceImpl implements UserService {
 	private PlaceUserRepository placeUserRepository;
 
 	@Autowired
-	private PasswordEncoder pbkdf2Encoder;
-
-	@Autowired
 	private ModelMapper mapper;
 
 	@Override
 	public void newUser(User user) {
 		String username = user.getUsername();
 		UserEntity entity = usersRepository.findByUsername(username);
+		PlaceUserEntity pue = null;
 		if (entity == null) {
-			PlaceUserEntity pue = new PlaceUserEntity();
+			pue = new PlaceUserEntity();
 			pue.setPlace(mapper.map(user.getPlace(), PlaceEntity.class));
+		}
+		user.setPassword(Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_8().encode(user.getPassword()));
+		entity = mapper.map(user, UserEntity.class);
+		entity = usersRepository.save(entity);
+		if (pue != null) {
 			pue.setUser(entity);
 			placeUserRepository.save(pue);
 		}
-		user.setPassword(pbkdf2Encoder.encode(user.getPassword()));
-		entity = mapper.map(user, UserEntity.class);
-		usersRepository.save(entity);
 	}
 
 	@Override

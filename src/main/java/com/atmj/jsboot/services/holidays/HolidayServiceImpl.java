@@ -39,7 +39,7 @@ public class HolidayServiceImpl implements HolidayService {
 	}
 
 	public void addHolidayAllPlaces(Holiday holiday) {
-		Iterable<PlaceEntity> place = placeRepository.findAll();
+		List<PlaceEntity> place = placeRepository.findAll();
 		Iterator<PlaceEntity> iplace = place.iterator();
 		while (iplace.hasNext()) {
 			HolidayEntity entity = converter.convertToEntity(holiday);

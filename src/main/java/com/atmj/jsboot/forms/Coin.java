@@ -2,9 +2,9 @@ package com.atmj.jsboot.forms;
 
 import java.util.Date;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import com.atmj.jsboot.dbaccess.entities.MetalEntity;
 import com.atmj.jsboot.dbaccess.entities.PlaceEntity;

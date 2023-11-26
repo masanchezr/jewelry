@@ -3,8 +3,8 @@ package com.atmj.jsboot.forms;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.CreatedDate;
 

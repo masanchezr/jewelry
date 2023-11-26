@@ -10,8 +10,9 @@
 	<name>jewelry</name>
 	<description>Jewelry project for Spring Boot</description>
 	<properties>
-		<java.version>1.8</java.version>
 		<sourceEncoding>UTF-8</sourceEncoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>17</java.version>
 	</properties>
 	<profiles>
 		<profile>
@@ -31,9 +32,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-war-plugin</artifactId>
-						<version>3.3.1</version>
 						<configuration>
-							<encoding>${sourceEncoding}</encoding>
 							<outputDirectory>deployments</outputDirectory>
 							<!-- warName>ROOT</warName -->
 						</configuration>
@@ -41,17 +40,10 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-compiler-plugin</artifactId>
-						<version>3.8.1</version>
-						<configuration>
-							<encoding>${sourceEncoding}</encoding>
-							<source>1.8</source>
-							<target>1.8</target>
-						</configuration>
 					</plugin>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-resources-plugin</artifactId>
-						<version>3.2.0</version>
 						<configuration>
 							<encoding>${sourceEncoding}</encoding>
 						</configuration>
@@ -64,16 +56,7 @@
 		<dependency>
 			<groupId>atmj</groupId>
 			<artifactId>comun</artifactId>
-			<version>0.0.3</version>
+			<version>0.0.4</version>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
 </project>

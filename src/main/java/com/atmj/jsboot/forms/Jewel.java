@@ -3,9 +3,9 @@ package com.atmj.jsboot.forms;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import com.atmj.jsboot.dbaccess.entities.MetalEntity;
 import com.atmj.jsboot.dbaccess.entities.PlaceEntity;

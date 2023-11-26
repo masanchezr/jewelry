@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
@@ -17,7 +18,8 @@ import com.atmj.jsboot.dbaccess.entities.PlaceEntity;
 /**
  * The Interface JewelRepository.
  */
-public interface JewelRepository extends PagingAndSortingRepository<JewelEntity, Long> {
+public interface JewelRepository
+		extends PagingAndSortingRepository<JewelEntity, Long>, ListCrudRepository<JewelEntity, Long> {
 
 	/**
 	 * Find by name and category.

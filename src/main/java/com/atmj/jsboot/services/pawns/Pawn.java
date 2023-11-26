@@ -2,9 +2,9 @@ package com.atmj.jsboot.services.pawns;
 
 import java.util.Date;
 
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotEmpty;
 
 import com.atmj.jsboot.dbaccess.entities.PlaceEntity;
 import com.atmj.jsboot.forms.OperationForm;

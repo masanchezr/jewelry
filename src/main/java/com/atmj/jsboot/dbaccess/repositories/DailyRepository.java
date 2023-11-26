@@ -2,7 +2,7 @@ package com.atmj.jsboot.dbaccess.repositories;
 
 import java.util.Date;
 
-import javax.persistence.TemporalType;
+import jakarta.persistence.TemporalType;
 
 import org.springframework.data.jpa.repository.Temporal;
 import org.springframework.data.repository.CrudRepository;

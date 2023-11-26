@@ -26,7 +26,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) {
-		UserEntity appUser = usersRepository.findByUsername(username);
+		UserEntity appUser = usersRepository.findByUsernameAndEnabledTrue(username);
 		// Mapear nuestra lista de Authority con la de spring security
 		List<GrantedAuthority> grantList = new ArrayList<>();
 		for (AuthorityEntity authority : appUser.getAuthority()) {
@@ -55,7 +55,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
 	@Bean
 	public PasswordEncoder encoder() {
-		return new Pbkdf2PasswordEncoder();
+		return Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_8();
 	}
 
 	public List<UserEntity> allEmployeesActives() {

@@ -3,7 +3,7 @@ package com.atmj.jsboot.web.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

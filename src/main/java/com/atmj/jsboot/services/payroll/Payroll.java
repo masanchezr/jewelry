@@ -2,7 +2,7 @@ package com.atmj.jsboot.services.payroll;
 
 import java.math.BigDecimal;
 
-import javax.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.DecimalMin;
 
 import com.atmj.jsboot.dbaccess.entities.PayrolltypeEntity;
 import com.atmj.jsboot.utils.constants.ConstantsViews;

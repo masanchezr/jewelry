@@ -2,8 +2,8 @@ package com.atmj.jsboot.services.incidents;
 
 import java.util.Date;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import com.atmj.jsboot.utils.constants.ConstantsViews;
 

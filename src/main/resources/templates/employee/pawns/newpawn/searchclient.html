@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	th:include="employee/template :: page">
+	th:insert="employee/template :: page">
 <div th:fragment="content">
 	<form method="post" th:action="@{/employee/newPawn}"
 		th:object="${pawnForm}">

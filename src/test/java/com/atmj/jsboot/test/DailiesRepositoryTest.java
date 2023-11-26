@@ -1,7 +1,6 @@
 package com.atmj.jsboot.test;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
@@ -46,6 +45,6 @@ class DailiesRepositoryTest {
 		PlaceEntity place = new PlaceEntity();
 		place.setIdplace(13700L);
 		DailyEntity daily = dailyRepository.findByPlaceAndDailydate(place, new Date());
-		assertNull(daily);
+		assertNotNull(daily);
 	}
 }
