@@ -1,5 +1,6 @@
 package com.atmj.jsboot.test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.math.BigDecimal;
@@ -45,6 +46,6 @@ class DailiesRepositoryTest {
 		PlaceEntity place = new PlaceEntity();
 		place.setIdplace(13700L);
 		DailyEntity daily = dailyRepository.findByPlaceAndDailydate(place, new Date());
-		assertNotNull(daily);
+		assertThat(daily);
 	}
 }

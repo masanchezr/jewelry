@@ -127,7 +127,7 @@ public class JsbootSecurityConfig {
 	 */
 	@Bean
 	public WebSecurityCustomizer webSecurityCostumizer() {
-		return web -> web.ignoring().requestMatchers(AntPathRequestMatcher.antMatcher("/styles/**"),
+		return web -> web.ignoring().requestMatchers(AntPathRequestMatcher.antMatcher("/css/**"),
 				AntPathRequestMatcher.antMatcher("/img/**"), AntPathRequestMatcher.antMatcher("/js/**"));
 	}
 
