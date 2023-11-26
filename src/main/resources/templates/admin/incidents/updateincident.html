@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	th:insert="admin/templateAdmin :: page">
+	th:insert="~{admin/templateAdmin :: page}">
 <div th:fragment="content">
 	<form method="post" th:action="@{/resolvedincident}"
 		th:object="${incident}">
