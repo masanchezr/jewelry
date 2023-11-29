@@ -3,8 +3,6 @@ package com.atmj.jsboot.dbaccess.repositories;
 import java.util.Date;
 import java.util.List;
 
-import jakarta.persistence.TemporalType;
-
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.Temporal;
 import org.springframework.data.repository.CrudRepository;
@@ -14,6 +12,8 @@ import com.atmj.jsboot.dbaccess.entities.ClientPawnEntity;
 import com.atmj.jsboot.dbaccess.entities.PawnEntity;
 import com.atmj.jsboot.dbaccess.entities.PlaceEntity;
 import com.atmj.jsboot.utils.constants.Constants;
+
+import jakarta.persistence.TemporalType;
 
 /**
  * The Interface PawnsRepository.
@@ -61,11 +61,16 @@ public interface PawnsRepository extends CrudRepository<PawnEntity, Long> {
 	@Query("select distinct p from PawnEntity p join p.objects o where p.place=:place and p.dateretired is null and o.realgrams is null")
 	public List<PawnEntity> searchByPlaceAndNotRetired(@Param(Constants.PLACE) PlaceEntity placeEntity);
 
-	@Query("select p from PawnEntity p where p.idpawn=:idpawn and PERIOD_DIFF(DATE_FORMAT(p.dateretired,'%Y%m'),DATE_FORMAT(p.creationdate,'%Y%m'))>(SELECT COUNT(*) FROM RenovationEntity where idpawn=:idpawn)+1")
+	// @Query("select p from PawnEntity p where p.idpawn=:idpawn and
+	// PERIOD_DIFF(DATE_FORMAT(p.dateretired,'%Y%m'),DATE_FORMAT(p.creationdate,'%Y%m'))>(SELECT
+	// COUNT(*) FROM RenovationEntity where idpawn=:idpawn)+1")
+	@Query(value = "select * from pawns where idpawn=:idpawn and PERIOD_DIFF(DATE_FORMAT(dateretired,'%Y%m'),DATE_FORMAT(creationdate,'%Y%m'))>(SELECT COUNT(*) FROM renovations where idpawn=:idpawn)+1", nativeQuery = true)
 	public List<PawnEntity> searchMissingRenovations(@Param(Constants.IDPAWN) Long idpawn);
 
-	@Query("select p from PawnEntity p where p.idpawn=:idpawn and PERIOD_DIFF(DATE_FORMAT(p.dateretired,'%Y%m'),DATE_FORMAT(p.creationdate,'%Y%m'))>p.months")
-	public List<PawnEntity> searchMissingMonths(@Param(Constants.IDPAWN) Long idpawn);
+	// @Query("select p from PawnEntity p where p.idpawn=:idpawn and
+	// PERIOD_DIFF(DATE_FORMAT(p.dateretired,'%Y%m'),DATE_FORMAT(p.creationdate,'%Y%m'))>p.months")
+	@Query(value = "select * from pawns where idpawn=:idpawn and PERIOD_DIFF(DATE_FORMAT(dateretired,'%Y%m'),DATE_FORMAT(creationdate,'%Y%m'))>months", nativeQuery = true)
+	public PawnEntity searchMissingMonths(@Param(Constants.IDPAWN) Long idpawn);
 
 	/**
 	 * 

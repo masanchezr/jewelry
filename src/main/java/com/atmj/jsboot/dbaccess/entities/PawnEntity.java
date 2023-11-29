@@ -61,8 +61,7 @@ public class PawnEntity {
 
 	/** The renovations. */
 	@ElementCollection
-	@JoinColumn(name = "IDPAWN")
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "pawn", cascade = CascadeType.ALL)
 	private List<RenovationEntity> renovations;
 
 	/** The percent. */

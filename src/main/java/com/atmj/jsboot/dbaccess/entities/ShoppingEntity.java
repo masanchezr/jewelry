@@ -74,8 +74,7 @@ public class ShoppingEntity {
 	private Integer year;
 
 	@ElementCollection
-	@JoinColumn(name = "IDSHOP")
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "shop", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<PaymentShopEntity> spayments;
 
 	@Column(name = "DESCRIPTION")

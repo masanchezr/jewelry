@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.atmj.jsboot.dbaccess.entities.PawnEntity;
 import com.atmj.jsboot.dbaccess.entities.PlaceEntity;
 import com.atmj.jsboot.dbaccess.repositories.PawnsRepository;
 
@@ -23,5 +24,11 @@ class PawnsRepositoryTest {
 		PlaceEntity place = new PlaceEntity();
 		place.setIdplace(24002L);
 		Assertions.assertNotNull(pawnsRepository.sumPawnsActive(place));
+	}
+
+	@Test
+	void searchMissingMonthsTest() {
+		PawnEntity pawns = pawnsRepository.searchMissingMonths(1L);
+		Assertions.assertNull(pawns);
 	}
 }
