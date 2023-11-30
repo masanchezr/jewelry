@@ -2,8 +2,6 @@ package com.atmj.jsboot.admin.controllers;
 
 import java.util.List;
 
-import jakarta.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -29,6 +27,8 @@ import com.atmj.jsboot.utils.constants.Constants;
 import com.atmj.jsboot.utils.constants.ConstantsViews;
 import com.atmj.jsboot.utils.string.Util;
 import com.atmj.jsboot.validators.SearchFormValidator;
+
+import jakarta.validation.Valid;
 
 /**
  * The Class PawnsAdminController.
@@ -127,7 +127,7 @@ public class PawnsAdminController {
 	}
 
 	@GetMapping("/searchpawn{id}")
-	public ModelAndView searchPawn(@PathVariable long id) {
+	public ModelAndView searchPawn(@PathVariable("id") long id) {
 		ModelAndView model = new ModelAndView();
 		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		NewPawn p = pawnService.findByIdpawn(id);
