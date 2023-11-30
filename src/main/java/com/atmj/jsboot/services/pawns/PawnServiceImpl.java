@@ -268,14 +268,12 @@ public class PawnServiceImpl implements PawnService {
 			pawnEntity.setDateretired(new Date());
 			pawnsRepository.save(pawnEntity);
 			// una vez retirado vamos a calcular si faltan renovaciones
-			List<PawnEntity> pawns;
 			if (Constants.STODOMINGO.equals(idplace)) {
-				pawns = new ArrayList<>();
-				pawns.add(pawnsRepository.searchMissingMonths(idpawn));
+				pawnEntity = pawnsRepository.searchMissingMonths(idpawn);
 			} else {
-				pawns = pawnsRepository.searchMissingRenovations(idpawn);
+				pawnEntity = pawnsRepository.searchMissingRenovations(idpawn);
 			}
-			if (pawns != null && !pawns.isEmpty()) {
+			if (pawnEntity != null) {
 				emailService.sendSimpleMessage("mangeles.sanchez0807@gmail.com", "REVISAR EMPEÑO",
 						"Número empeño: " + pawnEntity.getNumpawn() + ", fecha creación: "
 								+ pawnEntity.getCreationdate() + ", lugar:" + idplace);

@@ -65,7 +65,7 @@ public interface PawnsRepository extends CrudRepository<PawnEntity, Long> {
 	// PERIOD_DIFF(DATE_FORMAT(p.dateretired,'%Y%m'),DATE_FORMAT(p.creationdate,'%Y%m'))>(SELECT
 	// COUNT(*) FROM RenovationEntity where idpawn=:idpawn)+1")
 	@Query(value = "select * from pawns where idpawn=:idpawn and PERIOD_DIFF(DATE_FORMAT(dateretired,'%Y%m'),DATE_FORMAT(creationdate,'%Y%m'))>(SELECT COUNT(*) FROM renovations where idpawn=:idpawn)+1", nativeQuery = true)
-	public List<PawnEntity> searchMissingRenovations(@Param(Constants.IDPAWN) Long idpawn);
+	public PawnEntity searchMissingRenovations(@Param(Constants.IDPAWN) Long idpawn);
 
 	// @Query("select p from PawnEntity p where p.idpawn=:idpawn and
 	// PERIOD_DIFF(DATE_FORMAT(p.dateretired,'%Y%m'),DATE_FORMAT(p.creationdate,'%Y%m'))>p.months")
