@@ -34,11 +34,13 @@ class PawnServiceTest {
 	@Test
 	void searchByNumpawn() {
 		Pawn pawn = new Pawn();
-		pawn.setNumpawn("327");
 		PlaceEntity place = new PlaceEntity();
+		List<Pawn> pawns;
+		pawn.setNumpawn("327");
 		place.setIdplace(9004L);
 		pawn.setPlace(place);
-		Assertions.assertNotNull(pawnService.searchByNumpawn(pawn));
+		pawns = pawnService.searchByNumpawn(pawn);
+		Assertions.assertNotNull(pawns);
 	}
 
 	/**

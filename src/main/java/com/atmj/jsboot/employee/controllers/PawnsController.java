@@ -6,8 +6,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import jakarta.validation.Valid;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -65,6 +65,9 @@ public class PawnsController {
 
 	@Autowired
 	private ReturnPawnFormValidator returnPawnFormValidator;
+
+	/** The log. */
+	private static Logger log = LoggerFactory.getLogger(PawnsController.class);
 
 	private static final String VIEWNEWPAWN = "employee/pawns/newpawn/newPawn";
 	private static final String VIEWSEARCHCLIENT = "employee/pawns/newpawn/searchclient";
@@ -191,8 +194,12 @@ public class PawnsController {
 			pawn.setUser(user);
 			pawn.setRetired(false);
 			String sdate = pawn.getCreationdate();
+			log.warn("sdate: ".concat(sdate));
 			if (Util.isEmpty(sdate)) {
-				sdate = DateUtil.getStringDateddMMyyyy(new Date());
+				Date date = new Date();
+				log.warn("date: ".concat(date.toString()));
+				sdate = DateUtil.getStringDateddMMyyyy(date);
+				log.warn("sdate: ".concat(sdate));
 			}
 			model.addObject(ConstantsViews.DAILY, pawnService.save(pawn));
 			model.setViewName(ConstantsViews.VIEWDAILYARROW);
@@ -384,18 +391,13 @@ public class PawnsController {
 	}
 
 	@PostMapping("/employee/resultRenovationsPawns")
-	public ModelAndView resultRenovationsPawns(@Valid Pawn pawn, BindingResult result) {
+	public ModelAndView resultRenovationsPawns(Pawn pawn) {
 		ModelAndView model = new ModelAndView();
-		if (result.hasErrors()) {
-			model.setViewName("employee/pawns/searchrenovations/searchpawn");
-			model.addObject(ConstantsViews.PAWNFORM, pawn);
-		} else {
-			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-			String user = authentication.getName();
-			pawn.setPlace(placeService.getPlaceUser(user));
-			model.setViewName("employee/pawns/searchrenovations/resultpawn");
-			model.addObject(ConstantsViews.PAWNS, pawnService.searchByNumpawn(pawn));
-		}
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String user = authentication.getName();
+		pawn.setPlace(placeService.getPlaceUser(user));
+		model.setViewName("employee/pawns/searchrenovations/resultpawn");
+		model.addObject(ConstantsViews.PAWNS, pawnService.searchByNumpawn(pawn));
 		return model;
 	}
 

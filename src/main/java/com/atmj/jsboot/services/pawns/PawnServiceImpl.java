@@ -9,6 +9,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -73,14 +75,17 @@ public class PawnServiceImpl implements PawnService {
 	@Autowired
 	private PawnEntityConverter pawnconverter;
 
+	private static Logger log = LoggerFactory.getLogger(PawnServiceImpl.class);
+
 	@Override
 	public Daily save(NewPawn pawn) {
 		PawnEntity pawnEntity = pawnconverter.convertToDTO(pawn);
 		ClientPawnEntity cpe = clientPawnsRepository.findById(pawn.getNif()).orElse(null);
 		PlaceEntity place = placeUserRepository.findByUser(usersRepository.findByUsername(pawn.getUser())).get(0)
 				.getPlace();
+		Date creationdate = pawnEntity.getCreationdate();
 		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(pawnEntity.getCreationdate());
+		calendar.setTime(creationdate);
 		int year = calendar.get(Calendar.YEAR);
 		List<ObjectPawnEntity> newobjects = new ArrayList<>();
 		List<ObjectPawnEntity> object = pawnEntity.getObjects();
@@ -89,6 +94,11 @@ public class PawnServiceImpl implements PawnService {
 			cpe = mapper.map(pawn, ClientPawnEntity.class);
 			cpe.setCreationclient(new Date());
 			clientPawnsRepository.save(cpe);
+		}
+		if (creationdate != null) {
+			log.warn("Creation date: ".concat(creationdate.toString()));
+		} else {
+			log.warn("Creation date is null");
 		}
 		pawnEntity.setPlace(place);
 		pawnEntity.setClient(cpe);
@@ -104,7 +114,8 @@ public class PawnServiceImpl implements PawnService {
 		}
 		pawnEntity.setObjects(newobjects);
 		pawnsRepository.save(pawnEntity);
-		return dailyService.getDaily(DateUtil.getDateFormated(pawnEntity.getCreationdate()), place, null);
+		log.warn("Antes del return del parte");
+		return dailyService.getDaily(DateUtil.getDateFormated(creationdate), place, null);
 	}
 
 	@Override
