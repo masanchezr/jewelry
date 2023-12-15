@@ -85,20 +85,20 @@ public class PawnServiceImpl implements PawnService {
 				.getPlace();
 		Date creationdate = pawnEntity.getCreationdate();
 		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(creationdate);
-		int year = calendar.get(Calendar.YEAR);
 		List<ObjectPawnEntity> newobjects = new ArrayList<>();
 		List<ObjectPawnEntity> object = pawnEntity.getObjects();
 		Iterator<ObjectPawnEntity> iobjects = object.iterator();
-		if (cpe == null) {
-			cpe = mapper.map(pawn, ClientPawnEntity.class);
-			cpe.setCreationclient(new Date());
-			clientPawnsRepository.save(cpe);
-		}
 		if (creationdate != null) {
 			log.warn("Creation date: ".concat(creationdate.toString()));
 		} else {
 			log.warn("Creation date is null");
+		}
+		calendar.setTime(creationdate);
+		int year = calendar.get(Calendar.YEAR);
+		if (cpe == null) {
+			cpe = mapper.map(pawn, ClientPawnEntity.class);
+			cpe.setCreationclient(new Date());
+			clientPawnsRepository.save(cpe);
 		}
 		pawnEntity.setPlace(place);
 		pawnEntity.setClient(cpe);
