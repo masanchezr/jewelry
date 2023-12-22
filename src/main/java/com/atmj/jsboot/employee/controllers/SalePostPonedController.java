@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import jakarta.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -35,6 +33,8 @@ import com.atmj.jsboot.services.sales.SalesPostPonedService;
 import com.atmj.jsboot.utils.constants.Constants;
 import com.atmj.jsboot.utils.constants.ConstantsViews;
 import com.atmj.jsboot.utils.date.DateUtil;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class SalePostPonedController {
@@ -154,12 +154,8 @@ public class SalePostPonedController {
 		} else {
 			SalePostPoned sale = saleservicepostponed.addInstallment(installment);
 			if (sale != null) {
-				if (sale.getDateretired() != null) {
-					model = getModelDaily(request);
-				} else {
-					model.setViewName("employee/salespostponed/finishaddinstallment");
-					model.addObject(ConstantsViews.FORMSALE, sale);
-				}
+				model.setViewName("employee/salespostponed/finishaddinstallment");
+				model.addObject(ConstantsViews.FORMSALE, sale);
 			} else {
 				model.setViewName(ADDINSTALLMENT);
 				model.addObject(INSTALLMENT, installment);

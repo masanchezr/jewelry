@@ -89,28 +89,25 @@ public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 	public SalePostPoned addInstallment(Installment installment) {
 		SalePostponedEntity sppentity = salespostponedrepository.findById(installment.getIdsalepostponed())
 				.orElse(null);
-		SalePostPoned sale = null;
 		if (sppentity != null) {
 			BigDecimal amount = installmentsrepository.sumBySalepostponed(sppentity);
 			if (amount.add(Util.getNumber(installment.getAmount())).compareTo(sppentity.getTotalamount()) < 0) {
 				InstallmentEntity entity = mapper.map(installment, InstallmentEntity.class);
 				entity.setSalepostponed(sppentity);
 				entity.setCreationdate(new Date());
-				installmentsrepository.save(entity);
 				sppentity = salespostponedrepository.findById(installment.getIdsalepostponed()).orElse(null);
-				sale = mapper.map(sppentity, SalePostPoned.class);
+				return mapper.map(installmentsrepository.save(entity), SalePostPoned.class);
 			} else if (amount.add(Util.getNumber(installment.getAmount())).compareTo(sppentity.getTotalamount()) == 0) {
 				InstallmentEntity entity = mapper.map(installment, InstallmentEntity.class);
 				entity.setSalepostponed(sppentity);
 				entity.setCreationdate(new Date());
 				installmentsrepository.save(entity);
 				sppentity.setDateretired(new Date());
-				salespostponedrepository.save(sppentity);
-				sppentity = salespostponedrepository.findById(installment.getIdsalepostponed()).orElse(null);
-				sale = mapper.map(sppentity, SalePostPoned.class);
-			}
-		}
-		return sale;
+				return mapper.map(salespostponedrepository.save(sppentity), SalePostPoned.class);
+			} else
+				return null;
+		} else
+			return null;
 	}
 
 	@Override
@@ -144,7 +141,7 @@ public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 	public SalePostPoned searchByIdAndPlace(long id, PlaceEntity place) {
 		SalePostponedEntity saleEntity = salespostponedrepository.findById(id).orElse(null);
 		if (saleEntity != null && saleEntity.getPlace().equals(place)) {
-			SalePostPoned sale = mapper.map(saleEntity, SalePostPoned.class);
+			SalePostPoned sale = converter.convertToDTO(saleEntity);
 			List<SalePostPonedJewel> sjewels = saleEntity.getSjewels();
 			Iterator<SalePostPonedJewel> isjewels = sjewels.iterator();
 			sale.setJewels(new ArrayList<>());

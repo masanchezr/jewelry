@@ -23,6 +23,9 @@ public class SaleParent {
 
 	private String payments;
 
+	/** The total. */
+	private BigDecimal total;
+
 	/**
 	 * Gets the place.
 	 *
@@ -48,9 +51,6 @@ public class SaleParent {
 	public void setPlace(PlaceEntity place) {
 		this.place = place;
 	}
-
-	/** The total. */
-	private BigDecimal total;
 
 	/**
 	 * Gets the idsale.
