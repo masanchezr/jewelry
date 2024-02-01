@@ -17,7 +17,7 @@
 						<thead>
 							<tr>
 								<th th:text="#{numsale}"></th>
-								<th th:text="#{total}"></th>
+								<th th:text="#{amount}"></th>
 								<th th:text="#{place}"></th>
 								<th th:text="#{saledate}"></th>
 								<th th:text="#{discount}"></th>
@@ -32,39 +32,26 @@
 								<td th:text="${sale.discount}"></td>
 							</tr>
 							<tr th:each="sale:${salespost}">
-								<td th:text="${sale.idsalepostponed}"></td>
-								<td th:text="${sale.totalamount}"></td>
-								<td th:text="${sale.place.description}"></td>
-								<td th:text="${sale.dateretired}"></td>
+								<td th:text="${sale.salepostponed.idsalepostponed}"></td>
+								<td th:text="${sale.amount}"></td>
+								<td th:text="${sale.salepostponed.place.description}"></td>
+								<td th:text="${sale.salepostponed.dateretired}"></td>
 								<td th:text="#{salepostponed}"></td>
 							</tr>
 							<tr th:each="adjustment:${adjustments}">
 								<td th:text="${adjustment.idadjustment}"></td>
 								<td th:text="${adjustment.amount}"></td>
-								<td th:text="${adjustment.user}"></td>
+								<td th:text="${adjustment.place.description}"></td>
+								<td th:text="${adjustment.creationdate}"></td>
 								<td th:text="#{adjustment}"></td>
-								<td></td>
+
 							</tr>
 							<tr th:each="recording:${recordings}">
 								<td th:text="${recording.numsale}"></td>
 								<td th:text="${recording.amount}"></td>
 								<td th:text="${recording.place.description}"></td>
-								<td th:text="#{recording}"></td>
-								<td></td>
-							</tr>
-							<tr th:each="strap:${straps}">
-								<td th:text="${strap.numsale}"></td>
-								<td th:text="${strap.amount}"></td>
-								<td th:text="${strap.place.description}"></td>
-								<td th:text="#{strap}"></td>
-								<td></td>
-							</tr>
-							<tr th:each="battery:${batteries}">
-								<td th:text="${battery.numsale}"></td>
-								<td th:text="${battery.amount}"></td>
-								<td th:text="${battery.place.description}"></td>
-								<td th:text="#{battery}"></td>
-								<td></td>
+								<td th:text="${recording.creationdate}"></td>
+								<td th:text="${recording.type.name}"></td>
 							</tr>
 						</tbody>
 					</table>

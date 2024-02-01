@@ -1,5 +1,6 @@
 package com.atmj.jsboot.test;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,7 +10,7 @@ import com.atmj.jsboot.services.incidents.Incident;
 import com.atmj.jsboot.services.incidents.IncidentService;
 
 @SpringBootTest
-public class IncidentServiceTest {
+class IncidentServiceTest {
 
 	@Autowired
 	private IncidentService incidentService;
@@ -19,7 +20,7 @@ public class IncidentServiceTest {
 		SearchForm form = new SearchForm();
 		form.setDatefrom("01/01/2014");
 		form.setDateuntil("31/01/2022");
-		incidentService.searchByUserAndDates("SONIAMARCOS", form);
+		Assertions.assertNotNull(incidentService.searchByUserAndDates("SONIAMARCOS", form));
 	}
 
 	@Test

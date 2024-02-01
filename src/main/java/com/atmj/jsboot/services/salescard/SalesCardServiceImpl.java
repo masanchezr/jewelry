@@ -8,23 +8,21 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.atmj.jsboot.dbaccess.entities.AdjustmentEntity;
+import com.atmj.jsboot.dbaccess.entities.InstallmentEntity;
 import com.atmj.jsboot.dbaccess.entities.JewelEntity;
 import com.atmj.jsboot.dbaccess.entities.OtherSaleEntity;
 import com.atmj.jsboot.dbaccess.entities.PaymentEntity;
 import com.atmj.jsboot.dbaccess.entities.SaleEntity;
-import com.atmj.jsboot.dbaccess.entities.SalePostponedEntity;
 import com.atmj.jsboot.dbaccess.entities.SalesJewels;
 import com.atmj.jsboot.dbaccess.managers.SaleManager;
 import com.atmj.jsboot.dbaccess.repositories.AdjustmentRepository;
+import com.atmj.jsboot.dbaccess.repositories.InstallmentsRepository;
 import com.atmj.jsboot.dbaccess.repositories.OtherSaleRepository;
-import com.atmj.jsboot.dbaccess.repositories.SalesPostponedRepository;
 import com.atmj.jsboot.forms.Sale;
-import com.atmj.jsboot.services.adjustments.Adjustment;
 import com.atmj.jsboot.services.converters.SaleEntityConverter;
 import com.atmj.jsboot.services.sales.SearchSale;
 import com.atmj.jsboot.utils.constants.Constants;
@@ -34,10 +32,6 @@ import com.atmj.jsboot.utils.string.Util;
 
 @Service
 public class SalesCardServiceImpl implements SalesCardService {
-
-	/** The mapper. */
-	@Autowired
-	private ModelMapper mapper;
 
 	/** The sale manager. */
 	@Autowired
@@ -50,7 +44,7 @@ public class SalesCardServiceImpl implements SalesCardService {
 	private OtherSaleRepository othersalerepository;
 
 	@Autowired
-	private SalesPostponedRepository salespostponedrepository;
+	private InstallmentsRepository installmentsRepository;
 
 	@Autowired
 	private SaleEntityConverter converter;
@@ -102,23 +96,18 @@ public class SalesCardServiceImpl implements SalesCardService {
 		int size = 0;
 		List<AdjustmentEntity> adjustments = adjustmentRepository.findByCreationdateBetweenAndPayment(from, until,
 				payment);
-		List<Adjustment> ladjustments = null;
 		if (total == null) {
 			total = BigDecimal.ZERO;
 		}
 		if (adjustments != null && !adjustments.isEmpty()) {
 			Iterator<AdjustmentEntity> iadjustments = adjustments.iterator();
 			AdjustmentEntity entity;
-			ladjustments = new ArrayList<>();
 			while (iadjustments.hasNext()) {
 				entity = iadjustments.next();
-				Adjustment adjustment = mapper.map(entity, Adjustment.class);
-				ladjustments.add(adjustment);
 				total = total.add(entity.getAmount());
 			}
-			size = ladjustments.size();
 			map.put(ConstantsViews.TOTAL, total);
-			map.put(Constants.ADJUSTMENTS, ladjustments);
+			map.put(Constants.ADJUSTMENTS, adjustments);
 		}
 		return size;
 	}
@@ -143,7 +132,7 @@ public class SalesCardServiceImpl implements SalesCardService {
 	}
 
 	private int putSalesPost(Map<String, Object> map, Date from, Date until, PaymentEntity payment) {
-		List<SalePostponedEntity> salespost = salespostponedrepository.findByCreationdateBetweenPay(from, until,
+		List<InstallmentEntity> salespost = installmentsRepository.findByCreationdateBetweenAndPay(from, until,
 				payment);
 		BigDecimal total = (BigDecimal) map.get(ConstantsViews.TOTAL);
 		int size = 0;
@@ -151,9 +140,9 @@ public class SalesCardServiceImpl implements SalesCardService {
 			total = BigDecimal.ZERO;
 		}
 		if (salespost != null && !salespost.isEmpty()) {
-			Iterator<SalePostponedEntity> isalespost = salespost.iterator();
+			Iterator<InstallmentEntity> isalespost = salespost.iterator();
 			while (isalespost.hasNext()) {
-				total = total.add(isalespost.next().getTotalamount());
+				total = total.add(isalespost.next().getAmount());
 			}
 			size = salespost.size();
 		}

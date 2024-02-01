@@ -3,6 +3,10 @@ package com.atmj.jsboot.dbaccess.entities;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import org.springframework.data.annotation.CreatedDate;
+
+import com.atmj.jsboot.utils.constants.Constants;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,10 +15,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-
-import org.springframework.data.annotation.CreatedDate;
-
-import com.atmj.jsboot.utils.constants.Constants;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "installments")
@@ -38,7 +40,8 @@ public class InstallmentEntity {
 	private BigDecimal amount;
 
 	@CreatedDate
-	@Column(name = Constants.CREATIONDATE)
+	@Temporal(TemporalType.DATE)
+	@Column(name = "CREATIONDATE")
 	private Date creationdate;
 
 	public Long getIdinstallment() {
