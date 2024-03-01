@@ -35,7 +35,7 @@
 								<td th:text="${sale.salepostponed.idsalepostponed}"></td>
 								<td th:text="${sale.amount}"></td>
 								<td th:text="${sale.salepostponed.place.description}"></td>
-								<td th:text="${sale.salepostponed.dateretired}"></td>
+								<td th:text="${sale.creationdate}"></td>
 								<td th:text="#{salepostponed}"></td>
 							</tr>
 							<tr th:each="adjustment:${adjustments}">
