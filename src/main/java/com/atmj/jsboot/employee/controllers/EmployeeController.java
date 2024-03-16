@@ -1,7 +1,5 @@
 package com.atmj.jsboot.employee.controllers;
 
-import jakarta.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -12,6 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.atmj.jsboot.services.messages.MessageService;
 import com.atmj.jsboot.services.registers.RegisterService;
 import com.atmj.jsboot.utils.constants.ConstantsViews;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * The Class EmployeeController.
@@ -58,7 +58,7 @@ public class EmployeeController {
 	 *
 	 * @return the string
 	 */
-	@RequestMapping("/403")
+	@RequestMapping("/employee/403")
 	public String accessDeniedPage() {
 		return "employee/403";
 	}

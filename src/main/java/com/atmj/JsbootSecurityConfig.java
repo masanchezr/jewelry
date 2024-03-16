@@ -64,7 +64,7 @@ public class JsbootSecurityConfig {
 						.hasAnyRole(ROLEUSER, ROLENA).anyRequest().authenticated())
 				.formLogin(formLogin -> formLogin.loginPage("/employee/login").permitAll()
 						.defaultSuccessUrl("/employee/admin", true).failureForwardUrl("/403"))
-				.exceptionHandling(eH -> eH.accessDeniedPage("/403"))
+				.exceptionHandling(eH -> eH.accessDeniedPage("/employee/403"))
 				.logout(logout -> logout.logoutUrl("/employee/j_spring_security_logout")
 						.logoutSuccessUrl("/employee/login").invalidateHttpSession(true));
 		return http.build();
