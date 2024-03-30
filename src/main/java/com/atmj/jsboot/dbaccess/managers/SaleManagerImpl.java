@@ -256,11 +256,11 @@ public class SaleManagerImpl implements SaleManager {
 	}
 
 	@Override
-	public List<Long> calculateNumberMissing(Long numFrom, Long numUntil) {
+	public List<Long> calculateNumberMissing(Long numFrom, Long numUntil, PlaceEntity place) {
 		List<Long> numbers = new ArrayList<>();
 		List<SaleEntity> sales;
 		for (long i = numFrom; i <= numUntil; i++) {
-			sales = saleRepository.findByNumsale(i);
+			sales = saleRepository.findByNumsaleAndPlace(i, place);
 			if ((sales == null || sales.isEmpty()) && checkAllSales(i) != 0) {
 				numbers.add(i);
 			}
@@ -272,7 +272,7 @@ public class SaleManagerImpl implements SaleManager {
 		long num = 0;
 		List<OtherSaleEntity> othersales = othersalerepository.findByNumsale(i);
 		if (othersales == null || othersales.isEmpty()) {
-			DiscountEntity discount = discountsRepository.findById(i).orElse(null);
+			DiscountEntity discount = discountsRepository.findByNumsale(i);
 			if (discount == null) {
 				num = i;
 			}

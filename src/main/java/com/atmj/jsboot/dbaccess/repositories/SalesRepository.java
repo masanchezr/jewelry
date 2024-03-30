@@ -3,8 +3,6 @@ package com.atmj.jsboot.dbaccess.repositories;
 import java.util.Date;
 import java.util.List;
 
-import jakarta.persistence.TemporalType;
-
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.Temporal;
 import org.springframework.data.repository.CrudRepository;
@@ -14,6 +12,8 @@ import com.atmj.jsboot.dbaccess.entities.ClientEntity;
 import com.atmj.jsboot.dbaccess.entities.PaymentEntity;
 import com.atmj.jsboot.dbaccess.entities.PlaceEntity;
 import com.atmj.jsboot.dbaccess.entities.SaleEntity;
+
+import jakarta.persistence.TemporalType;
 
 /**
  * The Interface SaleRepository.
@@ -58,6 +58,8 @@ public interface SalesRepository extends CrudRepository<SaleEntity, Long> {
 			@Temporal(TemporalType.DATE) Date from, Long numsale);
 
 	public List<SaleEntity> findByNumsale(Long numsale);
+
+	public List<SaleEntity> findByNumsaleAndPlace(Long numsale, PlaceEntity place);
 
 	public SaleEntity findByNumsaleAndYear(Long num, int year);
 }

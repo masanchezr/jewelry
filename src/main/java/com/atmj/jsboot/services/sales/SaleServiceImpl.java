@@ -346,7 +346,7 @@ public class SaleServiceImpl implements SaleService {
 	}
 
 	public List<Long> calculateMissingSales(SearchMissingNumbers form) {
-		return saleManager.calculateNumberMissing(form.getNumfrom(), form.getNumuntil());
+		return saleManager.calculateNumberMissing(form.getNumfrom(), form.getNumuntil(), form.getPlace());
 	}
 
 	@Override
