@@ -171,9 +171,9 @@ public class DailyServiceImpl implements DailyService {
 			BigDecimal cancelsamount = getCancelsAmount(date, place, daily);
 			BigDecimal entriesmoneyamount = getEntriesMoneyAmount(date, place, daily);
 			BigDecimal othersalesamount = getOtherSalesAmount(date, place, daily);
-			double salesamount = getSalesAmount(date, place, daily);
+			BigDecimal salesamount = getSalesAmount(date, place, daily);
 			BigDecimal payrollamount = getPayrollAmount(date, place, daily);
-			double salespostamount = getSalesPostAmount(date, place, daily);
+			BigDecimal salespostamount = getSalesPostAmount(date, place, daily);
 			if (dEntity == null) {
 				DailyEntity previousdaily = null;
 				Date previousday = date;
@@ -195,10 +195,9 @@ public class DailyServiceImpl implements DailyService {
 				}
 			}
 			finalamount = previousamount.add(adjusmentsamount).add(adjustmentsworkamount).add(renovationsamount)
-					.add(BigDecimal.valueOf(salesamount)).add(shoppingsamount).add(retiredpawnsamount)
-					.add(otherconceptsamount).add(newpawnsamount).add(cancelsamount).add(payrollamount)
-					.add(entriesmoneyamount).add(rentalsamount).add(discountsamount)
-					.add(BigDecimal.valueOf(salespostamount).add(othersalesamount));
+					.add(salesamount).add(shoppingsamount).add(retiredpawnsamount).add(otherconceptsamount)
+					.add(newpawnsamount).add(cancelsamount).add(payrollamount).add(entriesmoneyamount)
+					.add(rentalsamount).add(discountsamount).add(salespostamount.add(othersalesamount));
 			dEntity.setFinalamount(finalamount);
 			dEntity.setIpaddress(ipaddress);
 			daily.setFinalamount(finalamount);
@@ -416,10 +415,10 @@ public class DailyServiceImpl implements DailyService {
 		return otherconceptsamount;
 	}
 
-	private double getSalesPostAmount(Date date, PlaceEntity place, Daily daily) {
+	private BigDecimal getSalesPostAmount(Date date, PlaceEntity place, Daily daily) {
 		List<SalePostponedEntity> salespost = salespostponedrepository.findByDateretiredAndPlaceAndTimeoutFalse(date,
 				place);
-		double salespostamount = 0;
+		BigDecimal salespostamount = BigDecimal.ZERO;
 		if (salespost != null && !salespost.isEmpty()) {
 			Iterator<SalePostponedEntity> isalespost = salespost.iterator();
 			List<SalePostPoned> lsalespost = new ArrayList<>();
@@ -439,7 +438,7 @@ public class DailyServiceImpl implements DailyService {
 					sp = ipayments.next();
 					payment = sp.getPay();
 					if (payment.getIdpayment().equals(Constants.EFECTIVO)) {
-						salespostamount += sp.getAmount().doubleValue();
+						salespostamount = salespostamount.add(sp.getAmount());
 					}
 					payments = payments.concat(payment.getName()).concat(" ");
 				}
@@ -453,9 +452,9 @@ public class DailyServiceImpl implements DailyService {
 		return salespostamount;
 	}
 
-	private double getSalesAmount(Date date, PlaceEntity place, Daily daily) {
+	private BigDecimal getSalesAmount(Date date, PlaceEntity place, Daily daily) {
 		List<SaleEntity> sales = saleManager.searchByCreationDateAndPlace(date, place);
-		double salesamount = 0;
+		BigDecimal salesamount = BigDecimal.ZERO;
 		if (sales != null && !sales.isEmpty()) {
 			Iterator<SaleEntity> isales = sales.iterator();
 			List<Sale> lsales = new ArrayList<>();
@@ -475,7 +474,7 @@ public class DailyServiceImpl implements DailyService {
 					sp = ipayments.next();
 					payment = sp.getPay();
 					if (payment.getIdpayment().equals(Constants.EFECTIVO)) {
-						salesamount += sp.getAmount().doubleValue();
+						salesamount = salesamount.add(sp.getAmount());
 					}
 					payments = payments.concat(payment.getName()).concat(" ");
 				}
