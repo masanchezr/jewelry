@@ -31,4 +31,12 @@ class DailyServiceTest {
 		place.setIdplace(13700L);
 		assertNotNull(dailyService.getDaily(c.getTime(), place, "prueba"));
 	}
+
+	@Test
+	void calculateDailiesTest() {
+		PlaceEntity place = new PlaceEntity();
+		Calendar c = new GregorianCalendar(2023, 11, 6);
+		place.setIdplace(24003L);
+		dailyService.calculateDailies(c.getTime(), place);
+	}
 }

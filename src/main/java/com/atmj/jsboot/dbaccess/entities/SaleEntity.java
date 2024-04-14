@@ -11,6 +11,7 @@ import com.atmj.jsboot.utils.constants.Constants;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -62,7 +63,7 @@ public class SaleEntity {
 	private List<SalesJewels> sjewels;
 
 	@JoinColumn(name = "IDSALE")
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<SalesPayments> spayments;
 
 	/** The total. */

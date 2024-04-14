@@ -11,6 +11,7 @@ import com.atmj.jsboot.utils.constants.Constants;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -51,7 +52,7 @@ public class SalePostponedEntity {
 	private List<SalePostPonedJewel> sjewels;
 
 	@JoinColumn(name = Constants.IDSALEPOSTPONED)
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<InstallmentEntity> spayments;
 
 	public Long getIdsalepostponed() {
