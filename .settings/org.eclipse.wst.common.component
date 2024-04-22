@@ -64,6 +64,12 @@
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+<<<<<<< HEAD
+=======
+        <dependent-module archiveName="comun-0.1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/comun/comun">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+>>>>>>> branch 'master' of https://github.com/masanchezr/jewelry.git
                                                                                                         
         
         
