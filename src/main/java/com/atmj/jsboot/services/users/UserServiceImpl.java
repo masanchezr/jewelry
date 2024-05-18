@@ -29,11 +29,12 @@ public class UserServiceImpl implements UserService {
 		UserEntity entity = usersRepository.findByUsername(username);
 		PlaceUserEntity pue = null;
 		if (entity == null) {
+			entity = new UserEntity();
 			pue = new PlaceUserEntity();
 			pue.setPlace(mapper.map(user.getPlace(), PlaceEntity.class));
 		}
 		user.setPassword(Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_8().encode(user.getPassword()));
-		entity = mapper.map(user, UserEntity.class);
+		mapper.map(user, entity);
 		entity = usersRepository.save(entity);
 		if (pue != null) {
 			pue.setUser(entity);

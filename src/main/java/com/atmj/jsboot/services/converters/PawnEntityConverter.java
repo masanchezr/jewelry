@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import org.modelmapper.AbstractConverter;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,9 +24,11 @@ public class PawnEntityConverter {
 	@Autowired
 	private ModelMapper mapper;
 
+	private static Logger log = LoggerFactory.getLogger(PawnEntityConverter.class);
+
 	Converter<String, Date> toDate = new AbstractConverter<String, Date>() {
 		protected Date convert(String source) {
-			System.out.println("Converter" + source);
+			log.error(source);
 			if (source == null || source.isEmpty()) {
 				return new Date();
 			} else
