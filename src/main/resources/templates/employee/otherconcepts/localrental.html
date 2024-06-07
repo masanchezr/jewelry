@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	th:insert="employee/templateDateMonth :: page">
+	th:insert="~{employee/templateDateMonth :: page}">
 <div th:fragment="content">
 	<form method="post" th:action="@{/employee/savelocalrental}"
 		th:object="${rentalForm}" role="form" autocomplete="off">
