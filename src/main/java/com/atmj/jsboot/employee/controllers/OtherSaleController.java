@@ -2,9 +2,6 @@ package com.atmj.jsboot.employee.controllers;
 
 import java.util.Date;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,6 +21,9 @@ import com.atmj.jsboot.services.places.PlaceService;
 import com.atmj.jsboot.services.salesrepeated.SearchSaleRepeatedService;
 import com.atmj.jsboot.utils.constants.ConstantsViews;
 import com.atmj.jsboot.utils.date.DateUtil;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 
 @Controller
 public class OtherSaleController {
@@ -87,7 +87,6 @@ public class OtherSaleController {
 			otherSaleService.save(mapper.map(recording, OtherSaleEntity.class));
 			model.setViewName(ConstantsViews.VIEWDAILYARROW);
 			model.addObject(ConstantsViews.DAILY, dailyService.getDaily(today, place, ipAddress));
-			model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(today));
 		}
 		return model;
 	}

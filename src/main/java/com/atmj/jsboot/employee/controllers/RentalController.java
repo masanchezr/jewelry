@@ -1,7 +1,5 @@
 package com.atmj.jsboot.employee.controllers;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -16,7 +14,6 @@ import com.atmj.jsboot.services.rentals.Rental;
 import com.atmj.jsboot.services.rentals.RentalService;
 import com.atmj.jsboot.utils.constants.Constants;
 import com.atmj.jsboot.utils.constants.ConstantsViews;
-import com.atmj.jsboot.utils.date.DateUtil;
 
 @Controller
 public class RentalController {
@@ -51,7 +48,6 @@ public class RentalController {
 			if (!rentalService.existsLocalRental(rental)) {
 				model.addObject(ConstantsViews.DAILY, rentalService.saveRental(rental));
 				model.setViewName(ConstantsViews.VIEWDAILYARROW);
-				model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 			} else {
 				model.setViewName(VIEWLOCALRENTAL);
 				model.addObject(FORMRENTAL, rental);

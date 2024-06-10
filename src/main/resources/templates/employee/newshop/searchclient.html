@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	th:insert="~{admin/templateAdmin :: page}">
+	th:insert="~{employee/template :: page}">
 <div th:fragment="content">
 	<!-- Breadcrumbs-->
 	<ol class="breadcrumb">
@@ -8,7 +8,8 @@
 				th:text="#{shoppings}"></span></a></li>
 		<li class="breadcrumb-item active" th:text="#{searchClients}"></li>
 	</ol>
-	<form method="post" th:action="@{/newshop}" th:object="${shopform}">
+	<form method="post" th:action="@{/employee/newshop}"
+		th:object="${shopform}">
 		<div class="form-row">
 			<div class="col-lg-6">
 				<div class="card-body">
@@ -22,14 +23,6 @@
 									th:placeholder="#{nif}" /> <label class="control-label"
 									for="inputSuccess" th:if="${#fields.hasErrors('nif')}"
 									th:errors="*{nif}"></label>
-							</div>
-							<div class="form-group">
-								<span th:text="#{numshop}"></span> <input class="form-control"
-									th:field="*{numshop}" />
-							</div>
-							<div class="form-group">
-								<span th:text="#{user}"></span> <input class="form-control"
-									th:field="*{user}" />
 							</div>
 							<div class="form-group">
 								<button class="btn btn-primary" value="submit">

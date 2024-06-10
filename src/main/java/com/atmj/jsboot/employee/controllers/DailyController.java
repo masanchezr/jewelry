@@ -3,8 +3,6 @@ package com.atmj.jsboot.employee.controllers;
 import java.util.Calendar;
 import java.util.Date;
 
-import jakarta.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -21,6 +19,8 @@ import com.atmj.jsboot.services.places.PlaceService;
 import com.atmj.jsboot.utils.constants.ConstantsViews;
 import com.atmj.jsboot.utils.date.DateUtil;
 import com.atmj.jsboot.utils.string.Util;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * The Class DailyController.
@@ -55,7 +55,6 @@ public class DailyController {
 		} else {
 			model.addObject(ConstantsViews.DAILY, daily);
 			model.setViewName(ConstantsViews.VIEWDAILYARROW);
-			model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 		}
 		return model;
 	}
@@ -88,7 +87,6 @@ public class DailyController {
 				} else {
 					model.addObject(ConstantsViews.DAILY, daily);
 					model.setViewName(ConstantsViews.VIEWDAILYARROWS);
-					model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(date));
 					existdaily = true;
 				}
 			} else {
@@ -122,7 +120,6 @@ public class DailyController {
 					}
 					model.addObject(ConstantsViews.DAILY, daily);
 					model.setViewName(view);
-					model.addObject(ConstantsViews.DATEDAILY, sdate);
 					existdaily = true;
 				}
 			} else {
@@ -160,7 +157,6 @@ public class DailyController {
 			} else {
 				model.addObject(ConstantsViews.DAILY, daily);
 				model.setViewName(view);
-				model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(date));
 			}
 		} else {
 			model.setViewName(ConstantsViews.VIEWNOTDAILY);

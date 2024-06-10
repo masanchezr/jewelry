@@ -85,16 +85,10 @@ public class ShoppingServiceImpl implements ShoppingService {
 	@Override
 	public Daily save(Shopping shopping) {
 		ShoppingEntity shoppingEntity = converter.convertToShoppingEntity(shopping);
-		String nif = shopping.getNif();
-		if (nif != null) {
-			ClientPawnEntity cpe = clientPawnsRepository.findById(nif).orElse(null);
-			if (cpe == null) {
-				cpe = mapper.map(shopping, ClientPawnEntity.class);
-				cpe.setCreationclient(new Date());
-				clientPawnsRepository.save(cpe);
-			}
-			shoppingEntity.setClient(cpe);
-		}
+		ClientPawnEntity cpe = mapper.map(shopping, ClientPawnEntity.class);
+		cpe.setCreationclient(new Date());
+		clientPawnsRepository.save(cpe);
+		shoppingEntity.setClient(cpe);
 		Calendar calendar = Calendar.getInstance();
 		PlaceEntity place = placeUserRepository.findByUser(usersRepository.findByUsername(shopping.getUser())).get(0)
 				.getPlace();
@@ -143,7 +137,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 		shoppingEntity.setYear(calendar.get(Calendar.YEAR));
 		shoppingEntity.setTotalamount(totalamount);
 		shoppingsRepository.save(shoppingEntity);
-		return dailyService.getDaily(DateUtil.getDateFormated(new Date()), place, null);
+		return dailyService.getDaily(shoppingEntity.getCreationdate(), place, null);
 	}
 
 	/**
@@ -428,53 +422,6 @@ public class ShoppingServiceImpl implements ShoppingService {
 			number = shopping.getNumshop() + 1;
 		}
 		return number;
-	}
-
-	@Override
-	public void saveAdmin(Shopping shopping) {
-		ShoppingEntity shoppingEntity = converter.convertToShoppingEntity(shopping);
-		ClientPawnEntity cpe = mapper.map(shopping, ClientPawnEntity.class);
-		cpe.setCreationclient(new Date());
-		clientPawnsRepository.save(cpe);
-		shoppingEntity.setClient(cpe);
-		Calendar calendar = Calendar.getInstance();
-		PlaceEntity place = placeUserRepository.findByUser(usersRepository.findByUsername(shopping.getUser())).get(0)
-				.getPlace();
-		List<ObjectShopEntity> objects = shoppingEntity.getObjects();
-		List<ObjectShopEntity> newobjects = new ArrayList<>();
-		Iterator<ObjectShopEntity> iobjects = objects.iterator();
-		ObjectShopEntity ose;
-		List<PaymentShopEntity> paymentshop = new ArrayList<>();
-		BigDecimal cashamount = Util.getNumber(shopping.getCashamount());
-		BigDecimal totalamount = BigDecimal.ZERO;
-		while (iobjects.hasNext()) {
-			ose = iobjects.next();
-			if (ose.getGrossgrams() != null) {
-				ose.setShop(shoppingEntity);
-				newobjects.add(ose);
-			}
-		}
-		if (cashamount != null) {
-			PaymentEntity payment = new PaymentEntity();
-			PaymentShopEntity payshop = new PaymentShopEntity();
-			payment.setIdpayment(Constants.EFECTIVO);
-			payshop.setPayment(payment);
-			payshop.setAmount(cashamount);
-			payshop.setShop(shoppingEntity);
-			paymentshop.add(payshop);
-			totalamount = totalamount.add(cashamount);
-		}
-		if (shoppingEntity.getCreationdate() == null) {
-			shoppingEntity.setCreationdate(new Date());
-		}
-		calendar.setTime(shoppingEntity.getCreationdate());
-		shoppingEntity.setYear(calendar.get(Calendar.YEAR));
-		shoppingEntity.setPlace(place);
-		shoppingEntity.setSpayments(paymentshop);
-		shoppingEntity.setObjects(newobjects);
-		shoppingEntity.setTotalamount(totalamount);
-		shoppingsRepository.save(shoppingEntity);
-
 	}
 
 	@Override

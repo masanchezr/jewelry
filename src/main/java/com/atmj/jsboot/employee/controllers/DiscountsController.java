@@ -2,9 +2,6 @@ package com.atmj.jsboot.employee.controllers;
 
 import java.util.Date;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -21,6 +18,9 @@ import com.atmj.jsboot.services.places.PlaceService;
 import com.atmj.jsboot.services.salesrepeated.SearchSaleRepeatedService;
 import com.atmj.jsboot.utils.constants.ConstantsViews;
 import com.atmj.jsboot.utils.date.DateUtil;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 
 @Controller
 public class DiscountsController {
@@ -69,7 +69,6 @@ public class DiscountsController {
 			discountService.save(discount);
 			model.addObject(ConstantsViews.DAILY,
 					dailyService.getDaily(DateUtil.getDateFormated(today), place, ipAddress));
-			model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(today));
 			model.setViewName(ConstantsViews.VIEWDAILYARROW);
 		}
 		return model;

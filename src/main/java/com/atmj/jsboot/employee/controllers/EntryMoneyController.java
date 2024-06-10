@@ -1,9 +1,5 @@
 package com.atmj.jsboot.employee.controllers;
 
-import java.util.Date;
-
-import jakarta.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -16,7 +12,8 @@ import com.atmj.jsboot.dbaccess.entities.EntryMoneyEntity;
 import com.atmj.jsboot.forms.EntryMoney;
 import com.atmj.jsboot.services.entrymoney.EntryMoneyService;
 import com.atmj.jsboot.utils.constants.ConstantsViews;
-import com.atmj.jsboot.utils.date.DateUtil;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class EntryMoneyController {
@@ -41,7 +38,6 @@ public class EntryMoneyController {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			model.addObject(ConstantsViews.DAILY, entryMoneyService.saveEntryMoney(user, entryMoney.getAmount()));
 			model.setViewName(ConstantsViews.VIEWDAILYARROW);
-			model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 		}
 		return model;
 	}

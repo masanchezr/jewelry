@@ -3,8 +3,6 @@ package com.atmj.jsboot.admin.controllers;
 import java.util.Calendar;
 import java.util.Date;
 
-import jakarta.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -25,6 +23,8 @@ import com.atmj.jsboot.services.places.PlaceService;
 import com.atmj.jsboot.utils.constants.Constants;
 import com.atmj.jsboot.utils.constants.ConstantsViews;
 import com.atmj.jsboot.utils.date.DateUtil;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * The Class DailiesController.
@@ -108,7 +108,6 @@ public class DailiesController {
 		} else {
 			model.addObject(ConstantsViews.DAILY, daily);
 			model.setViewName(view);
-			model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(date));
 			model.addObject(Constants.PLACE, place.getIdplace());
 		}
 		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
@@ -167,7 +166,6 @@ public class DailiesController {
 				} else {
 					model.addObject(ConstantsViews.DAILY, daily);
 					model.setViewName("admin/dailies/dailyarrows");
-					model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(date));
 					model.addObject(Constants.PLACE, idplace);
 					existdaily = true;
 				}
@@ -209,7 +207,6 @@ public class DailiesController {
 					}
 					model.addObject(ConstantsViews.DAILY, daily);
 					model.setViewName(view);
-					model.addObject(ConstantsViews.DATEDAILY, sdate);
 					model.addObject(Constants.PLACE, idplace);
 					existdaily = true;
 				}

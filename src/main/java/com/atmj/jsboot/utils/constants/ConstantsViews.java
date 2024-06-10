@@ -19,7 +19,6 @@ public class ConstantsViews {
 	public static final String SHOPPINGFORM = "shoppingForm";
 	public static final String DAILY = "daily";
 	public static final String VIEWDAILYARROW = "employee/daily/dailyarrow";
-	public static final String DATEDAILY = "datedaily";
 	public static final String XFORWARDEDFOR = "X-FORWARDED-FOR";
 	public static final String VIEWNOTDAILY = "employee/daily/notdaily";
 	public static final String VIEWDAILYARROWS = "employee/daily/dailyarrows";

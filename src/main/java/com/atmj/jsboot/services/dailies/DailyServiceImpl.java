@@ -155,6 +155,7 @@ public class DailyServiceImpl implements DailyService {
 		// lo primero que voy hacer es mirar si el día es festivo, con lo cual
 		// no calculo nada
 		if (!holidaysManager.isHoliday(date, place)) {
+			daily.setSdate(DateUtil.getStringDateddMMyyyy(date));
 			// busco el parte de hoy si ya está calculado
 			DailyEntity dEntity = dailyRepository.findByPlaceAndDailydate(place, date);
 			BigDecimal finalamount;

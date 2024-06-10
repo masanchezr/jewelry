@@ -22,6 +22,10 @@ import com.atmj.jsboot.services.shoppings.Shopping;
  */
 public class Daily {
 
+	private int numoperations;
+
+	private String sdate;
+
 	/** The finalamount. */
 	private BigDecimal finalamount;
 
@@ -57,8 +61,6 @@ public class Daily {
 	private List<Discount> discounts;
 
 	private List<PayrollEntity> payroll;
-
-	private int numoperations;
 
 	private List<SalePostPoned> lsalespost;
 
@@ -258,5 +260,13 @@ public class Daily {
 
 	public void setOthersales(List<OtherSaleEntity> othersales) {
 		this.othersales = othersales;
+	}
+
+	public String getSdate() {
+		return sdate;
+	}
+
+	public void setSdate(String sdate) {
+		this.sdate = sdate;
 	}
 }

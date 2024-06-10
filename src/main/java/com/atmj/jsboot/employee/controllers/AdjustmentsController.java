@@ -1,9 +1,5 @@
 package com.atmj.jsboot.employee.controllers;
 
-import java.util.Date;
-
-import jakarta.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -16,7 +12,8 @@ import com.atmj.jsboot.services.adjustments.Adjustment;
 import com.atmj.jsboot.services.adjustments.AdjustmentService;
 import com.atmj.jsboot.services.payment.PaymentService;
 import com.atmj.jsboot.utils.constants.ConstantsViews;
-import com.atmj.jsboot.utils.date.DateUtil;
+
+import jakarta.validation.Valid;
 
 /**
  * The Class AdjustmentsController.
@@ -71,7 +68,6 @@ public class AdjustmentsController {
 			adjustment.setUser(user);
 			model.addObject(ConstantsViews.DAILY, adjustmentService.save(adjustment));
 			model.setViewName(ConstantsViews.VIEWDAILYARROW);
-			model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 		}
 		return model;
 	}
@@ -88,7 +84,6 @@ public class AdjustmentsController {
 			adjustment.setUser(user);
 			model.addObject(ConstantsViews.DAILY, adjustmentService.saveWorkshop(adjustment));
 			model.setViewName(ConstantsViews.VIEWDAILYARROW);
-			model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 		}
 		return model;
 	}

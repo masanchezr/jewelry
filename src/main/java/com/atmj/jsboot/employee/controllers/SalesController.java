@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import jakarta.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -33,6 +31,8 @@ import com.atmj.jsboot.utils.constants.Constants;
 import com.atmj.jsboot.utils.constants.ConstantsViews;
 import com.atmj.jsboot.utils.date.DateUtil;
 import com.atmj.jsboot.validators.SaleFormValidator;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * The Class SalesController.
@@ -257,7 +257,6 @@ public class SalesController {
 				searchSale.setPayment(removeSaleForm.getPayment());
 				saleService.removeSale(searchSale);
 				model.addObject(ConstantsViews.DAILY, dailyService.getDaily(today, place, ipAddress));
-				model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateFormatddMMyyyy(today));
 			}
 		}
 		return model;

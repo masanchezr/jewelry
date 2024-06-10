@@ -3,8 +3,6 @@ package com.atmj.jsboot.employee.controllers;
 import java.util.Calendar;
 import java.util.Date;
 
-import jakarta.validation.Valid;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,6 +19,8 @@ import com.atmj.jsboot.services.payroll.PayrollService;
 import com.atmj.jsboot.utils.constants.Constants;
 import com.atmj.jsboot.utils.constants.ConstantsViews;
 import com.atmj.jsboot.utils.date.DateUtil;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class PayrollController {
@@ -63,7 +63,6 @@ public class PayrollController {
 			if (!payrollservice.existsPayroll(payrollEntity)) {
 				model.addObject(ConstantsViews.DAILY, payrollservice.addPayroll(payrollEntity));
 				model.setViewName(ConstantsViews.VIEWDAILYARROW);
-				model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 			} else {
 				model.setViewName(VIEWNEWPAYROLL);
 				model.addObject(FORMPAYROLL, payroll);

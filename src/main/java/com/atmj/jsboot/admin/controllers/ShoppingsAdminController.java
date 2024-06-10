@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import jakarta.servlet.http.HttpServletResponse;
-
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +24,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.atmj.jsboot.admin.forms.AdminForm;
 import com.atmj.jsboot.admin.forms.ShoppingSearch;
-import com.atmj.jsboot.admin.validators.NewShoppingFormValidator;
 import com.atmj.jsboot.admin.validators.ShoppingFormValidator;
 import com.atmj.jsboot.dbaccess.entities.MetalEntity;
 import com.atmj.jsboot.dbaccess.entities.ObjectShopEntity;
@@ -42,6 +39,8 @@ import com.atmj.jsboot.utils.constants.Constants;
 import com.atmj.jsboot.utils.constants.ConstantsViews;
 import com.atmj.jsboot.utils.string.Util;
 import com.atmj.jsboot.validators.SearchFormValidator;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * The Class ShoppingsAdminController.
@@ -69,9 +68,6 @@ public class ShoppingsAdminController {
 
 	@Autowired
 	private ShoppingFormValidator shoppingFormValidator;
-
-	@Autowired
-	private NewShoppingFormValidator newShoppingFormValidator;
 
 	@Autowired
 	private SearchFormValidator searchFormValidator;
@@ -174,42 +170,6 @@ public class ShoppingsAdminController {
 		return searchShoppings();
 	}
 
-	/**
-	 * Save shopping from admin
-	 *
-	 * @param shoppingForm the shopping form
-	 * @param result       the result
-	 * @return the model and view
-	 */
-	@PostMapping("/saveshop")
-	public ModelAndView saveShop(@ModelAttribute(FORMSHOP) Shopping shoppingForm, BindingResult result) {
-		ModelAndView model;
-		newShoppingFormValidator.validate(shoppingForm, result);
-		if (result.hasErrors()) {
-			List<MetalEntity> materials = materialService.getAllMetalsActive();
-			Iterator<MetalEntity> imaterials = materials.iterator();
-			List<ObjectShopEntity> lop = new ArrayList<>();
-			while (imaterials.hasNext()) {
-				ObjectShopEntity op = new ObjectShopEntity();
-				op.setMetal(imaterials.next());
-				lop.add(op);
-			}
-			shoppingForm.setObjects(lop);
-			model = new ModelAndView();
-			model.addObject(FORMSHOP, shoppingForm);
-			model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
-			model.addObject(Constants.TRACKS, trackservice.getTracks());
-			model.addObject(Constants.NATIONS, nationservice.getNations());
-			model.setViewName(VIEWNEWSHOP);
-		} else {
-			String user = SecurityContextHolder.getContext().getAuthentication().getName();
-			shoppingForm.setUser(user);
-			shoppingService.saveAdmin(shoppingForm);
-			model = searchClient();
-		}
-		return model;
-	}
-
 	@GetMapping("/searchquartermaterial")
 	public ModelAndView searchQuarterMetal() {
 		ModelAndView model = new ModelAndView("admin/shoppings/quartersmetal/searchquarter");
@@ -264,18 +224,6 @@ public class ShoppingsAdminController {
 			model.addObject("nummissing", numshops);
 			model.setViewName(ConstantsViews.VIEWSEARCHMISSINGSHOPPINGS);
 		}
-		return model;
-	}
-
-	@GetMapping("/tomelloso")
-	public ModelAndView searchClient() {
-		ModelAndView model = new ModelAndView(VIEWSEARCHCLIENTADMIN);
-		String user = SecurityContextHolder.getContext().getAuthentication().getName();
-		Shopping pawn = new Shopping();
-		pawn.setNumshop(shoppingService.getNextNumber(user));
-		pawn.setUser(user);
-		model.addObject(FORMSHOP, pawn);
-		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
 		return model;
 	}
 

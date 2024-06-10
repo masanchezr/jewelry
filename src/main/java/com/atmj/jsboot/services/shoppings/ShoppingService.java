@@ -53,8 +53,6 @@ public interface ShoppingService {
 
 	public Long getNextNumber(String user);
 
-	public void saveAdmin(Shopping shoppingForm);
-
 	public List<ShoppingEntity> getByNIF(String nif);
 
 	boolean isRepeatNumber(String num, String user, int year);

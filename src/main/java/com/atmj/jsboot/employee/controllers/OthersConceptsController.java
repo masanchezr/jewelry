@@ -1,7 +1,5 @@
 package com.atmj.jsboot.employee.controllers;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -15,7 +13,6 @@ import com.atmj.jsboot.employee.validators.OtherConceptValidator;
 import com.atmj.jsboot.services.otherconcepts.OtherConcept;
 import com.atmj.jsboot.services.otherconcepts.OtherConceptService;
 import com.atmj.jsboot.utils.constants.ConstantsViews;
-import com.atmj.jsboot.utils.date.DateUtil;
 
 /**
  * The Class OthersConceptsController.
@@ -63,7 +60,6 @@ public class OthersConceptsController {
 			otherconcept.setUser(user);
 			model.addObject(ConstantsViews.DAILY, otherConceptService.save(otherconcept));
 			model.setViewName(ConstantsViews.VIEWDAILYARROW);
-			model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 		}
 		return model;
 	}

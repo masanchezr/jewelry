@@ -180,7 +180,6 @@ public class SalePostPonedController {
 		} else {
 			model.addObject(ConstantsViews.DAILY, daily);
 			model.setViewName(ConstantsViews.VIEWDAILYARROW);
-			model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 		}
 		return model;
 	}

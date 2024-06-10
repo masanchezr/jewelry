@@ -159,7 +159,6 @@ public class PawnsController {
 			}
 			model.addObject(ConstantsViews.DAILY, pawnService.saveReturnPawn(pawn));
 			model.setViewName(ConstantsViews.VIEWDAILYARROW);
-			model.addObject(ConstantsViews.DATEDAILY, sdate);
 		}
 		return model;
 	}
@@ -203,7 +202,6 @@ public class PawnsController {
 			}
 			model.addObject(ConstantsViews.DAILY, pawnService.save(pawn));
 			model.setViewName(ConstantsViews.VIEWDAILYARROW);
-			model.addObject(ConstantsViews.DATEDAILY, sdate);
 		}
 		return model;
 	}
@@ -319,7 +317,6 @@ public class PawnsController {
 		pawn.setUser(user);
 		model.addObject(ConstantsViews.DAILY, pawnService.renew(pawn));
 		model.setViewName(ConstantsViews.VIEWDAILYARROW);
-		model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 		return model;
 	}
 
@@ -344,7 +341,6 @@ public class PawnsController {
 		} else {
 			model.addObject(ConstantsViews.DAILY, pawnService.remove(pawn));
 			model.setViewName(ConstantsViews.VIEWDAILYARROW);
-			model.addObject(ConstantsViews.DATEDAILY, DateUtil.getStringDateddMMyyyy(new Date()));
 		}
 		return model;
 	}

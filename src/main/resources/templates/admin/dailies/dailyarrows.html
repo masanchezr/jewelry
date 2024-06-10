@@ -6,7 +6,7 @@
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item"><a href="#"><span
 				th:text="#{dailies}"></span></a></li>
-		<li class="breadcrumb-item active" th:text="${datedaily}"></li>
+		<li class="breadcrumb-item active" th:text="${daily.sdate}"></li>
 		<li class="breadcrumb-item active"><span
 			th:text="${daily.numoperations}"></span> <span
 			th:text="#{operations}"></span></li>
@@ -164,7 +164,7 @@
 				<div class="row">
 					<div class="col-lg-6">
 						<div class="form-group">
-							<a th:href="@{'/beforeday' + ${datedaily}+'/'+${place}}"><button
+							<a th:href="@{'/beforeday' + ${daily.sdate}+'/'+${place}}"><button
 									class="btn btn-primary" type="button">
 									<i class="fas fa-arrow-circle-left"></i> <span
 										th:text="#{beforeday}"></span>
@@ -173,7 +173,7 @@
 					</div>
 					<div class="col-lg-6">
 						<div class="pull-right">
-							<a th:href="@{'/againday' + ${datedaily}+'/'+${place}}"><button
+							<a th:href="@{'/againday' + ${daily.sdate}+'/'+${place}}"><button
 									class="btn btn-primary" type="button">
 									<span th:text="#{againday}"></span> <i
 										class="fas fa-arrow-circle-right"></i>
