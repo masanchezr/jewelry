@@ -13,7 +13,7 @@ public class EmailServiceImpl implements EmailService {
 
 	public void sendSimpleMessage(String to, String subject, String text) {
 		SimpleMailMessage message = new SimpleMailMessage();
-		message.setFrom("webmariangeless@hotmail.com");
+		message.setFrom("info@tomeoro.es");
 		message.setTo(to);
 		message.setSubject(subject);
 		message.setText(text);
