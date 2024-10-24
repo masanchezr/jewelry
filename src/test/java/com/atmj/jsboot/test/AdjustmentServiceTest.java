@@ -56,8 +56,8 @@ class AdjustmentServiceTest {
 		pay.setIdpayment(1L);
 		adjustment.setAmount(new BigDecimal(5));
 		adjustment.setDescription("prueba hechura");
-		adjustment.setIdadjustment(11L);
-		adjustment.setUser("24002");
+		adjustment.setIdadjustment(1L);
+		adjustment.setUser("13700");
 		adjustment.setPayment(pay);
 		Assertions.assertNotNull(adjustmentservice.saveWorkshop(adjustment));
 	}
