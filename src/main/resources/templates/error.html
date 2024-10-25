@@ -4,7 +4,14 @@
 <title>ERROR</title>
 </head>
 <body>
-	<h1 th:text="${errorMsg}"></h1>
+	<h1 th:text="${error}"></h1>
+	<h3 th:text="${status}"></h3>
+	<h3 th:text="${timestamp}"></h3>
+	<h3 th:text="${message}"></h3>
+	<h3 th:text="${exception}"></h3>
+	<h3 th:text="${trace}"></h3>
+	<h3 th:text="${path}"></h3>
+	<h3 th:text="${errors}"></h3>
 	<img th:href="@{/img/web/error.jpg}" alt="Page Not Found (404)."
 		style="position: absolute; left: 50%; top: 50%; margin-left: -285px; margin-top: -190px;">
 </body>
