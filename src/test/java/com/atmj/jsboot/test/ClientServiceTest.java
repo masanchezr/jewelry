@@ -19,7 +19,7 @@ public class ClientServiceTest {
 	@Test
 	public void searchClientTest() {
 		Client client = new Client();
-		client.setName("Mario");
+		client.setName("Teresa");
 		List<Client> clients = clientservice.searchClients(client);
 		Iterator<Client> iclients = clients.iterator();
 		while (iclients.hasNext()) {

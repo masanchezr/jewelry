@@ -114,7 +114,7 @@ public class RegisterServiceImpl implements RegisterService {
 			Paragraph outmorning = new Paragraph("Hora salida por la mañana");
 			Paragraph inafternoon = new Paragraph("Hora entrada por la tarde");
 			Paragraph outafternoon = new Paragraph("Hora salida por la tarde");
-			document.add(new Paragraph("TOMEORO S.L. Registro de empleados").setItalic());
+			document.add(new Paragraph("TOMEORO S.L. Registro de empleados").simulateItalic());
 			table.addCell(new Cell().add(dni));
 			table.addCell(new Cell().add(name));
 			table.addCell(new Cell().add(date));
