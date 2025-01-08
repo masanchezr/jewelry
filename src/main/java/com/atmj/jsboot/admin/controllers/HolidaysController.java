@@ -47,7 +47,7 @@ public class HolidaysController {
 		ModelAndView model = new ModelAndView(VIEWNEWHOLIDAY);
 		model.addObject(ConstantsViews.FORMHOLIDAY, new Holiday());
 		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
-		model.addObject(ConstantsViews.PLACES, placeService.getAllPlaces());
+		model.addObject(ConstantsViews.PLACES, placeService.getAllPlacesActive());
 		return model;
 	}
 

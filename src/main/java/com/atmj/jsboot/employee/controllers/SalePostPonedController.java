@@ -2,7 +2,6 @@ package com.atmj.jsboot.employee.controllers;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +21,6 @@ import com.atmj.jsboot.employee.validators.InstallmentValidator;
 import com.atmj.jsboot.employee.validators.SalePostPonedValidator;
 import com.atmj.jsboot.forms.SalePostPoned;
 import com.atmj.jsboot.services.categories.CategoriesService;
-import com.atmj.jsboot.services.dailies.Daily;
-import com.atmj.jsboot.services.dailies.DailyService;
 import com.atmj.jsboot.services.jewels.JewelService;
 import com.atmj.jsboot.services.metal.MetalService;
 import com.atmj.jsboot.services.payment.PaymentService;
@@ -32,7 +29,6 @@ import com.atmj.jsboot.services.sales.Installment;
 import com.atmj.jsboot.services.sales.SalesPostPonedService;
 import com.atmj.jsboot.utils.constants.Constants;
 import com.atmj.jsboot.utils.constants.ConstantsViews;
-import com.atmj.jsboot.utils.date.DateUtil;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -42,9 +38,6 @@ public class SalePostPonedController {
 	/** The categories service. */
 	@Autowired
 	private CategoriesService categoriesService;
-
-	@Autowired
-	private DailyService dailyService;
 
 	/** The jewel service. */
 	@Autowired
@@ -162,24 +155,6 @@ public class SalePostPonedController {
 				model.addObject(ConstantsViews.PAYMENTS, paymentService.findAllActive());
 				result.rejectValue(Constants.IDSALEPOSTPONED, ConstantsViews.ERRORSALENOTEXIST);
 			}
-		}
-		return model;
-	}
-
-	private ModelAndView getModelDaily(HttpServletRequest request) {
-		ModelAndView model = new ModelAndView();
-		String user = SecurityContextHolder.getContext().getAuthentication().getName();
-		String ipAddress = request.getHeader(ConstantsViews.XFORWARDEDFOR);
-		if (ipAddress == null) {
-			ipAddress = request.getRemoteAddr();
-		}
-		Daily daily = dailyService.getDaily(DateUtil.getDateFormated(new Date()), placeService.getPlaceUser(user),
-				ipAddress);
-		if (daily.getFinalamount() == null) {
-			model.setViewName(ConstantsViews.VIEWNOTDAILY);
-		} else {
-			model.addObject(ConstantsViews.DAILY, daily);
-			model.setViewName(ConstantsViews.VIEWDAILYARROW);
 		}
 		return model;
 	}
