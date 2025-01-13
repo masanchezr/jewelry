@@ -26,7 +26,7 @@ public class SearchSaleRepeatedServiceImpl implements SearchSaleRepeatedService 
 	public boolean isNotRepeatSale(Long num, int year) {
 		SaleEntity sale = saleRepository.findByNumsaleAndYear(num, year);
 		List<OtherSaleEntity> othersales = othersaleRepository.findByNumsale(num);
-		return sale == null && othersales == null
+		return sale == null && (othersales == null || othersales.isEmpty())
 				&& discountsRepository.findByNumsaleAndYear(num, year) == null;
 	}
 }
