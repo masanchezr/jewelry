@@ -23,6 +23,7 @@ public class JsbootSecurityConfig {
 	private static final String ROLEAR = "AR";
 	private static final String ROLENA = "NA";
 	private static final String ROLEADMIN = "ADMIN";
+	private static final String ROLEWORK="WORK";
 
 	@Bean
 	public SecurityFilterChain employeeFilterChain(HttpSecurity http) throws Exception {
@@ -69,6 +70,19 @@ public class JsbootSecurityConfig {
 						.logoutSuccessUrl("/employee/login").invalidateHttpSession(true));
 		return http.build();
 	}
+	
+	@Bean
+	public SecurityFilterChain workFilterChain(HttpSecurity http) throws Exception {
+		http.securityMatcher("/work/**").authorizeHttpRequests(authorize -> authorize
+				.requestMatchers(AntPathRequestMatcher.antMatcher("/work/admin"),AntPathRequestMatcher.antMatcher("/work/newjewel"))
+				.hasRole(ROLEWORK).anyRequest().authenticated())
+		.formLogin(formLogin -> formLogin.loginPage("/work/login").permitAll()
+				.defaultSuccessUrl("/work/admin", true).failureForwardUrl("/work/403"))
+		.exceptionHandling(eH -> eH.accessDeniedPage("/work/403"))
+		.logout(logout -> logout.logoutUrl("/work/j_spring_security_logout")
+				.logoutSuccessUrl("/work/login").invalidateHttpSession(true));
+return http.build();
+}
 
 	@Bean
 	public SecurityFilterChain adminFilterChain(HttpSecurity http) throws Exception {
