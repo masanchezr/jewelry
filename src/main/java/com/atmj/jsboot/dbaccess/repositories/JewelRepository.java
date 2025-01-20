@@ -1,11 +1,13 @@
 package com.atmj.jsboot.dbaccess.repositories;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.Temporal;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -14,6 +16,9 @@ import com.atmj.jsboot.dbaccess.entities.CategoryEntity;
 import com.atmj.jsboot.dbaccess.entities.JewelEntity;
 import com.atmj.jsboot.dbaccess.entities.MetalEntity;
 import com.atmj.jsboot.dbaccess.entities.PlaceEntity;
+import com.atmj.jsboot.utils.constants.Constants;
+
+import jakarta.persistence.TemporalType;
 
 /**
  * The Interface JewelRepository.
@@ -106,5 +111,18 @@ public interface JewelRepository
 	public List<JewelEntity> findByPrice(BigDecimal price);
 
 	public List<JewelEntity> findByPriceAndReference(BigDecimal price, String reference);
+
+	public List<JewelEntity> findByPlaceAndCreationdate(PlaceEntity place, Date creationdate);
+
+	public List<JewelEntity> findByPlaceAndCreationdateBetween(PlaceEntity place, Date from, Date until);
+
+	@Query("select sum(a.grams) from JewelEntity a where a.creationdate=:from and a.place=:place")
+	public BigDecimal sumGramsByPlaceAndCreationdate(@Param(Constants.PLACE) PlaceEntity place,
+			@Param("from") @Temporal(TemporalType.DATE) Date creationdate);
+
+	@Query("select sum(a.grams) from JewelEntity a where a.creationdate>=:from and a.creationdate<=:until and a.place=:place")
+	public BigDecimal sumGramsByPlaceAndCreationdateBetween(@Param(Constants.PLACE) PlaceEntity place,
+			@Param("from") @Temporal(TemporalType.DATE) Date from,
+			@Param("until") @Temporal(TemporalType.DATE) Date until);
 
 }

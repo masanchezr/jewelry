@@ -2,6 +2,7 @@ package com.atmj.jsboot.dbaccess.managers;
 
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -113,5 +114,9 @@ public interface JewelsManager {
 	public List<JewelEntity> searchByPrice(BigDecimal price);
 
 	public List<JewelEntity> searchByPriceAndReference(BigDecimal price, String reference);
+
+	public List<JewelEntity> findByPlaceAndBetweenCreationdate(PlaceEntity place, Date from, Date until);
+
+	BigDecimal sumGramsByPlaceAndBetweenCreationdate(PlaceEntity place, Date from, Date until);
 
 }

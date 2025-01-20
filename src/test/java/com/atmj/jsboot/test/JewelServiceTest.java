@@ -45,4 +45,11 @@ class JewelServiceTest {
 	void searchTest() {
 		Assertions.assertNotNull(objectService.searchActive(1));
 	}
+
+	@Test
+	void printPdfTest() {
+		PlaceEntity place = new PlaceEntity();
+		place.setIdplace(24002L);
+		objectService.generatePdf(place, "01/01/2023", "31/12/2023");
+	}
 }

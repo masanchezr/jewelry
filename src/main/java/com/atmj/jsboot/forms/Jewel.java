@@ -3,13 +3,13 @@ package com.atmj.jsboot.forms;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-
 import com.atmj.jsboot.dbaccess.entities.MetalEntity;
 import com.atmj.jsboot.dbaccess.entities.PlaceEntity;
 import com.atmj.jsboot.utils.constants.ConstantsViews;
+
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 public class Jewel {
 
@@ -44,6 +44,8 @@ public class Jewel {
 	private Boolean revised;
 
 	private BigDecimal grams;
+
+	private String username;
 
 	/**
 	 * Gets the description.
@@ -283,5 +285,13 @@ public class Jewel {
 
 	public void setGrams(BigDecimal grams) {
 		this.grams = grams;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUser(String user) {
+		this.username = user;
 	}
 }

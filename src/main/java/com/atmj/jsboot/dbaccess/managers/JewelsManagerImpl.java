@@ -221,4 +221,22 @@ public class JewelsManagerImpl implements JewelsManager {
 	public List<JewelEntity> searchByPriceAndReference(BigDecimal price, String reference) {
 		return jewelRepository.findByPriceAndReference(price, reference);
 	}
+
+	@Override
+	public List<JewelEntity> findByPlaceAndBetweenCreationdate(PlaceEntity place, Date from, Date until) {
+		if (until == null) {
+			return jewelRepository.findByPlaceAndCreationdate(place, from);
+		} else {
+			return jewelRepository.findByPlaceAndCreationdateBetween(place, from, until);
+		}
+	}
+
+	@Override
+	public BigDecimal sumGramsByPlaceAndBetweenCreationdate(PlaceEntity place, Date from, Date until) {
+		if (until == null) {
+			return jewelRepository.sumGramsByPlaceAndCreationdate(place, from);
+		} else {
+			return jewelRepository.sumGramsByPlaceAndCreationdateBetween(place, from, until);
+		}
+	}
 }

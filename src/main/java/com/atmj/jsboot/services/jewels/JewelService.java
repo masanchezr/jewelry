@@ -1,7 +1,9 @@
 package com.atmj.jsboot.services.jewels;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
 
@@ -91,5 +93,9 @@ public interface JewelService {
 	public Page<JewelEntity> searchJewelsByCategory(CategoryEntity category, int i);
 
 	public List<JewelEntity> searchByPrice(JewelEntity map);
+
+	public Map<String, Object> searchByPlaceAndDates(PlaceEntity place, String sfrom, String suntil);
+
+	public File generatePdf(PlaceEntity place, String datefrom, String dateuntil);
 
 }

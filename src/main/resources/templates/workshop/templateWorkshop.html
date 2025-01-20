@@ -29,6 +29,9 @@
 			<hr class="sidebar-divider my-0">
 			<li class="nav-item"><a class="nav-link" th:href="@{newjewel}"><i
 					class="fas fa-gem fa-fw"></i> <span th:text="#{newjewels}"></span></a></li>
+			<li class="nav-item"><a class="nav-link"
+				th:href="@{searchjewels}"><i class="fas fa-print fa-fw"></i> <span
+					th:text="#{printjewels}"></span></a></li>
 			<!-- Divider -->
 			<hr class="sidebar-divider d-none d-md-block">
 
@@ -126,5 +129,14 @@
 	<script th:src="@{/js/comun/dataTables.bootstrap.js}"></script>
 	<script th:src="@{/js/comun/bootstrap-datepicker.min.js}"></script>
 	<script th:src="@{/js/comun/bootstrap-datepicker.es.min.js}"></script>
+	<script>
+		$(function() {
+			$("#sandbox-container input").datepicker({
+				language : "es",
+				autoclose : true,
+				todayHighlight : true
+			});
+		});
+	</script>
 </body>
 </html>

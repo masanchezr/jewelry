@@ -3,6 +3,8 @@ package com.atmj.jsboot.dbaccess.entities;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import org.springframework.data.annotation.CreatedDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,8 +13,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-
-import org.springframework.data.annotation.CreatedDate;
 
 /**
  * The Class JewelEntity.
@@ -65,6 +65,9 @@ public class JewelEntity {
 	@ManyToOne
 	@JoinColumn(name = "IDMETAL", referencedColumnName = "IDMETAL")
 	private MetalEntity metal;
+
+	/** The user. */
+	private String username;
 
 	/** The creationdate. */
 	@CreatedDate
@@ -324,5 +327,13 @@ public class JewelEntity {
 
 	public void setGrams(BigDecimal grams) {
 		this.grams = grams;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 }
