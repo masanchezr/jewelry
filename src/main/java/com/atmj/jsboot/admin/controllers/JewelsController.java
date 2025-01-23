@@ -3,18 +3,19 @@ package com.atmj.jsboot.admin.controllers;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-
-import jakarta.servlet.ServletOutputStream;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.validation.Valid;
+import java.io.InputStream;
 
 import org.apache.commons.io.IOUtils;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +32,7 @@ import com.atmj.jsboot.dbaccess.entities.JewelEntity;
 import com.atmj.jsboot.forms.Category;
 import com.atmj.jsboot.forms.Coin;
 import com.atmj.jsboot.forms.Jewel;
+import com.atmj.jsboot.forms.SearchForm;
 import com.atmj.jsboot.services.categories.CategoriesService;
 import com.atmj.jsboot.services.coins.CoinService;
 import com.atmj.jsboot.services.jewels.JewelService;
@@ -40,12 +42,18 @@ import com.atmj.jsboot.services.sets.NewSet;
 import com.atmj.jsboot.services.sets.SetService;
 import com.atmj.jsboot.utils.constants.Constants;
 import com.atmj.jsboot.utils.constants.ConstantsViews;
+import com.atmj.jsboot.validators.SearchFormValidator;
+
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 
 /**
  * The Class JewelsController.
  */
 @Controller
-@SessionAttributes({ "placeselected" })
+@SessionAttributes({ ConstantsViews.FORMSEARCH, "placeselected" })
 public class JewelsController {
 
 	/** The categories service. */
@@ -68,6 +76,9 @@ public class JewelsController {
 	@Autowired
 	private PlaceService placeService;
 
+	@Autowired
+	private SearchFormValidator searchFormValidator;
+
 	/** The set service. */
 	@Autowired
 	private SetService setService;
@@ -77,6 +88,9 @@ public class JewelsController {
 
 	@Autowired
 	private ModelMapper mapper;
+
+	/** The logger. */
+	private static Logger logger = LoggerFactory.getLogger(JewelsController.class);
 
 	private static final String VIEWSEARCHINVENTORY = "admin/jewels/revise/search";
 	private static final String FORMJEWEL = "jewelForm";
@@ -244,6 +258,8 @@ public class JewelsController {
 			model.addObject(ConstantsViews.MATERIALS, materialService.getAllMetals());
 			model.setViewName(VIEWNEWJEWEL);
 		} else {
+			User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			jewelForm.setUser(user.getUsername());
 			// primero miro a ver si existe ya esa joya,
 			JewelEntity jewelf = mapper.map(jewelForm, JewelEntity.class);
 			JewelEntity jewel = jewelService.searchByReferenceCategoryMetalPlace(jewelf);
@@ -441,5 +457,49 @@ public class JewelsController {
 	public String goodbye(SessionStatus status) {
 		status.setComplete();
 		return "goodbye";
+	}
+
+	@GetMapping("/searchjewels")
+	public ModelAndView searchJewels() {
+		ModelAndView model = new ModelAndView("admin/jewels/print/search.html");
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
+		model.addObject(ConstantsViews.FORMSEARCH, new SearchForm());
+		model.addObject(ConstantsViews.PLACES, placeService.getAllPlacesActive());
+		return model;
+	}
+
+	@PostMapping("/printjewels")
+	public ModelAndView printJewels(@ModelAttribute(ConstantsViews.FORMSEARCH) SearchForm form, BindingResult result,
+			Model m) {
+		String sfrom = form.getDatefrom();
+		String suntil = form.getDateuntil();
+		ModelAndView model = new ModelAndView();
+		model.addObject(ConstantsViews.ADMINFORM, new AdminForm());
+		searchFormValidator.validate(form, result);
+		if (result.hasErrors()) {
+			model.setViewName("admin/jewels/print/search.html");
+			model.addObject(ConstantsViews.FORMSEARCH, form);
+			model.addObject(ConstantsViews.PLACES, placeService.getAllPlacesActive());
+		} else {
+			model.setViewName("admin/jewels/print/resultsearch.html");
+			model.addAllObjects(jewelService.searchByPlaceAndDates(form.getPlace(), sfrom, suntil));
+			m.addAttribute(ConstantsViews.FORMSEARCH, form);
+		}
+		return model;
+	}
+
+	@PostMapping("/printpdf")
+	public void printpdf(
+			@Validated(SearchFormValidator.class) @ModelAttribute(ConstantsViews.FORMSEARCH) SearchForm form,
+			HttpServletResponse response) {
+		File file = jewelService.generatePdf(form.getPlace(), form.getDatefrom(), form.getDateuntil());
+		try (InputStream inputStream = new FileInputStream(file)) {
+			response.setContentType("application/force-download");
+			response.setHeader("Content-Disposition", "attachment; filename=".concat(file.getName()));
+			IOUtils.copy(inputStream, response.getOutputStream());
+			response.flushBuffer();
+		} catch (IOException e) {
+			logger.error(java.util.logging.Level.SEVERE.getName());
+		}
 	}
 }

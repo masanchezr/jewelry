@@ -56,15 +56,18 @@
 							th:href="@{/newSet}"><span th:text="#{newset}"></span></a> <a
 							class="collapse-item" th:href="@{/searchUpdateJewels}"><span
 							th:text="#{updatejewels}"></span></a> <a class="collapse-item"
-							th:href="@{/allSets}"><span th:text="#{allsets}"></span></a> <a
-							class="collapse-item" th:href="@{/searchByReference}"><span
+							th:href="@{/searchByReference}"><span
 							th:text="#{searchbyreference}"></span></a> <a class="collapse-item"
 							th:href="@{/searchByPrice}"><span th:text="#{searchbyprice}"></span></a>
-						<a class="collapse-item" th:href="@{/searchjewelsactive}"><span
+						<a class="collapse-item" th:href="@{/searchjewels}"><span
+							th:text="#{printjewels}"></span></a> <a class="collapse-item"
+							th:href="@{/searchjewelsactive}"><span
 							th:text="#{jewelsactive}"></span></a> <a class="collapse-item"
 							th:href="@{/checkinventory}"><span
 							th:text="#{checkinventory}"></span></a> <a class="collapse-item"
-							th:href="@{/upload}"><span th:text="#{uploadfile}"></span></a>
+							th:href="@{/upload}"><span th:text="#{uploadfile}"></span></a><a
+							class="collapse-item" th:href="@{/allSets}"><span
+							th:text="#{allsets}"></span></a>
 					</div>
 				</div></li>
 			<li class="nav-item"><a class="nav-link collapsed"
