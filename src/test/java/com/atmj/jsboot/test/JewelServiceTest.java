@@ -50,6 +50,6 @@ class JewelServiceTest {
 	void printPdfTest() {
 		PlaceEntity place = new PlaceEntity();
 		place.setIdplace(24002L);
-		objectService.generatePdf(place, "01/01/2023", "31/12/2023");
+		objectService.generatePdf(place, "01/01/2025", "11/01/2025");
 	}
 }

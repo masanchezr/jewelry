@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -163,6 +162,7 @@ public class JewelServiceImpl implements JewelService {
 		return jewelsManager.searchActive(PageRequest.of(i - 1, Constants.PAGE_SIZE));
 	}
 
+	@Override
 	public List<JewelEntity> searchJewels(List<JewelEntity> jewels, PlaceEntity place) {
 		JewelEntity jewel;
 		List<JewelEntity> newjewels = new ArrayList<>();
@@ -221,8 +221,7 @@ public class JewelServiceImpl implements JewelService {
 		Iterator<JewelEntity> ijewels = jewels.iterator();
 		// no puedo meter en el nombre del fichero el lugar de las joyas porque viene
 		// vacío, solo viene el id
-		File file = new File(path.concat("\\").concat(place.getIdplace().toString())
-				.concat(DateUtil.getStringDateFormatddMMyyyy(new Date()).concat(".pdf")));
+		File file = new File(path.concat("Joyas.pdf"));
 		file.setWritable(true);
 		try (PdfWriter writer = new PdfWriter(file)) {
 			PdfDocument pdf = new PdfDocument(writer);
@@ -267,7 +266,7 @@ public class JewelServiceImpl implements JewelService {
 					.setTextAlignment(TextAlignment.CENTER));
 			document.close();
 		} catch (IOException e) {
-			log.error("No se ha podido generar el documento.");
+			log.error("No se ha podido generar el documento." + e);
 		}
 		return file;
 	}
