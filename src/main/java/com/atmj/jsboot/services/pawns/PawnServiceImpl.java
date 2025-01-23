@@ -29,10 +29,10 @@ import com.atmj.jsboot.services.converters.ClientPawnEntityConverter;
 import com.atmj.jsboot.services.converters.PawnEntityConverter;
 import com.atmj.jsboot.services.dailies.Daily;
 import com.atmj.jsboot.services.dailies.DailyService;
-import com.atmj.jsboot.services.mails.EmailService;
 import com.atmj.jsboot.utils.constants.Constants;
 import com.atmj.jsboot.utils.date.DateUtil;
 import com.atmj.jsboot.utils.string.Util;
+import com.atmj.services.EmailService;
 
 /**
  * The Class PawnServiceImpl.

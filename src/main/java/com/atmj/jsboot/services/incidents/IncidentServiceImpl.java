@@ -14,9 +14,9 @@ import com.atmj.jsboot.dbaccess.entities.UserEntity;
 import com.atmj.jsboot.dbaccess.repositories.IncidentRepository;
 import com.atmj.jsboot.dbaccess.repositories.UsersRepository;
 import com.atmj.jsboot.forms.SearchForm;
-import com.atmj.jsboot.services.mails.EmailService;
 import com.atmj.jsboot.utils.date.DateUtil;
 import com.atmj.jsboot.utils.string.Util;
+import com.atmj.services.EmailService;
 
 @Service
 public class IncidentServiceImpl implements IncidentService {

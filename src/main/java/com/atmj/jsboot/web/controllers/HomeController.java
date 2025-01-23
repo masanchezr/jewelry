@@ -3,8 +3,6 @@ package com.atmj.jsboot.web.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -24,13 +22,15 @@ import com.atmj.jsboot.dbaccess.entities.JewelEntity;
 import com.atmj.jsboot.dbaccess.entities.PlaceEntity;
 import com.atmj.jsboot.services.categories.CategoriesService;
 import com.atmj.jsboot.services.jewels.JewelService;
-import com.atmj.jsboot.services.mails.EmailService;
 import com.atmj.jsboot.services.search.SearchService;
 import com.atmj.jsboot.utils.constants.Constants;
 import com.atmj.jsboot.utils.constants.ConstantsViews;
 import com.atmj.jsboot.web.forms.DataClientForm;
 import com.atmj.jsboot.web.forms.MessageForm;
 import com.atmj.jsboot.web.forms.SearchJewelForm;
+import com.atmj.services.EmailService;
+
+import jakarta.validation.Valid;
 
 /**
  * Handles requests for the application home page.

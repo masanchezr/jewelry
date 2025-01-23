@@ -29,12 +29,12 @@ import com.atmj.jsboot.dbaccess.managers.UsersManager;
 import com.atmj.jsboot.dbaccess.repositories.DiscountsRepository;
 import com.atmj.jsboot.forms.Payment;
 import com.atmj.jsboot.forms.Sale;
-import com.atmj.jsboot.services.mails.EmailService;
 import com.atmj.jsboot.services.users.Client;
 import com.atmj.jsboot.utils.constants.Constants;
 import com.atmj.jsboot.utils.constants.ConstantsViews;
 import com.atmj.jsboot.utils.date.DateUtil;
 import com.atmj.jsboot.utils.string.Util;
+import com.atmj.services.EmailService;
 
 /**
  * The Class SaleServiceImpl.
