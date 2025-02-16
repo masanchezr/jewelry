@@ -53,7 +53,7 @@ import jakarta.validation.Valid;
  * The Class JewelsController.
  */
 @Controller
-@SessionAttributes({ ConstantsViews.FORMSEARCH, "placeselected" })
+@SessionAttributes({ ConstantsViews.FORMSEARCH, "placeselected", "categoryselected" })
 public class JewelsController {
 
 	/** The categories service. */
@@ -276,6 +276,7 @@ public class JewelsController {
 				model.setViewName("admin/jewels/newjewel/successjewel");
 				model.addObject("jewel", jewelf);
 				m.addAttribute("placeselected", jewelf.getPlace());
+				m.addAttribute("categoryselected", jewelf.getCategory());
 			}
 		}
 		return model;

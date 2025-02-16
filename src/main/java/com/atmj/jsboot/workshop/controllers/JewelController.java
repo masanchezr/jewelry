@@ -36,7 +36,7 @@ import com.atmj.jsboot.validators.SearchFormValidator;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
-@SessionAttributes({ ConstantsViews.FORMSEARCH, "placeselected" })
+@SessionAttributes({ ConstantsViews.FORMSEARCH, "placeselected", "categoryselected" })
 public class JewelController {
 	/** The categories service. */
 	@Autowired
@@ -120,6 +120,7 @@ public class JewelController {
 				model.setViewName("workshop/jewels/newjewel/successjewel");
 				model.addObject("jewel", jewelf);
 				m.addAttribute("placeselected", jewelf.getPlace());
+				m.addAttribute("categoryselected", jewelf.getCategory());
 			}
 		}
 		return model;

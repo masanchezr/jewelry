@@ -35,6 +35,10 @@
 							</div>
 							<div class="form-group">
 								<select th:field="*{category.idcategory}" class="form-control">
+									<th:block th:if="${categoryselected!=null}">
+										<option selected th:value="${categoryselected.idcategory}"
+											th:text="${categoryselected.namecategory}" />
+									</th:block>
 									<option th:each="category : ${categories}"
 										th:value="${category.idcategory}"
 										th:text="${category.namecategory}" />
