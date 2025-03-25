@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:fragment="page">
-<head th:replace="workshop/header"></head>
+<head th:replace="~{workshop/header}"></head>
 <body id="page-top">
 	<!-- csrt support -->
 	<form th:action="@{/work/j_spring_security_logout}" method="post"
@@ -75,7 +75,7 @@
 				</nav>
 				<!-- End of Topbar -->
 				<!-- Begin Page Content -->
-				<div class="container-fluid" th:include="this :: content"></div>
+				<div class="container-fluid" th:include="~{this :: content}"></div>
 			</div>
 		</div>
 		<!-- End of Content Wrapper -->
