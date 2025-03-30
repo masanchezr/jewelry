@@ -27,7 +27,7 @@ class DailyServiceTest {
 	@Test
 	void getDailyTest() {
 		PlaceEntity place = new PlaceEntity();
-		Calendar c = new GregorianCalendar(2020, 9, 6);
+		Calendar c = new GregorianCalendar(2023, 9, 6);
 		place.setIdplace(13700L);
 		assertNotNull(dailyService.getDaily(c.getTime(), place, "prueba"));
 	}
