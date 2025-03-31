@@ -1,6 +1,7 @@
 package com.atmj.jsboot.admin.controllers;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -188,8 +189,14 @@ public class SaleAdminController {
 			if (!jewels.isEmpty() && existsJewels(jewels, place)) {
 				sale.setJewels(newjewels);
 				// comprobamos si ya existe la venta
-				Sale entitySale = saleService.searchByNumsaleAndYear(sale.getNumsale(),
-						DateUtil.getYear(sale.getSaledate()));
+				String sdate = sale.getSaledate();
+				int year;
+				if (sdate == null) {
+					year = DateUtil.getYear(new Date());
+				} else {
+					year = DateUtil.getYear(sdate);
+				}
+				Sale entitySale = saleService.searchByNumsaleAndYear(sale.getNumsale(), year);
 				if (entitySale == null) {
 					saleService.buy(sale);
 					model.setViewName("admin/sales/finishsale");
