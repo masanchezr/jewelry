@@ -26,7 +26,7 @@ class HolidaysManagerTest {
 	@Test
 	void getPreviousDayTest() {
 		PlaceEntity place = new PlaceEntity();
-		Calendar calendar = new GregorianCalendar(2015, 3, 3);
+		Calendar calendar = new GregorianCalendar(2025, 2, 31);
 		place.setIdplace(13700L);
 		Assertions.assertNotNull(holidaysManager.getPreviousDay(calendar.getTime(), place));
 	}
