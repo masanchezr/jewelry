@@ -15,7 +15,7 @@
 				<input class="form-control" th:field="*{description}"
 					th:placeholder="#{description}" />
 				<p class="text-danger" th:if="${#fields.hasErrors('description')}"
-					th:errors="description"></p>
+					th:errors="*{description}"></p>
 			</div>
 			<div class="form-group">
 				<input class="form-control" th:field="*{amount}"

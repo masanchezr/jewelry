@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.atmj.jsboot.dbaccess.entities.EntryMoneyEntity;
@@ -19,17 +18,21 @@ import com.atmj.jsboot.utils.date.DateUtil;
 @Service
 public class EntryMoneyServiceImpl implements EntryMoneyService {
 
-	@Autowired
-	private DailyService dailyService;
+	private final DailyService dailyService;
 
-	@Autowired
-	private EntryMoneyRepository entryMoneyRepository;
+	private final EntryMoneyRepository entryMoneyRepository;
 
-	@Autowired
-	private PlaceUserRepository placeUserRepository;
+	private final PlaceUserRepository placeUserRepository;
 
-	@Autowired
-	private UsersRepository usersRepository;
+	private final UsersRepository usersRepository;
+
+	public EntryMoneyServiceImpl(final DailyService dailyService, final EntryMoneyRepository entryMoneyRepository,
+			final PlaceUserRepository placeUserRepository, final UsersRepository usersRepository) {
+		this.dailyService = dailyService;
+		this.entryMoneyRepository = entryMoneyRepository;
+		this.placeUserRepository = placeUserRepository;
+		this.usersRepository = usersRepository;
+	}
 
 	public Daily saveEntryMoney(String user, BigDecimal amount) {
 		EntryMoneyEntity entrymoney = new EntryMoneyEntity();

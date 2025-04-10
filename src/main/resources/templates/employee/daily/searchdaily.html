@@ -21,7 +21,7 @@
 										th:placeholder="#{date}" />
 								</div>
 								<p class="text-danger" th:if="${#fields.hasErrors('datefrom')}"
-									th:errors="datefrom"></p>
+									th:errors="*{datefrom}"></p>
 							</div>
 							<div class="form-group">
 								<button class="btn btn-primary" value="submit">

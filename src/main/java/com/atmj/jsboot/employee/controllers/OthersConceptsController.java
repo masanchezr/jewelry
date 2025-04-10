@@ -1,6 +1,5 @@
 package com.atmj.jsboot.employee.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -21,13 +20,17 @@ import com.atmj.jsboot.utils.constants.ConstantsViews;
 public class OthersConceptsController {
 
 	/** The others concepts service. */
-	@Autowired
-	private OtherConceptService otherConceptService;
 
-	@Autowired
-	private OtherConceptValidator validator;
+	private final OtherConceptService otherConceptService;
+
+	private final OtherConceptValidator validator;
 
 	private static final String FORMOTHERCONCEPT = "otherconcept";
+
+	public OthersConceptsController(OtherConceptService otherConceptService, OtherConceptValidator validator) {
+		this.otherConceptService = otherConceptService;
+		this.validator = validator;
+	}
 
 	/**
 	 * Newconcept.

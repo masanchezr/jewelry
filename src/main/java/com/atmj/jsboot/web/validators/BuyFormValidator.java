@@ -39,7 +39,7 @@ public class BuyFormValidator implements Validator {
 			ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "citybilling", "selectcity");
 		}
 		if (buyform.getPayment() == null) {
-			arg1.reject(ConstantsViews.FORMPAYMENT, "selectpayment");
+			arg1.rejectValue(ConstantsViews.FORMPAYMENT, "selectpayment");
 		}
 	}
 }

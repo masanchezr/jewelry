@@ -5,7 +5,6 @@ import java.util.Date;
 import org.modelmapper.AbstractConverter;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.atmj.jsboot.dbaccess.entities.ClientPawnEntity;
@@ -16,8 +15,11 @@ import com.atmj.jsboot.utils.date.DateUtil;
 public class ClientPawnEntityConverter {
 
 	/** The mapper. */
-	@Autowired
-	private ModelMapper mapper;
+	private final ModelMapper mapper;
+
+	public ClientPawnEntityConverter(final ModelMapper mapper) {
+		this.mapper = mapper;
+	}
 
 	Converter<String, Date> toDate = new AbstractConverter<String, Date>() {
 		protected Date convert(String source) {

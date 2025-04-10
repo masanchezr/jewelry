@@ -9,7 +9,6 @@ import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.atmj.jsboot.dbaccess.entities.PawnEntity;
@@ -21,8 +20,11 @@ import com.atmj.jsboot.utils.date.DateUtil;
 public class PawnEntityConverter {
 
 	/** The mapper. */
-	@Autowired
-	private ModelMapper mapper;
+	private final ModelMapper mapper;
+
+	public PawnEntityConverter(final ModelMapper mapper) {
+		this.mapper = mapper;
+	}
 
 	private static Logger log = LoggerFactory.getLogger(PawnEntityConverter.class);
 
