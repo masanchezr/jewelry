@@ -60,7 +60,7 @@
 						<span th:text="#{amountpawn}"></span> <input class="form-control"
 							th:field="*{amount}" />
 						<p class="text-danger" th:if="${#fields.hasErrors('amount')}"
-							th:erros="*{amount}"></p>
+							th:errors="*{amount}"></p>
 					</div>
 					<div class="form-group">
 						<span th:text="#{percent}"></span> <input class="form-control"

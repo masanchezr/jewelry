@@ -90,4 +90,6 @@ public interface PawnService {
 	public List<PawnEntity> getByNIFAndUserAndRetiredAndReturn(String dni, String user);
 
 	public Daily saveReturnPawn(NewPawn pawn);
+
+	List<PawnEntity> searchByPlaceYearNumPawnIdreturnpawn(NewPawn pawn);
 }

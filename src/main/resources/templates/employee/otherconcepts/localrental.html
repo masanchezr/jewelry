@@ -19,7 +19,7 @@
 								<input class="form-control" th:field="*{amount}"
 									th:placeholder="#{amount}" />
 								<p class="text-danger" th:if="${#fields.hasErrors('amount')}"
-									th:erros="*{amount}"></p>
+									th:errors="*{amount}"></p>
 							</div>
 							<div class="form-group">
 								<div id="sandbox-container">

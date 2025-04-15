@@ -88,6 +88,16 @@ public interface PawnsRepository extends CrudRepository<PawnEntity, Long> {
 	public List<PawnEntity> findByClientAndPlaceAndDateretiredIsNotNullAndReturnpawnFalse(ClientPawnEntity client,
 			PlaceEntity placeEntity);
 
+	/**
+	 * Devuelve los empeños nuevos realizados en un año y en un lugar y con el mismo
+	 * número de empeño, que no debería haber más de uno, pero bueno devuelvo una
+	 * lista
+	 * 
+	 * @param num
+	 * @param placeEntity
+	 * @param year
+	 * @return empeños nuevos
+	 */
 	public List<PawnEntity> findByNumpawnAndPlaceAndYearAndIdreturnpawnIsNull(String num, PlaceEntity placeEntity,
 			int year);
 }

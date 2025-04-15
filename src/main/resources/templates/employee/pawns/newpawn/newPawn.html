@@ -73,20 +73,20 @@
 						<span th:text="#{amountpawn}"></span> <input class="form-control"
 							th:field="*{amount}" />
 						<p class="text-danger" th:if="${#fields.hasErrors('amount')}"
-							th:erros="*{amount}"></p>
+							th:errors="*{amount}"></p>
 					</div>
 					<div class="form-group">
 						<span th:text="#{percent}"></span> <input class="form-control"
 							th:field="*{percent}" />
 						<p class="text-danger" th:if="${#fields.hasErrors('percent')}"
-							th:field="*{percent}"></p>
+							th:errors="*{percent}"></p>
 					</div>
 					<div id="sandbox-container" class="form-group">
 						<span th:text="#{pawndate}"></span> <input class="form-control"
 							th:field="*{creationdate}" />
 						<p class="text-danger"
 							th:if="${#fields.hasErrors('creationdate')}"
-							th:field="*{creationdate}"></p>
+							th:errors="*{creationdate}"></p>
 					</div>
 					<div>
 						<button class="btn btn-primary" value="submit">

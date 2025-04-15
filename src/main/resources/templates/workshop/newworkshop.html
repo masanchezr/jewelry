@@ -30,7 +30,7 @@
 				<div class="form-group">
 					<input class="form-control" th:field="*{amount}" th:placeholder="#{amount}" />
 					<small class="form-text text-danger"
-						th:if="${#fields.hasErrors('amount')}" th:erros="*{amount}"></small>
+						th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></small>
 				</div>
 				<div class="form-group">
 					<button class="btn btn-primary" value="submit">

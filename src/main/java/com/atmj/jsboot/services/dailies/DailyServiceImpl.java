@@ -8,7 +8,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.atmj.jsboot.dbaccess.entities.AdjustmentEntity;
@@ -72,82 +71,63 @@ import com.atmj.jsboot.utils.date.DateUtil;
  */
 @Service
 public class DailyServiceImpl implements DailyService {
+	private final DailyRepository dailyRepository;
+	private final AdjustmentRepository adjustmentRepository;
+	private final PawnsRepository pawnsRepository;
+	private final SaleManager saleManager;
+	private final OtherConceptsRepository otherconceptsrepository;
+	private final ShoppingsRepository shoppingsRepository;
+	private final RenovationsRepository renovationsRepository;
+	private final CancelSaleRepository cancelSaleRepository;
+	private final PayrollRepository payrollRepository;
+	private final EntryMoneyRepository entryMoneyRepository;
+	private final OtherSaleRepository otherSaleRepository;
+	private final RentalsRepository rentalsRepository;
+	private final HolidaysManager holidaysManager;
+	private final DiscountsRepository discountsRepository;
+	private final SalesPostponedRepository salespostponedrepository;
+	private final PlaceUserRepository placeUserRepository;
+	private final WorksRepository worksRepository;
+	private final ModelMapper mapper;
+	private final DiscountEntityConverter converterDiscount;
+	private final PawnEntityConverter pawnConverter;
+	private final SalePostPonedEntityConverter salePostPonedConverter;
+	private final ShoppingEntityConverter shopConverter;
 
-	/** The daily repository. */
-	@Autowired
-	private DailyRepository dailyRepository;
+	public DailyServiceImpl(DailyRepository dailyRepository, AdjustmentRepository adjustmentRepository,
+			PawnsRepository pawnsRepository, SaleManager saleManager, OtherConceptsRepository otherconceptsrepository,
+			ShoppingsRepository shoppingsRepository, RenovationsRepository renovationsRepository,
+			CancelSaleRepository cancelSaleRepository, PayrollRepository payrollRepository,
+			EntryMoneyRepository entryMoneyRepository, OtherSaleRepository otherSaleRepository,
+			RentalsRepository rentalsRepository, HolidaysManager holidaysManager,
+			DiscountsRepository discountsRepository, SalesPostponedRepository salespostponedrepository,
+			PlaceUserRepository placeUserRepository, WorksRepository worksRepository, ModelMapper mapper,
+			DiscountEntityConverter converterDiscount, PawnEntityConverter pawnConverter,
+			SalePostPonedEntityConverter salePostPonedConverter, ShoppingEntityConverter shopConverter) {
+		this.dailyRepository = dailyRepository;
+		this.adjustmentRepository = adjustmentRepository;
+		this.pawnsRepository = pawnsRepository;
+		this.saleManager = saleManager;
+		this.otherconceptsrepository = otherconceptsrepository;
+		this.shoppingsRepository = shoppingsRepository;
+		this.renovationsRepository = renovationsRepository;
+		this.cancelSaleRepository = cancelSaleRepository;
+		this.payrollRepository = payrollRepository;
+		this.entryMoneyRepository = entryMoneyRepository;
+		this.otherSaleRepository = otherSaleRepository;
+		this.rentalsRepository = rentalsRepository;
+		this.holidaysManager = holidaysManager;
+		this.discountsRepository = discountsRepository;
+		this.salespostponedrepository = salespostponedrepository;
+		this.placeUserRepository = placeUserRepository;
+		this.worksRepository = worksRepository;
+		this.mapper = mapper;
+		this.converterDiscount = converterDiscount;
+		this.pawnConverter = pawnConverter;
+		this.salePostPonedConverter = salePostPonedConverter;
+		this.shopConverter = shopConverter;
 
-	/** The adjustment repository. */
-	@Autowired
-	private AdjustmentRepository adjustmentRepository;
-
-	/** The pawns repository. */
-	@Autowired
-	private PawnsRepository pawnsRepository;
-
-	/** The sale manager. */
-	@Autowired
-	private SaleManager saleManager;
-
-	/** The otherconceptsrepository. */
-	@Autowired
-	private OtherConceptsRepository otherconceptsrepository;
-
-	/** The shoppings repository. */
-	@Autowired
-	private ShoppingsRepository shoppingsRepository;
-
-	/** The renovations repository. */
-	@Autowired
-	private RenovationsRepository renovationsRepository;
-
-	/** The cancel sale repository. */
-	@Autowired
-	private CancelSaleRepository cancelSaleRepository;
-
-	@Autowired
-	private PayrollRepository payrollRepository;
-
-	@Autowired
-	private EntryMoneyRepository entryMoneyRepository;
-
-	@Autowired
-	private OtherSaleRepository otherSaleRepository;
-
-	@Autowired
-	private RentalsRepository rentalsRepository;
-
-	/** The holidays manager. */
-	@Autowired
-	private HolidaysManager holidaysManager;
-
-	@Autowired
-	private DiscountsRepository discountsRepository;
-
-	@Autowired
-	private SalesPostponedRepository salespostponedrepository;
-
-	@Autowired
-	private PlaceUserRepository placeUserRepository;
-
-	@Autowired
-	private WorksRepository worksRepository;
-
-	/** The mapper. */
-	@Autowired
-	private ModelMapper mapper;
-
-	@Autowired
-	private DiscountEntityConverter converterDiscount;
-
-	@Autowired
-	private PawnEntityConverter pawnConverter;
-
-	@Autowired
-	private SalePostPonedEntityConverter salePostPonedConverter;
-
-	@Autowired
-	private ShoppingEntityConverter shopConverter;
+	}
 
 	@Override
 	public Daily getDaily(Date date, PlaceEntity place, String ipaddress) {

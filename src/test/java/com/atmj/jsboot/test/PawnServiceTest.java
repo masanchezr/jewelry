@@ -1,7 +1,7 @@
 package com.atmj.jsboot.test;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
@@ -9,11 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.atmj.jsboot.dbaccess.entities.MetalEntity;
-import com.atmj.jsboot.dbaccess.entities.NationEntity;
-import com.atmj.jsboot.dbaccess.entities.ObjectPawnEntity;
 import com.atmj.jsboot.dbaccess.entities.PlaceEntity;
-import com.atmj.jsboot.dbaccess.entities.TrackEntity;
 import com.atmj.jsboot.services.pawns.NewPawn;
 import com.atmj.jsboot.services.pawns.Pawn;
 import com.atmj.jsboot.services.pawns.PawnService;
@@ -69,37 +65,10 @@ class PawnServiceTest {
 	}
 
 	@Test
-	void updatePawnTest() {
-		NewPawn newpawn = new NewPawn();
-		NationEntity nation = new NationEntity();
-		TrackEntity track = new TrackEntity();
-		List<ObjectPawnEntity> objects = new ArrayList<ObjectPawnEntity>();
-		ObjectPawnEntity o = new ObjectPawnEntity();
-		MetalEntity metal = new MetalEntity();
-		metal.setIdmetal(1L);
-		o.setDescription("dos pendientes estilo versace");
-		o.setIdobjectpawn(10295L);
-		o.setRealgrams(new BigDecimal(2.8));
-		o.setGrossgrams(new BigDecimal(2.8));
-		o.setMetal(metal);
-		objects.add(o);
-		track.setIdtrack(13L);
-		nation.setIdnation(34L);
-		newpawn.setNumpawn("286");
-		newpawn.setAddress("Timanfaya 10");
-		newpawn.setAmount("70");
-		newpawn.setCreationdate("2021-01-05");
-		newpawn.setDatebirth("1989-10-28");
-		newpawn.setDescription("dos pendientes estilo versace");
-		newpawn.setId(9820L);
-		newpawn.setName("Basilio");
-		newpawn.setSurname("Suárez Silva");
-		newpawn.setNation(nation);
-		newpawn.setTown("Madrid");
-		newpawn.setNif("50977535J");
-		newpawn.setPercent("20");
-		newpawn.setTrack(track);
-		newpawn.setObjects(objects);
-		pawnService.update(newpawn);
+	void searchByPlaceYearNumPawnIdreturnpawnTest() {
+		NewPawn pawn = new NewPawn();
+		pawn.setUser("13700");
+		pawn.setNumpawn("4");
+		assertNotNull(pawnService.searchByPlaceYearNumPawnIdreturnpawn(pawn));
 	}
 }

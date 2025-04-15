@@ -6,9 +6,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -44,30 +41,36 @@ import com.atmj.jsboot.utils.string.Util;
 @Controller
 public class PawnsController {
 
-	@Autowired
-	private MetalService materialService;
+	private final MetalService materialService;
 
-	@Autowired
-	private NationService nationservice;
+	private final NationService nationservice;
 
-	/** The pawn service. */
-	@Autowired
-	private PawnService pawnService;
+	private final PawnService pawnService;
 
-	@Autowired
-	private PlaceService placeService;
+	private final PlaceService placeService;
 
-	@Autowired
-	private TrackService trackservice;
+	private final TrackService trackservice;
 
-	@Autowired
-	private NewPawnFormValidator newPawnFormValidator;
+	private final NewPawnFormValidator newPawnFormValidator;
 
-	@Autowired
-	private ReturnPawnFormValidator returnPawnFormValidator;
+	private final ReturnPawnFormValidator returnPawnFormValidator;
 
-	/** The log. */
-	private static Logger log = LoggerFactory.getLogger(PawnsController.class);
+	public PawnsController(MetalService materialService, NationService nationservice, PawnService pawnService,
+			PlaceService placeService, TrackService trackservice, NewPawnFormValidator newPawnFormValidator,
+			ReturnPawnFormValidator returnPawnFormValidator) {
+		this.materialService = materialService;
+		this.nationservice = nationservice;
+		this.pawnService = pawnService;
+		this.placeService = placeService;
+		this.trackservice = trackservice;
+		this.newPawnFormValidator = newPawnFormValidator;
+		this.returnPawnFormValidator = returnPawnFormValidator;
+	}
+
+	/**
+	 * The log. private static Logger log =
+	 * LoggerFactory.getLogger(PawnsController.class);
+	 */
 
 	private static final String VIEWNEWPAWN = "employee/pawns/newpawn/newPawn";
 	private static final String VIEWSEARCHCLIENT = "employee/pawns/newpawn/searchclient";
@@ -136,18 +139,7 @@ public class PawnsController {
 		ModelAndView model = new ModelAndView();
 		returnPawnFormValidator.validate(pawn, result);
 		if (result.hasErrors()) {
-			List<MetalEntity> materials = materialService.getAllMetalsActive();
-			Iterator<MetalEntity> imaterials = materials.iterator();
-			List<ObjectPawnEntity> lop = new ArrayList<>();
-			while (imaterials.hasNext()) {
-				ObjectPawnEntity op = new ObjectPawnEntity();
-				op.setMetal(imaterials.next());
-				lop.add(op);
-			}
-			pawn.setObjects(lop);
-			model.addObject(ConstantsViews.PAWNFORM, pawn);
-			model.addObject(Constants.TRACKS, trackservice.getTracks());
-			model.addObject(Constants.NATIONS, nationservice.getNations());
+			setFormPawn(pawn, model);
 			model.setViewName("employee/pawns/returnpawn/newPawn");
 		} else {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -155,10 +147,13 @@ public class PawnsController {
 			pawn.setRetired(false);
 			String sdate = pawn.getCreationdate();
 			if (Util.isEmpty(sdate)) {
-				sdate = DateUtil.getStringDateddMMyyyy(new Date());
+				model.setViewName(ConstantsViews.VIEWDAILYARROW);
+			} else if (DateUtil.getDate(sdate).before(new Date())) {
+				model.setViewName(ConstantsViews.VIEWDAILYARROWS);
+			} else {
+				model.setViewName(ConstantsViews.VIEWDAILYARROW);
 			}
 			model.addObject(ConstantsViews.DAILY, pawnService.saveReturnPawn(pawn));
-			model.setViewName(ConstantsViews.VIEWDAILYARROW);
 		}
 		return model;
 	}
@@ -175,15 +170,6 @@ public class PawnsController {
 		ModelAndView model = new ModelAndView();
 		newPawnFormValidator.validate(pawn, result);
 		if (result.hasErrors()) {
-			List<MetalEntity> materials = materialService.getAllMetalsActive();
-			Iterator<MetalEntity> imaterials = materials.iterator();
-			List<ObjectPawnEntity> lop = new ArrayList<>();
-			while (imaterials.hasNext()) {
-				ObjectPawnEntity op = new ObjectPawnEntity();
-				op.setMetal(imaterials.next());
-				lop.add(op);
-			}
-			pawn.setObjects(lop);
 			model.addObject(ConstantsViews.PAWNFORM, pawn);
 			model.addObject(Constants.TRACKS, trackservice.getTracks());
 			model.addObject(Constants.NATIONS, nationservice.getNations());
@@ -192,18 +178,40 @@ public class PawnsController {
 			String user = SecurityContextHolder.getContext().getAuthentication().getName();
 			pawn.setUser(user);
 			pawn.setRetired(false);
-			String sdate = pawn.getCreationdate();
-			log.warn("sdate: ".concat(sdate));
-			if (Util.isEmpty(sdate)) {
-				Date date = new Date();
-				log.warn("date: ".concat(date.toString()));
-				sdate = DateUtil.getStringDateddMMyyyy(date);
-				log.warn("sdate: ".concat(sdate));
+			if (pawnService.searchByPlaceYearNumPawnIdreturnpawn(pawn).isEmpty()) {
+				model.addObject(ConstantsViews.DAILY, pawnService.save(pawn));
+				String sdate = pawn.getCreationdate();
+				if (Util.isEmpty(sdate)) {
+					model.setViewName(ConstantsViews.VIEWDAILYARROW);
+				} else if (DateUtil.getDate(sdate).before(new Date())) {
+					model.setViewName(ConstantsViews.VIEWDAILYARROWS);
+				} else {
+					model.setViewName(ConstantsViews.VIEWDAILYARROW);
+				}
+			} else {
+				result.rejectValue(Constants.CREATIONDATE, "numrepeated");
+				model.addObject(ConstantsViews.PAWNFORM, pawn);
+				model.addObject(Constants.TRACKS, trackservice.getTracks());
+				model.addObject(Constants.NATIONS, nationservice.getNations());
+				model.setViewName(VIEWNEWPAWN);
 			}
-			model.addObject(ConstantsViews.DAILY, pawnService.save(pawn));
-			model.setViewName(ConstantsViews.VIEWDAILYARROW);
 		}
 		return model;
+	}
+
+	private void setFormPawn(NewPawn pawn, ModelAndView model) {
+		List<MetalEntity> materials = materialService.getAllMetalsActive();
+		Iterator<MetalEntity> imaterials = materials.iterator();
+		List<ObjectPawnEntity> lop = new ArrayList<>();
+		while (imaterials.hasNext()) {
+			ObjectPawnEntity op = new ObjectPawnEntity();
+			op.setMetal(imaterials.next());
+			lop.add(op);
+		}
+		pawn.setObjects(lop);
+		model.addObject(ConstantsViews.PAWNFORM, pawn);
+		model.addObject(Constants.TRACKS, trackservice.getTracks());
+		model.addObject(Constants.NATIONS, nationservice.getNations());
 	}
 
 	/**
@@ -239,17 +247,7 @@ public class PawnsController {
 		} else {
 			pawn = pawnService.searchClient(dni);
 			pawn.setUser(user);
-			List<MetalEntity> materials = materialService.getAllMetalsActive();
-			Iterator<MetalEntity> imaterials = materials.iterator();
-			List<ObjectPawnEntity> lop = new ArrayList<>();
-			while (imaterials.hasNext()) {
-				ObjectPawnEntity op = new ObjectPawnEntity();
-				op.setMetal(imaterials.next());
-				lop.add(op);
-			}
-			pawn.setObjects(lop);
-			model.addObject(Constants.TRACKS, trackservice.getTracks());
-			model.addObject(Constants.NATIONS, nationservice.getNations());
+			setFormPawn(pawn, model);
 			model.setViewName(VIEWNEWPAWN);
 		}
 		model.addObject(ConstantsViews.PAWNFORM, pawn);

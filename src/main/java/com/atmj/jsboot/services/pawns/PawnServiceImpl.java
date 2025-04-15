@@ -11,7 +11,6 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.atmj.jsboot.dbaccess.entities.ClientPawnEntity;
@@ -41,41 +40,48 @@ import com.atmj.services.EmailService;
 public class PawnServiceImpl implements PawnService {
 
 	/** The daily service. */
-	@Autowired
-	private DailyService dailyService;
+	private final DailyService dailyService;
 
-	@Autowired
-	private EmailService emailService;
+	private final EmailService emailService;
 
 	/** The client pawns repository. */
-	@Autowired
-	private ClientPawnsRepository clientPawnsRepository;
+	private final ClientPawnsRepository clientPawnsRepository;
 
 	/** The pawns repository. */
-	@Autowired
-	private PawnsRepository pawnsRepository;
+	private final PawnsRepository pawnsRepository;
 
-	@Autowired
-	private PlaceUserRepository placeUserRepository;
+	private final PlaceUserRepository placeUserRepository;
 
 	/** The renovations repository. */
-	@Autowired
-	private RenovationsRepository renovationsRepository;
+	private final RenovationsRepository renovationsRepository;
 
-	@Autowired
-	private UsersRepository usersRepository;
+	private final UsersRepository usersRepository;
 
 	/** The mapper. */
-	@Autowired
-	private ModelMapper mapper;
+	private final ModelMapper mapper;
 
-	@Autowired
-	private ClientPawnEntityConverter clientPawnConverter;
+	private final ClientPawnEntityConverter clientPawnConverter;
 
-	@Autowired
-	private PawnEntityConverter pawnconverter;
+	private final PawnEntityConverter pawnconverter;
 
 	private static Logger log = LoggerFactory.getLogger(PawnServiceImpl.class);
+
+	public PawnServiceImpl(DailyService dailyService, EmailService emailService,
+			ClientPawnsRepository clientPawnsRepository, PawnsRepository pawnsRepository,
+			PlaceUserRepository placeUserRepository, RenovationsRepository renovationsRepository,
+			UsersRepository usersRepository, ModelMapper mapper, ClientPawnEntityConverter clientPawnConverter,
+			PawnEntityConverter pawnconverter) {
+		this.dailyService = dailyService;
+		this.emailService = emailService;
+		this.clientPawnsRepository = clientPawnsRepository;
+		this.clientPawnConverter = clientPawnConverter;
+		this.pawnsRepository = pawnsRepository;
+		this.placeUserRepository = placeUserRepository;
+		this.renovationsRepository = renovationsRepository;
+		this.usersRepository = usersRepository;
+		this.mapper = mapper;
+		this.pawnconverter = pawnconverter;
+	}
 
 	@Override
 	public Daily save(NewPawn pawn) {
@@ -88,11 +94,6 @@ public class PawnServiceImpl implements PawnService {
 		List<ObjectPawnEntity> newobjects = new ArrayList<>();
 		List<ObjectPawnEntity> object = pawnEntity.getObjects();
 		Iterator<ObjectPawnEntity> iobjects = object.iterator();
-		if (creationdate != null) {
-			log.warn("Creation date: ".concat(creationdate.toString()));
-		} else {
-			log.warn("Creation date is null");
-		}
 		calendar.setTime(creationdate);
 		int year = calendar.get(Calendar.YEAR);
 		if (cpe == null) {
@@ -444,5 +445,14 @@ public class PawnServiceImpl implements PawnService {
 		PlaceEntity place = placeUserRepository.findByUser(usersRepository.findByUsername(user)).get(0).getPlace();
 		client.setNif(nif);
 		return pawnsRepository.findByClientAndPlaceAndDateretiredIsNotNullAndReturnpawnFalse(client, place);
+	}
+
+	@Override
+	public List<PawnEntity> searchByPlaceYearNumPawnIdreturnpawn(NewPawn pawn) {
+		Calendar calendar = Calendar.getInstance();
+		PlaceEntity place = placeUserRepository.findByUser(usersRepository.findByUsername(pawn.getUser())).get(0)
+				.getPlace();
+		return pawnsRepository.findByNumpawnAndPlaceAndYearAndIdreturnpawnIsNull(pawn.getNumpawn(), place,
+				calendar.get(Calendar.YEAR));
 	}
 }

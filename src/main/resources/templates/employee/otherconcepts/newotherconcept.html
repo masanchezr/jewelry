@@ -21,7 +21,7 @@
 				<input class="form-control" th:field="*{amount}"
 					th:placeholder="#{amountotherconcept}" />
 				<p class="text-danger" th:if="${#fields.hasErrors('amount')}"
-					th:erros="*{amount}"></p>
+					th:errors="*{amount}"></p>
 			</div>
 			<div class="form-group">
 				<button class="btn btn-primary" value="submit">
