@@ -9,7 +9,6 @@ import org.apache.commons.io.IOUtils;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -57,37 +56,42 @@ import jakarta.validation.Valid;
 public class JewelsController {
 
 	/** The categories service. */
-	@Autowired
 	private CategoriesService categoriesService;
 
 	/** The coin service. */
-	@Autowired
 	private CoinService coinService;
 
 	/** The jewel service. */
-	@Autowired
 	private JewelService jewelService;
 
 	/** The material service. */
-	@Autowired
 	private MetalService materialService;
 
 	/** The place service. */
-	@Autowired
 	private PlaceService placeService;
 
-	@Autowired
 	private SearchFormValidator searchFormValidator;
 
 	/** The set service. */
-	@Autowired
 	private SetService setService;
 
-	@Autowired
 	private SelectCategoryValidator validator;
 
-	@Autowired
 	private ModelMapper mapper;
+
+	public JewelsController(CategoriesService categoriesService, CoinService coinService, JewelService jewelService,
+			MetalService materialService, PlaceService placeService, SearchFormValidator searchFormValidator,
+			SetService setService, SelectCategoryValidator validator, ModelMapper mapper) {
+		this.categoriesService = categoriesService;
+		this.coinService = coinService;
+		this.jewelService = jewelService;
+		this.materialService = materialService;
+		this.placeService = placeService;
+		this.searchFormValidator = searchFormValidator;
+		this.setService = setService;
+		this.validator = validator;
+		this.mapper = mapper;
+	}
 
 	/** The logger. */
 	private static Logger logger = LoggerFactory.getLogger(JewelsController.class);
