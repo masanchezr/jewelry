@@ -8,7 +8,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.atmj.jsboot.dbaccess.entities.InstallmentEntity;
@@ -23,22 +22,32 @@ import com.atmj.jsboot.forms.SalePostPoned;
 import com.atmj.jsboot.services.converters.SalePostPonedEntityConverter;
 import com.atmj.jsboot.utils.date.DateUtil;
 import com.atmj.jsboot.utils.string.Util;
+import com.atmj.services.EmailService;
 
 @Service
 public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 
-	@Autowired
+	private EmailService emailService;
+
 	private InstallmentsRepository installmentsrepository;
 
-	@Autowired
 	private SalesPostponedRepository salespostponedrepository;
 
 	/** The mapper. */
-	@Autowired
+
 	private ModelMapper mapper;
 
-	@Autowired
 	private SalePostPonedEntityConverter converter;
+
+	public SalesPostPonedServiceImpl(EmailService emailService, InstallmentsRepository installmentsrepository,
+			SalesPostponedRepository salespostponedrepository, ModelMapper mapper,
+			SalePostPonedEntityConverter converter) {
+		this.emailService = emailService;
+		this.installmentsrepository = installmentsrepository;
+		this.salespostponedrepository = salespostponedrepository;
+		this.mapper = mapper;
+		this.converter = converter;
+	}
 
 	@Override
 	public void buy(SalePostPoned sale) {
@@ -83,6 +92,10 @@ public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 		}
 		salespostponedrepository.save(saleEntity);
 		mapper.map(saleEntity, sale);
+		if (!salespostponedrepository.existsById(sale.getIdsale() - 1)) {
+			emailService.sendSimpleMessage("mangeles.sanchez0807@gmail.com", "REVISAR NÚMERO DE VENTA A PLAZOS",
+					"Número de venta a plazos " + sale.getIdsale() + " lugar: " + saleEntity.getPlace().getIdplace());
+		}
 	}
 
 	@Override
@@ -95,7 +108,6 @@ public class SalesPostPonedServiceImpl implements SalesPostPonedService {
 				InstallmentEntity entity = mapper.map(installment, InstallmentEntity.class);
 				entity.setSalepostponed(sppentity);
 				entity.setCreationdate(new Date());
-				sppentity = salespostponedrepository.findById(installment.getIdsalepostponed()).orElse(null);
 				return mapper.map(installmentsrepository.save(entity), SalePostPoned.class);
 			} else if (amount.add(Util.getNumber(installment.getAmount())).compareTo(sppentity.getTotalamount()) == 0) {
 				InstallmentEntity entity = mapper.map(installment, InstallmentEntity.class);

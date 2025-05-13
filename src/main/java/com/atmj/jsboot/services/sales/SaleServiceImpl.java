@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.atmj.jsboot.admin.forms.SearchMissingNumbers;
@@ -41,24 +40,26 @@ import com.atmj.services.EmailService;
  */
 @Service
 public class SaleServiceImpl implements SaleService {
-
-	@Autowired
 	private EmailService emailService;
-
-	@Autowired
 	private DiscountsRepository discountsRepository;
 
 	/** The sale manager. */
-	@Autowired
 	private SaleManager saleManager;
 
 	/** The users manager. */
-	@Autowired
 	private UsersManager usersManager;
 
 	/** The mapper. */
-	@Autowired
 	private ModelMapper mapper;
+
+	public SaleServiceImpl(EmailService emailService, DiscountsRepository discountsRepository, SaleManager saleManager,
+			UsersManager usersManager, ModelMapper mapper) {
+		this.emailService = emailService;
+		this.discountsRepository = discountsRepository;
+		this.saleManager = saleManager;
+		this.usersManager = usersManager;
+		this.mapper = mapper;
+	}
 
 	@Override
 	public Long buy(Sale sale) {

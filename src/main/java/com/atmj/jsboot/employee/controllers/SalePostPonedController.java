@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -36,35 +35,41 @@ import jakarta.servlet.http.HttpServletRequest;
 public class SalePostPonedController {
 
 	/** The categories service. */
-	@Autowired
 	private CategoriesService categoriesService;
 
 	/** The jewel service. */
-	@Autowired
 	private JewelService jewelService;
 
 	/** The material service. */
-	@Autowired
 	private MetalService materialService;
 
-	@Autowired
 	private PaymentService paymentService;
 
-	@Autowired
 	private PlaceService placeService;
 
-	@Autowired
 	private SalesPostPonedService saleservicepostponed;
 
-	@Autowired
 	private SalePostPonedValidator salePostPonedValidator;
 
-	@Autowired
 	private InstallmentValidator installmentValidator;
 
 	private static final String ADDINSTALLMENT = "employee/salespostponed/addinstallment";
 	private static final String INSTALLMENT = "installment";
 	private static final String VIEWNEWSALEPOSTPONED = "employee/salespostponed/newsale";
+
+	public SalePostPonedController(CategoriesService categoriesService, JewelService jewelService,
+			MetalService materialService, PaymentService paymentService, PlaceService placeService,
+			SalesPostPonedService saleservicepostponed, SalePostPonedValidator salePostPonedValidator,
+			InstallmentValidator installmentValidator) {
+		this.categoriesService = categoriesService;
+		this.jewelService = jewelService;
+		this.materialService = materialService;
+		this.paymentService = paymentService;
+		this.placeService = placeService;
+		this.saleservicepostponed = saleservicepostponed;
+		this.salePostPonedValidator = salePostPonedValidator;
+		this.installmentValidator = installmentValidator;
+	}
 
 	@GetMapping("/employee/newsalepostponed")
 	public ModelAndView newSalepostponed() {

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -41,40 +40,28 @@ import jakarta.servlet.http.HttpServletRequest;
 public class SalesController {
 
 	/** The categories service. */
-	@Autowired
 	private CategoriesService categoriesService;
-
-	@Autowired
 	private DailyService dailyService;
 
 	/** The jewel service. */
-	@Autowired
 	private JewelService jewelService;
 
 	/** The material service. */
-	@Autowired
 	private MetalService materialService;
 
-	@Autowired
 	private PaymentService paymentService;
 
-	@Autowired
 	private PlaceService placeService;
 
 	/** The sale service. */
-	@Autowired
 	private SaleService saleService;
 
-	@Autowired
 	private SearchSaleRepeatedService searchSaleRepeatedService;
 
-	@Autowired
 	private SaleFormValidator saleFormValidator;
 
-	@Autowired
 	private PartialCancelSaleValidator partialCancelSaleValidator;
 
-	@Autowired
 	private RemoveSaleFormValidator removeSaleFormValidator;
 
 	private static final String VIEWNEWSALE = "employee/sales/newsale";
@@ -82,6 +69,24 @@ public class SalesController {
 	private static final String VIEWREMOVESALE = "employee/sales/removesale";
 	private static final String FORMREMOVESALE = "removeSaleForm";
 	private static final String VIEWCANCELPARCIALSALE = "employee/sales/cancelparcialsale";
+
+	public SalesController(CategoriesService categoriesService, DailyService dailyService, JewelService jewelService,
+			MetalService materialService, PaymentService paymentService, PlaceService placeService,
+			SaleService saleService, SearchSaleRepeatedService searchSaleRepeatedService,
+			SaleFormValidator saleFormValidator, PartialCancelSaleValidator partialCancelSaleValidator,
+			RemoveSaleFormValidator removeSaleFormValidator) {
+		this.categoriesService = categoriesService;
+		this.dailyService = dailyService;
+		this.jewelService = jewelService;
+		this.materialService = materialService;
+		this.paymentService = paymentService;
+		this.placeService = placeService;
+		this.saleService = saleService;
+		this.searchSaleRepeatedService = searchSaleRepeatedService;
+		this.saleFormValidator = saleFormValidator;
+		this.partialCancelSaleValidator = partialCancelSaleValidator;
+		this.removeSaleFormValidator = removeSaleFormValidator;
+	}
 
 	/**
 	 * Sale.
