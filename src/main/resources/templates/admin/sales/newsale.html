@@ -17,6 +17,8 @@
 						<tr>
 							<td><input class="form-control" th:field="*{numsale}"
 								th:placeholder="#{numberofsale}"></td>
+							<td th:if="${#fields.hasErrors('numsale')}"
+								th:errors="*{numsale}" class="text-danger"></td>
 							<td><span th:text="#{payment}"></span><select
 								th:field="*{payment.idpayment}" class="form-control"><option
 										th:each="payment:${payments}" th:value="${payment.idpayment}"
@@ -54,6 +56,8 @@
 							</td>
 							<td><input class="form-control" th:field="*{discount}"
 								th:placeholder="#{discount}"></td>
+							<td th:if="${#fields.hasErrors('discount')}"
+								th:errors="*{discount}" class="text-danger"></td>
 							<td><button class="btn btn-primary" value="submit">
 									<span th:text="#{save}"></span>
 								</button></td>
@@ -65,7 +69,15 @@
 				<div class="col-sm-6">
 					<div class="form-group">
 						<span th:text="#{clientdiscount}"></span> <input
-							class="form-control" th:field="*{iddiscount}" />
+							class="form-control" th:field="*{iddiscount}" /><input
+							th:if="${#fields.hasErrors('iddiscount')}"
+							th:errors="*{iddiscount}" class="text-danger" />
+					</div>
+					<div id="sandbox-container" class="form-group">
+						<input class="form-control" th:field="*{year}"
+							th:placeholder="#{yeardiscount}" />
+						<p class="text-danger" th:if="${#fields.hasErrors('year')}"
+							th:errors="*{year}"></p>
 					</div>
 					<div class="form-group">
 						<span th:text="#{severalpayments}"></span> <input

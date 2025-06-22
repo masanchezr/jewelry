@@ -2,7 +2,7 @@ package com.atmj.jsboot.services.messages;
 
 public class Message {
 	private Long idmessage;
-	private String message;
+	private String text;
 	private Boolean active;
 	private String datefrom;
 	private String dateuntil;
@@ -15,12 +15,12 @@ public class Message {
 		this.idmessage = idmessage;
 	}
 
-	public String getMessage() {
-		return message;
+	public String getText() {
+		return text;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public void setText(String message) {
+		this.text = message;
 	}
 
 	public Boolean getActive() {

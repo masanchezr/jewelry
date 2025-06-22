@@ -3,7 +3,6 @@ package com.atmj.jsboot.web.controllers;
 import java.util.Iterator;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,25 +36,30 @@ import com.atmj.jsboot.web.validators.DataClientFormValidator;
 public class SaleController {
 
 	/** The payment service. */
-	@Autowired
 	private PaymentService paymentService;
 
 	/** The sale service. */
-	@Autowired
 	private SaleService saleService;
 
 	/** The registration service. */
-	@Autowired
 	private RegistrationService registrationService;
 
 	/** The search categories service. */
-	@Autowired
 	private CategoriesService searchCategoriesService;
 
-	@Autowired
 	private DataClientFormValidator validator;
 
 	private static final String VIEWSHOPPINGCART = "shoppingcart";
+
+	public SaleController(PaymentService paymentService, SaleService saleService,
+			RegistrationService registrationService, CategoriesService searchCategoriesService,
+			DataClientFormValidator validator) {
+		this.paymentService = paymentService;
+		this.saleService = saleService;
+		this.registrationService = registrationService;
+		this.searchCategoriesService = searchCategoriesService;
+		this.validator = validator;
+	}
 
 	/**
 	 * Buy.

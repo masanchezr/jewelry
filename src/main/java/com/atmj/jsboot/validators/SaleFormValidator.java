@@ -49,11 +49,19 @@ public class SaleFormValidator implements Validator {
 					&& sale.getPayment().getIdpayment().equals(Constants.CARD)) {
 				arg1.rejectValue(ConstantsViews.NUMSALE, "twopaycard");
 			}
+			Long iddiscount = sale.getIddiscount();
+			if (iddiscount != null) {
+				if (iddiscount.compareTo(0L) <= 0) {
+					arg1.rejectValue("iddiscount", ConstantsViews.NOTZERO);
+				} else if (sale.getYear() == null) {
+					arg1.rejectValue("year", ConstantsViews.SELECTYEAR);
+				}
+			}
 		} else {
 			arg1.rejectValue(ConstantsViews.NUMSALE, ConstantsViews.ERRORSELECTREFERENCE);
 		}
 		if (numsale.compareTo(0L) <= 0) {
-			arg1.rejectValue(ConstantsViews.NUMSALE, "numsaleminuszero");
+			arg1.rejectValue(ConstantsViews.NUMSALE, ConstantsViews.NOTZERO);
 		}
 	}
 }

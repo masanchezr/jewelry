@@ -13,7 +13,6 @@ import java.util.Map;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -46,18 +45,21 @@ import com.itextpdf.layout.properties.TextAlignment;
 public class JewelServiceImpl implements JewelService {
 
 	/** The jewels manager. */
-	@Autowired
 	private JewelsManager jewelsManager;
 
-	@Autowired
 	private MetadataService metadataservice;
 
 	/** The mapper. */
-	@Autowired
 	private ModelMapper mapper;
 
 	/** The log. */
 	private static Logger log = LoggerFactory.getLogger(JewelServiceImpl.class);
+
+	public JewelServiceImpl(JewelsManager jewelsManager, MetadataService metadataservice, ModelMapper mapper) {
+		this.jewelsManager = jewelsManager;
+		this.metadataservice = metadataservice;
+		this.mapper = mapper;
+	}
 
 	/**
 	 * Adds the jewel.
@@ -222,51 +224,53 @@ public class JewelServiceImpl implements JewelService {
 		// no puedo meter en el nombre del fichero el lugar de las joyas porque viene
 		// vacío, solo viene el id
 		File file = new File(path.concat("Joyas.pdf"));
-		file.setWritable(true);
-		try (PdfWriter writer = new PdfWriter(file)) {
-			PdfDocument pdf = new PdfDocument(writer);
-			PageSize page = PageSize.A4.rotate();
-			Document document = new Document(pdf, page);
-			PdfFont font = PdfFontFactory.createFont(StandardFonts.COURIER_BOLD, PdfEncodings.WINANSI);
-			// Creating a table
-			float[] pointColumnWidths = { 80F, 80F, 80F, 80F, 80F, 80F, 80F, 80F, 80F, 80F };
-			Table table = new Table(pointColumnWidths);
-			JewelEntity jewel;
-			BigDecimal grams = BigDecimal.ZERO, jgrams;
-			table.addHeaderCell("Referencia").setFont(font);
-			table.addHeaderCell("Nombre").setFont(font);
-			table.addHeaderCell("Descripción").setFont(font);
-			table.addHeaderCell("Precio €").setFont(font);
-			table.addHeaderCell("Categoría").setFont(font);
-			table.addHeaderCell("Metal").setFont(font);
-			table.addHeaderCell("Lugar").setFont(font);
-			table.addHeaderCell("Activo").setFont(font);
-			table.addHeaderCell("Fecha Envío").setFont(font);
-			table.addHeaderCell("Gramos").setFont(font);
-			while (ijewels.hasNext()) {
-				jewel = ijewels.next();
-				jgrams = jewel.getGrams();
-				table.startNewRow();
-				table.addCell(jewel.getReference());
-				table.addCell(jewel.getName());
-				table.addCell(jewel.getDescription());
-				table.addCell(jewel.getPrice().toString());
-				table.addCell(jewel.getCategory().getNamecategory());
-				table.addCell(jewel.getMetal().getDescription());
-				table.addCell(jewel.getPlace().getDescription());
-				table.addCell(jewel.getActive().toString());
-				table.addCell(DateUtil.getStringDateddMMyyyy(jewel.getCreationdate()));
-				if (jgrams != null) {
-					grams = grams.add(jgrams);
-					table.addCell(String.valueOf(jgrams));
+		if (file.setWritable(true)) {
+			try (PdfWriter writer = new PdfWriter(file)) {
+				PdfDocument pdf = new PdfDocument(writer);
+				PageSize page = PageSize.A4.rotate();
+				Document document = new Document(pdf, page);
+				PdfFont font = PdfFontFactory.createFont(StandardFonts.COURIER_BOLD, PdfEncodings.WINANSI);
+				// Creating a table
+				float[] pointColumnWidths = { 80F, 80F, 80F, 80F, 80F, 80F, 80F, 80F, 80F, 80F };
+				Table table = new Table(pointColumnWidths);
+				JewelEntity jewel;
+				BigDecimal grams = BigDecimal.ZERO;
+				BigDecimal jgrams;
+				table.addHeaderCell("Referencia").setFont(font);
+				table.addHeaderCell("Nombre").setFont(font);
+				table.addHeaderCell("Descripción").setFont(font);
+				table.addHeaderCell("Precio €").setFont(font);
+				table.addHeaderCell("Categoría").setFont(font);
+				table.addHeaderCell("Metal").setFont(font);
+				table.addHeaderCell("Lugar").setFont(font);
+				table.addHeaderCell("Activo").setFont(font);
+				table.addHeaderCell("Fecha Envío").setFont(font);
+				table.addHeaderCell("Gramos").setFont(font);
+				while (ijewels.hasNext()) {
+					jewel = ijewels.next();
+					jgrams = jewel.getGrams();
+					table.startNewRow();
+					table.addCell(jewel.getReference());
+					table.addCell(jewel.getName());
+					table.addCell(jewel.getDescription());
+					table.addCell(jewel.getPrice().toString());
+					table.addCell(jewel.getCategory().getNamecategory());
+					table.addCell(jewel.getMetal().getDescription());
+					table.addCell(jewel.getPlace().getDescription());
+					table.addCell(jewel.getActive().toString());
+					table.addCell(DateUtil.getStringDateddMMyyyy(jewel.getCreationdate()));
+					if (jgrams != null) {
+						grams = grams.add(jgrams);
+						table.addCell(String.valueOf(jgrams));
+					}
 				}
+				document.add(table);
+				document.add(new Paragraph("Gramos totales ".concat(grams.toString())).setFont(font).setFontSize(14)
+						.setTextAlignment(TextAlignment.CENTER));
+				document.close();
+			} catch (IOException e) {
+				log.error("No se ha podido generar el documento.".concat(e.getMessage()));
 			}
-			document.add(table);
-			document.add(new Paragraph("Gramos totales ".concat(grams.toString())).setFont(font).setFontSize(14)
-					.setTextAlignment(TextAlignment.CENTER));
-			document.close();
-		} catch (IOException e) {
-			log.error("No se ha podido generar el documento." + e);
 		}
 		return file;
 	}

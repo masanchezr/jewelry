@@ -82,5 +82,7 @@ public class ConstantsViews {
 	public static final String ERRORSELECTMAIL = "{selectmail}";
 	public static final String ERRORWRITEMESSAGE = "writemessage";
 	public static final String IDPAWN = "{idpawn}";
+	public static final String NOTZERO = "numminuszero";
+	public static final String SELECTYEAR = "selectyear";
 
 }

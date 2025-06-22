@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,44 +41,51 @@ import com.atmj.jsboot.validators.SearchFormValidator;
 public class SaleAdminController {
 
 	/** The sale service. */
-	@Autowired
 	private SaleService saleService;
 
 	/** The place service. */
-	@Autowired
 	private PlaceService placeService;
 
-	@Autowired
 	private SalesCardService salesCardService;
 
 	/** The jewel service. */
-	@Autowired
 	private JewelService jewelService;
 
 	/** The material service. */
-	@Autowired
 	private MetalService materialService;
 
 	/** The categories service. */
-	@Autowired
 	private CategoriesService categoriesService;
 
-	@Autowired
 	private PaymentService paymentService;
 
-	@Autowired
 	private SearchSalesValidator searchSalesValidator;
 
-	@Autowired
 	private SearchMissingNumbersValidator searchMissingNumbersValidator;
 
-	@Autowired
 	private SearchFormValidator searchFormValidator;
 
-	@Autowired
 	private SaleFormValidator saleFormValidator;
 
 	private static final String VIEWNEWSALEADMIN = "admin/sales/newsale";
+
+	public SaleAdminController(PaymentService paymentService, SaleService saleService,
+			CategoriesService categoriesService, PlaceService placeService, SalesCardService salesCardService,
+			JewelService jewelService, MetalService materialService, SearchSalesValidator searchSalesValidator,
+			SearchMissingNumbersValidator searchMissingNumbersValidator, SearchFormValidator searchFormValidator,
+			SaleFormValidator saleFormValidator) {
+		this.salesCardService = salesCardService;
+		this.saleService = saleService;
+		this.placeService = placeService;
+		this.jewelService = jewelService;
+		this.materialService = materialService;
+		this.categoriesService = categoriesService;
+		this.paymentService = paymentService;
+		this.searchSalesValidator = searchSalesValidator;
+		this.searchMissingNumbersValidator = searchMissingNumbersValidator;
+		this.searchFormValidator = searchFormValidator;
+		this.saleFormValidator = saleFormValidator;
+	}
 
 	@PostMapping("/resultSalesCard")
 	public ModelAndView resultSalesCard(@ModelAttribute("searchSaleForm") SearchSale searchSaleForm,
